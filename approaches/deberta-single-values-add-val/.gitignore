@@ -1,5 +1,5 @@
+venv/
+model/
 valueeval24/
 valueeval24.zip
-data/
-lexicons/
-**/.DS_Store
+output/

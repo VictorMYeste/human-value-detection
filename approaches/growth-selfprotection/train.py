@@ -10,14 +10,13 @@ import transformers
 
 # GENERIC
 
-values = [ "Self-direction: thought", "Self-direction: action", "Stimulation",  "Hedonism", "Achievement", "Power: dominance", "Power: resources", "Face", "Security: personal", "Security: societal", "Tradition", "Conformity: rules", "Conformity: interpersonal", "Humility", "Benevolence: caring", "Benevolence: dependability", "Universalism: concern", "Universalism: nature", "Universalism: tolerance" ]
-labels = values[:]
+labels = [ "Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance" ]
 id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)} 
 
 def load_dataset(directory, tokenizer, load_labels=True):
     sentences_file_path = os.path.join(directory, "sentences.tsv")
-    labels_file_path = os.path.join(directory, "labels.tsv")
+    labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
     data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
 
@@ -28,15 +27,7 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
     if load_labels and os.path.isfile(labels_file_path):
         labels_frame = pandas.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
-        # Convert labels with attained and constrained to only presence
-        for label in labels:
-            attained_col = label + " attained"
-            constrained_col = label + " constrained"
-            labels_frame[label] = ((labels_frame[attained_col] > 0.0) | (labels_frame[constrained_col] > 0.0)).astype(float)
-        columns_to_drop = [label + suffix for label in labels for suffix in [" attained", " constrained"]]
-        labels_frame.drop(columns=columns_to_drop, inplace=True)
-        # End conversion
-        labels_frame = pandas.merge(data_frame, labels_frame, on=["Text-ID", "Sentence-ID"])
+        # Extract only the new label columns
         labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
         for idx, label in enumerate(labels):
             if label in labels_frame.columns:
@@ -49,7 +40,7 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=5, learning_rate=2e-5, weight_decay=0.01):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = prediction_scores >= 0.0 # sigmoid
@@ -72,7 +63,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         output_dir=output_dir.name,
         save_strategy="epoch",
         hub_model_id=model_name,
-        eval_strategy="epoch",
+        evaluation_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -80,6 +71,8 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         weight_decay=weight_decay,
         load_best_model_at_end=True,
         metric_for_best_model='marco-avg-f1-score',
+        gradient_accumulation_steps = 2,
+        fp16=True,
         ddp_find_unused_parameters=False # Optimized for static models
     )
 
@@ -119,11 +112,23 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
+# Load the training dataset
 training_dataset, training_text_ids, training_sentence_ids = load_dataset(args.training_dataset, tokenizer)
+
+# Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
     validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset(args.validation_dataset, tokenizer)
+
+# Slicing for testing purposes
+
+#training_dataset = training_dataset.select(range(10))
+#validation_dataset = validation_dataset.select(range(10))
+
+# Train and evaluate
 trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+
+# Save the model if required
 if args.model_name != None:
     print("\n\nUPLOAD to https://huggingface.co/" + args.model_name + " (using HF_TOKEN environment variable)")
     print("======")

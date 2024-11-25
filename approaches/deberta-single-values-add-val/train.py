@@ -49,7 +49,7 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=5, learning_rate=2e-5, weight_decay=0.01):
+def train(combined_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=5, learning_rate=2e-5, weight_decay=0.01):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = prediction_scores >= 0.0 # sigmoid
@@ -72,13 +72,13 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         output_dir=output_dir.name,
         save_strategy="epoch",
         hub_model_id=model_name,
-        eval_strategy="epoch",
+        eval_strategy="no",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=num_train_epochs,
         weight_decay=weight_decay,
-        load_best_model_at_end=True,
+        load_best_model_at_end=False,
         metric_for_best_model='marco-avg-f1-score',
         ddp_find_unused_parameters=False # Optimized for static models
     )
@@ -93,17 +93,18 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
     print("TRAINING")
     print("========")
     trainer = transformers.Trainer(model, args,
-        train_dataset=training_dataset, eval_dataset=validation_dataset,
-        compute_metrics=compute_metrics, tokenizer=tokenizer)
+        train_dataset=combined_dataset,
+        compute_metrics=None,
+        tokenizer=tokenizer)
 
     trainer.train()
 
-    print("\n\nVALIDATION")
-    print("==========")
-    evaluation = trainer.evaluate()
-    for label in labels:
-        sys.stdout.write("%-39s %.2f\n" % (label + ":", evaluation["eval_f1-score"][label]))
-    sys.stdout.write("\n%-39s %.2f\n" % ("Macro average:", evaluation["eval_marco-avg-f1-score"]))
+    #print("\n\nVALIDATION")
+    #print("==========")
+    #evaluation = trainer.evaluate()
+    #for label in labels:
+    #    sys.stdout.write("%-39s %.2f\n" % (label + ":", evaluation["eval_f1-score"][label]))
+    #sys.stdout.write("\n%-39s %.2f\n" % ("Macro average:", evaluation["eval_marco-avg-f1-score"]))
 
     return trainer
 
@@ -119,11 +120,20 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
+# Load the training dataset
 training_dataset, training_text_ids, training_sentence_ids = load_dataset(args.training_dataset, tokenizer)
-validation_dataset = training_dataset
+
+# Load the validation dataset and combine it with the training dataset
 if args.validation_dataset != None:
     validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset(args.validation_dataset, tokenizer)
-trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+    combined_dataset = datasets.concatenate_datasets([training_dataset, validation_dataset])
+else:
+    combined_dataset = training_dataset
+
+# Train and evaluate
+trainer = train(combined_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+
+# Save the model if required
 if args.model_name != None:
     print("\n\nUPLOAD to https://huggingface.co/" + args.model_name + " (using HF_TOKEN environment variable)")
     print("======")

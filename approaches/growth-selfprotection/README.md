@@ -29,7 +29,7 @@ python3 train.py \
   --model-directory model/
 
 # Example
-python3 train.py --training-dataset ../../data/training-english/ --validation-dataset ../../data/validation-english/ --model-name "deberta-single-values" --model-directory "model"
+python3 train.py --training-dataset ../../data/training-english/ --validation-dataset ../../data/validation-english/ --model-name "DeBERTa-Single-Values"
 ```
 
 ## Usage

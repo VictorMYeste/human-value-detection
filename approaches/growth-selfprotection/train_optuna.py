@@ -7,17 +7,17 @@ import sys
 import tempfile
 import torch
 import transformers
+import optuna
 
 # GENERIC
 
-values = [ "Self-direction: thought", "Self-direction: action", "Stimulation",  "Hedonism", "Achievement", "Power: dominance", "Power: resources", "Face", "Security: personal", "Security: societal", "Tradition", "Conformity: rules", "Conformity: interpersonal", "Humility", "Benevolence: caring", "Benevolence: dependability", "Universalism: concern", "Universalism: nature", "Universalism: tolerance" ]
-labels = values[:]
+labels = [ "Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance" ]
 id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)} 
 
 def load_dataset(directory, tokenizer, load_labels=True):
     sentences_file_path = os.path.join(directory, "sentences.tsv")
-    labels_file_path = os.path.join(directory, "labels.tsv")
+    labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
     data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
 
@@ -28,15 +28,7 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
     if load_labels and os.path.isfile(labels_file_path):
         labels_frame = pandas.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
-        # Convert labels with attained and constrained to only presence
-        for label in labels:
-            attained_col = label + " attained"
-            constrained_col = label + " constrained"
-            labels_frame[label] = ((labels_frame[attained_col] > 0.0) | (labels_frame[constrained_col] > 0.0)).astype(float)
-        columns_to_drop = [label + suffix for label in labels for suffix in [" attained", " constrained"]]
-        labels_frame.drop(columns=columns_to_drop, inplace=True)
-        # End conversion
-        labels_frame = pandas.merge(data_frame, labels_frame, on=["Text-ID", "Sentence-ID"])
+        # Extract only the new label columns
         labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
         for idx, label in enumerate(labels):
             if label in labels_frame.columns:
@@ -48,8 +40,10 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
 
 # TRAINING
+# OPTUNA OBJECTIVE FUNCTION
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=5, learning_rate=2e-5, weight_decay=0.01):
+def objective(trial, training_dataset, validation_dataset, pretrained_model, tokenizer):
+    
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = prediction_scores >= 0.0 # sigmoid
@@ -67,25 +61,34 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
 
         return {'f1-score': f1_scores, 'marco-avg-f1-score': macro_average_f1_score}
 
-    output_dir = tempfile.TemporaryDirectory()
+    # Hyperparameter suggestions from Optuna
+    batch_size = 4
+    learning_rate = trial.suggest_loguniform("learning_rate", 1e-6, 1e-4)
+    weight_decay = 0.01
+    num_train_epochs = trial.suggest_int("num_train_epochs", 3, 10)
+    gradient_accumulation_steps = 2
+
+    # TrainingArguments with suggested hyperparameters
     args = transformers.TrainingArguments(
-        output_dir=output_dir.name,
-        save_strategy="epoch",
-        hub_model_id=model_name,
-        eval_strategy="epoch",
+        output_dir="./results",
+        save_strategy="no", # Speed up optimization by not saving models
+        evaluation_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=num_train_epochs,
         weight_decay=weight_decay,
-        load_best_model_at_end=True,
+        load_best_model_at_end=False,
         metric_for_best_model='marco-avg-f1-score',
+        gradient_accumulation_steps = gradient_accumulation_steps,
+        fp16=True,
         ddp_find_unused_parameters=False # Optimized for static models
     )
 
     model = transformers.AutoModelForSequenceClassification.from_pretrained(
         pretrained_model, problem_type="multi_label_classification",
         num_labels=len(labels), id2label=id2label, label2id=label2id)
+    
     if torch.cuda.is_available():
         print("Using cuda")
         model = model.to('cuda')
@@ -101,11 +104,8 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
     print("\n\nVALIDATION")
     print("==========")
     evaluation = trainer.evaluate()
-    for label in labels:
-        sys.stdout.write("%-39s %.2f\n" % (label + ":", evaluation["eval_f1-score"][label]))
-    sys.stdout.write("\n%-39s %.2f\n" % ("Macro average:", evaluation["eval_marco-avg-f1-score"]))
-
-    return trainer
+    
+    return evaluation["eval_marco-avg-f1-score"]  # Metric to maximize
 
 # COMMAND LINE INTERFACE
 
@@ -119,11 +119,29 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
+# Load the training dataset
 training_dataset, training_text_ids, training_sentence_ids = load_dataset(args.training_dataset, tokenizer)
+
+# Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
     validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset(args.validation_dataset, tokenizer)
-trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+
+# Slicing for testing purposes
+
+#training_dataset = training_dataset.select(range(10))
+#validation_dataset = validation_dataset.select(range(10))
+
+# OPTIMIZE WITH OPTUNA
+study = optuna.create_study(direction="maximize")  # Maximize F1-score
+study.optimize(lambda trial: objective(trial, training_dataset, validation_dataset, pretrained_model, tokenizer), n_trials=50)  # Number of trials
+
+# Print the best hyperparameters
+print("Best trial:")
+print(f"  Value: {study.best_trial.value}")
+print(f"  Params: {study.best_trial.params}")
+
+# Save the model if required
 if args.model_name != None:
     print("\n\nUPLOAD to https://huggingface.co/" + args.model_name + " (using HF_TOKEN environment variable)")
     print("======")

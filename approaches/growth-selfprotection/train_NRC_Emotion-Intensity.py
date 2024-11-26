@@ -18,10 +18,10 @@ id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)}
 
 class EnhancedDebertaModel(nn.Module):
-    def __init__(self, pretrained_model, num_labels, id2label, label2id):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_emotions):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
-        self.emotional_layer = nn.Linear(3, 128)  # Map emotional embeddings to 128 dimensions
+        self.emotional_layer = nn.Linear(num_emotions, 128)  # Map EmoLex embeddings to 128 dimensions
         self.classification_head = nn.Linear(self.transformer.config.hidden_size + 128, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
         self.num_labels = num_labels
@@ -45,38 +45,34 @@ class CustomTrainer(transformers.Trainer):
         return (loss, outputs) if return_outputs else loss
 
 def load_emotional_embeddings():
-    """Load NRC VAD lexicon into a dictionary."""
-    vad_lexicon_path = "../../lexicons/NRC-VAD-Lexicon.txt"
-    vad_scores = {}
-    with open(vad_lexicon_path, "r") as f:
+    """Load NRC Emotion Intensity Lexicon into a dictionary."""
+    intensity_lexicon_path = "../../lexicons/NRC-Emotion-Intensity-Lexicon-v1.txt"
+    intensity_scores = {}
+    with open(intensity_lexicon_path, "r") as f:
         for line in f.readlines()[1:]:  # Skip header
-            word, valence, arousal, dominance = line.strip().split("\t")
-            vad_scores[word] = {
-                "valence": float(valence),
-                "arousal": float(arousal),
-                "dominance": float(dominance)
-            }
-    return vad_scores
+            word, emotion, score = line.strip().split("\t")
+            score = float(score)  # Intensity scores are continuous
+            if word not in intensity_scores:
+                intensity_scores[word] = {emotion: 0.0 for emotion in ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]}
+            intensity_scores[word][emotion] = score
+    return intensity_scores
 
-
-def compute_emotional_scores(text, vad_scores):
-    """Compute the average VAD scores for a given text."""
+def compute_emotional_scores(text, intensity_scores, num_emotions=8):
+    """Compute the average Intensity scores for the 8 emotions for a given text."""
     tokens = text.split()  # Tokenize by whitespace
-    scores = {"valence": 0, "arousal": 0, "dominance": 0}
+    scores = {emotion: 0.0 for emotion in ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]}
     count = 0
     for token in tokens:
-        if token.lower() in vad_scores:
+        if token.lower() in intensity_scores:
             count += 1
-            scores["valence"] += vad_scores[token.lower()]["valence"]
-            scores["arousal"] += vad_scores[token.lower()]["arousal"]
-            scores["dominance"] += vad_scores[token.lower()]["dominance"]
+            for emotion in scores.keys():
+                scores[emotion] += intensity_scores[token].get(emotion, 0.0)
     if count > 0:
         for key in scores:
-            scores[key] /= count
-    return [scores["valence"], scores["arousal"], scores["dominance"]]
+            scores[key] /= count  # Normalize by token count
+    return list(scores.values())  # Return as a list of 8 scores
 
-
-def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=True):
+def load_dataset_with_emotions(directory, tokenizer, intensity_scores, load_labels=True):
     """Load dataset and add emotional embeddings."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
     labels_file_path = os.path.join(directory, "labels-cat.tsv")
@@ -87,8 +83,9 @@ def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=Tru
     data_frame['Text'] = data_frame['Text'].fillna('')
 
     # Compute emotional embeddings for each sentence
+    num_emotions = 8  # Emotion Intensity Lexicon has 8 emotions
     data_frame['Emotional_Scores'] = data_frame['Text'].apply(
-        lambda x: compute_emotional_scores(x, vad_scores)
+        lambda x: compute_emotional_scores(x, intensity_scores, num_emotions)
     )
 
     # Tokenize the text
@@ -112,7 +109,7 @@ def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=Tru
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01, num_emotions=8):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = torch.sigmoid(torch.tensor(prediction_scores)) >= 0.5  # Apply sigmoid
@@ -120,7 +117,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
 
         f1_scores = {}
         for i in range(predictions.shape[1]):
-            predicted = predictions[:,i].sum()
+            predicted = predictions[:, i].sum()
             true = labels[:, i].sum()
             true_positives = numpy.logical_and(predictions[:,i], labels[:,i]).sum()
             precision = 0 if predicted == 0 else true_positives / predicted
@@ -148,7 +145,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         ddp_find_unused_parameters=False # Optimized for static models
     )
 
-    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id)
+    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_emotions)
     
     if torch.cuda.is_available():
         print("Using cuda")
@@ -187,15 +184,19 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
-vad_scores = load_emotional_embeddings()
+# Load EmoLex
+intensity_scores = load_emotional_embeddings()
+
+# Number of emotions in the Emotion Intensity Lexicon
+num_emotions = 8  # The lexicon includes 8 emotions: anger, anticipation, disgust, fear, joy, sadness, surprise, trust
 
 # Load the training dataset
-training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_emotions(args.training_dataset, tokenizer, vad_scores)
+training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_emotions(args.training_dataset, tokenizer, intensity_scores)
 
 # Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
-    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_emotions(args.validation_dataset, tokenizer, vad_scores)
+    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_emotions(args.validation_dataset, tokenizer, intensity_scores)
 
 # Slicing for testing purposes
 
@@ -203,7 +204,7 @@ if args.validation_dataset != None:
 #validation_dataset = validation_dataset.select(range(10))
 
 # Train and evaluate
-trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name, num_emotions=num_emotions)
 
 # Save the model if required
 if args.model_name != None:

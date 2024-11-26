@@ -18,10 +18,10 @@ id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)}
 
 class EnhancedDebertaModel(nn.Module):
-    def __init__(self, pretrained_model, num_labels, id2label, label2id):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_emotions):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
-        self.emotional_layer = nn.Linear(3, 128)  # Map emotional embeddings to 128 dimensions
+        self.emotional_layer = nn.Linear(num_emotions, 128)  # Map EmoLex embeddings to 128 dimensions
         self.classification_head = nn.Linear(self.transformer.config.hidden_size + 128, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
         self.num_labels = num_labels
@@ -44,40 +44,34 @@ class CustomTrainer(transformers.Trainer):
         loss = binary_cross_entropy_with_logits(logits, labels.float())  # BCE loss
         return (loss, outputs) if return_outputs else loss
 
-def load_emotional_embeddings():
-    """Load NRC VAD lexicon into a dictionary."""
-    vad_lexicon_path = "../../lexicons/NRC-VAD-Lexicon.txt"
-    vad_scores = {}
-    with open(vad_lexicon_path, "r") as f:
+def load_liwc_features():
+    """Load LIWC Lexicon into a dictionary."""
+    liwc_path = "../../lexicons/LIWC-22.txt"
+    liwc_scores = {}
+    with open(liwc_path, "r") as f:
         for line in f.readlines()[1:]:  # Skip header
-            word, valence, arousal, dominance = line.strip().split("\t")
-            vad_scores[word] = {
-                "valence": float(valence),
-                "arousal": float(arousal),
-                "dominance": float(dominance)
-            }
-    return vad_scores
+            parts = line.strip().split("\t")
+            term = parts[0].lower()  # Normalize to lowercase
+            categories = parts[1:]  # The rest are categories
+            liwc_scores[term] = [float(category) for category in categories]  # Convert to float for scores
+    return liwc_scores
 
-
-def compute_emotional_scores(text, vad_scores):
-    """Compute the average VAD scores for a given text."""
+def compute_liwc_scores(text, liwc_scores, num_categories):
+    """Compute the average LIWC scores for a given text."""
     tokens = text.split()  # Tokenize by whitespace
-    scores = {"valence": 0, "arousal": 0, "dominance": 0}
+    scores = [0.0] * num_categories
     count = 0
     for token in tokens:
-        if token.lower() in vad_scores:
+        if token.lower() in liwc_scores:
             count += 1
-            scores["valence"] += vad_scores[token.lower()]["valence"]
-            scores["arousal"] += vad_scores[token.lower()]["arousal"]
-            scores["dominance"] += vad_scores[token.lower()]["dominance"]
+            for i in range(num_categories):
+                scores[i] += liwc_scores[token.lower()][i]
     if count > 0:
-        for key in scores:
-            scores[key] /= count
-    return [scores["valence"], scores["arousal"], scores["dominance"]]
+        scores = [score / count for score in scores]
+    return scores
 
-
-def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=True):
-    """Load dataset and add emotional embeddings."""
+def load_dataset_with_liwc(directory, tokenizer, liwc_scores, num_categories, load_labels=True):
+    """Load dataset and add LIWC features."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
     labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
@@ -86,17 +80,17 @@ def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=Tru
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
 
-    # Compute emotional embeddings for each sentence
-    data_frame['Emotional_Scores'] = data_frame['Text'].apply(
-        lambda x: compute_emotional_scores(x, vad_scores)
+    # Compute LIWC features for each sentence
+    data_frame['LIWC_Scores'] = data_frame['Text'].apply(
+        lambda x: compute_liwc_scores(x, liwc_scores, num_categories)
     )
 
     # Tokenize the text
     encoded_sentences = tokenizer(data_frame["Text"].to_list(), truncation=True, max_length=512)
 
-    # Add emotional embeddings to tokenized features
-    emotional_features = numpy.array(data_frame['Emotional_Scores'].to_list())
-    encoded_sentences["emotional_features"] = emotional_features.tolist()
+    # Add LIWC features to tokenized features
+    liwc_features = numpy.array(data_frame['LIWC_Scores'].to_list())
+    encoded_sentences["emotional_features"] = liwc_features.tolist()
 
     # Load labels if available
     if load_labels and os.path.isfile(labels_file_path):
@@ -112,7 +106,7 @@ def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=Tru
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01, num_emotions=8):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = torch.sigmoid(torch.tensor(prediction_scores)) >= 0.5  # Apply sigmoid
@@ -120,7 +114,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
 
         f1_scores = {}
         for i in range(predictions.shape[1]):
-            predicted = predictions[:,i].sum()
+            predicted = predictions[:, i].sum()
             true = labels[:, i].sum()
             true_positives = numpy.logical_and(predictions[:,i], labels[:,i]).sum()
             precision = 0 if predicted == 0 else true_positives / predicted
@@ -148,7 +142,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         ddp_find_unused_parameters=False # Optimized for static models
     )
 
-    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id)
+    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_emotions)
     
     if torch.cuda.is_available():
         print("Using cuda")
@@ -187,15 +181,17 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
-vad_scores = load_emotional_embeddings()
+# Updated commands to use LIWC
+liwc_scores = load_liwc_features()
+num_categories = len(next(iter(liwc_scores.values())))  # Infer number of LIWC categories
 
 # Load the training dataset
-training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_emotions(args.training_dataset, tokenizer, vad_scores)
+training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_liwc(args.training_dataset, tokenizer, liwc_scores, num_categories)
 
 # Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
-    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_emotions(args.validation_dataset, tokenizer, vad_scores)
+    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_liwc(args.validation_dataset, tokenizer, liwc_scores, num_categories)
 
 # Slicing for testing purposes
 
@@ -203,7 +199,7 @@ if args.validation_dataset != None:
 #validation_dataset = validation_dataset.select(range(10))
 
 # Train and evaluate
-trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name)
+trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name, num_emotions=num_categories)
 
 # Save the model if required
 if args.model_name != None:

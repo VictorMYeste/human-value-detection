@@ -8,6 +8,7 @@ import tempfile
 import torch
 import transformers
 import optuna
+from transformers import EarlyStoppingCallback
 
 # GENERIC
 
@@ -71,14 +72,14 @@ def objective(trial, training_dataset, validation_dataset, pretrained_model, tok
     # TrainingArguments with suggested hyperparameters
     args = transformers.TrainingArguments(
         output_dir="./results",
-        save_strategy="no", # Speed up optimization by not saving models
+        save_strategy="epoch", # Save and evaluate after each epoch
         evaluation_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=num_train_epochs,
         weight_decay=weight_decay,
-        load_best_model_at_end=False,
+        load_best_model_at_end=True,
         metric_for_best_model='marco-avg-f1-score',
         gradient_accumulation_steps = gradient_accumulation_steps,
         fp16=True,
@@ -95,9 +96,14 @@ def objective(trial, training_dataset, validation_dataset, pretrained_model, tok
 
     print("TRAINING")
     print("========")
+
+    # Add EarlyStoppingCallback with patience = 2 (e.g., stop if no improvement for 2 epochs)
+    early_stopping = EarlyStoppingCallback(early_stopping_patience=3, early_stopping_threshold=0.0)
+
     trainer = transformers.Trainer(model, args,
         train_dataset=training_dataset, eval_dataset=validation_dataset,
-        compute_metrics=compute_metrics, tokenizer=tokenizer)
+        compute_metrics=compute_metrics, tokenizer=tokenizer,
+        callbacks=[early_stopping])
 
     trainer.train()
 
@@ -112,8 +118,6 @@ def objective(trial, training_dataset, validation_dataset, pretrained_model, tok
 cli = argparse.ArgumentParser(prog="DeBERTa")
 cli.add_argument("-t", "--training-dataset", required=True)
 cli.add_argument("-v", "--validation-dataset")
-cli.add_argument("-m", "--model-name")
-cli.add_argument("-o", "--model-directory")
 args = cli.parse_args()
 
 pretrained_model = "microsoft/deberta-base"
@@ -134,20 +138,9 @@ if args.validation_dataset != None:
 
 # OPTIMIZE WITH OPTUNA
 study = optuna.create_study(direction="maximize")  # Maximize F1-score
-study.optimize(lambda trial: objective(trial, training_dataset, validation_dataset, pretrained_model, tokenizer), n_trials=50)  # Number of trials
+study.optimize(lambda trial: objective(trial, training_dataset, validation_dataset, pretrained_model, tokenizer), n_trials=20)  # Number of trials
 
 # Print the best hyperparameters
 print("Best trial:")
 print(f"  Value: {study.best_trial.value}")
 print(f"  Params: {study.best_trial.params}")
-
-# Save the model if required
-if args.model_name != None:
-    print("\n\nUPLOAD to https://huggingface.co/" + args.model_name + " (using HF_TOKEN environment variable)")
-    print("======")
-    #trainer.push_to_hub()
-
-if args.model_directory != None:
-    print("\n\nSAVE to " + args.model_directory)
-    print("======")
-    trainer.save_model(args.model_directory)

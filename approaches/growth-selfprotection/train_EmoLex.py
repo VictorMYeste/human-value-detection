@@ -47,7 +47,7 @@ class CustomTrainer(transformers.Trainer):
 def load_emotional_embeddings():
     """Load EmoLex lexicon into a dictionary."""
     emolex_path = "../../lexicons/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt"
-    emolex_scores = {} = {}
+    emolex_scores = {}
     with open(emolex_path, "r") as f:
         for line in f.readlines()[1:]:  # Skip header
             parts = line.strip().split("\t")

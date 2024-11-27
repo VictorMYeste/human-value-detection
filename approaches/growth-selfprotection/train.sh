@@ -6,29 +6,35 @@ validation_dataset="--validation-dataset ../../data/validation-english/"
 
 # List of Model trainings (only script names)
 scripts=(
-    "python3 train_VAD.py"
-    "python3 train_prev-sentences_VAD.py"
-    "python3 train_EmoLex.py"
-    "python3 train_prev-sentences_EmoLex.py"
-    "python3 train_Emotion-Intensity.py"
-    "python3 train_prev-sentences_Emotion-Intensity.py"
-    "python3 train_WorryWords.py"
-    "python3 train_prev-sentences_WorryWords.py"
-    "python3 train_LIWC.py"
-    "python3 train_prev-sentences_LIWC.py"
+    "VAD"
+    "VAD --previous-sentences"
+    "EmoLex"
+    "EmoLex --previous-sentences"
+    "EmotionIntensity"
+    "EmotionIntensity --previous-sentences"
+    "WorryWords"
+    "WorryWords --previous-sentences"
+    "LIWC"
+    "LIWC --previous-sentences"
 )
 
 # Loop through the scripts
 for cmd in "${scripts[@]}"; do
     # Extract the script name (without arguments)
-    script_name=$(echo "$cmd" | awk '{print $2}')
-    
-    # Remove the .py extension and train_ prefix
-    base_name=$(basename "$script_name" .py)
-    base_name=${base_name#train_}
+    script_name=$(echo "$cmd" | awk '{print $1}')
+    if [ "$script_name" == "Text" ]; then
+        lexicon=""
+    else
+        lexicon=" --lexicon $script_name"
+    fi
+
+    previous_sentences=$(echo "$cmd" | awk '{print $2}')
+    if [ ! -z "${previous_sentences}" ]; then
+        previous_sentences=" $previous_sentences"
+    fi
     
     # Add common arguments and model directory dynamically
-    full_cmd="$cmd $training_dataset $validation_dataset --model-directory models/$base_name"
+    full_cmd="python3 train_all.py $training_dataset $validation_dataset$previous_sentences$lexicon --model-directory models/$script_name"
     
     # Print header
     echo "====================================="

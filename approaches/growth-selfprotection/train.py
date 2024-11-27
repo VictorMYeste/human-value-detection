@@ -40,7 +40,7 @@ def load_dataset(directory, tokenizer, load_labels=True):
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=9, learning_rate=2.07e-05, weight_decay=1.02e-05):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = prediction_scores >= 0.0 # sigmoid
@@ -63,7 +63,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         output_dir=output_dir.name,
         save_strategy="epoch",
         hub_model_id=model_name,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,

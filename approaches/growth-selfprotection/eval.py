@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.metrics import precision_recall_fscore_support, classification_report
 
 # Load predictions and gold labels
-predictions_path = "output/predictions.tsv"
+predictions_path = "output-v1/predictions.tsv"
 gold_labels_path = "../../data/test-english/labels-cat.tsv"
 
 # Load the data

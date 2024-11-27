@@ -1,5 +1,7 @@
 venv/
 model/
+models/
+results/
 valueeval24/
 valueeval24.zip
 output/

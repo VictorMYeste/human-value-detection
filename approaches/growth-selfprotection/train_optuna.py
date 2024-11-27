@@ -70,10 +70,11 @@ def objective(trial, training_dataset, validation_dataset, pretrained_model, tok
     gradient_accumulation_steps = 2
 
     # TrainingArguments with suggested hyperparameters
+    output_dir = tempfile.TemporaryDirectory()
     args = transformers.TrainingArguments(
-        output_dir="./results",
+        output_dir=output_dir.name,
         save_strategy="epoch", # Save and evaluate after each epoch
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,

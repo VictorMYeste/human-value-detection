@@ -132,7 +132,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         output_dir=output_dir.name,
         save_strategy="epoch",
         hub_model_id=model_name,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,

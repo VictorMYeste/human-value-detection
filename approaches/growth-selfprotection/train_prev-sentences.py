@@ -7,100 +7,49 @@ import sys
 import tempfile
 import torch
 import transformers
-from torch import nn
-from torch.nn.functional import binary_cross_entropy_with_logits
 from transformers import EarlyStoppingCallback
 
 # GENERIC
 
 labels = [ "Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance" ]
 id2label = {idx:label for idx, label in enumerate(labels)}
-label2id = {label:idx for idx, label in enumerate(labels)}
+label2id = {label:idx for idx, label in enumerate(labels)} 
 
-class EnhancedDebertaModel(nn.Module):
-    def __init__(self, pretrained_model, num_labels, id2label, label2id):
-        super(EnhancedDebertaModel, self).__init__()
-        self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
-        self.emotional_layer = nn.Linear(3, 128)  # Map emotional embeddings to 128 dimensions
-        self.classification_head = nn.Linear(self.transformer.config.hidden_size + 128, num_labels)
-        self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
-        self.num_labels = num_labels
-        self.id2label = id2label
-        self.label2id = label2id
-
-    def forward(self, input_ids, attention_mask, emotional_features=None, labels=None):
-        transformer_output = self.transformer(input_ids, attention_mask=attention_mask).pooler_output
-        emotional_output = self.emotional_layer(emotional_features)
-        combined_output = torch.cat([transformer_output, emotional_output], dim=-1)
-        combined_output = self.dropout(combined_output)
-        logits = self.classification_head(combined_output)
-        return {"logits": logits}
-    
-class CustomTrainer(transformers.Trainer):
-    def compute_loss(self, model, inputs, return_outputs=False):
-        labels = inputs.pop("labels")
-        outputs = model(**inputs)
-        logits = outputs["logits"]
-        loss = binary_cross_entropy_with_logits(logits, labels.float())  # BCE loss
-        return (loss, outputs) if return_outputs else loss
-
-def load_emotional_embeddings():
-    """Load NRC VAD lexicon into a dictionary."""
-    vad_lexicon_path = "../../lexicons/NRC-VAD-Lexicon.txt"
-    vad_scores = {}
-    with open(vad_lexicon_path, "r") as f:
-        for line in f.readlines()[1:]:  # Skip header
-            word, valence, arousal, dominance = line.strip().split("\t")
-            vad_scores[word] = {
-                "valence": float(valence),
-                "arousal": float(arousal),
-                "dominance": float(dominance)
-            }
-    return vad_scores
-
-
-def compute_emotional_scores(text, vad_scores):
-    """Compute the average VAD scores for a given text."""
-    tokens = text.split()  # Tokenize by whitespace
-    scores = {"valence": 0, "arousal": 0, "dominance": 0}
-    count = 0
-    for token in tokens:
-        if token.lower() in vad_scores:
-            count += 1
-            scores["valence"] += vad_scores[token.lower()]["valence"]
-            scores["arousal"] += vad_scores[token.lower()]["arousal"]
-            scores["dominance"] += vad_scores[token.lower()]["dominance"]
-    if count > 0:
-        for key in scores:
-            scores[key] /= count
-    return [scores["valence"], scores["arousal"], scores["dominance"]]
-
-
-def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=True):
-    """Load dataset and add emotional embeddings."""
+def load_dataset(directory, tokenizer, load_labels=True):
     sentences_file_path = os.path.join(directory, "sentences.tsv")
     labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
     data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
 
-    # Fill missing text
+    # Fix TypeError: TextEncodeInput must be Union[TextInputSequence, Tuple[InputSequence, InputSequence]]
     data_frame['Text'] = data_frame['Text'].fillna('')
 
-    # Compute emotional embeddings for each sentence
-    data_frame['Emotional_Scores'] = data_frame['Text'].apply(
-        lambda x: compute_emotional_scores(x, vad_scores)
-    )
+    # Create a new column for concatenated text
+    concatenated_texts = []
+    for idx in range(len(data_frame)):
+        if idx == 0:
+            # First sentence, no preceding sentences
+            concatenated_texts.append(data_frame.iloc[idx]["Text"])
+        elif idx == 1:
+            # Second sentence, only one preceding sentence
+            concatenated_texts.append(
+                data_frame.iloc[idx - 1]["Text"] + " [SEP] " + data_frame.iloc[idx]["Text"]
+            )
+        else:
+            # Concatenate the two preceding sentences with a separator
+            concatenated_texts.append(
+                data_frame.iloc[idx - 2]["Text"] + " " +
+                data_frame.iloc[idx - 1]["Text"] + " [SEP] " +
+                data_frame.iloc[idx]["Text"]
+            )
+    
+    data_frame["ConcatenatedText"] = concatenated_texts
 
-    # Tokenize the text
-    encoded_sentences = tokenizer(data_frame["Text"].to_list(), truncation=True, max_length=512)
+    encoded_sentences = tokenizer(data_frame["ConcatenatedText"].to_list(), truncation=True, max_length=512)
 
-    # Add emotional embeddings to tokenized features
-    emotional_features = numpy.array(data_frame['Emotional_Scores'].to_list())
-    encoded_sentences["emotional_features"] = emotional_features.tolist()
-
-    # Load labels if available
     if load_labels and os.path.isfile(labels_file_path):
         labels_frame = pandas.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+        # Extract only the new label columns
         labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
         for idx, label in enumerate(labels):
             if label in labels_frame.columns:
@@ -110,18 +59,19 @@ def load_dataset_with_emotions(directory, tokenizer, vad_scores, load_labels=Tru
     encoded_sentences = datasets.Dataset.from_dict(encoded_sentences)
     return encoded_sentences, data_frame["Text-ID"].to_list(), data_frame["Sentence-ID"].to_list()
 
+
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=2, num_train_epochs=9, learning_rate=2.07e-05, weight_decay=1.02e-05):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
-        predictions = torch.sigmoid(torch.tensor(prediction_scores)) >= 0.5  # Apply sigmoid
+        predictions = prediction_scores >= 0.0 # sigmoid
         labels = label_scores >= 0.5
 
         f1_scores = {}
         for i in range(predictions.shape[1]):
             predicted = predictions[:,i].sum()
-            true = labels[:, i].sum()
+            true = labels[:,i].sum()
             true_positives = numpy.logical_and(predictions[:,i], labels[:,i]).sum()
             precision = 0 if predicted == 0 else true_positives / predicted
             recall = 0 if true == 0 else true_positives / true
@@ -135,7 +85,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         output_dir=output_dir.name,
         save_strategy="epoch",
         hub_model_id=model_name,
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -143,13 +93,14 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
         weight_decay=weight_decay,
         load_best_model_at_end=True,
         metric_for_best_model='marco-avg-f1-score',
-        gradient_accumulation_steps = 2,
+        gradient_accumulation_steps = 4,
         fp16=True,
         ddp_find_unused_parameters=False # Optimized for static models
     )
 
-    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id)
-    
+    model = transformers.AutoModelForSequenceClassification.from_pretrained(
+        pretrained_model, problem_type="multi_label_classification",
+        num_labels=len(labels), id2label=id2label, label2id=label2id)
     if torch.cuda.is_available():
         print("Using cuda")
         model = model.to('cuda')
@@ -159,7 +110,7 @@ def train(training_dataset, validation_dataset, pretrained_model, tokenizer, mod
 
     early_stopping = EarlyStoppingCallback(early_stopping_patience=3, early_stopping_threshold=0.0)
 
-    trainer = CustomTrainer(model, args,
+    trainer = transformers.Trainer(model, args,
         train_dataset=training_dataset, eval_dataset=validation_dataset,
         compute_metrics=compute_metrics, tokenizer=tokenizer,
         callbacks=[early_stopping])
@@ -185,17 +136,15 @@ cli.add_argument("-o", "--model-directory")
 args = cli.parse_args()
 
 pretrained_model = "microsoft/deberta-base"
-tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
-
-vad_scores = load_emotional_embeddings()
+tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model, truncation_side = "left")
 
 # Load the training dataset
-training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_emotions(args.training_dataset, tokenizer, vad_scores)
+training_dataset, training_text_ids, training_sentence_ids = load_dataset(args.training_dataset, tokenizer)
 
 # Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
-    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_emotions(args.validation_dataset, tokenizer, vad_scores)
+    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset(args.validation_dataset, tokenizer)
 
 # Slicing for testing purposes
 

@@ -5,7 +5,6 @@ import numpy
 import torch
 import sys
 import transformers
-import tempfile
 from tqdm import tqdm  # Import tqdm for progress bar
 
 # GENERIC
@@ -16,7 +15,7 @@ label2id = {label:idx for idx, label in enumerate(labels)}
 
 # SETUP
 
-model_path = "model" # load from directory
+model_path = "model-v1" # load from directory
 #model_path = "JohannesKiesel/valueeval24-bert-baseline-en" # load from huggingface hub
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(model_path)

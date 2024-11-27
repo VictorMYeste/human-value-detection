@@ -44,67 +44,35 @@ class CustomTrainer(transformers.Trainer):
         loss = binary_cross_entropy_with_logits(logits, labels.float())  # BCE loss
         return (loss, outputs) if return_outputs else loss
 
-def load_liwc_features():
-    """Load LIWC dictionary and process it into usable categories and scores."""
-    liwc_path = "../../lexicons/liwc2015.dic"
-    liwc_scores = {}
-    category_names = {}
-    with open(liwc_path, "r") as f:
-        lines = f.readlines()
+def load_emotional_embeddings():
+    """Load EmoLex lexicon into a dictionary."""
+    emolex_path = "../../lexicons/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt"
+    emolex_scores = {} = {}
+    with open(emolex_path, "r") as f:
+        for line in f.readlines()[1:]:  # Skip header
+            parts = line.strip().split("\t")
+            word = parts[0]
+            scores = [int(x) for x in parts[1:]]  # EmoLex uses binary indicators for emotions
+            emolex_scores[word] = scores
+    return emolex_scores
 
-    # Separate into categories and word entries based on the `%` markers
-    divider_index = lines.index("%\n")
-    category_section = lines[1:divider_index]
-    word_section = lines[divider_index + 1:]
-
-    # Parse category definitions
-    for line in category_section:
-        parts = line.strip().split("\t")
-        category_id = int(parts[0])  # Category ID is an integer
-        category_name = parts[1]    # Category name
-        category_names[category_id] = category_name
-
-    # Parse word entries
-    for line in word_section:
-        parts = line.strip().split("\t")
-        word = parts[0].lower()  # Normalize word to lowercase
-        categories = list(map(int, parts[1:]))  # Convert category IDs to integers
-        liwc_scores[word] = categories
-
-    return liwc_scores, category_names
-
-def compute_liwc_scores(text, liwc_scores, num_categories):
-    """Compute the average LIWC scores for a given text."""
+def compute_emotional_scores(text, emolex_scores, num_emotions=10):
+    """Compute the average EmoLex scores for a given text."""
     tokens = text.split()  # Tokenize by whitespace
-    scores = [0.0] * num_categories
+    scores = [0] * num_emotions  # EmoLex typically has 10 emotions
     count = 0
-
     for token in tokens:
-        token_lower = token.lower()
-        matched = False
-
-        # Exact match
-        if token_lower in liwc_scores:
-            matched = True
-            for category in liwc_scores[token_lower]:
-                scores[category - 1] += 1  # Adjust for 0-based indexing
-
-        # Stem match
-        if not matched:
-            for word, categories in liwc_scores.items():
-                if word.endswith("*") and token_lower.startswith(word[:-1]):
-                    for category in categories:
-                        scores[category - 1] += 1  # Adjust for 0-based indexing
-                    break
-
-    # Normalize scores by total words (if count > 0)
-    if tokens:
-        scores = [score / len(tokens) for score in scores]
-
+        if token.lower() in emolex_scores:
+            count += 1
+            for i in range(num_emotions):
+                scores[i] += emolex_scores[token.lower()][i]
+    if count > 0:
+        scores = [score / count for score in scores]  # Average scores
     return scores
 
-def load_dataset_with_liwc(directory, tokenizer, liwc_scores, num_categories, load_labels=True):
-    """Load dataset and add LIWC features."""
+
+def load_dataset_with_emotions(directory, tokenizer, emolex_scores, load_labels=True):
+    """Load dataset and add emotional embeddings."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
     labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
@@ -113,17 +81,18 @@ def load_dataset_with_liwc(directory, tokenizer, liwc_scores, num_categories, lo
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
 
-    # Compute LIWC features for each sentence
-    data_frame['LIWC_Scores'] = data_frame['Text'].apply(
-        lambda x: compute_liwc_scores(x, liwc_scores, num_categories)
+    # Compute emotional embeddings for each sentence
+    num_emotions = len(next(iter(emolex_scores.values())))  # Number of emotions in EmoLex
+    data_frame['Emotional_Scores'] = data_frame['Text'].apply(
+        lambda x: compute_emotional_scores(x, emolex_scores, num_emotions)
     )
 
     # Tokenize the text
     encoded_sentences = tokenizer(data_frame["Text"].to_list(), truncation=True, max_length=512)
 
-    # Add LIWC features to tokenized features
-    liwc_features = numpy.array(data_frame['LIWC_Scores'].to_list())
-    encoded_sentences["emotional_features"] = liwc_features.tolist()
+    # Add emotional embeddings to tokenized features
+    emotional_features = numpy.array(data_frame['Emotional_Scores'].to_list())
+    encoded_sentences["emotional_features"] = emotional_features.tolist()
 
     # Load labels if available
     if load_labels and os.path.isfile(labels_file_path):
@@ -139,7 +108,7 @@ def load_dataset_with_liwc(directory, tokenizer, liwc_scores, num_categories, lo
 
 # TRAINING
 
-def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01, num_emotions=8):
+def train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name=None, batch_size=4, num_train_epochs=10, learning_rate=5e-6, weight_decay=0.01, num_emotions=10):
     def compute_metrics(eval_prediction):
         prediction_scores, label_scores = eval_prediction
         predictions = torch.sigmoid(torch.tensor(prediction_scores)) >= 0.5  # Apply sigmoid
@@ -214,17 +183,19 @@ args = cli.parse_args()
 pretrained_model = "microsoft/deberta-base"
 tokenizer = transformers.DebertaTokenizer.from_pretrained(pretrained_model)
 
-# Updated commands to use LIWC
-liwc_scores, category_names = load_liwc_features()
-num_categories = len(category_names)
+# Load EmoLex
+emolex_scores = load_emotional_embeddings()
+
+# Number of emotions in EmoLex
+num_emotions = 10  # EmoLex usually has 10 emotional categories
 
 # Load the training dataset
-training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_liwc(args.training_dataset, tokenizer, liwc_scores, num_categories)
+training_dataset, training_text_ids, training_sentence_ids = load_dataset_with_emotions(args.training_dataset, tokenizer, emolex_scores)
 
 # Load the validation dataset
 validation_dataset = training_dataset
 if args.validation_dataset != None:
-    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_liwc(args.validation_dataset, tokenizer, liwc_scores, num_categories)
+    validation_dataset, validation_text_ids, validation_sentence_ids = load_dataset_with_emotions(args.validation_dataset, tokenizer, emolex_scores)
 
 # Slicing for testing purposes
 
@@ -232,7 +203,7 @@ if args.validation_dataset != None:
 #validation_dataset = validation_dataset.select(range(10))
 
 # Train and evaluate
-trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name, num_emotions=num_categories)
+trainer = train(training_dataset, validation_dataset, pretrained_model, tokenizer, model_name = args.model_name, num_emotions=num_emotions)
 
 # Save the model if required
 if args.model_name != None:

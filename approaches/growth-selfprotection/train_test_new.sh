@@ -6,17 +6,6 @@ validation_dataset="--validation-dataset ../../data/validation-english/"
 
 # List of Model trainings (only script names and optional arguments)
 scripts=(
-    "VAD"
-    "VAD --previous-sentences"
-    "EmoLex"
-    "EmoLex --previous-sentences"
-    "EmotionIntensity"
-    "EmotionIntensity --previous-sentences"
-    "WorryWords"
-    "WorryWords --previous-sentences"
-    "LIWC"
-    "LIWC --previous-sentences"
-    "LIWC --linguistic-features"
     "LIWC --previous-sentences --linguistic-features"
     "MFD"
     "MFD --previous-sentences"

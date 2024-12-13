@@ -1,0 +1,61 @@
+2024-12-12 22:14:44,141 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2024-12-12 22:14:44,473 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2024-12-12 22:14:44,473 - HVD - INFO - Preparing datasets for training and validation
+2024-12-12 22:15:02,831 - HVD - INFO - Arguments validated successfully.
+2024-12-12 22:15:03,445 - HVD - INFO - Using CUDA for training.
+2024-12-12 22:15:04,712 - HVD - INFO - TRAINING
+2024-12-12 22:15:04,712 - HVD - INFO - ========
+2024-12-12 22:15:04,712 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 7
+Learning rate: 4.7791613843996165e-05
+Weight decay: 2.3667239330748746e-08
+Gradient accumulation steps: 2
+Early stopping patience: 3
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2024-12-12 22:15:04,717 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6992, 'grad_norm': 76534.609375, 'learning_rate': 4.6571132362715296e-05, 'epoch': 0.18}
+{'loss': 0.692, 'grad_norm': 80483.03125, 'learning_rate': 4.5350650881434434e-05, 'epoch': 0.36}
+{'loss': 0.6906, 'grad_norm': 57252.875, 'learning_rate': 4.4130169400153565e-05, 'epoch': 0.54}
+{'loss': 0.6905, 'grad_norm': 77001.8125, 'learning_rate': 4.29096879188727e-05, 'epoch': 0.71}
+{'loss': 0.6886, 'grad_norm': 29548.419921875, 'learning_rate': 4.1689206437591834e-05, 'epoch': 0.89}
+4
+{'eval_loss': 0.6964241862297058, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.5943, 'eval_samples_per_second': 45.495, 'eval_steps_per_second': 5.687, 'epoch': 1.0}
+{'loss': 0.6885, 'grad_norm': 45049.0, 'learning_rate': 4.0468724956310965e-05, 'epoch': 1.07}
+{'loss': 0.6878, 'grad_norm': 48007.20703125, 'learning_rate': 3.92482434750301e-05, 'epoch': 1.25}
+{'loss': 0.687, 'grad_norm': 26001.572265625, 'learning_rate': 3.8027761993749234e-05, 'epoch': 1.43}
+{'loss': 0.6844, 'grad_norm': 70288.84375, 'learning_rate': 3.680728051246837e-05, 'epoch': 1.61}
+{'loss': 0.6854, 'grad_norm': 82274.34375, 'learning_rate': 3.55867990311875e-05, 'epoch': 1.79}
+{'loss': 0.6863, 'grad_norm': 56050.515625, 'learning_rate': 3.4366317549906634e-05, 'epoch': 1.97}
+4
+{'eval_loss': 0.7161121368408203, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.6057, 'eval_samples_per_second': 45.494, 'eval_steps_per_second': 5.687, 'epoch': 2.0}
+{'loss': 0.6839, 'grad_norm': 62705.9765625, 'learning_rate': 3.314583606862577e-05, 'epoch': 2.14}
+{'loss': 0.686, 'grad_norm': 23291.84765625, 'learning_rate': 3.19253545873449e-05, 'epoch': 2.32}
+{'loss': 0.6843, 'grad_norm': 37021.9296875, 'learning_rate': 3.070487310606404e-05, 'epoch': 2.5}
+{'loss': 0.6858, 'grad_norm': 39254.0078125, 'learning_rate': 2.948439162478317e-05, 'epoch': 2.68}
+{'loss': 0.6841, 'grad_norm': 44737.41015625, 'learning_rate': 2.8263910143502306e-05, 'epoch': 2.86}
+4
+{'eval_loss': 0.726642906665802, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.7858, 'eval_samples_per_second': 45.469, 'eval_steps_per_second': 5.684, 'epoch': 3.0}
+{'loss': 0.6846, 'grad_norm': 31594.857421875, 'learning_rate': 2.704342866222144e-05, 'epoch': 3.04}
+{'loss': 0.6815, 'grad_norm': 33414.24609375, 'learning_rate': 2.582294718094057e-05, 'epoch': 3.22}
+{'loss': 0.6839, 'grad_norm': 57064.484375, 'learning_rate': 2.4602465699659705e-05, 'epoch': 3.4}
+{'loss': 0.6859, 'grad_norm': 25783.53125, 'learning_rate': 2.3381984218378836e-05, 'epoch': 3.57}
+{'loss': 0.6839, 'grad_norm': 38055.86328125, 'learning_rate': 2.216150273709797e-05, 'epoch': 3.75}
+{'loss': 0.6855, 'grad_norm': 43502.8671875, 'learning_rate': 2.0941021255817105e-05, 'epoch': 3.93}
+4
+{'eval_loss': 0.7192956209182739, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.8826, 'eval_samples_per_second': 45.455, 'eval_steps_per_second': 5.682, 'epoch': 4.0}
+{'train_runtime': 10911.0555, 'train_samples_per_second': 28.715, 'train_steps_per_second': 1.794, 'train_loss': 0.6867695185411605, 'epoch': 4.0}
+2024-12-13 01:16:56,301 - HVD - INFO - 
+
+VALIDATION
+2024-12-13 01:16:56,301 - HVD - INFO - ==========
+4
+2024-12-13 01:22:23,611 - HVD - INFO - Presence: 0.00
+2024-12-13 01:22:23,611 - HVD - INFO - Macro average: 0.00
+2024-12-13 01:22:24,218 - HVD - INFO - SAVE to models/Text

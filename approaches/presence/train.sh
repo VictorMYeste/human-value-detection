@@ -54,7 +54,7 @@ construct_command() {
     local fullname="${script_name}${prev_sent}${ling_feat}"
     local model_directory="models/${fullname}"
     local result_file="results/${fullname}.txt"
-    echo "python3 train_all.py $training_dataset $validation_dataset$previous_sentences$linguistic_features$lexicon --model-directory $model_directory"
+    echo "python3 main.py $training_dataset $validation_dataset$previous_sentences$linguistic_features$lexicon --model-directory $model_directory"
     echo "$result_file"
 }
 

@@ -1,0 +1,92 @@
+2024-12-06 10:52:40,737 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2024-12-06 10:52:41,223 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2024-12-06 10:52:41,223 - HVD - INFO - Preparing datasets for training and validation
+2024-12-06 10:52:59,668 - HVD - INFO - Arguments validated successfully.
+2024-12-06 10:53:00,083 - HVD - INFO - Using CUDA for training.
+2024-12-06 10:53:01,353 - HVD - INFO - TRAINING
+2024-12-06 10:53:01,353 - HVD - INFO - ========
+2024-12-06 10:53:01,353 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 9
+Learning rate: 2.07e-05
+Weight decay: 1.02e-05
+Gradient accumulation steps: 2
+Early stopping patience: 3
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2024-12-06 10:53:01,358 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.5746, 'grad_norm': 127256.34375, 'learning_rate': 2.0288845191276368e-05, 'epoch': 0.18}
+{'loss': 0.5704, 'grad_norm': 68424.921875, 'learning_rate': 1.9877690382552734e-05, 'epoch': 0.36}
+{'loss': 0.5657, 'grad_norm': 90381.265625, 'learning_rate': 1.94665355738291e-05, 'epoch': 0.54}
+{'loss': 0.5571, 'grad_norm': 90003.3359375, 'learning_rate': 1.905538076510547e-05, 'epoch': 0.71}
+{'loss': 0.5595, 'grad_norm': 113388.828125, 'learning_rate': 1.8644225956381836e-05, 'epoch': 0.89}
+4
+{'eval_loss': 0.5512723922729492, 'eval_f1-score': {'Social Focus': 0.26, 'Personal Focus': 0.17}, 'eval_marco-avg-f1-score': 0.22, 'eval_runtime': 327.3576, 'eval_samples_per_second': 45.528, 'eval_steps_per_second': 5.691, 'epoch': 1.0}
+{'loss': 0.5483, 'grad_norm': 163342.59375, 'learning_rate': 1.8233071147658203e-05, 'epoch': 1.07}
+{'loss': 0.5155, 'grad_norm': 227691.234375, 'learning_rate': 1.7821916338934572e-05, 'epoch': 1.25}
+{'loss': 0.5105, 'grad_norm': 141145.71875, 'learning_rate': 1.741076153021094e-05, 'epoch': 1.43}
+{'loss': 0.5209, 'grad_norm': 292353.4375, 'learning_rate': 1.6999606721487308e-05, 'epoch': 1.61}
+{'loss': 0.5166, 'grad_norm': 177184.09375, 'learning_rate': 1.6588451912763674e-05, 'epoch': 1.79}
+{'loss': 0.5145, 'grad_norm': 192741.328125, 'learning_rate': 1.617729710404004e-05, 'epoch': 1.97}
+4
+{'eval_loss': 0.5655035376548767, 'eval_f1-score': {'Social Focus': 0.35, 'Personal Focus': 0.27}, 'eval_marco-avg-f1-score': 0.31, 'eval_runtime': 327.3741, 'eval_samples_per_second': 45.526, 'eval_steps_per_second': 5.691, 'epoch': 2.0}
+{'loss': 0.4482, 'grad_norm': 439095.15625, 'learning_rate': 1.576614229531641e-05, 'epoch': 2.14}
+{'loss': 0.4347, 'grad_norm': 339528.625, 'learning_rate': 1.5354987486592777e-05, 'epoch': 2.32}
+{'loss': 0.4348, 'grad_norm': 320183.9375, 'learning_rate': 1.4943832677869145e-05, 'epoch': 2.5}
+{'loss': 0.4359, 'grad_norm': 651588.3125, 'learning_rate': 1.4532677869145513e-05, 'epoch': 2.68}
+{'loss': 0.4369, 'grad_norm': 648690.0625, 'learning_rate': 1.4121523060421879e-05, 'epoch': 2.86}
+4
+{'eval_loss': 0.6265156865119934, 'eval_f1-score': {'Social Focus': 0.36, 'Personal Focus': 0.35}, 'eval_marco-avg-f1-score': 0.36, 'eval_runtime': 327.6172, 'eval_samples_per_second': 45.492, 'eval_steps_per_second': 5.687, 'epoch': 3.0}
+{'loss': 0.4132, 'grad_norm': 398791.375, 'learning_rate': 1.3710368251698247e-05, 'epoch': 3.04}
+{'loss': 0.3318, 'grad_norm': 681977.1875, 'learning_rate': 1.3299213442974615e-05, 'epoch': 3.22}
+{'loss': 0.3402, 'grad_norm': 553985.625, 'learning_rate': 1.2888058634250981e-05, 'epoch': 3.4}
+{'loss': 0.3346, 'grad_norm': 385563.875, 'learning_rate': 1.2476903825527349e-05, 'epoch': 3.57}
+{'loss': 0.3366, 'grad_norm': 478722.78125, 'learning_rate': 1.2065749016803719e-05, 'epoch': 3.75}
+{'loss': 0.3427, 'grad_norm': 311075.09375, 'learning_rate': 1.1654594208080083e-05, 'epoch': 3.93}
+4
+{'eval_loss': 0.7516780495643616, 'eval_f1-score': {'Social Focus': 0.42, 'Personal Focus': 0.31}, 'eval_marco-avg-f1-score': 0.36, 'eval_runtime': 327.5465, 'eval_samples_per_second': 45.502, 'eval_steps_per_second': 5.688, 'epoch': 4.0}
+{'loss': 0.277, 'grad_norm': 547935.9375, 'learning_rate': 1.1243439399356453e-05, 'epoch': 4.11}
+{'loss': 0.2454, 'grad_norm': 707871.8125, 'learning_rate': 1.083228459063282e-05, 'epoch': 4.29}
+{'loss': 0.2544, 'grad_norm': 770607.5625, 'learning_rate': 1.0421129781909187e-05, 'epoch': 4.47}
+{'loss': 0.2451, 'grad_norm': 530851.6875, 'learning_rate': 1.0009974973185555e-05, 'epoch': 4.65}
+{'loss': 0.2519, 'grad_norm': 685650.0, 'learning_rate': 9.598820164461923e-06, 'epoch': 4.83}
+4
+{'eval_loss': 0.9218323826789856, 'eval_f1-score': {'Social Focus': 0.38, 'Personal Focus': 0.37}, 'eval_marco-avg-f1-score': 0.38, 'eval_runtime': 327.6812, 'eval_samples_per_second': 45.483, 'eval_steps_per_second': 5.685, 'epoch': 5.0}
+{'loss': 0.247, 'grad_norm': 93585.9921875, 'learning_rate': 9.18766535573829e-06, 'epoch': 5.0}
+{'loss': 0.176, 'grad_norm': 226075.234375, 'learning_rate': 8.776510547014657e-06, 'epoch': 5.18}
+{'loss': 0.1742, 'grad_norm': 535089.3125, 'learning_rate': 8.365355738291025e-06, 'epoch': 5.36}
+{'loss': 0.1839, 'grad_norm': 755988.6875, 'learning_rate': 7.954200929567393e-06, 'epoch': 5.54}
+{'loss': 0.1848, 'grad_norm': 365960.6875, 'learning_rate': 7.543046120843761e-06, 'epoch': 5.72}
+{'loss': 0.1726, 'grad_norm': 752421.125, 'learning_rate': 7.131891312120128e-06, 'epoch': 5.9}
+4
+{'eval_loss': 1.068554401397705, 'eval_f1-score': {'Social Focus': 0.41, 'Personal Focus': 0.34}, 'eval_marco-avg-f1-score': 0.38, 'eval_runtime': 327.2456, 'eval_samples_per_second': 45.544, 'eval_steps_per_second': 5.693, 'epoch': 6.0}
+{'loss': 0.1644, 'grad_norm': 1127928.0, 'learning_rate': 6.720736503396496e-06, 'epoch': 6.08}
+{'loss': 0.1279, 'grad_norm': 482313.8125, 'learning_rate': 6.309581694672863e-06, 'epoch': 6.26}
+{'loss': 0.1297, 'grad_norm': 859264.875, 'learning_rate': 5.898426885949231e-06, 'epoch': 6.43}
+{'loss': 0.1302, 'grad_norm': 1342614.5, 'learning_rate': 5.487272077225598e-06, 'epoch': 6.61}
+{'loss': 0.1306, 'grad_norm': 805947.125, 'learning_rate': 5.076117268501966e-06, 'epoch': 6.79}
+{'loss': 0.1276, 'grad_norm': 345967.6875, 'learning_rate': 4.664962459778333e-06, 'epoch': 6.97}
+4
+{'eval_loss': 1.344944715499878, 'eval_f1-score': {'Social Focus': 0.4, 'Personal Focus': 0.33}, 'eval_marco-avg-f1-score': 0.36, 'eval_runtime': 327.2947, 'eval_samples_per_second': 45.537, 'eval_steps_per_second': 5.692, 'epoch': 7.0}
+{'loss': 0.1041, 'grad_norm': 359394.34375, 'learning_rate': 4.253807651054701e-06, 'epoch': 7.15}
+{'loss': 0.0934, 'grad_norm': 297507.9375, 'learning_rate': 3.842652842331068e-06, 'epoch': 7.33}
+{'loss': 0.0916, 'grad_norm': 729893.1875, 'learning_rate': 3.431498033607436e-06, 'epoch': 7.51}
+{'loss': 0.0942, 'grad_norm': 1299293.125, 'learning_rate': 3.020343224883804e-06, 'epoch': 7.69}
+{'loss': 0.0899, 'grad_norm': 558699.6875, 'learning_rate': 2.6091884161601712e-06, 'epoch': 7.86}
+4
+{'eval_loss': 1.6606965065002441, 'eval_f1-score': {'Social Focus': 0.39, 'Personal Focus': 0.34}, 'eval_marco-avg-f1-score': 0.36, 'eval_runtime': 327.3643, 'eval_samples_per_second': 45.527, 'eval_steps_per_second': 5.691, 'epoch': 8.0}
+{'train_runtime': 21808.0033, 'train_samples_per_second': 18.471, 'train_steps_per_second': 1.154, 'train_loss': 0.3130068370761138, 'epoch': 8.0}
+2024-12-06 16:56:29,888 - HVD - INFO - 
+
+VALIDATION
+2024-12-06 16:56:29,888 - HVD - INFO - ==========
+4
+2024-12-06 17:01:57,946 - HVD - INFO - Social Focus: 0.38
+2024-12-06 17:01:57,946 - HVD - INFO - Personal Focus: 0.37
+2024-12-06 17:01:57,946 - HVD - INFO - Macro average: 0.38
+2024-12-06 17:01:59,204 - HVD - INFO - SAVE to models/Text

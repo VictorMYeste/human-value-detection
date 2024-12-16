@@ -1,0 +1,24 @@
+2024-12-16 15:01:43,994 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2024-12-16 15:01:44,246 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2024-12-16 15:01:44,247 - HVD - INFO - Preparing datasets for training and validation
+2024-12-16 15:02:02,589 - HVD - INFO - Arguments validated successfully.
+2024-12-16 15:02:03,022 - HVD - INFO - Using CUDA for training.
+2024-12-16 15:02:04,283 - HVD - INFO - TRAINING
+2024-12-16 15:02:04,284 - HVD - INFO - ========
+2024-12-16 15:02:04,284 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-v8
+Batch size: 4
+Number of epochs: 10
+Learning rate: 1e-05
+Weight decay: 0.001
+Gradient accumulation steps: 16
+Early stopping patience: 7
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2024-12-16 15:02:04,289 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.6474659442901611, 'eval_f1-score': {'Presence': 0.67}, 'eval_marco-avg-f1-score': 0.67, 'eval_runtime': 326.975, 'eval_samples_per_second': 45.581, 'eval_steps_per_second': 5.698, 'epoch': 1.0}
+{'loss': 0.6465, 'grad_norm': 96988.890625, 'learning_rate': 8.567335243553008e-06, 'epoch': 1.43}

@@ -57,7 +57,6 @@ def compute_metrics(eval_prediction, id2label):
 
     # Compute macro-average F1 score
     macro_average_f1_score = round(np.mean(list(f1_scores.values())), 2)
-    print("4")
     return {'f1-score': f1_scores, 'marco-avg-f1-score': macro_average_f1_score}
 
 # ========================================================

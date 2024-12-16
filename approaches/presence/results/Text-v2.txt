@@ -1,0 +1,59 @@
+2024-12-13 17:04:56,372 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2024-12-13 17:04:56,629 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2024-12-13 17:04:56,629 - HVD - INFO - Preparing datasets for training and validation
+2024-12-13 17:05:15,281 - HVD - INFO - Arguments validated successfully.
+2024-12-13 17:05:15,704 - HVD - INFO - Using CUDA for training.
+2024-12-13 17:05:16,967 - HVD - INFO - TRAINING
+2024-12-13 17:05:16,967 - HVD - INFO - ========
+2024-12-13 17:05:16,967 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-v2
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 8
+Early stopping patience: 7
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2024-12-13 17:05:16,972 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6552, 'grad_norm': 159600.828125, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+4
+{'eval_loss': 0.6493802070617676, 'eval_f1-score': {'Presence': 0.68}, 'eval_marco-avg-f1-score': 0.68, 'eval_runtime': 327.4987, 'eval_samples_per_second': 45.509, 'eval_steps_per_second': 5.689, 'epoch': 1.0}
+{'loss': 0.6158, 'grad_norm': 139531.734375, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+4
+{'eval_loss': 0.6645725965499878, 'eval_f1-score': {'Presence': 0.62}, 'eval_marco-avg-f1-score': 0.62, 'eval_runtime': 327.5132, 'eval_samples_per_second': 45.507, 'eval_steps_per_second': 5.688, 'epoch': 2.0}
+{'loss': 0.5803, 'grad_norm': 228332.5, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.511, 'grad_norm': 302409.0, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+4
+{'eval_loss': 0.7234966158866882, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 327.5465, 'eval_samples_per_second': 45.502, 'eval_steps_per_second': 5.688, 'epoch': 3.0}
+{'loss': 0.4271, 'grad_norm': 483132.5, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+4
+{'eval_loss': 0.8758646845817566, 'eval_f1-score': {'Presence': 0.63}, 'eval_marco-avg-f1-score': 0.63, 'eval_runtime': 327.2863, 'eval_samples_per_second': 45.538, 'eval_steps_per_second': 5.692, 'epoch': 4.0}
+{'loss': 0.3624, 'grad_norm': 348813.96875, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+4
+{'eval_loss': 1.0037853717803955, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.9266, 'eval_samples_per_second': 45.449, 'eval_steps_per_second': 5.681, 'epoch': 5.0}
+{'loss': 0.3057, 'grad_norm': 467871.8125, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.2265, 'grad_norm': 522611.40625, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+4
+{'eval_loss': 1.179129719734192, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.4667, 'eval_samples_per_second': 45.513, 'eval_steps_per_second': 5.689, 'epoch': 6.0}
+{'loss': 0.1944, 'grad_norm': 1254835.25, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+4
+{'eval_loss': 1.3650747537612915, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.2934, 'eval_samples_per_second': 45.537, 'eval_steps_per_second': 5.692, 'epoch': 7.0}
+{'loss': 0.164, 'grad_norm': 895934.0, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.1313, 'grad_norm': 248710.859375, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+4
+{'eval_loss': 1.6059411764144897, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 327.1438, 'eval_samples_per_second': 45.558, 'eval_steps_per_second': 5.695, 'epoch': 8.0}
+{'train_runtime': 21321.3437, 'train_samples_per_second': 20.992, 'train_steps_per_second': 0.328, 'train_loss': 0.3751183195344245, 'epoch': 8.0}
+2024-12-13 23:00:38,849 - HVD - INFO - 
+
+VALIDATION
+2024-12-13 23:00:38,849 - HVD - INFO - ==========
+4
+2024-12-13 23:06:06,296 - HVD - INFO - Presence: 0.68
+2024-12-13 23:06:06,296 - HVD - INFO - Macro average: 0.68
+2024-12-13 23:06:07,505 - HVD - INFO - UPLOAD to https://huggingface.co/Text-v2 (using HF_TOKEN environment variable)
+2024-12-13 23:06:07,505 - HVD - INFO - SAVE to models

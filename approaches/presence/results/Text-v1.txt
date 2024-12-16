@@ -1,61 +1,79 @@
-2024-12-12 22:14:44,141 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2024-12-12 22:14:44,473 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
-2024-12-12 22:14:44,473 - HVD - INFO - Preparing datasets for training and validation
-2024-12-12 22:15:02,831 - HVD - INFO - Arguments validated successfully.
-2024-12-12 22:15:03,445 - HVD - INFO - Using CUDA for training.
-2024-12-12 22:15:04,712 - HVD - INFO - TRAINING
-2024-12-12 22:15:04,712 - HVD - INFO - ========
-2024-12-12 22:15:04,712 - HVD - INFO - Training configuration:
+2024-12-13 08:54:02,944 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2024-12-13 08:54:03,220 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2024-12-13 08:54:03,220 - HVD - INFO - Preparing datasets for training and validation
+2024-12-13 08:54:21,507 - HVD - INFO - Arguments validated successfully.
+2024-12-13 08:54:21,940 - HVD - INFO - Using CUDA for training.
+2024-12-13 08:54:23,206 - HVD - INFO - TRAINING
+2024-12-13 08:54:23,206 - HVD - INFO - ========
+2024-12-13 08:54:23,206 - HVD - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
-Model name: None
+Model name: Text
 Batch size: 4
-Number of epochs: 7
-Learning rate: 4.7791613843996165e-05
-Weight decay: 2.3667239330748746e-08
-Gradient accumulation steps: 2
-Early stopping patience: 3
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 7
 Previous sentences used: No
 Using lexicon: No
 Adding linguistic features: No
 Number of categories (lexicon): 0
 
-2024-12-12 22:15:04,717 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-{'loss': 0.6992, 'grad_norm': 76534.609375, 'learning_rate': 4.6571132362715296e-05, 'epoch': 0.18}
-{'loss': 0.692, 'grad_norm': 80483.03125, 'learning_rate': 4.5350650881434434e-05, 'epoch': 0.36}
-{'loss': 0.6906, 'grad_norm': 57252.875, 'learning_rate': 4.4130169400153565e-05, 'epoch': 0.54}
-{'loss': 0.6905, 'grad_norm': 77001.8125, 'learning_rate': 4.29096879188727e-05, 'epoch': 0.71}
-{'loss': 0.6886, 'grad_norm': 29548.419921875, 'learning_rate': 4.1689206437591834e-05, 'epoch': 0.89}
+2024-12-13 08:54:23,211 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6791, 'grad_norm': 43750.9375, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6591, 'grad_norm': 162628.328125, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
 4
-{'eval_loss': 0.6964241862297058, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.5943, 'eval_samples_per_second': 45.495, 'eval_steps_per_second': 5.687, 'epoch': 1.0}
-{'loss': 0.6885, 'grad_norm': 45049.0, 'learning_rate': 4.0468724956310965e-05, 'epoch': 1.07}
-{'loss': 0.6878, 'grad_norm': 48007.20703125, 'learning_rate': 3.92482434750301e-05, 'epoch': 1.25}
-{'loss': 0.687, 'grad_norm': 26001.572265625, 'learning_rate': 3.8027761993749234e-05, 'epoch': 1.43}
-{'loss': 0.6844, 'grad_norm': 70288.84375, 'learning_rate': 3.680728051246837e-05, 'epoch': 1.61}
-{'loss': 0.6854, 'grad_norm': 82274.34375, 'learning_rate': 3.55867990311875e-05, 'epoch': 1.79}
-{'loss': 0.6863, 'grad_norm': 56050.515625, 'learning_rate': 3.4366317549906634e-05, 'epoch': 1.97}
+{'eval_loss': 0.6573342084884644, 'eval_f1-score': {'Presence': 0.56}, 'eval_marco-avg-f1-score': 0.56, 'eval_runtime': 327.6688, 'eval_samples_per_second': 45.485, 'eval_steps_per_second': 5.686, 'epoch': 1.0}
+{'loss': 0.6473, 'grad_norm': 123870.6796875, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.6275, 'grad_norm': 92905.7734375, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.6226, 'grad_norm': 103588.0546875, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
 4
-{'eval_loss': 0.7161121368408203, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.6057, 'eval_samples_per_second': 45.494, 'eval_steps_per_second': 5.687, 'epoch': 2.0}
-{'loss': 0.6839, 'grad_norm': 62705.9765625, 'learning_rate': 3.314583606862577e-05, 'epoch': 2.14}
-{'loss': 0.686, 'grad_norm': 23291.84765625, 'learning_rate': 3.19253545873449e-05, 'epoch': 2.32}
-{'loss': 0.6843, 'grad_norm': 37021.9296875, 'learning_rate': 3.070487310606404e-05, 'epoch': 2.5}
-{'loss': 0.6858, 'grad_norm': 39254.0078125, 'learning_rate': 2.948439162478317e-05, 'epoch': 2.68}
-{'loss': 0.6841, 'grad_norm': 44737.41015625, 'learning_rate': 2.8263910143502306e-05, 'epoch': 2.86}
+{'eval_loss': 0.6610821485519409, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.5704, 'eval_samples_per_second': 45.499, 'eval_steps_per_second': 5.687, 'epoch': 2.0}
+{'loss': 0.5891, 'grad_norm': 206536.078125, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.5447, 'grad_norm': 314314.21875, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.5426, 'grad_norm': 350221.9375, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
 4
-{'eval_loss': 0.726642906665802, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.7858, 'eval_samples_per_second': 45.469, 'eval_steps_per_second': 5.684, 'epoch': 3.0}
-{'loss': 0.6846, 'grad_norm': 31594.857421875, 'learning_rate': 2.704342866222144e-05, 'epoch': 3.04}
-{'loss': 0.6815, 'grad_norm': 33414.24609375, 'learning_rate': 2.582294718094057e-05, 'epoch': 3.22}
-{'loss': 0.6839, 'grad_norm': 57064.484375, 'learning_rate': 2.4602465699659705e-05, 'epoch': 3.4}
-{'loss': 0.6859, 'grad_norm': 25783.53125, 'learning_rate': 2.3381984218378836e-05, 'epoch': 3.57}
-{'loss': 0.6839, 'grad_norm': 38055.86328125, 'learning_rate': 2.216150273709797e-05, 'epoch': 3.75}
-{'loss': 0.6855, 'grad_norm': 43502.8671875, 'learning_rate': 2.0941021255817105e-05, 'epoch': 3.93}
+{'eval_loss': 0.7327947020530701, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 327.6063, 'eval_samples_per_second': 45.494, 'eval_steps_per_second': 5.687, 'epoch': 3.0}
+{'loss': 0.4796, 'grad_norm': 637744.5, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.4345, 'grad_norm': 534963.375, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.4324, 'grad_norm': 314668.78125, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
 4
-{'eval_loss': 0.7192956209182739, 'eval_f1-score': {'Presence': 0}, 'eval_marco-avg-f1-score': 0.0, 'eval_runtime': 327.8826, 'eval_samples_per_second': 45.455, 'eval_steps_per_second': 5.682, 'epoch': 4.0}
-{'train_runtime': 10911.0555, 'train_samples_per_second': 28.715, 'train_steps_per_second': 1.794, 'train_loss': 0.6867695185411605, 'epoch': 4.0}
-2024-12-13 01:16:56,301 - HVD - INFO - 
+{'eval_loss': 0.7956677675247192, 'eval_f1-score': {'Presence': 0.62}, 'eval_marco-avg-f1-score': 0.62, 'eval_runtime': 327.6689, 'eval_samples_per_second': 45.485, 'eval_steps_per_second': 5.686, 'epoch': 4.0}
+{'loss': 0.3483, 'grad_norm': 810675.6875, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.3265, 'grad_norm': 620969.9375, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+4
+{'eval_loss': 1.0180672407150269, 'eval_f1-score': {'Presence': 0.63}, 'eval_marco-avg-f1-score': 0.63, 'eval_runtime': 327.3631, 'eval_samples_per_second': 45.527, 'eval_steps_per_second': 5.691, 'epoch': 5.0}
+{'loss': 0.3251, 'grad_norm': 874074.8125, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.2324, 'grad_norm': 529329.125, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.2387, 'grad_norm': 915447.75, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+4
+{'eval_loss': 1.1505316495895386, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 327.562, 'eval_samples_per_second': 45.5, 'eval_steps_per_second': 5.687, 'epoch': 6.0}
+{'loss': 0.2252, 'grad_norm': 854109.75, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.1694, 'grad_norm': 756422.4375, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.1747, 'grad_norm': 1312379.625, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+4
+{'eval_loss': 1.4256561994552612, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 328.0432, 'eval_samples_per_second': 45.433, 'eval_steps_per_second': 5.679, 'epoch': 7.0}
+{'loss': 0.1543, 'grad_norm': 487445.25, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.1306, 'grad_norm': 1090315.25, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.1287, 'grad_norm': 619502.8125, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+4
+{'eval_loss': 1.6571990251541138, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 328.4356, 'eval_samples_per_second': 45.379, 'eval_steps_per_second': 5.672, 'epoch': 8.0}
+{'loss': 0.118, 'grad_norm': 716699.0, 'learning_rate': 3.5479256080114456e-06, 'epoch': 8.22}
+{'loss': 0.1034, 'grad_norm': 348624.84375, 'learning_rate': 2.8326180257510733e-06, 'epoch': 8.58}
+{'loss': 0.1002, 'grad_norm': 1158183.0, 'learning_rate': 2.1173104434907013e-06, 'epoch': 8.94}
+4
+{'eval_loss': 2.0057523250579834, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 327.3728, 'eval_samples_per_second': 45.526, 'eval_steps_per_second': 5.691, 'epoch': 9.0}
+{'loss': 0.0901, 'grad_norm': 510094.875, 'learning_rate': 1.402002861230329e-06, 'epoch': 9.29}
+{'loss': 0.0861, 'grad_norm': 1641677.5, 'learning_rate': 6.866952789699572e-07, 'epoch': 9.65}
+4
+{'eval_loss': 2.164766788482666, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.5667, 'eval_samples_per_second': 45.499, 'eval_steps_per_second': 5.687, 'epoch': 9.99}
+{'train_runtime': 26876.9131, 'train_samples_per_second': 16.653, 'train_steps_per_second': 0.52, 'train_loss': 0.3322489205007048, 'epoch': 9.99}
+2024-12-13 16:22:20,655 - HVD - INFO - 
 
 VALIDATION
-2024-12-13 01:16:56,301 - HVD - INFO - ==========
+2024-12-13 16:22:20,655 - HVD - INFO - ==========
 4
-2024-12-13 01:22:23,611 - HVD - INFO - Presence: 0.00
-2024-12-13 01:22:23,611 - HVD - INFO - Macro average: 0.00
-2024-12-13 01:22:24,218 - HVD - INFO - SAVE to models/Text
+2024-12-13 16:27:48,151 - HVD - INFO - Presence: 0.63
+2024-12-13 16:27:48,151 - HVD - INFO - Macro average: 0.63
+2024-12-13 16:27:49,688 - HVD - INFO - UPLOAD to https://huggingface.co/Text (using HF_TOKEN environment variable)
+2024-12-13 16:27:49,688 - HVD - INFO - SAVE to models

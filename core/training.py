@@ -5,7 +5,7 @@ import torch
 import transformers
 from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
-from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device
+from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
 import sys
 import logging
 logging.basicConfig(
@@ -91,11 +91,11 @@ def train(
         id2label: dict[int, str],
         model_name: str = None,
         batch_size: int = 4,
-        num_train_epochs: int = 9,
-        learning_rate: float = 2.07e-05,
-        weight_decay: float = 1.02e-05,
-        gradient_accumulation_steps: int = 2,
-        early_stopping_patience=3,
+        num_train_epochs: int = 10,
+        learning_rate: float = 2e-05,
+        weight_decay: float = 0.01,
+        gradient_accumulation_steps: int = 4,
+        early_stopping_patience=4,
         num_categories: int = 0,
         lexicon: str = None,
         previous_sentences: bool = False,
@@ -104,8 +104,8 @@ def train(
     """Train the model and evaluate performance."""
 
     if previous_sentences:
+        gradient_accumulation_steps = int(gradient_accumulation_steps * batch_size / 2)
         batch_size = 2
-        gradient_accumulation_steps = 4
 
     output_dir = tempfile.TemporaryDirectory()
     output_dir = tempfile.mkdtemp() if output_dir is None else output_dir
@@ -114,12 +114,14 @@ def train(
         output_dir.name, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps
     )
 
-    if lexicon:
-        model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories)
+    #if lexicon:
+    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories)
+    """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(
         pretrained_model, problem_type="multi_label_classification",
         num_labels=len(labels), id2label=id2label, label2id=label2id)
+    """
     
     model = move_to_device(model)
 
@@ -169,6 +171,10 @@ def train(
             data_collator=data_collator,
             callbacks=[early_stopping]
         )
+
+    # Add a warmup of 2 epochs to avoid initial flukes
+    warmup_callback = WarmupEvalCallback(warmup_epochs=2)
+    trainer.add_callback(warmup_callback)
 
     trainer.train()
 

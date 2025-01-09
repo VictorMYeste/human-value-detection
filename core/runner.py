@@ -44,7 +44,10 @@ def run_training(
 
     # Lexicon embeddings
     logger.info("Loading lexicon embeddings for: %s", lexicon if lexicon else "No lexicon used")
-    lexicon_embeddings, num_categories = load_embeddings(lexicon)
+    if lexicon:
+        lexicon_embeddings, num_categories = load_embeddings(lexicon)
+    else:
+        lexicon_embeddings, num_categories = None, 0  # No lexicon features
 
     # Linguistic embeddings
     if linguistic_features:

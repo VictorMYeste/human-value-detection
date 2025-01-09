@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 import transformers
+from transformers import TrainerCallback
 from torch.nn.functional import binary_cross_entropy_with_logits
 import sys
 import logging
@@ -21,9 +22,9 @@ def save_model(trainer, model_name, model_directory):
         logger.info(f"UPLOAD to https://huggingface.co/{model_name} (using HF_TOKEN environment variable)")
         # trainer.push_to_hub()
 
-    if model_directory:
+    if model_directory and model_name:
         logger.info(f"SAVE to {model_directory}")
-        trainer.save_model(model_directory)
+        trainer.save_model(f"{model_directory}/{model_name}")
 
 def move_to_device(model):
     if torch.cuda.is_available():
@@ -42,32 +43,55 @@ class EnhancedDebertaModel(nn.Module):
     def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
+
+        # Optional lexicon feature processing
         #self.lexicon_layer = nn.Linear(num_categories, 128)  # Map categories to 128 dimensions
         self.lexicon_layer = nn.Sequential(
             nn.Linear(num_categories, 256),
             nn.ReLU(),
-            nn.Dropout(0.3),  # Regularization
+            nn.Dropout(0.3),
             nn.Linear(256, 128),
             nn.ReLU()
+        ) if num_categories > 0 else None
+
+        # Multi-layer processing for transformer embeddings
+        """
+        self.text_embedding_layer = nn.Sequential(
+            nn.Linear(self.transformer.config.hidden_size, 512),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(512, 256),
+            nn.ReLU()
         )
-        self.classification_head = nn.Linear(self.transformer.config.hidden_size + 128, num_labels)
+        """
+
+        # Classification head
+        input_dim = self.transformer.config.hidden_size + 128 if self.lexicon_layer else self.transformer.config.hidden_size # Adjust input dimension if lexicon features are used
+        self.classification_head = nn.Linear(input_dim, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
+
         self.num_labels = num_labels
         self.id2label = id2label
         self.label2id = label2id
 
     def forward(self, input_ids, attention_mask, lexicon_features=None, labels=None):
         """Forward pass for the enhanced model."""
+        # Extract transformer embeddings
         hidden_state = self.transformer(input_ids, attention_mask=attention_mask).last_hidden_state
         transformer_output = hidden_state[:, 0, :] # CLS token representation
 
-        if lexicon_features is not None:
+        # Process transformer embeddings through additional layers
+        # enhanced_text_embeddings = self.text_embedding_layer(transformer_output)
+
+        # Handle lexicon features if provided
+        if self.lexicon_layer and lexicon_features is not None:
             lexicon_features = lexicon_features.to(input_ids.device)
             lexicon_output = torch.relu(self.lexicon_layer(lexicon_features))
             if lexicon_output.shape[0] != transformer_output.shape[0]:
                 raise ValueError("Batch size mismatch between transformer and lexicon features.")
             combined_output = torch.cat([transformer_output, lexicon_output], dim=-1)
         else:
+            # Use only text embeddings if lexicon features are not provided
             combined_output = transformer_output
         
         #logits_with_lexicon = self.classification_head(combined_output)
@@ -77,8 +101,13 @@ class EnhancedDebertaModel(nn.Module):
 
         combined_output = self.dropout(combined_output)
         logits = self.classification_head(combined_output)
-        logger.debug(f"Logits Shape: {logits.shape}")  # Should be [batch_size, num_labels]
-        return {"logits": logits}
+        #logger.debug(f"Logits Shape: {logits.shape}")  # Should be [batch_size, num_labels]
+        loss = None
+        if labels is not None:
+            labels = labels.float()
+            loss = binary_cross_entropy_with_logits(logits, labels)
+
+        return {"logits": logits, "loss": loss}
 
 # ========================================================
 # TRAINERS
@@ -89,20 +118,45 @@ class CustomTrainer(transformers.Trainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         logger.debug(f"Input IDs Shape: {inputs['input_ids'].shape}")
         logger.debug(f"Attention Mask Shape: {inputs['attention_mask'].shape}")
+
+        # Debug lexicon features
         if "lexicon_features" in inputs:
             logger.debug(f"Lexicon Features Shape: {inputs['lexicon_features'].shape}")
         else:
             logger.debug("No lexicon features")
+        
+        # Pop labels for loss computation
         labels = inputs.pop("labels")
         logger.debug(f"Labels Shape: {labels.shape}")
 
         if labels.dim() == 1:  # Ensure labels are 2D
             labels = labels.unsqueeze(1)
 
-        outputs = model(**inputs)
-        logits = outputs["logits"]
-        logger.debug(f"Logits Shape: {logits.shape}")
+        # Forward pass through the model
+        outputs = model(**inputs, labels=labels)
 
-        loss = binary_cross_entropy_with_logits(logits, labels.float())  # BCE loss
+        # Retrieve loss and logits from the model's outputs
+        logits = outputs["logits"]
+        loss = outputs["loss"]
+        logger.debug(f"Logits Shape: {logits.shape}")
         logger.debug(f"Loss: {loss.item()}")
         return (loss, outputs) if return_outputs else loss
+
+# ========================================================
+# CALLBACKS
+# ========================================================
+
+class WarmupEvalCallback(TrainerCallback):
+    def __init__(self, warmup_epochs=2):
+        self.warmup_epochs = warmup_epochs
+
+    def on_evaluate(self, args, state, control, **kwargs):
+        current_epoch = int(state.epoch) + 1
+        if current_epoch <= self.warmup_epochs:
+            logger.info(f"Skipping evaluation for warm-up phase (epoch {current_epoch}).")
+            control.should_evaluate = False
+            control.should_save = False
+        else:
+            control.should_evaluate = True
+            control.should_save = True
+        return control

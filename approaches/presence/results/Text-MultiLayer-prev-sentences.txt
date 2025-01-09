@@ -1,0 +1,22 @@
+2025-01-09 17:11:45,977 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-09 17:11:46,234 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-09 17:11:46,235 - HVD - INFO - Preparing datasets for training and validation
+2025-01-09 17:12:04,278 - HVD - INFO - Arguments validated successfully.
+2025-01-09 17:12:04,731 - HVD - INFO - Using CUDA for training.
+2025-01-09 17:12:05,973 - HVD - INFO - TRAINING
+2025-01-09 17:12:05,973 - HVD - INFO - ========
+2025-01-09 17:12:05,973 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-MultiLayer-prev-sentences
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2025-01-09 17:12:05,978 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

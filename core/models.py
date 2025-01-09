@@ -40,7 +40,7 @@ def move_to_device(model):
 
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 
@@ -55,18 +55,21 @@ class EnhancedDebertaModel(nn.Module):
         ) if num_categories > 0 else None
 
         # Multi-layer processing for transformer embeddings
-        """
-        self.text_embedding_layer = nn.Sequential(
-            nn.Linear(self.transformer.config.hidden_size, 512),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(512, 256),
-            nn.ReLU()
-        )
-        """
+        self.multilayer = multilayer
+        if multilayer:
+            self.text_embedding_layer = nn.Sequential(
+                nn.Linear(self.transformer.config.hidden_size, 512),
+                nn.ReLU(),
+                nn.Dropout(0.3),
+                nn.Linear(512, 256),
+                nn.ReLU()
+            )
+            hidden_size = 256
+        else:
+            hidden_size = self.transformer.config.hidden_size
 
         # Classification head
-        input_dim = self.transformer.config.hidden_size + 128 if self.lexicon_layer else self.transformer.config.hidden_size # Adjust input dimension if lexicon features are used
+        input_dim = hidden_size + 128 if self.lexicon_layer else hidden_size # Adjust input dimension if lexicon features are used
         self.classification_head = nn.Linear(input_dim, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
 
@@ -81,18 +84,21 @@ class EnhancedDebertaModel(nn.Module):
         transformer_output = hidden_state[:, 0, :] # CLS token representation
 
         # Process transformer embeddings through additional layers
-        # enhanced_text_embeddings = self.text_embedding_layer(transformer_output)
+        if self.multilayer:
+            text_embeddings = self.text_embedding_layer(transformer_output)
+        else:
+            text_embeddings = transformer_output
 
         # Handle lexicon features if provided
         if self.lexicon_layer and lexicon_features is not None:
             lexicon_features = lexicon_features.to(input_ids.device)
             lexicon_output = torch.relu(self.lexicon_layer(lexicon_features))
-            if lexicon_output.shape[0] != transformer_output.shape[0]:
+            if lexicon_output.shape[0] != text_embeddings.shape[0]:
                 raise ValueError("Batch size mismatch between transformer and lexicon features.")
-            combined_output = torch.cat([transformer_output, lexicon_output], dim=-1)
+            combined_output = torch.cat([text_embeddings, lexicon_output], dim=-1)
         else:
             # Use only text embeddings if lexicon features are not provided
-            combined_output = transformer_output
+            combined_output = text_embeddings
         
         #logits_with_lexicon = self.classification_head(combined_output)
         #logits_without_lexicon = self.classification_head(transformer_output)

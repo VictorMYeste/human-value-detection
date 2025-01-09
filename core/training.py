@@ -115,7 +115,8 @@ def train(
     )
 
     #if lexicon:
-    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories)
+    multilayer = True
+    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories, multilayer)
     """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(

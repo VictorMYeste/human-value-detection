@@ -82,10 +82,10 @@ def main() -> None:
             slice_data=args.slice,
             batch_size=4,
             num_train_epochs=10,
-            learning_rate=1e-5,
-            weight_decay=0.001,
-            gradient_accumulation_steps=16,
-            early_stopping_patience=7
+            learning_rate=2e-05,
+            weight_decay=0.01,
+            gradient_accumulation_steps=4,
+            early_stopping_patience=4
         )
 
 if __name__ == "__main__":

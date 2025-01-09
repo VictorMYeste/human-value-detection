@@ -1,0 +1,68 @@
+2025-01-03 13:03:32,338 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-03 13:03:32,844 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-03 13:03:32,844 - HVD - INFO - Preparing datasets for training and validation
+2025-01-03 13:03:50,973 - HVD - INFO - Arguments validated successfully.
+2025-01-03 13:03:51,807 - HVD - INFO - Using CUDA for training.
+2025-01-03 13:03:53,065 - HVD - INFO - TRAINING
+2025-01-03 13:03:53,065 - HVD - INFO - ========
+2025-01-03 13:03:53,065 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 8
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2025-01-03 13:03:53,070 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6662, 'grad_norm': 83521.4453125, 'learning_rate': 1.9105865522174535e-05, 'epoch': 0.36}
+{'loss': 0.6433, 'grad_norm': 157192.75, 'learning_rate': 1.821173104434907e-05, 'epoch': 0.71}
+{'eval_loss': 0.6467543244361877, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 326.3779, 'eval_samples_per_second': 45.665, 'eval_steps_per_second': 5.708, 'epoch': 1.0}
+2025-01-03 13:48:27,874 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.6334, 'grad_norm': 172805.03125, 'learning_rate': 1.7317596566523608e-05, 'epoch': 1.07}
+{'loss': 0.5981, 'grad_norm': 177317.34375, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.43}
+{'loss': 0.594, 'grad_norm': 199688.703125, 'learning_rate': 1.5529327610872678e-05, 'epoch': 1.79}
+{'eval_loss': 0.66536945104599, 'eval_f1-score': {'Presence': 0.62}, 'eval_marco-avg-f1-score': 0.62, 'eval_runtime': 326.2972, 'eval_samples_per_second': 45.676, 'eval_steps_per_second': 5.71, 'epoch': 2.0}
+2025-01-03 14:33:03,862 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.5479, 'grad_norm': 437035.625, 'learning_rate': 1.4635193133047212e-05, 'epoch': 2.14}
+{'loss': 0.4868, 'grad_norm': 392144.46875, 'learning_rate': 1.3741058655221747e-05, 'epoch': 2.5}
+{'loss': 0.4841, 'grad_norm': 582928.375, 'learning_rate': 1.284692417739628e-05, 'epoch': 2.86}
+{'eval_loss': 0.7470512986183167, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 326.5527, 'eval_samples_per_second': 45.64, 'eval_steps_per_second': 5.705, 'epoch': 3.0}
+2025-01-03 15:17:38,917 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 2.
+{'loss': 0.4062, 'grad_norm': 822007.25, 'learning_rate': 1.1952789699570817e-05, 'epoch': 3.22}
+{'loss': 0.3589, 'grad_norm': 631387.0625, 'learning_rate': 1.1058655221745351e-05, 'epoch': 3.57}
+{'loss': 0.3559, 'grad_norm': 487783.84375, 'learning_rate': 1.0164520743919886e-05, 'epoch': 3.93}
+{'eval_loss': 0.8904938697814941, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 326.2436, 'eval_samples_per_second': 45.684, 'eval_steps_per_second': 5.71, 'epoch': 4.0}
+2025-01-03 16:02:15,870 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 4.
+{'loss': 0.2661, 'grad_norm': 989233.8125, 'learning_rate': 9.270386266094421e-06, 'epoch': 4.29}
+{'loss': 0.2516, 'grad_norm': 865030.75, 'learning_rate': 8.376251788268956e-06, 'epoch': 4.65}
+{'eval_loss': 1.1677356958389282, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 327.1608, 'eval_samples_per_second': 45.556, 'eval_steps_per_second': 5.694, 'epoch': 5.0}
+2025-01-03 16:46:53,579 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 4.
+{'loss': 0.2438, 'grad_norm': 655841.4375, 'learning_rate': 7.482117310443491e-06, 'epoch': 5.0}
+{'loss': 0.1714, 'grad_norm': 1104604.625, 'learning_rate': 6.587982832618026e-06, 'epoch': 5.36}
+{'loss': 0.177, 'grad_norm': 796785.375, 'learning_rate': 5.693848354792561e-06, 'epoch': 5.72}
+{'eval_loss': 1.4070795774459839, 'eval_f1-score': {'Presence': 0.58}, 'eval_marco-avg-f1-score': 0.58, 'eval_runtime': 326.5157, 'eval_samples_per_second': 45.646, 'eval_steps_per_second': 5.706, 'epoch': 6.0}
+2025-01-03 17:31:30,793 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 5.
+{'loss': 0.1682, 'grad_norm': 899905.0, 'learning_rate': 4.799713876967096e-06, 'epoch': 6.08}
+{'loss': 0.1244, 'grad_norm': 1011292.25, 'learning_rate': 3.905579399141631e-06, 'epoch': 6.43}
+{'loss': 0.1264, 'grad_norm': 855366.75, 'learning_rate': 3.0114449213161664e-06, 'epoch': 6.79}
+{'eval_loss': 1.7380330562591553, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 326.608, 'eval_samples_per_second': 45.633, 'eval_steps_per_second': 5.704, 'epoch': 7.0}
+2025-01-03 18:16:09,181 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 6.
+{'loss': 0.1026, 'grad_norm': 230660.71875, 'learning_rate': 2.1173104434907013e-06, 'epoch': 7.15}
+{'loss': 0.099, 'grad_norm': 1472824.875, 'learning_rate': 1.2231759656652361e-06, 'epoch': 7.51}
+{'loss': 0.0918, 'grad_norm': 308632.875, 'learning_rate': 3.2904148783977116e-07, 'epoch': 7.86}
+{'eval_loss': 1.9112088680267334, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 327.0576, 'eval_samples_per_second': 45.57, 'eval_steps_per_second': 5.696, 'epoch': 8.0}
+2025-01-03 19:00:39,665 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 7.
+{'train_runtime': 21430.4346, 'train_samples_per_second': 16.708, 'train_steps_per_second': 0.522, 'train_loss': 0.3412739162963518, 'epoch': 8.0}
+2025-01-03 19:01:04,034 - HVD - INFO - 
+
+VALIDATION
+2025-01-03 19:01:04,035 - HVD - INFO - ==========
+2025-01-03 19:06:30,187 - HVD - INFO - Warm-up phase finished. Logging evaluation metrics for epoch 7.
+2025-01-03 19:06:30,187 - HVD - INFO - Presence: 0.61
+2025-01-03 19:06:30,187 - HVD - INFO - Macro average: 0.61

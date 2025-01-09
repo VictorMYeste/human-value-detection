@@ -6,7 +6,6 @@ validation_dataset="--validation-dataset ../../data/validation-english/"
 
 # List of Model trainings (only script names and optional arguments)
 scripts=(
-    "Text"
     "Text --previous-sentences"
     "VAD"
     "VAD --previous-sentences"
@@ -15,13 +14,6 @@ scripts=(
     "EmotionIntensity"
     "EmotionIntensity --previous-sentences"
     "WorryWords"
-    "WorryWords --previous-sentences"
-    "LIWC"
-    "LIWC --previous-sentences"
-    "LIWC --linguistic-features"
-    "LIWC --previous-sentences --linguistic-features"
-    "MFD"
-    "MFD --previous-sentences"
 )
 
 # Function to parse arguments and construct the command
@@ -54,7 +46,7 @@ construct_command() {
     local fullname="${script_name}${prev_sent}${ling_feat}"
     local model_directory="models/${fullname}"
     local result_file="results/${fullname}.txt"
-    echo "python3 main.py $training_dataset $validation_dataset$previous_sentences$linguistic_features$lexicon --model-directory $model_directory"
+    echo "python3 main.py $training_dataset $validation_dataset$previous_sentences$linguistic_features$lexicon --model-directory $model_directory --model-name $fullname"
     echo "$result_file"
 }
 

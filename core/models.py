@@ -40,7 +40,7 @@ def move_to_device(model):
 
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer = False):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 

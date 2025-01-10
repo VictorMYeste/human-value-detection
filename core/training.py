@@ -115,7 +115,7 @@ def train(
     )
 
     #if lexicon:
-    multilayer = True
+    multilayer = False
     model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories, multilayer)
     """
     else:

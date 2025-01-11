@@ -84,17 +84,9 @@ def load_dataset(directory, tokenizer, labels, lexicon_embeddings = {}, num_cate
                 concatenated_texts.append(
                     str(data_frame.iloc[idx - 1]["Text"]) + " [SEP] " + str(data_frame.iloc[idx]["Text"])
                 )
-            elif idx == 2:
-                # Third sentence, only two preceding sentences
-                concatenated_texts.append(
-                    str(data_frame.iloc[idx - 2]["Text"]) + " " +
-                    str(data_frame.iloc[idx - 1]["Text"]) + " [SEP] " +
-                    str(data_frame.iloc[idx]["Text"])
-                )
             else:
                 # Concatenate the two preceding sentences with a separator
                 concatenated_texts.append(
-                    str(data_frame.iloc[idx - 3]["Text"]) + " " +
                     str(data_frame.iloc[idx - 2]["Text"]) + " " +
                     str(data_frame.iloc[idx - 1]["Text"]) + " [SEP] " +
                     str(data_frame.iloc[idx]["Text"])

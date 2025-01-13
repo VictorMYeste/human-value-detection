@@ -38,9 +38,24 @@ def move_to_device(model):
 # MODELS
 # ========================================================
 
+class ResidualBlock(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super().__init__()
+        self.linear_layers = nn.Sequential(
+            nn.Linear(input_dim, 512),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(512, output_dim),
+            nn.ReLU()
+        )
+        self.projection = nn.Linear(input_dim, output_dim) if input_dim != output_dim else nn.Identity()
+
+    def forward(self, x):
+        return self.linear_layers(x) + self.projection(x)  # Add residual connection
+
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer = False):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer = False, num_groups=32):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 
@@ -57,13 +72,18 @@ class EnhancedDebertaModel(nn.Module):
         # Multi-layer processing for transformer embeddings
         self.multilayer = multilayer
         if multilayer:
+            """
             self.text_embedding_layer = nn.Sequential(
                 nn.Linear(self.transformer.config.hidden_size, 512),
+                nn.GroupNorm(num_groups, 512),
                 nn.ReLU(),
                 nn.Dropout(0.3),
                 nn.Linear(512, 256),
+                nn.GroupNorm(num_groups, 256),
                 nn.ReLU()
             )
+            """
+            self.text_embedding_layer = ResidualBlock(self.transformer.config.hidden_size, 256)
             hidden_size = 256
         else:
             hidden_size = self.transformer.config.hidden_size
@@ -111,6 +131,8 @@ class EnhancedDebertaModel(nn.Module):
         loss = None
         if labels is not None:
             labels = labels.float()
+            if labels.dim() == 1:
+                labels = labels.unsqueeze(1)  # Ensure 2D labels
             loss = binary_cross_entropy_with_logits(logits, labels)
 
         return {"logits": logits, "loss": loss}
@@ -144,6 +166,8 @@ class CustomTrainer(transformers.Trainer):
         # Retrieve loss and logits from the model's outputs
         logits = outputs["logits"]
         loss = outputs["loss"]
+        #if loss.dim() > 0:
+        #    loss = loss.mean()  # Reduce to a scalar value if necessary
         logger.debug(f"Logits Shape: {logits.shape}")
         logger.debug(f"Loss: {loss.item()}")
         return (loss, outputs) if return_outputs else loss

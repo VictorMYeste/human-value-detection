@@ -23,6 +23,7 @@ def run_training(
     linguistic_features: bool = False,
     model_name: str = None,
     model_directory: str = "models",
+    multilayer: bool = False,
     slice_data: bool = False,
     batch_size: int = 4,
     num_train_epochs: int = 9,
@@ -89,7 +90,8 @@ def run_training(
         learning_rate=learning_rate,
         weight_decay=weight_decay,
         gradient_accumulation_steps=gradient_accumulation_steps,
-        early_stopping_patience=early_stopping_patience
+        early_stopping_patience=early_stopping_patience,
+        multilayer=multilayer
     )
 
     # Save the model if required

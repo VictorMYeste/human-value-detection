@@ -99,7 +99,8 @@ def train(
         num_categories: int = 0,
         lexicon: str = None,
         previous_sentences: bool = False,
-        linguistic_features: bool = False
+        linguistic_features: bool = False,
+        multilayer: bool = False,
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -115,7 +116,6 @@ def train(
     )
 
     #if lexicon:
-    multilayer = False
     model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories, multilayer)
     """
     else:
@@ -143,6 +143,7 @@ def train(
         f"Weight decay: {weight_decay}\n"
         f"Gradient accumulation steps: {gradient_accumulation_steps}\n"
         f"Early stopping patience: {early_stopping_patience}\n"
+        f"Multilayer: {'Yes' if multilayer else 'No'}\n"
         f"Previous sentences used: {'Yes' if previous_sentences else 'No'}\n"
         f"Using lexicon: {lexicon if lexicon else 'No'}\n"
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"

@@ -9,6 +9,7 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-l", "--lexicon", default=None, help="Lexicon to be added on top of the model")
     cli.add_argument("-m", "--model-name", help="Name of the model if being uploaded to HuggingFace")
     cli.add_argument("-d", "--model-directory", default="models", help="Directory to save the trained model")
+    cli.add_argument("-y", "--multilayer", action='store_true', help="Use multilayer design instead of single layer")
     cli.add_argument("-s", "--slice", action='store_true', help="Slice for testing with size = 100")
     cli.add_argument("-o", "--optimize", action='store_true', help="If set, run hyperparameter optimization with Optuna")
     return cli.parse_args()

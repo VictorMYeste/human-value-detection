@@ -6,14 +6,13 @@ validation_dataset="--validation-dataset ../../data/validation-english/"
 
 # List of Model trainings (only script names and optional arguments)
 scripts=(
-    "Text --previous-sentences"
-    "VAD"
     "VAD --previous-sentences"
     "EmoLex"
     "EmoLex --previous-sentences"
     "EmotionIntensity"
     "EmotionIntensity --previous-sentences"
     "WorryWords"
+    "WorryWords --previous-sentences"
 )
 
 # Function to parse arguments and construct the command

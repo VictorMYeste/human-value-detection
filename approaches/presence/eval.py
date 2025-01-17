@@ -1,10 +1,21 @@
+import sys
+import os
+# Add the project root to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from core.config import MODEL_CONFIG
+
 import pandas as pd
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support, classification_report
 
+# Load model-specific configuration
+model_group = "presence"
+model_config = MODEL_CONFIG[model_group]
+
 # Load predictions and gold labels
-predictions_path = "output-v1/predictions.tsv"
-gold_labels_path = "../../data/test-english/labels-cat.tsv"
+predictions_path = "output/predictions.tsv"
+gold_labels_path = "../../data/validation-english/labels-cat.tsv"
 
 # Load the data
 predictions = pd.read_csv(predictions_path, sep='\t')
@@ -14,7 +25,7 @@ gold_labels = pd.read_csv(gold_labels_path, sep='\t')
 merged = pd.merge(gold_labels, predictions, on=["Text-ID", "Sentence-ID"], suffixes=("_gold", "_pred"))
 
 # Extract the new labels
-labels = ["Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance"]
+labels = model_config["labels"]
 
 # Prepare gold and predicted arrays
 gold = merged[[label + "_gold" for label in labels]].values

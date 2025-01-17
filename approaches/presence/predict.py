@@ -1,21 +1,30 @@
+import sys
 import os
+# Add the project root to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+from core.config import MODEL_CONFIG
+
 import datasets
 import pandas
 import numpy
 import torch
-import sys
 import transformers
 from tqdm import tqdm  # Import tqdm for progress bar
 
+# Load model-specific configuration
+model_group = "presence"
+model_config = MODEL_CONFIG[model_group]
+
 # GENERIC
 
-labels = [ "Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance" ]
+labels = model_config["labels"]
 id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)} 
 
 # SETUP
 
-model_path = "model-v1" # load from directory
+model_path = "models/Text" # load from directory
 #model_path = "JohannesKiesel/valueeval24-bert-baseline-en" # load from huggingface hub
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(model_path)
@@ -25,7 +34,7 @@ sigmoid = torch.nn.Sigmoid()
 # PREDICTION
 
 def predict(text):
-    """ Predicts the value probabilities (attained and constrained) for each sentence """
+    """ Predicts the label probabilities for each sentence """
     # "text" contains all sentences (plain strings) of a single text in order (same Text-ID in the input file)
     encoded_sentences = tokenizer(text, truncation=True, padding=True, return_tensors="pt")
     sentences_predictions = sigmoid(model(**encoded_sentences).logits)

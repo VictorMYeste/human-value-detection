@@ -39,13 +39,15 @@ def move_to_device(model):
 # ========================================================
 
 class ResidualBlock(nn.Module):
-    def __init__(self, input_dim, output_dim):
+    def __init__(self, input_dim, output_dim, num_groups=8):
         super().__init__()
         self.linear_layers = nn.Sequential(
             nn.Linear(input_dim, 512),
+            # nn.GroupNorm(num_groups, 512),
             nn.ReLU(),
-            nn.Dropout(0.3),
+            nn.Dropout(0.4),
             nn.Linear(512, output_dim),
+            # nn.GroupNorm(num_groups, output_dim),
             nn.ReLU()
         )
         self.projection = nn.Linear(input_dim, output_dim) if input_dim != output_dim else nn.Identity()
@@ -55,7 +57,7 @@ class ResidualBlock(nn.Module):
 
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer = False, num_groups=32):
+    def __init__(self, pretrained_model, num_labels, id2label, label2id, num_categories, multilayer = False, num_groups=8):
         super(EnhancedDebertaModel, self).__init__()
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 
@@ -64,7 +66,7 @@ class EnhancedDebertaModel(nn.Module):
         self.lexicon_layer = nn.Sequential(
             nn.Linear(num_categories, 256),
             nn.ReLU(),
-            nn.Dropout(0.3),
+            nn.Dropout(0.4),
             nn.Linear(256, 128),
             nn.ReLU()
         ) if num_categories > 0 else None
@@ -77,7 +79,7 @@ class EnhancedDebertaModel(nn.Module):
                 nn.Linear(self.transformer.config.hidden_size, 512),
                 nn.GroupNorm(num_groups, 512),
                 nn.ReLU(),
-                nn.Dropout(0.3),
+                nn.Dropout(0.4),
                 nn.Linear(512, 256),
                 nn.GroupNorm(num_groups, 256),
                 nn.ReLU()
@@ -166,8 +168,8 @@ class CustomTrainer(transformers.Trainer):
         # Retrieve loss and logits from the model's outputs
         logits = outputs["logits"]
         loss = outputs["loss"]
-        #if loss.dim() > 0:
-        #    loss = loss.mean()  # Reduce to a scalar value if necessary
+        if loss.dim() > 0:
+            loss = loss.mean()  # Reduce to a scalar value if necessary
         logger.debug(f"Logits Shape: {logits.shape}")
         logger.debug(f"Loss: {loss.item()}")
         return (loss, outputs) if return_outputs else loss

@@ -5,8 +5,12 @@ import os
 from collections import defaultdict
 import spacy
 import re
+from nltk.tokenize import word_tokenize
 import transformers
+from transformers import AutoModel, AutoTokenizer
+import torch
 from typing import Optional, Dict, Tuple, List
+from core.config import MODEL_CONFIG
 from core.utils import validate_args, normalize_token, slice_for_testing
 import sys
 import logging
@@ -33,7 +37,8 @@ def prepare_datasets(
     previous_sentences: bool = False,
     linguistic_features: bool = False,
     ner_features: bool = False,
-    lexicon: str = None
+    lexicon: str = None,
+    custom_stopwords: List[str] = []
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
     # Training dataset
     training_dataset = load_dataset(
@@ -46,7 +51,8 @@ def prepare_datasets(
         previous_sentences,
         linguistic_features,
         ner_features,
-        lexicon
+        lexicon,
+        custom_stopwords
     )
 
     # Log class distribution
@@ -66,7 +72,8 @@ def prepare_datasets(
             previous_sentences,
             linguistic_features,
             ner_features,
-            lexicon
+            lexicon,
+            custom_stopwords
         )
     
     validate_args(labels, training_dataset, validation_dataset)
@@ -91,6 +98,21 @@ def validate_input_shapes(inputs):
             logger.error(f"Empty elements detected within feature {key}")
             raise ValueError(f"Feature {key} contains empty elements")
 
+def remove_custom_stopwords(text, custom_stopwords):
+    # Tokenize text
+    tokens = word_tokenize(text.lower())
+    
+    # Remove reporting stopwords
+    filtered_tokens = [word for word in tokens if word not in custom_stopwords]
+
+    # Reconstruct sentence
+    cleaned_text = " ".join(filtered_tokens)
+    
+    # Remove extra whitespace or special characters
+    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+    
+    return cleaned_text
+
 def load_dataset(
     directory,
     tokenizer,
@@ -101,7 +123,8 @@ def load_dataset(
     previous_sentences: bool = False,
     linguistic_features: bool = False,
     ner_features: bool = False,
-    lexicon: str = None
+    lexicon: str = None,
+    custom_stopwords: List[str] = []
 ):
     """Load dataset and add lexicon embeddings if specified."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
@@ -115,6 +138,10 @@ def load_dataset(
 
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
+
+    # Apply the reporting language removal before tokenization
+    if custom_stopwords:
+        data_frame['Text'] = data_frame['Text'].apply(lambda text: remove_custom_stopwords(text, custom_stopwords))
 
     # Tokenize the text
     texts = data_frame["Text"]
@@ -163,9 +190,15 @@ def load_dataset(
 
     # Compute NER features
     if ner_features:
+        """
         logger.info("Adding NER features")
         data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_features(text, nlp))
         logger.debug(f"NER features example: {data_frame['NER_Features'].head()}")
+        combined_features.append(data_frame["NER_Features"].tolist())
+        """
+        logger.info("Adding NER embeddings")
+        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_embeddings(text, nlp))
+        logger.debug(f"NER embedding example: {data_frame['NER_Features'].head()}")
         combined_features.append(data_frame["NER_Features"].tolist())
 
     # Compute lexicon embeddings for each sentence
@@ -464,6 +497,29 @@ def compute_ner_features(text, nlp):
     
     # Ensure the returned vector is always the same length
     return [entity_counts[ent] for ent in known_entities]
+
+# Load the tokenizer and model once to avoid reloading for each text
+ner_tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-base")
+ner_model = AutoModel.from_pretrained("microsoft/deberta-base")
+
+def compute_ner_embeddings(text, nlp):
+    doc = nlp(text)
+
+    # Collect entity texts
+    entity_texts = [ent.text for ent in doc.ents]
+
+    if entity_texts:
+        # Tokenize entity texts and get embeddings
+        encoded = ner_tokenizer(entity_texts, padding=True, truncation=True, return_tensors="pt")
+        with torch.no_grad():
+            output = ner_model(**encoded)
+        
+        # Take the CLS token representation for each entity
+        embeddings = output.last_hidden_state[:, 0, :].mean(dim=0)  # Mean pooling
+        return embeddings.cpu().numpy().tolist()
+    
+    # Return zero vector if no entities found
+    return [0.0] * ner_model.config.hidden_size
 
 def compute_mfd_scores(text, mfd_embeddings, tokenizer):
     """Compute the count of words matching each Moral Foundation dimension."""

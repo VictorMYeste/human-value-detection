@@ -118,7 +118,8 @@ def train(
     )
 
     if ner_features:
-        ner_feature_dim = 8
+        # ner_feature_dim = 8
+        ner_feature_dim = 768 # DeBERTa hidden size
     else:
         ner_feature_dim = 0
     

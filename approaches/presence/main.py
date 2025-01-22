@@ -51,6 +51,7 @@ def main() -> None:
             learning_rate=learning_rate,
             weight_decay=weight_decay,
             gradient_accumulation_steps=gradient_accumulation_steps,
+            custom_stopwords = model_config["custom_stopwords"]
         )
 
         # Evaluate and return metric

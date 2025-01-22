@@ -1,3 +1,4 @@
+import pandas as pd
 import os
 import sys
 import logging
@@ -14,8 +15,13 @@ def validate_args(labels, training_dataset, validation_dataset):
     assert validation_dataset is not None, "Validation dataset cannot be None."
     logger.info("Arguments validated successfully.")
 
-def slice_for_testing(dataset, size=1000):
-    return dataset.select(range(size))
+def slice_for_testing(dataset, size=100):
+    if hasattr(dataset, 'select'):  # Assuming it's a dataset with a select method
+        return dataset.select(range(size))
+    elif isinstance(dataset, pd.DataFrame):  # Check if it's a pandas DataFrame
+        return dataset.iloc[:size]  # Use iloc to slice DataFrame rows
+    else:
+        raise TypeError("Unsupported dataset type. Expected Dataset or DataFrame.")
 
 def validate_file(path):
     if not os.path.exists(path):

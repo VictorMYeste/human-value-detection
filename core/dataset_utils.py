@@ -4,9 +4,10 @@ import datasets
 import os
 from collections import defaultdict
 import spacy
+import re
 import transformers
 from typing import Optional, Dict, Tuple, List
-from core.utils import validate_args, normalize_token
+from core.utils import validate_args, normalize_token, slice_for_testing
 import sys
 import logging
 logging.basicConfig(
@@ -26,12 +27,26 @@ def prepare_datasets(
     validation_path: Optional[str],
     tokenizer: transformers.PreTrainedTokenizer,
     labels: List[str],
+    slice_data: bool = False,
     lexicon_embeddings: Optional[Dict] = None,
-    num_categories: int = 0
+    num_categories: int = 0,
+    previous_sentences: bool = False,
+    linguistic_features: bool = False,
+    ner_features: bool = False,
+    lexicon: str = None
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
     # Training dataset
     training_dataset = load_dataset(
-        training_path, tokenizer, labels, lexicon_embeddings, num_categories
+        training_path,
+        tokenizer,
+        labels,
+        slice_data,
+        lexicon_embeddings,
+        num_categories,
+        previous_sentences,
+        linguistic_features,
+        ner_features,
+        lexicon
     )
 
     # Log class distribution
@@ -42,7 +57,16 @@ def prepare_datasets(
     validation_dataset = training_dataset
     if validation_path:
         validation_dataset = load_dataset(
-            validation_path, tokenizer, labels, lexicon_embeddings, num_categories
+            validation_path,
+            tokenizer,
+            labels,
+            slice_data,
+            lexicon_embeddings,
+            num_categories,
+            previous_sentences,
+            linguistic_features,
+            ner_features,
+            lexicon
         )
     
     validate_args(labels, training_dataset, validation_dataset)
@@ -58,12 +82,36 @@ def prepare_datasets(
 # DATASET LOADING
 # ========================================================
 
-def load_dataset(directory, tokenizer, labels, lexicon_embeddings = {}, num_categories=0, previous_sentences=False, linguistic_features=False, lexicon=None):
+def validate_input_shapes(inputs):
+    for key, value in inputs.items():
+        if isinstance(value, list) and len(value) == 0:
+            logger.error(f"Empty feature detected in {key}")
+            raise ValueError(f"Feature {key} is empty")
+        elif isinstance(value, list) and any(len(v) == 0 for v in value):
+            logger.error(f"Empty elements detected within feature {key}")
+            raise ValueError(f"Feature {key} contains empty elements")
+
+def load_dataset(
+    directory,
+    tokenizer,
+    labels,
+    slice_data: bool = False,
+    lexicon_embeddings = {},
+    num_categories=0,
+    previous_sentences: bool = False,
+    linguistic_features: bool = False,
+    ner_features: bool = False,
+    lexicon: str = None
+):
     """Load dataset and add lexicon embeddings if specified."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
     labels_file_path = os.path.join(directory, "labels-cat.tsv")
     
     data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+
+    # Slicing for testing purposes
+    if slice_data:
+        data_frame = slice_for_testing(data_frame)
 
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
@@ -100,11 +148,25 @@ def load_dataset(directory, tokenizer, labels, lexicon_embeddings = {}, num_cate
 
     texts = pandas.Series(texts)
 
+    if linguistic_features or ner_features:
+        logger.info("Loading en_core_web_sm for extra features")
+        nlp = spacy.load("en_core_web_sm")
+    
+    # Initialize a list to hold combined features
+    combined_features = []
+
     # Compute Linguistic features
     if linguistic_features:
-        logger.info("Loading en_core_web_sm for linguistic features")
-        nlp = spacy.load("en_core_web_sm")
+        logger.info("Adding Linguistic features")
         data_frame['Linguistic_Scores'] = texts.apply(lambda text: compute_linguistic_features(text, nlp))
+        combined_features.append(data_frame['Linguistic_Scores'].tolist())
+
+    # Compute NER features
+    if ner_features:
+        logger.info("Adding NER features")
+        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_features(text, nlp))
+        logger.debug(f"NER features example: {data_frame['NER_Features'].head()}")
+        combined_features.append(data_frame["NER_Features"].tolist())
 
     # Compute lexicon embeddings for each sentence
     if lexicon:
@@ -114,31 +176,47 @@ def load_dataset(directory, tokenizer, labels, lexicon_embeddings = {}, num_cate
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
             lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0] * num_categories
         )
+        combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
         #logger.debug(f"Sample Lexicon Scores: {data_frame['Lexicon_Scores'].head()}")
     
-    # Combine features
-    if lexicon and linguistic_features:
-        # Add linguistic features to lexicon embeddings (if any)
+    # Combine all features
+    if combined_features:
+        # Stack features together (ensure consistent dimensions across all features)
+        max_length = max(len(f) for features in combined_features for f in features)
         combined_features = [
-            np.concatenate((lex, syntactic)) for lex, syntactic in zip(data_frame['Lexicon_Scores'], data_frame['Linguistic_Scores'])
+            np.concatenate([np.asarray(f, dtype=np.float32) if len(f) == max_length else np.pad(f, (0, max_length - len(f)), 'constant') for f in features])
+            for features in zip(*combined_features)
         ]
-    elif lexicon:
-        # Add lexicon embeddings to tokenized features
-        combined_features = data_frame['Lexicon_Scores']
-    elif linguistic_features:
-        # Add Linguistic embeddings to tokenized features
-        combined_features = data_frame['Linguistic_Scores']
+        #combined_features = [np.concatenate([np.asarray(f, dtype=np.float32) for f in features]) for features in zip(*combined_features)]
     else:
         combined_features = [[0.0] * num_categories] * len(data_frame)
+
+    if linguistic_features:
+        logger.debug(f"Sample Linguistic Features: {data_frame['Linguistic_Scores'].head()}")
+    if ner_features:
+        logger.debug(f"Sample NER Features: {data_frame['NER_Features'].head()}")
+    if lexicon:
+        logger.debug(f"Sample Lexicon Features: {data_frame['Lexicon_Scores'].head()}")
+
+    for i, row in enumerate(combined_features[:5]):
+        logger.debug(f"Combined features for sample {i}: {len(row)} elements")
     
-    #logger.debug(f"Data frame length: {len(data_frame)}, Combined features length: {len(combined_features)}")
-    
-    encoded_sentences["lexicon_features"] = combined_features
+    if lexicon:
+        encoded_sentences["lexicon_features"] = np.array(combined_features, dtype=np.float32).tolist()
+    elif ner_features:
+        encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
+
+    # Validate input shapes before dataset conversion
+    if linguistic_features or ner_features or lexicon:
+        validate_input_shapes(encoded_sentences)
 
     # Load labels if available
     if os.path.isfile(labels_file_path):
         labels_frame = pandas.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+        # Slicing for testing purposes
+        if slice_data:
+            labels_frame = slice_for_testing(labels_frame)
         #labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
         #for idx, label in enumerate(labels):
         #    if label in labels_frame.columns:
@@ -147,6 +225,7 @@ def load_dataset(directory, tokenizer, labels, lexicon_embeddings = {}, num_cate
         encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
 
     encoded_sentences = datasets.Dataset.from_dict(encoded_sentences)
+
     return encoded_sentences
 
 # ========================================================
@@ -273,6 +352,9 @@ def compute_liwc_scores(text, lexicon_embeddings, tokenizer, num_categories):
 def compute_linguistic_features(text, nlp):
     """Compute expanded linguistic and discourse features for moral value prediction."""
     doc = nlp(text)
+
+    if not text.strip():
+        return [0] * 17  # Return zeroes for empty text
     
     # Initialize feature counts
     feature_counts = {
@@ -362,6 +444,27 @@ def compute_linguistic_features(text, nlp):
     # Return as a feature vector
     return list(feature_counts.values())
 
+def compute_ner_features(text, nlp):
+    """
+    Extract NER features from text using spaCy.
+    Returns a dictionary of entity counts for each entity type.
+    """
+    doc = nlp(text)
+
+    # Define known entity types (ensure consistency across all texts)
+    known_entities = [
+        "PERSON", "ORG", "GPE", "DATE", "MONEY", "LAW", "EVENT", "PERCENT"
+    ]
+
+    entity_counts = {ent: 0 for ent in known_entities}
+
+    for ent in doc.ents:
+        if ent.label_ in entity_counts:
+            entity_counts[ent.label_] += 1
+    
+    # Ensure the returned vector is always the same length
+    return [entity_counts[ent] for ent in known_entities]
+
 def compute_mfd_scores(text, mfd_embeddings, tokenizer):
     """Compute the count of words matching each Moral Foundation dimension."""
     tokens = tokenizer.tokenize(text)
@@ -387,11 +490,19 @@ LEXICON_COMPUTATION_FUNCTIONS = {
 }
 
 def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_categories):
+    """Compute lexicon scores with fallback for missing words."""
     compute_fn = LEXICON_COMPUTATION_FUNCTIONS.get(lexicon)
     if not compute_fn:
         raise ValueError(f"Unknown lexicon: {lexicon}")
+    
     # Pass `num_categories` only if the function supports it
     try:
-        return compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
+        scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
     except TypeError:
-        return compute_fn(text, lexicon_embeddings, tokenizer)
+        scores = compute_fn(text, lexicon_embeddings, tokenizer)
+    
+    # Ensure consistent length
+    if len(scores) != num_categories:
+        scores = [0.0] * num_categories
+    
+    return scores

@@ -5,6 +5,7 @@ import torch
 import transformers
 from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
+from transformers import AutoConfig
 from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
 import sys
 import logging
@@ -100,6 +101,7 @@ def train(
         lexicon: str = None,
         previous_sentences: bool = False,
         linguistic_features: bool = False,
+        ner_features: bool = False,
         multilayer: bool = False,
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
@@ -115,8 +117,18 @@ def train(
         output_dir.name, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps
     )
 
-    #if lexicon:
-    model = EnhancedDebertaModel(pretrained_model, len(labels), id2label, label2id, num_categories, multilayer)
+    if ner_features:
+        ner_feature_dim = 18
+    else:
+        ner_feature_dim = 0
+    
+    config = AutoConfig.from_pretrained(pretrained_model)
+    # Add necessary attributes to config
+    config.id2label = id2label
+    config.label2id = label2id
+    config.problem_type = "multi_label_classification"
+    config.architectures = ["DebertaForSequenceClassification"]
+    model = EnhancedDebertaModel(pretrained_model, config, len(labels), id2label, label2id, num_categories, ner_feature_dim, multilayer)
     """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(
@@ -131,7 +143,7 @@ def train(
 
     early_stopping = EarlyStoppingCallback(early_stopping_patience=early_stopping_patience, early_stopping_threshold=0.0)
 
-    data_collator = DataCollatorWithPadding(tokenizer=tokenizer, return_tensors="pt")
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer, padding=True, return_tensors="pt")
 
     # Log the training arguments
     config_details = (
@@ -147,6 +159,7 @@ def train(
         f"Previous sentences used: {'Yes' if previous_sentences else 'No'}\n"
         f"Using lexicon: {lexicon if lexicon else 'No'}\n"
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"
+        f"Adding NER features: {'Yes' if ner_features else 'No'}\n"
         f"Number of categories (lexicon): {num_categories}\n"
     )
     logger.info("Training configuration:\n" + config_details)

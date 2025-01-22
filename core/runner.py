@@ -1,6 +1,5 @@
 import transformers
 from core.dataset_utils import prepare_datasets
-from core.utils import slice_for_testing
 from core.lexicon_utils import load_embeddings
 from core.training import train
 from core.models import save_model
@@ -21,6 +20,7 @@ def run_training(
     lexicon: str = None,
     previous_sentences: bool = False,
     linguistic_features: bool = False,
+    ner_features: bool = False,
     model_name: str = None,
     model_directory: str = "models",
     multilayer: bool = False,
@@ -62,14 +62,14 @@ def run_training(
         validation_dataset_path,
         tokenizer,
         labels,
+        slice_data,
         lexicon_embeddings,
-        num_categories
+        num_categories,
+        previous_sentences,
+        linguistic_features,
+        ner_features,
+        lexicon
     )
-
-    # Slicing for testing purposes
-    if slice_data:
-        training_dataset = slice_for_testing(training_dataset)
-        validation_dataset = slice_for_testing(validation_dataset)
 
     # Train and evaluate
     trainer = train(
@@ -85,6 +85,7 @@ def run_training(
         lexicon = lexicon,
         previous_sentences = previous_sentences,
         linguistic_features = linguistic_features,
+        ner_features = ner_features,
         batch_size=batch_size,
         num_train_epochs=num_train_epochs,
         learning_rate=learning_rate,

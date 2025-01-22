@@ -118,7 +118,7 @@ def train(
     )
 
     if ner_features:
-        ner_feature_dim = 18
+        ner_feature_dim = 8
     else:
         ner_feature_dim = 0
     

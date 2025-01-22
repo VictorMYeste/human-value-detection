@@ -7514,7 +7514,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -7528,7 +7528,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">validation_sentences_file</span> <span class="o">=</span> <span class="s2">"../data/validation-english/sentences.tsv"</span>
@@ -7555,7 +7555,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Load the data files</span>
@@ -7662,7 +7662,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Merge datasets on 'Text-ID' and 'Sentence-ID'</span>
@@ -7751,7 +7751,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># False Positives: Model predicted presence (1), but ground truth is 0</span>
@@ -7852,7 +7852,7 @@ False Negatives:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
@@ -7909,6 +7909,50 @@ dtype: int64
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">analyze_misclassified</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">misclass_type</span><span class="p">):</span>
+    <span class="c1"># Filter for false positives or negatives</span>
+    <span class="k">if</span> <span class="n">misclass_type</span> <span class="o">==</span> <span class="s1">'FP'</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_pred'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="n">misclass_type</span> <span class="o">==</span> <span class="s1">'FN'</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_pred'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+    
+    <span class="c1"># Tokenize and count word frequencies</span>
+    <span class="n">word_counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">word_counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Top 20 words</span>
+
+<span class="n">false_positive_words</span> <span class="o">=</span> <span class="n">analyze_misclassified</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="s1">'FP'</span><span class="p">)</span>
+<span class="n">false_negative_words</span> <span class="o">=</span> <span class="n">analyze_misclassified</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="s1">'FN'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent words in false positives:"</span><span class="p">,</span> <span class="n">false_positive_words</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent words in false negatives:"</span><span class="p">,</span> <span class="n">false_negative_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Frequent words in false positives: []
+Frequent words in false negatives: []
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7925,7 +7969,7 @@ dtype: int64
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Tokenize text and count occurrences of each word</span>
@@ -7984,7 +8028,7 @@ dtype: int64
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">word_of_interest</span> <span class="o">=</span> <span class="s1">'support'</span>  <span class="c1"># Change this to test different words</span>
@@ -8023,6 +8067,354 @@ dtype: int64
 <pre>Total sentences containing 'support': 398
 Misclassified sentences containing 'support': 173
 Percentage misclassified: 43.47%
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Step-6-bis:-Calculate-the-misclassification-percentage-for-every-word">Step 6-bis: Calculate the misclassification percentage for every word<a class="anchor-link" href="#Step-6-bis:-Calculate-the-misclassification-percentage-for-every-word">¶</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># Load the merged dataframe (assuming it contains 'Text', 'Presence_true', 'Presence_pred', 'Misclassified')</span>
+<span class="c1"># merged_df = pd.read_csv('your_merged_file.csv')</span>
+
+<span class="c1"># Function to tokenize sentences into words (simple splitting, can be improved with NLP libraries)</span>
+<span class="k">def</span> <span class="nf">tokenize_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\b\w+\b'</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+<span class="c1"># Tokenize all sentences</span>
+<span class="n">merged_df</span><span class="p">[</span><span class="s1">'tokenized_words'</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">tokenize_text</span><span class="p">)</span>
+
+<span class="c1"># Count occurrences of each word in the entire dataset</span>
+<span class="n">all_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">'tokenized_words'</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+<span class="n">word_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">all_words</span><span class="p">)</span>
+
+<span class="c1"># Count occurrences of each word in misclassified sentences</span>
+<span class="n">misclassified_words</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]][</span><span class="s1">'tokenized_words'</span><span class="p">]</span>
+<span class="n">misclassified_words_flat</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">misclassified_words</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+<span class="n">misclassified_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">misclassified_words_flat</span><span class="p">)</span>
+
+<span class="c1"># Calculate misclassification percentage for each word</span>
+<span class="n">word_misclassification_stats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">word</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'total_occurrences'</span><span class="p">:</span> <span class="n">word_counts</span><span class="p">[</span><span class="n">word</span><span class="p">],</span>
+        <span class="s1">'misclassified_occurrences'</span><span class="p">:</span> <span class="n">misclassified_counts</span><span class="p">[</span><span class="n">word</span><span class="p">],</span>
+        <span class="s1">'misclassification_percentage'</span><span class="p">:</span> <span class="p">(</span><span class="n">misclassified_counts</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">/</span> <span class="n">word_counts</span><span class="p">[</span><span class="n">word</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">word_counts</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_counts</span>
+<span class="p">}</span>
+
+<span class="c1"># Convert the results to a dataframe</span>
+<span class="n">misclassification_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">word_misclassification_stats</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">'index'</span><span class="p">)</span>
+<span class="n">misclassification_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">misclassification_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'index'</span><span class="p">:</span> <span class="s1">'Word'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Sort by misclassification percentage in descending order</span>
+<span class="n">misclassification_df</span> <span class="o">=</span> <span class="n">misclassification_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'misclassification_percentage'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Display top misclassified words</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Words with highest misclassification percentage:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">misclassification_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>  <span class="c1"># Show the top 20 misclassified words</span>
+
+<span class="c1"># Save results to a CSV file for further analysis</span>
+<span class="n">misclassification_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'misclassification_analysis.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Results saved to 'misclassification_analysis.csv'."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Words with highest misclassification percentage:
+                        Word  total_occurrences  misclassified_occurrences  \
+20327            gendarmerie                  1                          1   
+20317                grameen                  1                          1   
+20318           microfinance                  1                          1   
+20319                   tgmp                  1                          1   
+20301                 poetry                  1                          1   
+20302                  epics                  1                          1   
+20292                  bosom                  2                          2   
+20324                 tomato                  1                          1   
+20323              tailoring                  1                          1   
+20274                    433                  1                          1   
+20256              vacancies                  1                          1   
+20259                  iskur                  1                          1   
+20248                    699                  1                          1   
+4540                housings                  2                          2   
+4528   activityradioactivity                  1                          1   
+4530              weightwere                  1                          1   
+4532                 coolant                  2                          2   
+4513               barrister                  1                          1   
+4515                activism                  5                          5   
+4663              conception                  2                          2   
+
+       misclassification_percentage  
+20327                         100.0  
+20317                         100.0  
+20318                         100.0  
+20319                         100.0  
+20301                         100.0  
+20302                         100.0  
+20292                         100.0  
+20324                         100.0  
+20323                         100.0  
+20274                         100.0  
+20256                         100.0  
+20259                         100.0  
+20248                         100.0  
+4540                          100.0  
+4528                          100.0  
+4530                          100.0  
+4532                          100.0  
+4513                          100.0  
+4515                          100.0  
+4663                          100.0  
+Results saved to 'misclassification_analysis.csv'.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Analyze-Misclassifications">Analyze Misclassifications<a class="anchor-link" href="#Analyze-Misclassifications">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Identify Frequent Words and Phrases in Misclassified Sentences:</p>
+<p>Extract the sentences that are false positives and false negatives.</p>
+<p>Tokenize these sentences and count word/phrase frequencies.</p>
+<p>Compare these word/phrase distributions to correctly classified sentences to spot patterns.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">analyze_misclassified</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">misclass_type</span><span class="p">):</span>
+    <span class="c1"># Filter for false positives or negatives</span>
+    <span class="k">if</span> <span class="n">misclass_type</span> <span class="o">==</span> <span class="s1">'FP'</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_pred'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="n">misclass_type</span> <span class="o">==</span> <span class="s1">'FN'</span><span class="p">:</span>
+        <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Presence_pred'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+    
+    <span class="c1"># Tokenize and count word frequencies</span>
+    <span class="n">word_counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">word_counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Top 20 words</span>
+
+<span class="n">false_positive_words</span> <span class="o">=</span> <span class="n">analyze_misclassified</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="s1">'FP'</span><span class="p">)</span>
+<span class="n">false_negative_words</span> <span class="o">=</span> <span class="n">analyze_misclassified</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="s1">'FN'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent words in false positives:"</span><span class="p">,</span> <span class="n">false_positive_words</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent words in false negatives:"</span><span class="p">,</span> <span class="n">false_negative_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Frequent words in false positives: []
+Frequent words in false negatives: []
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Investigate Contextual Patterns. Analyze sentence length, POS tags, or named entities in misclassified examples to see if patterns exist.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'en_core_web_sm'</span><span class="p">)</span>
+
+<span class="c1"># Extract POS tags and entities</span>
+<span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="n">pos_tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">pos_</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="p">[</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pos_tags</span><span class="p">,</span> <span class="n">entities</span>
+
+<span class="c1"># Apply feature extraction</span>
+<span class="n">merged_df</span><span class="p">[</span><span class="s1">'POS_tags'</span><span class="p">],</span> <span class="n">merged_df</span><span class="p">[</span><span class="s1">'Entities'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Text'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">extract_features</span><span class="p">))</span>
+
+<span class="c1"># Analyze patterns</span>
+<span class="n">pos_fp</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)][</span><span class="s1">'POS_tags'</span><span class="p">],</span> <span class="p">[]))</span>
+<span class="n">pos_fn</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)][</span><span class="s1">'POS_tags'</span><span class="p">],</span> <span class="p">[]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent POS tags in false positives:"</span><span class="p">,</span> <span class="n">pos_fp</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent POS tags in false negatives:"</span><span class="p">,</span> <span class="n">pos_fn</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Frequent POS tags in false positives: [('NOUN', 15990), ('PUNCT', 10560), ('ADP', 9477), ('VERB', 8444), ('PROPN', 8092), ('DET', 7842), ('ADJ', 5296), ('AUX', 4492), ('PRON', 4257), ('ADV', 2839)]
+Frequent POS tags in false negatives: [('NOUN', 10872), ('ADP', 6584), ('PUNCT', 6098), ('DET', 5307), ('VERB', 5189), ('PROPN', 4507), ('ADJ', 3997), ('PRON', 2628), ('AUX', 2464), ('ADV', 1713)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Break down PROPN occurrences in misclassified sentences by their entity type (e.g., PERSON, ORG, GPE) using a named entity recognition (NER) tool. This could reveal whether specific categories of entities (e.g., political figures) are associated with misclassifications.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">named_entities_fp</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)][</span><span class="s1">'Entities'</span><span class="p">],</span> <span class="p">[]))</span>
+<span class="n">named_entities_fn</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)][</span><span class="s1">'Entities'</span><span class="p">],</span> <span class="p">[]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent named entities in false positives:"</span><span class="p">,</span> <span class="n">named_entities_fp</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Frequent named entities in false negatives:"</span><span class="p">,</span> <span class="n">named_entities_fn</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Frequent named entities in false positives: [('ORG', 1485), ('PERSON', 1212), ('GPE', 1084), ('DATE', 1062), ('CARDINAL', 682), ('NORP', 484), ('PERCENT', 194), ('ORDINAL', 129), ('LOC', 101), ('MONEY', 89)]
+Frequent named entities in false negatives: [('ORG', 841), ('GPE', 750), ('DATE', 551), ('PERSON', 545), ('NORP', 417), ('CARDINAL', 305), ('LOC', 134), ('ORDINAL', 86), ('PERCENT', 77), ('TIME', 35)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Compare Token Distributions</p>
+<p>Tokenize sentences and compare token distributions in false positives, false negatives, and correctly classified samples.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Token frequency analysis by classification outcome</span>
+<span class="k">def</span> <span class="nf">calculate_token_frequencies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">outcome_filter</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Misclassified'</span><span class="p">]</span> <span class="o">==</span> <span class="n">outcome_filter</span><span class="p">][</span><span class="s1">'tokenized_words'</span><span class="p">],</span> <span class="p">[])</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">fp_tokens</span> <span class="o">=</span> <span class="n">calculate_token_frequencies</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Misclassified = True</span>
+<span class="n">fn_tokens</span> <span class="o">=</span> <span class="n">calculate_token_frequencies</span><span class="p">(</span><span class="n">merged_df</span><span class="p">,</span> <span class="kc">True</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="s1">'Presence_true'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tokens in false positives:"</span><span class="p">,</span> <span class="n">fp_tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tokens in false negatives:"</span><span class="p">,</span> <span class="n">fn_tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Tokens in false positives: [('the', 9168), ('of', 3860), ('to', 3442), ('and', 3189), ('in', 2894), ('a', 2304), ('is', 1634), ('that', 1570), ('for', 1350), ('on', 1090)]
+Tokens in false negatives: [('the', 7579), ('of', 3266), ('to', 2666), ('and', 2637), ('in', 2491), ('a', 1922), ('is', 1339), ('that', 1223), ('for', 1175), ('on', 963)]
 </pre>
 </div>
 </div>

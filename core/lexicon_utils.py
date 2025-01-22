@@ -164,6 +164,22 @@ def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
     logger.debug(f"Loaded MFD embeddings: {len(embeddings)} words.")
     return embeddings
 
+SCHWARTZ_VALUE_LEXICON = {
+    "Power": ["power", "strength", "control"],
+    "Achievement": ["achievement", "ambition", "success"],
+    "Hedonism": ["luxury", "pleasure", "delight"],
+    "Stimulation": ["excitement", "novelty", "thrill"],
+    "Self-direction": ["independence", "freedom", "liberty"],
+    "Universalism": ["unity", "justice", "equality"],
+    "Benevolence": ["kindness", "charity", "mercy"],
+    "Tradition": ["tradition", "custom", "respect"],
+    "Conformity": ["restraint", "regard", "consideration"],
+    "Security": ["security", "safety", "protection"]
+}
+
+def load_schwartz_embeddings():
+    """Return the hardcoded Schwartz lexicon and category count."""
+    return SCHWARTZ_VALUE_LEXICON, len(SCHWARTZ_VALUE_LEXICON)
 
 # ========================================================
 # MAIN LEXICON LOADING
@@ -176,6 +192,7 @@ EMBEDDING_PARSERS = {
     "WorryWords": {"function": load_worrywords_embeddings, "num_categories": 1},
     "LIWC": {"function": load_liwc_embeddings, "is_liwc": True},
     "MFD": {"function": load_mfd_embeddings, "num_categories": 10},
+    "Schwartz": {"function": load_schwartz_embeddings, "num_categories": len(SCHWARTZ_VALUE_LEXICON)},
 }
 
 def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:

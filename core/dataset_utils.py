@@ -521,6 +521,19 @@ def compute_ner_embeddings(text, nlp):
     # Return zero vector if no entities found
     return [0.0] * ner_model.config.hidden_size
 
+def compute_schwartz_values(text, lexicon):
+    """Compute the count of Schwartz value words in the text."""
+    words = word_tokenize(text.lower())
+    value_counts = {value: 0 for value in lexicon}
+    
+    for value, phrases in lexicon.items():
+        for phrase in phrases:
+            pattern = r'\b' + re.escape(phrase) + r'\b'  # Match whole words
+            matches = re.findall(pattern, words)
+            value_counts[value] += len(matches)
+    
+    return list(value_counts.values())
+
 def compute_mfd_scores(text, mfd_embeddings, tokenizer):
     """Compute the count of words matching each Moral Foundation dimension."""
     tokens = tokenizer.tokenize(text)
@@ -543,6 +556,7 @@ LEXICON_COMPUTATION_FUNCTIONS = {
     "WorryWords": compute_worrywords_scores,
     "LIWC": compute_liwc_scores,
     "MFD": compute_mfd_scores,
+    "Schwartz": compute_schwartz_values
 }
 
 def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_categories):

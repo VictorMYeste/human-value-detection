@@ -10,7 +10,8 @@ LEXICON_PATHS = {
     "EmotionIntensity": "../../lexicons/NRC-Emotion-Intensity-Lexicon-v1.txt",
     "WorryWords": "../../lexicons/worrywords-v1.txt",
     "LIWC": "../../lexicons/liwc2015.dic",
-    "MFD": "../../lexicons/Moral-Foundations-Dictionary.wmodel"
+    "MFD": "../../lexicons/Moral-Foundations-Dictionary.wmodel",
+    "Schwartz": None # No file, using hardcoded dictionary
 }
 
 MODEL_CONFIG = {

@@ -58,7 +58,8 @@ def main() -> None:
             weight_decay=weight_decay,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"]
+            #custom_stopwords = model_config["custom_stopwords"],
+            augment_data=args.augment_data
         )
 
         # Evaluate and return metric

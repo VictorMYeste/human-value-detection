@@ -118,3 +118,9 @@ SCHWARTZ_VALUE_LEXICON = {
         "stability", "stable", "certainty", "risk-free", "assurance"
     ]
 }
+
+AUGMENTATION_CONFIG = {
+    "use_paraphrasing": True,  # Enable or disable paraphrasing augmentation
+    "paraphrasing_model": "t5-base",  # Pre-trained paraphrasing model (can be adjusted)
+    "num_augmented_variations": 2  # Number of paraphrased variations per sentence
+}

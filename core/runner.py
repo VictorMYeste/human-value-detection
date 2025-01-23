@@ -31,7 +31,8 @@ def run_training(
     weight_decay: float = 1.02e-05,
     gradient_accumulation_steps: int = 2,
     early_stopping_patience: int = 3,
-    custom_stopwords: list[str] = []
+    custom_stopwords: list[str] = [],
+    augment_data: bool = False
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -70,7 +71,8 @@ def run_training(
         linguistic_features,
         ner_features,
         lexicon,
-        custom_stopwords
+        custom_stopwords,
+        augment_data
     )
 
     # Train and evaluate

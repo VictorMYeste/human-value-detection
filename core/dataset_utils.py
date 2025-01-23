@@ -8,10 +8,10 @@ import re
 import nltk
 from nltk.tokenize import word_tokenize
 import transformers
-from transformers import AutoModel, AutoTokenizer
+from transformers import AutoModel, AutoTokenizer, pipeline
 import torch
 from typing import Optional, Dict, Tuple, List
-from core.config import MODEL_CONFIG
+from core.config import AUGMENTATION_CONFIG
 from core.utils import validate_args, normalize_token, slice_for_testing
 import sys
 import logging
@@ -39,7 +39,8 @@ def prepare_datasets(
     linguistic_features: bool = False,
     ner_features: bool = False,
     lexicon: str = None,
-    custom_stopwords: List[str] = []
+    custom_stopwords: List[str] = [],
+    augment_data: bool = False
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
     # Training dataset
     training_dataset = load_dataset(
@@ -53,7 +54,8 @@ def prepare_datasets(
         linguistic_features,
         ner_features,
         lexicon,
-        custom_stopwords
+        custom_stopwords,
+        augment_data
     )
 
     # Log class distribution
@@ -125,7 +127,8 @@ def load_dataset(
     linguistic_features: bool = False,
     ner_features: bool = False,
     lexicon: str = None,
-    custom_stopwords: List[str] = []
+    custom_stopwords: List[str] = [],
+    augment_data: bool = False
 ):
     """Load dataset and add lexicon embeddings if specified."""
     sentences_file_path = os.path.join(directory, "sentences.tsv")
@@ -139,6 +142,10 @@ def load_dataset(
 
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
+
+    if augment_data:
+        logger.info("Applying data augmentation through paraphrasing.")
+        data_frame['Text'] = apply_data_augmentation(data_frame['Text'].tolist())
 
     # Apply the reporting language removal before tokenization
     if custom_stopwords:
@@ -587,3 +594,23 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         scores = [0.0] * num_categories
     
     return scores
+
+# ========================================================
+# OTHERS
+# ========================================================
+
+def apply_data_augmentation(texts):
+    """
+    Augment text using paraphrasing if enabled in AUGMENTATION_CONFIG.
+    """
+    if AUGMENTATION_CONFIG["use_paraphrasing"]:
+        paraphraser = pipeline("text2text-generation", model=AUGMENTATION_CONFIG["paraphrasing_model"])
+        augmented_texts = []
+        
+        for text in texts:
+            paraphrased_texts = paraphraser(text, max_length=512, num_return_sequences=AUGMENTATION_CONFIG["num_augmented_variations"])
+            augmented_texts.extend([item["generated_text"] for item in paraphrased_texts])
+        
+        return augmented_texts
+    
+    return texts  # Return original if augmentation is disabled

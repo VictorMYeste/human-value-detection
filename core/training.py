@@ -7,6 +7,7 @@ from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
 from transformers import AutoConfig
 from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
+from core.config import AUGMENTATION_CONFIG
 import sys
 import logging
 logging.basicConfig(
@@ -162,6 +163,7 @@ def train(
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"
         f"Adding NER features: {'Yes' if ner_features else 'No'}\n"
         f"Number of categories (lexicon): {num_categories}\n"
+        f"Using data augmentation with paraphrasing: {'Yes' if AUGMENTATION_CONFIG['use_paraphrasing'] else 'No'}"
     )
     logger.info("Training configuration:\n" + config_details)
 

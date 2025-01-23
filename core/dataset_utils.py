@@ -5,6 +5,7 @@ import os
 from collections import defaultdict
 import spacy
 import re
+import nltk
 from nltk.tokenize import word_tokenize
 import transformers
 from transformers import AutoModel, AutoTokenizer
@@ -521,15 +522,20 @@ def compute_ner_embeddings(text, nlp):
     # Return zero vector if no entities found
     return [0.0] * ner_model.config.hidden_size
 
-def compute_schwartz_values(text, lexicon):
+def compute_schwartz_values(text: str, lexicon: dict) -> List[int]:
     """Compute the count of Schwartz value words in the text."""
     words = word_tokenize(text.lower())
-    value_counts = {value: 0 for value in lexicon}
+
+    # Convert token list back to a string for regex processing
+    text_str = " ".join(words)
+
+    # Initialize value counts
+    value_counts = {key: 0 for key in lexicon.keys()}
     
     for value, phrases in lexicon.items():
         for phrase in phrases:
             pattern = r'\b' + re.escape(phrase) + r'\b'  # Match whole words
-            matches = re.findall(pattern, words)
+            matches = re.findall(pattern, text_str)
             value_counts[value] += len(matches)
     
     return list(value_counts.values())
@@ -565,11 +571,16 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
     if not compute_fn:
         raise ValueError(f"Unknown lexicon: {lexicon}")
     
-    # Pass `num_categories` only if the function supports it
-    try:
-        scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
-    except TypeError:
-        scores = compute_fn(text, lexicon_embeddings, tokenizer)
+    # Schwartz lexicon does not use tokenizer or num_categories, handle it separately
+    if lexicon == "Schwartz":
+        schwartz_lexicon, _ = lexicon_embeddings
+        scores = compute_fn(text, schwartz_lexicon)
+    else:
+        # Pass `num_categories` only if the function supports it
+        try:
+            scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
+        except TypeError:
+            scores = compute_fn(text, lexicon_embeddings, tokenizer)
     
     # Ensure consistent length
     if len(scores) != num_categories:

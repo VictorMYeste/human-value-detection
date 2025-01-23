@@ -1,6 +1,6 @@
 import re
 from typing import Dict, List, Tuple
-from core.config import LEXICON_PATHS
+from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.utils import validate_file, skip_invalid_line, read_file_lines
 import logging
 logger = logging.getLogger("HVD")
@@ -14,11 +14,6 @@ def load_embeddings(lexicon: str) -> tuple[dict, int]:
     num_categories = 0
     if lexicon:
         lexicon_path = LEXICON_PATHS.get(lexicon)
-        if not lexicon_path:
-            logger.error(f"Lexicon path for '{lexicon}' not found.")
-            raise ValueError(f"Invalid lexicon: '{lexicon}'. "
-                 f"Available options are: {list(LEXICON_PATHS.keys())}. "
-                 "Please check your input.")
         lexicon_embeddings, num_categories = load_lexicon(lexicon, lexicon_path)
     return lexicon_embeddings, num_categories
 
@@ -164,20 +159,7 @@ def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
     logger.debug(f"Loaded MFD embeddings: {len(embeddings)} words.")
     return embeddings
 
-SCHWARTZ_VALUE_LEXICON = {
-    "Power": ["power", "strength", "control"],
-    "Achievement": ["achievement", "ambition", "success"],
-    "Hedonism": ["luxury", "pleasure", "delight"],
-    "Stimulation": ["excitement", "novelty", "thrill"],
-    "Self-direction": ["independence", "freedom", "liberty"],
-    "Universalism": ["unity", "justice", "equality"],
-    "Benevolence": ["kindness", "charity", "mercy"],
-    "Tradition": ["tradition", "custom", "respect"],
-    "Conformity": ["restraint", "regard", "consideration"],
-    "Security": ["security", "safety", "protection"]
-}
-
-def load_schwartz_embeddings():
+def load_schwartz_embeddings(path=None) -> tuple[dict, int]:
     """Return the hardcoded Schwartz lexicon and category count."""
     return SCHWARTZ_VALUE_LEXICON, len(SCHWARTZ_VALUE_LEXICON)
 

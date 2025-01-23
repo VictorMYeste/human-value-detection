@@ -183,7 +183,6 @@ def train(
             train_dataset=training_dataset,
             eval_dataset=validation_dataset,
             compute_metrics=lambda p: compute_metrics(p, id2label),
-            tokenizer=tokenizer,
             data_collator=data_collator,
             callbacks=[early_stopping]
         )

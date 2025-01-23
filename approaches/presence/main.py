@@ -7,6 +7,7 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module=r"torch\.nn\.parallel")
 
 from core.config import MODEL_CONFIG
+from core.utils import download_nltk_resources
 from core.runner import run_training
 from core.cli import parse_args
 import optuna
@@ -23,6 +24,9 @@ def main() -> None:
 
     # Define CLI arguments for training script
     args = parse_args(prog_name=model_group)
+
+    # Download resources only once
+    download_nltk_resources()
 
     def objective(trial):
         # Suggest hyperparameters

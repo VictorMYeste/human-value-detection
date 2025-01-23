@@ -1,6 +1,9 @@
-import pandas as pd
 import os
 import sys
+
+import pandas as pd
+import nltk
+
 import logging
 logging.basicConfig(
     level=logging.INFO,
@@ -15,7 +18,7 @@ def validate_args(labels, training_dataset, validation_dataset):
     assert validation_dataset is not None, "Validation dataset cannot be None."
     logger.info("Arguments validated successfully.")
 
-def slice_for_testing(dataset, size=100):
+def slice_for_testing(dataset, size=1000):
     if hasattr(dataset, 'select'):  # Assuming it's a dataset with a select method
         return dataset.select(range(size))
     elif isinstance(dataset, pd.DataFrame):  # Check if it's a pandas DataFrame
@@ -41,3 +44,10 @@ def read_file_lines(path, skip_header=False, encoding="utf-8"):
     with open(path, "r", encoding=encoding) as f:
         lines = f.readlines()
     return lines[1:] if skip_header else lines
+
+def download_nltk_resources():
+    """Ensure necessary NLTK resources are available."""
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')

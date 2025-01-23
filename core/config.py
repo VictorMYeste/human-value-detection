@@ -60,3 +60,61 @@ MODEL_CONFIG = {
         "labels": ["Social Focus", "Personal Focus"]
     },
 }
+
+SCHWARTZ_VALUE_LEXICON = {
+    "Power": [
+        "power", "powers", "strength", "strengths", "control", "controls", 
+        "controlling", "dominance", "dominate", "dominating", "dominated", 
+        "influence", "influences", "influencing", "authority", "command", 
+        "commands", "ruling", "governance", "leadership"
+    ],
+    "Achievement": [
+        "achievement", "achievements", "achieve", "achieving", "achieved", 
+        "ambition", "ambitions", "ambitious", "success", "successes", 
+        "succeed", "succeeded", "succeeding", "accomplishment", "accomplishments",
+        "accomplish", "accomplishing", "accomplished"
+    ],
+    "Hedonism": [
+        "luxury", "luxuries", "pleasure", "pleasures", "delight", "delights",
+        "enjoyment", "enjoy", "enjoyed", "enjoying", "satisfaction", "satisfy",
+        "satisfied", "satisfying", "indulgence", "indulging", "indulged", 
+        "recreation", "fun"
+    ],
+    "Stimulation": [
+        "excitement", "excite", "excited", "exciting", "novelty", "novelties",
+        "thrill", "thrills", "thrilling", "adventure", "adventures", 
+        "adventurous", "curiosity", "exploration", "exploring", "explored"
+    ],
+    "Self-direction": [
+        "independence", "independent", "independently", "freedom", "free", 
+        "liberty", "autonomy", "self-reliance", "self-sufficient", "self-rule",
+        "choice", "choices", "choosing", "chosen"
+    ],
+    "Universalism": [
+        "unity", "united", "justice", "equal", "equality", "equity", 
+        "fairness", "fair", "fairly", "tolerance", "tolerant", "acceptance",
+        "diversity", "inclusion", "humanity", "compassion", "respect"
+    ],
+    "Benevolence": [
+        "kindness", "kind", "charity", "charitable", "mercy", "merciful",
+        "generosity", "generous", "support", "supporting", "supported", 
+        "help", "helping", "helped", "care", "caring", "selflessness", 
+        "selfless"
+    ],
+    "Tradition": [
+        "tradition", "traditions", "traditional", "custom", "customs", 
+        "respect", "respecting", "respected", "heritage", "heritages",
+        "belief", "beliefs", "ritual", "rituals", "convention", "conventions"
+    ],
+    "Conformity": [
+        "restraint", "restrained", "restraining", "regard", "regarded",
+        "consideration", "considering", "considered", "obedience", 
+        "obedient", "obey", "obeyed", "obeying", "conventional", 
+        "complying", "compliance"
+    ],
+    "Security": [
+        "security", "secure", "secured", "safety", "safe", "safeguard", 
+        "safeguarding", "protection", "protect", "protecting", "protected", 
+        "stability", "stable", "certainty", "risk-free", "assurance"
+    ]
+}

@@ -11,7 +11,6 @@ import transformers
 from transformers import AutoModel, AutoTokenizer, pipeline
 import torch
 from typing import Optional, Dict, Tuple, List
-from core.config import AUGMENTATION_CONFIG
 from core.utils import validate_args, normalize_token, slice_for_testing
 import sys
 import logging
@@ -131,8 +130,14 @@ def load_dataset(
     augment_data: bool = False
 ):
     """Load dataset and add lexicon embeddings if specified."""
-    sentences_file_path = os.path.join(directory, "sentences.tsv")
-    labels_file_path = os.path.join(directory, "labels-cat.tsv")
+    if augment_data:
+        sentences_file_name = "sentences-aug.tsv"
+        labels_file_name = "labels-cat-aug.tsv"
+    else:
+        sentences_file_name = "sentences.tsv"
+        labels_file_name = "labels-cat.tsv"
+    sentences_file_path = os.path.join(directory, sentences_file_name)
+    labels_file_path = os.path.join(directory, labels_file_name)
     
     data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
 
@@ -142,10 +147,6 @@ def load_dataset(
 
     # Fill missing text
     data_frame['Text'] = data_frame['Text'].fillna('')
-
-    if augment_data:
-        logger.info("Applying data augmentation through paraphrasing.")
-        data_frame['Text'] = apply_data_augmentation(data_frame['Text'].tolist())
 
     # Apply the reporting language removal before tokenization
     if custom_stopwords:
@@ -594,23 +595,3 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         scores = [0.0] * num_categories
     
     return scores
-
-# ========================================================
-# OTHERS
-# ========================================================
-
-def apply_data_augmentation(texts):
-    """
-    Augment text using paraphrasing if enabled in AUGMENTATION_CONFIG.
-    """
-    if AUGMENTATION_CONFIG["use_paraphrasing"]:
-        paraphraser = pipeline("text2text-generation", model=AUGMENTATION_CONFIG["paraphrasing_model"])
-        augmented_texts = []
-        
-        for text in texts:
-            paraphrased_texts = paraphraser(text, max_length=512, num_return_sequences=AUGMENTATION_CONFIG["num_augmented_variations"])
-            augmented_texts.extend([item["generated_text"] for item in paraphrased_texts])
-        
-        return augmented_texts
-    
-    return texts  # Return original if augmentation is disabled

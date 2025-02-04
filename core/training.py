@@ -7,7 +7,6 @@ from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
 from transformers import AutoConfig
 from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
-from core.config import AUGMENTATION_CONFIG
 import sys
 import logging
 logging.basicConfig(
@@ -79,7 +78,8 @@ def create_training_args(output_dir, model_name, batch_size, num_train_epochs, l
         load_best_model_at_end=True,
         metric_for_best_model='marco-avg-f1-score',
         gradient_accumulation_steps=gradient_accumulation_steps,
-        fp16=True,
+        #fp16=True,
+        #bf16=True,
         ddp_find_unused_parameters=False
     )
 
@@ -104,6 +104,7 @@ def train(
         linguistic_features: bool = False,
         ner_features: bool = False,
         multilayer: bool = False,
+        augment_data: bool = False
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -163,7 +164,7 @@ def train(
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"
         f"Adding NER features: {'Yes' if ner_features else 'No'}\n"
         f"Number of categories (lexicon): {num_categories}\n"
-        f"Using data augmentation with paraphrasing: {'Yes' if AUGMENTATION_CONFIG['use_paraphrasing'] else 'No'}"
+        f"Using data augmentation with paraphrasing: {'Yes' if augment_data else 'No'}"
     )
     logger.info("Training configuration:\n" + config_details)
 

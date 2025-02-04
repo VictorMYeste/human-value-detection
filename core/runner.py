@@ -96,7 +96,8 @@ def run_training(
         weight_decay=weight_decay,
         gradient_accumulation_steps=gradient_accumulation_steps,
         early_stopping_patience=early_stopping_patience,
-        multilayer=multilayer
+        multilayer=multilayer,
+        augment_data=augment_data
     )
 
     # Save the model if required

@@ -68,6 +68,12 @@ class EnhancedDebertaModel(nn.Module):
 
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 
+        """
+        if torch.cuda.device_count() > 1:
+            print(f"Using {torch.cuda.device_count()} GPUs.")
+            self.transformer = torch.nn.DataParallel(self.transformer)  # Enables Multi-GPU
+        """
+
         # Optional Lexicon Layer
         #self.lexicon_layer = nn.Linear(num_categories, 128)  # Map categories to 128 dimensions
         if num_categories > 0:

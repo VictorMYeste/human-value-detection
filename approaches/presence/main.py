@@ -34,9 +34,9 @@ def main() -> None:
         num_train_epochs = trial.suggest_int("num_train_epochs", 3, 10)
         batch_size = trial.suggest_categorical("batch_size", [2, 4])
         gradient_accumulation_steps = 2 if batch_size == 4 else 4
-        """
         learning_rate = trial.suggest_float("learning_rate", 5e-6, 5e-5, log=True)
         weight_decay = trial.suggest_float("weight_decay", 0.1, 0.3, log=True)
+        """
 
         # Run training with these hyperparameters
         trainer = run_training(
@@ -54,8 +54,8 @@ def main() -> None:
             slice_data=args.slice,
             batch_size=4,
             num_train_epochs=10,
-            learning_rate=learning_rate,
-            weight_decay=weight_decay,
+            learning_rate=2e-05,
+            weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
@@ -93,13 +93,14 @@ def main() -> None:
             model_directory=args.model_directory,
             multilayer=args.multilayer,
             slice_data=args.slice,
-            batch_size=4,
+            batch_size=2,
             num_train_epochs=10,
             learning_rate=2e-05,
-            weight_decay=0.1,
-            gradient_accumulation_steps=4,
+            weight_decay=0.15,
+            gradient_accumulation_steps=8,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"]
+            #custom_stopwords = model_config["custom_stopwords"],
+            augment_data=args.augment_data
         )
 
 if __name__ == "__main__":

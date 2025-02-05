@@ -4,14 +4,18 @@ import transformers
 from transformers import TrainerCallback
 from torch.nn.functional import binary_cross_entropy_with_logits
 import sys
+
 import logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)],
-)
+import torch.distributed as dist
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
 #logger.setLevel(logging.DEBUG)
+
+# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 # ========================================================
 # UTILS

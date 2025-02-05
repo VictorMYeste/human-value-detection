@@ -9,14 +9,24 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support, classification_report
 
-import logging
+"""
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[logging.StreamHandler(sys.stdout)],
 )
+"""
+
+import logging
+import torch.distributed as dist
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
-logger.setLevel(logging.DEBUG)
+
+# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 # Load model-specific configuration
 model_group = "presence"

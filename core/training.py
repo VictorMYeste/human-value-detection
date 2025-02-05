@@ -7,15 +7,18 @@ from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
 from transformers import AutoConfig
 from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
-import sys
+
 import logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)],
-)
+import torch.distributed as dist
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
 #logger.setLevel(logging.DEBUG)
+
+# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 # ========================================================
 # METRICS
@@ -108,7 +111,7 @@ def train(
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
-    if previous_sentences:
+    if previous_sentences or augment_data:
         gradient_accumulation_steps = int(gradient_accumulation_steps * batch_size / 2)
         batch_size = 2
 

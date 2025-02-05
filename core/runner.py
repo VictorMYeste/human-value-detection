@@ -3,14 +3,17 @@ from core.dataset_utils import prepare_datasets
 from core.lexicon_utils import load_embeddings
 from core.training import train
 from core.models import save_model
-import sys
+
 import logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)],
-)
+import torch.distributed as dist
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
+
+# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 def run_training(
     pretrained_model: str,

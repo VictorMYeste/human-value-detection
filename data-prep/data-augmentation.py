@@ -3,6 +3,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from transformers import pipeline, T5Tokenizer
+from sentence_transformers import SentenceTransformer, util
+from deep_translator import GoogleTranslator
+
 import pandas as pd
 from datasets import Dataset
 import torch
@@ -19,24 +22,52 @@ logger = logging.getLogger("HVD")
 SENTENCES_PATH = "../data/training-english/sentences.tsv"
 LABELS_PATH = "../data/training-english/labels-cat.tsv"
 
-AUG_SENTENCES_PATH = "../data/training-english/sentences-aug.tsv"
-AUG_LABELS_PATH = "../data/training-english/labels-cat-aug.tsv"
+AUG_SENTENCES_PATH = "../data/training-english/sentences-aug-2.tsv"
+AUG_LABELS_PATH = "../data/training-english/labels-cat-aug-2.tsv"
 
 AUGMENTATION_CONFIG = {
     "use_paraphrasing": True,
     "paraphrasing_models": [
-        "ramsrigouthamg/t5_paraphraser",
+        #"ramsrigouthamg/t5_paraphraser",
+        "google/flan-t5-large",
         "humarin/chatgpt_paraphraser_on_T5_base"
     ],
     "num_augmented_variations": 1,  # One paraphrase per model
-    "num_beams": 2,
+    "num_beams": 1,
     "batch_size": 8,
     "device": 0 if torch.cuda.is_available() else -1,
     "max_length": 512,
-    "temperature": 1.2,
-    "top_k": 50,
-    "top_p": 0.92
+    "temperature": 1.5,
+    "top_k": 30,
+    "top_p": 0.9,
+    "repetition_penalty": 1.2,
+    "similarity_threshold": 0.85
 }
+
+# Load a strong sentence embedding model
+embedder = SentenceTransformer("paraphrase-MiniLM-L6-v2")
+
+def filter_paraphrases(original, paraphrases, threshold=0.85):
+    """
+    Removes paraphrases that are too similar to the original sentence.
+    """
+    original_embedding = embedder.encode(original, convert_to_tensor=True)
+    filtered_paraphrases = []
+    
+    for para in paraphrases:
+        para_embedding = embedder.encode(para, convert_to_tensor=True)
+        similarity = util.pytorch_cos_sim(original_embedding, para_embedding).item()
+        if similarity < threshold:
+            filtered_paraphrases.append(para)
+
+    return filtered_paraphrases or paraphrases[0]  # Ensure at least one paraphrase is kept
+
+def back_translate(sentence, lang="es"):
+    """
+    Translates the sentence to another language and back to English.
+    """
+    translated = GoogleTranslator(source="en", target=lang).translate(sentence)
+    return GoogleTranslator(source=lang, target="en").translate(translated)
 
 def generate_augmented_dataset():
     """
@@ -97,6 +128,10 @@ def generate_augmented_dataset():
                     logger.warning(f"Unexpected output format at index {idx}: {output}")
                     paraphrased_sentences[idx].append(batch["Text"][idx])  # Fallback to original text if output fails
 
+        # Apply filtering to remove redundant paraphrases
+        for idx, paraphrase_list in enumerate(paraphrased_sentences):
+            paraphrased_sentences[idx] = filter_paraphrases(batch["Text"][idx], paraphrase_list, threshold=AUGMENTATION_CONFIG["similarity_threshold"])
+        
         return {"Paraphrased_Text": paraphrased_sentences}
 
     # Apply paraphrasing with batch processing
@@ -117,7 +152,7 @@ def generate_augmented_dataset():
         augmented_sentences.append([text_id, sentence_id, text])
         augmented_labels.append([text_id, sentence_id] + df_labels.iloc[i, 2:].tolist())
 
-        # Append paraphrased versions from both models
+        # Append filtered paraphrased versions from both models
         paraphrased_versions = paraphrased_dataset["Paraphrased_Text"][i]
 
         for j, paraphrased_text in enumerate(paraphrased_versions):

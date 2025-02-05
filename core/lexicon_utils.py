@@ -2,8 +2,17 @@ import re
 from typing import Dict, List, Tuple
 from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.utils import validate_file, skip_invalid_line, read_file_lines
+
 import logging
+import torch.distributed as dist
+
+# Initialize logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
+
+# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 # ========================================================
 # EMBEDDINGS LOADING

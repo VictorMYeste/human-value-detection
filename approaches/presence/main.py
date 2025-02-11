@@ -64,7 +64,7 @@ def main() -> None:
             learning_rate=2e-05,
             weight_decay=0.15,
             gradient_accumulation_steps=4,
-            early_stopping_patience=4,
+            early_stopping_patience=8,
             #custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data
         )

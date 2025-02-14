@@ -60,7 +60,7 @@ def prepare_datasets(
     validation_dataset = training_dataset
     if validation_path:
         validation_dataset = load_dataset(
-            directory=training_path,
+            directory=validation_path,
             tokenizer=tokenizer,
             labels=labels,
             slice_data=slice_data,

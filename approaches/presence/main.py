@@ -1,10 +1,8 @@
 import sys
 import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, module=r"torch\.nn\.parallel")
 
 from core.config import MODEL_CONFIG
 from core.utils import download_nltk_resources
@@ -12,16 +10,11 @@ from core.runner import run_training
 from core.cli import parse_args
 import optuna
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module=r"torch\.nn\.parallel")
 import logging
-import torch.distributed as dist
+from core.log import logger
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
 def main() -> None:
 
@@ -31,6 +24,9 @@ def main() -> None:
 
     # Define CLI arguments for training script
     args = parse_args(prog_name=model_group)
+
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
 
     # Download resources only once
     download_nltk_resources()
@@ -64,9 +60,10 @@ def main() -> None:
             learning_rate=2e-05,
             weight_decay=0.15,
             gradient_accumulation_steps=4,
-            early_stopping_patience=8,
+            early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
-            augment_data=args.augment_data
+            augment_data=args.augment_data,
+            topic_detection=args.topic_detection
         )
 
         # Evaluate and return metric
@@ -107,7 +104,8 @@ def main() -> None:
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
-            augment_data=args.augment_data
+            augment_data=args.augment_data,
+            topic_detection=args.topic_detection
         )
 
 if __name__ == "__main__":

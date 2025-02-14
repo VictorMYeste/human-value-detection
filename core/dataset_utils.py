@@ -1,30 +1,19 @@
-import pandas
+import pandas as pd
 import numpy as np
 import datasets
 import os
 from collections import defaultdict
 import spacy
 import re
-import nltk
 from nltk.tokenize import word_tokenize
 import transformers
-from transformers import AutoModel, AutoTokenizer, pipeline
+from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
 from core.utils import validate_args, normalize_token, slice_for_testing
-import sys
+from core.topic_detection import TopicModeling
 
-import logging
-import torch.distributed as dist
-
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-#logger.setLevel(logging.DEBUG)
-
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+from core.log import logger
 
 # ========================================================
 # DATASETS PREPARATION
@@ -43,22 +32,24 @@ def prepare_datasets(
     ner_features: bool = False,
     lexicon: str = None,
     custom_stopwords: List[str] = [],
-    augment_data: bool = False
+    augment_data: bool = False,
+    topic_detection: str = None,
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
     # Training dataset
     training_dataset = load_dataset(
-        training_path,
-        tokenizer,
-        labels,
-        slice_data,
-        lexicon_embeddings,
-        num_categories,
-        previous_sentences,
-        linguistic_features,
-        ner_features,
-        lexicon,
-        custom_stopwords,
-        augment_data
+        directory=training_path,
+        tokenizer=tokenizer,
+        labels=labels,
+        slice_data=slice_data,
+        lexicon_embeddings=lexicon_embeddings,
+        num_categories=num_categories,
+        previous_sentences=previous_sentences,
+        linguistic_features=linguistic_features,
+        ner_features=ner_features,
+        lexicon=lexicon,
+        custom_stopwords=custom_stopwords,
+        augment_data=augment_data,
+        topic_detection=topic_detection
     )
 
     # Log class distribution
@@ -69,17 +60,18 @@ def prepare_datasets(
     validation_dataset = training_dataset
     if validation_path:
         validation_dataset = load_dataset(
-            validation_path,
-            tokenizer,
-            labels,
-            slice_data,
-            lexicon_embeddings,
-            num_categories,
-            previous_sentences,
-            linguistic_features,
-            ner_features,
-            lexicon,
-            custom_stopwords
+            directory=training_path,
+            tokenizer=tokenizer,
+            labels=labels,
+            slice_data=slice_data,
+            lexicon_embeddings=lexicon_embeddings,
+            num_categories=num_categories,
+            previous_sentences=previous_sentences,
+            linguistic_features=linguistic_features,
+            ner_features=ner_features,
+            lexicon=lexicon,
+            custom_stopwords=custom_stopwords,
+            topic_detection=topic_detection
         )
     
     validate_args(labels, training_dataset, validation_dataset)
@@ -131,9 +123,10 @@ def load_dataset(
     ner_features: bool = False,
     lexicon: str = None,
     custom_stopwords: List[str] = [],
-    augment_data: bool = False
+    augment_data: bool = False,
+    topic_detection: str = None
 ):
-    """Load dataset and add lexicon embeddings if specified."""
+    """Load dataset and add embeddings if specified."""
     if augment_data:
         sentences_file_name = "sentences-aug.tsv"
         labels_file_name = "labels-cat-aug.tsv"
@@ -143,7 +136,7 @@ def load_dataset(
     sentences_file_path = os.path.join(directory, sentences_file_name)
     labels_file_path = os.path.join(directory, labels_file_name)
     
-    data_frame = pandas.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+    data_frame = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
 
     # Slicing for testing purposes
     if slice_data:
@@ -186,7 +179,7 @@ def load_dataset(
     
     encoded_sentences = tokenizer(texts, padding=True, truncation=True, max_length=512)
 
-    texts = pandas.Series(texts)
+    texts = pd.Series(texts)
 
     if linguistic_features or ner_features:
         logger.info("Loading en_core_web_sm for extra features")
@@ -226,6 +219,17 @@ def load_dataset(
 
         #logger.debug(f"Sample Lexicon Scores: {data_frame['Lexicon_Scores'].head()}")
     
+    # Compute Topic features
+    if topic_detection:
+        logger.info(f"Applying {topic_detection} for topic modeling.")
+        topic_model = TopicModeling(method=topic_detection)
+        topic_vectors = None
+        topic_vectors = topic_model.fit_transform(texts)
+
+        if topic_vectors is not None:
+            encoded_sentences["topic_features"] = topic_vectors.tolist()
+            combined_features.append(topic_vectors.tolist())
+    
     # Combine all features
     if combined_features:
         # Stack features together (ensure consistent dimensions across all features)
@@ -244,6 +248,8 @@ def load_dataset(
         logger.debug(f"Sample NER Features: {data_frame['NER_Features'].head()}")
     if lexicon:
         logger.debug(f"Sample Lexicon Features: {data_frame['Lexicon_Scores'].head()}")
+    if topic_detection:
+        logger.debug(f"Sample Topic Detection Features: {encoded_sentences['topic_features'][:5]}")
 
     for i, row in enumerate(combined_features[:5]):
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
@@ -254,12 +260,12 @@ def load_dataset(
         encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
 
     # Validate input shapes before dataset conversion
-    if linguistic_features or ner_features or lexicon:
+    if combined_features:
         validate_input_shapes(encoded_sentences)
 
     # Load labels if available
     if os.path.isfile(labels_file_path):
-        labels_frame = pandas.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+        labels_frame = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
         # Slicing for testing purposes
         if slice_data:
             labels_frame = slice_for_testing(labels_frame)

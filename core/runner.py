@@ -3,17 +3,10 @@ from core.dataset_utils import prepare_datasets
 from core.lexicon_utils import load_embeddings
 from core.training import train
 from core.models import save_model
-
-import logging
 import torch.distributed as dist
+from accelerate import Accelerator
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+from core.log import logger
 
 def run_training(
     pretrained_model: str,
@@ -35,7 +28,8 @@ def run_training(
     gradient_accumulation_steps: int = 2,
     early_stopping_patience: int = 3,
     custom_stopwords: list[str] = [],
-    augment_data: bool = False
+    augment_data: bool = False,
+    topic_detection: str = None
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -75,7 +69,8 @@ def run_training(
         ner_features,
         lexicon,
         custom_stopwords,
-        augment_data
+        augment_data,
+        topic_detection=topic_detection
     )
 
     # Train and evaluate
@@ -100,11 +95,15 @@ def run_training(
         gradient_accumulation_steps=gradient_accumulation_steps,
         early_stopping_patience=early_stopping_patience,
         multilayer=multilayer,
-        augment_data=augment_data
+        augment_data=augment_data,
+        topic_detection=topic_detection
     )
 
     # Save the model if required
-    save_model(trainer, model_name, model_directory)
+    accelerator = Accelerator()
+    if model_name and accelerator.is_main_process:
+        logger.info(f"Saving best model to {model_directory} directory")
+        save_model(trainer, model_name, model_directory)
 
     # Return the trainer so that caller (objective function) can evaluate
     return trainer

@@ -1,24 +1,15 @@
 import numpy as np
-import sys
-import tempfile
 import torch
 import transformers
 from transformers import EarlyStoppingCallback
 from transformers import DataCollatorWithPadding
 from transformers import AutoConfig
-from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
-
-import logging
 import torch.distributed as dist
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-#logger.setLevel(logging.DEBUG)
+from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
+from core.utils import clear_directory
 
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+from core.log import logger
 
 # ========================================================
 # METRICS
@@ -83,7 +74,8 @@ def create_training_args(output_dir, model_name, batch_size, num_train_epochs, l
         gradient_accumulation_steps=gradient_accumulation_steps,
         #fp16=True,
         #bf16=True,
-        ddp_find_unused_parameters=False
+        ddp_find_unused_parameters=False,
+        save_on_each_node=True if dist.is_initialized() else False  # Ensure model is saved on each GPU node
     )
 
 def train(
@@ -107,19 +99,37 @@ def train(
         linguistic_features: bool = False,
         ner_features: bool = False,
         multilayer: bool = False,
-        augment_data: bool = False
+        augment_data: bool = False,
+        topic_detection: str = None,
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
     if previous_sentences or augment_data:
-        gradient_accumulation_steps = int(gradient_accumulation_steps * batch_size / 2)
+        scaled_gradient_accumulation_steps = int(gradient_accumulation_steps * batch_size / 2)
+        logger.info(f"Previous sentences or augmented data detected. Adjusting batch size: {batch_size} -> 2 and gradient accumulation steps: {gradient_accumulation_steps} -> {scaled_gradient_accumulation_steps}")
+        gradient_accumulation_steps = scaled_gradient_accumulation_steps
         batch_size = 2
+    
+    # Detect number of available GPUs
+    """
+    num_gpus = torch.cuda.device_count()
+    if num_gpus > 1:
+        scaled_batch_size = batch_size * num_gpus  # Multiply batch size per GPU count
+        scaled_gradient_accumulation_steps = int(gradient_accumulation_steps * scaled_batch_size / 2)
+        logger.info(f"Multi-GPU detected ({num_gpus} GPUs). Adjusting batch size: {batch_size} -> {scaled_batch_size} and gradient accumulation steps: {gradient_accumulation_steps} -> {scaled_gradient_accumulation_steps}")
+        batch_size = scaled_batch_size
+        gradient_accumulation_steps = scaled_gradient_accumulation_steps
+    """
 
-    output_dir = tempfile.TemporaryDirectory()
-    output_dir = tempfile.mkdtemp() if output_dir is None else output_dir
+    output_dir = "models/checkpoints"
+
+    # Ensure only rank 0 (primary process) clears the directory before training starts
+    if not dist.is_initialized() or dist.get_rank() == 0:
+        logger.info(f"Clearing old checkpoints in {output_dir}")
+        clear_directory(output_dir)
     
     training_args = create_training_args(
-        output_dir.name, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps
+        output_dir, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps
     )
 
     if ner_features:
@@ -128,13 +138,15 @@ def train(
     else:
         ner_feature_dim = 0
     
+    topic_feature_dim = 10 if topic_detection != None else 0  # Adjust based on method
+    
     config = AutoConfig.from_pretrained(pretrained_model)
     # Add necessary attributes to config
     config.id2label = id2label
     config.label2id = label2id
     config.problem_type = "multi_label_classification"
     config.architectures = ["DebertaForSequenceClassification"]
-    model = EnhancedDebertaModel(pretrained_model, config, len(labels), id2label, label2id, num_categories, ner_feature_dim, multilayer)
+    model = EnhancedDebertaModel(pretrained_model, config, len(labels), id2label, label2id, num_categories, ner_feature_dim, multilayer, topic_feature_dim)
     """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(
@@ -167,7 +179,8 @@ def train(
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"
         f"Adding NER features: {'Yes' if ner_features else 'No'}\n"
         f"Number of categories (lexicon): {num_categories}\n"
-        f"Using data augmentation with paraphrasing: {'Yes' if augment_data else 'No'}"
+        f"Using data augmentation with paraphrasing: {'Yes' if augment_data else 'No'}\n"
+        f"Adding topic detection features: {'Yes' if topic_detection else 'No'}\n"
     )
     logger.info("Training configuration:\n" + config_details)
 
@@ -205,5 +218,9 @@ def train(
     for label in labels:
         logger.info(f"{label}: {evaluation[METRIC_F1_SCORE][label]:.2f}")
     logger.info(f"Macro average: {evaluation[METRIC_MACRO_F1_SCORE]:.2f}")
+
+    # Ensure distributed training cleanup
+    if dist.is_initialized():
+        dist.destroy_process_group()
 
     return trainer

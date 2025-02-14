@@ -3,25 +3,19 @@ from torch import nn
 import transformers
 from transformers import TrainerCallback
 from torch.nn.functional import binary_cross_entropy_with_logits
-import sys
-
-import logging
 import torch.distributed as dist
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-#logger.setLevel(logging.DEBUG)
-
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+from core.log import logger
 
 # ========================================================
 # UTILS
 # ========================================================
 
 def save_model(trainer, model_name, model_directory):
+    # Ensure only the main GPU (rank 0) saves the model
+    if dist.is_initialized() and dist.get_rank() != 0:
+        return
+    
     if model_name:
         logger.info(f"UPLOAD to https://huggingface.co/{model_name} (using HF_TOKEN environment variable)")
         # trainer.push_to_hub()
@@ -33,6 +27,9 @@ def save_model(trainer, model_name, model_directory):
         # Ensure the model's configuration is also saved
         if hasattr(trainer.model, 'config'):
             trainer.model.config.save_pretrained(f"{model_directory}/{model_name}")
+
+        if trainer.tokenizer is not None:
+            trainer.tokenizer.save_pretrained(f"{model_directory}/{model_name}")
 
 def move_to_device(model):
     if torch.cuda.is_available():
@@ -65,7 +62,7 @@ class ResidualBlock(nn.Module):
 
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, config, num_labels, id2label, label2id, num_categories=0, ner_feature_dim=0, multilayer = False, num_groups=8):
+    def __init__(self, pretrained_model, config, num_labels, id2label, label2id, num_categories=0, ner_feature_dim=0, multilayer = False, num_groups=8, topic_feature_dim=0):
         #super(EnhancedDebertaModel, self).__init__()
         super().__init__()
         self.config = config  # Store config attribute
@@ -106,6 +103,17 @@ class EnhancedDebertaModel(nn.Module):
             self.ner_layer = None
             logger.debug("No NER layer initialized at model")
         
+        if topic_feature_dim > 0:
+            self.topic_layer = nn.Sequential(
+                nn.Linear(topic_feature_dim, 128),
+                nn.ReLU(),
+                nn.Dropout(0.4)
+            )
+            logger.debug("Topic Detection layer initialized at model")
+        else:
+            self.topic_layer = None
+            logger.debug("No Topic Detection layer initialized at model")
+        
         # Multi-layer processing for transformer embeddings
         self.multilayer = multilayer
         if multilayer:
@@ -130,6 +138,8 @@ class EnhancedDebertaModel(nn.Module):
             input_dim += 128
         if self.ner_layer:
             input_dim += 128
+        if self.topic_layer:
+            input_dim += 128
         self.classification_head = nn.Linear(input_dim, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
 
@@ -137,7 +147,7 @@ class EnhancedDebertaModel(nn.Module):
         self.id2label = id2label
         self.label2id = label2id
 
-    def forward(self, input_ids, attention_mask, lexicon_features=None, ner_features=None, labels=None, **kwargs):
+    def forward(self, input_ids, attention_mask, lexicon_features=None, ner_features=None, topic_features=None, labels=None, **kwargs):
         """Forward pass for the enhanced model."""
 
         logger.debug(f"Lexicon features received: {lexicon_features is not None}")
@@ -176,6 +186,13 @@ class EnhancedDebertaModel(nn.Module):
             ner_output = self.ner_layer(ner_features)
             logger.debug(f"NER output shape: {ner_output.shape}")
             combined_output = torch.cat([combined_output, ner_output], dim=-1)
+
+        if self.topic_layer and topic_features is not None:
+            logger.debug(f"Topic Detection features shape before processing: {topic_features.shape}")
+            topic_features = topic_features.to(input_ids.device)
+            topic_output = self.topic_layer(topic_features)
+            logger.debug(f"Topic Detection output shape: {topic_output.shape}")
+            combined_output = torch.cat([combined_output, topic_output], dim=-1)
         
         logger.debug(f"Final combined output shape: {combined_output.shape}")
 
@@ -235,7 +252,7 @@ class WarmupEvalCallback(TrainerCallback):
         self.warmup_epochs = warmup_epochs
 
     def on_evaluate(self, args, state, control, **kwargs):
-        current_epoch = int(state.epoch) + 1
+        current_epoch = int(state.epoch)
         if current_epoch <= self.warmup_epochs:
             logger.info(f"Skipping evaluation for warm-up phase (epoch {current_epoch}).")
             control.should_evaluate = False

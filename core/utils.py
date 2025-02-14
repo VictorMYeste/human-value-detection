@@ -1,20 +1,10 @@
 import os
-import sys
+import shutil
 
 import pandas as pd
 import nltk
 
-import logging
-import torch.distributed as dist
-
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
-#logger.setLevel(logging.DEBUG)
-
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+from core.log import logger
 
 def validate_args(labels, training_dataset, validation_dataset):
     assert len(labels) > 0, "Labels cannot be empty."
@@ -55,3 +45,16 @@ def download_nltk_resources():
         nltk.data.find('tokenizers/punkt')
     except LookupError:
         nltk.download('punkt')
+
+def clear_directory(directory):
+    """Remove all files and subdirectories in the given directory."""
+    if os.path.exists(directory):
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)  # Remove file
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)  # Remove directory
+            except Exception as e:
+                logger.error(f"Failed to delete {file_path}. Reason: {e}")

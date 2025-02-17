@@ -44,7 +44,7 @@ def run_training(
 
     # Lexicon embeddings
     logger.info("Loading lexicon embeddings for: %s", lexicon if lexicon else "No lexicon used")
-    if lexicon:
+    if lexicon and lexicon not in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
         lexicon_embeddings, num_categories = load_embeddings(lexicon)
     else:
         lexicon_embeddings, num_categories = None, 0  # No lexicon features

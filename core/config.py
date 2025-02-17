@@ -11,7 +11,19 @@ LEXICON_PATHS = {
     "WorryWords": "../../lexicons/worrywords-v1.txt",
     "LIWC": "../../lexicons/liwc2015.dic",
     "MFD": "../../lexicons/Moral-Foundations-Dictionary.wmodel",
-    "Schwartz": None # No file, using hardcoded dictionary
+    "Schwartz": None, # No file, using hardcoded dictionary
+    "LIWC-22-training": "../../lexicons/LIWC-22-training-sentences.csv",
+    "LIWC-22-validation": "../../lexicons/LIWC-22-validation-sentences.csv",
+    "LIWC-22-test": "../../lexicons/LIWC-22-test-sentences.csv",
+    "eMFD-training": "../../lexicons/eMFD-training-sentences.csv",
+    "eMFD-validation": "../../lexicons/eMFD-validation-sentences.csv",
+    "eMFD-test": "../../lexicons/eMFD-test-sentences.csv",
+    "MFD-20-training": "../../lexicons/MFD-20-training-sentences.csv",
+    "MFD-20-validation": "../../lexicons/MFD-20-validation-sentences.csv",
+    "MFD-20-test": "../../lexicons/MFD-20-test-sentences.csv",
+    "MJD-training": "../../lexicons/MJD-training-sentences.csv",
+    "MJD-validation": "../../lexicons/MJD-validation-sentences.csv",
+    "MJD-test": "../../lexicons/MJD-test-sentences.csv"
 }
 
 MODEL_CONFIG = {

@@ -2,6 +2,7 @@ import re
 from typing import Dict, List, Tuple
 from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.utils import validate_file, skip_invalid_line, read_file_lines
+import pandas as pd
 
 from core.log import logger
 
@@ -163,6 +164,32 @@ def load_schwartz_embeddings(path=None) -> tuple[dict, int]:
     """Return the hardcoded Schwartz lexicon and category count."""
     return SCHWARTZ_VALUE_LEXICON, len(SCHWARTZ_VALUE_LEXICON)
 
+def load_liwc22_embeddings(path: str) -> tuple[dict, int]:
+    """
+    Loads a CSV produced by LIWC-22, returning a dictionary that maps 
+    (TextID, SentenceID) -> list of precomputed scores, plus the number of columns.
+    """
+    validate_file(path)
+    data = pd.read_csv(path, encoding='utf-8')
+    
+    # Suppose your CSV has columns like:
+    # [Text-ID, Sentence-ID, Text, Segment, WC, Analytic, Clout, Authentic, Tone, WPS, BigWords, Dic, ...]
+    # We'll skip the first 4 columns (Text-ID, Sentence-ID, Text, Segment) and use the rest as features:
+    columns_to_use = data.columns[4:]  # or whichever subset you want
+    num_features = len(columns_to_use)
+
+    # Build dictionary from (Text-ID, Sentence-ID) -> feature vector
+    embeddings = {}
+    for _, row in data.iterrows():
+        text_id = str(row["Text-ID"])
+        sent_id = str(row["Sentence-ID"])
+        # Collect numeric columns as a list of floats
+        scores = row[columns_to_use].astype(float).tolist()
+        embeddings[(text_id, sent_id)] = scores
+
+    logger.debug(f"Loaded LIWC-22 software embeddings: {len(embeddings)} rows, {num_features} features each.")
+    return embeddings, num_features
+
 # ========================================================
 # MAIN LEXICON LOADING
 # ========================================================
@@ -172,9 +199,13 @@ EMBEDDING_PARSERS = {
     "EmoLex": {"function": load_emolex_embeddings, "num_categories": 10},
     "EmotionIntensity": {"function": load_emotionintensity_embeddings, "num_categories": 8},
     "WorryWords": {"function": load_worrywords_embeddings, "num_categories": 1},
-    "LIWC": {"function": load_liwc_embeddings, "is_liwc": True},
+    "LIWC": {"function": load_liwc_embeddings, "num_categories": None},
     "MFD": {"function": load_mfd_embeddings, "num_categories": 10},
     "Schwartz": {"function": load_schwartz_embeddings, "num_categories": len(SCHWARTZ_VALUE_LEXICON)},
+    "LIWC-22": {"function": load_liwc22_embeddings, "num_categories": None},
+    "eMFD": {"function": load_liwc22_embeddings, "num_categories": None},
+    "MFD-20": {"function": load_liwc22_embeddings, "num_categories": None},
+    "MJD": {"function": load_liwc22_embeddings, "num_categories": None},
 }
 
 def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
@@ -182,12 +213,14 @@ def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
     if not parser:
         raise ValueError(f"Unknown lexicon: {lexicon_name}")
     
-    # Handle complex parsers like LIWC with category mappings
-    if parser.get("is_liwc"):
-        embeddings, category_names = parser["function"](path)
-        return embeddings, len(category_names)
+    embeddings, dynamic_num_categories = parser["function"](path)
     
-    # Default handling for simple parsers
-    embeddings = parser["function"](path)
-    logger.debug(f"Loaded {len(embeddings)} embeddings from {path}")
-    return embeddings, parser["num_categories"]
+    # If the parser's dictionary says "num_categories" is None, then use the
+    # dynamic value returned by the loader. Otherwise, use the fixed one:
+    if parser["num_categories"] is not None:
+        num_categories = parser["num_categories"]
+    else:
+        num_categories = dynamic_num_categories
+
+    logger.debug(f"Loaded {lexicon_name} embeddings with {len(embeddings)} items, {num_categories} features.")
+    return embeddings, num_categories

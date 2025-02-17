@@ -10,6 +10,8 @@ import transformers
 from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
+from core.config import LEXICON_PATHS
+from core.lexicon_utils import load_lexicon
 from core.utils import validate_args, normalize_token, slice_for_testing
 from core.topic_detection import TopicModeling
 
@@ -35,14 +37,25 @@ def prepare_datasets(
     augment_data: bool = False,
     topic_detection: str = None,
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
+    
+     # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
+    if lexicon == "LIWC-22" or lexicon == "eMFD" or lexicon == "MFD-20" or lexicon == "MJD":
+        # Example: We handle training and validation differently
+        train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
+        val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
+    else:
+        # Fallback: single lexicon for everything (the old approach)
+        train_lexicon, train_num_cat = lexicon_embeddings, num_categories
+        val_lexicon, val_num_cat     = lexicon_embeddings, num_categories
+
     # Training dataset
     training_dataset = load_dataset(
         directory=training_path,
         tokenizer=tokenizer,
         labels=labels,
         slice_data=slice_data,
-        lexicon_embeddings=lexicon_embeddings,
-        num_categories=num_categories,
+        lexicon_embeddings=train_lexicon,
+        num_categories=train_num_cat,
         previous_sentences=previous_sentences,
         linguistic_features=linguistic_features,
         ner_features=ner_features,
@@ -64,8 +77,8 @@ def prepare_datasets(
             tokenizer=tokenizer,
             labels=labels,
             slice_data=slice_data,
-            lexicon_embeddings=lexicon_embeddings,
-            num_categories=num_categories,
+            lexicon_embeddings=val_lexicon,
+            num_categories=val_num_cat,
             previous_sentences=previous_sentences,
             linguistic_features=linguistic_features,
             ner_features=ner_features,
@@ -209,9 +222,18 @@ def load_dataset(
 
     # Compute lexicon embeddings for each sentence
     if lexicon:
-        data_frame['Lexicon_Scores'] = texts.apply(
-            lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
-        )
+        # 1) Is this lexicon in the dict of token-based scorers?
+        if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
+            # Same old token-based approach
+            data_frame['Lexicon_Scores'] = texts.apply(
+                lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
+            )
+        else:
+            # 2) This must be a precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
+            data_frame['Lexicon_Scores'] = data_frame.apply(
+                lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
+            )
+
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
             lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0] * num_categories
         )
@@ -605,3 +627,24 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         scores = [0.0] * num_categories
     
     return scores
+
+
+def compute_precomputed_scores(
+    row,
+    precomputed_dict: dict, 
+    num_categories: int
+):
+    """
+    For a 'precomputed' lexicon like LIWC-22, look up the row's (Text-ID, Sentence-ID)
+    in precomputed_dict and return the features. 
+    If not found, fall back to zeros.
+    """
+    text_id = str(row["Text-ID"])
+    sent_id = str(row["Sentence-ID"])
+    key = (text_id, sent_id)
+
+    if key in precomputed_dict:
+        return precomputed_dict[key]
+    else:
+        # If no match, fallback
+        return [0.0] * num_categories

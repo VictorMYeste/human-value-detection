@@ -37,7 +37,10 @@ LEXICON_PATHS = {
     "WorryWords": "../../lexicons/worrywords-v1.txt",
     "LIWC": "../../lexicons/liwc2015.dic",
     "MFD": "../../lexicons/Moral-Foundations-Dictionary.wmodel",
-    "Schwartz": None # No file, using hardcoded dictionary
+    "Schwartz": None, # No file, using hardcoded dictionary
+    "LIWC-22-training": "../../lexicons/LIWC-22-training-sentences.csv",
+    "LIWC-22-validation": "../../lexicons/LIWC-22-validation-sentences.csv",
+    "LIWC-22-test": "../../lexicons/LIWC-22-test-sentences.csv",
 }
 
 MODEL_CONFIG = {
@@ -160,6 +163,8 @@ import transformers
 from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
+from core.config import LEXICON_PATHS
+from core.lexicon_utils import load_lexicon
 from core.utils import validate_args, normalize_token, slice_for_testing
 from core.topic_detection import TopicModeling
 
@@ -185,14 +190,25 @@ def prepare_datasets(
     augment_data: bool = False,
     topic_detection: str = None,
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
+    
+     # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
+    if lexicon == "LIWC-22":
+        # Example: We handle training and validation differently
+        train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
+        val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
+    else:
+        # Fallback: single lexicon for everything (the old approach)
+        train_lexicon, train_num_cat = lexicon_embeddings, num_categories
+        val_lexicon, val_num_cat     = lexicon_embeddings, num_categories
+
     # Training dataset
     training_dataset = load_dataset(
         directory=training_path,
         tokenizer=tokenizer,
         labels=labels,
         slice_data=slice_data,
-        lexicon_embeddings=lexicon_embeddings,
-        num_categories=num_categories,
+        lexicon_embeddings=train_lexicon,
+        num_categories=train_num_cat,
         previous_sentences=previous_sentences,
         linguistic_features=linguistic_features,
         ner_features=ner_features,
@@ -214,8 +230,8 @@ def prepare_datasets(
             tokenizer=tokenizer,
             labels=labels,
             slice_data=slice_data,
-            lexicon_embeddings=lexicon_embeddings,
-            num_categories=num_categories,
+            lexicon_embeddings=val_lexicon,
+            num_categories=val_num_cat,
             previous_sentences=previous_sentences,
             linguistic_features=linguistic_features,
             ner_features=ner_features,
@@ -359,9 +375,19 @@ def load_dataset(
 
     # Compute lexicon embeddings for each sentence
     if lexicon:
-        data_frame['Lexicon_Scores'] = texts.apply(
-            lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
-        )
+        # 1) Is this lexicon in the dict of token-based scorers?
+        if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
+            # Same old token-based approach
+            data_frame['Lexicon_Scores'] = texts.apply(
+                lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
+            )
+        else:
+            # 2) This must be a precomputed (row-level) lexicon
+            #    e.g. "LIWC-22", "MyCustomLexicon", etc.
+            data_frame['Lexicon_Scores'] = data_frame.apply(
+                lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
+            )
+
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
             lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0] * num_categories
         )
@@ -755,6 +781,27 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         scores = [0.0] * num_categories
     
     return scores
+
+
+def compute_precomputed_scores(
+    row,
+    precomputed_dict: dict, 
+    num_categories: int
+):
+    """
+    For a 'precomputed' lexicon like LIWC-22, look up the row's (Text-ID, Sentence-ID)
+    in precomputed_dict and return the features. 
+    If not found, fall back to zeros.
+    """
+    text_id = str(row["Text-ID"])
+    sent_id = str(row["Sentence-ID"])
+    key = (text_id, sent_id)
+
+    if key in precomputed_dict:
+        return precomputed_dict[key]
+    else:
+        # If no match, fallback
+        return [0.0] * num_categories
 ```
 -----------
 ## lexicon_utils.py
@@ -763,6 +810,7 @@ import re
 from typing import Dict, List, Tuple
 from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.utils import validate_file, skip_invalid_line, read_file_lines
+import pandas as pd
 
 from core.log import logger
 
@@ -924,6 +972,32 @@ def load_schwartz_embeddings(path=None) -> tuple[dict, int]:
     """Return the hardcoded Schwartz lexicon and category count."""
     return SCHWARTZ_VALUE_LEXICON, len(SCHWARTZ_VALUE_LEXICON)
 
+def load_liwc22_embeddings(path: str) -> tuple[dict, int]:
+    """
+    Loads a CSV produced by LIWC-22, returning a dictionary that maps 
+    (TextID, SentenceID) -> list of precomputed scores, plus the number of columns.
+    """
+    validate_file(path)
+    data = pd.read_csv(path, encoding='utf-8')
+    
+    # Suppose your CSV has columns like:
+    # [Text-ID, Sentence-ID, Text, Segment, WC, Analytic, Clout, Authentic, Tone, WPS, BigWords, Dic, ...]
+    # We'll skip the first 4 columns (Text-ID, Sentence-ID, Text, Segment) and use the rest as features:
+    columns_to_use = data.columns[4:]  # or whichever subset you want
+    num_features = len(columns_to_use)
+
+    # Build dictionary from (Text-ID, Sentence-ID) -> feature vector
+    embeddings = {}
+    for _, row in data.iterrows():
+        text_id = str(row["Text-ID"])
+        sent_id = str(row["Sentence-ID"])
+        # Collect numeric columns as a list of floats
+        scores = row[columns_to_use].astype(float).tolist()
+        embeddings[(text_id, sent_id)] = scores
+
+    logger.debug(f"Loaded LIWC-22 embeddings: {len(embeddings)} rows, {num_features} features each.")
+    return embeddings, num_features
+
 # ========================================================
 # MAIN LEXICON LOADING
 # ========================================================
@@ -933,9 +1007,10 @@ EMBEDDING_PARSERS = {
     "EmoLex": {"function": load_emolex_embeddings, "num_categories": 10},
     "EmotionIntensity": {"function": load_emotionintensity_embeddings, "num_categories": 8},
     "WorryWords": {"function": load_worrywords_embeddings, "num_categories": 1},
-    "LIWC": {"function": load_liwc_embeddings, "is_liwc": True},
+    "LIWC": {"function": load_liwc_embeddings, "num_categories": None},
     "MFD": {"function": load_mfd_embeddings, "num_categories": 10},
     "Schwartz": {"function": load_schwartz_embeddings, "num_categories": len(SCHWARTZ_VALUE_LEXICON)},
+    "LIWC-22": {"function": load_liwc22_embeddings, "num_categories": None},
 }
 
 def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
@@ -943,15 +1018,18 @@ def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
     if not parser:
         raise ValueError(f"Unknown lexicon: {lexicon_name}")
     
-    # Handle complex parsers like LIWC with category mappings
-    if parser.get("is_liwc"):
-        embeddings, category_names = parser["function"](path)
-        return embeddings, len(category_names)
+    embeddings, dynamic_num_categories = parser["function"](path)
     
-    # Default handling for simple parsers
-    embeddings = parser["function"](path)
-    logger.debug(f"Loaded {len(embeddings)} embeddings from {path}")
-    return embeddings, parser["num_categories"]
+    # If the parser's dictionary says "num_categories" is None, then use the
+    # dynamic value returned by the loader. Otherwise, use the fixed one:
+    if parser["num_categories"] is not None:
+        num_categories = parser["num_categories"]
+    else:
+        num_categories = dynamic_num_categories
+
+    logger.debug(f"Loaded {lexicon_name} embeddings with {len(embeddings)} items, {num_categories} features.")
+    return embeddings, num_categories
+
 ```
 -----------
 ## log.py
@@ -1305,7 +1383,7 @@ def run_training(
 
     # Lexicon embeddings
     logger.info("Loading lexicon embeddings for: %s", lexicon if lexicon else "No lexicon used")
-    if lexicon:
+    if lexicon and not lexicon.startswith("LIWC-22"):
         lexicon_embeddings, num_categories = load_embeddings(lexicon)
     else:
         lexicon_embeddings, num_categories = None, 0  # No lexicon features

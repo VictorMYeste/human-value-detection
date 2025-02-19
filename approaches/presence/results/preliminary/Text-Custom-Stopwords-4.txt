@@ -1,0 +1,54 @@
+2025-01-23 09:56:08,019 - datasets - INFO - PyTorch version 2.5.1+cu118 available.
+2025-01-23 09:56:11,788 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 09:56:11,980 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 09:56:11,980 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 09:56:40,838 - HVD - INFO - Arguments validated successfully.
+2025-01-23 09:56:41,378 - HVD - INFO - Using CUDA for training.
+2025-01-23 09:56:42,718 - HVD - INFO - TRAINING
+2025-01-23 09:56:42,718 - HVD - INFO - ========
+2025-01-23 09:56:42,718 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-Custom-Stopwords-4
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 09:56:42,723 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 2.7154, 'grad_norm': 371435.21875, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 2.6167, 'grad_norm': 518153.4375, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6646881103515625, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 326.0851, 'eval_samples_per_second': 45.706, 'eval_steps_per_second': 5.713, 'epoch': 1.0}
+2025-01-23 10:40:51,524 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 2.6537, 'grad_norm': 1620431.75, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 2.5509, 'grad_norm': 775920.875, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 2.5208, 'grad_norm': 669723.4375, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6620850563049316, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 325.6735, 'eval_samples_per_second': 45.764, 'eval_steps_per_second': 5.72, 'epoch': 2.0}
+2025-01-23 11:24:59,989 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'loss': 2.4035, 'grad_norm': 770312.125, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.15}
+{'loss': 2.2702, 'grad_norm': 1173380.875, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 2.2497, 'grad_norm': 1390273.75, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7132278680801392, 'eval_f1-score': {'Presence': 0.58}, 'eval_marco-avg-f1-score': 0.58, 'eval_runtime': 325.8226, 'eval_samples_per_second': 45.743, 'eval_steps_per_second': 5.718, 'epoch': 3.0}
+{'loss': 1.9624, 'grad_norm': 1834903.0, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 1.8243, 'grad_norm': 1558813.25, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.58}
+{'loss': 1.8227, 'grad_norm': 2420702.25, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.844703733921051, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 325.7402, 'eval_samples_per_second': 45.754, 'eval_steps_per_second': 5.719, 'epoch': 4.0}
+{'loss': 1.416, 'grad_norm': 2534731.25, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 1.3001, 'grad_norm': 2081817.375, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.9684790372848511, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 325.8135, 'eval_samples_per_second': 45.744, 'eval_steps_per_second': 5.718, 'epoch': 5.0}
+{'train_runtime': 13249.6755, 'train_samples_per_second': 33.78, 'train_steps_per_second': 1.055, 'train_loss': 2.120317747800988, 'epoch': 5.0}
+2025-01-23 13:37:32,562 - HVD - INFO - 
+
+VALIDATION
+2025-01-23 13:37:32,562 - HVD - INFO - ==========
+2025-01-23 13:42:57,808 - HVD - INFO - Presence: 0.61
+2025-01-23 13:42:57,808 - HVD - INFO - Macro average: 0.61
+2025-01-23 13:42:58,242 - HVD - INFO - UPLOAD to https://huggingface.co/Text-Custom-Stopwords-4 (using HF_TOKEN environment variable)
+2025-01-23 13:42:58,242 - HVD - INFO - SAVE to models

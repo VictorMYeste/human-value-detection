@@ -1,0 +1,150 @@
+2025-01-23 09:52:29,789 - datasets - INFO - PyTorch version 2.4.1+cu118 available.
+2025-01-23 09:52:32,929 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 09:52:33,117 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 09:52:33,117 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 09:52:33,947 - HVD - INFO - Arguments validated successfully.
+2025-01-23 09:52:34,448 - HVD - INFO - Using CUDA for training.
+2025-01-23 09:52:35,714 - HVD - INFO - TRAINING
+2025-01-23 09:52:35,714 - HVD - INFO - ========
+2025-01-23 09:52:35,715 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.24651064311605164
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 09:52:35,749 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.7029648423194885, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0523, 'eval_samples_per_second': 71.163, 'eval_steps_per_second': 8.895, 'epoch': 0.99}
+2025-01-23 09:53:23,184 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7553292512893677, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.144, 'eval_samples_per_second': 70.701, 'eval_steps_per_second': 8.838, 'epoch': 1.98}
+2025-01-23 09:54:08,143 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'eval_loss': 0.8446387052536011, 'eval_f1-score': {'Presence': 0.7}, 'eval_marco-avg-f1-score': 0.7, 'eval_runtime': 14.0741, 'eval_samples_per_second': 71.052, 'eval_steps_per_second': 8.882, 'epoch': 2.98}
+{'eval_loss': 0.8568476438522339, 'eval_f1-score': {'Presence': 0.65}, 'eval_marco-avg-f1-score': 0.65, 'eval_runtime': 14.1844, 'eval_samples_per_second': 70.5, 'eval_steps_per_second': 8.812, 'epoch': 4.0}
+{'eval_loss': 0.9182735681533813, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 14.1812, 'eval_samples_per_second': 70.516, 'eval_steps_per_second': 8.814, 'epoch': 4.99}
+{'eval_loss': 1.1113823652267456, 'eval_f1-score': {'Presence': 0.66}, 'eval_marco-avg-f1-score': 0.66, 'eval_runtime': 14.1737, 'eval_samples_per_second': 70.553, 'eval_steps_per_second': 8.819, 'epoch': 5.98}
+{'eval_loss': 1.3079414367675781, 'eval_f1-score': {'Presence': 0.65}, 'eval_marco-avg-f1-score': 0.65, 'eval_runtime': 14.1781, 'eval_samples_per_second': 70.531, 'eval_steps_per_second': 8.816, 'epoch': 6.98}
+{'train_runtime': 326.6779, 'train_samples_per_second': 30.611, 'train_steps_per_second': 0.949, 'train_loss': 0.42985272188799095, 'epoch': 6.98}
+2025-01-23 09:58:02,942 - HVD - INFO - 
+
+VALIDATION
+2025-01-23 09:58:02,942 - HVD - INFO - ==========
+2025-01-23 09:58:17,106 - HVD - INFO - Presence: 0.70
+2025-01-23 09:58:17,106 - HVD - INFO - Macro average: 0.70
+2025-01-23 09:58:32,070 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 09:58:32,367 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 09:58:32,367 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 09:58:33,187 - HVD - INFO - Arguments validated successfully.
+2025-01-23 09:58:33,705 - HVD - INFO - Using CUDA for training.
+2025-01-23 09:58:33,823 - HVD - INFO - TRAINING
+2025-01-23 09:58:33,823 - HVD - INFO - ========
+2025-01-23 09:58:33,823 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.5394910593557385
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 09:58:33,828 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.7000637054443359, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1577, 'eval_samples_per_second': 70.633, 'eval_steps_per_second': 8.829, 'epoch': 0.99}
+2025-01-23 09:59:19,007 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7760008573532104, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0852, 'eval_samples_per_second': 70.996, 'eval_steps_per_second': 8.875, 'epoch': 1.98}
+2025-01-23 10:00:03,932 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'eval_loss': 0.7074008584022522, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1543, 'eval_samples_per_second': 70.65, 'eval_steps_per_second': 8.831, 'epoch': 2.98}
+{'eval_loss': 1.0740615129470825, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1984, 'eval_samples_per_second': 70.431, 'eval_steps_per_second': 8.804, 'epoch': 4.0}
+{'eval_loss': 0.8950228691101074, 'eval_f1-score': {'Presence': 0.68}, 'eval_marco-avg-f1-score': 0.68, 'eval_runtime': 14.0868, 'eval_samples_per_second': 70.988, 'eval_steps_per_second': 8.874, 'epoch': 4.99}
+{'eval_loss': 1.1053026914596558, 'eval_f1-score': {'Presence': 0.7}, 'eval_marco-avg-f1-score': 0.7, 'eval_runtime': 14.1564, 'eval_samples_per_second': 70.639, 'eval_steps_per_second': 8.83, 'epoch': 5.98}
+{'eval_loss': 0.9960510730743408, 'eval_f1-score': {'Presence': 0.68}, 'eval_marco-avg-f1-score': 0.68, 'eval_runtime': 14.086, 'eval_samples_per_second': 70.992, 'eval_steps_per_second': 8.874, 'epoch': 6.98}
+{'train_runtime': 324.4583, 'train_samples_per_second': 30.821, 'train_steps_per_second': 0.955, 'train_loss': 0.5556440790858838, 'epoch': 6.98}
+2025-01-23 10:03:58,568 - HVD - INFO - 
+
+VALIDATION
+2025-01-23 10:03:58,568 - HVD - INFO - ==========
+2025-01-23 10:04:12,727 - HVD - INFO - Presence: 0.72
+2025-01-23 10:04:12,727 - HVD - INFO - Macro average: 0.72
+2025-01-23 10:04:27,678 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 10:04:27,929 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 10:04:27,930 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 10:04:28,748 - HVD - INFO - Arguments validated successfully.
+2025-01-23 10:04:29,275 - HVD - INFO - Using CUDA for training.
+2025-01-23 10:04:29,392 - HVD - INFO - TRAINING
+2025-01-23 10:04:29,392 - HVD - INFO - ========
+2025-01-23 10:04:29,392 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.8880764566518645
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 10:04:29,394 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.6999464631080627, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1623, 'eval_samples_per_second': 70.61, 'eval_steps_per_second': 8.826, 'epoch': 0.99}
+2025-01-23 10:05:14,610 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7767314910888672, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0878, 'eval_samples_per_second': 70.984, 'eval_steps_per_second': 8.873, 'epoch': 1.98}
+2025-01-23 10:05:59,575 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'eval_loss': 0.76472008228302, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1581, 'eval_samples_per_second': 70.631, 'eval_steps_per_second': 8.829, 'epoch': 2.98}
+{'eval_loss': 0.8929607272148132, 'eval_f1-score': {'Presence': 0.7}, 'eval_marco-avg-f1-score': 0.7, 'eval_runtime': 14.155, 'eval_samples_per_second': 70.646, 'eval_steps_per_second': 8.831, 'epoch': 4.0}
+{'eval_loss': 0.8096328377723694, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 14.1666, 'eval_samples_per_second': 70.589, 'eval_steps_per_second': 8.824, 'epoch': 4.99}
+{'eval_loss': 0.8429486751556396, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 14.175, 'eval_samples_per_second': 70.547, 'eval_steps_per_second': 8.818, 'epoch': 5.98}
+{'eval_loss': 1.0305070877075195, 'eval_f1-score': {'Presence': 0.69}, 'eval_marco-avg-f1-score': 0.69, 'eval_runtime': 14.1588, 'eval_samples_per_second': 70.628, 'eval_steps_per_second': 8.828, 'epoch': 6.98}
+{'train_runtime': 324.5857, 'train_samples_per_second': 30.809, 'train_steps_per_second': 0.955, 'train_loss': 0.5614862354523545, 'epoch': 6.98}
+2025-01-23 10:09:54,246 - HVD - INFO - 
+
+VALIDATION
+2025-01-23 10:09:54,246 - HVD - INFO - ==========
+2025-01-23 10:10:08,333 - HVD - INFO - Presence: 0.72
+2025-01-23 10:10:08,333 - HVD - INFO - Macro average: 0.72
+2025-01-23 10:10:23,291 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 10:10:23,531 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 10:10:23,532 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 10:10:24,352 - HVD - INFO - Arguments validated successfully.
+2025-01-23 10:10:24,858 - HVD - INFO - Using CUDA for training.
+2025-01-23 10:10:24,975 - HVD - INFO - TRAINING
+2025-01-23 10:10:24,975 - HVD - INFO - ========
+2025-01-23 10:10:24,975 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.5176867382578014
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 10:10:24,978 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.7000722885131836, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1571, 'eval_samples_per_second': 70.636, 'eval_steps_per_second': 8.829, 'epoch': 0.99}
+2025-01-23 10:11:10,186 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7760147452354431, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0834, 'eval_samples_per_second': 71.006, 'eval_steps_per_second': 8.876, 'epoch': 1.98}
+2025-01-23 10:11:55,128 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'eval_loss': 0.7085910439491272, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1667, 'eval_samples_per_second': 70.588, 'eval_steps_per_second': 8.824, 'epoch': 2.98}

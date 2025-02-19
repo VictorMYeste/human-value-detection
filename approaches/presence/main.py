@@ -3,6 +3,9 @@ import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+import random
+import torch
+import numpy as np
 
 from core.config import MODEL_CONFIG
 from core.utils import download_nltk_resources
@@ -27,6 +30,15 @@ def main() -> None:
 
     if args.debug:
         logger.setLevel(logging.DEBUG)
+    
+    # Optionally set the seed if provided
+    if args.seed is not None:
+        logger.info(f"Setting random seed to {args.seed}")
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
 
     # Download resources only once
     download_nltk_resources()

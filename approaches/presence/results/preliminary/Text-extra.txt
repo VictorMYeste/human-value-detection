@@ -1,0 +1,27 @@
+2025-01-21 14:45:44,236 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-21 14:45:44,500 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-21 14:45:44,501 - HVD - INFO - Preparing datasets for training and validation
+2025-01-21 14:46:02,687 - HVD - INFO - Arguments validated successfully.
+2025-01-21 14:46:03,135 - HVD - INFO - Using CUDA for training.
+2025-01-21 14:46:04,382 - HVD - INFO - TRAINING
+2025-01-21 14:46:04,382 - HVD - INFO - ========
+2025-01-21 14:46:04,382 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-Extra
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Number of categories (lexicon): 0
+
+2025-01-21 14:46:04,387 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6765, 'grad_norm': 137449.265625, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6729, 'grad_norm': 757967.6875, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6536256670951843, 'eval_f1-score': {'Presence': 0.65}, 'eval_marco-avg-f1-score': 0.65, 'eval_runtime': 324.8541, 'eval_samples_per_second': 45.879, 'eval_steps_per_second': 5.735, 'epoch': 1.0}
+2025-01-21 15:30:32,712 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).

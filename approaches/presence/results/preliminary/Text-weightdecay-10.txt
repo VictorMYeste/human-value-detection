@@ -1,0 +1,43 @@
+2025-01-23 09:42:19,310 - datasets - INFO - PyTorch version 2.4.1+cu118 available.
+2025-01-23 09:42:22,808 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-23 09:42:23,031 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-23 09:42:23,031 - HVD - INFO - Preparing datasets for training and validation
+2025-01-23 09:42:23,864 - HVD - INFO - Arguments validated successfully.
+2025-01-23 09:42:24,393 - HVD - INFO - Using CUDA for training.
+2025-01-23 09:42:25,662 - HVD - INFO - TRAINING
+2025-01-23 09:42:25,662 - HVD - INFO - ========
+2025-01-23 09:42:25,662 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-Custom-Stopwords-weightdecay-10
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.1
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+
+2025-01-23 09:42:25,667 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.7139855027198792, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0744, 'eval_samples_per_second': 71.051, 'eval_steps_per_second': 8.881, 'epoch': 0.99}
+2025-01-23 09:43:13,117 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7023112773895264, 'eval_f1-score': {'Presence': 0.29}, 'eval_marco-avg-f1-score': 0.29, 'eval_runtime': 14.1485, 'eval_samples_per_second': 70.679, 'eval_steps_per_second': 8.835, 'epoch': 1.98}
+2025-01-23 09:43:58,093 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'eval_loss': 0.6870954632759094, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.0897, 'eval_samples_per_second': 70.974, 'eval_steps_per_second': 8.872, 'epoch': 2.98}
+{'eval_loss': 0.6851349472999573, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1787, 'eval_samples_per_second': 70.529, 'eval_steps_per_second': 8.816, 'epoch': 4.0}
+{'eval_loss': 0.6910759210586548, 'eval_f1-score': {'Presence': 0.72}, 'eval_marco-avg-f1-score': 0.72, 'eval_runtime': 14.1584, 'eval_samples_per_second': 70.629, 'eval_steps_per_second': 8.829, 'epoch': 4.99}
+{'eval_loss': 0.770906925201416, 'eval_f1-score': {'Presence': 0.69}, 'eval_marco-avg-f1-score': 0.69, 'eval_runtime': 14.1573, 'eval_samples_per_second': 70.635, 'eval_steps_per_second': 8.829, 'epoch': 5.98}
+{'eval_loss': 0.8499801158905029, 'eval_f1-score': {'Presence': 0.68}, 'eval_marco-avg-f1-score': 0.68, 'eval_runtime': 14.1625, 'eval_samples_per_second': 70.609, 'eval_steps_per_second': 8.826, 'epoch': 6.98}
+{'train_runtime': 326.5975, 'train_samples_per_second': 30.619, 'train_steps_per_second': 0.949, 'train_loss': 0.6530646927859804, 'epoch': 6.98}
+2025-01-23 09:47:52,781 - HVD - INFO - 
+
+VALIDATION
+2025-01-23 09:47:52,781 - HVD - INFO - ==========
+2025-01-23 09:48:06,941 - HVD - INFO - Presence: 0.72
+2025-01-23 09:48:06,941 - HVD - INFO - Macro average: 0.72
+2025-01-23 09:48:07,692 - HVD - INFO - UPLOAD to https://huggingface.co/Text-Custom-Stopwords-weightdecay-10 (using HF_TOKEN environment variable)
+2025-01-23 09:48:07,692 - HVD - INFO - SAVE to models

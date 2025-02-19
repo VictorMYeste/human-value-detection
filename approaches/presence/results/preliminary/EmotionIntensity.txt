@@ -1,0 +1,64 @@
+2025-01-18 04:09:58,640 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-18 04:09:59,096 - HVD - INFO - Loading lexicon embeddings for: EmotionIntensity
+2025-01-18 04:09:59,238 - HVD - INFO - Preparing datasets for training and validation
+2025-01-18 04:10:17,359 - HVD - INFO - Arguments validated successfully.
+2025-01-18 04:10:18,021 - HVD - INFO - Using CUDA for training.
+2025-01-18 04:10:19,278 - HVD - INFO - TRAINING
+2025-01-18 04:10:19,278 - HVD - INFO - ========
+2025-01-18 04:10:19,278 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: EmotionIntensity
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: EmotionIntensity
+Adding linguistic features: No
+Number of categories (lexicon): 8
+
+2025-01-18 04:10:19,283 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6787, 'grad_norm': 106432.28125, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6572, 'grad_norm': 689827.875, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6501194834709167, 'eval_f1-score': {'Presence': 0.64}, 'eval_marco-avg-f1-score': 0.64, 'eval_runtime': 324.5277, 'eval_samples_per_second': 45.925, 'eval_steps_per_second': 5.741, 'epoch': 1.0}
+2025-01-18 04:55:03,166 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.6429, 'grad_norm': 247875.453125, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.6113, 'grad_norm': 152758.15625, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.6091, 'grad_norm': 164698.171875, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6606025099754333, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 325.2461, 'eval_samples_per_second': 45.824, 'eval_steps_per_second': 5.728, 'epoch': 2.0}
+2025-01-18 05:39:45,512 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'loss': 0.5645, 'grad_norm': 307612.0625, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.5087, 'grad_norm': 482233.0625, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.5075, 'grad_norm': 418861.90625, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7437334060668945, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 324.6784, 'eval_samples_per_second': 45.904, 'eval_steps_per_second': 5.738, 'epoch': 3.0}
+{'loss': 0.4257, 'grad_norm': 594191.1875, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.3822, 'grad_norm': 674520.375, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.3732, 'grad_norm': 414229.96875, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.914019763469696, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 324.9306, 'eval_samples_per_second': 45.868, 'eval_steps_per_second': 5.734, 'epoch': 4.0}
+{'loss': 0.2766, 'grad_norm': 828383.0625, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.261, 'grad_norm': 821582.3125, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1828709840774536, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 324.9291, 'eval_samples_per_second': 45.868, 'eval_steps_per_second': 5.734, 'epoch': 5.0}
+{'loss': 0.2597, 'grad_norm': 756627.9375, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.1753, 'grad_norm': 343949.625, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.1792, 'grad_norm': 520638.15625, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 1.469321370124817, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 324.7035, 'eval_samples_per_second': 45.9, 'eval_steps_per_second': 5.738, 'epoch': 6.0}
+{'loss': 0.1694, 'grad_norm': 1973161.0, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.1202, 'grad_norm': 1186635.75, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.1381, 'grad_norm': 583950.375, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 1.8514643907546997, 'eval_f1-score': {'Presence': 0.58}, 'eval_marco-avg-f1-score': 0.58, 'eval_runtime': 325.2793, 'eval_samples_per_second': 45.819, 'eval_steps_per_second': 5.727, 'epoch': 7.0}
+{'loss': 0.1086, 'grad_norm': 103958.921875, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.0912, 'grad_norm': 160161.78125, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.0998, 'grad_norm': 519901.78125, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 2.1158065795898438, 'eval_f1-score': {'Presence': 0.58}, 'eval_marco-avg-f1-score': 0.58, 'eval_runtime': 324.5314, 'eval_samples_per_second': 45.925, 'eval_steps_per_second': 5.741, 'epoch': 8.0}
+{'train_runtime': 21470.5824, 'train_samples_per_second': 20.846, 'train_steps_per_second': 0.651, 'train_loss': 0.3519771357750232, 'epoch': 8.0}
+2025-01-18 10:08:10,404 - HVD - INFO - 
+
+VALIDATION
+2025-01-18 10:08:10,404 - HVD - INFO - ==========
+2025-01-18 10:13:35,482 - HVD - INFO - Presence: 0.60
+2025-01-18 10:13:35,482 - HVD - INFO - Macro average: 0.60
+2025-01-18 10:13:36,357 - HVD - INFO - UPLOAD to https://huggingface.co/EmotionIntensity (using HF_TOKEN environment variable)
+2025-01-18 10:13:36,357 - HVD - INFO - SAVE to models/EmotionIntensity

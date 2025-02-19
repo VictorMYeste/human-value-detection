@@ -1,0 +1,77 @@
+2025-02-17 20:06:19,063 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-17 20:06:19,065 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-17 20:06:25,659 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-02-17 20:06:25,849 - INFO - Loading lexicon embeddings for: LIWC-22
+2025-02-17 20:06:25,849 - INFO - Preparing datasets for training and validation
+2025-02-17 20:07:00,966 - INFO - Arguments validated successfully.
+2025-02-17 20:07:01,044 - INFO - Clearing old checkpoints in models/checkpoints
+2025-02-17 20:07:01,972 - INFO - Using CUDA for training.
+2025-02-17 20:07:03,203 - INFO - TRAINING
+2025-02-17 20:07:03,203 - INFO - ========
+2025-02-17 20:07:03,203 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: LIWC-22
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: LIWC-22
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+
+2025-02-17 20:07:03,206 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6771, 'grad_norm': 1.7668055295944214, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6521, 'grad_norm': 3.457411289215088, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6487088799476624, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 166.9189, 'eval_samples_per_second': 89.289, 'eval_steps_per_second': 11.161, 'epoch': 1.0}
+2025-02-17 20:34:54,301 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.6412, 'grad_norm': 3.3501570224761963, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.6105, 'grad_norm': 2.444298267364502, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.6094, 'grad_norm': 2.552476167678833, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6676879525184631, 'eval_f1-score': {'Presence': 0.63}, 'eval_marco-avg-f1-score': 0.63, 'eval_runtime': 167.7591, 'eval_samples_per_second': 88.842, 'eval_steps_per_second': 11.105, 'epoch': 2.0}
+2025-02-17 21:02:49,904 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.5658, 'grad_norm': 4.322812080383301, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.5121, 'grad_norm': 7.001338005065918, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.5062, 'grad_norm': 7.713149547576904, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7776682376861572, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 167.485, 'eval_samples_per_second': 88.987, 'eval_steps_per_second': 11.123, 'epoch': 3.0}
+2025-02-17 21:30:45,689 - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'loss': 0.4185, 'grad_norm': 9.21682357788086, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.3689, 'grad_norm': 14.837545394897461, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.3761, 'grad_norm': 6.608085632324219, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.917357325553894, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 166.9979, 'eval_samples_per_second': 89.247, 'eval_steps_per_second': 11.156, 'epoch': 4.0}
+{'loss': 0.2628, 'grad_norm': 16.068967819213867, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.2462, 'grad_norm': 12.28388786315918, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1509268283843994, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 166.9395, 'eval_samples_per_second': 89.278, 'eval_steps_per_second': 11.16, 'epoch': 5.0}
+{'loss': 0.2404, 'grad_norm': 5.466399669647217, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.1552, 'grad_norm': 16.089488983154297, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.1708, 'grad_norm': 11.690964698791504, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 1.4592549800872803, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 167.6402, 'eval_samples_per_second': 88.905, 'eval_steps_per_second': 11.113, 'epoch': 6.0}
+{'loss': 0.1537, 'grad_norm': 17.57923698425293, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.1116, 'grad_norm': 8.818282127380371, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.1179, 'grad_norm': 3.678194761276245, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 1.8801285028457642, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 166.986, 'eval_samples_per_second': 89.253, 'eval_steps_per_second': 11.157, 'epoch': 7.0}
+{'loss': 0.1044, 'grad_norm': 24.32753562927246, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.088, 'grad_norm': 31.986007690429688, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.0874, 'grad_norm': 9.521842956542969, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 2.236236810684204, 'eval_f1-score': {'Presence': 0.58}, 'eval_marco-avg-f1-score': 0.58, 'eval_runtime': 167.532, 'eval_samples_per_second': 88.962, 'eval_steps_per_second': 11.12, 'epoch': 8.0}
+{'loss': 0.0711, 'grad_norm': 3.162792205810547, 'learning_rate': 3.5479256080114456e-06, 'epoch': 8.22}
+{'loss': 0.0601, 'grad_norm': 22.237154006958008, 'learning_rate': 2.8326180257510733e-06, 'epoch': 8.58}
+{'loss': 0.0598, 'grad_norm': 4.70641565322876, 'learning_rate': 2.1173104434907013e-06, 'epoch': 8.94}
+{'eval_loss': 2.657123565673828, 'eval_f1-score': {'Presence': 0.6}, 'eval_marco-avg-f1-score': 0.6, 'eval_runtime': 167.5553, 'eval_samples_per_second': 88.95, 'eval_steps_per_second': 11.119, 'epoch': 9.0}
+{'train_runtime': 15093.089, 'train_samples_per_second': 29.655, 'train_steps_per_second': 0.926, 'train_loss': 0.3127332956479548, 'epoch': 9.0}
+2025-02-18 00:18:36,807 - INFO - 
+
+VALIDATION
+2025-02-18 00:18:36,807 - INFO - ==========
+2025-02-18 00:21:23,101 - INFO - Presence: 0.61
+2025-02-18 00:21:23,101 - INFO - Macro average: 0.61
+2025-02-18 00:21:23,618 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-02-18 00:21:23,619 - INFO - Saving best model to models directory
+2025-02-18 00:21:23,619 - INFO - UPLOAD to https://huggingface.co/LIWC-22 (using HF_TOKEN environment variable)
+2025-02-18 00:21:23,619 - INFO - SAVE to models

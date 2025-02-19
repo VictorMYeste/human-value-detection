@@ -1,0 +1,57 @@
+2025-01-22 11:03:28,081 - HVD - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-01-22 11:03:28,270 - HVD - INFO - Loading lexicon embeddings for: No lexicon used
+2025-01-22 11:03:28,270 - HVD - INFO - Preparing datasets for training and validation
+2025-01-22 11:03:38,371 - HVD - INFO - Loading en_core_web_sm for extra features
+2025-01-22 11:03:38,824 - HVD - INFO - Adding NER embeddings
+2025-01-22 11:28:30,775 - HVD - INFO - Loading en_core_web_sm for extra features
+2025-01-22 11:28:31,095 - HVD - INFO - Adding NER embeddings
+2025-01-22 11:37:03,408 - HVD - INFO - Arguments validated successfully.
+2025-01-22 11:37:04,454 - HVD - INFO - Using CUDA for training.
+2025-01-22 11:37:15,429 - HVD - INFO - TRAINING
+2025-01-22 11:37:15,429 - HVD - INFO - ========
+2025-01-22 11:37:15,429 - HVD - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Text-NER-embeddings
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.01
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: Yes
+Number of categories (lexicon): 0
+
+2025-01-22 11:37:15,434 - accelerate.utils.other - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 2.7226, 'grad_norm': 277436.59375, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 2.6323, 'grad_norm': 794444.125, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6470324397087097, 'eval_f1-score': {'Presence': 0.63}, 'eval_marco-avg-f1-score': 0.63, 'eval_runtime': 331.119, 'eval_samples_per_second': 45.011, 'eval_steps_per_second': 5.626, 'epoch': 1.0}
+2025-01-22 12:21:02,955 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 2.5732, 'grad_norm': 1186279.375, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 2.458, 'grad_norm': 786489.75, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 2.4438, 'grad_norm': 724982.1875, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6703067421913147, 'eval_f1-score': {'Presence': 0.59}, 'eval_marco-avg-f1-score': 0.59, 'eval_runtime': 330.8495, 'eval_samples_per_second': 45.048, 'eval_steps_per_second': 5.631, 'epoch': 2.0}
+2025-01-22 13:04:43,517 - HVD - INFO - Skipping evaluation for warm-up phase (epoch 2).
+{'loss': 2.2834, 'grad_norm': 1337272.0, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.15}
+{'loss': 2.1008, 'grad_norm': 1387654.0, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 2.0987, 'grad_norm': 1822223.75, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7247411012649536, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 331.1137, 'eval_samples_per_second': 45.012, 'eval_steps_per_second': 5.626, 'epoch': 3.0}
+{'loss': 1.7841, 'grad_norm': 2533377.5, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 1.619, 'grad_norm': 2089027.125, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.58}
+{'loss': 1.6238, 'grad_norm': 2090326.625, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.865188717842102, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 331.209, 'eval_samples_per_second': 44.999, 'eval_steps_per_second': 5.625, 'epoch': 4.0}
+{'loss': 1.2255, 'grad_norm': 3830957.75, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 1.1985, 'grad_norm': 3112950.75, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.059112787246704, 'eval_f1-score': {'Presence': 0.61}, 'eval_marco-avg-f1-score': 0.61, 'eval_runtime': 331.3224, 'eval_samples_per_second': 44.983, 'eval_steps_per_second': 5.623, 'epoch': 5.0}
+{'train_runtime': 13118.7783, 'train_samples_per_second': 34.118, 'train_steps_per_second': 1.066, 'train_loss': 1.9956816186209094, 'epoch': 5.0}
+2025-01-22 15:15:54,408 - HVD - INFO - 
+
+VALIDATION
+2025-01-22 15:15:54,408 - HVD - INFO - ==========
+2025-01-22 15:21:25,779 - HVD - INFO - Presence: 0.61
+2025-01-22 15:21:25,779 - HVD - INFO - Macro average: 0.61
+2025-01-22 15:21:26,215 - HVD - INFO - UPLOAD to https://huggingface.co/Text-NER-embeddings (using HF_TOKEN environment variable)
+2025-01-22 15:21:26,215 - HVD - INFO - SAVE to models

@@ -3,6 +3,7 @@ import argparse
 def parse_args(prog_name) -> argparse.Namespace:
     cli = argparse.ArgumentParser(prog=prog_name)
     cli.add_argument("-dg", "--debug", action='store_true', help="Show debug messages")
+    cli.add_argument("-s", "--seed", type=int, default=None, help="Random seed for reproducibility")
     cli.add_argument("-t", "--training-dataset", required=True, help="Path to training dataset")
     cli.add_argument("-v", "--validation-dataset", default=None, help="Path to validation dataset")
     cli.add_argument("-p", "--previous-sentences", action='store_true', help="If to add the two previous sentences of every sentence to the model")
@@ -12,7 +13,7 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-m", "--model-name", help="Name of the model if being uploaded to HuggingFace")
     cli.add_argument("-d", "--model-directory", default="models", help="Directory to save the trained model")
     cli.add_argument("-y", "--multilayer", action='store_true', help="Use multilayer design instead of single layer")
-    cli.add_argument("-s", "--slice", action='store_true', help="Slice for testing with size = 100")
+    cli.add_argument("-sc", "--slice", action='store_true', help="Slice for testing with size = 1000")
     cli.add_argument("-o", "--optimize", action='store_true', help="If set, run hyperparameter optimization with Optuna")
     cli.add_argument("-a", "--augment-data", action="store_true", help="Apply data augmentation through paraphrasing")
     cli.add_argument("-td", "--topic-detection", choices=["bertopic", "lda", "nmf", None], default=None, help="Choose topic detection method: BERTopic, LDA, NMF, or None")

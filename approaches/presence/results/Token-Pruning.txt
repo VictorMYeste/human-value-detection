@@ -31,3 +31,4 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 
 2025-02-19 10:06:58,107 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6802, 'grad_norm': 1.0839952230453491, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}

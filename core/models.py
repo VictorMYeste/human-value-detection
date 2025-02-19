@@ -48,11 +48,11 @@ class ResidualBlock(nn.Module):
         super().__init__()
         self.linear_layers = nn.Sequential(
             nn.Linear(input_dim, 512),
-            # nn.GroupNorm(num_groups, 512),
+            nn.GroupNorm(num_groups, 512),
             nn.ReLU(),
             nn.Dropout(0.4),
             nn.Linear(512, output_dim),
-            # nn.GroupNorm(num_groups, output_dim),
+            nn.GroupNorm(num_groups, output_dim),
             nn.ReLU()
         )
         self.projection = nn.Linear(input_dim, output_dim) if input_dim != output_dim else nn.Identity()

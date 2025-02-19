@@ -10,16 +10,94 @@ import transformers
 from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 from core.config import LEXICON_PATHS
 from core.lexicon_utils import load_lexicon
 from core.utils import validate_args, normalize_token, slice_for_testing
 from core.topic_detection import TopicModeling
-
 from core.log import logger
 
 # ========================================================
 # DATASETS PREPARATION
 # ========================================================
+
+def build_idf_map(texts):
+    """
+    Build a token -> IDF map from a list of raw texts using a TfidfVectorizer.
+    """
+    vectorizer = TfidfVectorizer(
+        lowercase=True,
+        token_pattern=r'\b\w+\b'
+        # You can tweak min_df or max_df here if you like
+    )
+    vectorizer.fit(texts)  # Fit on training texts only
+
+    feature_names = vectorizer.get_feature_names_out()
+    idf_scores = vectorizer.idf_
+
+    # Build dict: token -> idf
+    idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
+    return idf_map
+
+def prune_text(text, idf_map, threshold=2.0):
+    """
+    Remove tokens whose IDF is below a threshold (i.e., extremely common).
+    """
+    tokens = text.split()  # naive whitespace split; can replace with nltk word_tokenize
+    pruned_tokens = []
+    for token in tokens:
+        token_l = token.lower()
+        idf = idf_map.get(token_l, None)
+        # If token not found in the IDF map, keep it 
+        # or decide a rule. For now, we keep it if None
+        if idf is None or idf >= threshold:
+            pruned_tokens.append(token)
+    return " ".join(pruned_tokens)
+
+def load_and_optionally_prune_df(
+    dataset_path: str,
+    augment_data: bool,
+    slice_data: bool,
+    custom_stopwords: List[str],
+    token_pruning: bool,
+    idf_map: Optional[Dict[str, float]] = None,
+    threshold: float = 2.0
+) -> pd.DataFrame:
+    """
+    1. Load the sentences file (augmented or normal).
+    2. Slice if needed.
+    3. Remove custom stopwords.
+    4. Prune tokens using the provided idf_map, if token_pruning is True and idf_map is not None.
+    5. Return the cleaned DataFrame.
+    """
+    # Decide which file to load
+    if augment_data:
+        sentences_file_name = "sentences-aug.tsv"
+    else:
+        sentences_file_name = "sentences.tsv"
+
+    # Read DataFrame
+    sentences_file_path = os.path.join(dataset_path, sentences_file_name)
+    df = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+
+    # Slice if needed
+    if slice_data:
+        df = slice_for_testing(df)
+
+    # Fill missing text
+    df['Text'] = df['Text'].fillna('')
+
+    # Remove custom stopwords
+    if custom_stopwords:
+        df['Text'] = df['Text'].apply(lambda txt: remove_custom_stopwords(txt, custom_stopwords))
+
+    # If we have an IDF map, prune
+    if token_pruning and idf_map is not None:
+        logger.info(f"Pruning tokens in dataset '{dataset_path}' (threshold={threshold})")
+        df['Text'] = df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=threshold))
+
+    return df
 
 def prepare_datasets(
     training_path: str,
@@ -36,10 +114,47 @@ def prepare_datasets(
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
+    token_pruning: str = None
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
+    """
+    Build & prune (if requested) the training set, then do the same for validation
+    using the same IDF map.
+    """
+
+    # ------------------------------------------------
+    # (A) Load the training DataFrame, no IDF map yet
+    # ------------------------------------------------
+    train_df = load_and_optionally_prune_df(
+        dataset_path=training_path,
+        augment_data=augment_data,
+        slice_data=slice_data,
+        custom_stopwords=custom_stopwords,
+        token_pruning=False,   # (We haven't built the IDF map yet)
+        idf_map=None,
+    )
+
+    # Build the IDF map from the (unpruned) training text, if pruning is requested
+    idf_map = None
+    if token_pruning:
+        logger.info("Building IDF map from unpruned training text...")
+        idf_map = build_idf_map(train_df['Text'].tolist())
+        logger.debug(f"IDF map size: {len(idf_map)}")
+
+        # Now prune the training set in-place
+        logger.info("Pruning tokens in training set")
+        train_df['Text'] = train_df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=2.0))
+
+    # ------------------------------------------------
+    # (B) Convert the pruned training DataFrame -> HF dataset
+    # ------------------------------------------------
+    if augment_data:
+        labels_file = "labels-cat-aug.tsv"
+    else:
+        labels_file = "labels-cat.tsv"
+    labels_file_path = os.path.join(training_path, labels_file)
     
      # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
-    if lexicon == "LIWC-22" or lexicon == "eMFD" or lexicon == "MFD-20" or lexicon == "MJD":
+    if lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
@@ -50,43 +165,62 @@ def prepare_datasets(
 
     # Training dataset
     training_dataset = load_dataset(
-        directory=training_path,
+        df=train_df,
         tokenizer=tokenizer,
         labels=labels,
-        slice_data=slice_data,
+        slice_data=False,
         lexicon_embeddings=train_lexicon,
         num_categories=train_num_cat,
         previous_sentences=previous_sentences,
         linguistic_features=linguistic_features,
         ner_features=ner_features,
         lexicon=lexicon,
-        custom_stopwords=custom_stopwords,
+        custom_stopwords=[],
         augment_data=augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        labels_file_path=labels_file_path
     )
 
     # Log class distribution
     labels_array = np.array(training_dataset["labels"])
     logger.debug(f"Class distribution: {labels_array.sum(axis=0)}")
 
-    # Validation dataset
-    validation_dataset = training_dataset
+    # ------------------------------------------------
+    # (C) Prepare the VALIDATION set, reusing the IDF map
+    # ------------------------------------------------
+    validation_dataset = training_dataset # default if none
     if validation_path:
+        val_df = load_and_optionally_prune_df(
+            dataset_path=validation_path,
+            augment_data=augment_data,
+            slice_data=slice_data,
+            custom_stopwords=custom_stopwords,
+            token_pruning=token_pruning,  # now we do want to prune if user asked
+            idf_map=idf_map,             # reuse from training
+            threshold=2.0
+        )
+
+        val_labels_path = os.path.join(validation_path, labels_file)
+
         validation_dataset = load_dataset(
-            directory=validation_path,
+            df=val_df,
             tokenizer=tokenizer,
             labels=labels,
-            slice_data=slice_data,
+            slice_data=False,
             lexicon_embeddings=val_lexicon,
             num_categories=val_num_cat,
             previous_sentences=previous_sentences,
             linguistic_features=linguistic_features,
             ner_features=ner_features,
             lexicon=lexicon,
-            custom_stopwords=custom_stopwords,
-            topic_detection=topic_detection
+            custom_stopwords=[],
+            topic_detection=topic_detection,
+            labels_file_path=val_labels_path
         )
     
+    # ------------------------------------------------
+    # (D) Validate & return
+    # ------------------------------------------------
     validate_args(labels, training_dataset, validation_dataset)
 
     logger.debug(f"Training dataset columns: {training_dataset.column_names}")
@@ -125,9 +259,9 @@ def remove_custom_stopwords(text, custom_stopwords):
     return cleaned_text
 
 def load_dataset(
-    directory,
-    tokenizer,
-    labels,
+    df: pd.DataFrame,
+    tokenizer: transformers.PreTrainedTokenizer,
+    labels: list,
     slice_data: bool = False,
     lexicon_embeddings = {},
     num_categories=0,
@@ -137,33 +271,15 @@ def load_dataset(
     lexicon: str = None,
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
-    topic_detection: str = None
+    topic_detection: str = None,
+    labels_file_path: Optional[str] = None
 ):
-    """Load dataset and add embeddings if specified."""
-    if augment_data:
-        sentences_file_name = "sentences-aug.tsv"
-        labels_file_name = "labels-cat-aug.tsv"
-    else:
-        sentences_file_name = "sentences.tsv"
-        labels_file_name = "labels-cat.tsv"
-    sentences_file_path = os.path.join(directory, sentences_file_name)
-    labels_file_path = os.path.join(directory, labels_file_name)
-    
-    data_frame = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+    """
+    Convert a pandas DataFrame (already pruned/cleaned if needed)
+    into a HuggingFace Dataset with optional extra features.
+    """
 
-    # Slicing for testing purposes
-    if slice_data:
-        data_frame = slice_for_testing(data_frame)
-
-    # Fill missing text
-    data_frame['Text'] = data_frame['Text'].fillna('')
-
-    # Apply the reporting language removal before tokenization
-    if custom_stopwords:
-        data_frame['Text'] = data_frame['Text'].apply(lambda text: remove_custom_stopwords(text, custom_stopwords))
-
-    # Tokenize the text
-    texts = data_frame["Text"]
+    data_frame = df.copy()  # Just in case, keep local copy
 
     if previous_sentences:
         # Create a new column for concatenated text
@@ -186,37 +302,28 @@ def load_dataset(
                     str(data_frame.iloc[idx]["Text"])
                 )
         
-        texts = concatenated_texts
-    
-    texts = [str(text) for text in texts]
+        texts = [str(t) for t in concatenated_texts]
+    else:
+        texts = [str(t) for t in data_frame["Text"]]
     
     encoded_sentences = tokenizer(texts, padding=True, truncation=True, max_length=512)
-
-    texts = pd.Series(texts)
-
+    
+    # Possibly compute extra features (linguistic, NER, etc.)
+    combined_features = []
     if linguistic_features or ner_features:
         logger.info("Loading en_core_web_sm for extra features")
         nlp = spacy.load("en_core_web_sm")
-    
-    # Initialize a list to hold combined features
-    combined_features = []
 
     # Compute Linguistic features
     if linguistic_features:
         logger.info("Adding Linguistic features")
-        data_frame['Linguistic_Scores'] = texts.apply(lambda text: compute_linguistic_features(text, nlp))
+        data_frame['Linguistic_Scores'] = [compute_linguistic_features(txt, nlp) for txt in texts]
         combined_features.append(data_frame['Linguistic_Scores'].tolist())
 
     # Compute NER features
     if ner_features:
-        """
-        logger.info("Adding NER features")
-        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_features(text, nlp))
-        logger.debug(f"NER features example: {data_frame['NER_Features'].head()}")
-        combined_features.append(data_frame["NER_Features"].tolist())
-        """
         logger.info("Adding NER embeddings")
-        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_embeddings(text, nlp))
+        data_frame["NER_Features"] = [compute_ner_embeddings(txt, nlp) for txt in texts]
         logger.debug(f"NER embedding example: {data_frame['NER_Features'].head()}")
         combined_features.append(data_frame["NER_Features"].tolist())
 
@@ -224,10 +331,11 @@ def load_dataset(
     if lexicon:
         # 1) Is this lexicon in the dict of token-based scorers?
         if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
-            # Same old token-based approach
-            data_frame['Lexicon_Scores'] = texts.apply(
-                lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
-            )
+            # Token-based approach
+            data_frame['Lexicon_Scores'] = [
+                compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+                for txt in texts
+            ]
         else:
             # 2) This must be a precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
             data_frame['Lexicon_Scores'] = data_frame.apply(
@@ -235,7 +343,7 @@ def load_dataset(
             )
 
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
-            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0] * num_categories
+            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0]*num_categories
         )
         combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
@@ -247,23 +355,25 @@ def load_dataset(
         topic_model = TopicModeling(method=topic_detection)
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
-
-        if topic_vectors is not None:
-            encoded_sentences["topic_features"] = topic_vectors.tolist()
-            combined_features.append(topic_vectors.tolist())
+        encoded_sentences["topic_features"] = topic_vectors.tolist()
+        combined_features.append(topic_vectors.tolist())
     
     # Combine all features
     if combined_features:
         # Stack features together (ensure consistent dimensions across all features)
         max_length = max(len(f) for features in combined_features for f in features)
         combined_features = [
-            np.concatenate([np.asarray(f, dtype=np.float32) if len(f) == max_length else np.pad(f, (0, max_length - len(f)), 'constant') for f in features])
+            np.concatenate([
+                np.asarray(f, dtype=np.float32) if len(f) == max_length
+                else np.pad(f, (0, max_length - len(f)), 'constant')
+                for f in features
+            ])
             for features in zip(*combined_features)
         ]
-        #combined_features = [np.concatenate([np.asarray(f, dtype=np.float32) for f in features]) for features in zip(*combined_features)]
     else:
-        combined_features = [[0.0] * num_categories] * len(data_frame)
+        combined_features = [[0.0]*num_categories]*len(data_frame)
 
+    # Debug logging
     if linguistic_features:
         logger.debug(f"Sample Linguistic Features: {data_frame['Linguistic_Scores'].head()}")
     if ner_features:
@@ -272,13 +382,13 @@ def load_dataset(
         logger.debug(f"Sample Lexicon Features: {data_frame['Lexicon_Scores'].head()}")
     if topic_detection:
         logger.debug(f"Sample Topic Detection Features: {encoded_sentences['topic_features'][:5]}")
-
     for i, row in enumerate(combined_features[:5]):
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
     
-    if lexicon:
+    # Save them in the encoded_sentences
+    if lexicon and combined_features:
         encoded_sentences["lexicon_features"] = np.array(combined_features, dtype=np.float32).tolist()
-    elif ner_features:
+    elif ner_features and combined_features:
         encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
 
     # Validate input shapes before dataset conversion
@@ -286,21 +396,18 @@ def load_dataset(
         validate_input_shapes(encoded_sentences)
 
     # Load labels if available
-    if os.path.isfile(labels_file_path):
-        labels_frame = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+    if labels_file_path and os.path.isfile(labels_file_path):
+        labels_df = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
         # Slicing for testing purposes
         if slice_data:
-            labels_frame = slice_for_testing(labels_frame)
-        #labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
-        #for idx, label in enumerate(labels):
-        #    if label in labels_frame.columns:
-        #        labels_matrix[:, idx] = (labels_frame[label] >= 0.5).astype(int)
-        labels_matrix = labels_frame[labels].ge(0.5).astype(int).to_numpy()
+            labels_df = slice_for_testing(labels_df)
+        labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
         encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
 
-    encoded_sentences = datasets.Dataset.from_dict(encoded_sentences)
+    # Turn into HF dataset
+    dataset = datasets.Dataset.from_dict(encoded_sentences)
 
-    return encoded_sentences
+    return dataset
 
 # ========================================================
 # SCORE COMPUTATION

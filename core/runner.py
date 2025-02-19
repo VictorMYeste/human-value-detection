@@ -29,7 +29,8 @@ def run_training(
     early_stopping_patience: int = 3,
     custom_stopwords: list[str] = [],
     augment_data: bool = False,
-    topic_detection: str = None
+    topic_detection: str = None,
+    token_pruning: str = None
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -70,7 +71,8 @@ def run_training(
         lexicon,
         custom_stopwords,
         augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        token_pruning=token_pruning
     )
 
     # Train and evaluate

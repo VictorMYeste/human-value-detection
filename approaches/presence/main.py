@@ -105,7 +105,8 @@ def main() -> None:
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
-            topic_detection=args.topic_detection
+            topic_detection=args.topic_detection,
+            token_pruning=args.token_pruning
         )
 
 if __name__ == "__main__":

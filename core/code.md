@@ -18,7 +18,8 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-s", "--slice", action='store_true', help="Slice for testing with size = 100")
     cli.add_argument("-o", "--optimize", action='store_true', help="If set, run hyperparameter optimization with Optuna")
     cli.add_argument("-a", "--augment-data", action="store_true", help="Apply data augmentation through paraphrasing")
-    cli.add_argument("-td", "--topic-detection", choices=["bertopic", "lda", "nmf", "none"], default="none", help="Choose topic detection method: BERTopic, LDA, NMF, or None")
+    cli.add_argument("-td", "--topic-detection", choices=["bertopic", "lda", "nmf", None], default=None, help="Choose topic detection method: BERTopic, LDA, NMF, or None")
+    cli.add_argument("--token-pruning", action="store_true", help="Enable IDF-based token pruning step before tokenization")
     return cli.parse_args()
 ```
 -----------
@@ -41,6 +42,15 @@ LEXICON_PATHS = {
     "LIWC-22-training": "../../lexicons/LIWC-22-training-sentences.csv",
     "LIWC-22-validation": "../../lexicons/LIWC-22-validation-sentences.csv",
     "LIWC-22-test": "../../lexicons/LIWC-22-test-sentences.csv",
+    "eMFD-training": "../../lexicons/eMFD-training-sentences.csv",
+    "eMFD-validation": "../../lexicons/eMFD-validation-sentences.csv",
+    "eMFD-test": "../../lexicons/eMFD-test-sentences.csv",
+    "MFD-20-training": "../../lexicons/MFD-20-training-sentences.csv",
+    "MFD-20-validation": "../../lexicons/MFD-20-validation-sentences.csv",
+    "MFD-20-test": "../../lexicons/MFD-20-test-sentences.csv",
+    "MJD-training": "../../lexicons/MJD-training-sentences.csv",
+    "MJD-validation": "../../lexicons/MJD-validation-sentences.csv",
+    "MJD-test": "../../lexicons/MJD-test-sentences.csv"
 }
 
 MODEL_CONFIG = {
@@ -163,16 +173,46 @@ import transformers
 from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 from core.config import LEXICON_PATHS
 from core.lexicon_utils import load_lexicon
 from core.utils import validate_args, normalize_token, slice_for_testing
 from core.topic_detection import TopicModeling
-
 from core.log import logger
 
 # ========================================================
 # DATASETS PREPARATION
 # ========================================================
+
+def build_idf_map(texts):
+    """
+    Build a token -> IDF map from a list of raw texts using a TfidfVectorizer.
+    """
+    # Use a basic config, adjusting min_df/max_df as desired.
+    vectorizer = TfidfVectorizer(lowercase=True, token_pattern=r'\b\w+\b')
+    vectorizer.fit(texts)  # Fit on training texts only
+
+    feature_names = vectorizer.get_feature_names_out()
+    idf_scores = vectorizer.idf_
+
+    # Build dict: token -> idf
+    idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
+    return idf_map
+
+def prune_text(text, idf_map, threshold=2.0):
+    """
+    Remove tokens whose IDF is below a threshold (i.e., extremely common).
+    """
+    tokens = text.split()  # naive whitespace split; you could also use nltk.word_tokenize
+    pruned_tokens = []
+    for token in tokens:
+        token_l = token.lower()
+        idf = idf_map.get(token_l, None)
+        # If token not found in IDF map, keep it or decide how to handle it
+        if idf is None or idf >= threshold:
+            pruned_tokens.append(token)
+    return " ".join(pruned_tokens)
 
 def prepare_datasets(
     training_path: str,
@@ -189,10 +229,11 @@ def prepare_datasets(
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
+    token_pruning: bool = False
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
     
      # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
-    if lexicon == "LIWC-22":
+    if lexicon == "LIWC-22" or lexicon == "eMFD" or lexicon == "MFD-20" or lexicon == "MJD":
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
@@ -215,7 +256,8 @@ def prepare_datasets(
         lexicon=lexicon,
         custom_stopwords=custom_stopwords,
         augment_data=augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        token_pruning=token_pruning
     )
 
     # Log class distribution
@@ -237,7 +279,8 @@ def prepare_datasets(
             ner_features=ner_features,
             lexicon=lexicon,
             custom_stopwords=custom_stopwords,
-            topic_detection=topic_detection
+            topic_detection=topic_detection,
+            token_pruning=token_pruning
         )
     
     validate_args(labels, training_dataset, validation_dataset)
@@ -290,7 +333,8 @@ def load_dataset(
     lexicon: str = None,
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
-    topic_detection: str = None
+    topic_detection: str = None,
+    token_pruning: bool = False
 ):
     """Load dataset and add embeddings if specified."""
     if augment_data:
@@ -314,6 +358,17 @@ def load_dataset(
     # Apply the reporting language removal before tokenization
     if custom_stopwords:
         data_frame['Text'] = data_frame['Text'].apply(lambda text: remove_custom_stopwords(text, custom_stopwords))
+
+    # Build IDF map & prune tokens (only on training set)
+    if token_pruning:
+        # Build from the training set's text
+        logger.info("Building IDF map for token pruning...")
+        idf_map = build_idf_map(data_frame['Text'].tolist())
+        logger.info(f"IDF map size: {len(idf_map)}")
+
+        # Prune the training text
+        logger.info("Pruning tokens in training set using IDF threshold = 2.0")
+        data_frame['Text'] = data_frame['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=2.0))
 
     # Tokenize the text
     texts = data_frame["Text"]
@@ -382,8 +437,7 @@ def load_dataset(
                 lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
             )
         else:
-            # 2) This must be a precomputed (row-level) lexicon
-            #    e.g. "LIWC-22", "MyCustomLexicon", etc.
+            # 2) This must be a precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
             data_frame['Lexicon_Scores'] = data_frame.apply(
                 lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
             )
@@ -802,6 +856,7 @@ def compute_precomputed_scores(
     else:
         # If no match, fallback
         return [0.0] * num_categories
+    
 ```
 -----------
 ## lexicon_utils.py
@@ -995,7 +1050,7 @@ def load_liwc22_embeddings(path: str) -> tuple[dict, int]:
         scores = row[columns_to_use].astype(float).tolist()
         embeddings[(text_id, sent_id)] = scores
 
-    logger.debug(f"Loaded LIWC-22 embeddings: {len(embeddings)} rows, {num_features} features each.")
+    logger.debug(f"Loaded LIWC-22 software embeddings: {len(embeddings)} rows, {num_features} features each.")
     return embeddings, num_features
 
 # ========================================================
@@ -1011,6 +1066,9 @@ EMBEDDING_PARSERS = {
     "MFD": {"function": load_mfd_embeddings, "num_categories": 10},
     "Schwartz": {"function": load_schwartz_embeddings, "num_categories": len(SCHWARTZ_VALUE_LEXICON)},
     "LIWC-22": {"function": load_liwc22_embeddings, "num_categories": None},
+    "eMFD": {"function": load_liwc22_embeddings, "num_categories": None},
+    "MFD-20": {"function": load_liwc22_embeddings, "num_categories": None},
+    "MJD": {"function": load_liwc22_embeddings, "num_categories": None},
 }
 
 def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
@@ -1368,7 +1426,8 @@ def run_training(
     early_stopping_patience: int = 3,
     custom_stopwords: list[str] = [],
     augment_data: bool = False,
-    topic_detection: str = None
+    topic_detection: str = None,
+    token_pruning: bool = False
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -1383,7 +1442,7 @@ def run_training(
 
     # Lexicon embeddings
     logger.info("Loading lexicon embeddings for: %s", lexicon if lexicon else "No lexicon used")
-    if lexicon and not lexicon.startswith("LIWC-22"):
+    if lexicon and lexicon not in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
         lexicon_embeddings, num_categories = load_embeddings(lexicon)
     else:
         lexicon_embeddings, num_categories = None, 0  # No lexicon features
@@ -1409,7 +1468,8 @@ def run_training(
         lexicon,
         custom_stopwords,
         augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        token_pruning=token_pruning
     )
 
     # Train and evaluate
@@ -1842,6 +1902,7 @@ def clear_directory(directory):
                     shutil.rmtree(file_path)  # Remove directory
             except Exception as e:
                 logger.error(f"Failed to delete {file_path}. Reason: {e}")
+                
 ```
 -----------
 ## main.py
@@ -1913,7 +1974,8 @@ def main() -> None:
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
-            topic_detection=args.topic_detection
+            topic_detection=args.topic_detection,
+            token_pruning=args.token_pruning
         )
 
         # Evaluate and return metric

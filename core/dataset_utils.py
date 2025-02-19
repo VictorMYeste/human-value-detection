@@ -40,7 +40,7 @@ def build_idf_map(texts):
     idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
     return idf_map
 
-def prune_text(text, idf_map, threshold=2.0):
+def prune_text(text, idf_map, threshold=2.5):
     """
     Remove tokens whose IDF is below a threshold (i.e., extremely common).
     """
@@ -62,7 +62,7 @@ def load_and_optionally_prune_df(
     custom_stopwords: List[str],
     token_pruning: bool,
     idf_map: Optional[Dict[str, float]] = None,
-    threshold: float = 2.0
+    threshold: float = 2.5
 ) -> pd.DataFrame:
     """
     1. Load the sentences file (augmented or normal).
@@ -175,8 +175,6 @@ def prepare_datasets(
         linguistic_features=linguistic_features,
         ner_features=ner_features,
         lexicon=lexicon,
-        custom_stopwords=[],
-        augment_data=augment_data,
         topic_detection=topic_detection,
         labels_file_path=labels_file_path
     )
@@ -197,7 +195,7 @@ def prepare_datasets(
             custom_stopwords=custom_stopwords,
             token_pruning=token_pruning,  # now we do want to prune if user asked
             idf_map=idf_map,             # reuse from training
-            threshold=2.0
+            threshold=2.5
         )
 
         val_labels_path = os.path.join(validation_path, labels_file)
@@ -213,9 +211,9 @@ def prepare_datasets(
             linguistic_features=linguistic_features,
             ner_features=ner_features,
             lexicon=lexicon,
-            custom_stopwords=[],
             topic_detection=topic_detection,
-            labels_file_path=val_labels_path
+            labels_file_path=val_labels_path,
+            is_training=False,
         )
     
     # ------------------------------------------------
@@ -258,6 +256,67 @@ def remove_custom_stopwords(text, custom_stopwords):
     
     return cleaned_text
 
+# In dataset_utils.py
+
+def add_previous_label_features(
+    df: pd.DataFrame, 
+    labels_df: pd.DataFrame, 
+    labels: list,
+    is_training: bool,
+    model: Optional[torch.nn.Module] = None,
+    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
+    device: str = "cuda" if torch.cuda.is_available() else "cpu"
+) -> list[list[float]]:
+    """
+    For training, return ground-truth from row i-1.
+    For validation (is_training=False), compute dynamically the prediction for row i-1
+    by performing a sequential inference pass using the current model.
+    """
+    num_labels = len(labels)
+    prev_label_features = []
+    
+    if is_training:
+        label_matrix = labels_df[labels].to_numpy(dtype=float)
+        for i in range(len(df)):
+            if i == 0:
+                feats = [0.0]*num_labels
+            else:
+                feats = label_matrix[i-1].tolist()
+            prev_label_features.append(feats)
+    else:
+        # Dynamic auto-regressive evaluation: compute predictions sequentially.
+        if model is None or tokenizer_for_dynamic is None:
+            raise ValueError("For dynamic validation, 'model' and 'tokenizer_for_dynamic' must be provided.")
+        model.eval()
+        prev_pred = [0.0]*num_labels  # for the first row
+        for i in range(len(df)):
+            if i == 0:
+                feats = [0.0]*num_labels
+            else:
+                # Build input for row i-1.
+                text_prev = df.iloc[i-1]["Text"]
+                encoded = tokenizer_for_dynamic(
+                    [text_prev],
+                    padding=True,
+                    truncation=True,
+                    max_length=512,
+                    return_tensors="pt"
+                )
+                encoded = {k: v.to(device) for k, v in encoded.items()}
+                # Use the previously computed prediction as the prev_label_features for row i-1.
+                plf = torch.tensor(prev_pred, dtype=torch.float32, device=device).unsqueeze(0)
+                with torch.no_grad():
+                    outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
+                logits = outputs["logits"]
+                probs = torch.sigmoid(logits)
+                pred = (probs >= 0.5).float().cpu().numpy()[0].tolist()
+                feats = pred
+                prev_pred = pred  # update for next iteration
+            prev_label_features.append(feats)
+
+    return prev_label_features
+
+
 def load_dataset(
     df: pd.DataFrame,
     tokenizer: transformers.PreTrainedTokenizer,
@@ -269,10 +328,11 @@ def load_dataset(
     linguistic_features: bool = False,
     ner_features: bool = False,
     lexicon: str = None,
-    custom_stopwords: List[str] = [],
-    augment_data: bool = False,
     topic_detection: str = None,
-    labels_file_path: Optional[str] = None
+    labels_file_path: Optional[str] = None,
+    is_training: bool = True,
+    model: Optional[torch.nn.Module] = None,
+    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None
 ):
     """
     Convert a pandas DataFrame (already pruned/cleaned if needed)
@@ -395,7 +455,11 @@ def load_dataset(
     if combined_features:
         validate_input_shapes(encoded_sentences)
 
-    # Load labels if available
+    # ------------------------------------------------
+    # Load main labels for this split if available
+    # ------------------------------------------------
+    labels_matrix = None
+    labels_df = None
     if labels_file_path and os.path.isfile(labels_file_path):
         labels_df = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
         # Slicing for testing purposes
@@ -403,6 +467,30 @@ def load_dataset(
             labels_df = slice_for_testing(labels_df)
         labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
         encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
+    
+    # ------------------------------------------------
+    # Now build "prev_label_features"
+    # ------------------------------------------------
+    if previous_sentences and (labels_matrix is not None):
+        # Add new numeric feature for the label of the previous sentence
+        if not is_training:
+            prev_label_feats = add_previous_label_features(
+                df,
+                labels_df,
+                labels,
+                is_training=is_training,
+                model=model,
+                tokenizer_for_dynamic=tokenizer_for_dynamic
+            )
+        else:
+            prev_label_feats = add_previous_label_features(
+                df,
+                labels_df,
+                labels,
+                is_training=is_training
+            )
+        # Store them in the dictionary for the model
+        encoded_sentences["prev_label_features"] = prev_label_feats
 
     # Turn into HF dataset
     dataset = datasets.Dataset.from_dict(encoded_sentences)

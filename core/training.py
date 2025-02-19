@@ -102,6 +102,7 @@ def train(
         augment_data: bool = False,
         topic_detection: str = None,
         token_pruning: bool = False,
+        slice_data: bool = False
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -147,7 +148,17 @@ def train(
     config.label2id = label2id
     config.problem_type = "multi_label_classification"
     config.architectures = ["DebertaForSequenceClassification"]
-    model = EnhancedDebertaModel(pretrained_model, config, len(labels), id2label, label2id, num_categories, ner_feature_dim, multilayer, topic_feature_dim)
+    model = EnhancedDebertaModel(
+        pretrained_model, config,
+        len(labels),
+        id2label,
+        label2id,
+        num_categories,
+        ner_feature_dim,
+        multilayer,
+        topic_feature_dim,
+        previous_sentences
+    )
     """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(

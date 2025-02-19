@@ -1,8 +1,8 @@
 import transformers
-from core.dataset_utils import prepare_datasets
+from core.dataset_utils import prepare_datasets, load_and_optionally_prune_df
 from core.lexicon_utils import load_embeddings
 from core.training import train
-from core.models import save_model
+from core.models import save_model, DynamicPrevLabelCallback
 import torch.distributed as dist
 from accelerate import Accelerator
 
@@ -99,8 +99,28 @@ def run_training(
         multilayer=multilayer,
         augment_data=augment_data,
         topic_detection=topic_detection,
-        token_pruning=token_pruning
+        token_pruning=token_pruning,
+        slice_data=slice_data
     )
+
+    # Add a callback for previous sentences
+    if previous_sentences and validation_dataset_path is not None:
+        # Load the raw validation DataFrame from file
+        raw_val_df = load_and_optionally_prune_df(
+            dataset_path=validation_dataset_path,
+            augment_data=augment_data,
+            slice_data=slice_data,
+            custom_stopwords=custom_stopwords,
+            token_pruning=token_pruning,
+            idf_map=None
+        )
+        trainer.add_callback(
+            DynamicPrevLabelCallback(
+                val_df=raw_val_df,
+                labels=labels,
+                tokenizer=tokenizer
+            )
+        )
 
     # Save the model if required
     accelerator = Accelerator()

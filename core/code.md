@@ -6,6 +6,7 @@ import argparse
 def parse_args(prog_name) -> argparse.Namespace:
     cli = argparse.ArgumentParser(prog=prog_name)
     cli.add_argument("-dg", "--debug", action='store_true', help="Show debug messages")
+    cli.add_argument("-s", "--seed", type=int, default=None, help="Random seed for reproducibility")
     cli.add_argument("-t", "--training-dataset", required=True, help="Path to training dataset")
     cli.add_argument("-v", "--validation-dataset", default=None, help="Path to validation dataset")
     cli.add_argument("-p", "--previous-sentences", action='store_true', help="If to add the two previous sentences of every sentence to the model")
@@ -15,11 +16,11 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-m", "--model-name", help="Name of the model if being uploaded to HuggingFace")
     cli.add_argument("-d", "--model-directory", default="models", help="Directory to save the trained model")
     cli.add_argument("-y", "--multilayer", action='store_true', help="Use multilayer design instead of single layer")
-    cli.add_argument("-s", "--slice", action='store_true', help="Slice for testing with size = 100")
+    cli.add_argument("-sc", "--slice", action='store_true', help="Slice for testing with size = 1000")
     cli.add_argument("-o", "--optimize", action='store_true', help="If set, run hyperparameter optimization with Optuna")
     cli.add_argument("-a", "--augment-data", action="store_true", help="Apply data augmentation through paraphrasing")
     cli.add_argument("-td", "--topic-detection", choices=["bertopic", "lda", "nmf", None], default=None, help="Choose topic detection method: BERTopic, LDA, NMF, or None")
-    cli.add_argument("--token-pruning", action="store_true", help="Enable IDF-based token pruning step before tokenization")
+    cli.add_argument("-tp", "--token-pruning", action="store_true", help="Enable IDF-based token pruning step before tokenization")
     return cli.parse_args()
 ```
 -----------
@@ -189,8 +190,11 @@ def build_idf_map(texts):
     """
     Build a token -> IDF map from a list of raw texts using a TfidfVectorizer.
     """
-    # Use a basic config, adjusting min_df/max_df as desired.
-    vectorizer = TfidfVectorizer(lowercase=True, token_pattern=r'\b\w+\b')
+    vectorizer = TfidfVectorizer(
+        lowercase=True,
+        token_pattern=r'\b\w+\b'
+        # You can tweak min_df or max_df here if you like
+    )
     vectorizer.fit(texts)  # Fit on training texts only
 
     feature_names = vectorizer.get_feature_names_out()
@@ -200,19 +204,64 @@ def build_idf_map(texts):
     idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
     return idf_map
 
-def prune_text(text, idf_map, threshold=2.0):
+def prune_text(text, idf_map, threshold=2.5):
     """
     Remove tokens whose IDF is below a threshold (i.e., extremely common).
     """
-    tokens = text.split()  # naive whitespace split; you could also use nltk.word_tokenize
+    tokens = text.split()  # naive whitespace split; can replace with nltk word_tokenize
     pruned_tokens = []
     for token in tokens:
         token_l = token.lower()
         idf = idf_map.get(token_l, None)
-        # If token not found in IDF map, keep it or decide how to handle it
+        # If token not found in the IDF map, keep it 
+        # or decide a rule. For now, we keep it if None
         if idf is None or idf >= threshold:
             pruned_tokens.append(token)
     return " ".join(pruned_tokens)
+
+def load_and_optionally_prune_df(
+    dataset_path: str,
+    augment_data: bool,
+    slice_data: bool,
+    custom_stopwords: List[str],
+    token_pruning: bool,
+    idf_map: Optional[Dict[str, float]] = None,
+    threshold: float = 2.5
+) -> pd.DataFrame:
+    """
+    1. Load the sentences file (augmented or normal).
+    2. Slice if needed.
+    3. Remove custom stopwords.
+    4. Prune tokens using the provided idf_map, if token_pruning is True and idf_map is not None.
+    5. Return the cleaned DataFrame.
+    """
+    # Decide which file to load
+    if augment_data:
+        sentences_file_name = "sentences-aug.tsv"
+    else:
+        sentences_file_name = "sentences.tsv"
+
+    # Read DataFrame
+    sentences_file_path = os.path.join(dataset_path, sentences_file_name)
+    df = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+
+    # Slice if needed
+    if slice_data:
+        df = slice_for_testing(df)
+
+    # Fill missing text
+    df['Text'] = df['Text'].fillna('')
+
+    # Remove custom stopwords
+    if custom_stopwords:
+        df['Text'] = df['Text'].apply(lambda txt: remove_custom_stopwords(txt, custom_stopwords))
+
+    # If we have an IDF map, prune
+    if token_pruning and idf_map is not None:
+        logger.info(f"Pruning tokens in dataset '{dataset_path}' (threshold={threshold})")
+        df['Text'] = df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=threshold))
+
+    return df
 
 def prepare_datasets(
     training_path: str,
@@ -229,11 +278,47 @@ def prepare_datasets(
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
-    token_pruning: bool = False
+    token_pruning: str = None
 ) -> Tuple[datasets.Dataset, datasets.Dataset]:
+    """
+    Build & prune (if requested) the training set, then do the same for validation
+    using the same IDF map.
+    """
+
+    # ------------------------------------------------
+    # (A) Load the training DataFrame, no IDF map yet
+    # ------------------------------------------------
+    train_df = load_and_optionally_prune_df(
+        dataset_path=training_path,
+        augment_data=augment_data,
+        slice_data=slice_data,
+        custom_stopwords=custom_stopwords,
+        token_pruning=False,   # (We haven't built the IDF map yet)
+        idf_map=None,
+    )
+
+    # Build the IDF map from the (unpruned) training text, if pruning is requested
+    idf_map = None
+    if token_pruning:
+        logger.info("Building IDF map from unpruned training text...")
+        idf_map = build_idf_map(train_df['Text'].tolist())
+        logger.debug(f"IDF map size: {len(idf_map)}")
+
+        # Now prune the training set in-place
+        logger.info("Pruning tokens in training set")
+        train_df['Text'] = train_df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=2.0))
+
+    # ------------------------------------------------
+    # (B) Convert the pruned training DataFrame -> HF dataset
+    # ------------------------------------------------
+    if augment_data:
+        labels_file = "labels-cat-aug.tsv"
+    else:
+        labels_file = "labels-cat.tsv"
+    labels_file_path = os.path.join(training_path, labels_file)
     
      # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
-    if lexicon == "LIWC-22" or lexicon == "eMFD" or lexicon == "MFD-20" or lexicon == "MJD":
+    if lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
@@ -244,45 +329,60 @@ def prepare_datasets(
 
     # Training dataset
     training_dataset = load_dataset(
-        directory=training_path,
+        df=train_df,
         tokenizer=tokenizer,
         labels=labels,
-        slice_data=slice_data,
+        slice_data=False,
         lexicon_embeddings=train_lexicon,
         num_categories=train_num_cat,
         previous_sentences=previous_sentences,
         linguistic_features=linguistic_features,
         ner_features=ner_features,
         lexicon=lexicon,
-        custom_stopwords=custom_stopwords,
-        augment_data=augment_data,
         topic_detection=topic_detection,
-        token_pruning=token_pruning
+        labels_file_path=labels_file_path
     )
 
     # Log class distribution
     labels_array = np.array(training_dataset["labels"])
     logger.debug(f"Class distribution: {labels_array.sum(axis=0)}")
 
-    # Validation dataset
-    validation_dataset = training_dataset
+    # ------------------------------------------------
+    # (C) Prepare the VALIDATION set, reusing the IDF map
+    # ------------------------------------------------
+    validation_dataset = training_dataset # default if none
     if validation_path:
+        val_df = load_and_optionally_prune_df(
+            dataset_path=validation_path,
+            augment_data=augment_data,
+            slice_data=slice_data,
+            custom_stopwords=custom_stopwords,
+            token_pruning=token_pruning,  # now we do want to prune if user asked
+            idf_map=idf_map,             # reuse from training
+            threshold=2.5
+        )
+
+        val_labels_path = os.path.join(validation_path, labels_file)
+
         validation_dataset = load_dataset(
-            directory=validation_path,
+            df=val_df,
             tokenizer=tokenizer,
             labels=labels,
-            slice_data=slice_data,
+            slice_data=False,
             lexicon_embeddings=val_lexicon,
             num_categories=val_num_cat,
             previous_sentences=previous_sentences,
             linguistic_features=linguistic_features,
             ner_features=ner_features,
             lexicon=lexicon,
-            custom_stopwords=custom_stopwords,
             topic_detection=topic_detection,
-            token_pruning=token_pruning
+            labels_file_path=val_labels_path,
+            is_training=False,
         )
     
+    # ------------------------------------------------
+    # (D) Validate & return
+    # ------------------------------------------------
     validate_args(labels, training_dataset, validation_dataset)
 
     logger.debug(f"Training dataset columns: {training_dataset.column_names}")
@@ -320,10 +420,71 @@ def remove_custom_stopwords(text, custom_stopwords):
     
     return cleaned_text
 
+# In dataset_utils.py
+
+def add_previous_label_features(
+    df: pd.DataFrame, 
+    labels_df: pd.DataFrame, 
+    labels: list,
+    is_training: bool,
+    model: Optional[torch.nn.Module] = None,
+    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
+    device: str = "cuda" if torch.cuda.is_available() else "cpu"
+) -> list[list[float]]:
+    """
+    For training, return ground-truth from row i-1.
+    For validation (is_training=False), compute dynamically the prediction for row i-1
+    by performing a sequential inference pass using the current model.
+    """
+    num_labels = len(labels)
+    prev_label_features = []
+    
+    if is_training:
+        label_matrix = labels_df[labels].to_numpy(dtype=float)
+        for i in range(len(df)):
+            if i == 0:
+                feats = [0.0]*num_labels
+            else:
+                feats = label_matrix[i-1].tolist()
+            prev_label_features.append(feats)
+    else:
+        # Dynamic auto-regressive evaluation: compute predictions sequentially.
+        if model is None or tokenizer_for_dynamic is None:
+            raise ValueError("For dynamic validation, 'model' and 'tokenizer_for_dynamic' must be provided.")
+        model.eval()
+        prev_pred = [0.0]*num_labels  # for the first row
+        for i in range(len(df)):
+            if i == 0:
+                feats = [0.0]*num_labels
+            else:
+                # Build input for row i-1.
+                text_prev = df.iloc[i-1]["Text"]
+                encoded = tokenizer_for_dynamic(
+                    [text_prev],
+                    padding=True,
+                    truncation=True,
+                    max_length=512,
+                    return_tensors="pt"
+                )
+                encoded = {k: v.to(device) for k, v in encoded.items()}
+                # Use the previously computed prediction as the prev_label_features for row i-1.
+                plf = torch.tensor(prev_pred, dtype=torch.float32, device=device).unsqueeze(0)
+                with torch.no_grad():
+                    outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
+                logits = outputs["logits"]
+                probs = torch.sigmoid(logits)
+                pred = (probs >= 0.5).float().cpu().numpy()[0].tolist()
+                feats = pred
+                prev_pred = pred  # update for next iteration
+            prev_label_features.append(feats)
+
+    return prev_label_features
+
+
 def load_dataset(
-    directory,
-    tokenizer,
-    labels,
+    df: pd.DataFrame,
+    tokenizer: transformers.PreTrainedTokenizer,
+    labels: list,
     slice_data: bool = False,
     lexicon_embeddings = {},
     num_categories=0,
@@ -331,47 +492,18 @@ def load_dataset(
     linguistic_features: bool = False,
     ner_features: bool = False,
     lexicon: str = None,
-    custom_stopwords: List[str] = [],
-    augment_data: bool = False,
     topic_detection: str = None,
-    token_pruning: bool = False
+    labels_file_path: Optional[str] = None,
+    is_training: bool = True,
+    model: Optional[torch.nn.Module] = None,
+    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None
 ):
-    """Load dataset and add embeddings if specified."""
-    if augment_data:
-        sentences_file_name = "sentences-aug.tsv"
-        labels_file_name = "labels-cat-aug.tsv"
-    else:
-        sentences_file_name = "sentences.tsv"
-        labels_file_name = "labels-cat.tsv"
-    sentences_file_path = os.path.join(directory, sentences_file_name)
-    labels_file_path = os.path.join(directory, labels_file_name)
-    
-    data_frame = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+    """
+    Convert a pandas DataFrame (already pruned/cleaned if needed)
+    into a HuggingFace Dataset with optional extra features.
+    """
 
-    # Slicing for testing purposes
-    if slice_data:
-        data_frame = slice_for_testing(data_frame)
-
-    # Fill missing text
-    data_frame['Text'] = data_frame['Text'].fillna('')
-
-    # Apply the reporting language removal before tokenization
-    if custom_stopwords:
-        data_frame['Text'] = data_frame['Text'].apply(lambda text: remove_custom_stopwords(text, custom_stopwords))
-
-    # Build IDF map & prune tokens (only on training set)
-    if token_pruning:
-        # Build from the training set's text
-        logger.info("Building IDF map for token pruning...")
-        idf_map = build_idf_map(data_frame['Text'].tolist())
-        logger.info(f"IDF map size: {len(idf_map)}")
-
-        # Prune the training text
-        logger.info("Pruning tokens in training set using IDF threshold = 2.0")
-        data_frame['Text'] = data_frame['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=2.0))
-
-    # Tokenize the text
-    texts = data_frame["Text"]
+    data_frame = df.copy()  # Just in case, keep local copy
 
     if previous_sentences:
         # Create a new column for concatenated text
@@ -394,37 +526,28 @@ def load_dataset(
                     str(data_frame.iloc[idx]["Text"])
                 )
         
-        texts = concatenated_texts
-    
-    texts = [str(text) for text in texts]
+        texts = [str(t) for t in concatenated_texts]
+    else:
+        texts = [str(t) for t in data_frame["Text"]]
     
     encoded_sentences = tokenizer(texts, padding=True, truncation=True, max_length=512)
-
-    texts = pd.Series(texts)
-
+    
+    # Possibly compute extra features (linguistic, NER, etc.)
+    combined_features = []
     if linguistic_features or ner_features:
         logger.info("Loading en_core_web_sm for extra features")
         nlp = spacy.load("en_core_web_sm")
-    
-    # Initialize a list to hold combined features
-    combined_features = []
 
     # Compute Linguistic features
     if linguistic_features:
         logger.info("Adding Linguistic features")
-        data_frame['Linguistic_Scores'] = texts.apply(lambda text: compute_linguistic_features(text, nlp))
+        data_frame['Linguistic_Scores'] = [compute_linguistic_features(txt, nlp) for txt in texts]
         combined_features.append(data_frame['Linguistic_Scores'].tolist())
 
     # Compute NER features
     if ner_features:
-        """
-        logger.info("Adding NER features")
-        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_features(text, nlp))
-        logger.debug(f"NER features example: {data_frame['NER_Features'].head()}")
-        combined_features.append(data_frame["NER_Features"].tolist())
-        """
         logger.info("Adding NER embeddings")
-        data_frame["NER_Features"] = texts.apply(lambda text: compute_ner_embeddings(text, nlp))
+        data_frame["NER_Features"] = [compute_ner_embeddings(txt, nlp) for txt in texts]
         logger.debug(f"NER embedding example: {data_frame['NER_Features'].head()}")
         combined_features.append(data_frame["NER_Features"].tolist())
 
@@ -432,10 +555,11 @@ def load_dataset(
     if lexicon:
         # 1) Is this lexicon in the dict of token-based scorers?
         if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
-            # Same old token-based approach
-            data_frame['Lexicon_Scores'] = texts.apply(
-                lambda x: compute_lexicon_scores(x, lexicon, lexicon_embeddings, tokenizer, num_categories)
-            )
+            # Token-based approach
+            data_frame['Lexicon_Scores'] = [
+                compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+                for txt in texts
+            ]
         else:
             # 2) This must be a precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
             data_frame['Lexicon_Scores'] = data_frame.apply(
@@ -443,7 +567,7 @@ def load_dataset(
             )
 
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
-            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0] * num_categories
+            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0]*num_categories
         )
         combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
@@ -455,23 +579,25 @@ def load_dataset(
         topic_model = TopicModeling(method=topic_detection)
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
-
-        if topic_vectors is not None:
-            encoded_sentences["topic_features"] = topic_vectors.tolist()
-            combined_features.append(topic_vectors.tolist())
+        encoded_sentences["topic_features"] = topic_vectors.tolist()
+        combined_features.append(topic_vectors.tolist())
     
     # Combine all features
     if combined_features:
         # Stack features together (ensure consistent dimensions across all features)
         max_length = max(len(f) for features in combined_features for f in features)
         combined_features = [
-            np.concatenate([np.asarray(f, dtype=np.float32) if len(f) == max_length else np.pad(f, (0, max_length - len(f)), 'constant') for f in features])
+            np.concatenate([
+                np.asarray(f, dtype=np.float32) if len(f) == max_length
+                else np.pad(f, (0, max_length - len(f)), 'constant')
+                for f in features
+            ])
             for features in zip(*combined_features)
         ]
-        #combined_features = [np.concatenate([np.asarray(f, dtype=np.float32) for f in features]) for features in zip(*combined_features)]
     else:
-        combined_features = [[0.0] * num_categories] * len(data_frame)
+        combined_features = [[0.0]*num_categories]*len(data_frame)
 
+    # Debug logging
     if linguistic_features:
         logger.debug(f"Sample Linguistic Features: {data_frame['Linguistic_Scores'].head()}")
     if ner_features:
@@ -480,35 +606,60 @@ def load_dataset(
         logger.debug(f"Sample Lexicon Features: {data_frame['Lexicon_Scores'].head()}")
     if topic_detection:
         logger.debug(f"Sample Topic Detection Features: {encoded_sentences['topic_features'][:5]}")
-
     for i, row in enumerate(combined_features[:5]):
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
     
-    if lexicon:
+    # Save them in the encoded_sentences
+    if lexicon and combined_features:
         encoded_sentences["lexicon_features"] = np.array(combined_features, dtype=np.float32).tolist()
-    elif ner_features:
+    elif ner_features and combined_features:
         encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
 
     # Validate input shapes before dataset conversion
     if combined_features:
         validate_input_shapes(encoded_sentences)
 
-    # Load labels if available
-    if os.path.isfile(labels_file_path):
-        labels_frame = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+    # ------------------------------------------------
+    # Load main labels for this split if available
+    # ------------------------------------------------
+    labels_matrix = None
+    labels_df = None
+    if labels_file_path and os.path.isfile(labels_file_path):
+        labels_df = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
         # Slicing for testing purposes
         if slice_data:
-            labels_frame = slice_for_testing(labels_frame)
-        #labels_matrix = numpy.zeros((labels_frame.shape[0], len(labels)))
-        #for idx, label in enumerate(labels):
-        #    if label in labels_frame.columns:
-        #        labels_matrix[:, idx] = (labels_frame[label] >= 0.5).astype(int)
-        labels_matrix = labels_frame[labels].ge(0.5).astype(int).to_numpy()
+            labels_df = slice_for_testing(labels_df)
+        labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
         encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
+    
+    # ------------------------------------------------
+    # Now build "prev_label_features"
+    # ------------------------------------------------
+    if previous_sentences and (labels_matrix is not None):
+        # Add new numeric feature for the label of the previous sentence
+        if not is_training:
+            prev_label_feats = add_previous_label_features(
+                df,
+                labels_df,
+                labels,
+                is_training=is_training,
+                model=model,
+                tokenizer_for_dynamic=tokenizer_for_dynamic
+            )
+        else:
+            prev_label_feats = add_previous_label_features(
+                df,
+                labels_df,
+                labels,
+                is_training=is_training
+            )
+        # Store them in the dictionary for the model
+        encoded_sentences["prev_label_features"] = prev_label_feats
 
-    encoded_sentences = datasets.Dataset.from_dict(encoded_sentences)
+    # Turn into HF dataset
+    dataset = datasets.Dataset.from_dict(encoded_sentences)
 
-    return encoded_sentences
+    return dataset
 
 # ========================================================
 # SCORE COMPUTATION
@@ -856,7 +1007,6 @@ def compute_precomputed_scores(
     else:
         # If no match, fallback
         return [0.0] * num_categories
-    
 ```
 -----------
 ## lexicon_utils.py
@@ -1134,7 +1284,10 @@ import transformers
 from transformers import TrainerCallback
 from torch.nn.functional import binary_cross_entropy_with_logits
 import torch.distributed as dist
+import os
+import pandas as pd
 
+from core.dataset_utils import add_previous_label_features
 from core.log import logger
 
 # ========================================================
@@ -1178,11 +1331,11 @@ class ResidualBlock(nn.Module):
         super().__init__()
         self.linear_layers = nn.Sequential(
             nn.Linear(input_dim, 512),
-            # nn.GroupNorm(num_groups, 512),
+            nn.GroupNorm(num_groups, 512),
             nn.ReLU(),
             nn.Dropout(0.4),
             nn.Linear(512, output_dim),
-            # nn.GroupNorm(num_groups, output_dim),
+            nn.GroupNorm(num_groups, output_dim),
             nn.ReLU()
         )
         self.projection = nn.Linear(input_dim, output_dim) if input_dim != output_dim else nn.Identity()
@@ -1192,7 +1345,19 @@ class ResidualBlock(nn.Module):
 
 class EnhancedDebertaModel(nn.Module):
     """Enhanced DeBERTa model with added lexicon feature layer."""
-    def __init__(self, pretrained_model, config, num_labels, id2label, label2id, num_categories=0, ner_feature_dim=0, multilayer = False, num_groups=8, topic_feature_dim=0):
+    def __init__(
+            self,
+            pretrained_model,
+            config,
+            num_labels,
+            id2label,
+            label2id,
+            num_categories=0,
+            ner_feature_dim=0,
+            multilayer = False,
+            num_groups=8,
+            topic_feature_dim=0
+        ):
         #super(EnhancedDebertaModel, self).__init__()
         super().__init__()
         self.config = config  # Store config attribute
@@ -1261,6 +1426,18 @@ class EnhancedDebertaModel(nn.Module):
             hidden_size = 256
         else:
             hidden_size = self.transformer.config.hidden_size
+        
+        # Add labels from previous sentences
+        self.prev_label_size = 0
+        if True:  # You can guard this with a config if you want
+            self.prev_label_size = num_labels  # or len(labels)
+            self.prev_label_layer = nn.Sequential(
+                nn.Linear(self.prev_label_size, 16),
+                nn.ReLU(),
+                nn.Dropout(0.4)
+            )
+        else:
+            self.prev_label_layer = None
 
         # Classification head. Combine all features
         input_dim = hidden_size
@@ -1270,6 +1447,9 @@ class EnhancedDebertaModel(nn.Module):
             input_dim += 128
         if self.topic_layer:
             input_dim += 128
+        if self.prev_label_layer:
+            input_dim += 16
+
         self.classification_head = nn.Linear(input_dim, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
 
@@ -1277,7 +1457,17 @@ class EnhancedDebertaModel(nn.Module):
         self.id2label = id2label
         self.label2id = label2id
 
-    def forward(self, input_ids, attention_mask, lexicon_features=None, ner_features=None, topic_features=None, labels=None, **kwargs):
+    def forward(
+        self,
+        input_ids,
+        attention_mask,
+        lexicon_features=None,
+        ner_features=None,
+        topic_features=None,
+        prev_label_features=None,
+        labels=None,
+        **kwargs
+    ):
         """Forward pass for the enhanced model."""
 
         logger.debug(f"Lexicon features received: {lexicon_features is not None}")
@@ -1294,6 +1484,7 @@ class EnhancedDebertaModel(nn.Module):
         transformer_output = hidden_state[:, 0, :] # CLS token representation
 
         # Process transformer embeddings through additional layers
+        # (A) DeBERTa forward
         if self.multilayer:
             text_embeddings = self.text_embedding_layer(transformer_output)
         else:
@@ -1301,7 +1492,7 @@ class EnhancedDebertaModel(nn.Module):
         
         combined_output = text_embeddings
 
-        # Handle lexicon features if provided
+        # (B) Add lexicon features
         if self.lexicon_layer and lexicon_features is not None:
             logger.debug(f"Lexicon features shape before processing: {lexicon_features.shape}")
             lexicon_features = lexicon_features.to(input_ids.device)
@@ -1310,6 +1501,7 @@ class EnhancedDebertaModel(nn.Module):
             logger.debug(f"Lexicon output shape: {lexicon_output.shape}")
             combined_output = torch.cat([combined_output, lexicon_output], dim=-1)
         
+        # (C) Add NER features
         if self.ner_layer and ner_features is not None:
             logger.debug(f"NER features shape before processing: {ner_features.shape}")
             ner_features = ner_features.to(input_ids.device)
@@ -1317,12 +1509,21 @@ class EnhancedDebertaModel(nn.Module):
             logger.debug(f"NER output shape: {ner_output.shape}")
             combined_output = torch.cat([combined_output, ner_output], dim=-1)
 
+        # (D) Add topic features
         if self.topic_layer and topic_features is not None:
             logger.debug(f"Topic Detection features shape before processing: {topic_features.shape}")
             topic_features = topic_features.to(input_ids.device)
             topic_output = self.topic_layer(topic_features)
             logger.debug(f"Topic Detection output shape: {topic_output.shape}")
             combined_output = torch.cat([combined_output, topic_output], dim=-1)
+        
+        # (E) Add previous labels
+        if self.prev_label_layer and prev_label_features is not None:
+            logger.debug(f"Previous labels features shape before processing: {prev_label_features.shape}")
+            prev_label_features = prev_label_features.to(input_ids.device)
+            prev_labels_output = self.prev_label_layer(prev_label_features.float())
+            logger.debug(f"Previous labels output shape: {prev_labels_output.shape}")
+            combined_output = torch.cat([combined_output, prev_labels_output], dim=-1)
         
         logger.debug(f"Final combined output shape: {combined_output.shape}")
 
@@ -1353,6 +1554,8 @@ class CustomTrainer(transformers.Trainer):
             logger.debug(f"Lexicon Features Shape: {inputs['lexicon_features'].shape}")
         else:
             logger.debug("No lexicon features")
+
+        prev_label_features = inputs.pop("prev_label_features", None)
         
         # Pop labels for loss computation
         labels = inputs.pop("labels")
@@ -1362,7 +1565,7 @@ class CustomTrainer(transformers.Trainer):
             labels = labels.unsqueeze(1)
 
         # Forward pass through the model
-        outputs = model(**inputs, labels=labels)
+        outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
 
         # Retrieve loss and logits from the model's outputs
         logits = outputs["logits"]
@@ -1383,7 +1586,7 @@ class WarmupEvalCallback(TrainerCallback):
 
     def on_evaluate(self, args, state, control, **kwargs):
         current_epoch = int(state.epoch)
-        if current_epoch <= self.warmup_epochs:
+        if current_epoch < self.warmup_epochs:
             logger.info(f"Skipping evaluation for warm-up phase (epoch {current_epoch}).")
             control.should_evaluate = False
             control.should_save = False
@@ -1391,15 +1594,58 @@ class WarmupEvalCallback(TrainerCallback):
             control.should_evaluate = True
             control.should_save = True
         return control
+
+class DynamicPrevLabelCallback(transformers.TrainerCallback):
+    def __init__(self, val_df, labels, tokenizer, device=None):
+        """
+        val_df: The original raw validation DataFrame.
+        labels: List of label names.
+        tokenizer: Tokenizer used for inference.
+        """
+        self.val_df = val_df.copy()  # store a copy of the original raw DF
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
+
+    def on_evaluate(self, args, state, control, **kwargs):
+        # Obtain current model from trainer
+        trainer = kwargs["trainer"]
+        model = trainer.model
+        model.eval()
+        # Dynamically compute the previous labels using our modified function:
+        # (This function now uses model & tokenizer to sequentially compute predictions.)
+        new_prev_feats = add_previous_label_features(
+            self.val_df,
+            self.val_df,  # assume the labels DataFrame is contained in self.val_df or stored separately
+            self.labels,
+            is_training=False,
+            model=model,
+            tokenizer_for_dynamic=self.tokenizer,
+            device=self.device
+        )
+        # Now update the evaluation dataset:
+        # Use the dataset's map method to update that field.
+        def update_prev_label(dataset, idx):
+            # Here, idx comes from the order of the dataset; we assume it matches self.val_df
+            dataset["prev_label_features"] = new_prev_feats[idx]
+            return dataset
+
+        # Update the dataset with the new prev_label_features
+        new_eval_dataset = trainer.eval_dataset.map(
+            update_prev_label, with_indices=True
+        )
+        trainer.eval_dataset = new_eval_dataset
+        logger.info("Updated evaluation dataset with dynamic previous label features.")
+        return control
 ```
 -----------
 ## runner.py
 ```python
 import transformers
-from core.dataset_utils import prepare_datasets
+from core.dataset_utils import prepare_datasets, load_and_optionally_prune_df
 from core.lexicon_utils import load_embeddings
 from core.training import train
-from core.models import save_model
+from core.models import save_model, DynamicPrevLabelCallback
 import torch.distributed as dist
 from accelerate import Accelerator
 
@@ -1427,7 +1673,7 @@ def run_training(
     custom_stopwords: list[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
-    token_pruning: bool = False
+    token_pruning: str = None
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -1495,8 +1741,29 @@ def run_training(
         early_stopping_patience=early_stopping_patience,
         multilayer=multilayer,
         augment_data=augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        token_pruning=token_pruning,
+        slice_data=slice_data
     )
+
+    # Add a callback for previous sentences
+    if previous_sentences and validation_dataset_path is not None:
+        # Load the raw validation DataFrame from file
+        raw_val_df = load_and_optionally_prune_df(
+            dataset_path=validation_dataset_path,
+            augment_data=augment_data,
+            slice_data=slice_data,
+            custom_stopwords=custom_stopwords,
+            token_pruning=token_pruning,
+            idf_map=None
+        )
+        trainer.add_callback(
+            DynamicPrevLabelCallback(
+                val_df=raw_val_df,
+                labels=labels,
+                tokenizer=tokenizer
+            )
+        )
 
     # Save the model if required
     accelerator = Accelerator()
@@ -1714,6 +1981,8 @@ def train(
         multilayer: bool = False,
         augment_data: bool = False,
         topic_detection: str = None,
+        token_pruning: bool = False,
+        slice_data: bool = False
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -1794,6 +2063,7 @@ def train(
         f"Number of categories (lexicon): {num_categories}\n"
         f"Using data augmentation with paraphrasing: {'Yes' if augment_data else 'No'}\n"
         f"Adding topic detection features: {'Yes' if topic_detection else 'No'}\n"
+        f"Applying token pruning: {'Yes' if token_pruning else 'No'}\n"
     )
     logger.info("Training configuration:\n" + config_details)
 
@@ -1914,6 +2184,9 @@ import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+import random
+import torch
+import numpy as np
 
 from core.config import MODEL_CONFIG
 from core.utils import download_nltk_resources
@@ -1938,6 +2211,15 @@ def main() -> None:
 
     if args.debug:
         logger.setLevel(logging.DEBUG)
+    
+    # Optionally set the seed if provided
+    if args.seed is not None:
+        logger.info(f"Setting random seed to {args.seed}")
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
 
     # Download resources only once
     download_nltk_resources()
@@ -1974,8 +2256,7 @@ def main() -> None:
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
-            topic_detection=args.topic_detection,
-            token_pruning=args.token_pruning
+            topic_detection=args.topic_detection
         )
 
         # Evaluate and return metric
@@ -2017,7 +2298,8 @@ def main() -> None:
             early_stopping_patience=4,
             #custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
-            topic_detection=args.topic_detection
+            topic_detection=args.topic_detection,
+            token_pruning=args.token_pruning
         )
 
 if __name__ == "__main__":

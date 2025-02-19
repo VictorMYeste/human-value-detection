@@ -149,15 +149,16 @@ def train(
     config.problem_type = "multi_label_classification"
     config.architectures = ["DebertaForSequenceClassification"]
     model = EnhancedDebertaModel(
-        pretrained_model, config,
-        len(labels),
-        id2label,
-        label2id,
-        num_categories,
-        ner_feature_dim,
-        multilayer,
-        topic_feature_dim,
-        previous_sentences
+        pretrained_model=pretrained_model,
+        config=config,
+        num_labels=len(labels),
+        id2label=id2label,
+        label2id=label2id,
+        num_categories=num_categories,
+        ner_feature_dim=ner_feature_dim,
+        multilayer=multilayer,
+        topic_feature_dim=topic_feature_dim,
+        previous_sentences=previous_sentences
     )
     """
     else:

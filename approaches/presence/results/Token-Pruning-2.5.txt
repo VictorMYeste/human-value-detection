@@ -1,18 +1,18 @@
-2025-02-19 14:58:21,304 - INFO - PyTorch version 2.4.1+cu118 available.
-2025-02-19 14:58:21,304 - INFO - PyTorch version 2.4.1+cu118 available.
-2025-02-19 14:58:27,848 - INFO - Setting random seed to 42
-2025-02-19 14:58:27,849 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-02-19 14:58:28,038 - INFO - Loading lexicon embeddings for: No lexicon used
-2025-02-19 14:58:28,038 - INFO - Preparing datasets for training and validation
-2025-02-19 14:58:28,102 - INFO - Building IDF map from unpruned training text...
-2025-02-19 14:58:28,768 - INFO - Pruning tokens in training set
-2025-02-19 14:58:42,317 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=2.5)
-2025-02-19 14:58:46,208 - INFO - Arguments validated successfully.
-2025-02-19 14:58:46,215 - INFO - Clearing old checkpoints in models/checkpoints
-2025-02-19 14:58:46,714 - INFO - Using CUDA for training.
-2025-02-19 14:58:48,054 - INFO - TRAINING
-2025-02-19 14:58:48,054 - INFO - ========
-2025-02-19 14:58:48,054 - INFO - Training configuration:
+2025-02-19 18:53:42,696 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-19 18:53:42,782 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-19 18:53:49,547 - INFO - Setting random seed to 42
+2025-02-19 18:53:49,548 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-02-19 18:53:49,947 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-02-19 18:53:49,947 - INFO - Preparing datasets for training and validation
+2025-02-19 18:53:50,009 - INFO - Building IDF map from unpruned training text...
+2025-02-19 18:53:50,711 - INFO - Pruning tokens in training set
+2025-02-19 18:54:05,150 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=2.5)
+2025-02-19 18:54:09,425 - INFO - Arguments validated successfully.
+2025-02-19 18:54:09,431 - INFO - Clearing old checkpoints in models/checkpoints
+2025-02-19 18:54:10,090 - INFO - Using CUDA for training.
+2025-02-19 18:54:12,009 - INFO - TRAINING
+2025-02-19 18:54:12,009 - INFO - ========
+2025-02-19 18:54:12,009 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
 Model name: None
 Batch size: 4
@@ -31,4 +31,33 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: Yes
 
-2025-02-19 14:58:48,056 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-02-19 18:54:12,012 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-02-19 18:54:13,656 - ERROR - An error occurred: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 7.80 GiB of which 94.31 MiB is free. Process 1020466 has 6.27 GiB memory in use. Including non-PyTorch memory, this process has 1.43 GiB memory in use. Of the allocated memory 780.36 MiB is allocated by PyTorch, and 61.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 79, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 228, in train
+    trainer.train()
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2204, in _inner_training_loop
+    model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/accelerate/accelerator.py", line 1329, in prepare
+    result = tuple(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/accelerate/accelerator.py", line 1330, in <genexpr>
+    self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/accelerate/accelerator.py", line 1205, in _prepare_one
+    return self.prepare_model(obj, device_placement=device_placement)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/accelerate/accelerator.py", line 1459, in prepare_model
+    model = torch.nn.parallel.DistributedDataParallel(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 824, in __init__
+    _sync_module_states(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/distributed/utils.py", line 315, in _sync_module_states
+    _sync_params_and_buffers(process_group, module_states, broadcast_bucket_size, src)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/distributed/utils.py", line 326, in _sync_params_and_buffers
+    dist._broadcast_coalesced(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 252.00 MiB. GPU 0 has a total capacity of 7.80 GiB of which 94.31 MiB is free. Process 1020466 has 6.27 GiB memory in use. Including non-PyTorch memory, this process has 1.43 GiB memory in use. Of the allocated memory 780.36 MiB is allocated by PyTorch, and 61.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

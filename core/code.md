@@ -1356,7 +1356,8 @@ class EnhancedDebertaModel(nn.Module):
             ner_feature_dim=0,
             multilayer = False,
             num_groups=8,
-            topic_feature_dim=0
+            topic_feature_dim=0,
+            previous_sentences=False
         ):
         #super(EnhancedDebertaModel, self).__init__()
         super().__init__()
@@ -1428,15 +1429,15 @@ class EnhancedDebertaModel(nn.Module):
             hidden_size = self.transformer.config.hidden_size
         
         # Add labels from previous sentences
-        self.prev_label_size = 0
-        if True:  # You can guard this with a config if you want
-            self.prev_label_size = num_labels  # or len(labels)
+        if previous_sentences:
+            self.prev_label_size = num_labels
             self.prev_label_layer = nn.Sequential(
                 nn.Linear(self.prev_label_size, 16),
                 nn.ReLU(),
                 nn.Dropout(0.4)
             )
         else:
+            self.prev_label_size = 0
             self.prev_label_layer = None
 
         # Classification head. Combine all features
@@ -1447,7 +1448,7 @@ class EnhancedDebertaModel(nn.Module):
             input_dim += 128
         if self.topic_layer:
             input_dim += 128
-        if self.prev_label_layer:
+        if self.prev_label_layer is not None:
             input_dim += 16
 
         self.classification_head = nn.Linear(input_dim, num_labels)
@@ -2028,7 +2029,17 @@ def train(
     config.label2id = label2id
     config.problem_type = "multi_label_classification"
     config.architectures = ["DebertaForSequenceClassification"]
-    model = EnhancedDebertaModel(pretrained_model, config, len(labels), id2label, label2id, num_categories, ner_feature_dim, multilayer, topic_feature_dim)
+    model = EnhancedDebertaModel(
+        pretrained_model, config,
+        len(labels),
+        id2label,
+        label2id,
+        num_categories,
+        ner_feature_dim,
+        multilayer,
+        topic_feature_dim,
+        previous_sentences
+    )
     """
     else:
         model = transformers.AutoModelForSequenceClassification.from_pretrained(

@@ -101,6 +101,7 @@ def train(
         multilayer: bool = False,
         augment_data: bool = False,
         topic_detection: str = None,
+        token_pruning: bool = False,
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -181,6 +182,7 @@ def train(
         f"Number of categories (lexicon): {num_categories}\n"
         f"Using data augmentation with paraphrasing: {'Yes' if augment_data else 'No'}\n"
         f"Adding topic detection features: {'Yes' if topic_detection else 'No'}\n"
+        f"Applying token pruning: {'Yes' if token_pruning else 'No'}\n"
     )
     logger.info("Training configuration:\n" + config_details)
 

@@ -98,7 +98,8 @@ def run_training(
         early_stopping_patience=early_stopping_patience,
         multilayer=multilayer,
         augment_data=augment_data,
-        topic_detection=topic_detection
+        topic_detection=topic_detection,
+        token_pruning=token_pruning
     )
 
     # Save the model if required

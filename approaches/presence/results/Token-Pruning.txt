@@ -1,0 +1,33 @@
+2025-02-19 10:06:31,082 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-19 10:06:31,083 - INFO - PyTorch version 2.4.1+cu118 available.
+2025-02-19 10:06:37,551 - INFO - Setting random seed to 42
+2025-02-19 10:06:37,552 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-02-19 10:06:37,744 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-02-19 10:06:37,744 - INFO - Preparing datasets for training and validation
+2025-02-19 10:06:37,809 - INFO - Building IDF map from unpruned training text...
+2025-02-19 10:06:38,458 - INFO - Pruning tokens in training set
+2025-02-19 10:06:51,655 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=2.0)
+2025-02-19 10:06:55,561 - INFO - Arguments validated successfully.
+2025-02-19 10:06:55,568 - INFO - Clearing old checkpoints in models/checkpoints
+2025-02-19 10:06:56,831 - INFO - Using CUDA for training.
+2025-02-19 10:06:58,104 - INFO - TRAINING
+2025-02-19 10:06:58,104 - INFO - ========
+2025-02-19 10:06:58,104 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+
+2025-02-19 10:06:58,107 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

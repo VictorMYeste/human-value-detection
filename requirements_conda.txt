@@ -1,0 +1,6 @@
+importlib_metadata
+pandas
+nltk
+transformers[torch]
+spacy
+scikit-learn

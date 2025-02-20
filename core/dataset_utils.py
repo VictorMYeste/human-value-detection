@@ -154,7 +154,7 @@ def prepare_datasets(
     # Build the IDF map from the (unpruned) training text, if pruning is requested
     idf_map = None
     if token_pruning:
-        pruning_threshold = 2.5
+        pruning_threshold = 3.0
         logger.info(f"Pruning tokens in dataset '{training_path}' (threshold={pruning_threshold})")
         logger.info("Building IDF map from unpruned training text...")
         idf_map = build_idf_map(train_df['Text'].tolist())

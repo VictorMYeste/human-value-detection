@@ -1,0 +1,42 @@
+2025-02-20 17:01:42,050 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-02-20 17:01:42,051 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-02-20 17:01:47,624 - INFO - Setting random seed to 42
+2025-02-20 17:01:47,625 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-02-20 17:01:47,813 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-02-20 17:01:47,813 - INFO - Preparing datasets for training and validation
+2025-02-20 17:01:47,879 - INFO - Building IDF map from unpruned training text...
+2025-02-20 17:01:48,586 - INFO - Token pruning (training): Average token count before pruning: 20.96
+2025-02-20 17:01:48,587 - INFO - Pruning tokens in training set
+2025-02-20 17:01:48,904 - INFO - Token pruning (training): Average token count after pruning: 16.96 (Reduction: 4.00 tokens, 19.1% reduction)
+2025-02-20 17:02:03,119 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=3.0)
+2025-02-20 17:02:03,135 - INFO - Token pruning (validation): Average token count before pruning: 20.86
+2025-02-20 17:02:03,240 - INFO - Token pruning (validation): Average token count after pruning: 15.43 (Reduction: 5.43 tokens, 26.0% reduction)
+2025-02-20 17:02:07,393 - INFO - Arguments validated successfully.
+2025-02-20 17:02:07,398 - INFO - Clearing old checkpoints in models/checkpoints
+2025-02-20 17:02:08,018 - INFO - Using CUDA for training.
+2025-02-20 17:02:09,410 - INFO - TRAINING
+2025-02-20 17:02:09,410 - INFO - ========
+2025-02-20 17:02:09,410 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: Yes
+
+2025-02-20 17:02:09,413 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6802, 'grad_norm': 1.0839952230453491, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6603, 'grad_norm': 4.296040058135986, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6507374048233032, 'eval_f1-score': {'Presence': 0.61}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 131.8114, 'eval_samples_per_second': 113.071, 'eval_steps_per_second': 14.134, 'epoch': 1.0}
+2025-02-20 17:26:37,276 - INFO - Skipping evaluation for warm-up phase (epoch 0).

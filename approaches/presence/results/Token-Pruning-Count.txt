@@ -1,0 +1,38 @@
+2025-02-20 16:57:12,481 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-02-20 16:57:12,481 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-02-20 16:57:18,020 - INFO - Setting random seed to 42
+2025-02-20 16:57:18,021 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-02-20 16:57:18,253 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-02-20 16:57:18,254 - INFO - Preparing datasets for training and validation
+2025-02-20 16:57:18,322 - INFO - Building IDF map from unpruned training text...
+2025-02-20 16:57:19,045 - INFO - Token pruning (training): Average token count before pruning: 20.96
+2025-02-20 16:57:19,045 - INFO - Pruning tokens in training set
+2025-02-20 16:57:19,360 - INFO - Token pruning (training): Average token count after pruning: 16.96 (Reduction: 4.00 tokens, 19.1% reduction)
+2025-02-20 16:57:33,568 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=2.5)
+2025-02-20 16:57:33,584 - INFO - Token pruning (validation): Average token count before pruning: 20.86
+2025-02-20 16:57:33,689 - INFO - Token pruning (validation): Average token count after pruning: 16.25 (Reduction: 4.61 tokens, 22.1% reduction)
+2025-02-20 16:57:37,892 - INFO - Arguments validated successfully.
+2025-02-20 16:57:37,897 - INFO - Clearing old checkpoints in models/checkpoints
+2025-02-20 16:57:38,412 - INFO - Using CUDA for training.
+2025-02-20 16:57:39,788 - INFO - TRAINING
+2025-02-20 16:57:39,789 - INFO - ========
+2025-02-20 16:57:39,789 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: Yes
+
+2025-02-20 16:57:39,791 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

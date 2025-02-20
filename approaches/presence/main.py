@@ -80,7 +80,7 @@ def main() -> None:
 
         # Evaluate and return metric
         eval_results = trainer.evaluate()
-        macro_avg_f1 = eval_results["eval_marco-avg-f1-score"]
+        macro_avg_f1 = eval_results["eval_macro-avg-f1-score"]
         return macro_avg_f1
 
     # If user passes --optimize, run Optuna optimization

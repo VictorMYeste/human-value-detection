@@ -16,7 +16,7 @@ from core.log import logger
 # ========================================================
 
 METRIC_F1_SCORE = "eval_f1-score"
-METRIC_MACRO_F1_SCORE = "eval_marco-avg-f1-score"
+METRIC_MACRO_F1_SCORE = "eval_macro-avg-f1-score"
 
 def compute_metrics(eval_prediction, id2label):
     """Compute evaluation metrics like F1-score."""
@@ -52,7 +52,7 @@ def compute_metrics(eval_prediction, id2label):
 
     # Compute macro-average F1 score
     macro_average_f1_score = round(np.mean(list(f1_scores.values())), 2)
-    return {'f1-score': f1_scores, 'marco-avg-f1-score': macro_average_f1_score}
+    return {'f1-score': f1_scores, 'macro-avg-f1-score': macro_average_f1_score}
 
 # ========================================================
 # TRAINING
@@ -70,10 +70,9 @@ def create_training_args(output_dir, model_name, batch_size, num_train_epochs, l
         num_train_epochs=num_train_epochs,
         weight_decay=weight_decay,
         load_best_model_at_end=True,
-        metric_for_best_model='marco-avg-f1-score',
+        metric_for_best_model='macro-avg-f1-score',
         gradient_accumulation_steps=gradient_accumulation_steps,
-        #fp16=True,
-        #bf16=True,
+        label_names=["labels"],
         ddp_find_unused_parameters=False,
         save_on_each_node=True if dist.is_initialized() else False  # Ensure model is saved on each GPU node
     )

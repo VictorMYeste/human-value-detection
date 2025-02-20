@@ -62,7 +62,7 @@ def load_and_optionally_prune_df(
     custom_stopwords: List[str],
     token_pruning: bool,
     idf_map: Optional[Dict[str, float]] = None,
-    threshold: float = 2.5
+    threshold: float = 2.0
 ) -> pd.DataFrame:
     """
     1. Load the sentences file (augmented or normal).
@@ -95,7 +95,25 @@ def load_and_optionally_prune_df(
     # If we have an IDF map, prune
     if token_pruning and idf_map is not None:
         logger.info(f"Pruning tokens in dataset '{dataset_path}' (threshold={threshold})")
+
+        # Compute token counts before pruning
+        df["raw_token_count"] = df["Text"].apply(lambda txt: len(txt.split()))
+        avg_before = df["raw_token_count"].mean()
+        logger.info(f"Token pruning (validation): Average token count before pruning: {avg_before:.2f}")
+
+        # Apply pruning
         df['Text'] = df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=threshold))
+
+        # Compute token counts after pruning
+        df["pruned_token_count"] = df["Text"].apply(lambda txt: len(txt.split()))
+        avg_after = df["pruned_token_count"].mean()
+        reduction = avg_before - avg_after
+        perc_reduction = (reduction / avg_before) * 100 if avg_before > 0 else 0
+        logger.info(
+            f"Token pruning (validation): Average token count after pruning: {avg_after:.2f} "
+            f"(Reduction: {reduction:.2f} tokens, {perc_reduction:.1f}% reduction)"
+        )
+        df.drop(columns=["raw_token_count", "pruned_token_count"], inplace=True)
 
     return df
 
@@ -136,13 +154,30 @@ def prepare_datasets(
     # Build the IDF map from the (unpruned) training text, if pruning is requested
     idf_map = None
     if token_pruning:
+        pruning_threshold = 2.5
+        logger.info(f"Pruning tokens in dataset '{training_path}' (threshold={pruning_threshold})")
         logger.info("Building IDF map from unpruned training text...")
         idf_map = build_idf_map(train_df['Text'].tolist())
         logger.debug(f"IDF map size: {len(idf_map)}")
 
+        # Compute token counts before pruning
+        train_df["raw_token_count"] = train_df["Text"].apply(lambda txt: len(txt.split()))
+        avg_before = train_df["raw_token_count"].mean()
+        logger.info(f"Token pruning (training): Average token count before pruning: {avg_before:.2f}")
+
         # Now prune the training set in-place
-        logger.info("Pruning tokens in training set")
-        train_df['Text'] = train_df['Text'].apply(lambda txt: prune_text(txt, idf_map, threshold=2.0))
+        train_df['Text'] = train_df['Text'].apply(lambda txt: prune_text(txt, idf_map, pruning_threshold))
+
+        # Compute token counts after pruning
+        train_df["pruned_token_count"] = train_df["Text"].apply(lambda txt: len(txt.split()))
+        avg_after = train_df["pruned_token_count"].mean()
+        reduction = avg_before - avg_after
+        perc_reduction = (reduction / avg_before) * 100 if avg_before > 0 else 0
+        logger.info(
+            f"Token pruning (training): Average token count after pruning: {avg_after:.2f} "
+            f"(Reduction: {reduction:.2f} tokens, {perc_reduction:.1f}% reduction)"
+        )
+        train_df.drop(columns=["raw_token_count", "pruned_token_count"], inplace=True)
 
     # ------------------------------------------------
     # (B) Convert the pruned training DataFrame -> HF dataset
@@ -168,7 +203,7 @@ def prepare_datasets(
         df=train_df,
         tokenizer=tokenizer,
         labels=labels,
-        slice_data=False,
+        slice_data=slice_data,
         lexicon_embeddings=train_lexicon,
         num_categories=train_num_cat,
         previous_sentences=previous_sentences,
@@ -195,16 +230,19 @@ def prepare_datasets(
             custom_stopwords=custom_stopwords,
             token_pruning=token_pruning,  # now we do want to prune if user asked
             idf_map=idf_map,             # reuse from training
-            threshold=2.5
+            threshold=pruning_threshold
         )
 
         val_labels_path = os.path.join(validation_path, labels_file)
+
+        # Store original text before modifying it
+        val_df["original_text"] = val_df["Text"]  
 
         validation_dataset = load_dataset(
             df=val_df,
             tokenizer=tokenizer,
             labels=labels,
-            slice_data=False,
+            slice_data=slice_data,
             lexicon_embeddings=val_lexicon,
             num_categories=val_num_cat,
             previous_sentences=previous_sentences,
@@ -316,6 +354,71 @@ def add_previous_label_features(
 
     return prev_label_features
 
+def predict_prev_labels(
+    df: pd.DataFrame,
+    model: torch.nn.Module,
+    tokenizer: transformers.PreTrainedTokenizer,
+    labels: list,
+    device: str = "cuda" if torch.cuda.is_available() else "cpu"
+) -> list[list[float]]:
+    """
+    Dynamically predict previous sentence labels in an auto-regressive way.
+
+    - Uses **ground-truth labels for training**.
+    - Uses **dynamic predictions for validation** (each sentence is predicted one by one, and its labels are used for the next).
+
+    Args:
+        df (pd.DataFrame): Dataframe containing the text samples.
+        model (torch.nn.Module): The trained model for inference.
+        tokenizer (transformers.PreTrainedTokenizer): The tokenizer to process text.
+        labels (list): List of label names.
+        device (str): Computation device (CPU or GPU).
+
+    Returns:
+        list[list[float]]: Predicted previous label features for each sentence.
+    """
+
+    num_labels = len(labels)
+    prev_label_features = []
+    model.eval()  # Set model to evaluation mode
+
+    prev_pred = [0.0] * num_labels  # Start with zeros for first sentence
+
+    for i in range(len(df)):
+        if i == 0:
+            # First sentence has no previous labels
+            prev_label_features.append([0.0] * num_labels)
+        else:
+            # Get previous sentence's text
+            prev_text = df.iloc[i - 1]["Text"]
+
+            # Tokenize previous sentence
+            encoded = tokenizer(
+                [prev_text], padding=True, truncation=True, max_length=512, return_tensors="pt"
+            )
+            encoded = {k: v.to(device) for k, v in encoded.items()}
+
+            # Convert last predicted labels into a tensor
+            plf = torch.tensor(prev_pred, dtype=torch.float32, device=device).unsqueeze(0)
+
+            # Predict previous labels dynamically
+            with torch.no_grad():
+                outputs = model(
+                    input_ids=encoded["input_ids"],
+                    attention_mask=encoded["attention_mask"],
+                    prev_label_features=plf
+                )
+
+            # Extract logits, apply sigmoid, and binarize predictions
+            logits = outputs["logits"]
+            probs = torch.sigmoid(logits)
+            pred = (probs >= 0.5).float().cpu().numpy()[0].tolist()
+
+            # Store prediction for use in the next step
+            prev_label_features.append(pred)
+            prev_pred = pred  # Update for next iteration
+
+    return prev_label_features
 
 def load_dataset(
     df: pd.DataFrame,
@@ -342,29 +445,45 @@ def load_dataset(
     data_frame = df.copy()  # Just in case, keep local copy
 
     if previous_sentences:
-        # Create a new column for concatenated text
         concatenated_texts = []
-
-        for idx in range(len(data_frame)):
-            if idx == 0:
-                # First sentence, no preceding sentences
-                concatenated_texts.append(str(data_frame.iloc[idx]["Text"]))
-            elif idx == 1:
-                # Second sentence, only one preceding sentence
-                concatenated_texts.append(
-                    str(data_frame.iloc[idx - 1]["Text"]) + " [SEP] " + str(data_frame.iloc[idx]["Text"])
-                )
-            else:
-                # Concatenate the two preceding sentences with a separator
-                concatenated_texts.append(
-                    str(data_frame.iloc[idx - 2]["Text"]) + " " +
-                    str(data_frame.iloc[idx - 1]["Text"]) + " [SEP] " +
-                    str(data_frame.iloc[idx]["Text"])
-                )
         
-        texts = [str(t) for t in concatenated_texts]
+        for idx in range(len(data_frame)):
+            prev_sentences = []
+            
+            for offset in [1, 2]:  # Now, we get prev-1 first, then prev-2
+                if idx >= offset:
+                    prev_text = str(data_frame.iloc[idx - offset]["Text"])
+                    
+                    # Get previous sentence labels
+                    if is_training:
+                        prev_labels = labels_df.iloc[idx - offset][labels]
+                    else:
+                        # Use predicted labels in validation
+                        prev_labels = predict_prev_labels(
+                            data_frame.iloc[idx - offset]["Text"],
+                            model, tokenizer_for_dynamic, labels
+                        )
+
+                    # Convert labels into a readable format
+                    label_str = " ".join(
+                        [label for label, value in zip(labels, prev_labels) if value >= 0.5]
+                    )
+
+                    prev_sentences.append(f"{label_str} {prev_text}")
+
+            # Place the current sentence first to avoid truncation of important information
+            current_text = str(data_frame.iloc[idx]["Text"])
+
+            if prev_sentences:
+                full_text = current_text + " [SEP] " + " [SEP] ".join(prev_sentences)
+            else:
+                full_text = current_text
+                
+            concatenated_texts.append(full_text)
+
+        texts = concatenated_texts
     else:
-        texts = [str(t) for t in data_frame["Text"]]
+        texts = data_frame["Text"].tolist()
     
     encoded_sentences = tokenizer(texts, padding=True, truncation=True, max_length=512)
     
@@ -462,12 +581,16 @@ def load_dataset(
     labels_df = None
     if labels_file_path and os.path.isfile(labels_file_path):
         labels_df = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
+        logger.debug(f"Loaded labels file from {labels_file_path} with shape {labels_df.shape} and columns: {list(labels_df.columns)}")
         # Slicing for testing purposes
         if slice_data:
             labels_df = slice_for_testing(labels_df)
         labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
+        logger.debug(f"Extracted labels matrix with shape {labels_matrix.shape} from columns: {labels}")
         encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
-    
+    else:
+        logger.warning("No labels file found at the expected path.")
+
     # ------------------------------------------------
     # Now build "prev_label_features"
     # ------------------------------------------------
@@ -494,6 +617,12 @@ def load_dataset(
 
     # Turn into HF dataset
     dataset = datasets.Dataset.from_dict(encoded_sentences)
+
+    logger.debug(f"Constructed dataset with keys: {list(dataset.column_names)}")
+    if "labels" in dataset.column_names:
+        logger.debug(f"'labels' column found with {len(dataset['labels'])} entries. Sample: {dataset['labels'][:3]}")
+    else:
+        logger.error("The 'labels' column is missing from the dataset!")
 
     return dataset
 

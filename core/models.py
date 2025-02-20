@@ -7,7 +7,7 @@ import torch.distributed as dist
 import os
 import pandas as pd
 
-from core.dataset_utils import add_previous_label_features
+from core.dataset_utils import add_previous_label_features, predict_prev_labels
 from core.log import logger
 
 # ========================================================
@@ -186,8 +186,7 @@ class EnhancedDebertaModel(nn.Module):
         ner_features=None,
         topic_features=None,
         prev_label_features=None,
-        labels=None,
-        **kwargs
+        labels=None
     ):
         """Forward pass for the enhanced model."""
 
@@ -276,7 +275,8 @@ class CustomTrainer(transformers.Trainer):
         else:
             logger.debug("No lexicon features")
 
-        prev_label_features = inputs.pop("prev_label_features", None)
+        if "prev_label_features" in inputs:
+            prev_label_features = inputs.pop("prev_label_features", None)
         
         # Pop labels for loss computation
         labels = inputs.pop("labels")
@@ -286,7 +286,10 @@ class CustomTrainer(transformers.Trainer):
             labels = labels.unsqueeze(1)
 
         # Forward pass through the model
-        outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
+        if "prev_label_features" in inputs:
+            outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
+        else:
+            outputs = model(**inputs, labels=labels)
 
         # Retrieve loss and logits from the model's outputs
         logits = outputs["logits"]
@@ -322,6 +325,7 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         val_df: The original raw validation DataFrame.
         labels: List of label names.
         tokenizer: Tokenizer used for inference.
+        device (str): Computation device (CPU/GPU).
         """
         self.val_df = val_df.copy()  # store a copy of the original raw DF
         self.labels = labels
@@ -333,8 +337,10 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         trainer = kwargs["trainer"]
         model = trainer.model
         model.eval()
+
+        # (A) Add previous sentences label features
+
         # Dynamically compute the previous labels using our modified function:
-        # (This function now uses model & tokenizer to sequentially compute predictions.)
         new_prev_feats = add_previous_label_features(
             self.val_df,
             self.val_df,  # assume the labels DataFrame is contained in self.val_df or stored separately
@@ -344,17 +350,56 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             tokenizer_for_dynamic=self.tokenizer,
             device=self.device
         )
+
+        # (B) Concatenate to text the previous sentences with their predicted labels
+
+        # Reset "Text" column to its original state
+        self.val_df["Text"] = self.val_df["original_text"]
+
+        # Rebuild validation dataset with new labels
+        self.val_df["Text"] = self.val_df.apply(lambda row: self.concatenate_text_with_prev_labels(row, model, self.tokenizer, self.labels), axis=1)
+
         # Now update the evaluation dataset:
         # Use the dataset's map method to update that field.
         def update_prev_label(dataset, idx):
             # Here, idx comes from the order of the dataset; we assume it matches self.val_df
             dataset["prev_label_features"] = new_prev_feats[idx]
+            dataset["Text"] = self.val_df.iloc[idx]["Text"]
             return dataset
 
         # Update the dataset with the new prev_label_features
         new_eval_dataset = trainer.eval_dataset.map(
             update_prev_label, with_indices=True
         )
+
         trainer.eval_dataset = new_eval_dataset
         logger.info("Updated evaluation dataset with dynamic previous label features.")
         return control
+
+def concatenate_text_with_prev_labels(self, row, model, tokenizer, labels):
+        """
+        Helper function to reconstruct the text with previous sentences and their labels.
+        """
+        idx = row.name
+        prev_sentences = []
+
+        for offset in [1, 2]:  # Get prev-1 first, then prev-2
+            if idx >= offset:
+                prev_text = str(self.val_df.iloc[idx - offset]["Text"])
+                prev_labels = predict_prev_labels(
+                    self.val_df.iloc[idx - offset]["Text"],
+                    model, tokenizer, labels
+                )
+
+                label_str = " ".join(
+                    [label for label, value in zip(labels, prev_labels) if value >= 0.5]
+                )
+
+                prev_sentences.append(f"{label_str} {prev_text}")
+
+        current_text = str(row["Text"])
+
+        if prev_sentences:
+            return current_text + " </s> " + " </s> ".join(prev_sentences)
+        else:
+            return current_text

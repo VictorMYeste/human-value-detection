@@ -6,7 +6,8 @@ from transformers import DataCollatorWithPadding
 from transformers import AutoConfig
 import torch.distributed as dist
 
-from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback
+from core.models import EnhancedDebertaModel, CustomTrainer, move_to_device, WarmupEvalCallback, DynamicPrevLabelCallback
+from core.dataset_utils import load_and_optionally_prune_df
 from core.utils import clear_directory
 
 from core.log import logger
@@ -80,6 +81,7 @@ def create_training_args(output_dir, model_name, batch_size, num_train_epochs, l
 def train(
         training_dataset,
         validation_dataset,
+        validation_path: str,
         pretrained_model: str,
         tokenizer: transformers.PreTrainedTokenizer,
         labels: list[str],
@@ -98,6 +100,7 @@ def train(
         linguistic_features: bool = False,
         ner_features: bool = False,
         multilayer: bool = False,
+        custom_stopwords: list[str] = [],
         augment_data: bool = False,
         topic_detection: str = None,
         token_pruning: bool = False,
@@ -223,6 +226,27 @@ def train(
     # Add a warmup of 2 epochs to avoid initial flukes
     warmup_callback = WarmupEvalCallback(warmup_epochs=2)
     trainer.add_callback(warmup_callback)
+
+    # Add a callback for previous sentences
+    if previous_sentences:
+        logger.info("Rebuilding validation dataset with dynamically predicted previous labels.")
+        # Load the raw validation DataFrame from file
+        raw_val_df = load_and_optionally_prune_df(
+            dataset_path=validation_path,
+            augment_data=augment_data,
+            slice_data=slice_data,
+            custom_stopwords=custom_stopwords,
+            token_pruning=token_pruning,
+            idf_map=None
+        )
+        trainer.add_callback(
+            DynamicPrevLabelCallback(
+                trainer=trainer,
+                val_df=raw_val_df,
+                labels=labels,
+                tokenizer=tokenizer
+            )
+        )
 
     trainer.train()
 

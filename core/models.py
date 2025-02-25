@@ -7,7 +7,7 @@ import torch.distributed as dist
 import os
 import pandas as pd
 
-from core.dataset_utils import add_previous_label_features, predict_prev_labels
+from core.dataset_utils import add_previous_label_features
 from core.log import logger
 
 # ========================================================
@@ -150,15 +150,17 @@ class EnhancedDebertaModel(nn.Module):
         
         # Add labels from previous sentences
         if previous_sentences:
-            self.prev_label_size = num_labels
+            self.prev_label_size = 2 * num_labels # 2 previous sentences
             self.prev_label_layer = nn.Sequential(
                 nn.Linear(self.prev_label_size, 16),
                 nn.ReLU(),
                 nn.Dropout(0.4)
             )
+            logger.debug(f"Previous label layer initialized with prev_label_size = {self.prev_label_size}.")
         else:
             self.prev_label_size = 0
             self.prev_label_layer = None
+            logger.debug("No previous label layer initialized.")
 
         # Classification head. Combine all features
         input_dim = hidden_size
@@ -168,8 +170,10 @@ class EnhancedDebertaModel(nn.Module):
             input_dim += 128
         if self.topic_layer:
             input_dim += 128
-        if self.prev_label_layer is not None:
+        if self.prev_label_layer:
             input_dim += 16
+
+        logger.debug(f"Final computed input_dim for classification head: {input_dim}")
 
         self.classification_head = nn.Linear(input_dim, num_labels)
         self.dropout = nn.Dropout(self.transformer.config.hidden_dropout_prob)
@@ -212,6 +216,10 @@ class EnhancedDebertaModel(nn.Module):
         
         combined_output = text_embeddings
 
+        logger.debug(f"DeBERTa combined_output shape: {combined_output.shape}")
+        logger.debug(f"Checking prev_label_layer: {self.prev_label_layer}")
+        logger.debug(f"Checking prev_label_features: {prev_label_features}")
+
         # (B) Add lexicon features
         if self.lexicon_layer and lexicon_features is not None:
             logger.debug(f"Lexicon features shape before processing: {lexicon_features.shape}")
@@ -220,6 +228,8 @@ class EnhancedDebertaModel(nn.Module):
             lexicon_output = self.lexicon_layer(lexicon_features)
             logger.debug(f"Lexicon output shape: {lexicon_output.shape}")
             combined_output = torch.cat([combined_output, lexicon_output], dim=-1)
+
+            logger.debug(f"Lexicon combined_output shape: {combined_output.shape}")
         
         # (C) Add NER features
         if self.ner_layer and ner_features is not None:
@@ -228,6 +238,7 @@ class EnhancedDebertaModel(nn.Module):
             ner_output = self.ner_layer(ner_features)
             logger.debug(f"NER output shape: {ner_output.shape}")
             combined_output = torch.cat([combined_output, ner_output], dim=-1)
+            logger.debug(f"NER combined_output shape: {combined_output.shape}")
 
         # (D) Add topic features
         if self.topic_layer and topic_features is not None:
@@ -236,16 +247,24 @@ class EnhancedDebertaModel(nn.Module):
             topic_output = self.topic_layer(topic_features)
             logger.debug(f"Topic Detection output shape: {topic_output.shape}")
             combined_output = torch.cat([combined_output, topic_output], dim=-1)
+            logger.debug(f"Topic Detection combined_output shape: {combined_output.shape}")
         
         # (E) Add previous labels
+
         if self.prev_label_layer and prev_label_features is not None:
-            logger.debug(f"Previous labels features shape before processing: {prev_label_features.shape}")
+            logger.info(f"Previous labels features received: {prev_label_features is not None}")
+            logger.info(f"Previous labels features shape before processing: {prev_label_features.shape if prev_label_features is not None else 'None'}")
+    
             prev_label_features = prev_label_features.to(input_ids.device)
             prev_labels_output = self.prev_label_layer(prev_label_features.float())
-            logger.debug(f"Previous labels output shape: {prev_labels_output.shape}")
+
+            logger.info(f"Previous labels output shape: {prev_labels_output.shape}")
+
             combined_output = torch.cat([combined_output, prev_labels_output], dim=-1)
+
+            logger.info(f"Previous Sentences combined_output shape: {combined_output.shape}")
         
-        logger.debug(f"Final combined output shape: {combined_output.shape}")
+        logger.info(f"Final combined output shape: {combined_output.shape}")
 
         combined_output = self.dropout(combined_output)
         logits = self.classification_head(combined_output)
@@ -320,13 +339,14 @@ class WarmupEvalCallback(TrainerCallback):
         return control
 
 class DynamicPrevLabelCallback(transformers.TrainerCallback):
-    def __init__(self, val_df, labels, tokenizer, device=None):
+    def __init__(self, trainer, val_df, labels, tokenizer, device=None):
         """
         val_df: The original raw validation DataFrame.
         labels: List of label names.
         tokenizer: Tokenizer used for inference.
         device (str): Computation device (CPU/GPU).
         """
+        self.trainer = trainer
         self.val_df = val_df.copy()  # store a copy of the original raw DF
         self.labels = labels
         self.tokenizer = tokenizer
@@ -334,11 +354,11 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
 
     def on_evaluate(self, args, state, control, **kwargs):
         # Obtain current model from trainer
-        trainer = kwargs["trainer"]
-        model = trainer.model
+        model = self.trainer.model
         model.eval()
 
         # (A) Add previous sentences label features
+        logger.info(f"Epoch {state.epoch}: Running validation. Model: {model is not None}")
 
         # Dynamically compute the previous labels using our modified function:
         new_prev_feats = add_previous_label_features(
@@ -358,6 +378,7 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
 
         # Rebuild validation dataset with new labels
         self.val_df["Text"] = self.val_df.apply(lambda row: self.concatenate_text_with_prev_labels(row, model, self.tokenizer, self.labels), axis=1)
+        logger.info(f"Text: {self.val_df['Text']}")
 
         # Now update the evaluation dataset:
         # Use the dataset's map method to update that field.
@@ -368,11 +389,11 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             return dataset
 
         # Update the dataset with the new prev_label_features
-        new_eval_dataset = trainer.eval_dataset.map(
+        new_eval_dataset = self.trainer.eval_dataset.map(
             update_prev_label, with_indices=True
         )
 
-        trainer.eval_dataset = new_eval_dataset
+        self.trainer.eval_dataset = new_eval_dataset
         logger.info("Updated evaluation dataset with dynamic previous label features.")
         return control
 
@@ -386,7 +407,7 @@ def concatenate_text_with_prev_labels(self, row, model, tokenizer, labels):
         for offset in [1, 2]:  # Get prev-1 first, then prev-2
             if idx >= offset:
                 prev_text = str(self.val_df.iloc[idx - offset]["Text"])
-                prev_labels = predict_prev_labels(
+                prev_labels = add_previous_label_features(
                     self.val_df.iloc[idx - offset]["Text"],
                     model, tokenizer, labels
                 )

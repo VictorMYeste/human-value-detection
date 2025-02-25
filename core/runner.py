@@ -79,6 +79,7 @@ def run_training(
     trainer = train(
         training_dataset=training_dataset,
         validation_dataset=validation_dataset,
+        validation_path=validation_dataset_path,
         pretrained_model=pretrained_model,
         tokenizer=tokenizer,
         labels=labels,
@@ -97,30 +98,12 @@ def run_training(
         gradient_accumulation_steps=gradient_accumulation_steps,
         early_stopping_patience=early_stopping_patience,
         multilayer=multilayer,
+        custom_stopwords=custom_stopwords,
         augment_data=augment_data,
         topic_detection=topic_detection,
         token_pruning=token_pruning,
         slice_data=slice_data
     )
-
-    # Add a callback for previous sentences
-    if previous_sentences and validation_dataset_path is not None:
-        # Load the raw validation DataFrame from file
-        raw_val_df = load_and_optionally_prune_df(
-            dataset_path=validation_dataset_path,
-            augment_data=augment_data,
-            slice_data=slice_data,
-            custom_stopwords=custom_stopwords,
-            token_pruning=token_pruning,
-            idf_map=None
-        )
-        trainer.add_callback(
-            DynamicPrevLabelCallback(
-                val_df=raw_val_df,
-                labels=labels,
-                tokenizer=tokenizer
-            )
-        )
 
     # Save the model if required
     accelerator = Accelerator()

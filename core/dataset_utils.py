@@ -115,6 +115,9 @@ def load_and_optionally_prune_df(
         )
         df.drop(columns=["raw_token_count", "pruned_token_count"], inplace=True)
 
+    # Store original text before modifying it
+    df["Original_Text"] = df["Text"]  
+
     return df
 
 def prepare_datasets(
@@ -235,9 +238,6 @@ def prepare_datasets(
 
         val_labels_path = os.path.join(validation_path, labels_file)
 
-        # Store original text before modifying it
-        val_df["original_text"] = val_df["Text"]  
-
         validation_dataset = load_dataset(
             df=val_df,
             tokenizer=tokenizer,
@@ -317,7 +317,6 @@ def add_previous_label_features(
     text_id_col = "Text-ID"
 
     logger.debug(f"Inside add_previous_label_features. is_training={is_training}")
-    logger.debug(f"First Text-ID: {df.iloc[0]['Text-ID']}")
     
     if is_training:
         label_matrix = labels_df[labels].to_numpy(dtype=float)
@@ -364,8 +363,6 @@ def add_previous_label_features(
 
             prev_label_features.append(feats)
 
-            logger.info(f"prev_label_features = {prev_label_features[:3]}")
-
             # Step 3: Predict the Current Sentence
             text_prev = df.iloc[i]["Text"]
             encoded = tokenizer_for_dynamic(
@@ -376,7 +373,7 @@ def add_previous_label_features(
                 return_tensors="pt"
             )
             encoded = {k: v.to(device) for k, v in encoded.items()}
-            plf = torch.tensor(prev_pred_1, dtype=torch.float32, device=device).unsqueeze(0)
+            plf = torch.tensor(prev_pred_2 + prev_pred_1, dtype=torch.float32, device=device).unsqueeze(0)
 
             with torch.no_grad():
                 outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
@@ -390,9 +387,9 @@ def add_previous_label_features(
                 pred = pred + [0.0] * (num_labels - len(pred))
 
             prev_pred_2 = prev_pred_1[:]  # Shift prev-1 to prev-2
-            logger.info(f"prev_pred_2 = {prev_pred_2}")
-            prev_pred_1 = pred[:] + [0.0] * max(0, num_labels - len(pred))  # Update prev-1 with latest prediction
-            logger.info(f"prev_pred_1 = {prev_pred_1}")
+            logger.debug(f"prev_pred_2 = {prev_pred_2}")
+            prev_pred_1 = pred[:]  # Update prev-1 with latest prediction
+            logger.debug(f"prev_pred_1 = {prev_pred_1}")
 
     return prev_label_features
 
@@ -438,8 +435,11 @@ def load_dataset(
                         if model is not None:
                             # Use predicted labels in validation
                             prev_labels = add_previous_label_features(
-                                data_frame.iloc[idx - offset]["Text"],
-                                model, tokenizer_for_dynamic, labels
+                                df=data_frame.iloc[idx - offset]["Text"],
+                                labels_df=labels_df,
+                                labels=labels,
+                                model=model,
+                                tokenizer_for_dynamic=tokenizer_for_dynamic
                             )
                         else:
                             prev_labels = [0.0] * 2 * len(labels)  # Default zero labels if model is not yet available
@@ -579,9 +579,9 @@ def load_dataset(
         # Add new numeric feature for the label of the previous sentence
         if is_training:
             prev_label_feats = add_previous_label_features(
-                df,
-                labels_df,
-                labels,
+                df=df,
+                labels_df=labels_df,
+                labels=labels,
                 is_training=is_training
             )
         else:
@@ -590,9 +590,9 @@ def load_dataset(
                 prev_label_feats = [[0.0] * 2 * len(labels)] * len(df)  # Return zero features
             else:
                 prev_label_feats = add_previous_label_features(
-                    df,
-                    labels_df,
-                    labels,
+                    df=df,
+                    labels_df=labels_df,
+                    labels=labels,
                     is_training=is_training,
                     model=model,
                     tokenizer_for_dynamic=tokenizer_for_dynamic

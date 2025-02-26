@@ -1,5 +1,5 @@
 import transformers
-from core.dataset_utils import prepare_datasets, load_and_optionally_prune_df
+from core.dataset_utils import prepare_datasets
 from core.lexicon_utils import load_embeddings
 from core.training import train
 from core.models import save_model, DynamicPrevLabelCallback

@@ -47,6 +47,8 @@ labels_df = pd.read_csv("../data/validation-english/labels-cat.tsv", sep="\t")
 # Merge sentences with labels based on Text-ID and Sentence-ID
 merged_df = pd.merge(sentences_df, labels_df, on=["Text-ID", "Sentence-ID"])
 
+merged_df = merged_df.head(10)
+
 # Dictionary to store aggregated token attributions
 token_attributions = defaultdict(list)
 presence_attributions = defaultdict(list)
@@ -84,13 +86,14 @@ def get_attributions(sentence):
         )
     
     sentences_predictions = sigmoid(model_output["logits"]).squeeze().detach().cpu().numpy()
-    
-    # Ensure target_class is within valid range
-    if sentences_predictions.ndim == 0:  # If scalar output
-        target_class = 0  # Use 0 for binary classification
-    else:
-        target_class = np.round(sentences_predictions).astype(int)
 
+    print("Raw model predictions for sentence:", sentences_predictions)
+    
+    if sentences_predictions.ndim == 0:  # If scalar output
+        target_class = int(sentences_predictions > 0.5)  # Convert scalar to Python int
+    else:
+        target_class = int(sentences_predictions.argmax())  # Convert array output to int
+        
     # Compute attributions
     attributions = ig.attribute(
         input_embeds,
@@ -102,8 +105,14 @@ def get_attributions(sentence):
     attributions = np.abs(attributions).mean(axis=1)  # Aggregate across hidden dimensions
 
     tokens = tokenizer.convert_ids_to_tokens(encoded_sentences["input_ids"].squeeze())
+    print("Sample tokenized output:", tokens[:50])
 
-    return tokens, attributions, target_class
+    decoded_sentence = tokenizer.decode(encoded_sentences["input_ids"].squeeze())
+    print("Decoded sentence:", decoded_sentence)
+
+    clean_tokens = [tokenizer.convert_tokens_to_string([token]) for token in tokens]
+
+    return clean_tokens, attributions, target_class
 
 # Process entire validation dataset
 for idx, row in merged_df.iterrows():
@@ -146,7 +155,7 @@ plt.title("Top 20 Tokens Contributing to Presence Label")
 plt.xlabel("Mean Attribution Score")
 plt.ylabel("Token")
 plt.tight_layout()
-plt.savefig("attribution_presence_1.png", dpi=300)
+plt.savefig("files/attribution_presence_1.png", dpi=300)
 plt.close()
 
 # Plot Top 20 Absence Tokens
@@ -156,7 +165,11 @@ plt.title("Top 20 Tokens Contributing to Absence of Presence Label")
 plt.xlabel("Mean Attribution Score")
 plt.ylabel("Token")
 plt.tight_layout()
-plt.savefig("attribution_presence_0.png", dpi=300)
+plt.savefig("files/attribution_presence_0.png", dpi=300)
 plt.close()
 
 print("Plots saved as attribution_presence_1.png and attribution_presence_0.png")
+
+tokens, attributions, _ = get_attributions(text)
+print(f"Tokens: {tokens}")
+print(f"Attributions: {attributions}")

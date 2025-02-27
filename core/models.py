@@ -184,8 +184,9 @@ class EnhancedDebertaModel(nn.Module):
 
     def forward(
         self,
-        input_ids,
-        attention_mask,
+        input_ids=None,
+        inputs_embeds=None,  # Add inputs_embeds for Captum support
+        attention_mask=None,
         lexicon_features=None,
         ner_features=None,
         topic_features=None,
@@ -193,6 +194,10 @@ class EnhancedDebertaModel(nn.Module):
         labels=None
     ):
         """Forward pass for the enhanced model."""
+
+        # Ensure input_ids remains as LongTensor (int64)
+        if input_ids is not None:
+            input_ids = input_ids.to(torch.long)
 
         logger.debug(f"Lexicon features received: {lexicon_features is not None}")
         logger.debug(f"NER features received: {ner_features is not None}")
@@ -204,7 +209,10 @@ class EnhancedDebertaModel(nn.Module):
             logger.debug(f"NER feature shape: {ner_features.shape}")
 
         # Extract transformer embeddings
-        hidden_state = self.transformer(input_ids, attention_mask=attention_mask).last_hidden_state
+        if inputs_embeds is not None:
+            hidden_state = self.transformer(inputs_embeds=inputs_embeds, attention_mask=attention_mask).last_hidden_state
+        else:
+            hidden_state = self.transformer(input_ids=input_ids, attention_mask=attention_mask).last_hidden_state
         transformer_output = hidden_state[:, 0, :] # CLS token representation
 
         # Process transformer embeddings through additional layers

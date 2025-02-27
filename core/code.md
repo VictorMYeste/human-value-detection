@@ -478,29 +478,51 @@ def add_previous_label_features(
     """
     num_labels = len(labels)
     prev_label_features = []
-    text_id_col = "Text-ID"
+
+    # Ensure dataframe is sorted by Text-ID and Sentence-ID
+    df = df.sort_values(by=["Text-ID", "Sentence-ID"]).reset_index(drop=True)
 
     logger.debug(f"Inside add_previous_label_features. is_training={is_training}")
     
+    # **Training Dataset: Use Ground-Truth Labels**
     if is_training:
-        label_matrix = labels_df[labels].to_numpy(dtype=float)
+        label_matrix = labels_df.set_index(["Text-ID", "Sentence-ID"])[labels].to_numpy(dtype=float)
         logger.debug(f"Label matrix shape: {label_matrix.shape}")
 
-        for i in range(len(df)):
-            current_text_id = df.iloc[i][text_id_col]
+        for index, row in df.iterrows():
+            current_text_id = row["Text-ID"]
+            current_sentence_id = row["Sentence-ID"]
 
-            if i == 0 or df.iloc[i-1][text_id_col] != current_text_id:
-                # First sentence of a new Text-ID → No previous sentences
+            # **Handle first sentence of new Text-ID**
+            if current_sentence_id == 1:
                 feats = [0.0] * (2 * num_labels)
-            elif i == 1 or df.iloc[i-2][text_id_col] != current_text_id:
-                # Second sentence → Only previous sentence available
-                feats = [0.0] * num_labels + label_matrix[i-1].tolist()
+            
+            # **Handle second sentence → Use prev-1**
+            elif current_sentence_id == 2:
+                prev_1_idx = labels_df[
+                    (labels_df["Text-ID"] == current_text_id) & 
+                    (labels_df["Sentence-ID"] == current_sentence_id - 1)
+                ].index
+                prev_1 = label_matrix[prev_1_idx[0]].tolist() if len(prev_1_idx) > 0 else [0.0] * num_labels
+                feats = prev_1 + [0.0] * num_labels
+            
+            # **Handle third+ sentences → Use prev-1 and prev-2**
             else:
-                # Third and beyond → Use both prev-2 and prev-1 labels
-                feats = label_matrix[i-2].tolist() + label_matrix[i-1].tolist()
-                
+                prev_1_idx = labels_df[
+                    (labels_df["Text-ID"] == current_text_id) & 
+                    (labels_df["Sentence-ID"] == current_sentence_id - 1)
+                ].index
+                prev_1 = label_matrix[prev_1_idx[0]].tolist() if len(prev_1_idx) > 0 else [0.0] * num_labels
+                prev_2_idx = labels_df[
+                    (labels_df["Text-ID"] == current_text_id) & 
+                    (labels_df["Sentence-ID"] == current_sentence_id - 2)
+                ].index
+                prev_2 = label_matrix[prev_2_idx[0]].tolist() if len(prev_2_idx) > 0 else [0.0] * num_labels
+                feats = prev_1 + prev_2
+
             prev_label_features.append(feats)
 
+    # **Validation Mode: Dynamically Predict Previous Labels**
     else:
         # Dynamic auto-regressive evaluation: compute predictions sequentially.
         if model is None or tokenizer_for_dynamic is None:
@@ -512,23 +534,32 @@ def add_previous_label_features(
         prev_pred_1 = [0.0] * (2 * num_labels)  # Placeholder for prev-1 labels
         prev_pred_2 = [0.0] * (2 * num_labels)  # Placeholder for prev-2 labels
 
-        for i in range(len(df)):
-            current_text_id = df.iloc[i][text_id_col]
+        for index, row in df.iterrows():
+            current_text_id = row["Text-ID"]
+            current_sentence_id = row["Sentence-ID"]
 
             # Step 2: Assign Previous Labels to Features
 
-            if i == 0 or df.iloc[i-1][text_id_col] != current_text_id:
-                feats = [0.0] * (2 * num_labels)  # First sentence
+            # **Handle first sentence of new Text-ID**
+            if current_sentence_id == 1:
+                feats = [0.0] * (2 * num_labels)
                 prev_pred_1, prev_pred_2 = [0.0] * num_labels, [0.0] * num_labels
-            elif i == 1 or df.iloc[i-2][text_id_col] != current_text_id:
-                feats = prev_pred_1 + [0.0] * num_labels  # Second sentence
-            else:
-                feats = prev_pred_2 + prev_pred_1  # Third and beyond
+                logger.debug(f"sentence 1!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
 
-            prev_label_features.append(feats)
+            # **Handle second sentence**
+            elif current_sentence_id == 2:
+                feats = prev_pred_1 + [0.0] * num_labels
+                logger.debug(f"sentence 2!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
+
+            # **Handle third+ sentences**
+            else:
+                feats = prev_pred_1 + prev_pred_2
+                logger.debug(f"sentence 3+!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
+
+            prev_label_features.append(feats.copy())
 
             # Step 3: Predict the Current Sentence
-            text_prev = df.iloc[i]["Text"]
+            text_prev = row["Text"]
             encoded = tokenizer_for_dynamic(
                 [text_prev],
                 padding=True,
@@ -537,7 +568,7 @@ def add_previous_label_features(
                 return_tensors="pt"
             )
             encoded = {k: v.to(device) for k, v in encoded.items()}
-            plf = torch.tensor(prev_pred_2 + prev_pred_1, dtype=torch.float32, device=device).unsqueeze(0)
+            plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
 
             with torch.no_grad():
                 outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
@@ -550,11 +581,19 @@ def add_previous_label_features(
             if len(pred) < num_labels:
                 pred = pred + [0.0] * (num_labels - len(pred))
 
+            #torch.cuda.synchronize()
             prev_pred_2 = prev_pred_1[:]  # Shift prev-1 to prev-2
-            logger.debug(f"prev_pred_2 = {prev_pred_2}")
+            #torch.cuda.synchronize()
             prev_pred_1 = pred[:]  # Update prev-1 with latest prediction
-            logger.debug(f"prev_pred_1 = {prev_pred_1}")
 
+            logger.debug(f"Text-ID {current_text_id} - Sentence-ID {current_sentence_id}: Stored prev_pred_1 = {prev_pred_1}")
+            logger.debug(f"Text-ID {current_text_id} - Sentence-ID {current_sentence_id}: Stored prev_pred_2 = {prev_pred_2}")
+
+    for i in range(len(prev_label_features[:10])):  # Limit to first 10 samples
+        logger.debug(f"Row {i}: prev_label_features = {prev_label_features[i]}")
+        logger.debug(f"Row {i}: prev_1_labels = {prev_label_features[i][:len(labels)]}")
+        logger.debug(f"Row {i}: prev_2_labels = {prev_label_features[i][len(labels):]}")
+    
     return prev_label_features
 
 def load_dataset(
@@ -584,38 +623,42 @@ def load_dataset(
 
     if previous_sentences and is_training:
         concatenated_texts = []
+
+        # Sort by Text-ID and Sentence-ID
+        data_frame = data_frame.sort_values(by=["Text-ID", "Sentence-ID"]).reset_index(drop=True)
         
-        for idx in range(len(data_frame)):
+        for idx, row in data_frame.iterrows():
             prev_sentences = []
-            
+            current_text_id = row["Text-ID"]
+            current_sentence_id = row["Sentence-ID"]
+
             for offset in [1, 2]:  # Now, we get prev-1 first, then prev-2
-                if idx >= offset:
-                    prev_text = str(data_frame.iloc[idx - offset]["Text"])
+                if current_sentence_id > offset:
+                    prev_row = data_frame[
+                        (data_frame["Text-ID"] == current_text_id) & 
+                        (data_frame["Sentence-ID"] == current_sentence_id - offset)
+                    ]
                     
-                    # Get previous sentence labels
-                    if is_training:
-                        prev_labels = labels_df.iloc[idx - offset][labels]
-                    else:
-                        if model is not None:
-                            # Use predicted labels in validation
-                            prev_labels = add_previous_label_features(
-                                df=data_frame.iloc[idx - offset]["Text"],
-                                labels_df=labels_df,
-                                labels=labels,
-                                model=model,
-                                tokenizer_for_dynamic=tokenizer_for_dynamic
-                            )
+                    if not prev_row.empty:
+                        prev_text = prev_row.iloc[0]["Text"]
+
+                        # Get previous sentence labels
+                        if is_training:
+                            prev_labels = labels_df.loc[
+                                (labels_df["Text-ID"] == current_text_id) & 
+                                (labels_df["Sentence-ID"] == current_sentence_id - offset),
+                                labels
+                            ].values.flatten().tolist()
                         else:
-                            prev_labels = [0.0] * 2 * len(labels)  # Default zero labels if model is not yet available
+                            prev_labels = [0.0] * 2 * len(labels)
 
-                    # Convert labels into a readable format
-                    label_str = " ".join(f"<{label}>" for label, value in zip(labels, prev_labels) if value >= 0.5)
-                    label_str = label_str if label_str else "<NONE>"  # Ensure a placeholder when no label is present
+                        # Convert labels into a readable format
+                        label_str = " ".join(f"<{label}>" for label, value in zip(labels, prev_labels) if value >= 0.5)
+                        label_str = label_str if label_str else "<NONE>"
 
-                    prev_sentences.append(f"{label_str} {prev_text}")
+                        prev_sentences.append(f"{label_str} {prev_text}")
 
-            # Place the current sentence first to avoid truncation of important information
-            current_text = str(data_frame.iloc[idx]["Text"])
+            current_text = row["Text"]
 
             if prev_sentences:
                 full_text = current_text + " </s> " + " </s> ".join(prev_sentences).strip()
@@ -1649,6 +1692,9 @@ class EnhancedDebertaModel(nn.Module):
 
             logger.debug(f"Previous labels output shape: {prev_labels_output.shape}")
 
+            for i in range(min(5, prev_label_features.shape[0])):  # Print first 5 only
+                logger.debug(f"Sample {i}: Prev Labels Input: {prev_label_features[i].cpu().numpy()}")
+
             combined_output = torch.cat([combined_output, prev_labels_output], dim=-1)
 
             logger.debug(f"Previous Sentences combined_output shape: {combined_output.shape}")
@@ -1757,8 +1803,7 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             labels=self.labels,
             is_training=False,
             model=model,
-            tokenizer_for_dynamic=self.tokenizer,
-            device=self.device
+            tokenizer_for_dynamic=self.tokenizer
         )
 
         # Ensure new_prev_feats has the correct shape
@@ -1773,7 +1818,12 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             lambda row: self.concatenate_text_with_prev_labels(row, self.labels, new_prev_feats), axis=1
         )
 
-        logger.debug(f"Validation dataset first samples:\n{self.val_df[['Text', 'Original_Text']].head().to_string()}")
+        logger.debug(f"Validation dataset first samples:\n{self.val_df[['Text', 'Original_Text']].head().to_string().strip()}")
+
+        for i in range(min(5, len(new_prev_feats))):  # Print first 5 for comparison
+            logger.debug(f"Validation Row {i}: prev_label_features = {new_prev_feats[i]}")
+            logger.debug(f"Validation Row {i}: prev_1_labels = {new_prev_feats[i][:len(self.labels)]}")
+            logger.debug(f"Validation Row {i}: prev_2_labels = {new_prev_feats[i][len(self.labels):]}")
 
         # Now update the evaluation dataset:
         # Use the dataset's map method to update that field.
@@ -1795,20 +1845,32 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         Helper function to reconstruct the text with previous sentences and their labels.
         """
         idx = row.name
+        text_id = row["Text-ID"]
+        sentence_id = row["Sentence-ID"]
         prev_sentences = []
 
         for offset in [1, 2]:  # Get prev-1 first, then prev-2
-            if idx >= offset:
-                prev_text = str(self.val_df.iloc[idx - offset]["Text"])
+            prev_idx = self.val_df[(self.val_df["Text-ID"] == text_id) & (self.val_df["Sentence-ID"] == sentence_id - offset)].index
 
-                # Retrieve previously computed label features (instead of recomputing)
-                prev_labels = new_prev_feats[idx - offset]
+            if len(prev_idx) > 0:
+                prev_idx = prev_idx[0]
+                prev_text = str(self.val_df.iloc[prev_idx]["Text"])
+                
+                # Extract correct previous label features
+                prev_feat = new_prev_feats[prev_idx]
+
+                # Assign prev-1 or prev-2 labels
+                prev_labels = prev_feat[:len(labels)] if offset == 1 else prev_feat[len(labels):]
 
                 # Ensure labels are formatted and added
                 label_str = " ".join(f"<{label}>" for label, value in zip(labels, prev_labels) if value >= 0.5)
                 label_str = label_str if label_str else "<NONE>"  # Ensure a placeholder when no label is present
 
                 prev_sentences.append(f"{label_str} {prev_text}")
+
+                # Debugging: Ensure correct previous label extraction
+                logger.debug(f"Row {idx} (Text-ID {text_id}, Sentence-ID {sentence_id}) Offset {offset}: Extracted prev_labels = {prev_labels}")
+                logger.debug(f"Row {idx} Offset {offset}: label_str before formatting = {label_str}")
 
         current_text = str(row["Text"])
 
@@ -1820,8 +1882,6 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         logger.debug(f"Concatenated text for row {idx}:\n{full_text}\n")
 
         return full_text
-
-            
 ```
 -----------
 ## runner.py

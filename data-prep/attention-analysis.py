@@ -2,11 +2,18 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import torch
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import transformers
+from safetensors.torch import load_file
+from transformers import AutoTokenizer
 import transformers
 from safetensors.torch import load_file
 from transformers import AutoTokenizer
@@ -41,7 +48,26 @@ model.eval()  # Set to evaluation mode
 
 sigmoid = torch.nn.Sigmoid()
 
+# Load tokenizer and model
+tokenizer = transformers.AutoTokenizer.from_pretrained(model_path)
+model = EnhancedDebertaModel(
+    pretrained_model=model_config["pretrained_model"],
+    config=transformers.AutoConfig.from_pretrained(model_path),
+    num_labels=len(model_config["labels"]),
+    id2label={idx: label for idx, label in enumerate(model_config["labels"])},
+    label2id={label: idx for idx, label in enumerate(model_config["labels"])}
+)
+
+# Load model weights
+state_dict = load_file(model_path + "/model.safetensors")
+model.load_state_dict(state_dict)
+model.eval()  # Set to evaluation mode
+
+sigmoid = torch.nn.Sigmoid()
+
 # Load validation dataset
+sentences_df = pd.read_csv("../data/validation-english/sentences.tsv", sep="\t")
+labels_df = pd.read_csv("../data/validation-english/labels-cat.tsv", sep="\t")
 sentences_df = pd.read_csv("../data/validation-english/sentences.tsv", sep="\t")
 labels_df = pd.read_csv("../data/validation-english/labels-cat.tsv", sep="\t")
 
@@ -57,6 +83,22 @@ absence_attributions = defaultdict(list)
 
 # Define function to compute attributions
 def get_attributions(sentence):
+    encoded_sentences = tokenizer(sentence, return_tensors="pt", truncation=True, padding=True, max_length=512)
+
+    # Remove token_type_ids if present
+    encoded_sentences.pop("token_type_ids", None)
+
+    # Convert input_ids to LongTensor
+    encoded_sentences["input_ids"] = encoded_sentences["input_ids"].to(torch.long)
+    encoded_sentences["attention_mask"] = encoded_sentences["attention_mask"].to(torch.long)
+
+    # Extract embeddings
+    with torch.no_grad():
+        input_embeds = model.transformer.embeddings.word_embeddings(encoded_sentences["input_ids"])
+
+    # Enable gradient computation
+    input_embeds.requires_grad_()
+
     encoded_sentences = tokenizer(sentence, return_tensors="pt", truncation=True, padding=True, max_length=512)
 
     # Remove token_type_ids if present
@@ -128,6 +170,7 @@ def get_attributions(sentence):
 # Process entire validation dataset
 for idx, row in tqdm(merged_df.iterrows(), total=len(merged_df), desc="Processing Sentences", unit="sentence"):
     text = row["Text"]
+    tokens, attributions, label = get_attributions(text)
     tokens, attributions, label = get_attributions(text)
 
     for token, attr in zip(tokens, attributions):

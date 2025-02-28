@@ -10,7 +10,8 @@ for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
 
 # Force stdout to be unbuffered
-sys.stdout.reconfigure(line_buffering=True)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(line_buffering=True)
 
 # Custom handler that ensures immediate flushing
 class FlushStreamHandler(logging.StreamHandler):

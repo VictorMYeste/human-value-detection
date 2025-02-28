@@ -228,14 +228,15 @@ def prepare_datasets(
     if validation_path:
         val_df = load_and_optionally_prune_df(
             dataset_path=validation_path,
-            augment_data=augment_data,
+            augment_data=False,
             slice_data=slice_data,
             custom_stopwords=custom_stopwords,
             token_pruning=token_pruning,  # now we do want to prune if user asked
-            idf_map=idf_map,             # reuse from training
+            idf_map=idf_map,              # reuse from training
             threshold=pruning_threshold
         )
 
+        labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
 
         validation_dataset = load_dataset(

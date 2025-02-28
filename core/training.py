@@ -235,7 +235,7 @@ def train(
         # Load the raw validation DataFrame from file
         raw_val_df = load_and_optionally_prune_df(
             dataset_path=validation_path,
-            augment_data=augment_data,
+            augment_data=False,
             slice_data=slice_data,
             custom_stopwords=custom_stopwords,
             token_pruning=token_pruning,

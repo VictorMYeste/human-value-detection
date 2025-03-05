@@ -143,8 +143,15 @@ def train(
         ner_feature_dim = 768 # DeBERTa hidden size
     else:
         ner_feature_dim = 0
-    
-    topic_feature_dim = 10 if topic_detection != None else 0  # Adjust based on method
+
+    if topic_detection == "bertopic":
+        topic_feature_dim = 40
+    elif topic_detection == "lda":
+        topic_feature_dim = 60
+    elif topic_detection == "nmf":
+        topic_feature_dim = 90
+    else:
+        topic_feature_dim = 0
     
     config = AutoConfig.from_pretrained(pretrained_model)
     # Add necessary attributes to config

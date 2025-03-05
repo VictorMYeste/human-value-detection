@@ -1,0 +1,39 @@
+2025-03-05 11:02:10,917 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-05 11:02:10,919 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-05 11:02:16,564 - INFO - Setting random seed to 42
+2025-03-05 11:02:16,564 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-05 11:02:16,754 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-03-05 11:02:16,755 - INFO - Preparing datasets for training and validation
+2025-03-05 11:02:24,984 - INFO - Applying lda for topic modeling.
+2025-03-05 11:04:06,061 - INFO - Applying lda for topic modeling.
+2025-03-05 11:04:35,625 - INFO - Arguments validated successfully.
+2025-03-05 11:04:35,629 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-05 11:04:36,227 - INFO - Using CUDA for training.
+2025-03-05 11:04:37,443 - INFO - TRAINING
+2025-03-05 11:04:37,443 - INFO - ========
+2025-03-05 11:04:37,443 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-03-05 11:04:37,446 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6873, 'grad_norm': 1.4945528507232666, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6546, 'grad_norm': 2.9215073585510254, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6518338322639465, 'eval_f1-score': {'Presence': 0.64}, 'eval_macro-avg-f1-score': 0.64, 'eval_runtime': 163.6491, 'eval_samples_per_second': 91.073, 'eval_steps_per_second': 11.384, 'epoch': 1.0}
+2025-03-05 11:31:48,921 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.6437, 'grad_norm': 3.283158779144287, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.6124, 'grad_norm': 2.483880043029785, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}

@@ -93,7 +93,7 @@ def train(
         batch_size: int = 4,
         num_train_epochs: int = 10,
         learning_rate: float = 2e-05,
-        weight_decay: float = 0.01,
+        weight_decay: float = 0.15,
         gradient_accumulation_steps: int = 4,
         early_stopping_patience=4,
         num_categories: int = 0,

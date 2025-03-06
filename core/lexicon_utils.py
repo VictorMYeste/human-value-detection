@@ -35,7 +35,7 @@ def load_vad_embeddings(path: str) -> dict[str, dict[str, float]]:
             "dominance": float(dominance)
             }
     logger.debug(f"Loaded VAD embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 3
 
 def load_emolex_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load EmoLex lexicon into a dictionary."""
@@ -51,7 +51,7 @@ def load_emolex_embeddings(path: str) -> dict[str, dict[str, float]]:
             emotion_idx = emotions.index(emotion)
             embeddings[word][emotion_idx] = int(score)
     logger.debug(f"Loaded EmoLex embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 10
 
 def load_emotionintensity_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load NRC Emotion Intensity Lexicon into a dictionary."""
@@ -64,7 +64,7 @@ def load_emotionintensity_embeddings(path: str) -> dict[str, dict[str, float]]:
             embeddings[word] = {emotion: 0.0 for emotion in ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]}
         embeddings[word][emotion] = score
     logger.debug(f"Loaded Emotion Intensity embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 8
 
 def load_worrywords_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load NRC WorryWords Lexicon into a dictionary."""
@@ -76,7 +76,7 @@ def load_worrywords_embeddings(path: str) -> dict[str, dict[str, float]]:
         mean_score = float(parts[1])  # Mean score column
         embeddings[term.lower()] = mean_score
     logger.debug(f"Loaded WorryWords embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 1
 
 def load_liwc_embeddings(path: str) -> Tuple[Dict[str, List[int]], Dict[int, str]]:
     """Load LIWC dictionary and process it into usable categories and scores."""
@@ -158,7 +158,7 @@ def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
                 word = word_match.group(1).strip()
                 embeddings[word] = current_category
     logger.debug(f"Loaded MFD embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 10
 
 def load_schwartz_embeddings(path=None) -> tuple[dict, int]:
     """Return the hardcoded Schwartz lexicon and category count."""

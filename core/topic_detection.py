@@ -44,7 +44,7 @@ class TopicModeling:
             embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
 
             # Initialize BERTopic with a fixed number of topics
-            self.model = BERTopic(nr_topics=self.num_topics, embedding_model=embedding_model, verbose=True)
+            self.model = BERTopic(nr_topics=40, embedding_model=embedding_model, verbose=True, top_n_words=20)
             topics, _ = self.model.fit_transform(sentences)
 
             # Ensure topics are within a valid range
@@ -54,6 +54,10 @@ class TopicModeling:
             del embedding_model  # Delete the embedding model
             torch.cuda.empty_cache()  # Clear unused GPU memory
             gc.collect()  # Run garbage collector
+
+            logger.debug(f"Topic indices shape: {np.array(topics).shape}")
+            logger.debug(f"Max topic index: {max(topics)}")
+            logger.debug(f"Expected num_topics: {self.num_topics}")
 
             return self.get_topic_vectors(topics)
 
@@ -86,12 +90,14 @@ class TopicModeling:
             np.ndarray: One-hot encoded topic representation.
         """
         num_sentences = len(topics)
-        topic_vectors = np.zeros((num_sentences, self.num_topics))
+        fixed_num_topics = 40
+
+        topic_vectors = np.zeros((num_sentences, fixed_num_topics))
 
         for i, topic in enumerate(topics):
-            if topic >= 0 and topic < self.num_topics:  # Ensure topic index is within bounds
+            if 0 <= topic < fixed_num_topics:  # Ensure topic index is within bounds
                 topic_vectors[i, topic] = 1  # One-hot encode the topic assignment
             else:
-                continue  # Ignore -1 topics
+                continue  # Ignore invalid topics
 
         return topic_vectors

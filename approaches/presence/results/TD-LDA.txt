@@ -37,3 +37,37 @@ Applying token pruning: No
 2025-03-05 11:31:48,921 - INFO - Skipping evaluation for warm-up phase (epoch 0).
 {'loss': 0.6437, 'grad_norm': 3.283158779144287, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
 {'loss': 0.6124, 'grad_norm': 2.483880043029785, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.611, 'grad_norm': 2.4989705085754395, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6606054902076721, 'eval_f1-score': {'Presence': 0.62}, 'eval_macro-avg-f1-score': 0.62, 'eval_runtime': 163.4237, 'eval_samples_per_second': 91.199, 'eval_steps_per_second': 11.4, 'epoch': 2.0}
+2025-03-05 11:59:02,195 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.5698, 'grad_norm': 4.522130489349365, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.5147, 'grad_norm': 5.1740193367004395, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.512, 'grad_norm': 8.281472206115723, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7366192936897278, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 163.564, 'eval_samples_per_second': 91.12, 'eval_steps_per_second': 11.39, 'epoch': 3.0}
+{'loss': 0.4369, 'grad_norm': 10.660097122192383, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.39, 'grad_norm': 9.336004257202148, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.3914, 'grad_norm': 6.1296281814575195, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.8828098773956299, 'eval_f1-score': {'Presence': 0.61}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 163.8484, 'eval_samples_per_second': 90.962, 'eval_steps_per_second': 11.37, 'epoch': 4.0}
+{'loss': 0.2951, 'grad_norm': 14.33827018737793, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.2708, 'grad_norm': 14.653709411621094, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1174049377441406, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 163.6924, 'eval_samples_per_second': 91.049, 'eval_steps_per_second': 11.381, 'epoch': 5.0}
+{'loss': 0.2741, 'grad_norm': 5.461935043334961, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.1884, 'grad_norm': 23.24419593811035, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.2001, 'grad_norm': 7.272738456726074, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 1.3453744649887085, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 164.0668, 'eval_samples_per_second': 90.841, 'eval_steps_per_second': 11.355, 'epoch': 6.0}
+{'loss': 0.1816, 'grad_norm': 24.392921447753906, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.1322, 'grad_norm': 26.501163482666016, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.1371, 'grad_norm': 11.892115592956543, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 1.602640151977539, 'eval_f1-score': {'Presence': 0.6}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 163.663, 'eval_samples_per_second': 91.065, 'eval_steps_per_second': 11.383, 'epoch': 7.0}
+{'loss': 0.131, 'grad_norm': 6.963627338409424, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.1026, 'grad_norm': 5.825366020202637, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.1032, 'grad_norm': 20.7903995513916, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 1.904497742652893, 'eval_f1-score': {'Presence': 0.6}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 163.7323, 'eval_samples_per_second': 91.027, 'eval_steps_per_second': 11.378, 'epoch': 8.0}
+{'train_runtime': 13082.5296, 'train_samples_per_second': 34.212, 'train_steps_per_second': 1.069, 'train_loss': 0.3610959868648417, 'epoch': 8.0}
+2025-03-05 14:42:41,018 - INFO - 
+
+VALIDATION
+2025-03-05 14:42:41,018 - INFO - ==========
+2025-03-05 14:45:24,823 - INFO - Presence: 0.61
+2025-03-05 14:45:24,824 - INFO - Macro average: 0.61
+2025-03-05 14:45:25,280 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

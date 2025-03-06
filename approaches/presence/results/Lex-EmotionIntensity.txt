@@ -1,0 +1,36 @@
+2025-03-06 08:17:50,345 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-06 08:17:50,346 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-06 08:17:55,844 - INFO - Setting random seed to 42
+2025-03-06 08:17:55,845 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-06 08:17:56,030 - INFO - Loading lexicon embeddings for: EmotionIntensity
+2025-03-06 08:17:56,042 - INFO - Preparing datasets for training and validation
+2025-03-06 08:18:22,815 - INFO - Arguments validated successfully.
+2025-03-06 08:18:22,819 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-06 08:18:24,194 - INFO - Using CUDA for training.
+2025-03-06 08:18:25,477 - INFO - TRAINING
+2025-03-06 08:18:25,477 - INFO - ========
+2025-03-06 08:18:25,477 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: EmotionIntensity
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 8
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-03-06 08:18:25,480 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6824, 'grad_norm': 1.2055927515029907, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6601, 'grad_norm': 2.9398088455200195, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6512704491615295, 'eval_f1-score': {'Presence': 0.64}, 'eval_macro-avg-f1-score': 0.64, 'eval_runtime': 163.1986, 'eval_samples_per_second': 91.324, 'eval_steps_per_second': 11.416, 'epoch': 1.0}
+2025-03-06 08:45:44,000 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.649, 'grad_norm': 2.8760242462158203, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}

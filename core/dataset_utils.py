@@ -11,6 +11,7 @@ from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
 from sklearn.feature_extraction.text import TfidfVectorizer
+import numbers
 
 from core.config import LEXICON_PATHS
 from core.lexicon_utils import load_lexicon
@@ -136,7 +137,7 @@ def prepare_datasets(
     augment_data: bool = False,
     topic_detection: str = None,
     token_pruning: str = None
-) -> Tuple[datasets.Dataset, datasets.Dataset]:
+) -> Tuple[datasets.Dataset, datasets.Dataset, int]:
     """
     Build & prune (if requested) the training set, then do the same for validation
     using the same IDF map.
@@ -196,6 +197,7 @@ def prepare_datasets(
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
+        logger.debug(f"Lexicon produced from LIWC 22 software with train_num_cat = {train_num_cat} and val_num_cat = {val_num_cat}")
     else:
         # Fallback: single lexicon for everything (the old approach)
         train_lexicon, train_num_cat = lexicon_embeddings, num_categories
@@ -265,7 +267,7 @@ def prepare_datasets(
     logger.debug(f"Sample training dataset: {training_dataset[0]}")
     logger.debug(f"Sample validation dataset: {validation_dataset[0]}")
 
-    return training_dataset, validation_dataset
+    return training_dataset, validation_dataset, train_num_cat
 
 # ========================================================
 # DATASET LOADING
@@ -522,13 +524,17 @@ def load_dataset(
     if linguistic_features:
         logger.info("Adding Linguistic features")
         data_frame['Linguistic_Scores'] = [compute_linguistic_features(txt, nlp) for txt in texts]
+        logger.debug(f"[LING] shape: {data_frame['Linguistic_Scores'].shape}, first: {data_frame['Linguistic_Scores'].iloc[0]}")
+        logger.debug("Before appending linguistic features: combined_features has length = %d", len(combined_features))
         combined_features.append(data_frame['Linguistic_Scores'].tolist())
+        logger.debug("After appending linguistic features: combined_features has length = %d", len(combined_features))
 
     # Compute NER features
     if ner_features:
         logger.info("Adding NER embeddings")
         data_frame["NER_Features"] = [compute_ner_embeddings(txt, nlp) for txt in texts]
         logger.debug(f"NER embedding example: {data_frame['NER_Features'].head()}")
+        logger.debug(f"[NER] shape: {data_frame['NER_Features'].shape}, first: {data_frame['NER_Features'].iloc[0]}")
         combined_features.append(data_frame["NER_Features"].tolist())
 
     # Compute lexicon embeddings for each sentence
@@ -545,10 +551,7 @@ def load_dataset(
             data_frame['Lexicon_Scores'] = data_frame.apply(
                 lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
             )
-
-        data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
-            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0]*num_categories
-        )
+        logger.debug(f"[LEX] shape: {data_frame['Lexicon_Scores'].shape}, first: {data_frame['Lexicon_Scores'].iloc[0]}")
         combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
         #logger.debug(f"Sample Lexicon Scores: {data_frame['Lexicon_Scores'].head()}")
@@ -560,22 +563,23 @@ def load_dataset(
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
         encoded_sentences["topic_features"] = topic_vectors.tolist()
+        logger.debug(f"[Topic Detection] shape: {encoded_sentences['topic_features'].shape}, first: {encoded_sentences['topic_features'].iloc[0]}")
         combined_features.append(topic_vectors.tolist())
     
     # Combine all features
     if combined_features:
-        # Stack features together (ensure consistent dimensions across all features)
-        max_length = max(len(f) for features in combined_features for f in features)
-        combined_features = [
-            np.concatenate([
-                np.asarray(f, dtype=np.float32) if len(f) == max_length
-                else np.pad(f, (0, max_length - len(f)), 'constant')
-                for f in features
-            ])
-            for features in zip(*combined_features)
-        ]
+        merged_rows = []
+        for row_tuple in zip(*combined_features):
+            arrays = []
+            for feat in row_tuple:
+                # feat should be a list (or numpy array) of floats
+                arrays.append(np.array(feat, dtype=np.float32))
+            merged_rows.append(np.concatenate(arrays))
+        combined_features = merged_rows
     else:
-        combined_features = [[0.0]*num_categories]*len(data_frame)
+        if linguistic_features:
+            num_categories += 17
+        combined_features = [[0.0] * num_categories] * len(data_frame)  # Default zero vectors
 
     # Debug logging
     if linguistic_features:
@@ -588,10 +592,34 @@ def load_dataset(
         logger.debug(f"Sample Topic Detection Features: {encoded_sentences['topic_features'][:5]}")
     for i, row in enumerate(combined_features[:5]):
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
+    if len(combined_features) > 0:
+        logger.debug(f"First sample’s final combined_features array:\n{combined_features[0]}")
+
     
     # Save them in the encoded_sentences
     if lexicon and combined_features:
+        all_lengths = [len(row) for row in combined_features]  # length of each row
+        unique_lengths = set(all_lengths)
+        logger.debug(f"unique_lengths in combined_features: {unique_lengths}")
+
+        # If more than one unique length, pinpoint which row(s)
+        if len(unique_lengths) != 1:
+            for i, length in enumerate(all_lengths):
+                if length != 135:  # or whatever you expect
+                    logger.error(f"Row {i} in combined_features has length {length} instead of 135!")
+                    logger.error(f"Row {i}: {combined_features[i]}")
+        
+        for i, row in enumerate(combined_features):
+            for j, val in enumerate(row):
+                if not isinstance(val, numbers.Number):
+                    logger.error(f"Non-numeric: {type(val)} -> {val}")
+
+
         encoded_sentences["lexicon_features"] = np.array(combined_features, dtype=np.float32).tolist()
+        logger.debug(
+            f"Shape of 'lexicon_features' before dataset conversion: "
+            f"{np.array(encoded_sentences['lexicon_features']).shape}"
+        )
     elif ner_features and combined_features:
         encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
 
@@ -964,11 +992,7 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         schwartz_lexicon, _ = lexicon_embeddings
         scores = compute_fn(text, schwartz_lexicon)
     else:
-        # Pass `num_categories` only if the function supports it
-        try:
-            scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
-        except TypeError:
-            scores = compute_fn(text, lexicon_embeddings, tokenizer)
+        scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
     
     # Ensure consistent length
     if len(scores) != num_categories:

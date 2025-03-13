@@ -1,0 +1,35 @@
+2025-03-13 22:07:21,101 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-13 22:07:21,102 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-13 22:07:26,615 - INFO - Setting random seed to 42
+2025-03-13 22:07:26,616 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-13 22:07:26,808 - INFO - Loading lexicon embeddings for: LIWC-22
+2025-03-13 22:07:26,808 - INFO - Preparing datasets for training and validation
+2025-03-13 22:07:51,227 - INFO - Loading en_core_web_sm for extra features
+2025-03-13 22:07:51,595 - INFO - Adding Linguistic features
+2025-03-13 22:12:34,098 - INFO - Loading en_core_web_sm for extra features
+2025-03-13 22:12:34,419 - INFO - Adding Linguistic features
+2025-03-13 22:14:10,227 - INFO - Arguments validated successfully.
+2025-03-13 22:14:10,310 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-13 22:14:10,856 - INFO - Using CUDA for training.
+2025-03-13 22:14:12,094 - INFO - TRAINING
+2025-03-13 22:14:12,094 - INFO - ========
+2025-03-13 22:14:12,094 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: LIWC-22
+Adding linguistic features: Yes
+Adding NER features: No
+Number of categories (lexicon): 135
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-03-13 22:14:12,097 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

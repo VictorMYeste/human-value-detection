@@ -49,15 +49,10 @@ def run_training(
         lexicon_embeddings, num_categories = load_embeddings(lexicon)
     else:
         lexicon_embeddings, num_categories = None, 0  # No lexicon features
-
-    # Linguistic embeddings
-    if linguistic_features:
-        num_linguistic_features = 17  # Total number of linguistic features
-        num_categories += num_linguistic_features
     
     # Prepare datasets
     logger.info("Preparing datasets for training and validation")
-    training_dataset, validation_dataset = prepare_datasets(
+    training_dataset, validation_dataset, num_categories = prepare_datasets(
         training_path=training_dataset_path,
         validation_path=validation_dataset_path,
         tokenizer=tokenizer,
@@ -74,6 +69,11 @@ def run_training(
         topic_detection=topic_detection,
         token_pruning=token_pruning
     )
+
+    logger.debug(f"num_categories after preparing datasets = {num_categories}")
+
+    if linguistic_features:
+        num_categories += 17
 
     # Train and evaluate
     trainer = train(

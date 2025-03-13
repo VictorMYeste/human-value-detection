@@ -1,0 +1,40 @@
+2025-03-12 16:16:35,079 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-12 16:16:35,080 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-12 16:16:40,626 - INFO - Setting random seed to 42
+2025-03-12 16:16:40,627 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-12 16:16:40,830 - INFO - Loading lexicon embeddings for: Schwartz
+2025-03-12 16:16:40,830 - INFO - Preparing datasets for training and validation
+2025-03-12 16:16:49,050 - ERROR - An error occurred: too many values to unpack (expected 2)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 60, in run_training
+    training_dataset, validation_dataset = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 205, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 539, in load_dataset
+    data_frame['Lexicon_Scores'] = [
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 540, in <listcomp>
+    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 964, in compute_lexicon_scores
+    schwartz_lexicon, _ = lexicon_embeddings
+ValueError: too many values to unpack (expected 2)
+2025-03-12 16:16:49,090 - ERROR - An error occurred: too many values to unpack (expected 2)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 60, in run_training
+    training_dataset, validation_dataset = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 205, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 539, in load_dataset
+    data_frame['Lexicon_Scores'] = [
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 540, in <listcomp>
+    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 964, in compute_lexicon_scores
+    schwartz_lexicon, _ = lexicon_embeddings
+ValueError: too many values to unpack (expected 2)

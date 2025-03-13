@@ -129,7 +129,10 @@ def load_liwc_embeddings(path: str) -> Tuple[Dict[str, List[int]], Dict[int, str
     #logger.debug("Category Names Sample:", list(category_names.items())[:5])
     #logger.debug("Embeddings Sample:", list(embeddings.items())[:5])
     logger.debug(f"Loaded LIWC embeddings: {len(embeddings)} words, {len(category_names)} categories.")
-    return embeddings, category_names
+    
+    num_categories = len(category_names)
+
+    return embeddings, num_categories
 
 def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load the Moral Foundations Dictionary into a usable format."""

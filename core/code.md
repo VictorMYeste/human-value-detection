@@ -360,6 +360,9 @@ def prepare_datasets(
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
+        if linguistic_features:
+            train_num_cat += 17
+            val_num_cat   += 17
     else:
         # Fallback: single lexicon for everything (the old approach)
         train_lexicon, train_num_cat = lexicon_embeddings, num_categories
@@ -1128,11 +1131,7 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
         schwartz_lexicon, _ = lexicon_embeddings
         scores = compute_fn(text, schwartz_lexicon)
     else:
-        # Pass `num_categories` only if the function supports it
-        try:
-            scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
-        except TypeError:
-            scores = compute_fn(text, lexicon_embeddings, tokenizer)
+        scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
     
     # Ensure consistent length
     if len(scores) != num_categories:
@@ -1201,7 +1200,7 @@ def load_vad_embeddings(path: str) -> dict[str, dict[str, float]]:
             "dominance": float(dominance)
             }
     logger.debug(f"Loaded VAD embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 3
 
 def load_emolex_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load EmoLex lexicon into a dictionary."""
@@ -1217,7 +1216,7 @@ def load_emolex_embeddings(path: str) -> dict[str, dict[str, float]]:
             emotion_idx = emotions.index(emotion)
             embeddings[word][emotion_idx] = int(score)
     logger.debug(f"Loaded EmoLex embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 10
 
 def load_emotionintensity_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load NRC Emotion Intensity Lexicon into a dictionary."""
@@ -1230,7 +1229,7 @@ def load_emotionintensity_embeddings(path: str) -> dict[str, dict[str, float]]:
             embeddings[word] = {emotion: 0.0 for emotion in ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]}
         embeddings[word][emotion] = score
     logger.debug(f"Loaded Emotion Intensity embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 8
 
 def load_worrywords_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load NRC WorryWords Lexicon into a dictionary."""
@@ -1242,7 +1241,7 @@ def load_worrywords_embeddings(path: str) -> dict[str, dict[str, float]]:
         mean_score = float(parts[1])  # Mean score column
         embeddings[term.lower()] = mean_score
     logger.debug(f"Loaded WorryWords embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 1
 
 def load_liwc_embeddings(path: str) -> Tuple[Dict[str, List[int]], Dict[int, str]]:
     """Load LIWC dictionary and process it into usable categories and scores."""
@@ -1295,7 +1294,10 @@ def load_liwc_embeddings(path: str) -> Tuple[Dict[str, List[int]], Dict[int, str
     #logger.debug("Category Names Sample:", list(category_names.items())[:5])
     #logger.debug("Embeddings Sample:", list(embeddings.items())[:5])
     logger.debug(f"Loaded LIWC embeddings: {len(embeddings)} words, {len(category_names)} categories.")
-    return embeddings, category_names
+    
+    num_categories = len(category_names)
+
+    return embeddings, num_categories
 
 def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
     """Load the Moral Foundations Dictionary into a usable format."""
@@ -1324,7 +1326,7 @@ def load_mfd_embeddings(path: str) -> dict[str, dict[str, float]]:
                 word = word_match.group(1).strip()
                 embeddings[word] = current_category
     logger.debug(f"Loaded MFD embeddings: {len(embeddings)} words.")
-    return embeddings
+    return embeddings, 10
 
 def load_schwartz_embeddings(path=None) -> tuple[dict, int]:
     """Return the hardcoded Schwartz lexicon and category count."""
@@ -1950,8 +1952,7 @@ def run_training(
 
     # Linguistic embeddings
     if linguistic_features:
-        num_linguistic_features = 17  # Total number of linguistic features
-        num_categories += num_linguistic_features
+        num_categories += 17
     
     # Prepare datasets
     logger.info("Preparing datasets for training and validation")
@@ -2061,7 +2062,7 @@ class TopicModeling:
             embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
 
             # Initialize BERTopic with a fixed number of topics
-            self.model = BERTopic(nr_topics=self.num_topics, embedding_model=embedding_model, verbose=True)
+            self.model = BERTopic(nr_topics=40, embedding_model=embedding_model, verbose=True, top_n_words=20)
             topics, _ = self.model.fit_transform(sentences)
 
             # Ensure topics are within a valid range
@@ -2071,6 +2072,10 @@ class TopicModeling:
             del embedding_model  # Delete the embedding model
             torch.cuda.empty_cache()  # Clear unused GPU memory
             gc.collect()  # Run garbage collector
+
+            logger.debug(f"Topic indices shape: {np.array(topics).shape}")
+            logger.debug(f"Max topic index: {max(topics)}")
+            logger.debug(f"Expected num_topics: {self.num_topics}")
 
             return self.get_topic_vectors(topics)
 
@@ -2103,13 +2108,15 @@ class TopicModeling:
             np.ndarray: One-hot encoded topic representation.
         """
         num_sentences = len(topics)
-        topic_vectors = np.zeros((num_sentences, self.num_topics))
+        fixed_num_topics = 40
+
+        topic_vectors = np.zeros((num_sentences, fixed_num_topics))
 
         for i, topic in enumerate(topics):
-            if topic >= 0 and topic < self.num_topics:  # Ensure topic index is within bounds
+            if 0 <= topic < fixed_num_topics:  # Ensure topic index is within bounds
                 topic_vectors[i, topic] = 1  # One-hot encode the topic assignment
             else:
-                continue  # Ignore -1 topics
+                continue  # Ignore invalid topics
 
         return topic_vectors
 ```

@@ -215,9 +215,9 @@ def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
     parser = EMBEDDING_PARSERS.get(lexicon_name)
     if not parser:
         raise ValueError(f"Unknown lexicon: {lexicon_name}")
-    
+
     embeddings, dynamic_num_categories = parser["function"](path)
-    
+
     # If the parser's dictionary says "num_categories" is None, then use the
     # dynamic value returned by the loader. Otherwise, use the fixed one:
     if parser["num_categories"] is not None:

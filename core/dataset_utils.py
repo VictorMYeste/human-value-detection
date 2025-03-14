@@ -551,6 +551,10 @@ def load_dataset(
             data_frame['Lexicon_Scores'] = data_frame.apply(
                 lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
             )
+        # If the above can produce NaNs, fix them
+        data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
+            lambda arr: [0.0 if np.isnan(x) else x for x in arr]
+        )
         logger.debug(f"[LEX] shape: {data_frame['Lexicon_Scores'].shape}, first: {data_frame['Lexicon_Scores'].iloc[0]}")
         combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
@@ -1014,6 +1018,8 @@ def compute_precomputed_scores(
     text_id = str(row["Text-ID"])
     sent_id = str(row["Sentence-ID"])
     key = (text_id, sent_id)
+
+    logger.debug(f"text_id: {text_id}, sent_id: {sent_id}")
 
     if key in precomputed_dict:
         return precomputed_dict[key]

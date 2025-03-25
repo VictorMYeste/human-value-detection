@@ -1,0 +1,117 @@
+2025-03-17 08:26:12,955 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-17 08:26:12,955 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-17 08:26:26,979 - INFO - Setting random seed to 42
+2025-03-17 08:26:26,995 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-17 08:26:27,212 - INFO - Loading lexicon embeddings for: LIWC-22
+2025-03-17 08:26:27,213 - INFO - Preparing datasets for training and validation
+2025-03-17 08:33:16,728 - INFO - Loading en_core_web_sm for extra features
+2025-03-17 08:33:17,075 - INFO - Adding Linguistic features
+2025-03-17 08:40:27,791 - INFO - Adding Previous Sentences Labels features
+2025-03-17 08:43:34,486 - INFO - Loading en_core_web_sm for extra features
+2025-03-17 08:43:34,783 - INFO - Adding Linguistic features
+2025-03-17 08:44:54,942 - INFO - Adding Previous Sentences Labels features
+2025-03-17 08:44:57,122 - INFO - Arguments validated successfully.
+2025-03-17 08:44:57,195 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-03-17 08:44:57,195 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-17 08:44:57,718 - INFO - Using CUDA for training.
+2025-03-17 08:44:58,845 - INFO - TRAINING
+2025-03-17 08:44:58,845 - INFO - ========
+2025-03-17 08:44:58,845 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: LIWC-22
+Adding linguistic features: Yes
+Adding NER features: No
+Number of categories (lexicon): 135
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-03-17 08:44:58,848 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-03-17 08:44:58,851 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+2025-03-17 08:45:01,031 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (2x896 and 912x1)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 79, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 269, in train
+    trainer.train()
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3485, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 322, in compute_loss
+    outputs = model(**inputs, labels=labels)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 281, in forward
+    logits = self.classification_head(combined_output)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (2x896 and 912x1)
+2025-03-17 08:45:01,032 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (2x896 and 912x1)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 79, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 269, in train
+    trainer.train()
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3485, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 322, in compute_loss
+    outputs = model(**inputs, labels=labels)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 281, in forward
+    logits = self.classification_head(combined_output)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (2x896 and 912x1)

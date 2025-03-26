@@ -262,7 +262,11 @@ def train(
                 val_df=raw_val_df,
                 labels_df=labels_df,
                 labels=labels,
-                tokenizer=tokenizer
+                tokenizer=tokenizer,
+                num_categories=num_categories,
+                lexicon=lexicon,
+                ner_features=ner_features,
+                topic_detection=topic_detection
             )
         )
 

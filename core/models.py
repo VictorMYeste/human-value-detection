@@ -6,8 +6,12 @@ from torch.nn.functional import binary_cross_entropy_with_logits
 import torch.distributed as dist
 import os
 import pandas as pd
+import spacy
 
-from core.dataset_utils import add_previous_label_features
+from core.dataset_utils import add_previous_label_features, compute_lexicon_scores, compute_ner_embeddings
+from core.lexicon_utils import load_embeddings, load_lexicon
+from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
+from core.topic_detection import TopicModeling
 from core.log import logger
 
 # ========================================================
@@ -296,6 +300,7 @@ class EnhancedDebertaModel(nn.Module):
 class CustomTrainer(transformers.Trainer):
     """Custom Trainer with modified loss function for multi-label classification."""
     def compute_loss(self, model, inputs, return_outputs=False):
+        logger.debug(f"Keys in inputs: {inputs.keys()}")
         logger.debug(f"Input IDs Shape: {inputs['input_ids'].shape}")
         logger.debug(f"Attention Mask Shape: {inputs['attention_mask'].shape}")
 
@@ -304,9 +309,6 @@ class CustomTrainer(transformers.Trainer):
             logger.debug(f"Lexicon Features Shape: {inputs['lexicon_features'].shape}")
         else:
             logger.debug("No lexicon features")
-
-        if "prev_label_features" in inputs:
-            prev_label_features = inputs.pop("prev_label_features", None)
         
         # Pop labels for loss computation
         labels = inputs.pop("labels")
@@ -317,6 +319,7 @@ class CustomTrainer(transformers.Trainer):
 
         # Forward pass through the model
         if "prev_label_features" in inputs:
+            prev_label_features = inputs.pop("prev_label_features", None)
             outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
         else:
             outputs = model(**inputs, labels=labels)
@@ -350,7 +353,18 @@ class WarmupEvalCallback(TrainerCallback):
         return control
 
 class DynamicPrevLabelCallback(transformers.TrainerCallback):
-    def __init__(self, trainer, val_df, labels_df, labels, tokenizer, device=None):
+    def __init__(
+            self,
+            trainer,
+            val_df,
+            labels_df,
+            labels,
+            tokenizer,
+            device=None,
+            num_categories=0,
+            lexicon=None,
+            ner_features=None,
+            topic_detection=None):
         """
         val_df: The original raw validation DataFrame.
         labels: List of label names.
@@ -363,13 +377,28 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         self.labels = labels
         self.tokenizer = tokenizer
         self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
+        self.num_categories=num_categories
+        self.lexicon=lexicon
+        self.ner_features=ner_features
+        self.topic_detection=topic_detection
 
     def on_evaluate(self, args, state, control, **kwargs):
         # Obtain current model from trainer
         model = self.trainer.model
         model.eval()
 
-        # (A) Add previous sentences label features
+        # (A) Dynamically compute lexicon features for validation
+        if self.lexicon and self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
+            val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
+            logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
+        else:
+            val_lexicon, val_num_cat = load_embeddings(self.lexicon)
+
+        new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
+
+        logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
+
+        # (B) Add previous sentences label features
         logger.debug(f"Epoch {state.epoch}: Running validation. Model: {model is not None}")
 
         # Dynamically compute the previous labels using our modified function:
@@ -379,16 +408,38 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             labels=self.labels,
             is_training=False,
             model=model,
-            tokenizer_for_dynamic=self.tokenizer
+            tokenizer_for_dynamic=self.tokenizer,
+            lexicon=self.lexicon,
+            lexicon_embeddings=val_lexicon
         )
+
+        # (C) Dynamically compute NER features for validation
+        if self.ner_features:
+            new_ner_feats = self.compute_ner_features(self.val_df)
+
+        # (D) Dynamically compute topic features for validation
+        if self.topic_detection:
+            new_topic_feats = self.compute_topic_features(self.val_df)
 
         # Ensure new_prev_feats has the correct shape
         for i in range(len(new_prev_feats)):
             if len(new_prev_feats[i]) < 2 * len(self.labels):
                 padding = [0.0] * (2 * len(self.labels) - len(new_prev_feats[i]))
                 new_prev_feats[i].extend(padding)  # Pad with zeros if missing
+            
+            if self.lexicon and len(new_lexicon_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_lexicon_feats[i]))
+                new_lexicon_feats[i].extend(padding)  # Pad with zeros if missing
 
-        # (B) Concatenate to text the previous sentences with their predicted labels
+            if self.ner_features and len(new_ner_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_ner_feats[i]))
+                new_ner_feats[i].extend(padding)  # Pad with zeros if missing
+
+            if self.topic_detection and len(new_topic_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_topic_feats[i]))
+                new_topic_feats[i].extend(padding)  # Pad with zeros if missing
+
+        # (E) Concatenate to text the previous sentences with their predicted labels
         self.val_df["Text"] = self.val_df["Original_Text"]
         self.val_df["Text"] = self.val_df.apply(
             lambda row: self.concatenate_text_with_prev_labels(row, self.labels, new_prev_feats), axis=1
@@ -406,6 +457,12 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         def update_prev_label(dataset, idx):
             # Here, idx comes from the order of the dataset; we assume it matches self.val_df
             dataset["prev_label_features"] = new_prev_feats[idx]
+            if self.lexicon:
+                dataset["lexicon_features"] = new_lexicon_feats[idx]
+            if self.ner_features:
+                dataset["ner_features"] = new_ner_feats[idx]
+            if self.topic_detection:
+                dataset["topic_features"] = new_topic_feats[idx]
             dataset["Text"] = self.val_df.iloc[idx]["Text"]
             return dataset
 
@@ -415,6 +472,52 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         self.trainer.eval_dataset = new_eval_dataset
         logger.info("Updated evaluation dataset with dynamic previous label features.")
         return control
+    
+    def compute_lexicon_features(self, df, lexicon, lexicon_embeddings, num_categories):
+        """
+        Compute lexicon features for the validation dataset. This function should generate
+        lexicon features dynamically for each sentence in the validation dataset.
+        """
+        lexicon_features = []
+        
+        for _, row in df.iterrows():
+            text = row["Text"]
+            # You will need a function that computes lexicon features for each text
+            lexicon_feats = compute_lexicon_scores(text, lexicon, lexicon_embeddings, self.tokenizer, num_categories)
+            lexicon_features.append(lexicon_feats)
+
+        return lexicon_features
+
+    def compute_ner_features(self, df):
+        """
+        Compute NER features for the validation dataset. This function should generate
+        NER features dynamically for each sentence in the validation dataset.
+        """
+        ner_features = []
+        nlp = spacy.load("en_core_web_sm")
+        for _, row in df.iterrows():
+            text = row["Text"]
+            # You will need a function that computes NER features for each text
+            ner_feats = compute_ner_embeddings(text, nlp)
+            ner_features.append(ner_feats)
+
+        return ner_features
+
+    def compute_topic_features(self, df):
+        """
+        Compute topic features for the validation dataset. This function should generate
+        topic features dynamically for each sentence in the validation dataset.
+        """
+        topic_features = []
+        texts = df["Text"].tolist()
+        # You will need a function that computes topic features for each text
+        topic_model = TopicModeling(method=self.topic_detection)
+        topic_vectors = None
+        topic_vectors = topic_model.fit_transform(texts)
+        topic_feats = topic_vectors.tolist()
+        topic_features.append(topic_feats)
+
+        return topic_features
 
     def concatenate_text_with_prev_labels(self, row, labels, new_prev_feats):
         """

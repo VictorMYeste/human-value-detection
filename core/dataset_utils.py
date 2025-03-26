@@ -241,6 +241,8 @@ def prepare_datasets(
         labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
 
+        logger.debug(f"Lexicon embeddings len: {len(val_lexicon)}, val_num_cat = {val_num_cat}")
+
         validation_dataset = load_dataset(
             df=val_df,
             tokenizer=tokenizer,
@@ -304,7 +306,9 @@ def add_previous_label_features(
     is_training: bool,
     model: Optional[torch.nn.Module] = None,
     tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
-    device: str = "cuda" if torch.cuda.is_available() else "cpu"
+    device: str = "cuda" if torch.cuda.is_available() else "cpu",
+    lexicon=None,
+    lexicon_embeddings=None
 ) -> list[list[float]]:
     """
     For training, return ground-truth from row i-1.
@@ -317,6 +321,7 @@ def add_previous_label_features(
     """
     num_labels = len(labels)
     prev_label_features = []
+    lexicon_features = []
 
     # Ensure dataframe is sorted by Text-ID and Sentence-ID
     df = df.sort_values(by=["Text-ID", "Sentence-ID"]).reset_index(drop=True)
@@ -407,10 +412,20 @@ def add_previous_label_features(
                 return_tensors="pt"
             )
             encoded = {k: v.to(device) for k, v in encoded.items()}
+
+            # Compute the lexicon features for the current sentence
+            lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_labels)
+            lexicon_features.append(lexicon_feats)
+
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
 
             with torch.no_grad():
-                outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
+                outputs = model(
+                    input_ids=encoded["input_ids"],
+                    attention_mask=encoded["attention_mask"],
+                    prev_label_features=plf,
+                    lexicon_features=torch.tensor(lexicon_feats).unsqueeze(0).to(device)
+                )
             
             logits = outputs["logits"]
             probs = torch.sigmoid(logits)

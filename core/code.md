@@ -175,6 +175,7 @@ from transformers import AutoModel, AutoTokenizer
 import torch
 from typing import Optional, Dict, Tuple, List
 from sklearn.feature_extraction.text import TfidfVectorizer
+import numbers
 
 from core.config import LEXICON_PATHS
 from core.lexicon_utils import load_lexicon
@@ -300,7 +301,7 @@ def prepare_datasets(
     augment_data: bool = False,
     topic_detection: str = None,
     token_pruning: str = None
-) -> Tuple[datasets.Dataset, datasets.Dataset]:
+) -> Tuple[datasets.Dataset, datasets.Dataset, int]:
     """
     Build & prune (if requested) the training set, then do the same for validation
     using the same IDF map.
@@ -360,9 +361,7 @@ def prepare_datasets(
         # Example: We handle training and validation differently
         train_lexicon, train_num_cat = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-training"])
         val_lexicon, val_num_cat     = load_lexicon(lexicon, LEXICON_PATHS[lexicon+"-validation"])
-        if linguistic_features:
-            train_num_cat += 17
-            val_num_cat   += 17
+        logger.debug(f"Lexicon produced from LIWC 22 software with train_num_cat = {train_num_cat} and val_num_cat = {val_num_cat}")
     else:
         # Fallback: single lexicon for everything (the old approach)
         train_lexicon, train_num_cat = lexicon_embeddings, num_categories
@@ -406,6 +405,8 @@ def prepare_datasets(
         labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
 
+        logger.debug(f"Lexicon embeddings len: {len(val_lexicon)}, val_num_cat = {val_num_cat}")
+
         validation_dataset = load_dataset(
             df=val_df,
             tokenizer=tokenizer,
@@ -432,7 +433,7 @@ def prepare_datasets(
     logger.debug(f"Sample training dataset: {training_dataset[0]}")
     logger.debug(f"Sample validation dataset: {validation_dataset[0]}")
 
-    return training_dataset, validation_dataset
+    return training_dataset, validation_dataset, train_num_cat
 
 # ========================================================
 # DATASET LOADING
@@ -689,13 +690,17 @@ def load_dataset(
     if linguistic_features:
         logger.info("Adding Linguistic features")
         data_frame['Linguistic_Scores'] = [compute_linguistic_features(txt, nlp) for txt in texts]
+        logger.debug(f"[LING] shape: {data_frame['Linguistic_Scores'].shape}, first: {data_frame['Linguistic_Scores'].iloc[0]}")
+        logger.debug("Before appending linguistic features: combined_features has length = %d", len(combined_features))
         combined_features.append(data_frame['Linguistic_Scores'].tolist())
+        logger.debug("After appending linguistic features: combined_features has length = %d", len(combined_features))
 
     # Compute NER features
     if ner_features:
         logger.info("Adding NER embeddings")
         data_frame["NER_Features"] = [compute_ner_embeddings(txt, nlp) for txt in texts]
         logger.debug(f"NER embedding example: {data_frame['NER_Features'].head()}")
+        logger.debug(f"[NER] shape: {data_frame['NER_Features'].shape}, first: {data_frame['NER_Features'].iloc[0]}")
         combined_features.append(data_frame["NER_Features"].tolist())
 
     # Compute lexicon embeddings for each sentence
@@ -712,10 +717,11 @@ def load_dataset(
             data_frame['Lexicon_Scores'] = data_frame.apply(
                 lambda row: compute_precomputed_scores(row, lexicon_embeddings, num_categories),axis=1
             )
-
+        # If the above can produce NaNs, fix them
         data_frame['Lexicon_Scores'] = data_frame['Lexicon_Scores'].apply(
-            lambda x: x if isinstance(x, list) and len(x) == num_categories else [0.0]*num_categories
+            lambda arr: [0.0 if np.isnan(x) else x for x in arr]
         )
+        logger.debug(f"[LEX] shape: {data_frame['Lexicon_Scores'].shape}, first: {data_frame['Lexicon_Scores'].iloc[0]}")
         combined_features.append(data_frame['Lexicon_Scores'].tolist())
 
         #logger.debug(f"Sample Lexicon Scores: {data_frame['Lexicon_Scores'].head()}")
@@ -727,22 +733,23 @@ def load_dataset(
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
         encoded_sentences["topic_features"] = topic_vectors.tolist()
+        logger.debug(f"[Topic Detection] shape: {encoded_sentences['topic_features'].shape}, first: {encoded_sentences['topic_features'].iloc[0]}")
         combined_features.append(topic_vectors.tolist())
     
     # Combine all features
     if combined_features:
-        # Stack features together (ensure consistent dimensions across all features)
-        max_length = max(len(f) for features in combined_features for f in features)
-        combined_features = [
-            np.concatenate([
-                np.asarray(f, dtype=np.float32) if len(f) == max_length
-                else np.pad(f, (0, max_length - len(f)), 'constant')
-                for f in features
-            ])
-            for features in zip(*combined_features)
-        ]
+        merged_rows = []
+        for row_tuple in zip(*combined_features):
+            arrays = []
+            for feat in row_tuple:
+                # feat should be a list (or numpy array) of floats
+                arrays.append(np.array(feat, dtype=np.float32))
+            merged_rows.append(np.concatenate(arrays))
+        combined_features = merged_rows
     else:
-        combined_features = [[0.0]*num_categories]*len(data_frame)
+        if linguistic_features:
+            num_categories += 17
+        combined_features = [[0.0] * num_categories] * len(data_frame)  # Default zero vectors
 
     # Debug logging
     if linguistic_features:
@@ -755,10 +762,34 @@ def load_dataset(
         logger.debug(f"Sample Topic Detection Features: {encoded_sentences['topic_features'][:5]}")
     for i, row in enumerate(combined_features[:5]):
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
+    if len(combined_features) > 0:
+        logger.debug(f"First sample’s final combined_features array:\n{combined_features[0]}")
+
     
     # Save them in the encoded_sentences
     if lexicon and combined_features:
+        all_lengths = [len(row) for row in combined_features]  # length of each row
+        unique_lengths = set(all_lengths)
+        logger.debug(f"unique_lengths in combined_features: {unique_lengths}")
+
+        # If more than one unique length, pinpoint which row(s)
+        if len(unique_lengths) != 1:
+            for i, length in enumerate(all_lengths):
+                if length != 135:  # or whatever you expect
+                    logger.error(f"Row {i} in combined_features has length {length} instead of 135!")
+                    logger.error(f"Row {i}: {combined_features[i]}")
+        
+        for i, row in enumerate(combined_features):
+            for j, val in enumerate(row):
+                if not isinstance(val, numbers.Number):
+                    logger.error(f"Non-numeric: {type(val)} -> {val}")
+
+
         encoded_sentences["lexicon_features"] = np.array(combined_features, dtype=np.float32).tolist()
+        logger.debug(
+            f"Shape of 'lexicon_features' before dataset conversion: "
+            f"{np.array(encoded_sentences['lexicon_features']).shape}"
+        )
     elif ner_features and combined_features:
         encoded_sentences["ner_features"] = np.array(combined_features, dtype=np.float32).tolist()
 
@@ -1154,6 +1185,8 @@ def compute_precomputed_scores(
     sent_id = str(row["Sentence-ID"])
     key = (text_id, sent_id)
 
+    logger.debug(f"text_id: {text_id}, sent_id: {sent_id}")
+
     if key in precomputed_dict:
         return precomputed_dict[key]
     else:
@@ -1380,9 +1413,9 @@ def load_lexicon(lexicon_name: str, path: str) -> tuple[dict, int]:
     parser = EMBEDDING_PARSERS.get(lexicon_name)
     if not parser:
         raise ValueError(f"Unknown lexicon: {lexicon_name}")
-    
+
     embeddings, dynamic_num_categories = parser["function"](path)
-    
+
     # If the parser's dictionary says "num_categories" is None, then use the
     # dynamic value returned by the loader. Otherwise, use the fixed one:
     if parser["num_categories"] is not None:
@@ -1443,7 +1476,10 @@ import torch.distributed as dist
 import os
 import pandas as pd
 
-from core.dataset_utils import add_previous_label_features
+from core.dataset_utils import add_previous_label_features, compute_lexicon_scores, compute_ner_embeddings
+from core.lexicon_utils import load_embeddings, load_lexicon
+from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
+from core.topic_detection import TopicModeling
 from core.log import logger
 
 # ========================================================
@@ -1732,6 +1768,7 @@ class EnhancedDebertaModel(nn.Module):
 class CustomTrainer(transformers.Trainer):
     """Custom Trainer with modified loss function for multi-label classification."""
     def compute_loss(self, model, inputs, return_outputs=False):
+        logger.debug(f"Keys in inputs: {inputs.keys()}")
         logger.debug(f"Input IDs Shape: {inputs['input_ids'].shape}")
         logger.debug(f"Attention Mask Shape: {inputs['attention_mask'].shape}")
 
@@ -1740,9 +1777,6 @@ class CustomTrainer(transformers.Trainer):
             logger.debug(f"Lexicon Features Shape: {inputs['lexicon_features'].shape}")
         else:
             logger.debug("No lexicon features")
-
-        if "prev_label_features" in inputs:
-            prev_label_features = inputs.pop("prev_label_features", None)
         
         # Pop labels for loss computation
         labels = inputs.pop("labels")
@@ -1753,6 +1787,7 @@ class CustomTrainer(transformers.Trainer):
 
         # Forward pass through the model
         if "prev_label_features" in inputs:
+            prev_label_features = inputs.pop("prev_label_features", None)
             outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
         else:
             outputs = model(**inputs, labels=labels)
@@ -1786,7 +1821,7 @@ class WarmupEvalCallback(TrainerCallback):
         return control
 
 class DynamicPrevLabelCallback(transformers.TrainerCallback):
-    def __init__(self, trainer, val_df, labels_df, labels, tokenizer, device=None):
+    def __init__(self, trainer, val_df, labels_df, labels, tokenizer, device=None, num_categories=0, lexicon=None, topic_detection=None):
         """
         val_df: The original raw validation DataFrame.
         labels: List of label names.
@@ -1799,6 +1834,9 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         self.labels = labels
         self.tokenizer = tokenizer
         self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
+        self.num_categories=num_categories
+        self.lexicon=lexicon
+        self.topic_detection=topic_detection
 
     def on_evaluate(self, args, state, control, **kwargs):
         # Obtain current model from trainer
@@ -1818,13 +1856,40 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             tokenizer_for_dynamic=self.tokenizer
         )
 
+        # (B) Dynamically compute lexicon features for validation
+        if self.lexicon and self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
+            val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
+            logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
+        else:
+            val_lexicon, val_num_cat = load_embeddings(self.lexicon)
+
+        new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
+
+        # (C) Dynamically compute NER features for validation
+        new_ner_feats = self.compute_ner_features(self.val_df)
+
+        # (D) Dynamically compute topic features for validation
+        new_topic_feats = self.compute_topic_features(self.val_df)
+
         # Ensure new_prev_feats has the correct shape
         for i in range(len(new_prev_feats)):
             if len(new_prev_feats[i]) < 2 * len(self.labels):
                 padding = [0.0] * (2 * len(self.labels) - len(new_prev_feats[i]))
                 new_prev_feats[i].extend(padding)  # Pad with zeros if missing
+            
+            if len(new_lexicon_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_lexicon_feats[i]))
+                new_lexicon_feats[i].extend(padding)  # Pad with zeros if missing
 
-        # (B) Concatenate to text the previous sentences with their predicted labels
+            if len(new_ner_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_ner_feats[i]))
+                new_ner_feats[i].extend(padding)  # Pad with zeros if missing
+
+            if len(new_topic_feats[i]) < len(self.labels):
+                padding = [0.0] * (len(self.labels) - len(new_topic_feats[i]))
+                new_topic_feats[i].extend(padding)  # Pad with zeros if missing
+
+        # (E) Concatenate to text the previous sentences with their predicted labels
         self.val_df["Text"] = self.val_df["Original_Text"]
         self.val_df["Text"] = self.val_df.apply(
             lambda row: self.concatenate_text_with_prev_labels(row, self.labels, new_prev_feats), axis=1
@@ -1842,6 +1907,9 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         def update_prev_label(dataset, idx):
             # Here, idx comes from the order of the dataset; we assume it matches self.val_df
             dataset["prev_label_features"] = new_prev_feats[idx]
+            dataset["lexicon_features"] = new_lexicon_feats[idx]
+            dataset["ner_features"] = new_ner_feats[idx]
+            dataset["topic_features"] = new_topic_feats[idx]
             dataset["Text"] = self.val_df.iloc[idx]["Text"]
             return dataset
 
@@ -1851,6 +1919,52 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         self.trainer.eval_dataset = new_eval_dataset
         logger.info("Updated evaluation dataset with dynamic previous label features.")
         return control
+    
+    def compute_lexicon_features(self, df, lexicon, lexicon_embeddings, num_categories):
+        """
+        Compute lexicon features for the validation dataset. This function should generate
+        lexicon features dynamically for each sentence in the validation dataset.
+        """
+        lexicon_features = []
+        
+        for _, row in df.iterrows():
+            text = row["Text"]
+            # You will need a function that computes lexicon features for each text
+            lexicon_feats = compute_lexicon_scores(text, lexicon, lexicon_embeddings, self.tokenizer, num_categories)
+            lexicon_features.append(lexicon_feats)
+
+        return lexicon_features
+
+    def compute_ner_features(self, df):
+        """
+        Compute NER features for the validation dataset. This function should generate
+        NER features dynamically for each sentence in the validation dataset.
+        """
+        ner_features = []
+        for _, row in df.iterrows():
+            text = row["Text"]
+            # You will need a function that computes NER features for each text
+            ner_feats = compute_ner_embeddings(text, self.tokenizer)
+            ner_features.append(ner_feats)
+
+        return ner_features
+
+    def compute_topic_features(self, df):
+        """
+        Compute topic features for the validation dataset. This function should generate
+        topic features dynamically for each sentence in the validation dataset.
+        """
+        topic_features = []
+        for _, row in df.iterrows():
+            text = row["Text"]
+            # You will need a function that computes topic features for each text
+            topic_model = TopicModeling(method=self.topic_detection)
+            topic_vectors = None
+            topic_vectors = topic_model.fit_transform(text)
+            topic_feats = topic_vectors.tolist()
+            topic_features.append(topic_feats)
+
+        return topic_features
 
     def concatenate_text_with_prev_labels(self, row, labels, new_prev_feats):
         """
@@ -1949,14 +2063,10 @@ def run_training(
         lexicon_embeddings, num_categories = load_embeddings(lexicon)
     else:
         lexicon_embeddings, num_categories = None, 0  # No lexicon features
-
-    # Linguistic embeddings
-    if linguistic_features:
-        num_categories += 17
     
     # Prepare datasets
     logger.info("Preparing datasets for training and validation")
-    training_dataset, validation_dataset = prepare_datasets(
+    training_dataset, validation_dataset, num_categories = prepare_datasets(
         training_path=training_dataset_path,
         validation_path=validation_dataset_path,
         tokenizer=tokenizer,
@@ -1973,6 +2083,11 @@ def run_training(
         topic_detection=topic_detection,
         token_pruning=token_pruning
     )
+
+    logger.debug(f"num_categories after preparing datasets = {num_categories}")
+
+    if linguistic_features:
+        num_categories += 17
 
     # Train and evaluate
     trainer = train(
@@ -2387,7 +2502,10 @@ def train(
                 val_df=raw_val_df,
                 labels_df=labels_df,
                 labels=labels,
-                tokenizer=tokenizer
+                tokenizer=tokenizer,
+                num_categories=num_categories,
+                lexicon=lexicon,
+                topic_detection=topic_detection
             )
         )
 

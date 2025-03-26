@@ -2,7 +2,7 @@ import transformers
 from core.dataset_utils import prepare_datasets
 from core.lexicon_utils import load_embeddings
 from core.training import train
-from core.models import save_model, DynamicPrevLabelCallback
+from core.models import save_model
 import torch.distributed as dist
 from accelerate import Accelerator
 

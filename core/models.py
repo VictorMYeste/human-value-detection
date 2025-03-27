@@ -399,8 +399,6 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
             logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
 
-        logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
-
         # (B) Add previous sentences label features
         logger.debug(f"Epoch {state.epoch}: Running validation. Model: {model is not None}")
 

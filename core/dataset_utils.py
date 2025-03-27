@@ -412,8 +412,9 @@ def add_previous_label_features(
             encoded = {k: v.to(device) for k, v in encoded.items()}
 
             # Compute the lexicon features for the current sentence
-            lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_labels)
-            lexicon_features.append(lexicon_feats)
+            if lexicon:
+                lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_labels)
+                lexicon_features.append(lexicon_feats)
 
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
 
@@ -422,7 +423,7 @@ def add_previous_label_features(
                     input_ids=encoded["input_ids"],
                     attention_mask=encoded["attention_mask"],
                     prev_label_features=plf,
-                    lexicon_features=torch.tensor(lexicon_feats).unsqueeze(0).to(device)
+                    lexicon_features=torch.tensor(lexicon_feats).unsqueeze(0).to(device) if lexicon else None
                 )
             
             logits = outputs["logits"]

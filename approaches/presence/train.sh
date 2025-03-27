@@ -1,72 +1,68 @@
 #!/bin/bash
 
-# Define common arguments
-training_dataset="--training-dataset ../../data/training-english/"
-validation_dataset="--validation-dataset ../../data/validation-english/"
+echo "===== Baseline ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 | tee results/Baseline.txt
 
-# List of Model trainings (only script names and optional arguments)
-scripts=(
-    "VAD"
-    "VAD --previous-sentences"
-    "EmoLex"
-    "EmoLex --previous-sentences"
-    "EmotionIntensity"
-    "EmotionIntensity --previous-sentences"
-    "WorryWords"
-    "WorryWords --previous-sentences"
-)
+echo "===== Token Pruning (TP, IDF = 3.0) ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --token-pruning | tee results/Token-Pruning-3.0.txt
 
-# Function to parse arguments and construct the command
-construct_command() {
-    local cmd="$1"
-    local script_name
-    local lexicon=""
-    local previous_sentences=""
-    local linguistic_features=""
-    local prev_sent=""
-    local ling_feat=""
+echo "===== 2 prev sentences with label ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences | tee results/Previous-Sentences-2.txt
 
-    # Extract the script name and optional arguments
-    script_name=$(echo "$cmd" | awk '{print $1}')
-    if [ "$script_name" != "Text" ]; then
-        lexicon=" --lexicon $script_name"
-    fi
+echo "===== MultiLayer ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --multilayer | tee results/MultiLayer.txt
 
-    # Check for additional flags in the command
-    if echo "$cmd" | grep -q -- "--previous-sentences"; then
-        previous_sentences=" --previous-sentences"
-        prev_sent="-prev-sentences"
-    fi
-    if echo "$cmd" | grep -q -- "--linguistic-features"; then
-        linguistic_features=" --linguistic-features"
-        ling_feat="-ling-feat"
-    fi
+# Residual Block (Manual)
 
-    # Construct and return the full command and result file prefix
-    local fullname="${script_name}${prev_sent}${ling_feat}"
-    local model_directory="models/${fullname}"
-    local result_file="results/${fullname}.txt"
-    echo "python3 main.py $training_dataset $validation_dataset$previous_sentences$linguistic_features$lexicon --model-directory $model_directory --model-name $fullname"
-    echo "$result_file"
-}
+echo "===== Data Augmentation ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --augment-data | tee results/Data-Augmentation.txt
 
-# Loop through the scripts
-for cmd in "${scripts[@]}"; do
-    # Construct the command and result file
-    full_cmd=$(construct_command "$cmd" | head -n 1)
-    result_file=$(construct_command "$cmd" | tail -n 1)
+# Custom Stopwords (Manual)
 
-    # Print header
-    echo "====================================="
-    echo "Executing: $full_cmd"
-    echo "====================================="
+echo "===== NER ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --ner-features | tee results/NER.txt
 
-    # Run the command and save output
-    eval "$full_cmd" | tee "$result_file"
+echo "===== Lex - Schwartz ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon Schwartz | tee results/Lex-Schwartz.txt
 
-    # Print footer
-    echo "-------------------------------------"
-    echo "Finished: $full_cmd"
-    echo "-------------------------------------"
-    echo # Add an extra blank line for clarity
-done
+echo "===== Lex - VAD ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon VAD | tee results/Lex-VAD.txt
+
+echo "===== Lex - EmoLex ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon EmoLex | tee results/Lex-EmoLex.txt
+
+echo "===== Lex - Emotion Intensity ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon EmotionIntensity | tee results/Lex-EmotionIntensity.txt
+
+echo "===== Lex - WorryWords ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon WorryWords | tee results/Lex-WorryWords.txt
+
+echo "===== Lex - LIWC 15 ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon LIWC | tee results/Lex-LIWC.txt
+
+echo "===== Lex - MFD ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MFD | tee results/Lex-MFD.txt
+
+echo "===== Lex - LIWC 22 ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon LIWC-22 | tee results/Lex-LIWC-22.txt
+
+echo "===== Lex - LIWC 22 + Linguistic Features ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon LIWC-22 --linguistic-features | tee results/Lex-LIWC-22_LingFeat.txt
+
+echo "===== Lex - MFD-20 ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MFD-20 | tee results/Lex-MFD-20.txt
+
+echo "===== Lex - eMFD ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon eMFD | tee results/Lex-eMFD.txt
+
+echo "===== Lex - MJD ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MJD | tee results/Lex-MJD.txt
+
+echo "===== Topic Detection - LDA ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection lda | tee results/TD-LDA.txt
+
+echo "===== Topic Detection - NMF ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
+
+echo "===== Topic Detection - BERTopic ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic.txt

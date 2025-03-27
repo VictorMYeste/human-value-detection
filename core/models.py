@@ -388,13 +388,16 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         model.eval()
 
         # (A) Dynamically compute lexicon features for validation
-        if self.lexicon and self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
-            val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
-            logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
-        else:
-            val_lexicon, val_num_cat = load_embeddings(self.lexicon)
-
-        new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
+        val_lexicon = None
+        val_num_cat = 0
+        if self.lexicon:
+            if self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
+                val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
+                logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
+            else:
+                val_lexicon, val_num_cat = load_embeddings(self.lexicon)
+            new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
+            logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
 
         logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
 

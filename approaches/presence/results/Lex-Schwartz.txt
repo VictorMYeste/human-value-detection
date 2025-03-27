@@ -1,40 +1,78 @@
-2025-03-12 16:16:35,079 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-03-12 16:16:35,080 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-03-12 16:16:40,626 - INFO - Setting random seed to 42
-2025-03-12 16:16:40,627 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-03-12 16:16:40,830 - INFO - Loading lexicon embeddings for: Schwartz
-2025-03-12 16:16:40,830 - INFO - Preparing datasets for training and validation
-2025-03-12 16:16:49,050 - ERROR - An error occurred: too many values to unpack (expected 2)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 60, in run_training
-    training_dataset, validation_dataset = prepare_datasets(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 205, in prepare_datasets
-    training_dataset = load_dataset(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 539, in load_dataset
-    data_frame['Lexicon_Scores'] = [
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 540, in <listcomp>
-    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 964, in compute_lexicon_scores
-    schwartz_lexicon, _ = lexicon_embeddings
-ValueError: too many values to unpack (expected 2)
-2025-03-12 16:16:49,090 - ERROR - An error occurred: too many values to unpack (expected 2)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 60, in run_training
-    training_dataset, validation_dataset = prepare_datasets(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 205, in prepare_datasets
-    training_dataset = load_dataset(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 539, in load_dataset
-    data_frame['Lexicon_Scores'] = [
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 540, in <listcomp>
-    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 964, in compute_lexicon_scores
-    schwartz_lexicon, _ = lexicon_embeddings
-ValueError: too many values to unpack (expected 2)
+2025-03-14 15:05:53,034 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-14 15:05:53,035 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-14 15:05:58,575 - INFO - Setting random seed to 42
+2025-03-14 15:05:58,576 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-14 15:05:58,768 - INFO - Loading lexicon embeddings for: Schwartz
+2025-03-14 15:05:58,768 - INFO - Preparing datasets for training and validation
+2025-03-14 15:07:00,149 - INFO - Arguments validated successfully.
+2025-03-14 15:07:00,153 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-14 15:07:00,965 - INFO - Using CUDA for training.
+2025-03-14 15:07:02,303 - INFO - TRAINING
+2025-03-14 15:07:02,304 - INFO - ========
+2025-03-14 15:07:02,304 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: Schwartz
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-03-14 15:07:02,306 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.678, 'grad_norm': 1.4541186094284058, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6509, 'grad_norm': 4.813086986541748, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6503580212593079, 'eval_f1-score': {'Presence': 0.64}, 'eval_macro-avg-f1-score': 0.64, 'eval_runtime': 164.5577, 'eval_samples_per_second': 90.57, 'eval_steps_per_second': 11.321, 'epoch': 1.0}
+2025-03-14 15:34:32,549 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.6411, 'grad_norm': 3.5340096950531006, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.6089, 'grad_norm': 2.0897088050842285, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.6063, 'grad_norm': 3.0639946460723877, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.6747557520866394, 'eval_f1-score': {'Presence': 0.63}, 'eval_macro-avg-f1-score': 0.63, 'eval_runtime': 164.5528, 'eval_samples_per_second': 90.573, 'eval_steps_per_second': 11.322, 'epoch': 2.0}
+2025-03-14 16:02:08,035 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.5647, 'grad_norm': 4.4615159034729, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.5115, 'grad_norm': 6.575987339019775, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.5089, 'grad_norm': 7.151793003082275, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.7395044565200806, 'eval_f1-score': {'Presence': 0.6}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 164.4571, 'eval_samples_per_second': 90.625, 'eval_steps_per_second': 11.328, 'epoch': 3.0}
+{'loss': 0.4287, 'grad_norm': 9.48386001586914, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.3837, 'grad_norm': 8.566536903381348, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.3845, 'grad_norm': 6.338111877441406, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.8925963640213013, 'eval_f1-score': {'Presence': 0.61}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 164.2901, 'eval_samples_per_second': 90.718, 'eval_steps_per_second': 11.34, 'epoch': 4.0}
+{'loss': 0.2903, 'grad_norm': 11.262639045715332, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.2641, 'grad_norm': 16.18487548828125, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1614887714385986, 'eval_f1-score': {'Presence': 0.61}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 163.8635, 'eval_samples_per_second': 90.954, 'eval_steps_per_second': 11.369, 'epoch': 5.0}
+{'loss': 0.2688, 'grad_norm': 6.237293720245361, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.1769, 'grad_norm': 7.640366077423096, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.1882, 'grad_norm': 11.732081413269043, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 1.4329237937927246, 'eval_f1-score': {'Presence': 0.62}, 'eval_macro-avg-f1-score': 0.62, 'eval_runtime': 164.2977, 'eval_samples_per_second': 90.713, 'eval_steps_per_second': 11.339, 'epoch': 6.0}
+{'loss': 0.168, 'grad_norm': 5.107989311218262, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.1297, 'grad_norm': 14.151025772094727, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.127, 'grad_norm': 6.6278486251831055, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 1.7940808534622192, 'eval_f1-score': {'Presence': 0.58}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 163.8576, 'eval_samples_per_second': 90.957, 'eval_steps_per_second': 11.37, 'epoch': 7.0}
+{'loss': 0.1134, 'grad_norm': 16.88903045654297, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.0966, 'grad_norm': 10.466445922851562, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.0973, 'grad_norm': 28.66143226623535, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 2.091967821121216, 'eval_f1-score': {'Presence': 0.6}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 163.9158, 'eval_samples_per_second': 90.925, 'eval_steps_per_second': 11.366, 'epoch': 8.0}
+{'loss': 0.0881, 'grad_norm': 0.16183386743068695, 'learning_rate': 3.5479256080114456e-06, 'epoch': 8.22}
+{'loss': 0.0772, 'grad_norm': 30.596864700317383, 'learning_rate': 2.8326180257510733e-06, 'epoch': 8.58}
+{'loss': 0.0769, 'grad_norm': 36.4356575012207, 'learning_rate': 2.1173104434907013e-06, 'epoch': 8.94}
+{'eval_loss': 2.4317774772644043, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 164.3194, 'eval_samples_per_second': 90.701, 'eval_steps_per_second': 11.338, 'epoch': 9.0}
+{'loss': 0.0567, 'grad_norm': 10.364001274108887, 'learning_rate': 1.402002861230329e-06, 'epoch': 9.29}
+{'loss': 0.0508, 'grad_norm': 48.977638244628906, 'learning_rate': 6.866952789699572e-07, 'epoch': 9.65}
+{'eval_loss': 2.7269225120544434, 'eval_f1-score': {'Presence': 0.6}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 163.55, 'eval_samples_per_second': 91.128, 'eval_steps_per_second': 11.391, 'epoch': 9.99}
+{'train_runtime': 16567.5147, 'train_samples_per_second': 27.016, 'train_steps_per_second': 0.844, 'train_loss': 0.2968130377740819, 'epoch': 9.99}
+2025-03-14 19:43:10,852 - INFO - 
+
+VALIDATION
+2025-03-14 19:43:10,852 - INFO - ==========
+2025-03-14 19:45:53,945 - INFO - Presence: 0.62
+2025-03-14 19:45:53,945 - INFO - Macro average: 0.62
+2025-03-14 19:45:54,341 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

@@ -1,17 +1,17 @@
-2025-03-27 10:01:08,904 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-03-27 10:01:08,907 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-03-27 10:01:15,135 - INFO - Setting random seed to 42
-2025-03-27 10:01:15,136 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-03-27 10:01:15,331 - INFO - Loading lexicon embeddings for: No lexicon used
-2025-03-27 10:01:15,331 - INFO - Preparing datasets for training and validation
-2025-03-27 10:01:15,736 - INFO - Applying nmf for topic modeling.
-2025-03-27 10:01:21,932 - INFO - Applying nmf for topic modeling.
-2025-03-27 10:01:31,849 - INFO - Arguments validated successfully.
-2025-03-27 10:01:31,852 - INFO - Clearing old checkpoints in models/checkpoints
-2025-03-27 10:01:32,471 - INFO - Using CUDA for training.
-2025-03-27 10:01:33,729 - INFO - TRAINING
-2025-03-27 10:01:33,729 - INFO - ========
-2025-03-27 10:01:33,730 - INFO - Training configuration:
+2025-03-27 10:20:15,564 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-27 10:20:15,566 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-27 10:20:21,902 - INFO - Setting random seed to 42
+2025-03-27 10:20:21,903 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-27 10:20:22,117 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-03-27 10:20:22,117 - INFO - Preparing datasets for training and validation
+2025-03-27 10:20:22,552 - INFO - Applying nmf for topic modeling.
+2025-03-27 10:20:28,706 - INFO - Applying nmf for topic modeling.
+2025-03-27 10:20:38,328 - INFO - Arguments validated successfully.
+2025-03-27 10:20:38,331 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-27 10:20:38,776 - INFO - Using CUDA for training.
+2025-03-27 10:20:40,019 - INFO - TRAINING
+2025-03-27 10:20:40,019 - INFO - ========
+2025-03-27 10:20:40,019 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
 Model name: None
 Batch size: 4
@@ -30,94 +30,21 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: Yes
 Applying token pruning: No
 
-2025-03-27 10:01:33,732 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-2025-03-27 10:01:34,801 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (4x40 and 90x128)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 79, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 273, in train
-    trainer.train()
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
-    tr_loss_step = self.training_step(model, inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3485, in training_step
-    loss = self.compute_loss(model, inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3532, in compute_loss
-    outputs = model(**inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
-    else self._run_ddp_forward(*inputs, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
-    return self.module(*inputs, **kwargs)  # type: ignore[index]
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 259, in forward
-    topic_output = self.topic_layer(topic_features)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/container.py", line 250, in forward
-    input = module(input)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (4x40 and 90x128)
-2025-03-27 10:01:34,813 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (4x40 and 90x128)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 126, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/presence/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 79, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 273, in train
-    trainer.train()
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
-    tr_loss_step = self.training_step(model, inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3485, in training_step
-    loss = self.compute_loss(model, inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3532, in compute_loss
-    outputs = model(**inputs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
-    else self._run_ddp_forward(*inputs, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
-    return self.module(*inputs, **kwargs)  # type: ignore[index]
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 259, in forward
-    topic_output = self.topic_layer(topic_features)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/container.py", line 250, in forward
-    input = module(input)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (4x40 and 90x128)
+2025-03-27 10:20:40,022 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.7026059031486511, 'eval_f1-score': {'Presence': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 5.4112, 'eval_samples_per_second': 184.803, 'eval_steps_per_second': 23.1, 'epoch': 0.99}
+2025-03-27 10:21:08,195 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'eval_loss': 0.6918189525604248, 'eval_f1-score': {'Presence': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 5.4038, 'eval_samples_per_second': 185.054, 'eval_steps_per_second': 23.132, 'epoch': 1.98}
+2025-03-27 10:21:34,999 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.7890918254852295, 'eval_f1-score': {'Presence': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 5.4209, 'eval_samples_per_second': 184.472, 'eval_steps_per_second': 23.059, 'epoch': 2.98}
+{'eval_loss': 0.8610861897468567, 'eval_f1-score': {'Presence': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 5.4668, 'eval_samples_per_second': 182.924, 'eval_steps_per_second': 22.865, 'epoch': 4.0}
+{'eval_loss': 0.8522181510925293, 'eval_f1-score': {'Presence': 0.66}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 5.4311, 'eval_samples_per_second': 184.125, 'eval_steps_per_second': 23.016, 'epoch': 4.99}
+{'eval_loss': 0.9652155637741089, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.4297, 'eval_samples_per_second': 184.172, 'eval_steps_per_second': 23.022, 'epoch': 5.98}
+{'eval_loss': 1.106966495513916, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.4272, 'eval_samples_per_second': 184.257, 'eval_steps_per_second': 23.032, 'epoch': 6.98}
+{'train_runtime': 199.1166, 'train_samples_per_second': 50.222, 'train_steps_per_second': 1.557, 'train_loss': 0.5222766771229035, 'epoch': 6.98}
+2025-03-27 10:24:00,169 - INFO - 
+
+VALIDATION
+2025-03-27 10:24:00,169 - INFO - ==========
+2025-03-27 10:24:05,603 - INFO - Presence: 0.72
+2025-03-27 10:24:05,603 - INFO - Macro average: 0.72
+2025-03-27 10:24:06,097 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

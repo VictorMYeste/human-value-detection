@@ -514,8 +514,8 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         topic_model = TopicModeling(method=self.topic_detection)
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
-        topic_feats = topic_vectors.tolist()
-        topic_features.append(topic_feats)
+        for row_vector in topic_vectors:  
+            topic_features.append(row_vector.tolist())
 
         return topic_features
 

@@ -41,7 +41,7 @@ def build_idf_map(texts):
     idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
     return idf_map
 
-def prune_text(text, idf_map, threshold=2.5):
+def prune_text(text, idf_map, threshold=3.0):
     """
     Remove tokens whose IDF is below a threshold (i.e., extremely common).
     """
@@ -63,7 +63,7 @@ def load_and_optionally_prune_df(
     custom_stopwords: List[str],
     token_pruning: bool,
     idf_map: Optional[Dict[str, float]] = None,
-    threshold: float = 2.0
+    threshold: float = 3.0
 ) -> pd.DataFrame:
     """
     1. Load the sentences file (augmented or normal).
@@ -240,8 +240,6 @@ def prepare_datasets(
 
         labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
-
-        logger.debug(f"Lexicon embeddings len: {len(val_lexicon)}, val_num_cat = {val_num_cat}")
 
         validation_dataset = load_dataset(
             df=val_df,
@@ -582,7 +580,7 @@ def load_dataset(
         topic_vectors = None
         topic_vectors = topic_model.fit_transform(texts)
         encoded_sentences["topic_features"] = topic_vectors.tolist()
-        logger.debug(f"[Topic Detection] shape: {encoded_sentences['topic_features'].shape}, first: {encoded_sentences['topic_features'].iloc[0]}")
+        logger.debug(f"[Topic Detection] shape: {len(encoded_sentences['topic_features'])}, first: {encoded_sentences['topic_features'][0]}")
         combined_features.append(topic_vectors.tolist())
     
     # Combine all features

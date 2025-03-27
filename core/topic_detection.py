@@ -90,12 +90,11 @@ class TopicModeling:
             np.ndarray: One-hot encoded topic representation.
         """
         num_sentences = len(topics)
-        fixed_num_topics = 40
 
-        topic_vectors = np.zeros((num_sentences, fixed_num_topics))
+        topic_vectors = np.zeros((num_sentences, self.num_topics))
 
         for i, topic in enumerate(topics):
-            if 0 <= topic < fixed_num_topics:  # Ensure topic index is within bounds
+            if 0 <= topic < self.num_topics:  # Ensure topic index is within bounds
                 topic_vectors[i, topic] = 1  # One-hot encode the topic assignment
             else:
                 continue  # Ignore invalid topics

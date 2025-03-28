@@ -974,7 +974,7 @@ def compute_schwartz_values(text: str, lexicon: dict) -> List[int]:
     
     return list(value_counts.values())
 
-def compute_mfd_scores(text, mfd_embeddings, tokenizer):
+def compute_mfd_scores(text, mfd_embeddings, tokenizer, num_categories=None):
     """Compute the count of words matching each Moral Foundation dimension."""
     tokens = tokenizer.tokenize(text)
     normalized_tokens = [normalize_token(token) for token in tokens]
@@ -1007,8 +1007,7 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
     
     # Schwartz lexicon does not use tokenizer or num_categories, handle it separately
     if lexicon == "Schwartz":
-        schwartz_lexicon, _ = lexicon_embeddings
-        scores = compute_fn(text, schwartz_lexicon)
+        scores = compute_fn(text, lexicon_embeddings)
     else:
         scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
     

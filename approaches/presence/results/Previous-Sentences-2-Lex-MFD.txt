@@ -1,0 +1,84 @@
+2025-03-30 01:15:49,547 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-30 01:15:49,549 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-30 01:15:55,980 - INFO - Setting random seed to 42
+2025-03-30 01:15:55,981 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-30 01:15:56,385 - INFO - Loading lexicon embeddings for: MFD
+2025-03-30 01:15:56,460 - INFO - Preparing datasets for training and validation
+2025-03-30 01:22:42,435 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2025-03-30 01:25:50,339 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2025-03-30 01:25:52,350 - INFO - Arguments validated successfully.
+2025-03-30 01:25:52,354 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-03-30 01:25:52,354 - INFO - Clearing old checkpoints in models/checkpoints
+2025-03-30 01:25:53,525 - INFO - Using CUDA for training.
+2025-03-30 01:25:54,797 - INFO - TRAINING
+2025-03-30 01:25:54,797 - INFO - ========
+2025-03-30 01:25:54,798 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: MFD
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-03-30 01:25:54,800 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-03-30 01:25:54,803 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.5809, 'grad_norm': 4.71058464050293, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.5127, 'grad_norm': 4.9805216789245605, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.78877854347229, 'eval_f1-score': {'Presence': 0.67}, 'eval_macro-avg-f1-score': 0.67, 'eval_runtime': 318.7207, 'eval_samples_per_second': 46.762, 'eval_steps_per_second': 11.69, 'epoch': 1.0}
+2025-03-30 03:36:13,324 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-03-30 03:40:37,003 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4952, 'grad_norm': 4.315701007843018, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.4379, 'grad_norm': 3.6471872329711914, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.431, 'grad_norm': 4.030109405517578, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.7837629318237305, 'eval_f1-score': {'Presence': 0.65}, 'eval_macro-avg-f1-score': 0.65, 'eval_runtime': 333.5447, 'eval_samples_per_second': 44.684, 'eval_steps_per_second': 11.171, 'epoch': 2.0}
+2025-03-30 04:50:09,357 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-03-30 04:55:07,108 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.377, 'grad_norm': 6.147566795349121, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.2962, 'grad_norm': 7.381113052368164, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.298, 'grad_norm': 9.652633666992188, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.9561460018157959, 'eval_f1-score': {'Presence': 0.65}, 'eval_macro-avg-f1-score': 0.65, 'eval_runtime': 316.2209, 'eval_samples_per_second': 47.132, 'eval_steps_per_second': 11.783, 'epoch': 3.0}
+2025-03-30 06:09:24,763 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2161, 'grad_norm': 7.320021152496338, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1698, 'grad_norm': 8.501378059387207, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.1759, 'grad_norm': 10.651559829711914, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 1.2937413454055786, 'eval_f1-score': {'Presence': 0.66}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 331.3494, 'eval_samples_per_second': 44.98, 'eval_steps_per_second': 11.245, 'epoch': 4.0}
+2025-03-30 07:24:04,779 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1107, 'grad_norm': 15.463319778442383, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1021, 'grad_norm': 9.720528602600098, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.773661732673645, 'eval_f1-score': {'Presence': 0.66}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 313.049, 'eval_samples_per_second': 47.609, 'eval_steps_per_second': 11.902, 'epoch': 5.0}
+2025-03-30 08:38:27,834 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1034, 'grad_norm': 5.710646152496338, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0664, 'grad_norm': 2.8502485752105713, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0734, 'grad_norm': 5.418469429016113, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 2.231576442718506, 'eval_f1-score': {'Presence': 0.65}, 'eval_macro-avg-f1-score': 0.65, 'eval_runtime': 318.1885, 'eval_samples_per_second': 46.84, 'eval_steps_per_second': 11.71, 'epoch': 6.0}
+2025-03-30 09:52:59,474 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.065, 'grad_norm': 1.5692635774612427, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0488, 'grad_norm': 15.483868598937988, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0505, 'grad_norm': 20.39108657836914, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 2.5221188068389893, 'eval_f1-score': {'Presence': 0.64}, 'eval_macro-avg-f1-score': 0.64, 'eval_runtime': 323.411, 'eval_samples_per_second': 46.084, 'eval_steps_per_second': 11.521, 'epoch': 7.0}
+2025-03-30 11:07:36,585 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0453, 'grad_norm': 65.01445770263672, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.0366, 'grad_norm': 5.631511211395264, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.03, 'grad_norm': 0.11595524847507477, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 2.7070093154907227, 'eval_f1-score': {'Presence': 0.63}, 'eval_macro-avg-f1-score': 0.63, 'eval_runtime': 316.7413, 'eval_samples_per_second': 47.054, 'eval_steps_per_second': 11.764, 'epoch': 8.0}
+2025-03-30 12:22:09,639 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 35797.6733, 'train_samples_per_second': 12.503, 'train_steps_per_second': 0.391, 'train_loss': 0.21163505012164488, 'epoch': 8.0}
+2025-03-30 12:22:32,870 - INFO - 
+
+VALIDATION
+2025-03-30 12:22:32,870 - INFO - ==========
+2025-03-30 12:32:33,426 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-03-30 12:32:33,428 - INFO - Presence: 0.66
+2025-03-30 12:32:33,428 - INFO - Macro average: 0.66
+2025-03-30 12:32:33,655 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

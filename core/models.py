@@ -411,7 +411,8 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             model=model,
             tokenizer_for_dynamic=self.tokenizer,
             lexicon=self.lexicon,
-            lexicon_embeddings=val_lexicon
+            lexicon_embeddings=val_lexicon,
+            num_categories=val_num_cat
         )
 
         # (C) Dynamically compute NER features for validation

@@ -202,6 +202,13 @@ def prepare_datasets(
         # Fallback: single lexicon for everything (the old approach)
         train_lexicon, train_num_cat = lexicon_embeddings, num_categories
         val_lexicon, val_num_cat     = lexicon_embeddings, num_categories
+    
+    actual_num_topics = 0
+    if topic_detection:
+        topic_model = TopicModeling(method="bertopic")
+        train_topics = topic_model.fit_transform(train_df["Text"].tolist())
+        train_df["topic_vectors"] = list(train_topics)  # store as a column or array
+        actual_num_topics = train_topics.shape[1]
 
     # Training dataset
     training_dataset = load_dataset(
@@ -216,6 +223,7 @@ def prepare_datasets(
         ner_features=ner_features,
         lexicon=lexicon,
         topic_detection=topic_detection,
+        precomputed_topic_vectors=train_df["topic_vectors"].tolist() if topic_detection else None,
         labels_file_path=labels_file_path
     )
 
@@ -226,6 +234,7 @@ def prepare_datasets(
     # ------------------------------------------------
     # (C) Prepare the VALIDATION set, reusing the IDF map
     # ------------------------------------------------
+
     validation_dataset = training_dataset # default if none
     if validation_path:
         val_df = load_and_optionally_prune_df(
@@ -241,6 +250,10 @@ def prepare_datasets(
         labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
 
+        if topic_detection:
+            val_topics = topic_model.transform(val_df["Text"].tolist())
+            val_df["topic_vectors"] = list(val_topics)
+
         validation_dataset = load_dataset(
             df=val_df,
             tokenizer=tokenizer,
@@ -254,6 +267,7 @@ def prepare_datasets(
             lexicon=lexicon,
             topic_detection=topic_detection,
             labels_file_path=val_labels_path,
+            precomputed_topic_vectors=val_df["topic_vectors"].tolist() if topic_detection else None,
             is_training=False,
         )
     
@@ -267,7 +281,7 @@ def prepare_datasets(
     logger.debug(f"Sample training dataset: {training_dataset[0]}")
     logger.debug(f"Sample validation dataset: {validation_dataset[0]}")
 
-    return training_dataset, validation_dataset, train_num_cat
+    return training_dataset, validation_dataset, train_num_cat, actual_num_topics
 
 # ========================================================
 # DATASET LOADING
@@ -306,7 +320,8 @@ def add_previous_label_features(
     tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
     lexicon=None,
-    lexicon_embeddings=None
+    lexicon_embeddings=None,
+    num_categories=0
 ) -> list[list[float]]:
     """
     For training, return ground-truth from row i-1.
@@ -413,7 +428,13 @@ def add_previous_label_features(
 
             # Compute the lexicon features for the current sentence
             if lexicon:
-                lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_labels)
+                lexicon_feats = compute_lexicon_scores(
+                    text_prev,
+                    lexicon,
+                    lexicon_embeddings,
+                    tokenizer_for_dynamic,
+                    num_categories
+                )
                 lexicon_features.append(lexicon_feats)
 
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
@@ -423,7 +444,7 @@ def add_previous_label_features(
                     input_ids=encoded["input_ids"],
                     attention_mask=encoded["attention_mask"],
                     prev_label_features=plf,
-                    lexicon_features=torch.tensor(lexicon_feats).unsqueeze(0).to(device) if lexicon else None
+                    lexicon_features=torch.tensor(lexicon_feats, dtype=torch.float32).unsqueeze(0).to(device) if lexicon else None
                 )
             
             logits = outputs["logits"]
@@ -461,6 +482,7 @@ def load_dataset(
     ner_features: bool = False,
     lexicon: str = None,
     topic_detection: str = None,
+    precomputed_topic_vectors=None,
     labels_file_path: Optional[str] = None,
     is_training: bool = True,
     model: Optional[torch.nn.Module] = None,
@@ -576,13 +598,11 @@ def load_dataset(
     
     # Compute Topic features
     if topic_detection:
-        logger.info(f"Applying {topic_detection} for topic modeling.")
-        topic_model = TopicModeling(method=topic_detection)
-        topic_vectors = None
-        topic_vectors = topic_model.fit_transform(texts)
-        encoded_sentences["topic_features"] = topic_vectors.tolist()
-        logger.debug(f"[Topic Detection] shape: {len(encoded_sentences['topic_features'])}, first: {encoded_sentences['topic_features'][0]}")
-        combined_features.append(topic_vectors.tolist())
+        if precomputed_topic_vectors is not None:
+            logger.info(f"Applying {topic_detection} for topic modeling.")
+            encoded_sentences["topic_features"] = precomputed_topic_vectors
+            logger.debug(f"[Topic Detection] shape: {len(encoded_sentences['topic_features'])}, first: {encoded_sentences['topic_features'][0]}")
+            combined_features.append(precomputed_topic_vectors)
     
     # Combine all features
     if combined_features:
@@ -596,8 +616,8 @@ def load_dataset(
         combined_features = merged_rows
     else:
         if linguistic_features:
-            num_categories += 17
-        combined_features = [[0.0] * num_categories] * len(data_frame)  # Default zero vectors
+            num_categories_ling_feat += 17
+        combined_features = [[0.0] * num_categories_ling_feat] * len(data_frame)  # Default zero vectors
 
     # Debug logging
     if linguistic_features:
@@ -666,15 +686,16 @@ def load_dataset(
     # Now build "prev_label_features"
     # ------------------------------------------------
     if previous_sentences:
-        logger.info("Adding Previous Sentences Labels features")
+        logger.info(f"Adding Previous Sentences Labels features with num_categories = {num_categories}")
         # Add new numeric feature for the label of the previous sentence
         if is_training:
             prev_label_feats = add_previous_label_features(
                 df=df,
                 labels_df=labels_df,
                 labels=labels,
-                is_training=is_training
-                )
+                is_training=is_training,
+                num_categories=10
+            )
         else:
             prev_label_feats = [[0.0] * 2 * len(labels)] * len(df)  # Return zero features initially
             
@@ -974,20 +995,32 @@ def compute_schwartz_values(text: str, lexicon: dict) -> List[int]:
     
     return list(value_counts.values())
 
-def compute_mfd_scores(text, mfd_embeddings, tokenizer, num_categories=None):
+def compute_mfd_scores(text, mfd_embeddings, tokenizer, num_categories=10):
     """Compute the count of words matching each Moral Foundation dimension."""
-    tokens = tokenizer.tokenize(text)
-    normalized_tokens = [normalize_token(token) for token in tokens]
+    # Define the 10 MFD categories in the order to appear in the vector:
+    categories_order = [
+        "CARE.VIRTUE", "CARE.VICE",
+        "FAIRNESS.VIRTUE", "FAIRNESS.VICE",
+        "LOYALTY.VIRTUE", "LOYALTY.VICE",
+        "AUTHORITY.VIRTUE", "AUTHORITY.VICE",
+        "SANCTITY.VIRTUE", "SANCTITY.VICE"
+    ]
+    # Create a lookup so we can increment the right slot
+    cat_to_index = {cat: i for i, cat in enumerate(categories_order)}
 
-    scores = defaultdict(int)
+    tokens = tokenizer.tokenize(text)
+    normalized_tokens = [token.upper() for token in tokens]
+
+    scores = [0]*len(categories_order)
     
     # Compute counts for each category
     for token in normalized_tokens:
-        if token.upper() in mfd_embeddings:
-            category = mfd_embeddings[token.upper()]
-            scores[category] += 1
+        if token in mfd_embeddings:
+            cat = mfd_embeddings[token]  # e.g. "CARE.VIRTUE"
+            if cat in cat_to_index:
+                scores[cat_to_index[cat]] += 1
 
-    return dict(scores)
+    return scores
 
 LEXICON_COMPUTATION_FUNCTIONS = {
     "VAD": compute_vad_scores,

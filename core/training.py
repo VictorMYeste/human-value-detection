@@ -105,6 +105,7 @@ def train(
         custom_stopwords: list[str] = [],
         augment_data: bool = False,
         topic_detection: str = None,
+        discovered_topics: int = 0,
         token_pruning: bool = False,
         slice_data: bool = False
     ) -> transformers.Trainer:
@@ -143,15 +144,6 @@ def train(
         ner_feature_dim = 768 # DeBERTa hidden size
     else:
         ner_feature_dim = 0
-
-    if topic_detection == "bertopic":
-        topic_feature_dim = 40
-    elif topic_detection == "lda":
-        topic_feature_dim = 60
-    elif topic_detection == "nmf":
-        topic_feature_dim = 90
-    else:
-        topic_feature_dim = 0
     
     config = AutoConfig.from_pretrained(pretrained_model)
     # Add necessary attributes to config
@@ -168,7 +160,7 @@ def train(
         num_categories=num_categories,
         ner_feature_dim=ner_feature_dim,
         multilayer=multilayer,
-        topic_feature_dim=topic_feature_dim,
+        topic_feature_dim=discovered_topics,
         previous_sentences=previous_sentences
     )
     """

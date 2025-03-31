@@ -52,7 +52,7 @@ def run_training(
     
     # Prepare datasets
     logger.info("Preparing datasets for training and validation")
-    training_dataset, validation_dataset, num_categories = prepare_datasets(
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
         training_path=training_dataset_path,
         validation_path=validation_dataset_path,
         tokenizer=tokenizer,
@@ -101,6 +101,7 @@ def run_training(
         custom_stopwords=custom_stopwords,
         augment_data=augment_data,
         topic_detection=topic_detection,
+        discovered_topics=discovered_topics,
         token_pruning=token_pruning,
         slice_data=slice_data
     )

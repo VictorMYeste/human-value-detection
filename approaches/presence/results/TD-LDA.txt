@@ -68,3 +68,13 @@ Applying token pruning: No
 {'loss': 0.0609, 'grad_norm': 1.0498926639556885, 'learning_rate': 2.1173104434907013e-06, 'epoch': 8.94}
 {'eval_loss': 2.6592562198638916, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 328.2417, 'eval_samples_per_second': 45.406, 'eval_steps_per_second': 5.676, 'epoch': 9.0}
 {'loss': 0.0465, 'grad_norm': 5.000692844390869, 'learning_rate': 1.402002861230329e-06, 'epoch': 9.29}
+{'loss': 0.0426, 'grad_norm': 1.3755639791488647, 'learning_rate': 6.866952789699572e-07, 'epoch': 9.65}
+{'eval_loss': 2.828101873397827, 'eval_f1-score': {'Presence': 0.59}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 304.2963, 'eval_samples_per_second': 48.979, 'eval_steps_per_second': 6.122, 'epoch': 9.99}
+{'train_runtime': 29066.9097, 'train_samples_per_second': 15.398, 'train_steps_per_second': 0.481, 'train_loss': 0.2884132771362392, 'epoch': 9.99}
+2025-03-28 09:51:15,403 - INFO - 
+
+VALIDATION
+2025-03-28 09:51:15,403 - INFO - ==========
+2025-03-28 09:56:22,158 - INFO - Presence: 0.61
+2025-03-28 09:56:22,159 - INFO - Macro average: 0.61
+2025-03-28 09:56:22,524 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

@@ -19,8 +19,8 @@
 
 # Custom Stopwords (Manual)
 
-echo "===== NER ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --ner-features | tee results/NER.txt
+# echo "===== NER ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --ner-features | tee results/NER.txt
 
 # echo "===== Lex - Schwartz ====="
 # accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon Schwartz | tee results/Lex-Schwartz.txt
@@ -40,8 +40,8 @@ accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../d
 # echo "===== Lex - LIWC 15 ====="
 # accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon LIWC | tee results/Lex-LIWC.txt
 
-# echo "===== Lex - MFD ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MFD | tee results/Lex-MFD.txt
+echo "===== Lex - MFD ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MFD | tee results/Lex-MFD.txt
 
 # echo "===== Lex - LIWC 22 ====="
 # accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon LIWC-22 | tee results/Lex-LIWC-22.txt
@@ -58,11 +58,23 @@ accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../d
 # echo "===== Lex - MJD ====="
 # accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --lexicon MJD | tee results/Lex-MJD.txt
 
-echo "===== Topic Detection - LDA ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection lda | tee results/TD-LDA.txt
+# echo "===== Topic Detection - LDA ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection lda | tee results/TD-LDA.txt
 
-echo "===== Topic Detection - NMF ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
+# echo "===== Topic Detection - NMF ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
 
-echo "===== Topic Detection - BERTopic ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic.txt
+# echo "===== Topic Detection - BERTopic ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic-v2.txt
+
+###################
+
+# echo "===== 2 prev sentences with label + Token Pruning (TP, IDF = 3.0)  ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --token-pruning | tee results/Previous-Sentences-2-TokenPruning-3.0-v2.txt
+
+echo "===== 2 prev sentences with label + Lex - MFD  ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon MFD | tee results/Previous-Sentences-2-Lex-MFD.txt
+
+
+echo "===== 2 prev sentences with label + Lex - EmoLex  ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon EmoLex | tee results/Previous-Sentences-2-Lex-EmoLex.txt

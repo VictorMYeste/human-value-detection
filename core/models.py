@@ -6,9 +6,10 @@ from torch.nn.functional import binary_cross_entropy_with_logits
 import torch.distributed as dist
 import os
 import pandas as pd
+import numpy as np
 import spacy
 
-from core.dataset_utils import add_previous_label_features, compute_lexicon_scores, compute_ner_embeddings
+from core.dataset_utils import LEXICON_COMPUTATION_FUNCTIONS, add_previous_label_features, compute_lexicon_scores, compute_ner_embeddings, compute_precomputed_scores
 from core.lexicon_utils import load_embeddings, load_lexicon
 from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.topic_detection import TopicModeling
@@ -389,7 +390,9 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
 
         # (A) Dynamically compute lexicon features for validation
         val_lexicon = None
+        new_lexicon_feats = []
         val_num_cat = 0
+
         if self.lexicon:
             if self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
                 val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
@@ -484,8 +487,15 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         
         for _, row in df.iterrows():
             text = row["Text"]
-            # You will need a function that computes lexicon features for each text
-            lexicon_feats = compute_lexicon_scores(text, lexicon, lexicon_embeddings, self.tokenizer, num_categories)
+            if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
+                # Token-based approach
+                lexicon_feats = compute_lexicon_scores(text, lexicon, lexicon_embeddings, self.tokenizer, num_categories)
+            else:
+                # Precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
+                lexicon_feats = compute_precomputed_scores(row, lexicon_embeddings, num_categories)
+            # If the above can produce NaNs, fix them
+            lexicon_feats = [0.0 if (isinstance(x, float) and np.isnan(x)) else x for x in lexicon_feats]
+
             lexicon_features.append(lexicon_feats)
 
         return lexicon_features

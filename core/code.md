@@ -205,7 +205,7 @@ def build_idf_map(texts):
     idf_map = {feature_names[i]: idf_scores[i] for i in range(len(feature_names))}
     return idf_map
 
-def prune_text(text, idf_map, threshold=2.5):
+def prune_text(text, idf_map, threshold=3.0):
     """
     Remove tokens whose IDF is below a threshold (i.e., extremely common).
     """
@@ -227,7 +227,7 @@ def load_and_optionally_prune_df(
     custom_stopwords: List[str],
     token_pruning: bool,
     idf_map: Optional[Dict[str, float]] = None,
-    threshold: float = 2.0
+    threshold: float = 3.0
 ) -> pd.DataFrame:
     """
     1. Load the sentences file (augmented or normal).
@@ -366,6 +366,13 @@ def prepare_datasets(
         # Fallback: single lexicon for everything (the old approach)
         train_lexicon, train_num_cat = lexicon_embeddings, num_categories
         val_lexicon, val_num_cat     = lexicon_embeddings, num_categories
+    
+    actual_num_topics = 0
+    if topic_detection:
+        topic_model = TopicModeling(method="bertopic")
+        train_topics = topic_model.fit_transform(train_df["Text"].tolist())
+        train_df["topic_vectors"] = list(train_topics)  # store as a column or array
+        actual_num_topics = train_topics.shape[1]
 
     # Training dataset
     training_dataset = load_dataset(
@@ -380,6 +387,7 @@ def prepare_datasets(
         ner_features=ner_features,
         lexicon=lexicon,
         topic_detection=topic_detection,
+        precomputed_topic_vectors=train_df["topic_vectors"].tolist() if topic_detection else None,
         labels_file_path=labels_file_path
     )
 
@@ -390,6 +398,7 @@ def prepare_datasets(
     # ------------------------------------------------
     # (C) Prepare the VALIDATION set, reusing the IDF map
     # ------------------------------------------------
+
     validation_dataset = training_dataset # default if none
     if validation_path:
         val_df = load_and_optionally_prune_df(
@@ -405,7 +414,9 @@ def prepare_datasets(
         labels_file = "labels-cat.tsv"
         val_labels_path = os.path.join(validation_path, labels_file)
 
-        logger.debug(f"Lexicon embeddings len: {len(val_lexicon)}, val_num_cat = {val_num_cat}")
+        if topic_detection:
+            val_topics = topic_model.transform(val_df["Text"].tolist())
+            val_df["topic_vectors"] = list(val_topics)
 
         validation_dataset = load_dataset(
             df=val_df,
@@ -420,6 +431,7 @@ def prepare_datasets(
             lexicon=lexicon,
             topic_detection=topic_detection,
             labels_file_path=val_labels_path,
+            precomputed_topic_vectors=val_df["topic_vectors"].tolist() if topic_detection else None,
             is_training=False,
         )
     
@@ -433,7 +445,7 @@ def prepare_datasets(
     logger.debug(f"Sample training dataset: {training_dataset[0]}")
     logger.debug(f"Sample validation dataset: {validation_dataset[0]}")
 
-    return training_dataset, validation_dataset, train_num_cat
+    return training_dataset, validation_dataset, train_num_cat, actual_num_topics
 
 # ========================================================
 # DATASET LOADING
@@ -470,7 +482,10 @@ def add_previous_label_features(
     is_training: bool,
     model: Optional[torch.nn.Module] = None,
     tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
-    device: str = "cuda" if torch.cuda.is_available() else "cpu"
+    device: str = "cuda" if torch.cuda.is_available() else "cpu",
+    lexicon=None,
+    lexicon_embeddings=None,
+    num_categories=0
 ) -> list[list[float]]:
     """
     For training, return ground-truth from row i-1.
@@ -483,6 +498,7 @@ def add_previous_label_features(
     """
     num_labels = len(labels)
     prev_label_features = []
+    lexicon_features = []
 
     # Ensure dataframe is sorted by Text-ID and Sentence-ID
     df = df.sort_values(by=["Text-ID", "Sentence-ID"]).reset_index(drop=True)
@@ -573,10 +589,27 @@ def add_previous_label_features(
                 return_tensors="pt"
             )
             encoded = {k: v.to(device) for k, v in encoded.items()}
+
+            # Compute the lexicon features for the current sentence
+            if lexicon:
+                lexicon_feats = compute_lexicon_scores(
+                    text_prev,
+                    lexicon,
+                    lexicon_embeddings,
+                    tokenizer_for_dynamic,
+                    num_categories
+                )
+                lexicon_features.append(lexicon_feats)
+
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
 
             with torch.no_grad():
-                outputs = model(input_ids=encoded["input_ids"], attention_mask=encoded["attention_mask"], prev_label_features=plf)
+                outputs = model(
+                    input_ids=encoded["input_ids"],
+                    attention_mask=encoded["attention_mask"],
+                    prev_label_features=plf,
+                    lexicon_features=torch.tensor(lexicon_feats, dtype=torch.float32).unsqueeze(0).to(device) if lexicon else None
+                )
             
             logits = outputs["logits"]
             probs = torch.sigmoid(logits)
@@ -613,6 +646,7 @@ def load_dataset(
     ner_features: bool = False,
     lexicon: str = None,
     topic_detection: str = None,
+    precomputed_topic_vectors=None,
     labels_file_path: Optional[str] = None,
     is_training: bool = True,
     model: Optional[torch.nn.Module] = None,
@@ -728,13 +762,11 @@ def load_dataset(
     
     # Compute Topic features
     if topic_detection:
-        logger.info(f"Applying {topic_detection} for topic modeling.")
-        topic_model = TopicModeling(method=topic_detection)
-        topic_vectors = None
-        topic_vectors = topic_model.fit_transform(texts)
-        encoded_sentences["topic_features"] = topic_vectors.tolist()
-        logger.debug(f"[Topic Detection] shape: {encoded_sentences['topic_features'].shape}, first: {encoded_sentences['topic_features'].iloc[0]}")
-        combined_features.append(topic_vectors.tolist())
+        if precomputed_topic_vectors is not None:
+            logger.info(f"Applying {topic_detection} for topic modeling.")
+            encoded_sentences["topic_features"] = precomputed_topic_vectors
+            logger.debug(f"[Topic Detection] shape: {len(encoded_sentences['topic_features'])}, first: {encoded_sentences['topic_features'][0]}")
+            combined_features.append(precomputed_topic_vectors)
     
     # Combine all features
     if combined_features:
@@ -746,10 +778,6 @@ def load_dataset(
                 arrays.append(np.array(feat, dtype=np.float32))
             merged_rows.append(np.concatenate(arrays))
         combined_features = merged_rows
-    else:
-        if linguistic_features:
-            num_categories += 17
-        combined_features = [[0.0] * num_categories] * len(data_frame)  # Default zero vectors
 
     # Debug logging
     if linguistic_features:
@@ -764,7 +792,6 @@ def load_dataset(
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
     if len(combined_features) > 0:
         logger.debug(f"First sample’s final combined_features array:\n{combined_features[0]}")
-
     
     # Save them in the encoded_sentences
     if lexicon and combined_features:
@@ -818,15 +845,16 @@ def load_dataset(
     # Now build "prev_label_features"
     # ------------------------------------------------
     if previous_sentences:
-        logger.info("Adding Previous Sentences Labels features")
+        logger.info(f"Adding Previous Sentences Labels features with num_categories = {num_categories}")
         # Add new numeric feature for the label of the previous sentence
         if is_training:
             prev_label_feats = add_previous_label_features(
                 df=df,
                 labels_df=labels_df,
                 labels=labels,
-                is_training=is_training
-                )
+                is_training=is_training,
+                num_categories=10
+            )
         else:
             prev_label_feats = [[0.0] * 2 * len(labels)] * len(df)  # Return zero features initially
             
@@ -1126,20 +1154,32 @@ def compute_schwartz_values(text: str, lexicon: dict) -> List[int]:
     
     return list(value_counts.values())
 
-def compute_mfd_scores(text, mfd_embeddings, tokenizer):
+def compute_mfd_scores(text, mfd_embeddings, tokenizer, num_categories=10):
     """Compute the count of words matching each Moral Foundation dimension."""
-    tokens = tokenizer.tokenize(text)
-    normalized_tokens = [normalize_token(token) for token in tokens]
+    # Define the 10 MFD categories in the order to appear in the vector:
+    categories_order = [
+        "CARE.VIRTUE", "CARE.VICE",
+        "FAIRNESS.VIRTUE", "FAIRNESS.VICE",
+        "LOYALTY.VIRTUE", "LOYALTY.VICE",
+        "AUTHORITY.VIRTUE", "AUTHORITY.VICE",
+        "SANCTITY.VIRTUE", "SANCTITY.VICE"
+    ]
+    # Create a lookup so we can increment the right slot
+    cat_to_index = {cat: i for i, cat in enumerate(categories_order)}
 
-    scores = defaultdict(int)
+    tokens = tokenizer.tokenize(text)
+    normalized_tokens = [token.upper() for token in tokens]
+
+    scores = [0]*len(categories_order)
     
     # Compute counts for each category
     for token in normalized_tokens:
-        if token.upper() in mfd_embeddings:
-            category = mfd_embeddings[token.upper()]
-            scores[category] += 1
+        if token in mfd_embeddings:
+            cat = mfd_embeddings[token]  # e.g. "CARE.VIRTUE"
+            if cat in cat_to_index:
+                scores[cat_to_index[cat]] += 1
 
-    return dict(scores)
+    return scores
 
 LEXICON_COMPUTATION_FUNCTIONS = {
     "VAD": compute_vad_scores,
@@ -1159,8 +1199,7 @@ def compute_lexicon_scores(text, lexicon, lexicon_embeddings, tokenizer, num_cat
     
     # Schwartz lexicon does not use tokenizer or num_categories, handle it separately
     if lexicon == "Schwartz":
-        schwartz_lexicon, _ = lexicon_embeddings
-        scores = compute_fn(text, schwartz_lexicon)
+        scores = compute_fn(text, lexicon_embeddings)
     else:
         scores = compute_fn(text, lexicon_embeddings, tokenizer, num_categories=num_categories)
     
@@ -1475,6 +1514,7 @@ from torch.nn.functional import binary_cross_entropy_with_logits
 import torch.distributed as dist
 import os
 import pandas as pd
+import spacy
 
 from core.dataset_utils import add_previous_label_features, compute_lexicon_scores, compute_ner_embeddings
 from core.lexicon_utils import load_embeddings, load_lexicon
@@ -1821,7 +1861,18 @@ class WarmupEvalCallback(TrainerCallback):
         return control
 
 class DynamicPrevLabelCallback(transformers.TrainerCallback):
-    def __init__(self, trainer, val_df, labels_df, labels, tokenizer, device=None, num_categories=0, lexicon=None, topic_detection=None):
+    def __init__(
+            self,
+            trainer,
+            val_df,
+            labels_df,
+            labels,
+            tokenizer,
+            device=None,
+            num_categories=0,
+            lexicon=None,
+            ner_features=None,
+            topic_detection=None):
         """
         val_df: The original raw validation DataFrame.
         labels: List of label names.
@@ -1836,6 +1887,7 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
         self.num_categories=num_categories
         self.lexicon=lexicon
+        self.ner_features=ner_features
         self.topic_detection=topic_detection
 
     def on_evaluate(self, args, state, control, **kwargs):
@@ -1843,7 +1895,19 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         model = self.trainer.model
         model.eval()
 
-        # (A) Add previous sentences label features
+        # (A) Dynamically compute lexicon features for validation
+        val_lexicon = None
+        val_num_cat = 0
+        if self.lexicon:
+            if self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
+                val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
+                logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
+            else:
+                val_lexicon, val_num_cat = load_embeddings(self.lexicon)
+            new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
+            logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
+
+        # (B) Add previous sentences label features
         logger.debug(f"Epoch {state.epoch}: Running validation. Model: {model is not None}")
 
         # Dynamically compute the previous labels using our modified function:
@@ -1853,23 +1917,19 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             labels=self.labels,
             is_training=False,
             model=model,
-            tokenizer_for_dynamic=self.tokenizer
+            tokenizer_for_dynamic=self.tokenizer,
+            lexicon=self.lexicon,
+            lexicon_embeddings=val_lexicon,
+            num_categories=val_num_cat
         )
 
-        # (B) Dynamically compute lexicon features for validation
-        if self.lexicon and self.lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
-            val_lexicon, val_num_cat = load_lexicon(self.lexicon, LEXICON_PATHS[self.lexicon+"-validation"])
-            logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
-        else:
-            val_lexicon, val_num_cat = load_embeddings(self.lexicon)
-
-        new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
-
         # (C) Dynamically compute NER features for validation
-        new_ner_feats = self.compute_ner_features(self.val_df)
+        if self.ner_features:
+            new_ner_feats = self.compute_ner_features(self.val_df)
 
         # (D) Dynamically compute topic features for validation
-        new_topic_feats = self.compute_topic_features(self.val_df)
+        if self.topic_detection:
+            new_topic_feats = self.compute_topic_features(self.val_df)
 
         # Ensure new_prev_feats has the correct shape
         for i in range(len(new_prev_feats)):
@@ -1877,15 +1937,15 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
                 padding = [0.0] * (2 * len(self.labels) - len(new_prev_feats[i]))
                 new_prev_feats[i].extend(padding)  # Pad with zeros if missing
             
-            if len(new_lexicon_feats[i]) < len(self.labels):
+            if self.lexicon and len(new_lexicon_feats[i]) < len(self.labels):
                 padding = [0.0] * (len(self.labels) - len(new_lexicon_feats[i]))
                 new_lexicon_feats[i].extend(padding)  # Pad with zeros if missing
 
-            if len(new_ner_feats[i]) < len(self.labels):
+            if self.ner_features and len(new_ner_feats[i]) < len(self.labels):
                 padding = [0.0] * (len(self.labels) - len(new_ner_feats[i]))
                 new_ner_feats[i].extend(padding)  # Pad with zeros if missing
 
-            if len(new_topic_feats[i]) < len(self.labels):
+            if self.topic_detection and len(new_topic_feats[i]) < len(self.labels):
                 padding = [0.0] * (len(self.labels) - len(new_topic_feats[i]))
                 new_topic_feats[i].extend(padding)  # Pad with zeros if missing
 
@@ -1907,9 +1967,12 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         def update_prev_label(dataset, idx):
             # Here, idx comes from the order of the dataset; we assume it matches self.val_df
             dataset["prev_label_features"] = new_prev_feats[idx]
-            dataset["lexicon_features"] = new_lexicon_feats[idx]
-            dataset["ner_features"] = new_ner_feats[idx]
-            dataset["topic_features"] = new_topic_feats[idx]
+            if self.lexicon:
+                dataset["lexicon_features"] = new_lexicon_feats[idx]
+            if self.ner_features:
+                dataset["ner_features"] = new_ner_feats[idx]
+            if self.topic_detection:
+                dataset["topic_features"] = new_topic_feats[idx]
             dataset["Text"] = self.val_df.iloc[idx]["Text"]
             return dataset
 
@@ -1941,10 +2004,11 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         NER features dynamically for each sentence in the validation dataset.
         """
         ner_features = []
+        nlp = spacy.load("en_core_web_sm")
         for _, row in df.iterrows():
             text = row["Text"]
             # You will need a function that computes NER features for each text
-            ner_feats = compute_ner_embeddings(text, self.tokenizer)
+            ner_feats = compute_ner_embeddings(text, nlp)
             ner_features.append(ner_feats)
 
         return ner_features
@@ -1955,14 +2019,13 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         topic features dynamically for each sentence in the validation dataset.
         """
         topic_features = []
-        for _, row in df.iterrows():
-            text = row["Text"]
-            # You will need a function that computes topic features for each text
-            topic_model = TopicModeling(method=self.topic_detection)
-            topic_vectors = None
-            topic_vectors = topic_model.fit_transform(text)
-            topic_feats = topic_vectors.tolist()
-            topic_features.append(topic_feats)
+        texts = df["Text"].tolist()
+        # You will need a function that computes topic features for each text
+        topic_model = TopicModeling(method=self.topic_detection)
+        topic_vectors = None
+        topic_vectors = topic_model.fit_transform(texts)
+        for row_vector in topic_vectors:  
+            topic_features.append(row_vector.tolist())
 
         return topic_features
 
@@ -2016,7 +2079,7 @@ import transformers
 from core.dataset_utils import prepare_datasets
 from core.lexicon_utils import load_embeddings
 from core.training import train
-from core.models import save_model, DynamicPrevLabelCallback
+from core.models import save_model
 import torch.distributed as dist
 from accelerate import Accelerator
 
@@ -2066,7 +2129,7 @@ def run_training(
     
     # Prepare datasets
     logger.info("Preparing datasets for training and validation")
-    training_dataset, validation_dataset, num_categories = prepare_datasets(
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
         training_path=training_dataset_path,
         validation_path=validation_dataset_path,
         tokenizer=tokenizer,
@@ -2115,6 +2178,7 @@ def run_training(
         custom_stopwords=custom_stopwords,
         augment_data=augment_data,
         topic_detection=topic_detection,
+        discovered_topics=discovered_topics,
         token_pruning=token_pruning,
         slice_data=slice_data
     )
@@ -2160,6 +2224,7 @@ class TopicModeling:
             num_topics = 90
         self.num_topics = num_topics
         self.model = None
+        self.fitted = False
 
     def fit_transform(self, sentences):
         """
@@ -2172,27 +2237,38 @@ class TopicModeling:
             np.ndarray: One-hot encoded topic vectors.
         """
         if self.method == "bertopic":
-            # Use GPU-based embedding model for BERTopic
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
+            if not self.fitted:
+                # Use GPU-based embedding model for BERTopic
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+                embedding_model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
 
-            # Initialize BERTopic with a fixed number of topics
-            self.model = BERTopic(nr_topics=40, embedding_model=embedding_model, verbose=True, top_n_words=20)
-            topics, _ = self.model.fit_transform(sentences)
+                # Initialize BERTopic with a fixed number of topics
+                self.model = BERTopic(
+                    nr_topics=self.num_topics,
+                    embedding_model=embedding_model,
+                    verbose=True,
+                    top_n_words=20
+                
+                )
+                topics, _ = self.model.fit_transform(sentences)
+                self.fitted = True
 
-            # Ensure topics are within a valid range
-            self.num_topics = max(topics) + 1  # Update num_topics dynamically
+                # Ensure topics are within a valid range
+                self.num_topics = max(topics) + 1  # Update num_topics dynamically
 
-            # Free GPU memory
-            del embedding_model  # Delete the embedding model
-            torch.cuda.empty_cache()  # Clear unused GPU memory
-            gc.collect()  # Run garbage collector
+                # Free GPU memory
+                del embedding_model  # Delete the embedding model
+                torch.cuda.empty_cache()  # Clear unused GPU memory
+                gc.collect()  # Run garbage collector
 
-            logger.debug(f"Topic indices shape: {np.array(topics).shape}")
-            logger.debug(f"Max topic index: {max(topics)}")
-            logger.debug(f"Expected num_topics: {self.num_topics}")
+                logger.debug(f"Topic indices shape: {np.array(topics).shape}")
+                logger.debug(f"Max topic index: {max(topics)}")
+                logger.debug(f"Expected num_topics: {self.num_topics}")
 
-            return self.get_topic_vectors(topics)
+                return self.get_topic_vectors(topics)
+            else:
+                # If we call fit_transform again by mistake, either raise an error or just transform
+                raise RuntimeError("This model is already fitted. Call .transform() for new data.")
 
         # Use CountVectorizer for LDA, TfidfVectorizer for NMF
         vectorizer = CountVectorizer() if self.method == "lda" else TfidfVectorizer()
@@ -2212,6 +2288,11 @@ class TopicModeling:
 
         return self.get_topic_vectors(topic_indices)
 
+    def transform(self, sentences):
+        if self.method == "bertopic":
+            topics, _ = self.model.transform(sentences)
+            return self.get_topic_vectors(topics)
+
     def get_topic_vectors(self, topics):
         """
         Convert topic indices into one-hot encoded vectors.
@@ -2223,12 +2304,11 @@ class TopicModeling:
             np.ndarray: One-hot encoded topic representation.
         """
         num_sentences = len(topics)
-        fixed_num_topics = 40
 
-        topic_vectors = np.zeros((num_sentences, fixed_num_topics))
+        topic_vectors = np.zeros((num_sentences, self.num_topics))
 
         for i, topic in enumerate(topics):
-            if 0 <= topic < fixed_num_topics:  # Ensure topic index is within bounds
+            if 0 <= topic < self.num_topics:  # Ensure topic index is within bounds
                 topic_vectors[i, topic] = 1  # One-hot encode the topic assignment
             else:
                 continue  # Ignore invalid topics
@@ -2345,6 +2425,7 @@ def train(
         custom_stopwords: list[str] = [],
         augment_data: bool = False,
         topic_detection: str = None,
+        discovered_topics: int = 0,
         token_pruning: bool = False,
         slice_data: bool = False
     ) -> transformers.Trainer:
@@ -2383,15 +2464,6 @@ def train(
         ner_feature_dim = 768 # DeBERTa hidden size
     else:
         ner_feature_dim = 0
-
-    if topic_detection == "bertopic":
-        topic_feature_dim = 40
-    elif topic_detection == "lda":
-        topic_feature_dim = 60
-    elif topic_detection == "nmf":
-        topic_feature_dim = 90
-    else:
-        topic_feature_dim = 0
     
     config = AutoConfig.from_pretrained(pretrained_model)
     # Add necessary attributes to config
@@ -2408,7 +2480,7 @@ def train(
         num_categories=num_categories,
         ner_feature_dim=ner_feature_dim,
         multilayer=multilayer,
-        topic_feature_dim=topic_feature_dim,
+        topic_feature_dim=discovered_topics,
         previous_sentences=previous_sentences
     )
     """
@@ -2505,6 +2577,7 @@ def train(
                 tokenizer=tokenizer,
                 num_categories=num_categories,
                 lexicon=lexicon,
+                ner_features=ner_features,
                 topic_detection=topic_detection
             )
         )
@@ -2618,7 +2691,7 @@ from core.log import logger
 def main() -> None:
 
     # Load model-specific configuration
-    model_group = "presence"
+    model_group = "growth_selfprotection"
     model_config = MODEL_CONFIG[model_group]
 
     # Define CLI arguments for training script
@@ -2688,7 +2761,7 @@ def main() -> None:
 
     else:
         # Normal training run
-        model_group = "presence"
+        model_group = "growth_selfprotection"
         model_config = MODEL_CONFIG[model_group]
     
         # Run the training pipeline

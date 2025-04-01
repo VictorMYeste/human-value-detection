@@ -65,11 +65,77 @@ MODEL_CONFIG = {
     },
     "growth_selfprotection": {
         "pretrained_model": "microsoft/deberta-base",
-        "labels": ["Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance"]
+        "labels": ["Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance"],
+
+        "custom_stopwords": [
+            # Reporting Verbs (different tenses and forms)
+            "say", "says", "said", "saying",
+            "report", "reports", "reported", "reporting",
+            "state", "states", "stated", "stating",
+            "tell", "tells", "told", "telling",
+            "claim", "claims", "claimed", "claiming",
+            "announce", "announces", "announced", "announcing",
+            "note", "notes", "noted", "noting",
+            "mention", "mentions", "mentioned", "mentioning",
+            "describe", "describes", "described", "describing",
+            "publish", "publishes", "published", "publishing",
+            "reveal", "reveals", "revealed", "revealing",
+            "explain", "explains", "explained", "explaining",
+            "quote", "quotes", "quoted", "quoting",
+            "comment", "comments", "commented", "commenting",
+
+            # Journalistic phrases
+            "allege", "alleges", "alleged", "alleging",
+            "interview", "interviews", "interviewed", "interviewing",
+            "source", "sources",
+            "article", "articles",
+            "media", "journalism", "news", "press",
+            "official", "officials",
+            "reported", "reportedly",
+            "coverage", "broadcast", "headline",
+
+            # General non-moral contextual terms
+            "situation", "case", "problem", "issue", "matter",
+            "people", "person", "individual", "group", "community",
+            "leaders", "authorities", "organization", "institutions"
+        ]
     },
     "social_personal_focus": {
         "pretrained_model": "microsoft/deberta-base",
-        "labels": ["Social Focus", "Personal Focus"]
+        "labels": ["Social Focus", "Personal Focus"],
+
+        "custom_stopwords": [
+            # Reporting Verbs (different tenses and forms)
+            "say", "says", "said", "saying",
+            "report", "reports", "reported", "reporting",
+            "state", "states", "stated", "stating",
+            "tell", "tells", "told", "telling",
+            "claim", "claims", "claimed", "claiming",
+            "announce", "announces", "announced", "announcing",
+            "note", "notes", "noted", "noting",
+            "mention", "mentions", "mentioned", "mentioning",
+            "describe", "describes", "described", "describing",
+            "publish", "publishes", "published", "publishing",
+            "reveal", "reveals", "revealed", "revealing",
+            "explain", "explains", "explained", "explaining",
+            "quote", "quotes", "quoted", "quoting",
+            "comment", "comments", "commented", "commenting",
+
+            # Journalistic phrases
+            "allege", "alleges", "alleged", "alleging",
+            "interview", "interviews", "interviewed", "interviewing",
+            "source", "sources",
+            "article", "articles",
+            "media", "journalism", "news", "press",
+            "official", "officials",
+            "reported", "reportedly",
+            "coverage", "broadcast", "headline",
+
+            # General non-moral contextual terms
+            "situation", "case", "problem", "issue", "matter",
+            "people", "person", "individual", "group", "community",
+            "leaders", "authorities", "organization", "institutions"
+        ]
     },
 }
 

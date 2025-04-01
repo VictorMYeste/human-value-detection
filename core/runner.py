@@ -30,7 +30,8 @@ def run_training(
     custom_stopwords: list[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
-    token_pruning: str = None
+    token_pruning: str = None,
+    filter_labels: list[str] = []
 ):
 
     id2label = {idx: label for idx, label in enumerate(labels)}
@@ -67,7 +68,8 @@ def run_training(
         custom_stopwords=custom_stopwords,
         augment_data=augment_data,
         topic_detection=topic_detection,
-        token_pruning=token_pruning
+        token_pruning=token_pruning,
+        filter_labels=filter_labels
     )
 
     logger.debug(f"num_categories after preparing datasets = {num_categories}")

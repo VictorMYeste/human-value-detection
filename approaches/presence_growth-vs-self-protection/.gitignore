@@ -4,3 +4,5 @@ models/
 valueeval24/
 valueeval24.zip
 output/
+checkpoints/
+results/Test.txt

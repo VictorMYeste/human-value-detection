@@ -63,7 +63,8 @@ def load_and_optionally_prune_df(
     custom_stopwords: List[str],
     token_pruning: bool,
     idf_map: Optional[Dict[str, float]] = None,
-    threshold: float = 3.0
+    threshold: float = 3.0,
+    filter_labels: List[str] = []
 ) -> pd.DataFrame:
     """
     1. Load the sentences file (augmented or normal).
@@ -81,6 +82,12 @@ def load_and_optionally_prune_df(
     # Read DataFrame
     sentences_file_path = os.path.join(dataset_path, sentences_file_name)
     df = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+
+    # Filter DF by the selected labels
+    if filter_labels:
+        row_mask = (df[filter_labels] == 1).all(axis=1)
+        filtered = df[row_mask][["Text-ID", "Sentence-ID"]]
+        df = pd.merge(df, filtered, on=["Text-ID", "Sentence-ID"], how="inner")
 
     # Slice if needed
     if slice_data:
@@ -136,7 +143,8 @@ def prepare_datasets(
     custom_stopwords: List[str] = [],
     augment_data: bool = False,
     topic_detection: str = None,
-    token_pruning: str = None
+    token_pruning: str = None,
+    filter_labels: List[str] = []
 ) -> Tuple[datasets.Dataset, datasets.Dataset, int]:
     """
     Build & prune (if requested) the training set, then do the same for validation
@@ -224,7 +232,8 @@ def prepare_datasets(
         lexicon=lexicon,
         topic_detection=topic_detection,
         precomputed_topic_vectors=train_df["topic_vectors"].tolist() if topic_detection else None,
-        labels_file_path=labels_file_path
+        labels_file_path=labels_file_path,
+        filter_labels=filter_labels
     )
 
     # Log class distribution
@@ -269,6 +278,7 @@ def prepare_datasets(
             labels_file_path=val_labels_path,
             precomputed_topic_vectors=val_df["topic_vectors"].tolist() if topic_detection else None,
             is_training=False,
+            filter_labels=filter_labels
         )
     
     # ------------------------------------------------
@@ -428,13 +438,14 @@ def add_previous_label_features(
 
             # Compute the lexicon features for the current sentence
             if lexicon:
-                lexicon_feats = compute_lexicon_scores(
-                    text_prev,
-                    lexicon,
-                    lexicon_embeddings,
-                    tokenizer_for_dynamic,
-                    num_categories
-                )
+                if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
+                    # Token-based approach
+                    lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_categories)
+                else:
+                    # Precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
+                    lexicon_feats = compute_precomputed_scores(row, lexicon_embeddings, num_categories)
+                # If the above can produce NaNs, fix them
+                lexicon_feats = [0.0 if (isinstance(x, float) and np.isnan(x)) else x for x in lexicon_feats]
                 lexicon_features.append(lexicon_feats)
 
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
@@ -486,7 +497,8 @@ def load_dataset(
     labels_file_path: Optional[str] = None,
     is_training: bool = True,
     model: Optional[torch.nn.Module] = None,
-    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None
+    tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
+    filter_labels: List[str] = []
 ):
     """
     Convert a pandas DataFrame (already pruned/cleaned if needed)
@@ -495,6 +507,12 @@ def load_dataset(
 
     data_frame = df.copy()  # Just in case, keep local copy
     labels_df = pd.read_csv(labels_file_path, sep="\t") if labels_file_path else None
+
+    # Filter DF by the selected labels
+    if filter_labels:
+        row_mask = (labels_df[filter_labels] == 1).all(axis=1)
+        filtered = labels_df[row_mask][["Text-ID", "Sentence-ID"]]
+        labels_df = pd.merge(labels_df, filtered, on=["Text-ID", "Sentence-ID"], how="inner")
 
     if previous_sentences and is_training:
         concatenated_texts = []
@@ -614,10 +632,6 @@ def load_dataset(
                 arrays.append(np.array(feat, dtype=np.float32))
             merged_rows.append(np.concatenate(arrays))
         combined_features = merged_rows
-    else:
-        if linguistic_features:
-            num_categories_ling_feat += 17
-        combined_features = [[0.0] * num_categories_ling_feat] * len(data_frame)  # Default zero vectors
 
     # Debug logging
     if linguistic_features:
@@ -632,7 +646,6 @@ def load_dataset(
         logger.debug(f"Combined features for sample {i}: {len(row)} elements")
     if len(combined_features) > 0:
         logger.debug(f"First sample’s final combined_features array:\n{combined_features[0]}")
-
     
     # Save them in the encoded_sentences
     if lexicon and combined_features:
@@ -669,18 +682,12 @@ def load_dataset(
     # Load main labels for this split if available
     # ------------------------------------------------
     labels_matrix = None
-    labels_df = None
-    if labels_file_path and os.path.isfile(labels_file_path):
-        labels_df = pd.read_csv(labels_file_path, encoding="utf-8", sep="\t", header=0)
-        logger.debug(f"Loaded labels file from {labels_file_path} with shape {labels_df.shape} and columns: {list(labels_df.columns)}")
-        # Slicing for testing purposes
-        if slice_data:
-            labels_df = slice_for_testing(labels_df)
-        labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
-        logger.debug(f"Extracted labels matrix with shape {labels_matrix.shape} from columns: {labels}")
-        encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
-    else:
-        logger.warning("No labels file found at the expected path.")
+    # Slicing for testing purposes
+    if slice_data:
+        labels_df = slice_for_testing(labels_df)
+    labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
+    logger.debug(f"Extracted labels matrix with shape {labels_matrix.shape} from columns: {labels}")
+    encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
 
     # ------------------------------------------------
     # Now build "prev_label_features"

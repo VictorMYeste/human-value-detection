@@ -1,0 +1,50 @@
+2025-03-31 22:11:23,181 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-31 22:11:23,182 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-03-31 22:11:29,681 - INFO - Setting random seed to 42
+2025-03-31 22:11:29,692 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-03-31 22:11:29,912 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-03-31 22:11:29,912 - INFO - Preparing datasets for training and validation
+2025-03-31 22:11:40,786 - ERROR - An error occurred: Column 3 named labels expected length 44758 but got length 23062
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence_growth-vs-self-protection/main.py", line 131, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence_growth-vs-self-protection/main.py", line 103, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 56, in run_training
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 222, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 717, in load_dataset
+    dataset = datasets.Dataset.from_dict(encoded_sentences)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/datasets/arrow_dataset.py", line 963, in from_dict
+    pa_table = InMemoryTable.from_pydict(mapping=mapping)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/datasets/table.py", line 758, in from_pydict
+    return cls(pa.Table.from_pydict(*args, **kwargs))
+  File "pyarrow/table.pxi", line 1968, in pyarrow.lib._Tabular.from_pydict
+  File "pyarrow/table.pxi", line 6338, in pyarrow.lib._from_pydict
+  File "pyarrow/table.pxi", line 4868, in pyarrow.lib.Table.from_arrays
+  File "pyarrow/table.pxi", line 4214, in pyarrow.lib.Table.validate
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: Column 3 named labels expected length 44758 but got length 23062
+2025-03-31 22:11:40,770 - ERROR - An error occurred: Column 3 named labels expected length 44758 but got length 23062
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/presence_growth-vs-self-protection/main.py", line 131, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/presence_growth-vs-self-protection/main.py", line 103, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 56, in run_training
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 222, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 717, in load_dataset
+    dataset = datasets.Dataset.from_dict(encoded_sentences)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/datasets/arrow_dataset.py", line 963, in from_dict
+    pa_table = InMemoryTable.from_pydict(mapping=mapping)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/datasets/table.py", line 758, in from_pydict
+    return cls(pa.Table.from_pydict(*args, **kwargs))
+  File "pyarrow/table.pxi", line 1968, in pyarrow.lib._Tabular.from_pydict
+  File "pyarrow/table.pxi", line 6338, in pyarrow.lib._from_pydict
+  File "pyarrow/table.pxi", line 4868, in pyarrow.lib.Table.from_arrays
+  File "pyarrow/table.pxi", line 4214, in pyarrow.lib.Table.validate
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: Column 3 named labels expected length 44758 but got length 23062

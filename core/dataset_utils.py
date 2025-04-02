@@ -76,12 +76,19 @@ def load_and_optionally_prune_df(
     # Decide which file to load
     if augment_data:
         sentences_file_name = "sentences-aug.tsv"
+        labels_file_name = "labels-cat-aug.tsv"
     else:
         sentences_file_name = "sentences.tsv"
+        labels_file_name = "labels-cat.tsv"
+
 
     # Read DataFrame
     sentences_file_path = os.path.join(dataset_path, sentences_file_name)
-    df = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+    labels_file_path = os.path.join(dataset_path, labels_file_name)
+    sentences_df = pd.read_csv(sentences_file_path, encoding="utf-8", sep="\t", header=0)
+    labels_df = pd.read_csv(labels_file_path, sep="\t") if labels_file_path else None
+    
+    df = pd.merge(sentences_df, labels_df, on=["Text-ID", "Sentence-ID"], how="inner")
 
     # Filter DF by the selected labels
     if filter_labels:
@@ -161,6 +168,7 @@ def prepare_datasets(
         custom_stopwords=custom_stopwords,
         token_pruning=False,   # (We haven't built the IDF map yet)
         idf_map=None,
+        filter_labels=filter_labels
     )
 
     # Build the IDF map from the (unpruned) training text, if pruning is requested
@@ -194,11 +202,6 @@ def prepare_datasets(
     # ------------------------------------------------
     # (B) Convert the pruned training DataFrame -> HF dataset
     # ------------------------------------------------
-    if augment_data:
-        labels_file = "labels-cat-aug.tsv"
-    else:
-        labels_file = "labels-cat.tsv"
-    labels_file_path = os.path.join(training_path, labels_file)
     
      # 1) Possibly load separate training vs. validation embeddings if we have a known “LIWC-22” style
     if lexicon in ["LIWC-22", "eMFD", "MFD-20", "MJD"]:
@@ -232,7 +235,6 @@ def prepare_datasets(
         lexicon=lexicon,
         topic_detection=topic_detection,
         precomputed_topic_vectors=train_df["topic_vectors"].tolist() if topic_detection else None,
-        labels_file_path=labels_file_path,
         filter_labels=filter_labels
     )
 
@@ -253,11 +255,9 @@ def prepare_datasets(
             custom_stopwords=custom_stopwords,
             token_pruning=token_pruning,  # now we do want to prune if user asked
             idf_map=idf_map,              # reuse from training
-            threshold=pruning_threshold
+            threshold=pruning_threshold,
+            filter_labels=filter_labels
         )
-
-        labels_file = "labels-cat.tsv"
-        val_labels_path = os.path.join(validation_path, labels_file)
 
         if topic_detection:
             val_topics = topic_model.transform(val_df["Text"].tolist())
@@ -275,7 +275,6 @@ def prepare_datasets(
             ner_features=ner_features,
             lexicon=lexicon,
             topic_detection=topic_detection,
-            labels_file_path=val_labels_path,
             precomputed_topic_vectors=val_df["topic_vectors"].tolist() if topic_detection else None,
             is_training=False,
             filter_labels=filter_labels
@@ -322,8 +321,7 @@ def remove_custom_stopwords(text, custom_stopwords):
     return cleaned_text
 
 def add_previous_label_features(
-    df: pd.DataFrame, 
-    labels_df: pd.DataFrame, 
+    df: pd.DataFrame,
     labels: list,
     is_training: bool,
     model: Optional[torch.nn.Module] = None,
@@ -353,7 +351,7 @@ def add_previous_label_features(
     
     # **Training Dataset: Use Ground-Truth Labels**
     if is_training:
-        label_matrix = labels_df.set_index(["Text-ID", "Sentence-ID"])[labels].to_numpy(dtype=float)
+        label_matrix = df.set_index(["Text-ID", "Sentence-ID"])[labels].to_numpy(dtype=float)
         logger.debug(f"Label matrix shape: {label_matrix.shape}")
 
         for index, row in df.iterrows():
@@ -366,23 +364,23 @@ def add_previous_label_features(
             
             # **Handle second sentence → Use prev-1**
             elif current_sentence_id == 2:
-                prev_1_idx = labels_df[
-                    (labels_df["Text-ID"] == current_text_id) & 
-                    (labels_df["Sentence-ID"] == current_sentence_id - 1)
+                prev_1_idx = df[
+                    (df["Text-ID"] == current_text_id) & 
+                    (df["Sentence-ID"] == current_sentence_id - 1)
                 ].index
                 prev_1 = label_matrix[prev_1_idx[0]].tolist() if len(prev_1_idx) > 0 else [0.0] * num_labels
                 feats = prev_1 + [0.0] * num_labels
             
             # **Handle third+ sentences → Use prev-1 and prev-2**
             else:
-                prev_1_idx = labels_df[
-                    (labels_df["Text-ID"] == current_text_id) & 
-                    (labels_df["Sentence-ID"] == current_sentence_id - 1)
+                prev_1_idx = df[
+                    (df["Text-ID"] == current_text_id) & 
+                    (df["Sentence-ID"] == current_sentence_id - 1)
                 ].index
                 prev_1 = label_matrix[prev_1_idx[0]].tolist() if len(prev_1_idx) > 0 else [0.0] * num_labels
-                prev_2_idx = labels_df[
-                    (labels_df["Text-ID"] == current_text_id) & 
-                    (labels_df["Sentence-ID"] == current_sentence_id - 2)
+                prev_2_idx = df[
+                    (df["Text-ID"] == current_text_id) & 
+                    (df["Sentence-ID"] == current_sentence_id - 2)
                 ].index
                 prev_2 = label_matrix[prev_2_idx[0]].tolist() if len(prev_2_idx) > 0 else [0.0] * num_labels
                 feats = prev_1 + prev_2
@@ -494,7 +492,6 @@ def load_dataset(
     lexicon: str = None,
     topic_detection: str = None,
     precomputed_topic_vectors=None,
-    labels_file_path: Optional[str] = None,
     is_training: bool = True,
     model: Optional[torch.nn.Module] = None,
     tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
@@ -506,13 +503,6 @@ def load_dataset(
     """
 
     data_frame = df.copy()  # Just in case, keep local copy
-    labels_df = pd.read_csv(labels_file_path, sep="\t") if labels_file_path else None
-
-    # Filter DF by the selected labels
-    if filter_labels:
-        row_mask = (labels_df[filter_labels] == 1).all(axis=1)
-        filtered = labels_df[row_mask][["Text-ID", "Sentence-ID"]]
-        labels_df = pd.merge(labels_df, filtered, on=["Text-ID", "Sentence-ID"], how="inner")
 
     if previous_sentences and is_training:
         concatenated_texts = []
@@ -537,9 +527,9 @@ def load_dataset(
 
                         # Get previous sentence labels
                         if is_training:
-                            prev_labels = labels_df.loc[
-                                (labels_df["Text-ID"] == current_text_id) & 
-                                (labels_df["Sentence-ID"] == current_sentence_id - offset),
+                            prev_labels = data_frame.loc[
+                                (data_frame["Text-ID"] == current_text_id) & 
+                                (data_frame["Sentence-ID"] == current_sentence_id - offset),
                                 labels
                             ].values.flatten().tolist()
                         else:
@@ -681,11 +671,7 @@ def load_dataset(
     # ------------------------------------------------
     # Load main labels for this split if available
     # ------------------------------------------------
-    labels_matrix = None
-    # Slicing for testing purposes
-    if slice_data:
-        labels_df = slice_for_testing(labels_df)
-    labels_matrix = labels_df[labels].ge(0.5).astype(int).to_numpy()
+    labels_matrix = data_frame[labels].ge(0.5).astype(int).to_numpy()
     logger.debug(f"Extracted labels matrix with shape {labels_matrix.shape} from columns: {labels}")
     encoded_sentences["labels"] = labels_matrix.astype(np.float32).tolist()
 
@@ -698,7 +684,6 @@ def load_dataset(
         if is_training:
             prev_label_feats = add_previous_label_features(
                 df=df,
-                labels_df=labels_df,
                 labels=labels,
                 is_training=is_training,
                 num_categories=10

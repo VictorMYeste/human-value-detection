@@ -22,11 +22,11 @@ from core.log import logger
 def main() -> None:
 
     # Load model-specific configuration
-    model_group = "growth_selfprotection"
+    model_group = "openness_conservation"
     model_config = MODEL_CONFIG[model_group]
 
-    filter_labels = ['Presence']
-    # filter_labels = []
+    # filter_labels = ['Presence']
+    filter_labels = []
 
     # Define CLI arguments for training script
     args = parse_args(prog_name=model_group)
@@ -95,10 +95,6 @@ def main() -> None:
         logger.info(f"Best params: {study.best_params}")
 
     else:
-        # Normal training run
-        model_group = "growth_selfprotection"
-        model_config = MODEL_CONFIG[model_group]
-    
         # Run the training pipeline
         run_training(
             pretrained_model=model_config["pretrained_model"],

@@ -45,6 +45,7 @@ def download_nltk_resources():
         nltk.data.find('tokenizers/punkt')
     except LookupError:
         nltk.download('punkt')
+        nltk.download('punkt_tab')
 
 def clear_directory(directory):
     """Remove all files and subdirectories in the given directory."""

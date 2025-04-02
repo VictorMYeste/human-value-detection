@@ -22,11 +22,11 @@ from core.log import logger
 def main() -> None:
 
     # Load model-specific configuration
-    model_group = "social_personal_focus"
+    model_group = "growth_selfprotection"
     model_config = MODEL_CONFIG[model_group]
 
-    # filter_labels = ['Presence']
-    filter_labels = []
+    filter_labels = ['Presence']
+    # filter_labels = []
 
     # Define CLI arguments for training script
     args = parse_args(prog_name=model_group)

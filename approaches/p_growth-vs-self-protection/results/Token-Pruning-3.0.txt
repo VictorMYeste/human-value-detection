@@ -1,0 +1,68 @@
+2025-04-01 13:29:37,838 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-01 13:29:37,840 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-01 13:29:48,174 - INFO - Setting random seed to 42
+2025-04-01 13:29:48,176 - INFO - Running training for labels: ['Growth Anxiety-Free', 'Self-Protection Anxiety-Avoidance']
+2025-04-01 13:29:48,176 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-01 13:29:48,394 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-01 13:29:48,394 - INFO - Preparing datasets for training and validation
+2025-04-01 13:29:48,636 - INFO - Pruning tokens in dataset '../../data/training-english/' (threshold=3.0)
+2025-04-01 13:29:48,636 - INFO - Building IDF map from unpruned training text...
+2025-04-01 13:29:49,072 - INFO - Token pruning (training): Average token count before pruning: 24.18
+2025-04-01 13:29:49,241 - INFO - Token pruning (training): Average token count after pruning: 17.35 (Reduction: 6.84 tokens, 28.3% reduction)
+2025-04-01 13:29:54,966 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=3.0)
+2025-04-01 13:29:54,975 - INFO - Token pruning (validation): Average token count before pruning: 24.32
+2025-04-01 13:29:55,031 - INFO - Token pruning (validation): Average token count after pruning: 17.44 (Reduction: 6.88 tokens, 28.3% reduction)
+2025-04-01 13:29:56,881 - INFO - Arguments validated successfully.
+2025-04-01 13:29:56,884 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-01 13:29:57,897 - INFO - Using CUDA for training.
+2025-04-01 13:29:59,145 - INFO - TRAINING
+2025-04-01 13:29:59,145 - INFO - ========
+2025-04-01 13:29:59,145 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: Yes
+
+2025-04-01 13:29:59,148 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.5828, 'grad_norm': 4.652647495269775, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.5474072098731995, 'eval_f1-score': {'Growth Anxiety-Free': 0.7, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 105.2566, 'eval_samples_per_second': 72.205, 'eval_steps_per_second': 9.026, 'epoch': 1.0}
+2025-04-01 13:43:52,085 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.492, 'grad_norm': 6.83106803894043, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.5423802137374878, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 103.831, 'eval_samples_per_second': 73.196, 'eval_steps_per_second': 9.149, 'epoch': 2.0}
+2025-04-01 13:57:45,345 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.442, 'grad_norm': 7.756107807159424, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.3348, 'grad_norm': 6.538532733917236, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.6137788891792297, 'eval_f1-score': {'Growth Anxiety-Free': 0.72, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 108.4547, 'eval_samples_per_second': 70.075, 'eval_steps_per_second': 8.759, 'epoch': 3.0}
+{'loss': 0.2622, 'grad_norm': 11.102919578552246, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.7474338412284851, 'eval_f1-score': {'Growth Anxiety-Free': 0.69, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 111.0945, 'eval_samples_per_second': 68.41, 'eval_steps_per_second': 8.551, 'epoch': 4.0}
+{'loss': 0.2122, 'grad_norm': 5.890478610992432, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1605, 'grad_norm': 9.205109596252441, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.8743441104888916, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 109.7561, 'eval_samples_per_second': 69.244, 'eval_steps_per_second': 8.656, 'epoch': 5.0}
+{'loss': 0.1302, 'grad_norm': 7.058345317840576, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 1.0550596714019775, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.81}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 107.245, 'eval_samples_per_second': 70.866, 'eval_steps_per_second': 8.858, 'epoch': 6.0}
+{'loss': 0.1072, 'grad_norm': 8.48531436920166, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0876, 'grad_norm': 8.778386116027832, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.146699070930481, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 106.9263, 'eval_samples_per_second': 71.077, 'eval_steps_per_second': 8.885, 'epoch': 7.0}
+{'train_runtime': 5896.0321, 'train_samples_per_second': 39.114, 'train_steps_per_second': 1.221, 'train_loss': 0.2792827324068582, 'epoch': 7.0}
+2025-04-01 15:08:15,505 - INFO - 
+
+VALIDATION
+2025-04-01 15:08:15,505 - INFO - ==========
+2025-04-01 15:10:01,720 - INFO - Growth Anxiety-Free: 0.72
+2025-04-01 15:10:01,720 - INFO - Self-Protection Anxiety-Avoidance: 0.82
+2025-04-01 15:10:01,720 - INFO - Macro average: 0.77
+2025-04-01 15:10:02,154 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

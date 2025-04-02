@@ -107,7 +107,8 @@ def train(
         topic_detection: str = None,
         discovered_topics: int = 0,
         token_pruning: bool = False,
-        slice_data: bool = False
+        slice_data: bool = False,
+        filter_labels: list[str] = []
     ) -> transformers.Trainer:
     """Train the model and evaluate performance."""
 
@@ -183,6 +184,7 @@ def train(
     config_details = (
         f"Pre-trained model: {pretrained_model}\n"
         f"Model name: {model_name if model_name else 'None'}\n"
+        f"Filter labels: {filter_labels}\n"
         f"Batch size: {batch_size}\n"
         f"Number of epochs: {num_train_epochs}\n"
         f"Learning rate: {learning_rate}\n"

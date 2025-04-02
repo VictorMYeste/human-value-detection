@@ -34,6 +34,7 @@ def run_training(
     filter_labels: list[str] = []
 ):
 
+    logger.info(f"Running training for labels: {labels}")
     id2label = {idx: label for idx, label in enumerate(labels)}
     label2id = {label: idx for idx, label in enumerate(labels)}
 
@@ -105,7 +106,8 @@ def run_training(
         topic_detection=topic_detection,
         discovered_topics=discovered_topics,
         token_pruning=token_pruning,
-        slice_data=slice_data
+        slice_data=slice_data,
+        filter_labels=filter_labels
     )
 
     # Save the model if required

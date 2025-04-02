@@ -1,0 +1,155 @@
+2025-04-02 09:13:53,561 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-02 09:13:53,561 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-02 09:13:59,945 - INFO - Setting random seed to 42
+2025-04-02 09:13:59,945 - INFO - Running training for labels: ['Growth Anxiety-Free', 'Self-Protection Anxiety-Avoidance']
+2025-04-02 09:13:59,946 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-02 09:14:00,162 - INFO - Loading lexicon embeddings for: Schwartz
+2025-04-02 09:14:00,162 - INFO - Preparing datasets for training and validation
+2025-04-02 09:14:04,872 - ERROR - An error occurred: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - '/home/vicyesmo/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/share/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/p_growth-vs-self-protection/main.py", line 127, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/p_growth-vs-self-protection/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 57, in run_training
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 225, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 589, in load_dataset
+    data_frame['Lexicon_Scores'] = [
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 590, in <listcomp>
+    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 1035, in compute_lexicon_scores
+    scores = compute_fn(text, lexicon_embeddings)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 974, in compute_schwartz_values
+    words = word_tokenize(text.lower())
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 142, in word_tokenize
+    sentences = [text] if preserve_line else sent_tokenize(text, language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 119, in sent_tokenize
+    tokenizer = _get_punkt_tokenizer(language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 105, in _get_punkt_tokenizer
+    return PunktTokenizer(language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/punkt.py", line 1744, in __init__
+    self.load_lang(lang)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/punkt.py", line 1749, in load_lang
+    lang_dir = find(f"tokenizers/punkt_tab/{lang}/")
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/data.py", line 579, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - '/home/vicyesmo/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/share/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+
+2025-04-02 09:14:04,875 - ERROR - An error occurred: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - '/home/vicyesmo/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/share/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/p_growth-vs-self-protection/main.py", line 127, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/p_growth-vs-self-protection/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 57, in run_training
+    training_dataset, validation_dataset, num_categories, discovered_topics = prepare_datasets(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 225, in prepare_datasets
+    training_dataset = load_dataset(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 589, in load_dataset
+    data_frame['Lexicon_Scores'] = [
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 590, in <listcomp>
+    compute_lexicon_scores(txt, lexicon, lexicon_embeddings, tokenizer, num_categories)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 1035, in compute_lexicon_scores
+    scores = compute_fn(text, lexicon_embeddings)
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 974, in compute_schwartz_values
+    words = word_tokenize(text.lower())
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 142, in word_tokenize
+    sentences = [text] if preserve_line else sent_tokenize(text, language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 119, in sent_tokenize
+    tokenizer = _get_punkt_tokenizer(language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/__init__.py", line 105, in _get_punkt_tokenizer
+    return PunktTokenizer(language)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/punkt.py", line 1744, in __init__
+    self.load_lang(lang)
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/tokenize/punkt.py", line 1749, in load_lang
+    lang_dir = find(f"tokenizers/punkt_tab/{lang}/")
+  File "/home/vicyesmo/.conda/envs/hvd/lib/python3.9/site-packages/nltk/data.py", line 579, in find
+    raise LookupError(resource_not_found)
+LookupError: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - '/home/vicyesmo/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/share/nltk_data'
+    - '/home/vicyesmo/.conda/envs/hvd/lib/nltk_data'
+    - '/usr/share/nltk_data'
+    - '/usr/local/share/nltk_data'
+    - '/usr/lib/nltk_data'
+    - '/usr/local/lib/nltk_data'
+**********************************************************************
+

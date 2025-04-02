@@ -95,10 +95,6 @@ def main() -> None:
         logger.info(f"Best params: {study.best_params}")
 
     else:
-        # Normal training run
-        model_group = "growth_selfprotection"
-        model_config = MODEL_CONFIG[model_group]
-    
         # Run the training pipeline
         run_training(
             pretrained_model=model_config["pretrained_model"],

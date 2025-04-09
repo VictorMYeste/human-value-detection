@@ -243,18 +243,10 @@ def train(
             idf_map=None
         )
 
-        if augment_data:
-            labels_file = "labels-cat-aug.tsv"
-        else:
-            labels_file = "labels-cat.tsv"
-        labels_file_path = os.path.join(validation_path, labels_file)
-        labels_df = pd.read_csv(labels_file_path, sep="\t") if labels_file_path else None
-
         trainer.add_callback(
             DynamicPrevLabelCallback(
                 trainer=trainer,
                 val_df=raw_val_df,
-                labels_df=labels_df,
                 labels=labels,
                 tokenizer=tokenizer,
                 num_categories=num_categories,

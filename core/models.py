@@ -78,6 +78,7 @@ class EnhancedDebertaModel(nn.Module):
             id2label,
             label2id,
             num_categories=0,
+            ling_feature_dim=0,
             ner_feature_dim=0,
             multilayer = False,
             num_groups=8,
@@ -110,6 +111,18 @@ class EnhancedDebertaModel(nn.Module):
         else:
             self.lexicon_layer = None
             logger.debug("No lexicon layer initialized at model")
+
+        # Optional Linguistic Layer
+        if ling_feature_dim > 0:
+            self.ling_layer = nn.Sequential(
+                nn.Linear(ling_feature_dim, 128),
+                nn.ReLU(),
+                nn.Dropout(0.4),
+            )
+            logger.debug("Linguistic layer initialized at model")
+        else:
+            self.ling_layer = None
+            logger.debug("No linguistic layer initialized at model")
 
         # Optional NER Layer
         #self.ner_layer = nn.Linear(num_categories, 128)  # Map categories to 128 dimensions
@@ -171,6 +184,8 @@ class EnhancedDebertaModel(nn.Module):
         input_dim = hidden_size
         if self.lexicon_layer:
             input_dim += 128
+        if self.ling_layer:
+            input_dim += 128
         if self.ner_layer:
             input_dim += 128
         if self.topic_layer:
@@ -193,6 +208,7 @@ class EnhancedDebertaModel(nn.Module):
         inputs_embeds=None,  # Add inputs_embeds for Captum support
         attention_mask=None,
         lexicon_features=None,
+        linguistic_features=None,
         ner_features=None,
         topic_features=None,
         prev_label_features=None,
@@ -209,6 +225,9 @@ class EnhancedDebertaModel(nn.Module):
 
         if lexicon_features is not None:
             logger.debug(f"Lexicon feature shape: {lexicon_features.shape}")
+
+        if linguistic_features is not None:
+            logger.debug(f"Linguistic feature shape: {linguistic_features.shape}")
 
         if ner_features is not None:
             logger.debug(f"NER feature shape: {ner_features.shape}")
@@ -241,10 +260,18 @@ class EnhancedDebertaModel(nn.Module):
             lexicon_output = self.lexicon_layer(lexicon_features)
             logger.debug(f"Lexicon output shape: {lexicon_output.shape}")
             combined_output = torch.cat([combined_output, lexicon_output], dim=-1)
-
             logger.debug(f"Lexicon combined_output shape: {combined_output.shape}")
+
+        # (C) Add linguistic features
+        if self.ling_layer and linguistic_features is not None:
+            logger.debug(f"Linguistic features shape before processing: {linguistic_features.shape}")
+            linguistic_features = linguistic_features.to(input_ids.device)
+            ling_output = self.ling_layer(linguistic_features)
+            logger.debug(f"Linguistic output shape: {ling_output.shape}")
+            combined_output = torch.cat([combined_output, ling_output], dim=-1)
+            logger.debug(f"Linguistic combined_output shape: {combined_output.shape}")
         
-        # (C) Add NER features
+        # (D) Add NER features
         if self.ner_layer and ner_features is not None:
             logger.debug(f"NER features shape before processing: {ner_features.shape}")
             ner_features = ner_features.to(input_ids.device)
@@ -253,7 +280,7 @@ class EnhancedDebertaModel(nn.Module):
             combined_output = torch.cat([combined_output, ner_output], dim=-1)
             logger.debug(f"NER combined_output shape: {combined_output.shape}")
 
-        # (D) Add topic features
+        # (E) Add topic features
         if self.topic_layer and topic_features is not None:
             logger.debug(f"Topic Detection features shape before processing: {topic_features.shape}")
             topic_features = topic_features.to(input_ids.device)
@@ -306,7 +333,7 @@ class CustomTrainer(transformers.Trainer):
         logger.debug(f"Attention Mask Shape: {inputs['attention_mask'].shape}")
 
         # Debug lexicon features
-        if "lexicon_features" in inputs:
+        if "Lexicon_Scores" in inputs:
             logger.debug(f"Lexicon Features Shape: {inputs['lexicon_features'].shape}")
         else:
             logger.debug("No lexicon features")
@@ -358,7 +385,6 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             self,
             trainer,
             val_df,
-            labels_df,
             labels,
             tokenizer,
             device=None,
@@ -374,7 +400,6 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         """
         self.trainer = trainer
         self.val_df = val_df.copy()
-        self.labels_df = labels_df.copy()
         self.labels = labels
         self.tokenizer = tokenizer
         self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
@@ -408,7 +433,6 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
         # Dynamically compute the previous labels using our modified function:
         new_prev_feats = add_previous_label_features(
             df=self.val_df,
-            labels_df=self.labels_df,
             labels=self.labels,
             is_training=False,
             model=model,
@@ -463,11 +487,11 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             # Here, idx comes from the order of the dataset; we assume it matches self.val_df
             dataset["prev_label_features"] = new_prev_feats[idx]
             if self.lexicon:
-                dataset["lexicon_features"] = new_lexicon_feats[idx]
+                dataset["Lexicon_Scores"] = new_lexicon_feats[idx]
             if self.ner_features:
-                dataset["ner_features"] = new_ner_feats[idx]
+                dataset["NER_Features"] = new_ner_feats[idx]
             if self.topic_detection:
-                dataset["topic_features"] = new_topic_feats[idx]
+                dataset["Topic_Features"] = new_topic_feats[idx]
             dataset["Text"] = self.val_df.iloc[idx]["Text"]
             return dataset
 

@@ -1,0 +1,72 @@
+2025-04-04 09:25:38,858 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-04 09:25:38,859 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-04 09:25:44,430 - INFO - Setting random seed to 42
+2025-04-04 09:25:44,430 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-04-04 09:25:44,431 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-04 09:25:44,665 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-04 09:25:44,665 - INFO - Preparing datasets for training and validation
+2025-04-04 09:27:38,676 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-04 09:28:41,274 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-04 09:28:42,265 - INFO - Arguments validated successfully.
+2025-04-04 09:28:42,267 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-04 09:28:42,268 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-04 09:28:42,883 - INFO - Using CUDA for training.
+2025-04-04 09:28:44,142 - INFO - TRAINING
+2025-04-04 09:28:44,142 - INFO - ========
+2025-04-04 09:28:44,142 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-04 09:28:44,144 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-04 09:28:44,148 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.465, 'grad_norm': 3.5147180557250977, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.45446160435676575, 'eval_f1-score': {'Openness to Change': 0.47, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 93.0365, 'eval_samples_per_second': 81.688, 'eval_steps_per_second': 20.422, 'epoch': 1.0}
+2025-04-04 09:48:38,766 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-04 09:53:12,697 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.3899, 'grad_norm': 7.625405788421631, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.4610830843448639, 'eval_f1-score': {'Openness to Change': 0.43, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 93.7097, 'eval_samples_per_second': 81.101, 'eval_steps_per_second': 20.275, 'epoch': 2.0}
+2025-04-04 10:13:05,604 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-04 10:17:47,748 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.3469, 'grad_norm': 4.055912017822266, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.2614, 'grad_norm': 4.8064727783203125, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.508359968662262, 'eval_f1-score': {'Openness to Change': 0.43, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 93.7332, 'eval_samples_per_second': 81.081, 'eval_steps_per_second': 20.27, 'epoch': 3.0}
+2025-04-04 10:42:29,784 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2009, 'grad_norm': 3.665367364883423, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.6706616282463074, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.64}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 93.6373, 'eval_samples_per_second': 81.164, 'eval_steps_per_second': 20.291, 'epoch': 4.0}
+2025-04-04 11:07:08,172 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1543, 'grad_norm': 5.749347686767578, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1039, 'grad_norm': 6.6454596519470215, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.7934805750846863, 'eval_f1-score': {'Openness to Change': 0.44, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 93.6139, 'eval_samples_per_second': 81.185, 'eval_steps_per_second': 20.296, 'epoch': 5.0}
+2025-04-04 11:31:51,941 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0733, 'grad_norm': 7.96848726272583, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 0.999629557132721, 'eval_f1-score': {'Openness to Change': 0.44, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 93.7293, 'eval_samples_per_second': 81.085, 'eval_steps_per_second': 20.271, 'epoch': 6.0}
+2025-04-04 11:56:31,275 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0575, 'grad_norm': 13.634751319885254, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0431, 'grad_norm': 3.4345829486846924, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.152759313583374, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 93.8316, 'eval_samples_per_second': 80.996, 'eval_steps_per_second': 20.249, 'epoch': 7.0}
+2025-04-04 12:21:12,081 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 10347.6888, 'train_samples_per_second': 22.287, 'train_steps_per_second': 0.696, 'train_loss': 0.2081876082746432, 'epoch': 7.0}
+2025-04-04 12:21:15,165 - INFO - 
+
+VALIDATION
+2025-04-04 12:21:15,166 - INFO - ==========
+2025-04-04 12:27:27,300 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-04 12:27:27,301 - INFO - Openness to Change: 0.43
+2025-04-04 12:27:27,302 - INFO - Conservation: 0.66
+2025-04-04 12:27:27,302 - INFO - Macro average: 0.55

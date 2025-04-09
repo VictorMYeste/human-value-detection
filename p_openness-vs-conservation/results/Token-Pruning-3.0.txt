@@ -1,0 +1,75 @@
+2025-04-03 00:43:45,037 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-03 00:43:45,037 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-03 00:43:50,615 - INFO - Setting random seed to 42
+2025-04-03 00:43:50,615 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-04-03 00:43:50,615 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-03 00:43:50,848 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-03 00:43:50,848 - INFO - Preparing datasets for training and validation
+2025-04-03 00:43:51,093 - INFO - Pruning tokens in dataset '../../data/training-english/' (threshold=3.0)
+2025-04-03 00:43:51,093 - INFO - Building IDF map from unpruned training text...
+2025-04-03 00:43:51,497 - INFO - Token pruning (training): Average token count before pruning: 24.18
+2025-04-03 00:43:51,677 - INFO - Token pruning (training): Average token count after pruning: 17.35 (Reduction: 6.84 tokens, 28.3% reduction)
+2025-04-03 00:43:58,001 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=3.0)
+2025-04-03 00:43:58,011 - INFO - Token pruning (validation): Average token count before pruning: 24.32
+2025-04-03 00:43:58,072 - INFO - Token pruning (validation): Average token count after pruning: 17.44 (Reduction: 6.88 tokens, 28.3% reduction)
+2025-04-03 00:44:00,044 - INFO - Arguments validated successfully.
+2025-04-03 00:44:00,049 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-03 00:44:01,723 - INFO - Using CUDA for training.
+2025-04-03 00:44:03,023 - INFO - TRAINING
+2025-04-03 00:44:03,024 - INFO - ========
+2025-04-03 00:44:03,024 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: Yes
+
+2025-04-03 00:44:03,026 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.4893, 'grad_norm': 3.305250406265259, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.44983452558517456, 'eval_f1-score': {'Openness to Change': 0.35, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 58.7463, 'eval_samples_per_second': 129.37, 'eval_steps_per_second': 16.171, 'epoch': 1.0}
+2025-04-03 00:52:04,638 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.4202, 'grad_norm': 4.870197772979736, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.4554945230484009, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 58.7714, 'eval_samples_per_second': 129.315, 'eval_steps_per_second': 16.164, 'epoch': 2.0}
+2025-04-03 01:00:05,578 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.3784, 'grad_norm': 9.12450122833252, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.2944, 'grad_norm': 4.497959613800049, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.508121132850647, 'eval_f1-score': {'Openness to Change': 0.43, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 58.9659, 'eval_samples_per_second': 128.888, 'eval_steps_per_second': 16.111, 'epoch': 3.0}
+{'loss': 0.2331, 'grad_norm': 6.899035930633545, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.6179177165031433, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 58.9477, 'eval_samples_per_second': 128.928, 'eval_steps_per_second': 16.116, 'epoch': 4.0}
+{'loss': 0.1891, 'grad_norm': 6.980276107788086, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1334, 'grad_norm': 7.954825401306152, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.741619348526001, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 58.9599, 'eval_samples_per_second': 128.901, 'eval_steps_per_second': 16.113, 'epoch': 5.0}
+{'loss': 0.0993, 'grad_norm': 8.813798904418945, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 0.9206222295761108, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 59.1412, 'eval_samples_per_second': 128.506, 'eval_steps_per_second': 16.063, 'epoch': 6.0}
+{'loss': 0.0779, 'grad_norm': 9.926241874694824, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0598, 'grad_norm': 7.81195068359375, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.072982668876648, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 59.1338, 'eval_samples_per_second': 128.522, 'eval_steps_per_second': 16.065, 'epoch': 7.0}
+{'loss': 0.0436, 'grad_norm': 1.3086642026901245, 'learning_rate': 4.722222222222222e-06, 'epoch': 7.63}
+{'eval_loss': 1.1877846717834473, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 58.8187, 'eval_samples_per_second': 129.211, 'eval_steps_per_second': 16.151, 'epoch': 8.0}
+{'loss': 0.0351, 'grad_norm': 7.845665454864502, 'learning_rate': 3.3333333333333333e-06, 'epoch': 8.32}
+{'eval_loss': 1.2733464241027832, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 58.7959, 'eval_samples_per_second': 129.261, 'eval_steps_per_second': 16.158, 'epoch': 9.0}
+{'loss': 0.0277, 'grad_norm': 1.385412335395813, 'learning_rate': 1.944444444444445e-06, 'epoch': 9.02}
+{'loss': 0.02, 'grad_norm': 0.6757634282112122, 'learning_rate': 5.555555555555555e-07, 'epoch': 9.71}
+{'eval_loss': 1.315618872642517, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 58.8953, 'eval_samples_per_second': 129.042, 'eval_steps_per_second': 16.13, 'epoch': 9.99}
+{'train_runtime': 4842.0402, 'train_samples_per_second': 47.629, 'train_steps_per_second': 1.487, 'train_loss': 0.17415185345543754, 'epoch': 9.99}
+2025-04-03 02:04:46,115 - INFO - 
+
+VALIDATION
+2025-04-03 02:04:46,115 - INFO - ==========
+2025-04-03 02:05:44,129 - INFO - Openness to Change: 0.45
+2025-04-03 02:05:44,129 - INFO - Conservation: 0.68
+2025-04-03 02:05:44,129 - INFO - Macro average: 0.57
+2025-04-03 02:05:44,420 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

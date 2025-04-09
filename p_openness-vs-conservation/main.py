@@ -22,7 +22,7 @@ from core.log import logger
 def main() -> None:
 
     # Load model-specific configuration
-    model_group = "growth_selfprotection"
+    model_group = "openness_conservation"
     model_config = MODEL_CONFIG[model_group]
 
     filter_labels = ['Presence']

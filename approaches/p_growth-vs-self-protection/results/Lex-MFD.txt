@@ -1,0 +1,63 @@
+2025-04-02 20:13:09,997 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-02 20:13:09,997 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-02 20:13:23,325 - INFO - Setting random seed to 42
+2025-04-02 20:13:23,357 - INFO - Running training for labels: ['Growth Anxiety-Free', 'Self-Protection Anxiety-Avoidance']
+2025-04-02 20:13:23,358 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-02 20:13:23,920 - INFO - Loading lexicon embeddings for: MFD
+2025-04-02 20:13:23,995 - INFO - Preparing datasets for training and validation
+2025-04-02 20:13:36,641 - INFO - Arguments validated successfully.
+2025-04-02 20:13:36,643 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-02 20:13:37,668 - INFO - Using CUDA for training.
+2025-04-02 20:13:38,861 - INFO - TRAINING
+2025-04-02 20:13:38,862 - INFO - ========
+2025-04-02 20:13:38,862 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: MFD
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-02 20:13:38,864 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.5795, 'grad_norm': 3.6163578033447266, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.5391936898231506, 'eval_f1-score': {'Growth Anxiety-Free': 0.7, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 147.328, 'eval_samples_per_second': 51.586, 'eval_steps_per_second': 6.448, 'epoch': 1.0}
+2025-04-02 20:30:18,066 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.4848, 'grad_norm': 6.329992294311523, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.5329427719116211, 'eval_f1-score': {'Growth Anxiety-Free': 0.72, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 147.436, 'eval_samples_per_second': 51.548, 'eval_steps_per_second': 6.443, 'epoch': 2.0}
+2025-04-02 20:46:57,287 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.4338, 'grad_norm': 6.326739311218262, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.3228, 'grad_norm': 6.555347442626953, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.6173941493034363, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 147.7027, 'eval_samples_per_second': 51.455, 'eval_steps_per_second': 6.432, 'epoch': 3.0}
+{'loss': 0.2531, 'grad_norm': 5.862288951873779, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.7467967867851257, 'eval_f1-score': {'Growth Anxiety-Free': 0.72, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 147.2597, 'eval_samples_per_second': 51.61, 'eval_steps_per_second': 6.451, 'epoch': 4.0}
+{'loss': 0.2014, 'grad_norm': 8.89529037475586, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1479, 'grad_norm': 7.82588529586792, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.9072387218475342, 'eval_f1-score': {'Growth Anxiety-Free': 0.7, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 147.9289, 'eval_samples_per_second': 51.376, 'eval_steps_per_second': 6.422, 'epoch': 5.0}
+{'loss': 0.1129, 'grad_norm': 2.5030179023742676, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 1.071911096572876, 'eval_f1-score': {'Growth Anxiety-Free': 0.72, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 149.5109, 'eval_samples_per_second': 50.832, 'eval_steps_per_second': 6.354, 'epoch': 6.0}
+{'loss': 0.0972, 'grad_norm': 13.79208755493164, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0787, 'grad_norm': 6.501968860626221, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.1692346334457397, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.83}, 'eval_macro-avg-f1-score': 0.77, 'eval_runtime': 146.3329, 'eval_samples_per_second': 51.936, 'eval_steps_per_second': 6.492, 'epoch': 7.0}
+{'loss': 0.0572, 'grad_norm': 11.664228439331055, 'learning_rate': 4.722222222222222e-06, 'epoch': 7.63}
+{'eval_loss': 1.3166472911834717, 'eval_f1-score': {'Growth Anxiety-Free': 0.71, 'Self-Protection Anxiety-Avoidance': 0.82}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 146.3481, 'eval_samples_per_second': 51.931, 'eval_steps_per_second': 6.491, 'epoch': 8.0}
+{'train_runtime': 8020.2911, 'train_samples_per_second': 28.755, 'train_steps_per_second': 0.898, 'train_loss': 0.2427499061899387, 'epoch': 8.0}
+2025-04-02 22:27:19,492 - INFO - 
+
+VALIDATION
+2025-04-02 22:27:19,492 - INFO - ==========
+2025-04-02 22:29:48,738 - INFO - Growth Anxiety-Free: 0.72
+2025-04-02 22:29:48,738 - INFO - Self-Protection Anxiety-Avoidance: 0.83
+2025-04-02 22:29:48,738 - INFO - Macro average: 0.77
+2025-04-02 22:29:49,119 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

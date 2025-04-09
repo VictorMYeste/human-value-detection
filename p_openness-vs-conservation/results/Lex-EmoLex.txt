@@ -1,0 +1,61 @@
+2025-04-03 12:58:43,816 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-03 12:58:43,817 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-03 12:58:49,362 - INFO - Setting random seed to 42
+2025-04-03 12:58:49,363 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-04-03 12:58:49,363 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-03 12:58:49,573 - INFO - Loading lexicon embeddings for: EmoLex
+2025-04-03 12:58:49,707 - INFO - Preparing datasets for training and validation
+2025-04-03 12:59:03,989 - INFO - Arguments validated successfully.
+2025-04-03 12:59:03,991 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-03 12:59:05,464 - INFO - Using CUDA for training.
+2025-04-03 12:59:06,763 - INFO - TRAINING
+2025-04-03 12:59:06,763 - INFO - ========
+2025-04-03 12:59:06,763 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: EmoLex
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-03 12:59:06,766 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.482, 'grad_norm': 3.922234296798706, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.43905922770500183, 'eval_f1-score': {'Openness to Change': 0.38, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 82.9909, 'eval_samples_per_second': 91.576, 'eval_steps_per_second': 11.447, 'epoch': 1.0}
+2025-04-03 13:08:54,195 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.4127, 'grad_norm': 4.140486240386963, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.45583391189575195, 'eval_f1-score': {'Openness to Change': 0.47, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 82.958, 'eval_samples_per_second': 91.613, 'eval_steps_per_second': 11.452, 'epoch': 2.0}
+2025-04-03 13:18:40,161 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.3683, 'grad_norm': 6.157844543457031, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.2797, 'grad_norm': 4.500314712524414, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.5055847764015198, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 83.4823, 'eval_samples_per_second': 91.037, 'eval_steps_per_second': 11.38, 'epoch': 3.0}
+{'loss': 0.2165, 'grad_norm': 3.8392839431762695, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.6474317908287048, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 83.6546, 'eval_samples_per_second': 90.85, 'eval_steps_per_second': 11.356, 'epoch': 4.0}
+{'loss': 0.1732, 'grad_norm': 5.891906261444092, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1202, 'grad_norm': 6.877216815948486, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.7560142278671265, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 83.8603, 'eval_samples_per_second': 90.627, 'eval_steps_per_second': 11.328, 'epoch': 5.0}
+{'loss': 0.0886, 'grad_norm': 14.221638679504395, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 0.984682559967041, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 83.7831, 'eval_samples_per_second': 90.71, 'eval_steps_per_second': 11.339, 'epoch': 6.0}
+{'loss': 0.0698, 'grad_norm': 0.5364152193069458, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0545, 'grad_norm': 15.36971378326416, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.1133339405059814, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 83.7808, 'eval_samples_per_second': 90.713, 'eval_steps_per_second': 11.339, 'epoch': 7.0}
+{'train_runtime': 4127.5788, 'train_samples_per_second': 55.873, 'train_steps_per_second': 1.744, 'train_loss': 0.22500167961044992, 'epoch': 7.0}
+2025-04-03 14:07:55,392 - INFO - 
+
+VALIDATION
+2025-04-03 14:07:55,392 - INFO - ==========
+2025-04-03 14:09:19,155 - INFO - Openness to Change: 0.45
+2025-04-03 14:09:19,155 - INFO - Conservation: 0.66
+2025-04-03 14:09:19,155 - INFO - Macro average: 0.56
+2025-04-03 14:09:19,327 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

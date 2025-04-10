@@ -1,0 +1,83 @@
+2025-04-08 14:24:51,085 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-08 14:24:51,086 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-08 14:24:57,865 - INFO - Setting random seed to 42
+2025-04-08 14:24:57,866 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-08 14:24:57,866 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-08 14:24:58,049 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-08 14:24:58,049 - INFO - Preparing datasets for training and validation
+2025-04-08 14:26:54,284 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-08 14:27:58,697 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-08 14:27:59,723 - INFO - Arguments validated successfully.
+2025-04-08 14:27:59,726 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-08 14:27:59,726 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-08 14:28:01,071 - INFO - Using CUDA for training.
+2025-04-08 14:28:02,359 - INFO - TRAINING
+2025-04-08 14:28:02,359 - INFO - ========
+2025-04-08 14:28:02,359 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-08 14:28:02,362 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-08 14:28:02,366 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.5998, 'grad_norm': 8.331254959106445, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.5698712468147278, 'eval_f1-score': {'Social Focus': 0.73, 'Personal Focus': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 93.971, 'eval_samples_per_second': 80.876, 'eval_steps_per_second': 20.219, 'epoch': 1.0}
+2025-04-08 14:48:08,472 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-08 14:52:47,945 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4902, 'grad_norm': 3.5942790508270264, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.5698201060295105, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.7}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 94.5989, 'eval_samples_per_second': 80.339, 'eval_steps_per_second': 20.085, 'epoch': 2.0}
+2025-04-08 15:12:56,439 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-08 15:17:39,006 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4371, 'grad_norm': 4.186311721801758, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.3208, 'grad_norm': 7.823507785797119, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.6648702621459961, 'eval_f1-score': {'Social Focus': 0.75, 'Personal Focus': 0.69}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 94.833, 'eval_samples_per_second': 80.141, 'eval_steps_per_second': 20.035, 'epoch': 3.0}
+2025-04-08 15:42:31,263 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2487, 'grad_norm': 11.613932609558105, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.9169611930847168, 'eval_f1-score': {'Social Focus': 0.72, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.0434, 'eval_samples_per_second': 79.963, 'eval_steps_per_second': 19.991, 'epoch': 4.0}
+2025-04-08 16:07:30,395 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.195, 'grad_norm': 2.3409552574157715, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1451, 'grad_norm': 6.033824443817139, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.9909263849258423, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.7}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 94.819, 'eval_samples_per_second': 80.153, 'eval_steps_per_second': 20.038, 'epoch': 5.0}
+2025-04-08 16:32:24,830 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1107, 'grad_norm': 18.66745376586914, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 1.134423851966858, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.68}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 94.8056, 'eval_samples_per_second': 80.164, 'eval_steps_per_second': 20.041, 'epoch': 6.0}
+2025-04-08 16:57:23,503 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0999, 'grad_norm': 1.3593957424163818, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0757, 'grad_norm': 1.5090965032577515, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.273003101348877, 'eval_f1-score': {'Social Focus': 0.75, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 94.8334, 'eval_samples_per_second': 80.141, 'eval_steps_per_second': 20.035, 'epoch': 7.0}
+2025-04-08 17:22:23,192 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0617, 'grad_norm': 13.50487232208252, 'learning_rate': 4.722222222222222e-06, 'epoch': 7.63}
+{'eval_loss': 1.4886999130249023, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.7}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.0184, 'eval_samples_per_second': 79.985, 'eval_steps_per_second': 19.996, 'epoch': 8.0}
+2025-04-08 17:47:21,734 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0532, 'grad_norm': 0.9365458488464355, 'learning_rate': 3.3333333333333333e-06, 'epoch': 8.32}
+{'eval_loss': 1.5784846544265747, 'eval_f1-score': {'Social Focus': 0.75, 'Personal Focus': 0.72}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 95.1936, 'eval_samples_per_second': 79.837, 'eval_steps_per_second': 19.959, 'epoch': 9.0}
+2025-04-08 18:12:16,724 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0427, 'grad_norm': 9.172060012817383, 'learning_rate': 1.944444444444445e-06, 'epoch': 9.02}
+{'loss': 0.034, 'grad_norm': 0.23305732011795044, 'learning_rate': 5.555555555555555e-07, 'epoch': 9.71}
+{'eval_loss': 1.6168962717056274, 'eval_f1-score': {'Social Focus': 0.75, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 94.6489, 'eval_samples_per_second': 80.297, 'eval_steps_per_second': 20.074, 'epoch': 9.99}
+2025-04-08 18:37:06,872 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 14961.6988, 'train_samples_per_second': 15.414, 'train_steps_per_second': 0.481, 'train_loss': 0.20330624487664964, 'epoch': 9.99}
+2025-04-08 18:37:24,572 - INFO - 
+
+VALIDATION
+2025-04-08 18:37:24,572 - INFO - ==========
+2025-04-08 18:43:37,684 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-08 18:43:37,685 - INFO - Social Focus: 0.75
+2025-04-08 18:43:37,685 - INFO - Personal Focus: 0.72
+2025-04-08 18:43:37,685 - INFO - Macro average: 0.74
+2025-04-08 18:43:37,966 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

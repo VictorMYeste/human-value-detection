@@ -1,0 +1,126 @@
+2025-04-10 03:58:32,347 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-10 03:58:32,348 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-10 03:58:39,455 - INFO - Setting random seed to 42
+2025-04-10 03:58:39,456 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-10 03:58:39,457 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-10 03:58:39,464 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-10 03:58:39,641 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-10 03:58:39,641 - INFO - Preparing datasets for training and validation
+2025-04-10 03:58:39,863 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-10 04:01:13,693 - INFO - Applying lda for topic modeling.
+2025-04-10 04:01:13,756 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-10 04:02:34,370 - INFO - Applying lda for topic modeling.
+2025-04-10 04:02:34,388 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-10 04:02:35,509 - INFO - Arguments validated successfully.
+2025-04-10 04:02:35,518 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-10 04:02:35,519 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-10 04:02:37,211 - INFO - Using CUDA for training.
+2025-04-10 04:02:37,346 - INFO - TRAINING
+2025-04-10 04:02:37,346 - INFO - ========
+2025-04-10 04:02:37,346 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-04-10 04:02:37,349 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-10 04:02:37,353 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.574, 'grad_norm': 4.980210781097412, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.5557671189308167, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.72}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 94.7285, 'eval_samples_per_second': 80.229, 'eval_steps_per_second': 20.057, 'epoch': 1.0}
+2025-04-10 04:22:49,033 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-10 04:22:49,077 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x2)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 127, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 82, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 259, in train
+    trainer.train()
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
+    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3898, in evaluate
+    self.control = self.callback_handler.on_evaluate(self.args, self.state, self.control, output.metrics)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 498, in on_evaluate
+    return self.call_event("on_evaluate", args, state, control, metrics=metrics)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 516, in call_event
+    result = getattr(callback, event)(
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 407, in on_evaluate
+    new_prev_feats = add_previous_label_features(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 452, in add_previous_label_features
+    outputs = model(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 286, in forward
+    logits = self.classification_head(combined_output)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x2)
+2025-04-10 04:22:49,078 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x2)
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 127, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 99, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 82, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 259, in train
+    trainer.train()
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
+    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3898, in evaluate
+    self.control = self.callback_handler.on_evaluate(self.args, self.state, self.control, output.metrics)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 498, in on_evaluate
+    return self.call_event("on_evaluate", args, state, control, metrics=metrics)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 516, in call_event
+    result = getattr(callback, event)(
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 407, in on_evaluate
+    new_prev_feats = add_previous_label_features(
+  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 452, in add_previous_label_features
+    outputs = model(
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/human-value-detection/core/models.py", line 286, in forward
+    logits = self.classification_head(combined_output)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x2)

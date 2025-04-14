@@ -22,8 +22,11 @@ from core.log import logger
 def main() -> None:
 
     # Load model-specific configuration
-    model_group = "presence"
+    model_group = "growth"
     model_config = MODEL_CONFIG[model_group]
+
+    filter_labels = ['Growth Anxiety-Free']
+    # filter_labels = []
 
     # Define CLI arguments for training script
     args = parse_args(prog_name=model_group)
@@ -59,7 +62,6 @@ def main() -> None:
             labels=model_config["labels"],
             training_dataset_path=args.training_dataset,
             validation_dataset_path=args.validation_dataset,
-            seed=args.seed,
             lexicon=args.lexicon,
             previous_sentences=args.previous_sentences,
             linguistic_features=args.linguistic_features,
@@ -74,9 +76,10 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"],
+            # custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
-            topic_detection=args.topic_detection
+            topic_detection=args.topic_detection,
+            filter_labels=filter_labels
         )
 
         # Evaluate and return metric
@@ -98,7 +101,6 @@ def main() -> None:
             labels=model_config["labels"],
             training_dataset_path=args.training_dataset,
             validation_dataset_path=args.validation_dataset,
-            seed=args.seed,
             lexicon=args.lexicon,
             previous_sentences=args.previous_sentences,
             linguistic_features=args.linguistic_features,
@@ -113,10 +115,11 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"],
+            # custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
             topic_detection=args.topic_detection,
-            token_pruning=args.token_pruning
+            token_pruning=args.token_pruning,
+            filter_labels=filter_labels
         )
 
 if __name__ == "__main__":

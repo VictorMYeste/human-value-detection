@@ -1,0 +1,64 @@
+2025-04-14 17:57:07,535 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-14 17:57:07,537 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-14 17:57:13,840 - INFO - Setting random seed to 42
+2025-04-14 17:57:13,841 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Humility', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+2025-04-14 17:57:13,841 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-14 17:57:14,058 - INFO - Loading lexicon embeddings for: VAD
+2025-04-14 17:57:14,080 - INFO - Preparing datasets for training and validation
+2025-04-14 17:57:20,393 - INFO - Arguments validated successfully.
+2025-04-14 17:57:20,395 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-14 17:57:20,900 - INFO - Using CUDA for training.
+2025-04-14 17:57:22,196 - INFO - TRAINING
+2025-04-14 17:57:22,196 - INFO - ========
+2025-04-14 17:57:22,196 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Growth Anxiety-Free']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: VAD
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 3
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-14 17:57:22,199 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.2095995396375656, 'eval_f1-score': {'Self-direction: thought': 0.02, 'Self-direction: action': 0.21, 'Stimulation': 0.26, 'Hedonism': 0.32, 'Achievement': 0.65, 'Humility': 0, 'Benevolence: caring': 0.14, 'Benevolence: dependability': 0.4, 'Universalism: concern': 0.51, 'Universalism: nature': 0.81, 'Universalism: tolerance': 0.33}, 'eval_macro-avg-f1-score': 0.33, 'eval_runtime': 30.1833, 'eval_samples_per_second': 121.855, 'eval_steps_per_second': 15.24, 'epoch': 1.0}
+2025-04-14 18:04:57,656 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.2248, 'grad_norm': 1.5850573778152466, 'learning_rate': 1.719887955182073e-05, 'epoch': 1.4}
+{'eval_loss': 0.2081078141927719, 'eval_f1-score': {'Self-direction: thought': 0.14, 'Self-direction: action': 0.44, 'Stimulation': 0.43, 'Hedonism': 0.51, 'Achievement': 0.66, 'Humility': 0, 'Benevolence: caring': 0.12, 'Benevolence: dependability': 0.35, 'Universalism: concern': 0.51, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.41}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 29.943, 'eval_samples_per_second': 122.833, 'eval_steps_per_second': 15.362, 'epoch': 2.0}
+{'loss': 0.1626, 'grad_norm': 1.856486439704895, 'learning_rate': 1.4397759103641458e-05, 'epoch': 2.8}
+{'eval_loss': 0.2146756798028946, 'eval_f1-score': {'Self-direction: thought': 0.24, 'Self-direction: action': 0.48, 'Stimulation': 0.4, 'Hedonism': 0.48, 'Achievement': 0.64, 'Humility': 0, 'Benevolence: caring': 0.43, 'Benevolence: dependability': 0.41, 'Universalism: concern': 0.55, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.37}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 29.3261, 'eval_samples_per_second': 125.417, 'eval_steps_per_second': 15.686, 'epoch': 3.0}
+{'eval_loss': 0.238942950963974, 'eval_f1-score': {'Self-direction: thought': 0.26, 'Self-direction: action': 0.49, 'Stimulation': 0.41, 'Hedonism': 0.47, 'Achievement': 0.63, 'Humility': 0, 'Benevolence: caring': 0.42, 'Benevolence: dependability': 0.41, 'Universalism: concern': 0.54, 'Universalism: nature': 0.78, 'Universalism: tolerance': 0.42}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 29.4584, 'eval_samples_per_second': 124.854, 'eval_steps_per_second': 15.615, 'epoch': 4.0}
+{'loss': 0.1161, 'grad_norm': 1.8035759925842285, 'learning_rate': 1.1596638655462186e-05, 'epoch': 4.2}
+{'eval_loss': 0.25333234667778015, 'eval_f1-score': {'Self-direction: thought': 0.24, 'Self-direction: action': 0.45, 'Stimulation': 0.45, 'Hedonism': 0.49, 'Achievement': 0.64, 'Humility': 0.12, 'Benevolence: caring': 0.34, 'Benevolence: dependability': 0.39, 'Universalism: concern': 0.53, 'Universalism: nature': 0.78, 'Universalism: tolerance': 0.41}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 29.4126, 'eval_samples_per_second': 125.048, 'eval_steps_per_second': 15.64, 'epoch': 5.0}
+{'loss': 0.08, 'grad_norm': 1.3676197528839111, 'learning_rate': 8.795518207282914e-06, 'epoch': 5.59}
+{'eval_loss': 0.2731737196445465, 'eval_f1-score': {'Self-direction: thought': 0.25, 'Self-direction: action': 0.47, 'Stimulation': 0.38, 'Hedonism': 0.5, 'Achievement': 0.66, 'Humility': 0.11, 'Benevolence: caring': 0.35, 'Benevolence: dependability': 0.39, 'Universalism: concern': 0.54, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.37}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 30.4019, 'eval_samples_per_second': 120.979, 'eval_steps_per_second': 15.131, 'epoch': 6.0}
+{'loss': 0.059, 'grad_norm': 2.2305400371551514, 'learning_rate': 5.994397759103642e-06, 'epoch': 6.99}
+{'eval_loss': 0.29019930958747864, 'eval_f1-score': {'Self-direction: thought': 0.25, 'Self-direction: action': 0.48, 'Stimulation': 0.46, 'Hedonism': 0.48, 'Achievement': 0.64, 'Humility': 0.08, 'Benevolence: caring': 0.36, 'Benevolence: dependability': 0.4, 'Universalism: concern': 0.52, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.38}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 31.4557, 'eval_samples_per_second': 116.926, 'eval_steps_per_second': 14.624, 'epoch': 7.0}
+{'train_runtime': 3198.8075, 'train_samples_per_second': 35.76, 'train_steps_per_second': 1.116, 'train_loss': 0.12844241882185284, 'epoch': 7.0}
+2025-04-14 18:50:41,626 - INFO - 
+
+VALIDATION
+2025-04-14 18:50:41,626 - INFO - ==========
+2025-04-14 18:51:13,061 - INFO - Self-direction: thought: 0.24
+2025-04-14 18:51:13,061 - INFO - Self-direction: action: 0.48
+2025-04-14 18:51:13,061 - INFO - Stimulation: 0.40
+2025-04-14 18:51:13,061 - INFO - Hedonism: 0.48
+2025-04-14 18:51:13,061 - INFO - Achievement: 0.64
+2025-04-14 18:51:13,061 - INFO - Humility: 0.00
+2025-04-14 18:51:13,061 - INFO - Benevolence: caring: 0.43
+2025-04-14 18:51:13,061 - INFO - Benevolence: dependability: 0.41
+2025-04-14 18:51:13,061 - INFO - Universalism: concern: 0.55
+2025-04-14 18:51:13,061 - INFO - Universalism: nature: 0.79
+2025-04-14 18:51:13,061 - INFO - Universalism: tolerance: 0.37
+2025-04-14 18:51:13,061 - INFO - Macro average: 0.44
+2025-04-14 18:51:13,502 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

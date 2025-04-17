@@ -216,7 +216,7 @@ def prepare_datasets(
     
     actual_num_topics = 0
     if topic_detection:
-        topic_model = TopicModeling(method="bertopic")
+        topic_model = TopicModeling(method=topic_detection)
         train_topics = topic_model.fit_transform(train_df["Text"].tolist())
         train_df["topic_vectors"] = list(train_topics)  # store as a column or array
         actual_num_topics = train_topics.shape[1]
@@ -260,7 +260,10 @@ def prepare_datasets(
         )
 
         if topic_detection:
-            val_topics = topic_model.transform(val_df["Text"].tolist())
+            if topic_detection == "bertopic":
+                val_topics = topic_model.transform(val_df["Text"].tolist())
+            else:
+                val_topics = topic_model.fit_transform(val_df["Text"].tolist())
             val_df["topic_vectors"] = list(val_topics)
 
         validation_dataset = load_dataset(
@@ -318,9 +321,10 @@ def add_previous_label_features(
     model: Optional[torch.nn.Module] = None,
     tokenizer_for_dynamic: Optional[transformers.PreTrainedTokenizer] = None,
     device: str = "cuda" if torch.cuda.is_available() else "cpu",
-    lexicon=None,
-    lexicon_embeddings=None,
-    num_categories=0
+    lexicon_features: list = None,
+    ner_features: list = None,
+    linguistic_features: list = None,
+    topic_features: list = None,
 ) -> list[list[float]]:
     """
     For training, return ground-truth from row i-1.
@@ -400,17 +404,17 @@ def add_previous_label_features(
             if current_sentence_id == 1:
                 feats = [0.0] * (2 * num_labels)
                 prev_pred_1, prev_pred_2 = [0.0] * num_labels, [0.0] * num_labels
-                logger.debug(f"sentence 1!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
+                logger.debug(f"sentence 1: prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
 
             # **Handle second sentence**
             elif current_sentence_id == 2:
                 feats = prev_pred_1 + [0.0] * num_labels
-                logger.debug(f"sentence 2!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
+                logger.debug(f"sentence 2: prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
 
             # **Handle third+ sentences**
             else:
                 feats = prev_pred_1 + prev_pred_2
-                logger.debug(f"sentence 3+!!!! prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
+                logger.debug(f"sentence 3+: prev_pred_1 = {prev_pred_1} and prev_pred_2 = {prev_pred_2}")
 
             prev_label_features.append(feats.copy())
 
@@ -425,18 +429,6 @@ def add_previous_label_features(
             )
             encoded = {k: v.to(device) for k, v in encoded.items()}
 
-            # Compute the lexicon features for the current sentence
-            if lexicon:
-                if lexicon in LEXICON_COMPUTATION_FUNCTIONS:
-                    # Token-based approach
-                    lexicon_feats = compute_lexicon_scores(text_prev, lexicon, lexicon_embeddings, tokenizer_for_dynamic, num_categories)
-                else:
-                    # Precomputed (row-level) lexicon (e.g. LIWC-22 software generated)
-                    lexicon_feats = compute_precomputed_scores(row, lexicon_embeddings, num_categories)
-                # If the above can produce NaNs, fix them
-                lexicon_feats = [0.0 if (isinstance(x, float) and np.isnan(x)) else x for x in lexicon_feats]
-                lexicon_features.append(lexicon_feats)
-
             plf = torch.tensor(prev_pred_1 + prev_pred_2, dtype=torch.float32, device=device).unsqueeze(0)
 
             with torch.no_grad():
@@ -444,7 +436,10 @@ def add_previous_label_features(
                     input_ids=encoded["input_ids"],
                     attention_mask=encoded["attention_mask"],
                     prev_label_features=plf,
-                    lexicon_features=torch.tensor(lexicon_feats, dtype=torch.float32).unsqueeze(0).to(device) if lexicon else None
+                    lexicon_features=torch.tensor(lexicon_features[index], dtype=torch.float32).unsqueeze(0).to(device) if lexicon_features else None,
+                    linguistic_features=torch.tensor(linguistic_features[index], dtype=torch.float32).unsqueeze(0).to(device) if linguistic_features else None,
+                    ner_features=torch.tensor(ner_features[index], dtype=torch.float32).unsqueeze(0).to(device) if ner_features else None,
+                    topic_features=torch.tensor(topic_features[index], dtype=torch.float32).unsqueeze(0).to(device) if topic_features else None
                 )
             
             logits = outputs["logits"]
@@ -633,8 +628,7 @@ def load_dataset(
             prev_label_feats = add_previous_label_features(
                 df=df,
                 labels=labels,
-                is_training=is_training,
-                num_categories=10
+                is_training=is_training
             )
         else:
             prev_label_feats = [[0.0] * 2 * len(labels)] * len(df)  # Return zero features initially
@@ -1012,3 +1006,4 @@ def compute_precomputed_scores(
     else:
         # If no match, fallback
         return [0.0] * num_categories
+    

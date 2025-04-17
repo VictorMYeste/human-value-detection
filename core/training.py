@@ -251,8 +251,10 @@ def train(
                 tokenizer=tokenizer,
                 num_categories=num_categories,
                 lexicon=lexicon,
+                linguistic_features=linguistic_features,
                 ner_features=ner_features,
-                topic_detection=topic_detection
+                topic_detection=topic_detection,
+                discovered_topics=discovered_topics
             )
         )
 

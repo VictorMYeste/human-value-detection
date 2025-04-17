@@ -75,9 +75,6 @@ def run_training(
 
     logger.debug(f"num_categories after preparing datasets = {num_categories}")
 
-    if linguistic_features:
-        num_categories += 17
-
     # Train and evaluate
     trainer = train(
         training_dataset=training_dataset,

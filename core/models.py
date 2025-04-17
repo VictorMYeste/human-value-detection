@@ -255,7 +255,8 @@ class EnhancedDebertaModel(nn.Module):
         # (B) Add lexicon features
         if self.lexicon_layer and lexicon_features is not None:
             logger.debug(f"Lexicon features shape before processing: {lexicon_features.shape}")
-            lexicon_features = lexicon_features.to(input_ids.device)
+            lexicon_features = lexicon_features.to(torch.float32)
+            #lexicon_features = lexicon_features.to(input_ids.device)
             #lexicon_output = torch.relu(self.lexicon_layer(lexicon_features))
             lexicon_output = self.lexicon_layer(lexicon_features)
             logger.debug(f"Lexicon output shape: {lexicon_output.shape}")

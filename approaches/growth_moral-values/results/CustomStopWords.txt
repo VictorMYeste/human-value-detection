@@ -1,0 +1,67 @@
+2025-04-16 12:40:40,253 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-16 12:40:40,256 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-16 12:40:50,447 - INFO - Setting random seed to 42
+2025-04-16 12:40:50,448 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Humility', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+2025-04-16 12:40:50,448 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-16 12:40:50,663 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-16 12:40:50,663 - INFO - Preparing datasets for training and validation
+2025-04-16 12:40:57,213 - INFO - Arguments validated successfully.
+2025-04-16 12:40:57,215 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-16 12:40:58,364 - INFO - Using CUDA for training.
+2025-04-16 12:40:59,577 - INFO - TRAINING
+2025-04-16 12:40:59,577 - INFO - ========
+2025-04-16 12:40:59,577 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Growth Anxiety-Free']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-16 12:40:59,579 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.2107212245464325, 'eval_f1-score': {'Self-direction: thought': 0.01, 'Self-direction: action': 0.21, 'Stimulation': 0.21, 'Hedonism': 0.32, 'Achievement': 0.64, 'Humility': 0, 'Benevolence: caring': 0.06, 'Benevolence: dependability': 0.38, 'Universalism: concern': 0.5, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.34}, 'eval_macro-avg-f1-score': 0.31, 'eval_runtime': 32.6287, 'eval_samples_per_second': 112.723, 'eval_steps_per_second': 14.098, 'epoch': 1.0}
+2025-04-16 12:48:42,438 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.2366, 'grad_norm': 1.5559011697769165, 'learning_rate': 1.719887955182073e-05, 'epoch': 1.4}
+{'eval_loss': 0.21335572004318237, 'eval_f1-score': {'Self-direction: thought': 0.17, 'Self-direction: action': 0.45, 'Stimulation': 0.39, 'Hedonism': 0.45, 'Achievement': 0.67, 'Humility': 0, 'Benevolence: caring': 0.11, 'Benevolence: dependability': 0.36, 'Universalism: concern': 0.49, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.37}, 'eval_macro-avg-f1-score': 0.39, 'eval_runtime': 33.7695, 'eval_samples_per_second': 108.915, 'eval_steps_per_second': 13.622, 'epoch': 2.0}
+{'loss': 0.1695, 'grad_norm': 1.7729147672653198, 'learning_rate': 1.4397759103641458e-05, 'epoch': 2.8}
+{'eval_loss': 0.21845802664756775, 'eval_f1-score': {'Self-direction: thought': 0.2, 'Self-direction: action': 0.48, 'Stimulation': 0.4, 'Hedonism': 0.44, 'Achievement': 0.63, 'Humility': 0, 'Benevolence: caring': 0.41, 'Benevolence: dependability': 0.38, 'Universalism: concern': 0.53, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.38}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 32.5054, 'eval_samples_per_second': 113.151, 'eval_steps_per_second': 14.152, 'epoch': 3.0}
+{'eval_loss': 0.23389402031898499, 'eval_f1-score': {'Self-direction: thought': 0.22, 'Self-direction: action': 0.51, 'Stimulation': 0.38, 'Hedonism': 0.44, 'Achievement': 0.65, 'Humility': 0, 'Benevolence: caring': 0.4, 'Benevolence: dependability': 0.4, 'Universalism: concern': 0.52, 'Universalism: nature': 0.8, 'Universalism: tolerance': 0.33}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 32.7503, 'eval_samples_per_second': 112.304, 'eval_steps_per_second': 14.046, 'epoch': 4.0}
+{'loss': 0.1243, 'grad_norm': 1.5436056852340698, 'learning_rate': 1.1596638655462186e-05, 'epoch': 4.2}
+{'eval_loss': 0.25544455647468567, 'eval_f1-score': {'Self-direction: thought': 0.22, 'Self-direction: action': 0.49, 'Stimulation': 0.42, 'Hedonism': 0.45, 'Achievement': 0.65, 'Humility': 0.12, 'Benevolence: caring': 0.36, 'Benevolence: dependability': 0.42, 'Universalism: concern': 0.5, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.37}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 32.8029, 'eval_samples_per_second': 112.124, 'eval_steps_per_second': 14.023, 'epoch': 5.0}
+{'loss': 0.0881, 'grad_norm': 1.318875789642334, 'learning_rate': 8.795518207282914e-06, 'epoch': 5.59}
+{'eval_loss': 0.27074775099754333, 'eval_f1-score': {'Self-direction: thought': 0.25, 'Self-direction: action': 0.49, 'Stimulation': 0.4, 'Hedonism': 0.42, 'Achievement': 0.66, 'Humility': 0.08, 'Benevolence: caring': 0.4, 'Benevolence: dependability': 0.39, 'Universalism: concern': 0.52, 'Universalism: nature': 0.78, 'Universalism: tolerance': 0.35}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 32.9598, 'eval_samples_per_second': 111.591, 'eval_steps_per_second': 13.956, 'epoch': 6.0}
+{'loss': 0.0645, 'grad_norm': 2.0156524181365967, 'learning_rate': 5.994397759103642e-06, 'epoch': 6.99}
+{'eval_loss': 0.28577983379364014, 'eval_f1-score': {'Self-direction: thought': 0.24, 'Self-direction: action': 0.49, 'Stimulation': 0.44, 'Hedonism': 0.44, 'Achievement': 0.64, 'Humility': 0.08, 'Benevolence: caring': 0.37, 'Benevolence: dependability': 0.4, 'Universalism: concern': 0.52, 'Universalism: nature': 0.78, 'Universalism: tolerance': 0.33}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 33.2049, 'eval_samples_per_second': 110.767, 'eval_steps_per_second': 13.853, 'epoch': 7.0}
+{'eval_loss': 0.3018557131290436, 'eval_f1-score': {'Self-direction: thought': 0.23, 'Self-direction: action': 0.47, 'Stimulation': 0.43, 'Hedonism': 0.44, 'Achievement': 0.63, 'Humility': 0.08, 'Benevolence: caring': 0.4, 'Benevolence: dependability': 0.4, 'Universalism: concern': 0.5, 'Universalism: nature': 0.78, 'Universalism: tolerance': 0.36}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 33.4604, 'eval_samples_per_second': 109.921, 'eval_steps_per_second': 13.748, 'epoch': 8.0}
+{'loss': 0.047, 'grad_norm': 3.1843369007110596, 'learning_rate': 3.1932773109243696e-06, 'epoch': 8.39}
+{'eval_loss': 0.30867719650268555, 'eval_f1-score': {'Self-direction: thought': 0.22, 'Self-direction: action': 0.47, 'Stimulation': 0.44, 'Hedonism': 0.45, 'Achievement': 0.64, 'Humility': 0.14, 'Benevolence: caring': 0.35, 'Benevolence: dependability': 0.39, 'Universalism: concern': 0.51, 'Universalism: nature': 0.79, 'Universalism: tolerance': 0.35}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 33.1793, 'eval_samples_per_second': 110.852, 'eval_steps_per_second': 13.864, 'epoch': 9.0}
+{'train_runtime': 4195.1966, 'train_samples_per_second': 27.267, 'train_steps_per_second': 0.851, 'train_loss': 0.11641545128222018, 'epoch': 9.0}
+2025-04-16 13:50:55,088 - INFO - 
+
+VALIDATION
+2025-04-16 13:50:55,088 - INFO - ==========
+2025-04-16 13:51:24,398 - INFO - Self-direction: thought: 0.22
+2025-04-16 13:51:24,398 - INFO - Self-direction: action: 0.49
+2025-04-16 13:51:24,398 - INFO - Stimulation: 0.42
+2025-04-16 13:51:24,398 - INFO - Hedonism: 0.45
+2025-04-16 13:51:24,398 - INFO - Achievement: 0.65
+2025-04-16 13:51:24,398 - INFO - Humility: 0.12
+2025-04-16 13:51:24,398 - INFO - Benevolence: caring: 0.36
+2025-04-16 13:51:24,398 - INFO - Benevolence: dependability: 0.42
+2025-04-16 13:51:24,398 - INFO - Universalism: concern: 0.50
+2025-04-16 13:51:24,398 - INFO - Universalism: nature: 0.79
+2025-04-16 13:51:24,398 - INFO - Universalism: tolerance: 0.37
+2025-04-16 13:51:24,398 - INFO - Macro average: 0.44
+2025-04-16 13:51:24,744 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

@@ -10,7 +10,7 @@ import numpy as np
 from core.log import logger
 
 class TopicModeling:
-    def __init__(self, method="bertopic", num_topics=40):
+    def __init__(self, method="bertopic", num_topics=18):
         """
         Initialize the topic modeling method.
         
@@ -20,7 +20,7 @@ class TopicModeling:
         """
         self.method = method
         if method == "bertopic":
-            num_topics = 40
+            num_topics = 18
         if method == "lda":
             num_topics = 60
         elif method == "nmf":

@@ -61,11 +61,12 @@ def compute_metrics(eval_prediction, id2label):
 # TRAINING
 # ========================================================
 
-def create_training_args(output_dir, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps):
+def create_training_args(output_dir, model_name, seed, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps):
     return transformers.TrainingArguments(
         output_dir=output_dir,
         save_strategy="epoch",
         hub_model_id=model_name,
+        seed=seed,
         eval_strategy="epoch",
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
@@ -90,6 +91,7 @@ def train(
         label2id: dict[str, int],
         id2label: dict[int, str],
         model_name: str = None,
+        seed: int = 42,
         batch_size: int = 4,
         num_train_epochs: int = 10,
         learning_rate: float = 2e-05,
@@ -137,7 +139,14 @@ def train(
         clear_directory(output_dir)
     
     training_args = create_training_args(
-        output_dir, model_name, batch_size, num_train_epochs, learning_rate, weight_decay, gradient_accumulation_steps
+        output_dir,
+        model_name,
+        seed,
+        batch_size,
+        num_train_epochs,
+        learning_rate,
+        weight_decay,
+        gradient_accumulation_steps
     )
 
     if ner_features:
@@ -251,8 +260,10 @@ def train(
                 tokenizer=tokenizer,
                 num_categories=num_categories,
                 lexicon=lexicon,
+                linguistic_features=linguistic_features,
                 ner_features=ner_features,
-                topic_detection=topic_detection
+                topic_detection=topic_detection,
+                discovered_topics=discovered_topics
             )
         )
 

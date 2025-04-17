@@ -1,19 +1,19 @@
-2025-04-09 10:07:17,534 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-09 10:07:17,534 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-09 10:07:24,298 - INFO - Setting random seed to 42
-2025-04-09 10:07:24,299 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
-2025-04-09 10:07:24,299 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-04-09 10:07:24,480 - INFO - Loading lexicon embeddings for: WorryWords
-2025-04-09 10:07:24,510 - INFO - Preparing datasets for training and validation
-2025-04-09 10:09:27,406 - INFO - Adding Previous Sentences Labels features with num_categories = 1
-2025-04-09 10:10:33,071 - INFO - Adding Previous Sentences Labels features with num_categories = 1
-2025-04-09 10:10:34,148 - INFO - Arguments validated successfully.
-2025-04-09 10:10:34,150 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
-2025-04-09 10:10:34,151 - INFO - Clearing old checkpoints in models/checkpoints
-2025-04-09 10:10:35,896 - INFO - Using CUDA for training.
-2025-04-09 10:10:37,183 - INFO - TRAINING
-2025-04-09 10:10:37,183 - INFO - ========
-2025-04-09 10:10:37,183 - INFO - Training configuration:
+2025-04-10 11:40:08,457 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-10 11:40:08,458 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-10 11:40:15,195 - INFO - Setting random seed to 42
+2025-04-10 11:40:15,196 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-10 11:40:15,196 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-10 11:40:15,380 - INFO - Loading lexicon embeddings for: WorryWords
+2025-04-10 11:40:15,410 - INFO - Preparing datasets for training and validation
+2025-04-10 11:42:17,158 - INFO - Adding Previous Sentences Labels features with num_categories = 1
+2025-04-10 11:43:22,269 - INFO - Adding Previous Sentences Labels features with num_categories = 1
+2025-04-10 11:43:23,298 - INFO - Arguments validated successfully.
+2025-04-10 11:43:23,300 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-10 11:43:23,301 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-10 11:43:23,768 - INFO - Using CUDA for training.
+2025-04-10 11:43:25,107 - INFO - TRAINING
+2025-04-10 11:43:25,107 - INFO - ========
+2025-04-10 11:43:25,107 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
 Model name: None
 Filter labels: ['Presence']
@@ -33,100 +33,51 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: No
 
-2025-04-09 10:10:37,186 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-2025-04-09 10:10:37,190 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+2025-04-10 11:43:25,110 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-10 11:43:25,113 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
 {'loss': 0.566, 'grad_norm': 5.721295356750488, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
-{'eval_loss': 0.6569485664367676, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.46}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 94.5982, 'eval_samples_per_second': 80.34, 'eval_steps_per_second': 20.085, 'epoch': 1.0}
-2025-04-09 10:30:50,129 - INFO - Skipping evaluation for warm-up phase (epoch 0).
-2025-04-09 10:35:33,999 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.6569485664367676, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.46}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 95.1587, 'eval_samples_per_second': 79.867, 'eval_steps_per_second': 19.967, 'epoch': 1.0}
+2025-04-10 12:03:44,110 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-10 12:08:25,951 - INFO - Updated evaluation dataset with dynamic previous label features.
 {'loss': 0.499, 'grad_norm': 3.8623008728027344, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
-2025-04-09 10:54:12,479 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (2x2 and 1x256)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 127, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 82, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 259, in train
-    trainer.train()
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
-    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
-    metrics = self._evaluate(trial, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
-    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3868, in evaluate
-    output = eval_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 4061, in evaluation_loop
-    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 4279, in prediction_step
-    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 324, in compute_loss
-    outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 241, in forward
-    lexicon_output = self.lexicon_layer(lexicon_features)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/container.py", line 250, in forward
-    input = module(input)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (2x2 and 1x256)
-2025-04-09 10:54:12,496 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (2x2 and 1x256)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 127, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/p_social-vs-personal-focus/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 82, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 259, in train
-    trainer.train()
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
-    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
-    metrics = self._evaluate(trial, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
-    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3868, in evaluate
-    output = eval_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 4061, in evaluation_loop
-    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 4279, in prediction_step
-    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 324, in compute_loss
-    outputs = model(**inputs, labels=labels, prev_label_features=prev_label_features)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 241, in forward
-    lexicon_output = self.lexicon_layer(lexicon_features)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/container.py", line 250, in forward
-    input = module(input)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (2x2 and 1x256)
+{'eval_loss': 0.5917240381240845, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.7043, 'eval_samples_per_second': 79.411, 'eval_steps_per_second': 19.853, 'epoch': 2.0}
+2025-04-10 12:28:45,777 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-10 12:33:41,624 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.426, 'grad_norm': 9.9854154586792, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.3104, 'grad_norm': 6.301884651184082, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.652510404586792, 'eval_f1-score': {'Social Focus': 0.77, 'Personal Focus': 0.69}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 95.8183, 'eval_samples_per_second': 79.317, 'eval_steps_per_second': 19.829, 'epoch': 3.0}
+2025-04-10 12:58:56,935 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2388, 'grad_norm': 5.300732135772705, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.8611461520195007, 'eval_f1-score': {'Social Focus': 0.73, 'Personal Focus': 0.7}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.7639, 'eval_samples_per_second': 79.362, 'eval_steps_per_second': 19.84, 'epoch': 4.0}
+2025-04-10 13:24:20,241 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1875, 'grad_norm': 14.350497245788574, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1365, 'grad_norm': 11.935047149658203, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.9969912171363831, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.5621, 'eval_samples_per_second': 79.529, 'eval_steps_per_second': 19.882, 'epoch': 5.0}
+2025-04-10 13:49:43,907 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.104, 'grad_norm': 6.1981916427612305, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 1.0991008281707764, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 95.8362, 'eval_samples_per_second': 79.302, 'eval_steps_per_second': 19.825, 'epoch': 6.0}
+2025-04-10 14:15:05,863 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0931, 'grad_norm': 2.6274173259735107, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0725, 'grad_norm': 5.748582363128662, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.290637493133545, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.5891, 'eval_samples_per_second': 79.507, 'eval_steps_per_second': 19.877, 'epoch': 7.0}
+2025-04-10 14:40:25,270 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0566, 'grad_norm': 2.7607715129852295, 'learning_rate': 4.722222222222222e-06, 'epoch': 7.63}
+{'eval_loss': 1.4458537101745605, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 96.001, 'eval_samples_per_second': 79.166, 'eval_steps_per_second': 19.791, 'epoch': 8.0}
+2025-04-10 15:05:44,643 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0492, 'grad_norm': 0.8965360522270203, 'learning_rate': 3.3333333333333333e-06, 'epoch': 8.32}
+{'eval_loss': 1.548634648323059, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 95.7057, 'eval_samples_per_second': 79.41, 'eval_steps_per_second': 19.853, 'epoch': 9.0}
+2025-04-10 15:31:11,165 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0387, 'grad_norm': 1.444675326347351, 'learning_rate': 1.944444444444445e-06, 'epoch': 9.02}
+{'loss': 0.0309, 'grad_norm': 0.0477900393307209, 'learning_rate': 5.555555555555555e-07, 'epoch': 9.71}
+{'eval_loss': 1.6107064485549927, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 95.983, 'eval_samples_per_second': 79.181, 'eval_steps_per_second': 19.795, 'epoch': 9.99}
+2025-04-10 15:56:24,989 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 15191.6263, 'train_samples_per_second': 15.181, 'train_steps_per_second': 0.474, 'train_loss': 0.19583013514677683, 'epoch': 9.99}
+2025-04-10 15:56:37,441 - INFO - 
+
+VALIDATION
+2025-04-10 15:56:37,441 - INFO - ==========
+2025-04-10 16:03:09,949 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-10 16:03:09,952 - INFO - Social Focus: 0.76
+2025-04-10 16:03:09,952 - INFO - Personal Focus: 0.71
+2025-04-10 16:03:09,952 - INFO - Macro average: 0.74
+2025-04-10 16:03:10,155 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

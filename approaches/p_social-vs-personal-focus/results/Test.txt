@@ -1,0 +1,2374 @@
+2025-04-17 13:05:06,777 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-17 13:05:06,778 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-17 13:05:13,518 - INFO - Setting random seed to 42
+2025-04-17 13:05:13,519 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:13,520 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-17 13:05:13,649 - INFO - Setting random seed to 42
+2025-04-17 13:05:13,650 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:13,650 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-17 13:05:13,712 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-17 13:05:13,713 - INFO - Preparing datasets for training and validation
+2025-04-17 13:05:13,830 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-17 13:05:13,830 - INFO - Preparing datasets for training and validation
+2025-04-17 13:05:14,067 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-17 13:05:14,179 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-17 13:05:25,109 - DEBUG - Topic indices shape: (1000,)
+2025-04-17 13:05:25,109 - DEBUG - Max topic index: 16
+2025-04-17 13:05:25,109 - DEBUG - Expected num_topics: 17
+2025-04-17 13:05:25,271 - DEBUG - Topic indices shape: (1000,)
+2025-04-17 13:05:25,272 - DEBUG - Max topic index: 16
+2025-04-17 13:05:25,272 - DEBUG - Expected num_topics: 17
+2025-04-17 13:05:26,286 - DEBUG - Sample concatenated texts after preprocessing:
+['hispanic voters are losing faith in the democratic party : poll', '( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'this marks the lowest approval rating of any demographic . </s> <Personal Focus> ( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting . </s> <Personal Focus> this marks the lowest approval rating of any demographic . </s> <Personal Focus> ( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ” </s> <Personal Focus> the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting . </s> <Personal Focus> this marks the lowest approval rating of any demographic .', 'having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ” </s> <Social Focus> <Personal Focus> while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ” </s> <Personal Focus> the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting .', 'many are beginning to turn away from the democratic party because “ they ’ re getting vibes of a communist cuba and socialist venezuela here in america . “ as a result , avila hispanics are going to be “ extremely instrumental ” in the upcoming midterm elections . </s> <Social Focus> having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ” </s> <Social Focus> <Personal Focus> while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ”', '“ they are starting to come to the realization that their conservative values are in opposition to what the has been trying to feed them in favor of biden and the democrats . ” </s> <Personal Focus> many are beginning to turn away from the democratic party because “ they ’ re getting vibes of a communist cuba and socialist venezuela here in america . “ as a result , avila hispanics are going to be “ extremely instrumental ” in the upcoming midterm elections . </s> <Social Focus> having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ”', 'lucero progressive push for abortion and the abolishment of the second amendment , for example .', '“ the hispanic is very pro-life and does not want a power grab [ that restricts the lawful possession of firearms ] , ” he . </s> <Social Focus> lucero progressive push for abortion and the abolishment of the second amendment , for example .']
+2025-04-17 13:05:26,466 - DEBUG - Sample concatenated texts after preprocessing:
+['hispanic voters are losing faith in the democratic party : poll', '( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'this marks the lowest approval rating of any demographic . </s> <Personal Focus> ( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting . </s> <Personal Focus> this marks the lowest approval rating of any demographic . </s> <Personal Focus> ( julie bennett/getty images ) according to a quinnipiac university poll in april , only 26 percent of hispanic survey participants approved of president joe biden ’ s job performance .', 'while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ” </s> <Personal Focus> the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting . </s> <Personal Focus> this marks the lowest approval rating of any demographic .', 'having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ” </s> <Social Focus> <Personal Focus> while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ” </s> <Personal Focus> the epoch times spoke to santiago avila , national vice chairman of the republican national hispanic assembly ( rnha ) , who offered a number of reasons why support among hispanic voters is plummeting .', 'many are beginning to turn away from the democratic party because “ they ’ re getting vibes of a communist cuba and socialist venezuela here in america . “ as a result , avila hispanics are going to be “ extremely instrumental ” in the upcoming midterm elections . </s> <Social Focus> having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ” </s> <Social Focus> <Personal Focus> while hispanics have historically registered as democrats , avila their values are generally conservative . “ [ many hispanics ] grow up being that republicans are for the rich and democrats are for the poor . ” what they should understand , he , is that “ democrats are more liberal , and republicans are more conservative . ”', '“ they are starting to come to the realization that their conservative values are in opposition to what the has been trying to feed them in favor of biden and the democrats . ” </s> <Personal Focus> many are beginning to turn away from the democratic party because “ they ’ re getting vibes of a communist cuba and socialist venezuela here in america . “ as a result , avila hispanics are going to be “ extremely instrumental ” in the upcoming midterm elections . </s> <Social Focus> having spoken to many different left-leaning hispanics , avila , “ they are really beginning to feel like the democratic party has become too extreme to the point where it ’ s starting to scare some of them . ”', 'lucero progressive push for abortion and the abolishment of the second amendment , for example .', '“ the hispanic is very pro-life and does not want a power grab [ that restricts the lawful possession of firearms ] , ” he . </s> <Social Focus> lucero progressive push for abortion and the abolishment of the second amendment , for example .']
+2025-04-17 13:05:26,710 - INFO - Applying bertopic for topic modeling.
+2025-04-17 13:05:26,710 - DEBUG - [Topic Detection] shape: 1000, first: [0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+2025-04-17 13:05:26,710 - DEBUG - encoded_sentences keys: dict_keys(['input_ids', 'token_type_ids', 'attention_mask', 'topic_features'])
+2025-04-17 13:05:26,710 - DEBUG - Sample 0 input_ids: [1, 12724, 46067, 1983, 32]
+2025-04-17 13:05:26,710 - DEBUG - Sample 0 attention_mask: [1, 1, 1, 1, 1]
+2025-04-17 13:05:26,711 - DEBUG - Extracted labels matrix with shape (1000, 2) from columns: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:26,711 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-17 13:05:26,712 - DEBUG - Inside add_previous_label_features. is_training=True
+2025-04-17 13:05:26,714 - DEBUG - Label matrix shape: (1000, 2)
+2025-04-17 13:05:26,888 - INFO - Applying bertopic for topic modeling.
+2025-04-17 13:05:26,888 - DEBUG - [Topic Detection] shape: 1000, first: [0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+2025-04-17 13:05:26,888 - DEBUG - encoded_sentences keys: dict_keys(['input_ids', 'token_type_ids', 'attention_mask', 'topic_features'])
+2025-04-17 13:05:26,888 - DEBUG - Sample 0 input_ids: [1, 12724, 46067, 1983, 32]
+2025-04-17 13:05:26,888 - DEBUG - Sample 0 attention_mask: [1, 1, 1, 1, 1]
+2025-04-17 13:05:26,889 - DEBUG - Extracted labels matrix with shape (1000, 2) from columns: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:26,889 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-17 13:05:26,890 - DEBUG - Inside add_previous_label_features. is_training=True
+2025-04-17 13:05:26,892 - DEBUG - Label matrix shape: (1000, 2)
+2025-04-17 13:05:27,344 - DEBUG - Row 0: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 0: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 0: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 1: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 1: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 1: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 2: prev_label_features = [0.0, 1.0, 0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 2: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 2: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 3: prev_label_features = [0.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 3: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 3: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 4: prev_label_features = [0.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 4: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 4: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 5: prev_label_features = [1.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 5: prev_1_labels = [1.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 5: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 6: prev_label_features = [1.0, 0.0, 1.0, 1.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 6: prev_1_labels = [1.0, 0.0]
+2025-04-17 13:05:27,344 - DEBUG - Row 6: prev_2_labels = [1.0, 1.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 7: prev_label_features = [0.0, 1.0, 1.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 7: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 7: prev_2_labels = [1.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 8: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 8: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 8: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 9: prev_label_features = [1.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 9: prev_1_labels = [1.0, 0.0]
+2025-04-17 13:05:27,345 - DEBUG - Row 9: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,346 - DEBUG - Final prev_label_features shape before dataset conversion: (1000, 4)
+2025-04-17 13:05:27,346 - DEBUG - First few prev_label_features: [[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0]]
+2025-04-17 13:05:27,430 - DEBUG - Constructed dataset with keys: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:27,433 - DEBUG - 'labels' column found with 1000 entries. Sample: [[1.0, 0.0], [0.0, 1.0], [0.0, 1.0]]
+2025-04-17 13:05:27,438 - DEBUG - Class distribution: [591. 420.]
+2025-04-17 13:05:27,524 - DEBUG - Row 0: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 0: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 0: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 1: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 1: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 1: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 2: prev_label_features = [0.0, 1.0, 0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 2: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 2: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 3: prev_label_features = [0.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 3: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 3: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 4: prev_label_features = [0.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 4: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 4: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 5: prev_label_features = [1.0, 1.0, 0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 5: prev_1_labels = [1.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 5: prev_2_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 6: prev_label_features = [1.0, 0.0, 1.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 6: prev_1_labels = [1.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 6: prev_2_labels = [1.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 7: prev_label_features = [0.0, 1.0, 1.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 7: prev_1_labels = [0.0, 1.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 7: prev_2_labels = [1.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 8: prev_label_features = [0.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 8: prev_1_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 8: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 9: prev_label_features = [1.0, 0.0, 0.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 9: prev_1_labels = [1.0, 0.0]
+2025-04-17 13:05:27,524 - DEBUG - Row 9: prev_2_labels = [0.0, 0.0]
+2025-04-17 13:05:27,525 - DEBUG - Final prev_label_features shape before dataset conversion: (1000, 4)
+2025-04-17 13:05:27,525 - DEBUG - First few prev_label_features: [[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0]]
+2025-04-17 13:05:27,609 - DEBUG - Constructed dataset with keys: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:27,612 - DEBUG - 'labels' column found with 1000 entries. Sample: [[1.0, 0.0], [0.0, 1.0], [0.0, 1.0]]
+2025-04-17 13:05:27,617 - DEBUG - Class distribution: [591. 420.]
+2025-04-17 13:05:32,558 - INFO - Applying bertopic for topic modeling.
+2025-04-17 13:05:32,559 - DEBUG - [Topic Detection] shape: 1000, first: [0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+2025-04-17 13:05:32,559 - DEBUG - encoded_sentences keys: dict_keys(['input_ids', 'token_type_ids', 'attention_mask', 'topic_features'])
+2025-04-17 13:05:32,559 - DEBUG - Sample 0 input_ids: [1, 627, 3845, 52, 37980]
+2025-04-17 13:05:32,559 - DEBUG - Sample 0 attention_mask: [1, 1, 1, 1, 1]
+2025-04-17 13:05:32,560 - DEBUG - Extracted labels matrix with shape (1000, 2) from columns: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:32,560 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-17 13:05:32,560 - DEBUG - Final prev_label_features shape before dataset conversion: (1000, 4)
+2025-04-17 13:05:32,560 - DEBUG - First few prev_label_features: [[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
+2025-04-17 13:05:32,634 - DEBUG - Constructed dataset with keys: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,637 - DEBUG - 'labels' column found with 1000 entries. Sample: [[1.0, 0.0], [0.0, 1.0], [1.0, 0.0]]
+2025-04-17 13:05:32,639 - INFO - Arguments validated successfully.
+2025-04-17 13:05:32,639 - DEBUG - Training dataset columns: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,639 - DEBUG - Validation dataset columns: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,640 - DEBUG - Sample training dataset: {'input_ids': [1, 12724, 46067, 1983, 32, 2086, 3975, 11, 5, 7368, 537, 4832, 2902, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'topic_features': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'labels': [1.0, 0.0], 'prev_label_features': [0.0, 0.0, 0.0, 0.0]}
+2025-04-17 13:05:32,640 - DEBUG - Sample validation dataset: {'input_ids': [1, 627, 3845, 52, 37980, 13014, 2156, 5, 10027, 5, 346, 9, 7910, 1200, 8, 3257, 40, 7280, 479, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'topic_features': [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'labels': [1.0, 0.0], 'prev_label_features': [0.0, 0.0, 0.0, 0.0]}
+2025-04-17 13:05:32,642 - DEBUG - num_categories after preparing datasets = 0
+2025-04-17 13:05:32,642 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-17 13:05:32,642 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-17 13:05:32,764 - INFO - Applying bertopic for topic modeling.
+2025-04-17 13:05:32,764 - DEBUG - [Topic Detection] shape: 1000, first: [0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+2025-04-17 13:05:32,764 - DEBUG - encoded_sentences keys: dict_keys(['input_ids', 'token_type_ids', 'attention_mask', 'topic_features'])
+2025-04-17 13:05:32,764 - DEBUG - Sample 0 input_ids: [1, 627, 3845, 52, 37980]
+2025-04-17 13:05:32,764 - DEBUG - Sample 0 attention_mask: [1, 1, 1, 1, 1]
+2025-04-17 13:05:32,765 - DEBUG - Extracted labels matrix with shape (1000, 2) from columns: ['Social Focus', 'Personal Focus']
+2025-04-17 13:05:32,765 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-17 13:05:32,766 - DEBUG - Final prev_label_features shape before dataset conversion: (1000, 4)
+2025-04-17 13:05:32,766 - DEBUG - First few prev_label_features: [[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
+2025-04-17 13:05:32,839 - DEBUG - Constructed dataset with keys: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,842 - DEBUG - 'labels' column found with 1000 entries. Sample: [[1.0, 0.0], [0.0, 1.0], [1.0, 0.0]]
+2025-04-17 13:05:32,844 - INFO - Arguments validated successfully.
+2025-04-17 13:05:32,844 - DEBUG - Training dataset columns: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,844 - DEBUG - Validation dataset columns: ['input_ids', 'token_type_ids', 'attention_mask', 'topic_features', 'labels', 'prev_label_features']
+2025-04-17 13:05:32,845 - DEBUG - Sample training dataset: {'input_ids': [1, 12724, 46067, 1983, 32, 2086, 3975, 11, 5, 7368, 537, 4832, 2902, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'topic_features': [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'labels': [1.0, 0.0], 'prev_label_features': [0.0, 0.0, 0.0, 0.0]}
+2025-04-17 13:05:32,845 - DEBUG - Sample validation dataset: {'input_ids': [1, 627, 3845, 52, 37980, 13014, 2156, 5, 10027, 5, 346, 9, 7910, 1200, 8, 3257, 40, 7280, 479, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'topic_features': [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'labels': [1.0, 0.0], 'prev_label_features': [0.0, 0.0, 0.0, 0.0]}
+2025-04-17 13:05:32,847 - DEBUG - num_categories after preparing datasets = 0
+2025-04-17 13:05:32,847 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-17 13:05:33,160 - DEBUG - No lexicon layer initialized at model
+2025-04-17 13:05:33,160 - DEBUG - No linguistic layer initialized at model
+2025-04-17 13:05:33,160 - DEBUG - No NER layer initialized at model
+2025-04-17 13:05:33,160 - DEBUG - Topic Detection layer initialized at model
+2025-04-17 13:05:33,160 - DEBUG - Previous label layer initialized with prev_label_size = 4.
+2025-04-17 13:05:33,160 - DEBUG - Final computed input_dim for classification head: 912
+2025-04-17 13:05:33,161 - INFO - Using CUDA for training.
+2025-04-17 13:05:33,281 - INFO - TRAINING
+2025-04-17 13:05:33,281 - INFO - ========
+2025-04-17 13:05:33,282 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-04-17 13:05:33,284 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-17 13:05:33,288 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+2025-04-17 13:05:33,413 - DEBUG - No lexicon layer initialized at model
+2025-04-17 13:05:33,413 - DEBUG - No linguistic layer initialized at model
+2025-04-17 13:05:33,413 - DEBUG - No NER layer initialized at model
+2025-04-17 13:05:33,413 - DEBUG - Topic Detection layer initialized at model
+2025-04-17 13:05:33,413 - DEBUG - Previous label layer initialized with prev_label_size = 4.
+2025-04-17 13:05:33,413 - DEBUG - Final computed input_dim for classification head: 912
+2025-04-17 13:05:33,413 - INFO - Using CUDA for training.
+2025-04-17 13:05:33,515 - INFO - TRAINING
+2025-04-17 13:05:33,515 - INFO - ========
+2025-04-17 13:05:33,515 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-04-17 13:05:33,522 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+2025-04-17 13:05:34,325 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,325 - DEBUG - NER features received: False
+2025-04-17 13:05:34,327 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,327 - DEBUG - NER features received: False
+2025-04-17 13:05:34,392 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,392 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,393 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:34,393 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,394 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,394 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,394 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,394 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,394 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,394 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,394 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,394 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,395 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,395 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,395 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,395 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:34,395 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,395 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,395 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,396 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,396 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,396 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,396 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,396 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,396 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,396 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,442 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,442 - DEBUG - NER features received: False
+2025-04-17 13:05:34,442 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,443 - DEBUG - NER features received: False
+2025-04-17 13:05:34,470 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,470 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,470 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,470 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,471 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [1., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:34,471 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,471 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,471 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,471 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,471 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,471 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:34,471 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,471 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,471 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,471 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:34,472 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,472 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,472 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,472 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:34,472 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,472 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,472 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,472 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,472 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:34,472 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,473 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,517 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,517 - DEBUG - NER features received: False
+2025-04-17 13:05:34,519 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,519 - DEBUG - NER features received: False
+2025-04-17 13:05:34,541 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,541 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,542 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:34,542 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,542 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,542 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,542 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,542 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,542 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,542 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:34,543 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:34,543 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,543 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,543 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,543 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,544 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:34,544 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,544 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,544 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,544 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,544 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,545 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,545 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,545 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:34,545 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,545 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,589 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,589 - DEBUG - NER features received: False
+2025-04-17 13:05:34,591 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,591 - DEBUG - NER features received: False
+2025-04-17 13:05:34,613 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,613 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,614 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:34,614 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,614 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,614 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,614 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,614 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,614 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,615 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,615 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:34,615 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,615 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,616 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,616 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,617 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:34,617 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,617 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,617 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,617 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,617 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,617 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,618 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:34,618 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:34,618 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,618 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,660 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,660 - DEBUG - NER features received: False
+2025-04-17 13:05:34,665 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,665 - DEBUG - NER features received: False
+2025-04-17 13:05:34,684 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,684 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,685 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:34,685 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,685 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,685 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,685 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,685 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,685 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,686 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,686 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:34,686 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,686 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,689 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,689 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,690 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:34,690 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,690 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,690 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,690 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,690 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,690 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,690 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,691 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:34,691 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,691 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,732 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,733 - DEBUG - NER features received: False
+2025-04-17 13:05:34,737 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,738 - DEBUG - NER features received: False
+2025-04-17 13:05:34,757 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,757 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,757 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:34,757 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,758 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,758 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,758 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,758 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,758 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,758 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:34,758 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,758 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,758 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,761 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,762 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,762 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:34,762 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,763 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,763 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,763 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,763 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,763 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,763 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:34,763 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:34,764 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,764 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,806 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,806 - DEBUG - NER features received: False
+2025-04-17 13:05:34,809 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,809 - DEBUG - NER features received: False
+2025-04-17 13:05:34,830 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,830 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,831 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:34,831 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,831 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,831 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,831 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,831 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,831 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,831 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,832 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,832 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,832 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,833 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,833 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,834 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:34,834 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,834 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,834 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,834 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,834 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,835 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,835 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,835 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,835 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,835 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,879 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,879 - DEBUG - NER features received: False
+2025-04-17 13:05:34,881 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:34,881 - DEBUG - NER features received: False
+2025-04-17 13:05:34,903 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,903 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,904 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:34,904 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,904 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,904 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,904 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,904 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,904 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:34,904 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,905 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:34,905 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,905 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:34,905 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,905 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,905 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:34,905 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:34,906 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:34,906 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:34,906 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:34,906 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:34,906 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:34,906 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:34,906 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:34,906 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:34,906 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,135 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,135 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,135 - DEBUG - NER features received: False
+2025-04-17 13:05:35,135 - DEBUG - NER features received: False
+2025-04-17 13:05:35,159 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,159 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,159 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,159 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,160 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:35,160 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,160 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [1., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:35,160 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,161 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,161 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,161 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,161 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,161 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,161 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,161 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,161 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,161 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,161 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,161 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:35,161 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:35,161 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:35,161 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,162 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,162 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:35,162 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,162 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,205 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,206 - DEBUG - NER features received: False
+2025-04-17 13:05:35,206 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,206 - DEBUG - NER features received: False
+2025-04-17 13:05:35,231 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,231 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,231 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,231 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,232 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,232 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [0., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,232 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,232 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,232 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,232 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,232 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,232 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,232 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,233 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:35,233 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,233 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:35,233 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,233 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,233 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:35,233 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,233 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,282 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,282 - DEBUG - NER features received: False
+2025-04-17 13:05:35,282 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,282 - DEBUG - NER features received: False
+2025-04-17 13:05:35,306 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,306 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,306 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,306 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,307 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,307 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,307 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,307 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,307 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,307 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,307 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,307 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,307 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,307 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,308 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:35,308 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,308 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:35,308 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,308 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,308 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,308 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,353 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,353 - DEBUG - NER features received: False
+2025-04-17 13:05:35,355 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,355 - DEBUG - NER features received: False
+2025-04-17 13:05:35,377 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,377 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,378 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,378 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,378 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,378 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,378 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,378 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,378 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,379 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:35,379 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,379 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,379 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,379 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,380 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,380 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,380 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,381 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,381 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,381 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,381 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,381 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,381 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:35,381 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,381 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,381 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,424 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,424 - DEBUG - NER features received: False
+2025-04-17 13:05:35,428 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,428 - DEBUG - NER features received: False
+2025-04-17 13:05:35,448 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,448 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,449 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,449 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,449 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,449 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,449 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,449 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,449 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,450 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:35,450 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,450 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,450 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,452 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,452 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,453 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,453 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,453 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,453 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,453 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,453 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,453 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,454 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:35,454 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:35,454 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,454 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,495 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,495 - DEBUG - NER features received: False
+2025-04-17 13:05:35,500 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,500 - DEBUG - NER features received: False
+2025-04-17 13:05:35,519 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,519 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,520 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:35,520 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,520 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,520 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,520 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,520 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,521 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,521 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:35,521 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:35,521 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,521 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,524 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,524 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,525 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,525 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,525 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,525 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,525 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,525 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,525 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,526 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:35,526 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,526 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,526 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,569 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,570 - DEBUG - NER features received: False
+2025-04-17 13:05:35,575 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,575 - DEBUG - NER features received: False
+2025-04-17 13:05:35,594 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,594 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,595 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [1., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:35,595 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,595 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,595 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,596 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,596 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,596 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,596 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:35,596 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:35,596 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,596 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,600 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,600 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,600 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:35,600 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,601 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,601 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,601 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,601 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,601 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,601 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,601 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:35,601 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,601 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,643 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,643 - DEBUG - NER features received: False
+2025-04-17 13:05:35,649 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,650 - DEBUG - NER features received: False
+2025-04-17 13:05:35,667 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,667 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,668 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,668 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,668 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,668 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,668 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,668 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,668 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,669 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:35,669 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:35,669 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,669 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,674 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,674 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,674 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,674 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,674 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,675 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,675 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,675 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,675 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,675 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,675 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,675 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,675 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,877 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,878 - DEBUG - NER features received: False
+2025-04-17 13:05:35,878 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,878 - DEBUG - NER features received: False
+2025-04-17 13:05:35,901 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,901 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,902 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,902 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,902 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,902 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,902 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,902 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,902 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,902 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,902 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,902 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,902 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,903 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,903 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,903 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,903 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,903 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,903 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,903 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,903 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,903 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,903 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,903 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:35,903 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,904 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,947 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,947 - DEBUG - NER features received: False
+2025-04-17 13:05:35,949 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:35,949 - DEBUG - NER features received: False
+2025-04-17 13:05:35,971 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,971 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,972 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:35,972 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,972 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,972 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,972 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,972 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,972 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,973 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,973 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,973 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,973 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,973 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:35,973 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:35,974 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:35,974 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:35,974 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:35,974 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:35,974 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:35,974 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:35,975 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:35,975 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:35,975 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:35,975 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:35,975 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,018 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,018 - DEBUG - NER features received: False
+2025-04-17 13:05:36,021 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,021 - DEBUG - NER features received: False
+2025-04-17 13:05:36,042 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,042 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,043 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:36,043 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,043 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,043 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,043 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,043 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,043 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,044 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,044 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:36,044 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,044 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,045 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,045 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,046 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,046 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,046 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,046 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,046 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,046 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,046 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,046 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:36,047 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,047 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,047 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,092 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,092 - DEBUG - NER features received: False
+2025-04-17 13:05:36,093 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,093 - DEBUG - NER features received: False
+2025-04-17 13:05:36,116 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,116 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,116 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,117 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,117 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,117 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:36,117 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,117 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,117 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,118 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,118 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,118 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,118 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,118 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,118 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,118 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,118 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,118 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,118 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,118 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,118 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:36,118 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,118 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,119 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,119 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,119 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,165 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,165 - DEBUG - NER features received: False
+2025-04-17 13:05:36,165 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,165 - DEBUG - NER features received: False
+2025-04-17 13:05:36,189 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,189 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,189 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,189 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,190 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,190 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,190 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,190 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,190 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,190 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,190 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,190 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,190 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,191 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,191 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:36,191 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,191 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,191 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,191 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:36,191 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,191 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,236 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,236 - DEBUG - NER features received: False
+2025-04-17 13:05:36,237 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,237 - DEBUG - NER features received: False
+2025-04-17 13:05:36,260 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,260 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,261 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 1., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,261 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,261 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,261 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,261 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,261 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,261 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,262 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,262 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:36,262 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,262 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:36,262 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,262 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,263 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:36,263 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,263 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,263 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,263 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,263 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,263 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,263 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,264 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:36,264 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,264 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,307 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,307 - DEBUG - NER features received: False
+2025-04-17 13:05:36,309 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,309 - DEBUG - NER features received: False
+2025-04-17 13:05:36,331 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,331 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,332 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:36,332 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,332 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,332 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,332 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,332 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,332 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,332 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,333 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:36,333 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,333 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,333 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,333 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,334 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:36,334 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,334 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,334 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,334 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,334 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,335 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,335 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,335 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,335 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,335 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,377 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,377 - DEBUG - NER features received: False
+2025-04-17 13:05:36,381 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,381 - DEBUG - NER features received: False
+2025-04-17 13:05:36,402 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,402 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,403 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,403 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,403 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,403 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,403 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,403 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,403 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,403 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:36,404 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,404 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,404 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,405 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,405 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,406 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:36,406 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,406 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,406 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,406 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,406 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,407 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,407 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,407 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:36,407 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,407 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,609 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,609 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,609 - DEBUG - NER features received: False
+2025-04-17 13:05:36,609 - DEBUG - NER features received: False
+2025-04-17 13:05:36,633 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,633 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,633 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,633 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,634 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,634 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,634 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,634 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,634 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,634 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,634 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,634 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,634 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,635 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:36,635 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:36,635 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:36,635 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,635 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,635 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,635 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,635 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,676 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,676 - DEBUG - NER features received: False
+2025-04-17 13:05:36,680 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,680 - DEBUG - NER features received: False
+2025-04-17 13:05:36,700 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,700 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,701 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:36,701 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,701 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,701 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,701 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,701 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,702 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,702 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,702 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,702 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,702 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,704 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,704 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,705 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,705 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,705 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,705 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,705 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,705 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,705 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,706 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,706 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,706 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,706 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,749 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,749 - DEBUG - NER features received: False
+2025-04-17 13:05:36,751 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,751 - DEBUG - NER features received: False
+2025-04-17 13:05:36,773 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,773 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,774 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:36,774 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,774 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,774 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,775 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,775 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,775 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,775 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:36,775 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:36,775 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,775 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,776 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,776 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,776 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:36,776 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,777 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,777 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,777 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,777 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,777 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,777 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,777 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:36,777 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,777 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,821 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,821 - DEBUG - NER features received: False
+2025-04-17 13:05:36,825 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,825 - DEBUG - NER features received: False
+2025-04-17 13:05:36,846 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,846 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,846 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:36,846 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,847 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,847 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,847 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,847 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,847 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,847 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,847 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:36,848 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,848 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,849 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,849 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,850 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 1.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:36,850 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,850 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,850 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,850 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,850 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,850 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,850 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:36,851 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:36,851 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,851 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,893 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,893 - DEBUG - NER features received: False
+2025-04-17 13:05:36,896 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,896 - DEBUG - NER features received: False
+2025-04-17 13:05:36,917 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,917 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,918 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:36,918 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,918 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,918 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,918 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,918 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,918 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,919 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,919 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:36,919 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,919 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,921 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,921 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,921 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:36,921 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,921 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,921 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,922 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,922 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,922 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,922 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,922 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,922 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,922 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,968 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,968 - DEBUG - NER features received: False
+2025-04-17 13:05:36,968 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:36,968 - DEBUG - NER features received: False
+2025-04-17 13:05:36,992 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,992 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,992 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:36,992 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:36,993 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 1.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,993 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:36,993 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,993 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:36,993 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,993 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:36,993 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:36,993 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,993 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:36,994 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:36,994 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:36,994 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:36,994 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,994 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,994 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:36,994 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:36,994 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,039 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,039 - DEBUG - NER features received: False
+2025-04-17 13:05:37,041 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,041 - DEBUG - NER features received: False
+2025-04-17 13:05:37,063 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,063 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,063 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,064 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,064 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,064 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,064 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,064 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,064 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,064 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:37,064 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,065 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,065 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,065 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,066 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,066 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,066 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,066 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,067 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,067 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,067 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,067 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,067 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,067 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,067 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,067 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,110 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,110 - DEBUG - NER features received: False
+2025-04-17 13:05:37,113 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,113 - DEBUG - NER features received: False
+2025-04-17 13:05:37,134 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,134 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,134 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,135 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,135 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,135 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,135 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,135 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,135 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,135 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,135 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,135 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,135 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,137 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,138 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,138 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,139 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,139 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,139 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,139 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,139 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,139 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,139 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:37,140 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,140 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,140 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,343 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,343 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,344 - DEBUG - NER features received: False
+2025-04-17 13:05:37,344 - DEBUG - NER features received: False
+2025-04-17 13:05:37,367 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,367 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,367 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,368 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,368 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,368 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,368 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,368 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,368 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,368 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,368 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,368 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,369 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,369 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,369 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,369 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,369 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,369 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,369 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,369 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,369 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:37,369 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,369 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,369 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,369 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,369 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,411 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,411 - DEBUG - NER features received: False
+2025-04-17 13:05:37,413 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,413 - DEBUG - NER features received: False
+2025-04-17 13:05:37,434 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,435 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,435 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,435 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,436 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,436 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,436 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,436 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,436 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,436 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:37,437 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,437 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,437 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,437 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,437 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,438 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,438 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,438 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,438 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,438 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,438 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,438 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,438 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,438 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,438 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,438 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,483 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,483 - DEBUG - NER features received: False
+2025-04-17 13:05:37,484 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,484 - DEBUG - NER features received: False
+2025-04-17 13:05:37,507 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,507 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,508 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,508 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,508 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,508 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,508 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,508 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,508 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,508 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,508 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,508 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,508 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,509 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,509 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,509 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,509 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,509 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,509 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,509 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,509 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,509 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,509 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:37,510 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,510 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,510 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,554 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,554 - DEBUG - NER features received: False
+2025-04-17 13:05:37,555 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,555 - DEBUG - NER features received: False
+2025-04-17 13:05:37,578 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,578 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,579 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:37,579 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,579 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,579 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,579 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,579 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,579 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,579 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,580 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,580 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:37,580 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,580 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,580 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:37,580 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,580 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,580 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,580 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,580 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,580 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,581 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,581 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,581 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,581 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,581 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,626 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,626 - DEBUG - NER features received: False
+2025-04-17 13:05:37,626 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,626 - DEBUG - NER features received: False
+2025-04-17 13:05:37,650 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,650 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,650 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,650 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,651 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,651 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,651 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,651 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,651 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,651 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,651 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,651 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,651 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,651 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,651 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:37,652 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,652 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,652 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,652 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,652 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,652 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,652 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,652 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:37,652 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,652 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,652 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,696 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,697 - DEBUG - NER features received: False
+2025-04-17 13:05:37,698 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,698 - DEBUG - NER features received: False
+2025-04-17 13:05:37,721 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,721 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,721 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,722 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,722 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,722 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,722 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,722 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,722 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,722 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,722 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,722 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,722 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,723 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,723 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,723 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,723 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,723 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,723 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,723 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,723 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,723 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,723 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:37,724 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,724 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,724 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,769 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,769 - DEBUG - NER features received: False
+2025-04-17 13:05:37,770 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,770 - DEBUG - NER features received: False
+2025-04-17 13:05:37,793 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,793 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,793 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,793 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,794 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,794 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,794 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,794 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,794 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,794 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,795 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,795 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,795 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,795 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:37,795 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,795 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,795 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,795 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:37,795 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:37,795 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,795 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,841 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,841 - DEBUG - NER features received: False
+2025-04-17 13:05:37,841 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:37,841 - DEBUG - NER features received: False
+2025-04-17 13:05:37,865 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,865 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,865 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:37,865 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:37,866 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 1., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:37,866 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,866 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,866 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 1., 0.]], device='cuda:0')
+2025-04-17 13:05:37,866 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:37,866 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,866 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,866 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,866 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,866 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:37,867 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:37,867 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:37,867 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:37,867 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:37,867 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:37,867 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:37,867 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,867 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,867 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:37,867 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:37,867 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:37,868 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,072 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,072 - DEBUG - NER features received: False
+2025-04-17 13:05:38,072 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,073 - DEBUG - NER features received: False
+2025-04-17 13:05:38,096 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,096 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,097 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,097 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,097 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,097 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,097 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,097 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,097 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,097 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:38,097 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,097 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,098 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,098 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,098 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,098 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,098 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,098 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,098 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,098 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,098 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,098 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,098 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,098 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:38,098 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,098 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,142 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,142 - DEBUG - NER features received: False
+2025-04-17 13:05:38,145 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,145 - DEBUG - NER features received: False
+2025-04-17 13:05:38,166 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,166 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,167 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [0., 1., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:38,167 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,167 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,168 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,168 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,168 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,168 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,168 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,168 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,168 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,168 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,169 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,169 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,170 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:38,170 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,170 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,170 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,170 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,170 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,170 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,171 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,171 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:38,171 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,171 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,216 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,216 - DEBUG - NER features received: False
+2025-04-17 13:05:38,216 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,217 - DEBUG - NER features received: False
+2025-04-17 13:05:38,240 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,240 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,240 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,241 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,241 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [1., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,241 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,241 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,241 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 1., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:38,241 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,241 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,241 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,241 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,241 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,242 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,242 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,242 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,242 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,242 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,242 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:38,242 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:38,242 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:38,242 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,242 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,242 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,242 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,242 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,287 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,287 - DEBUG - NER features received: False
+2025-04-17 13:05:38,290 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,290 - DEBUG - NER features received: False
+2025-04-17 13:05:38,311 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,311 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,312 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [1., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:38,312 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,312 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,312 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,312 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,312 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,312 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,312 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,313 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:38,313 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,313 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,314 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,314 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,315 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,315 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,315 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,315 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,315 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,315 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,315 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,315 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,315 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,316 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,316 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,358 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,358 - DEBUG - NER features received: False
+2025-04-17 13:05:38,362 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,362 - DEBUG - NER features received: False
+2025-04-17 13:05:38,382 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,382 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,383 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:38,383 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,383 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,383 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,383 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,383 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,383 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,384 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:38,384 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,384 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,384 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,385 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,385 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,386 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,386 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,386 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,386 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,386 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,386 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,386 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,387 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,387 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,387 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,387 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,429 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,429 - DEBUG - NER features received: False
+2025-04-17 13:05:38,433 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,433 - DEBUG - NER features received: False
+2025-04-17 13:05:38,454 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,454 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,455 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:38,455 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,455 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,455 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,455 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,455 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,455 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,455 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:38,456 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,456 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,456 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,457 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,457 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,457 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,457 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,457 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,458 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,458 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,458 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,458 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,458 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,458 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,458 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,458 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,501 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,501 - DEBUG - NER features received: False
+2025-04-17 13:05:38,504 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,504 - DEBUG - NER features received: False
+2025-04-17 13:05:38,526 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,526 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,526 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 1., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:38,527 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,527 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,527 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,527 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,527 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,527 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,527 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:38,528 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,528 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,528 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,528 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,528 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,529 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,529 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,529 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,529 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,529 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,529 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,529 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,530 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:38,530 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,530 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,530 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,573 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,573 - DEBUG - NER features received: False
+2025-04-17 13:05:38,579 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,579 - DEBUG - NER features received: False
+2025-04-17 13:05:38,597 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,597 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,598 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:38,598 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,598 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,598 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,598 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,599 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,599 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,599 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,599 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,599 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,599 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,603 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,603 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,604 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,604 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,604 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,604 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,604 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,604 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,604 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,604 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,605 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,605 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,605 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,808 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,808 - DEBUG - NER features received: False
+2025-04-17 13:05:38,808 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,808 - DEBUG - NER features received: False
+2025-04-17 13:05:38,832 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,832 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,832 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,832 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,832 - DEBUG - Checking prev_label_features: tensor([[0., 0., 1., 0.],
+        [0., 1., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,832 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,833 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,833 - DEBUG - Checking prev_label_features: tensor([[1., 0., 1., 0.],
+        [0., 0., 0., 1.]], device='cuda:1')
+2025-04-17 13:05:38,833 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,833 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,833 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,833 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,833 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,833 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,833 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,833 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,833 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,833 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,833 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 1. 0.]
+2025-04-17 13:05:38,833 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,833 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:38,834 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,834 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,834 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:38,834 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,834 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,878 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,878 - DEBUG - NER features received: False
+2025-04-17 13:05:38,879 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,879 - DEBUG - NER features received: False
+2025-04-17 13:05:38,902 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,902 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,903 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:38,903 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,903 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,903 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,903 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,903 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,903 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,903 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,903 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,904 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,904 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:38,904 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,904 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,904 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 0.],
+        [0., 1., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:38,904 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,904 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,904 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,904 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,904 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,904 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,905 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 0.]
+2025-04-17 13:05:38,905 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,905 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,905 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,951 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,951 - DEBUG - NER features received: False
+2025-04-17 13:05:38,952 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:38,952 - DEBUG - NER features received: False
+2025-04-17 13:05:38,975 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,975 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,976 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:38,976 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:38,976 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [0., 1., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:38,976 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,976 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,976 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,976 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,976 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,977 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,977 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 0.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:38,977 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:38,977 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,977 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:38,977 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:38,977 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:38,977 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:38,977 - DEBUG - Sample 1: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:38,977 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:38,977 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,977 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,977 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 0.]
+2025-04-17 13:05:38,978 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:38,978 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:38,978 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,023 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,023 - DEBUG - NER features received: False
+2025-04-17 13:05:39,026 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,026 - DEBUG - NER features received: False
+2025-04-17 13:05:39,047 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,047 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,048 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 1.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:39,048 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,048 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,048 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,048 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,048 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,048 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,049 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:39,049 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:39,049 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,049 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,050 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,050 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,051 - DEBUG - Checking prev_label_features: tensor([[0., 1., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:39,051 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,051 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,051 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,051 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,051 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,051 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,052 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 0. 1.]
+2025-04-17 13:05:39,052 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:39,052 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,052 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,094 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,094 - DEBUG - NER features received: False
+2025-04-17 13:05:39,097 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,097 - DEBUG - NER features received: False
+2025-04-17 13:05:39,118 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,118 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,119 - DEBUG - Checking prev_label_features: tensor([[1., 0., 0., 1.],
+        [1., 0., 1., 0.]], device='cuda:1')
+2025-04-17 13:05:39,119 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,119 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,119 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,119 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,119 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,119 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,120 - DEBUG - Sample 0: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:39,120 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 1. 0.]
+2025-04-17 13:05:39,120 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,120 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,121 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,121 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,122 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]], device='cuda:0')
+2025-04-17 13:05:39,122 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,122 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,122 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,122 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,122 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,122 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,122 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:39,122 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:39,123 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,123 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,165 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,166 - DEBUG - NER features received: False
+2025-04-17 13:05:39,168 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,168 - DEBUG - NER features received: False
+2025-04-17 13:05:39,190 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,190 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,191 - DEBUG - Checking prev_label_features: tensor([[0., 0., 0., 1.],
+        [0., 0., 0., 0.]], device='cuda:1')
+2025-04-17 13:05:39,191 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,191 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,191 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,191 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,191 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,191 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,191 - DEBUG - Sample 0: Prev Labels Input: [0. 0. 0. 1.]
+2025-04-17 13:05:39,192 - DEBUG - Sample 1: Prev Labels Input: [0. 0. 0. 0.]
+2025-04-17 13:05:39,192 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,192 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,192 - DEBUG - DeBERTa combined_output shape: torch.Size([2, 768])
+2025-04-17 13:05:39,192 - DEBUG - Checking prev_label_layer: Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): ReLU()
+  (2): Dropout(p=0.4, inplace=False)
+)
+2025-04-17 13:05:39,193 - DEBUG - Checking prev_label_features: tensor([[0., 1., 1., 0.],
+        [1., 0., 0., 1.]], device='cuda:0')
+2025-04-17 13:05:39,193 - DEBUG - Topic Detection features shape before processing: torch.Size([2, 17])
+2025-04-17 13:05:39,193 - DEBUG - Topic Detection output shape: torch.Size([2, 128])
+2025-04-17 13:05:39,193 - DEBUG - Topic Detection combined_output shape: torch.Size([2, 896])
+2025-04-17 13:05:39,193 - DEBUG - Previous labels features received: True
+2025-04-17 13:05:39,193 - DEBUG - Previous labels features shape before processing: torch.Size([2, 4])
+2025-04-17 13:05:39,194 - DEBUG - Previous labels output shape: torch.Size([2, 16])
+2025-04-17 13:05:39,194 - DEBUG - Sample 0: Prev Labels Input: [0. 1. 1. 0.]
+2025-04-17 13:05:39,194 - DEBUG - Sample 1: Prev Labels Input: [1. 0. 0. 1.]
+2025-04-17 13:05:39,194 - DEBUG - Previous Sentences combined_output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,194 - DEBUG - Final combined output shape: torch.Size([2, 912])
+2025-04-17 13:05:39,237 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,237 - DEBUG - NER features received: False
+2025-04-17 13:05:39,243 - DEBUG - Lexicon features received: False
+2025-04-17 13:05:39,243 - DEBUG - NER features received: False

@@ -161,7 +161,7 @@ class EnhancedDebertaModel(nn.Module):
                 nn.ReLU()
             )
             
-            # self.text_embedding_layer = ResidualBlock(self.transformer.config.hidden_size, 256)
+            self.text_embedding_layer = ResidualBlock(self.transformer.config.hidden_size, 256)
             hidden_size = 256
         else:
             hidden_size = self.transformer.config.hidden_size

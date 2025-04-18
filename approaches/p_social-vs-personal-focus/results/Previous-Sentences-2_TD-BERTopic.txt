@@ -1,0 +1,93 @@
+2025-04-18 03:56:48,264 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-18 03:56:48,266 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-18 03:56:55,195 - INFO - Setting random seed to 42
+2025-04-18 03:56:55,196 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-18 03:56:55,196 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-18 03:56:55,349 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 03:56:55,376 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-18 03:56:55,376 - INFO - Preparing datasets for training and validation
+2025-04-18 03:56:55,561 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 03:59:28,793 - INFO - Applying bertopic for topic modeling.
+2025-04-18 03:59:28,807 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-18 04:00:49,441 - INFO - Applying bertopic for topic modeling.
+2025-04-18 04:00:49,444 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-04-18 04:00:50,544 - INFO - Arguments validated successfully.
+2025-04-18 04:00:50,553 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-18 04:00:50,553 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-18 04:00:51,811 - INFO - Using CUDA for training.
+2025-04-18 04:00:51,945 - INFO - TRAINING
+2025-04-18 04:00:51,946 - INFO - ========
+2025-04-18 04:00:51,946 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Presence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-04-18 04:00:51,949 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-18 04:00:51,952 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.5917, 'grad_norm': 5.157116889953613, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.5680239796638489, 'eval_f1-score': {'Social Focus': 0.72, 'Personal Focus': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 94.6664, 'eval_samples_per_second': 80.282, 'eval_steps_per_second': 20.07, 'epoch': 1.0}
+2025-04-18 04:21:01,065 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-18 04:21:01,067 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 04:21:01,068 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 04:25:49,086 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.487, 'grad_norm': 5.2295451164245605, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.5813235640525818, 'eval_f1-score': {'Social Focus': 0.74, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.6083, 'eval_samples_per_second': 79.491, 'eval_steps_per_second': 19.873, 'epoch': 2.0}
+2025-04-18 04:46:04,985 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-18 04:46:04,988 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 04:46:04,988 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 04:51:07,629 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4311, 'grad_norm': 7.181194305419922, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.3157, 'grad_norm': 7.106270790100098, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.6407865285873413, 'eval_f1-score': {'Social Focus': 0.77, 'Personal Focus': 0.68}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 95.4785, 'eval_samples_per_second': 79.599, 'eval_steps_per_second': 19.9, 'epoch': 3.0}
+2025-04-18 05:11:31,049 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 05:11:31,050 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 05:16:35,138 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2521, 'grad_norm': 7.968789577484131, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.8568381071090698, 'eval_f1-score': {'Social Focus': 0.73, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 96.0527, 'eval_samples_per_second': 79.123, 'eval_steps_per_second': 19.781, 'epoch': 4.0}
+2025-04-18 05:36:58,317 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 05:36:58,317 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 05:42:01,480 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1966, 'grad_norm': 4.239416122436523, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.1419, 'grad_norm': 7.8802361488342285, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.9964564442634583, 'eval_f1-score': {'Social Focus': 0.73, 'Personal Focus': 0.71}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.5049, 'eval_samples_per_second': 79.577, 'eval_steps_per_second': 19.894, 'epoch': 5.0}
+2025-04-18 06:02:24,847 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:02:24,848 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:07:33,805 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1078, 'grad_norm': 7.293381690979004, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 1.1886277198791504, 'eval_f1-score': {'Social Focus': 0.75, 'Personal Focus': 0.7}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.2572, 'eval_samples_per_second': 79.784, 'eval_steps_per_second': 19.946, 'epoch': 6.0}
+2025-04-18 06:27:53,057 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:27:53,058 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:33:04,699 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.093, 'grad_norm': 3.0015482902526855, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0767, 'grad_norm': 2.1777126789093018, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.3865504264831543, 'eval_f1-score': {'Social Focus': 0.76, 'Personal Focus': 0.68}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 95.3542, 'eval_samples_per_second': 79.703, 'eval_steps_per_second': 19.926, 'epoch': 7.0}
+2025-04-18 06:53:22,660 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:53:22,660 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 06:58:30,843 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 10662.3204, 'train_samples_per_second': 21.629, 'train_steps_per_second': 0.675, 'train_loss': 0.26766934730370995, 'epoch': 7.0}
+2025-04-18 06:58:34,868 - INFO - 
+
+VALIDATION
+2025-04-18 06:58:34,868 - INFO - ==========
+2025-04-18 07:00:07,697 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 07:00:07,697 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-04-18 07:05:11,017 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-18 07:05:11,021 - INFO - Social Focus: 0.77
+2025-04-18 07:05:11,021 - INFO - Personal Focus: 0.68
+2025-04-18 07:05:11,021 - INFO - Macro average: 0.73
+2025-04-18 07:05:11,094 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

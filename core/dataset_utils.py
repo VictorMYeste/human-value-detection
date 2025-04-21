@@ -337,7 +337,6 @@ def add_previous_label_features(
     """
     num_labels = len(labels)
     prev_label_features = []
-    lexicon_features = []
 
     # Ensure dataframe is sorted by Text-ID and Sentence-ID
     df = df.sort_values(by=["Text-ID", "Sentence-ID"]).reset_index(drop=True)

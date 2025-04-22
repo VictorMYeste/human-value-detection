@@ -1,0 +1,66 @@
+2025-04-20 03:29:34,971 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-20 03:29:34,971 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-20 03:29:43,212 - INFO - Setting random seed to 42
+2025-04-20 03:29:43,213 - INFO - Running training for labels: ['Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility']
+2025-04-20 03:29:43,213 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-20 03:29:43,431 - INFO - Loading lexicon embeddings for: MFD-20
+2025-04-20 03:29:43,432 - INFO - Preparing datasets for training and validation
+2025-04-20 03:30:03,886 - INFO - Arguments validated successfully.
+2025-04-20 03:30:03,903 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-20 03:30:05,184 - INFO - Using CUDA for training.
+2025-04-20 03:30:06,388 - INFO - TRAINING
+2025-04-20 03:30:06,388 - INFO - ========
+2025-04-20 03:30:06,389 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Self-Protection Anxiety-Avoidance']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: MFD-20
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 22
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-20 03:30:06,391 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.2112673819065094, 'eval_f1-score': {'Achievement': 0.58, 'Power: dominance': 0.52, 'Power: resources': 0.34, 'Face': 0.33, 'Security: personal': 0.49, 'Security: societal': 0.57, 'Tradition': 0.57, 'Conformity: rules': 0.63, 'Conformity: interpersonal': 0, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 143.4042, 'eval_samples_per_second': 36.805, 'eval_steps_per_second': 4.602, 'epoch': 1.0}
+2025-04-20 03:43:05,979 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.2445, 'grad_norm': 0.9460089802742004, 'learning_rate': 1.796747967479675e-05, 'epoch': 1.02}
+{'eval_loss': 0.20880059897899628, 'eval_f1-score': {'Achievement': 0.59, 'Power: dominance': 0.52, 'Power: resources': 0.51, 'Face': 0.25, 'Security: personal': 0.53, 'Security: societal': 0.56, 'Tradition': 0.6, 'Conformity: rules': 0.68, 'Conformity: interpersonal': 0.18, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 143.3214, 'eval_samples_per_second': 36.826, 'eval_steps_per_second': 4.605, 'epoch': 2.0}
+{'loss': 0.1846, 'grad_norm': 1.4082497358322144, 'learning_rate': 1.5934959349593496e-05, 'epoch': 2.03}
+{'eval_loss': 0.2199867069721222, 'eval_f1-score': {'Achievement': 0.59, 'Power: dominance': 0.45, 'Power: resources': 0.56, 'Face': 0.38, 'Security: personal': 0.57, 'Security: societal': 0.61, 'Tradition': 0.65, 'Conformity: rules': 0.66, 'Conformity: interpersonal': 0.21, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.47, 'eval_runtime': 144.1329, 'eval_samples_per_second': 36.619, 'eval_steps_per_second': 4.579, 'epoch': 3.0}
+{'loss': 0.145, 'grad_norm': 1.5171960592269897, 'learning_rate': 1.3902439024390244e-05, 'epoch': 3.05}
+{'eval_loss': 0.24011021852493286, 'eval_f1-score': {'Achievement': 0.61, 'Power: dominance': 0.51, 'Power: resources': 0.51, 'Face': 0.38, 'Security: personal': 0.56, 'Security: societal': 0.59, 'Tradition': 0.64, 'Conformity: rules': 0.67, 'Conformity: interpersonal': 0.24, 'Humility': 0.04}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 144.4101, 'eval_samples_per_second': 36.549, 'eval_steps_per_second': 4.57, 'epoch': 4.0}
+{'loss': 0.1105, 'grad_norm': 1.26559317111969, 'learning_rate': 1.1869918699186992e-05, 'epoch': 4.06}
+{'eval_loss': 0.2645064890384674, 'eval_f1-score': {'Achievement': 0.6, 'Power: dominance': 0.49, 'Power: resources': 0.56, 'Face': 0.4, 'Security: personal': 0.5, 'Security: societal': 0.62, 'Tradition': 0.65, 'Conformity: rules': 0.66, 'Conformity: interpersonal': 0.26, 'Humility': 0.04}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 143.5837, 'eval_samples_per_second': 36.759, 'eval_steps_per_second': 4.597, 'epoch': 5.0}
+{'loss': 0.0817, 'grad_norm': 1.970008134841919, 'learning_rate': 9.837398373983741e-06, 'epoch': 5.08}
+{'eval_loss': 0.2853618860244751, 'eval_f1-score': {'Achievement': 0.59, 'Power: dominance': 0.5, 'Power: resources': 0.55, 'Face': 0.41, 'Security: personal': 0.53, 'Security: societal': 0.61, 'Tradition': 0.64, 'Conformity: rules': 0.66, 'Conformity: interpersonal': 0.25, 'Humility': 0.06}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 143.2604, 'eval_samples_per_second': 36.842, 'eval_steps_per_second': 4.607, 'epoch': 6.0}
+{'loss': 0.0627, 'grad_norm': 2.967811107635498, 'learning_rate': 7.804878048780489e-06, 'epoch': 6.09}
+{'eval_loss': 0.3082689046859741, 'eval_f1-score': {'Achievement': 0.6, 'Power: dominance': 0.5, 'Power: resources': 0.56, 'Face': 0.4, 'Security: personal': 0.54, 'Security: societal': 0.61, 'Tradition': 0.62, 'Conformity: rules': 0.64, 'Conformity: interpersonal': 0.28, 'Humility': 0.07}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 144.1722, 'eval_samples_per_second': 36.609, 'eval_steps_per_second': 4.578, 'epoch': 7.0}
+{'loss': 0.0495, 'grad_norm': 1.4462932348251343, 'learning_rate': 5.772357723577237e-06, 'epoch': 7.11}
+{'eval_loss': 0.32112500071525574, 'eval_f1-score': {'Achievement': 0.61, 'Power: dominance': 0.46, 'Power: resources': 0.54, 'Face': 0.4, 'Security: personal': 0.54, 'Security: societal': 0.61, 'Tradition': 0.62, 'Conformity: rules': 0.66, 'Conformity: interpersonal': 0.25, 'Humility': 0.06}, 'eval_macro-avg-f1-score': 0.47, 'eval_runtime': 143.9633, 'eval_samples_per_second': 36.662, 'eval_steps_per_second': 4.585, 'epoch': 8.0}
+{'train_runtime': 6393.5823, 'train_samples_per_second': 24.643, 'train_steps_per_second': 0.77, 'train_loss': 0.11614816539783768, 'epoch': 8.0}
+2025-04-20 05:16:40,419 - INFO - 
+
+VALIDATION
+2025-04-20 05:16:40,419 - INFO - ==========
+2025-04-20 05:19:04,178 - INFO - Achievement: 0.61
+2025-04-20 05:19:04,178 - INFO - Power: dominance: 0.51
+2025-04-20 05:19:04,178 - INFO - Power: resources: 0.51
+2025-04-20 05:19:04,178 - INFO - Face: 0.38
+2025-04-20 05:19:04,178 - INFO - Security: personal: 0.56
+2025-04-20 05:19:04,178 - INFO - Security: societal: 0.59
+2025-04-20 05:19:04,178 - INFO - Tradition: 0.64
+2025-04-20 05:19:04,178 - INFO - Conformity: rules: 0.67
+2025-04-20 05:19:04,178 - INFO - Conformity: interpersonal: 0.24
+2025-04-20 05:19:04,178 - INFO - Humility: 0.04
+2025-04-20 05:19:04,178 - INFO - Macro average: 0.48
+2025-04-20 05:19:04,505 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

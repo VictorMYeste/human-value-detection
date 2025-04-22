@@ -66,7 +66,6 @@ MODEL_CONFIG = {
     "growth_selfprotection": {
         "pretrained_model": "microsoft/deberta-base",
         "labels": ["Growth Anxiety-Free", "Self-Protection Anxiety-Avoidance"],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -103,7 +102,6 @@ MODEL_CONFIG = {
     "social_personal_focus": {
         "pretrained_model": "microsoft/deberta-base",
         "labels": ["Social Focus", "Personal Focus"],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -140,7 +138,6 @@ MODEL_CONFIG = {
     "openness_conservation": {
         "pretrained_model": "microsoft/deberta-base",
         "labels": ["Openness to Change", "Conservation"],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -177,7 +174,6 @@ MODEL_CONFIG = {
     "self-trans_self-enh": {
         "pretrained_model": "microsoft/deberta-base",
         "labels": ["Self-Transcendence", "Self-Enhancement"],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -234,7 +230,6 @@ MODEL_CONFIG = {
             "Universalism: nature",
             "Universalism: tolerance"
         ],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -283,7 +278,6 @@ MODEL_CONFIG = {
             "Universalism: nature",
             "Universalism: tolerance"
         ],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",
@@ -331,7 +325,6 @@ MODEL_CONFIG = {
             "Conformity: interpersonal",
             "Humility"
         ],
-
         "custom_stopwords": [
             # Reporting Verbs (different tenses and forms)
             "say", "says", "said", "saying",

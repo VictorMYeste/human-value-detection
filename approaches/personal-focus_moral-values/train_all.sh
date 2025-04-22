@@ -65,4 +65,4 @@ echo "===== Topic Detection - NMF ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
 
 echo "===== Topic Detection - BERTopic ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic-v2.txt
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic.txt

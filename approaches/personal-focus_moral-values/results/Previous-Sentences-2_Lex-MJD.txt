@@ -1,19 +1,19 @@
-2025-04-21 15:22:06,013 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-21 15:22:06,014 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-21 15:22:12,929 - INFO - Setting random seed to 42
-2025-04-21 15:22:12,930 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal']
-2025-04-21 15:22:12,930 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-04-21 15:22:13,110 - INFO - Loading lexicon embeddings for: MJD
-2025-04-21 15:22:13,110 - INFO - Preparing datasets for training and validation
-2025-04-21 15:23:02,170 - INFO - Adding Previous Sentences Labels features with num_categories = 24
-2025-04-21 15:23:23,690 - INFO - Adding Previous Sentences Labels features with num_categories = 24
-2025-04-21 15:23:24,212 - INFO - Arguments validated successfully.
-2025-04-21 15:23:24,232 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
-2025-04-21 15:23:24,232 - INFO - Clearing old checkpoints in models/checkpoints
-2025-04-21 15:23:25,713 - INFO - Using CUDA for training.
-2025-04-21 15:23:27,064 - INFO - TRAINING
-2025-04-21 15:23:27,064 - INFO - ========
-2025-04-21 15:23:27,064 - INFO - Training configuration:
+2025-04-21 16:38:27,243 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-21 16:38:27,244 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-21 16:38:33,955 - INFO - Setting random seed to 42
+2025-04-21 16:38:33,956 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal']
+2025-04-21 16:38:33,956 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-21 16:38:34,173 - INFO - Loading lexicon embeddings for: MJD
+2025-04-21 16:38:34,173 - INFO - Preparing datasets for training and validation
+2025-04-21 16:39:23,078 - INFO - Adding Previous Sentences Labels features with num_categories = 24
+2025-04-21 16:39:44,703 - INFO - Adding Previous Sentences Labels features with num_categories = 24
+2025-04-21 16:39:45,273 - INFO - Arguments validated successfully.
+2025-04-21 16:39:45,293 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-21 16:39:45,293 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-21 16:39:46,078 - INFO - Using CUDA for training.
+2025-04-21 16:39:47,363 - INFO - TRAINING
+2025-04-21 16:39:47,363 - INFO - ========
+2025-04-21 16:39:47,363 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
 Model name: None
 Filter labels: ['Personal Focus']
@@ -33,89 +33,44 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: No
 
-2025-04-21 15:23:27,067 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-2025-04-21 15:23:27,071 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
-{'eval_loss': 0.24476516246795654, 'eval_f1-score': {'Self-direction: thought': 0.04, 'Self-direction: action': 0.29, 'Stimulation': 0.29, 'Hedonism': 0.39, 'Achievement': 0.44, 'Power: dominance': 0.55, 'Power: resources': 0.66, 'Face': 0.37, 'Security: personal': 0.59}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 47.7396, 'eval_samples_per_second': 79.745, 'eval_steps_per_second': 19.942, 'epoch': 1.0}
-2025-04-21 15:31:36,980 - INFO - Skipping evaluation for warm-up phase (epoch 1).
-2025-04-21 15:31:40,939 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x9)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/personal-focus_moral-values/main.py", line 127, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/personal-focus_moral-values/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 80, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 270, in train
-    trainer.train()
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
-    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
-    metrics = self._evaluate(trial, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
-    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3898, in evaluate
-    self.control = self.callback_handler.on_evaluate(self.args, self.state, self.control, output.metrics)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 498, in on_evaluate
-    return self.call_event("on_evaluate", args, state, control, metrics=metrics)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 516, in call_event
-    result = getattr(callback, event)(
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 476, in on_evaluate
-    new_prev_feats = add_previous_label_features(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 435, in add_previous_label_features
-    outputs = model(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 314, in forward
-    logits = self.classification_head(combined_output)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x9)
-2025-04-21 15:31:40,939 - ERROR - An error occurred: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x9)
-Traceback (most recent call last):
-  File "/home/vicyesmo/human-value-detection/approaches/personal-focus_moral-values/main.py", line 127, in <module>
-    main()
-  File "/home/vicyesmo/human-value-detection/approaches/personal-focus_moral-values/main.py", line 99, in main
-    run_training(
-  File "/home/vicyesmo/human-value-detection/core/runner.py", line 80, in run_training
-    trainer = train(
-  File "/home/vicyesmo/human-value-detection/core/training.py", line 270, in train
-    trainer.train()
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2052, in train
-    return inner_training_loop(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2487, in _inner_training_loop
-    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2915, in _maybe_log_save_evaluate
-    metrics = self._evaluate(trial, ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2872, in _evaluate
-    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3898, in evaluate
-    self.control = self.callback_handler.on_evaluate(self.args, self.state, self.control, output.metrics)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 498, in on_evaluate
-    return self.call_event("on_evaluate", args, state, control, metrics=metrics)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer_callback.py", line 516, in call_event
-    result = getattr(callback, event)(
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 476, in on_evaluate
-    new_prev_feats = add_previous_label_features(
-  File "/home/vicyesmo/human-value-detection/core/dataset_utils.py", line 435, in add_previous_label_features
-    outputs = model(
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/human-value-detection/core/models.py", line 314, in forward
-    logits = self.classification_head(combined_output)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/vicyesmo/anaconda3/envs/hvd/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 125, in forward
-    return F.linear(input, self.weight, self.bias)
-RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x784 and 912x9)
+2025-04-21 16:39:47,366 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-21 16:39:47,369 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'eval_loss': 0.24476516246795654, 'eval_f1-score': {'Self-direction: thought': 0.04, 'Self-direction: action': 0.29, 'Stimulation': 0.29, 'Hedonism': 0.39, 'Achievement': 0.44, 'Power: dominance': 0.55, 'Power: resources': 0.66, 'Face': 0.37, 'Security: personal': 0.59}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 47.6521, 'eval_samples_per_second': 79.892, 'eval_steps_per_second': 19.978, 'epoch': 1.0}
+2025-04-21 16:47:59,947 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-21 16:52:40,588 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2576, 'grad_norm': 1.932082176208496, 'learning_rate': 1.7311827956989248e-05, 'epoch': 1.34}
+{'eval_loss': 0.23987628519535065, 'eval_f1-score': {'Self-direction: thought': 0.2, 'Self-direction: action': 0.44, 'Stimulation': 0.38, 'Hedonism': 0.51, 'Achievement': 0.57, 'Power: dominance': 0.66, 'Power: resources': 0.6, 'Face': 0.33, 'Security: personal': 0.63}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 47.8866, 'eval_samples_per_second': 79.5, 'eval_steps_per_second': 19.88, 'epoch': 2.0}
+2025-04-21 17:05:42,482 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1841, 'grad_norm': 1.6959131956100464, 'learning_rate': 1.4623655913978497e-05, 'epoch': 2.69}
+{'eval_loss': 0.24947546422481537, 'eval_f1-score': {'Self-direction: thought': 0.26, 'Self-direction: action': 0.4, 'Stimulation': 0.48, 'Hedonism': 0.54, 'Achievement': 0.57, 'Power: dominance': 0.57, 'Power: resources': 0.6, 'Face': 0.43, 'Security: personal': 0.62}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 47.9488, 'eval_samples_per_second': 79.397, 'eval_steps_per_second': 19.855, 'epoch': 3.0}
+2025-04-21 17:18:50,380 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.262945294380188, 'eval_f1-score': {'Self-direction: thought': 0.23, 'Self-direction: action': 0.43, 'Stimulation': 0.46, 'Hedonism': 0.52, 'Achievement': 0.59, 'Power: dominance': 0.64, 'Power: resources': 0.61, 'Face': 0.46, 'Security: personal': 0.63}, 'eval_macro-avg-f1-score': 0.51, 'eval_runtime': 48.115, 'eval_samples_per_second': 79.123, 'eval_steps_per_second': 19.786, 'epoch': 4.0}
+2025-04-21 17:31:55,543 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1358, 'grad_norm': 1.3641184568405151, 'learning_rate': 1.1935483870967743e-05, 'epoch': 4.03}
+{'eval_loss': 0.2891060411930084, 'eval_f1-score': {'Self-direction: thought': 0.22, 'Self-direction: action': 0.44, 'Stimulation': 0.46, 'Hedonism': 0.47, 'Achievement': 0.58, 'Power: dominance': 0.6, 'Power: resources': 0.62, 'Face': 0.46, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.49, 'eval_runtime': 48.1712, 'eval_samples_per_second': 79.031, 'eval_steps_per_second': 19.763, 'epoch': 5.0}
+2025-04-21 17:45:06,008 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0898, 'grad_norm': 1.1426838636398315, 'learning_rate': 9.24731182795699e-06, 'epoch': 5.38}
+{'eval_loss': 0.31422317028045654, 'eval_f1-score': {'Self-direction: thought': 0.27, 'Self-direction: action': 0.45, 'Stimulation': 0.47, 'Hedonism': 0.48, 'Achievement': 0.59, 'Power: dominance': 0.62, 'Power: resources': 0.62, 'Face': 0.44, 'Security: personal': 0.61}, 'eval_macro-avg-f1-score': 0.51, 'eval_runtime': 48.042, 'eval_samples_per_second': 79.243, 'eval_steps_per_second': 19.816, 'epoch': 6.0}
+2025-04-21 17:58:14,411 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0642, 'grad_norm': 1.8376120328903198, 'learning_rate': 6.5591397849462365e-06, 'epoch': 6.72}
+{'eval_loss': 0.34143391251564026, 'eval_f1-score': {'Self-direction: thought': 0.28, 'Self-direction: action': 0.43, 'Stimulation': 0.42, 'Hedonism': 0.51, 'Achievement': 0.59, 'Power: dominance': 0.61, 'Power: resources': 0.58, 'Face': 0.45, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 48.0913, 'eval_samples_per_second': 79.162, 'eval_steps_per_second': 19.796, 'epoch': 7.0}
+2025-04-21 18:11:21,262 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.35531431436538696, 'eval_f1-score': {'Self-direction: thought': 0.26, 'Self-direction: action': 0.41, 'Stimulation': 0.45, 'Hedonism': 0.51, 'Achievement': 0.58, 'Power: dominance': 0.6, 'Power: resources': 0.62, 'Face': 0.45, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 48.2267, 'eval_samples_per_second': 78.94, 'eval_steps_per_second': 19.74, 'epoch': 8.0}
+2025-04-21 18:24:26,657 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 6280.0499, 'train_samples_per_second': 18.954, 'train_steps_per_second': 0.592, 'train_loss': 0.1304799952814656, 'epoch': 8.0}
+2025-04-21 18:24:29,635 - INFO - 
+
+VALIDATION
+2025-04-21 18:24:29,635 - INFO - ==========
+2025-04-21 18:30:03,023 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-21 18:30:03,031 - INFO - Self-direction: thought: 0.23
+2025-04-21 18:30:03,031 - INFO - Self-direction: action: 0.43
+2025-04-21 18:30:03,031 - INFO - Stimulation: 0.46
+2025-04-21 18:30:03,031 - INFO - Hedonism: 0.52
+2025-04-21 18:30:03,031 - INFO - Achievement: 0.59
+2025-04-21 18:30:03,031 - INFO - Power: dominance: 0.64
+2025-04-21 18:30:03,031 - INFO - Power: resources: 0.61
+2025-04-21 18:30:03,031 - INFO - Face: 0.46
+2025-04-21 18:30:03,031 - INFO - Security: personal: 0.63
+2025-04-21 18:30:03,031 - INFO - Macro average: 0.51
+2025-04-21 18:30:03,242 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

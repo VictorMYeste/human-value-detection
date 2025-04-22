@@ -66,14 +66,3 @@ accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../d
 
 echo "===== Topic Detection - BERTopic ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic-v2.txt
-
-###################
-
-# echo "===== 2 prev sentences with label + Token Pruning (TP, IDF = 3.0)  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --token-pruning | tee results/Previous-Sentences-2-TokenPruning-3.0-v2.txt
-
-# echo "===== 2 prev sentences with label + Lex - MFD  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon MFD | tee results/Previous-Sentences-2-Lex-MFD.txt
-
-# echo "===== 2 prev sentences with label + Lex - EmoLex  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon EmoLex | tee results/Previous-Sentences-2-Lex-EmoLex.txt

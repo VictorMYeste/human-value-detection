@@ -433,41 +433,21 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
                 logger.debug(f"Lexicon produced from LIWC 22 software with val_num_cat = {val_num_cat}")
             else:
                 val_lexicon, val_num_cat = load_embeddings(self.lexicon)
+            
             new_lexicon_feats = self.compute_lexicon_features(self.val_df, self.lexicon, val_lexicon, val_num_cat)
             logger.debug(f"New lexicon features for validation: {new_lexicon_feats[:5]}")
-
-            for i in range(len(new_lexicon_feats)):
-                if len(new_lexicon_feats[i]) < len(self.labels):
-                    padding = [0.0] * (len(self.labels) - len(new_lexicon_feats[i]))
-                    new_lexicon_feats[i].extend(padding)  # Pad with zeros if missing
         
         # (B) Dynamically compute linguistic features for validation
         if self.linguistic_features:
             new_ling_feats = self.compute_ling_features(self.val_df)
 
-            for i in range(len(new_ling_feats)):
-                if len(new_ling_feats[i]) < len(self.labels):
-                    padding = [0.0] * (len(self.labels) - len(new_ling_feats[i]))
-                    new_ling_feats[i].extend(padding)  # Pad with zeros if missing
-
-
         # (C) Dynamically compute NER features for validation
         if self.ner_features:
             new_ner_feats = self.compute_ner_features(self.val_df)
 
-            for i in range(len(new_ner_feats)):
-                if len(new_ner_feats[i]) < len(self.labels):
-                    padding = [0.0] * (len(self.labels) - len(new_ner_feats[i]))
-                    new_ner_feats[i].extend(padding)  # Pad with zeros if missing
-
         # (D) Dynamically compute topic features for validation
         if self.topic_detection:
             new_topic_feats = self.compute_topic_features(self.val_df)
-
-            for i in range(len(new_topic_feats)):
-                if len(new_topic_feats[i]) < len(self.labels):
-                    padding = [0.0] * (len(self.labels) - len(new_topic_feats[i]))
-                    new_topic_feats[i].extend(padding)  # Pad with zeros if missing
 
         # (B) Add previous sentences label features
         logger.debug(f"Epoch {state.epoch}: Running validation. Model: {model is not None}")

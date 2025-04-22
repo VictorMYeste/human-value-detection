@@ -1,0 +1,67 @@
+2025-04-20 20:04:40,225 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-20 20:04:40,227 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-20 20:04:46,987 - INFO - Setting random seed to 42
+2025-04-20 20:04:46,988 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal']
+2025-04-20 20:04:46,988 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-20 20:04:47,176 - INFO - Loading lexicon embeddings for: EmoLex
+2025-04-20 20:04:47,278 - INFO - Preparing datasets for training and validation
+2025-04-20 20:04:54,581 - INFO - Arguments validated successfully.
+2025-04-20 20:04:54,582 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-20 20:04:56,064 - INFO - Using CUDA for training.
+2025-04-20 20:04:57,439 - INFO - TRAINING
+2025-04-20 20:04:57,439 - INFO - ========
+2025-04-20 20:04:57,439 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Personal Focus']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: EmoLex
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-20 20:04:57,442 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.23556366562843323, 'eval_f1-score': {'Self-direction: thought': 0.01, 'Self-direction: action': 0.2, 'Stimulation': 0.22, 'Hedonism': 0.42, 'Achievement': 0.54, 'Power: dominance': 0.62, 'Power: resources': 0.63, 'Face': 0.43, 'Security: personal': 0.57}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 42.5933, 'eval_samples_per_second': 89.38, 'eval_steps_per_second': 11.175, 'epoch': 1.0}
+2025-04-20 20:10:04,665 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.2648, 'grad_norm': 1.660918116569519, 'learning_rate': 1.7311827956989248e-05, 'epoch': 1.34}
+{'eval_loss': 0.2334122210741043, 'eval_f1-score': {'Self-direction: thought': 0.08, 'Self-direction: action': 0.4, 'Stimulation': 0.41, 'Hedonism': 0.5, 'Achievement': 0.58, 'Power: dominance': 0.63, 'Power: resources': 0.6, 'Face': 0.36, 'Security: personal': 0.57}, 'eval_macro-avg-f1-score': 0.46, 'eval_runtime': 42.4584, 'eval_samples_per_second': 89.664, 'eval_steps_per_second': 11.211, 'epoch': 2.0}
+{'loss': 0.1967, 'grad_norm': 1.9904961585998535, 'learning_rate': 1.4623655913978497e-05, 'epoch': 2.69}
+{'eval_loss': 0.24714726209640503, 'eval_f1-score': {'Self-direction: thought': 0.24, 'Self-direction: action': 0.43, 'Stimulation': 0.49, 'Hedonism': 0.48, 'Achievement': 0.55, 'Power: dominance': 0.61, 'Power: resources': 0.54, 'Face': 0.46, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.49, 'eval_runtime': 42.4182, 'eval_samples_per_second': 89.749, 'eval_steps_per_second': 11.222, 'epoch': 3.0}
+{'eval_loss': 0.2590126395225525, 'eval_f1-score': {'Self-direction: thought': 0.22, 'Self-direction: action': 0.43, 'Stimulation': 0.46, 'Hedonism': 0.44, 'Achievement': 0.6, 'Power: dominance': 0.64, 'Power: resources': 0.64, 'Face': 0.45, 'Security: personal': 0.61}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 42.3837, 'eval_samples_per_second': 89.822, 'eval_steps_per_second': 11.231, 'epoch': 4.0}
+{'loss': 0.1484, 'grad_norm': 1.491182804107666, 'learning_rate': 1.1935483870967743e-05, 'epoch': 4.03}
+{'eval_loss': 0.2926405370235443, 'eval_f1-score': {'Self-direction: thought': 0.28, 'Self-direction: action': 0.4, 'Stimulation': 0.44, 'Hedonism': 0.48, 'Achievement': 0.58, 'Power: dominance': 0.64, 'Power: resources': 0.65, 'Face': 0.47, 'Security: personal': 0.59}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 42.3286, 'eval_samples_per_second': 89.939, 'eval_steps_per_second': 11.245, 'epoch': 5.0}
+{'loss': 0.1013, 'grad_norm': 1.5443140268325806, 'learning_rate': 9.24731182795699e-06, 'epoch': 5.38}
+{'eval_loss': 0.3081147074699402, 'eval_f1-score': {'Self-direction: thought': 0.29, 'Self-direction: action': 0.43, 'Stimulation': 0.45, 'Hedonism': 0.49, 'Achievement': 0.59, 'Power: dominance': 0.63, 'Power: resources': 0.62, 'Face': 0.48, 'Security: personal': 0.61}, 'eval_macro-avg-f1-score': 0.51, 'eval_runtime': 42.3868, 'eval_samples_per_second': 89.816, 'eval_steps_per_second': 11.23, 'epoch': 6.0}
+{'loss': 0.0731, 'grad_norm': 1.342413067817688, 'learning_rate': 6.5591397849462365e-06, 'epoch': 6.72}
+{'eval_loss': 0.3294507563114166, 'eval_f1-score': {'Self-direction: thought': 0.3, 'Self-direction: action': 0.43, 'Stimulation': 0.43, 'Hedonism': 0.48, 'Achievement': 0.6, 'Power: dominance': 0.61, 'Power: resources': 0.63, 'Face': 0.48, 'Security: personal': 0.59}, 'eval_macro-avg-f1-score': 0.51, 'eval_runtime': 42.3483, 'eval_samples_per_second': 89.897, 'eval_steps_per_second': 11.24, 'epoch': 7.0}
+{'eval_loss': 0.3435658812522888, 'eval_f1-score': {'Self-direction: thought': 0.27, 'Self-direction: action': 0.42, 'Stimulation': 0.44, 'Hedonism': 0.48, 'Achievement': 0.59, 'Power: dominance': 0.63, 'Power: resources': 0.63, 'Face': 0.49, 'Security: personal': 0.59}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 42.4592, 'eval_samples_per_second': 89.662, 'eval_steps_per_second': 11.211, 'epoch': 8.0}
+{'loss': 0.0556, 'grad_norm': 2.9503772258758545, 'learning_rate': 3.870967741935484e-06, 'epoch': 8.06}
+{'eval_loss': 0.35899618268013, 'eval_f1-score': {'Self-direction: thought': 0.3, 'Self-direction: action': 0.42, 'Stimulation': 0.45, 'Hedonism': 0.49, 'Achievement': 0.6, 'Power: dominance': 0.61, 'Power: resources': 0.62, 'Face': 0.48, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.51, 'eval_runtime': 42.38, 'eval_samples_per_second': 89.83, 'eval_steps_per_second': 11.232, 'epoch': 9.0}
+{'loss': 0.0428, 'grad_norm': 2.1780805587768555, 'learning_rate': 1.1827956989247313e-06, 'epoch': 9.41}
+{'eval_loss': 0.3623782992362976, 'eval_f1-score': {'Self-direction: thought': 0.3, 'Self-direction: action': 0.42, 'Stimulation': 0.45, 'Hedonism': 0.47, 'Achievement': 0.59, 'Power: dominance': 0.62, 'Power: resources': 0.61, 'Face': 0.48, 'Security: personal': 0.6}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 42.305, 'eval_samples_per_second': 89.989, 'eval_steps_per_second': 11.252, 'epoch': 10.0}
+{'train_runtime': 3094.5753, 'train_samples_per_second': 38.464, 'train_steps_per_second': 1.202, 'train_loss': 0.12095647832398773, 'epoch': 10.0}
+2025-04-20 20:56:32,571 - INFO - 
+
+VALIDATION
+2025-04-20 20:56:32,571 - INFO - ==========
+2025-04-20 20:57:14,317 - INFO - Self-direction: thought: 0.29
+2025-04-20 20:57:14,317 - INFO - Self-direction: action: 0.43
+2025-04-20 20:57:14,317 - INFO - Stimulation: 0.45
+2025-04-20 20:57:14,317 - INFO - Hedonism: 0.49
+2025-04-20 20:57:14,317 - INFO - Achievement: 0.59
+2025-04-20 20:57:14,317 - INFO - Power: dominance: 0.63
+2025-04-20 20:57:14,317 - INFO - Power: resources: 0.62
+2025-04-20 20:57:14,317 - INFO - Face: 0.48
+2025-04-20 20:57:14,317 - INFO - Security: personal: 0.61
+2025-04-20 20:57:14,317 - INFO - Macro average: 0.51
+2025-04-20 20:57:14,798 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

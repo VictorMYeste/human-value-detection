@@ -357,6 +357,99 @@ MODEL_CONFIG = {
             "people", "person", "individual", "group", "community",
             "leaders", "authorities", "organization", "institutions"
         ]
+    },
+    "social-focus": {
+        "pretrained_model": "microsoft/deberta-base",
+        "labels": [
+            "Security: societal",
+            "Tradition",
+            "Conformity: rules",
+            "Conformity: interpersonal",
+            "Humility",
+            "Benevolence: caring",
+            "Benevolence: dependability",
+            "Universalism: concern",
+            "Universalism: nature",
+            "Universalism: tolerance"
+        ],
+        "custom_stopwords": [
+            # Reporting Verbs (different tenses and forms)
+            "say", "says", "said", "saying",
+            "report", "reports", "reported", "reporting",
+            "state", "states", "stated", "stating",
+            "tell", "tells", "told", "telling",
+            "claim", "claims", "claimed", "claiming",
+            "announce", "announces", "announced", "announcing",
+            "note", "notes", "noted", "noting",
+            "mention", "mentions", "mentioned", "mentioning",
+            "describe", "describes", "described", "describing",
+            "publish", "publishes", "published", "publishing",
+            "reveal", "reveals", "revealed", "revealing",
+            "explain", "explains", "explained", "explaining",
+            "quote", "quotes", "quoted", "quoting",
+            "comment", "comments", "commented", "commenting",
+
+            # Journalistic phrases
+            "allege", "alleges", "alleged", "alleging",
+            "interview", "interviews", "interviewed", "interviewing",
+            "source", "sources",
+            "article", "articles",
+            "media", "journalism", "news", "press",
+            "official", "officials",
+            "reported", "reportedly",
+            "coverage", "broadcast", "headline",
+
+            # General non-moral contextual terms
+            "situation", "case", "problem", "issue", "matter",
+            "people", "person", "individual", "group", "community",
+            "leaders", "authorities", "organization", "institutions"
+        ]
+    },
+    "personal-focus": {
+        "pretrained_model": "microsoft/deberta-base",
+        "labels": [
+            "Self-direction: thought",
+            "Self-direction: action",
+            "Stimulation",
+            "Hedonism",
+            "Achievement",
+            "Power: dominance",
+            "Power: resources",
+            "Face",
+            "Security: personal"
+        ],
+        "custom_stopwords": [
+            # Reporting Verbs (different tenses and forms)
+            "say", "says", "said", "saying",
+            "report", "reports", "reported", "reporting",
+            "state", "states", "stated", "stating",
+            "tell", "tells", "told", "telling",
+            "claim", "claims", "claimed", "claiming",
+            "announce", "announces", "announced", "announcing",
+            "note", "notes", "noted", "noting",
+            "mention", "mentions", "mentioned", "mentioning",
+            "describe", "describes", "described", "describing",
+            "publish", "publishes", "published", "publishing",
+            "reveal", "reveals", "revealed", "revealing",
+            "explain", "explains", "explained", "explaining",
+            "quote", "quotes", "quoted", "quoting",
+            "comment", "comments", "commented", "commenting",
+
+            # Journalistic phrases
+            "allege", "alleges", "alleged", "alleging",
+            "interview", "interviews", "interviewed", "interviewing",
+            "source", "sources",
+            "article", "articles",
+            "media", "journalism", "news", "press",
+            "official", "officials",
+            "reported", "reportedly",
+            "coverage", "broadcast", "headline",
+
+            # General non-moral contextual terms
+            "situation", "case", "problem", "issue", "matter",
+            "people", "person", "individual", "group", "community",
+            "leaders", "authorities", "organization", "institutions"
+        ]
     }
 }
 

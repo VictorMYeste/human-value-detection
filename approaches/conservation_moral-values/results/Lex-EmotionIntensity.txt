@@ -1,0 +1,61 @@
+2025-04-22 20:00:10,678 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-22 20:00:10,682 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-22 20:00:17,476 - INFO - Setting random seed to 42
+2025-04-22 20:00:17,477 - INFO - Running training for labels: ['Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility']
+2025-04-22 20:00:17,477 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-22 20:00:17,663 - INFO - Loading lexicon embeddings for: EmotionIntensity
+2025-04-22 20:00:17,673 - INFO - Preparing datasets for training and validation
+2025-04-22 20:00:23,560 - INFO - Arguments validated successfully.
+2025-04-22 20:00:23,562 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-22 20:00:25,563 - INFO - Using CUDA for training.
+2025-04-22 20:00:26,857 - INFO - TRAINING
+2025-04-22 20:00:26,858 - INFO - ========
+2025-04-22 20:00:26,858 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Conservation']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: EmotionIntensity
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 8
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-22 20:00:26,860 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.21690914034843445, 'eval_f1-score': {'Face': 0.46, 'Security: personal': 0.54, 'Security: societal': 0.75, 'Tradition': 0.69, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.09, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.47, 'eval_runtime': 35.3399, 'eval_samples_per_second': 90.238, 'eval_steps_per_second': 11.29, 'epoch': 1.0}
+2025-04-22 20:04:04,613 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.231, 'grad_norm': 2.2167739868164062, 'learning_rate': 1.6575342465753425e-05, 'epoch': 1.71}
+{'eval_loss': 0.22589294612407684, 'eval_f1-score': {'Face': 0.4, 'Security: personal': 0.56, 'Security: societal': 0.75, 'Tradition': 0.67, 'Conformity: rules': 0.76, 'Conformity: interpersonal': 0.37, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 35.0897, 'eval_samples_per_second': 90.881, 'eval_steps_per_second': 11.371, 'epoch': 2.0}
+{'eval_loss': 0.23498663306236267, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.59, 'Security: societal': 0.78, 'Tradition': 0.7, 'Conformity: rules': 0.73, 'Conformity: interpersonal': 0.35, 'Humility': 0.04}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 35.5587, 'eval_samples_per_second': 89.683, 'eval_steps_per_second': 11.221, 'epoch': 3.0}
+{'loss': 0.1303, 'grad_norm': 1.809983253479004, 'learning_rate': 1.3150684931506849e-05, 'epoch': 3.42}
+{'eval_loss': 0.25534722208976746, 'eval_f1-score': {'Face': 0.46, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.71, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.38, 'Humility': 0.15}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.508, 'eval_samples_per_second': 89.811, 'eval_steps_per_second': 11.237, 'epoch': 4.0}
+{'eval_loss': 0.2872779667377472, 'eval_f1-score': {'Face': 0.51, 'Security: personal': 0.59, 'Security: societal': 0.77, 'Tradition': 0.71, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.32, 'Humility': 0.11}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.4625, 'eval_samples_per_second': 89.926, 'eval_steps_per_second': 11.251, 'epoch': 5.0}
+{'loss': 0.0763, 'grad_norm': 0.8239306807518005, 'learning_rate': 9.726027397260275e-06, 'epoch': 5.13}
+{'eval_loss': 0.3097274899482727, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.59, 'Security: societal': 0.76, 'Tradition': 0.7, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.37, 'Humility': 0.15}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.532, 'eval_samples_per_second': 89.75, 'eval_steps_per_second': 11.229, 'epoch': 6.0}
+{'loss': 0.0422, 'grad_norm': 2.6834068298339844, 'learning_rate': 6.301369863013699e-06, 'epoch': 6.84}
+{'eval_loss': 0.32873356342315674, 'eval_f1-score': {'Face': 0.5, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.72, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.29, 'Humility': 0.16}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.4955, 'eval_samples_per_second': 89.842, 'eval_steps_per_second': 11.241, 'epoch': 7.0}
+{'eval_loss': 0.34305569529533386, 'eval_f1-score': {'Face': 0.5, 'Security: personal': 0.57, 'Security: societal': 0.76, 'Tradition': 0.72, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.3, 'Humility': 0.16}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.4842, 'eval_samples_per_second': 89.871, 'eval_steps_per_second': 11.244, 'epoch': 8.0}
+{'train_runtime': 1757.0358, 'train_samples_per_second': 53.237, 'train_steps_per_second': 1.662, 'train_loss': 0.10704947047763401, 'epoch': 8.0}
+2025-04-22 20:29:44,323 - INFO - 
+
+VALIDATION
+2025-04-22 20:29:44,323 - INFO - ==========
+2025-04-22 20:30:19,708 - INFO - Face: 0.46
+2025-04-22 20:30:19,708 - INFO - Security: personal: 0.58
+2025-04-22 20:30:19,708 - INFO - Security: societal: 0.77
+2025-04-22 20:30:19,708 - INFO - Tradition: 0.71
+2025-04-22 20:30:19,708 - INFO - Conformity: rules: 0.74
+2025-04-22 20:30:19,708 - INFO - Conformity: interpersonal: 0.38
+2025-04-22 20:30:19,708 - INFO - Humility: 0.15
+2025-04-22 20:30:19,708 - INFO - Macro average: 0.54
+2025-04-22 20:30:20,191 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

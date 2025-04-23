@@ -18,4 +18,6 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-a", "--augment-data", action="store_true", help="Apply data augmentation through paraphrasing")
     cli.add_argument("-td", "--topic-detection", choices=["bertopic", "lda", "nmf", None], default=None, help="Choose topic detection method: BERTopic, LDA, NMF, or None")
     cli.add_argument("-tp", "--token-pruning", action="store_true", help="Enable IDF-based token pruning step before tokenization")
+    cli.add_argument("-c", "--customstopwords", action="store_true", help="Enable custom stopwords assigned to the model group")
+    cli.add_argument("-r", "--residualblock", action="store_true", help="Use multilayer design instead of single layer and add a residual block")
     return cli.parse_args()

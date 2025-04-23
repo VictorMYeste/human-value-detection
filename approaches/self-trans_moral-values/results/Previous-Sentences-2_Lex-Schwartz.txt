@@ -1,0 +1,77 @@
+2025-04-23 08:08:34,547 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-23 08:08:34,547 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-23 08:08:41,457 - INFO - Setting random seed to 42
+2025-04-23 08:08:41,458 - INFO - Running training for labels: ['Humility', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+2025-04-23 08:08:41,458 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-23 08:08:41,647 - INFO - Loading lexicon embeddings for: Schwartz
+2025-04-23 08:08:41,647 - INFO - Preparing datasets for training and validation
+2025-04-23 08:08:59,543 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2025-04-23 08:09:07,686 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2025-04-23 08:09:07,820 - INFO - Arguments validated successfully.
+2025-04-23 08:09:07,822 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-04-23 08:09:07,822 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-23 08:09:10,556 - INFO - Using CUDA for training.
+2025-04-23 08:09:11,867 - INFO - TRAINING
+2025-04-23 08:09:11,867 - INFO - ========
+2025-04-23 08:09:11,867 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Self-Transcendence']
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: Yes
+Using lexicon: Schwartz
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-23 08:09:11,870 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-23 08:09:11,874 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'eval_loss': 0.27960583567619324, 'eval_f1-score': {'Humility': 0, 'Benevolence: caring': 0.22, 'Benevolence: dependability': 0.5, 'Universalism: concern': 0.68, 'Universalism: nature': 0.89, 'Universalism: tolerance': 0.37}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 9.3873, 'eval_samples_per_second': 189.405, 'eval_steps_per_second': 47.405, 'epoch': 1.0}
+2025-04-23 08:12:56,369 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-04-23 08:17:47,887 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.26894137263298035, 'eval_f1-score': {'Humility': 0, 'Benevolence: caring': 0.53, 'Benevolence: dependability': 0.5, 'Universalism: concern': 0.66, 'Universalism: nature': 0.87, 'Universalism: tolerance': 0.4}, 'eval_macro-avg-f1-score': 0.49, 'eval_runtime': 9.5697, 'eval_samples_per_second': 185.794, 'eval_steps_per_second': 46.501, 'epoch': 2.0}
+2025-04-23 08:21:32,211 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-04-23 08:26:48,184 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2346, 'grad_norm': 2.791278600692749, 'learning_rate': 1.4117647058823532e-05, 'epoch': 2.94}
+{'eval_loss': 0.2758420407772064, 'eval_f1-score': {'Humility': 0.05, 'Benevolence: caring': 0.5, 'Benevolence: dependability': 0.53, 'Universalism: concern': 0.69, 'Universalism: nature': 0.89, 'Universalism: tolerance': 0.44}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 9.649, 'eval_samples_per_second': 184.268, 'eval_steps_per_second': 46.119, 'epoch': 3.0}
+2025-04-23 08:35:53,270 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.3253423869609833, 'eval_f1-score': {'Humility': 0.33, 'Benevolence: caring': 0.52, 'Benevolence: dependability': 0.54, 'Universalism: concern': 0.61, 'Universalism: nature': 0.89, 'Universalism: tolerance': 0.49}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 9.6443, 'eval_samples_per_second': 184.357, 'eval_steps_per_second': 46.141, 'epoch': 4.0}
+2025-04-23 08:44:57,640 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.3471856713294983, 'eval_f1-score': {'Humility': 0.2, 'Benevolence: caring': 0.49, 'Benevolence: dependability': 0.55, 'Universalism: concern': 0.64, 'Universalism: nature': 0.9, 'Universalism: tolerance': 0.5}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 9.6459, 'eval_samples_per_second': 184.328, 'eval_steps_per_second': 46.134, 'epoch': 5.0}
+2025-04-23 08:54:01,478 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0922, 'grad_norm': 3.2053420543670654, 'learning_rate': 8.23529411764706e-06, 'epoch': 5.88}
+{'eval_loss': 0.3694588541984558, 'eval_f1-score': {'Humility': 0.29, 'Benevolence: caring': 0.51, 'Benevolence: dependability': 0.53, 'Universalism: concern': 0.68, 'Universalism: nature': 0.89, 'Universalism: tolerance': 0.48}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 9.6397, 'eval_samples_per_second': 184.446, 'eval_steps_per_second': 46.163, 'epoch': 6.0}
+2025-04-23 09:03:06,107 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.3956497013568878, 'eval_f1-score': {'Humility': 0.34, 'Benevolence: caring': 0.5, 'Benevolence: dependability': 0.57, 'Universalism: concern': 0.69, 'Universalism: nature': 0.89, 'Universalism: tolerance': 0.47}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 9.6352, 'eval_samples_per_second': 184.531, 'eval_steps_per_second': 46.185, 'epoch': 6.99}
+2025-04-23 09:12:08,289 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.4165983498096466, 'eval_f1-score': {'Humility': 0.34, 'Benevolence: caring': 0.48, 'Benevolence: dependability': 0.57, 'Universalism: concern': 0.68, 'Universalism: nature': 0.9, 'Universalism: tolerance': 0.49}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 9.6543, 'eval_samples_per_second': 184.166, 'eval_steps_per_second': 46.093, 'epoch': 8.0}
+2025-04-23 09:21:12,258 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0371, 'grad_norm': 2.716273307800293, 'learning_rate': 2.3529411764705885e-06, 'epoch': 8.82}
+{'eval_loss': 0.42954400181770325, 'eval_f1-score': {'Humility': 0.36, 'Benevolence: caring': 0.48, 'Benevolence: dependability': 0.56, 'Universalism: concern': 0.68, 'Universalism: nature': 0.9, 'Universalism: tolerance': 0.47}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 9.65, 'eval_samples_per_second': 184.249, 'eval_steps_per_second': 46.114, 'epoch': 9.0}
+2025-04-23 09:30:20,163 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'eval_loss': 0.43410736322402954, 'eval_f1-score': {'Humility': 0.36, 'Benevolence: caring': 0.49, 'Benevolence: dependability': 0.56, 'Universalism: concern': 0.69, 'Universalism: nature': 0.9, 'Universalism: tolerance': 0.47}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 9.6273, 'eval_samples_per_second': 184.683, 'eval_steps_per_second': 46.223, 'epoch': 9.99}
+2025-04-23 09:39:32,735 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 5431.1021, 'train_samples_per_second': 10.022, 'train_steps_per_second': 0.313, 'train_loss': 0.11018699169158935, 'epoch': 9.99}
+2025-04-23 09:39:44,084 - INFO - 
+
+VALIDATION
+2025-04-23 09:39:44,085 - INFO - ==========
+2025-04-23 09:45:12,096 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-04-23 09:45:12,099 - INFO - Humility: 0.34
+2025-04-23 09:45:12,099 - INFO - Benevolence: caring: 0.50
+2025-04-23 09:45:12,099 - INFO - Benevolence: dependability: 0.57
+2025-04-23 09:45:12,099 - INFO - Universalism: concern: 0.69
+2025-04-23 09:45:12,099 - INFO - Universalism: nature: 0.89
+2025-04-23 09:45:12,099 - INFO - Universalism: tolerance: 0.47
+2025-04-23 09:45:12,099 - INFO - Macro average: 0.58
+2025-04-23 09:45:12,272 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

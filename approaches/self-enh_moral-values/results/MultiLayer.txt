@@ -1,0 +1,63 @@
+2025-04-23 17:12:00,991 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-23 17:12:00,993 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-23 17:12:06,488 - INFO - Setting random seed to 42
+2025-04-23 17:12:06,488 - INFO - Running training for labels: ['Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face']
+2025-04-23 17:12:06,488 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-23 17:12:06,679 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-23 17:12:06,679 - INFO - Preparing datasets for training and validation
+2025-04-23 17:12:10,544 - INFO - Arguments validated successfully.
+2025-04-23 17:12:10,546 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-23 17:12:11,751 - INFO - Using CUDA for training.
+2025-04-23 17:12:13,070 - INFO - TRAINING
+2025-04-23 17:12:13,070 - INFO - ========
+2025-04-23 17:12:13,070 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Self-Enhancement']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: Yes
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-04-23 17:12:13,073 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.31761008501052856, 'eval_f1-score': {'Hedonism': 0.48, 'Achievement': 0.71, 'Power: dominance': 0.71, 'Power: resources': 0.69, 'Face': 0.27}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 29.2592, 'eval_samples_per_second': 89.75, 'eval_steps_per_second': 11.244, 'epoch': 1.0}
+2025-04-23 17:15:38,352 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.3664, 'grad_norm': 2.6503078937530518, 'learning_rate': 1.6031746031746033e-05, 'epoch': 1.98}
+{'eval_loss': 0.30360084772109985, 'eval_f1-score': {'Hedonism': 0.63, 'Achievement': 0.67, 'Power: dominance': 0.74, 'Power: resources': 0.72, 'Face': 0.47}, 'eval_macro-avg-f1-score': 0.65, 'eval_runtime': 29.3208, 'eval_samples_per_second': 89.561, 'eval_steps_per_second': 11.221, 'epoch': 2.0}
+2025-04-23 17:19:04,049 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.306829035282135, 'eval_f1-score': {'Hedonism': 0.63, 'Achievement': 0.69, 'Power: dominance': 0.75, 'Power: resources': 0.71, 'Face': 0.54}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.3564, 'eval_samples_per_second': 89.453, 'eval_steps_per_second': 11.207, 'epoch': 3.0}
+{'loss': 0.2333, 'grad_norm': 3.0730953216552734, 'learning_rate': 1.2063492063492064e-05, 'epoch': 3.96}
+{'eval_loss': 0.31675463914871216, 'eval_f1-score': {'Hedonism': 0.63, 'Achievement': 0.68, 'Power: dominance': 0.75, 'Power: resources': 0.71, 'Face': 0.52}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.3205, 'eval_samples_per_second': 89.562, 'eval_steps_per_second': 11.221, 'epoch': 4.0}
+{'eval_loss': 0.33322542905807495, 'eval_f1-score': {'Hedonism': 0.63, 'Achievement': 0.71, 'Power: dominance': 0.74, 'Power: resources': 0.69, 'Face': 0.54}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.3066, 'eval_samples_per_second': 89.604, 'eval_steps_per_second': 11.226, 'epoch': 5.0}
+{'loss': 0.1658, 'grad_norm': 7.004264831542969, 'learning_rate': 8.095238095238097e-06, 'epoch': 5.95}
+{'eval_loss': 0.3442777395248413, 'eval_f1-score': {'Hedonism': 0.64, 'Achievement': 0.7, 'Power: dominance': 0.74, 'Power: resources': 0.72, 'Face': 0.53}, 'eval_macro-avg-f1-score': 0.67, 'eval_runtime': 29.3397, 'eval_samples_per_second': 89.503, 'eval_steps_per_second': 11.213, 'epoch': 6.0}
+{'eval_loss': 0.35275909304618835, 'eval_f1-score': {'Hedonism': 0.62, 'Achievement': 0.7, 'Power: dominance': 0.74, 'Power: resources': 0.7, 'Face': 0.54}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.2994, 'eval_samples_per_second': 89.626, 'eval_steps_per_second': 11.229, 'epoch': 7.0}
+{'loss': 0.1306, 'grad_norm': 1.5479505062103271, 'learning_rate': 4.126984126984127e-06, 'epoch': 7.93}
+{'eval_loss': 0.35431230068206787, 'eval_f1-score': {'Hedonism': 0.63, 'Achievement': 0.71, 'Power: dominance': 0.74, 'Power: resources': 0.7, 'Face': 0.53}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.2885, 'eval_samples_per_second': 89.66, 'eval_steps_per_second': 11.233, 'epoch': 8.0}
+{'eval_loss': 0.3640134036540985, 'eval_f1-score': {'Hedonism': 0.62, 'Achievement': 0.69, 'Power: dominance': 0.74, 'Power: resources': 0.71, 'Face': 0.53}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.2851, 'eval_samples_per_second': 89.67, 'eval_steps_per_second': 11.234, 'epoch': 9.0}
+{'loss': 0.1121, 'grad_norm': 1.404902458190918, 'learning_rate': 1.5873015873015874e-07, 'epoch': 9.91}
+{'eval_loss': 0.36104950308799744, 'eval_f1-score': {'Hedonism': 0.61, 'Achievement': 0.7, 'Power: dominance': 0.74, 'Power: resources': 0.71, 'Face': 0.52}, 'eval_macro-avg-f1-score': 0.66, 'eval_runtime': 29.208, 'eval_samples_per_second': 89.907, 'eval_steps_per_second': 11.264, 'epoch': 9.99}
+{'train_runtime': 2083.2439, 'train_samples_per_second': 38.733, 'train_steps_per_second': 1.21, 'train_loss': 0.2008874225238013, 'epoch': 9.99}
+2025-04-23 17:46:57,364 - INFO - 
+
+VALIDATION
+2025-04-23 17:46:57,364 - INFO - ==========
+2025-04-23 17:47:26,179 - INFO - Hedonism: 0.64
+2025-04-23 17:47:26,179 - INFO - Achievement: 0.70
+2025-04-23 17:47:26,179 - INFO - Power: dominance: 0.74
+2025-04-23 17:47:26,179 - INFO - Power: resources: 0.72
+2025-04-23 17:47:26,179 - INFO - Face: 0.53
+2025-04-23 17:47:26,179 - INFO - Macro average: 0.67
+2025-04-23 17:47:26,356 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

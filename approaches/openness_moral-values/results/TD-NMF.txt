@@ -1,0 +1,57 @@
+2025-04-21 15:14:57,364 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-21 15:14:57,364 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-21 15:15:02,906 - INFO - Setting random seed to 42
+2025-04-21 15:15:02,907 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism']
+2025-04-21 15:15:02,907 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-21 15:15:03,119 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-21 15:15:03,119 - INFO - Preparing datasets for training and validation
+2025-04-21 15:15:16,573 - INFO - Applying nmf for topic modeling.
+2025-04-21 15:15:24,613 - INFO - Applying nmf for topic modeling.
+2025-04-21 15:15:24,718 - INFO - Arguments validated successfully.
+2025-04-21 15:15:24,719 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-21 15:15:26,371 - INFO - Using CUDA for training.
+2025-04-21 15:15:27,690 - INFO - TRAINING
+2025-04-21 15:15:27,690 - INFO - ========
+2025-04-21 15:15:27,690 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: ['Openness to Change']
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-04-21 15:15:27,693 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.3968123197555542, 'eval_f1-score': {'Self-direction: thought': 0.08, 'Self-direction: action': 0.65, 'Stimulation': 0.7, 'Hedonism': 0.58}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 5.5159, 'eval_samples_per_second': 208.671, 'eval_steps_per_second': 26.107, 'epoch': 0.99}
+2025-04-21 15:16:43,892 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'eval_loss': 0.3826371133327484, 'eval_f1-score': {'Self-direction: thought': 0.31, 'Self-direction: action': 0.7, 'Stimulation': 0.62, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 5.6217, 'eval_samples_per_second': 204.744, 'eval_steps_per_second': 25.615, 'epoch': 2.0}
+2025-04-21 15:17:59,607 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.41563311219215393, 'eval_f1-score': {'Self-direction: thought': 0.3, 'Self-direction: action': 0.72, 'Stimulation': 0.63, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 5.6491, 'eval_samples_per_second': 203.749, 'eval_steps_per_second': 25.491, 'epoch': 3.0}
+{'eval_loss': 0.466470330953598, 'eval_f1-score': {'Self-direction: thought': 0.38, 'Self-direction: action': 0.7, 'Stimulation': 0.65, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 5.6481, 'eval_samples_per_second': 203.786, 'eval_steps_per_second': 25.495, 'epoch': 4.0}
+{'loss': 0.3029, 'grad_norm': 2.4231677055358887, 'learning_rate': 1.1228070175438597e-05, 'epoch': 4.36}
+{'eval_loss': 0.5558971166610718, 'eval_f1-score': {'Self-direction: thought': 0.37, 'Self-direction: action': 0.71, 'Stimulation': 0.61, 'Hedonism': 0.63}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 5.6298, 'eval_samples_per_second': 204.448, 'eval_steps_per_second': 25.578, 'epoch': 4.99}
+{'eval_loss': 0.5818164944648743, 'eval_f1-score': {'Self-direction: thought': 0.35, 'Self-direction: action': 0.7, 'Stimulation': 0.67, 'Hedonism': 0.64}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.6224, 'eval_samples_per_second': 204.718, 'eval_steps_per_second': 25.612, 'epoch': 6.0}
+{'eval_loss': 0.6932846903800964, 'eval_f1-score': {'Self-direction: thought': 0.34, 'Self-direction: action': 0.71, 'Stimulation': 0.66, 'Hedonism': 0.63}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 5.6409, 'eval_samples_per_second': 204.045, 'eval_steps_per_second': 25.528, 'epoch': 7.0}
+{'eval_loss': 0.7237421274185181, 'eval_f1-score': {'Self-direction: thought': 0.35, 'Self-direction: action': 0.71, 'Stimulation': 0.66, 'Hedonism': 0.64}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.637, 'eval_samples_per_second': 204.185, 'eval_steps_per_second': 25.545, 'epoch': 8.0}
+{'train_runtime': 619.0236, 'train_samples_per_second': 59.287, 'train_steps_per_second': 1.842, 'train_loss': 0.1947117641340933, 'epoch': 8.0}
+2025-04-21 15:25:47,765 - INFO - 
+
+VALIDATION
+2025-04-21 15:25:47,765 - INFO - ==========
+2025-04-21 15:25:53,353 - INFO - Self-direction: thought: 0.38
+2025-04-21 15:25:53,353 - INFO - Self-direction: action: 0.70
+2025-04-21 15:25:53,353 - INFO - Stimulation: 0.65
+2025-04-21 15:25:53,353 - INFO - Hedonism: 0.67
+2025-04-21 15:25:53,353 - INFO - Macro average: 0.60
+2025-04-21 15:25:53,393 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

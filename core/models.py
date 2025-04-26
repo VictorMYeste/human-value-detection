@@ -81,6 +81,7 @@ class EnhancedDebertaModel(nn.Module):
             ling_feature_dim=0,
             ner_feature_dim=0,
             multilayer = False,
+            residualblock = False,
             num_groups=8,
             topic_feature_dim=0,
             previous_sentences=False
@@ -150,6 +151,7 @@ class EnhancedDebertaModel(nn.Module):
         
         # Multi-layer processing for transformer embeddings
         self.multilayer = multilayer
+        self.residualblock = residualblock
         if multilayer:
             self.text_embedding_layer = nn.Sequential(
                 nn.Linear(self.transformer.config.hidden_size, 512),
@@ -161,7 +163,8 @@ class EnhancedDebertaModel(nn.Module):
                 nn.ReLU()
             )
             
-            # self.text_embedding_layer = ResidualBlock(self.transformer.config.hidden_size, 256)
+            if residualblock:
+                self.text_embedding_layer = ResidualBlock(self.transformer.config.hidden_size, 256)
             hidden_size = 256
         else:
             hidden_size = self.transformer.config.hidden_size

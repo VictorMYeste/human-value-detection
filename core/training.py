@@ -104,6 +104,7 @@ def train(
         linguistic_features: bool = False,
         ner_features: bool = False,
         multilayer: bool = False,
+        residualblock: bool = False,
         custom_stopwords: list[str] = [],
         augment_data: bool = False,
         topic_detection: str = None,
@@ -170,6 +171,7 @@ def train(
         num_categories=num_categories,
         ner_feature_dim=ner_feature_dim,
         multilayer=multilayer,
+        residualblock=residualblock,
         topic_feature_dim=discovered_topics,
         previous_sentences=previous_sentences
     )
@@ -201,6 +203,7 @@ def train(
         f"Gradient accumulation steps: {gradient_accumulation_steps}\n"
         f"Early stopping patience: {early_stopping_patience}\n"
         f"Multilayer: {'Yes' if multilayer else 'No'}\n"
+        f"ResidualBlock: {'Yes' if residualblock else 'No'}\n"
         f"Previous sentences used: {'Yes' if previous_sentences else 'No'}\n"
         f"Using lexicon: {lexicon if lexicon else 'No'}\n"
         f"Adding linguistic features: {'Yes' if linguistic_features else 'No'}\n"

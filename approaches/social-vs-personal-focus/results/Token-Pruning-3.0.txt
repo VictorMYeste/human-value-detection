@@ -1,0 +1,78 @@
+2025-04-24 12:40:10,324 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-24 12:40:10,326 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-24 12:40:17,254 - INFO - Setting random seed to 42
+2025-04-24 12:40:17,255 - INFO - Running training for labels: ['Social Focus', 'Personal Focus']
+2025-04-24 12:40:17,255 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-24 12:40:17,445 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-24 12:40:17,445 - INFO - Preparing datasets for training and validation
+2025-04-24 12:40:17,643 - INFO - Pruning tokens in dataset '../../data/training-english/' (threshold=3.0)
+2025-04-24 12:40:17,643 - INFO - Building IDF map from unpruned training text...
+2025-04-24 12:40:18,343 - INFO - Token pruning (training): Average token count before pruning: 20.96
+2025-04-24 12:40:18,641 - INFO - Token pruning (training): Average token count after pruning: 15.49 (Reduction: 5.47 tokens, 26.1% reduction)
+2025-04-24 12:40:31,298 - INFO - Pruning tokens in dataset '../../data/validation-english/' (threshold=3.0)
+2025-04-24 12:40:31,314 - INFO - Token pruning (validation): Average token count before pruning: 20.86
+2025-04-24 12:40:31,415 - INFO - Token pruning (validation): Average token count after pruning: 15.43 (Reduction: 5.43 tokens, 26.0% reduction)
+2025-04-24 12:40:35,382 - INFO - Arguments validated successfully.
+2025-04-24 12:40:35,388 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-24 12:40:37,101 - INFO - Using CUDA for training.
+2025-04-24 12:40:38,375 - INFO - TRAINING
+2025-04-24 12:40:38,375 - INFO - ========
+2025-04-24 12:40:38,375 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: Yes
+
+2025-04-24 12:40:38,378 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.5398, 'grad_norm': 3.6865200996398926, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.4949, 'grad_norm': 2.3416404724121094, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.4879617691040039, 'eval_f1-score': {'Social Focus': 0.56, 'Personal Focus': 0.49}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 134.4873, 'eval_samples_per_second': 110.821, 'eval_steps_per_second': 13.853, 'epoch': 1.0}
+2025-04-24 13:05:40,256 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.4888, 'grad_norm': 3.0767629146575928, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.436, 'grad_norm': 2.698549747467041, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.4289, 'grad_norm': 3.5966732501983643, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.4877654016017914, 'eval_f1-score': {'Social Focus': 0.6, 'Personal Focus': 0.48}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 134.854, 'eval_samples_per_second': 110.519, 'eval_steps_per_second': 13.815, 'epoch': 2.0}
+2025-04-24 13:30:37,339 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.3972, 'grad_norm': 5.701009273529053, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.3446, 'grad_norm': 4.235955238342285, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.345, 'grad_norm': 4.860299587249756, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.536063015460968, 'eval_f1-score': {'Social Focus': 0.57, 'Personal Focus': 0.49}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 134.9023, 'eval_samples_per_second': 110.48, 'eval_steps_per_second': 13.81, 'epoch': 3.0}
+{'loss': 0.2783, 'grad_norm': 8.82141399383545, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.247, 'grad_norm': 7.800550937652588, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.253, 'grad_norm': 8.312722206115723, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.6298031210899353, 'eval_f1-score': {'Social Focus': 0.59, 'Personal Focus': 0.48}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 134.9053, 'eval_samples_per_second': 110.477, 'eval_steps_per_second': 13.81, 'epoch': 4.0}
+{'loss': 0.187, 'grad_norm': 7.363187313079834, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1713, 'grad_norm': 7.811955451965332, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.7873386144638062, 'eval_f1-score': {'Social Focus': 0.55, 'Personal Focus': 0.49}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 135.4331, 'eval_samples_per_second': 110.047, 'eval_steps_per_second': 13.756, 'epoch': 5.0}
+{'loss': 0.1759, 'grad_norm': 4.8886003494262695, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.1158, 'grad_norm': 12.695289611816406, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.1207, 'grad_norm': 9.294227600097656, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.9030472040176392, 'eval_f1-score': {'Social Focus': 0.56, 'Personal Focus': 0.49}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 135.3051, 'eval_samples_per_second': 110.151, 'eval_steps_per_second': 13.769, 'epoch': 6.0}
+{'loss': 0.1147, 'grad_norm': 8.73800277709961, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0831, 'grad_norm': 7.104671955108643, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0869, 'grad_norm': 7.096949577331543, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 1.1306227445602417, 'eval_f1-score': {'Social Focus': 0.54, 'Personal Focus': 0.5}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 135.0695, 'eval_samples_per_second': 110.343, 'eval_steps_per_second': 13.793, 'epoch': 7.0}
+{'train_runtime': 10495.4576, 'train_samples_per_second': 42.645, 'train_steps_per_second': 1.332, 'train_loss': 0.27345604361315057, 'epoch': 7.0}
+2025-04-24 15:35:34,281 - INFO - 
+
+VALIDATION
+2025-04-24 15:35:34,281 - INFO - ==========
+2025-04-24 15:37:49,264 - INFO - Social Focus: 0.57
+2025-04-24 15:37:49,264 - INFO - Personal Focus: 0.49
+2025-04-24 15:37:49,264 - INFO - Macro average: 0.53
+2025-04-24 15:37:49,380 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

@@ -1,22 +1,22 @@
-2025-04-08 20:30:56,833 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-08 20:30:56,834 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-08 20:31:02,479 - INFO - Setting random seed to 42
-2025-04-08 20:31:02,480 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
-2025-04-08 20:31:02,480 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-04-08 20:31:02,670 - INFO - Loading lexicon embeddings for: EmotionIntensity
-2025-04-08 20:31:02,683 - INFO - Preparing datasets for training and validation
-2025-04-08 20:31:07,540 - INFO - Loading en_core_web_sm for extra features
-2025-04-08 20:31:07,917 - INFO - Adding NER embeddings
-2025-04-08 21:00:26,519 - INFO - Loading en_core_web_sm for extra features
-2025-04-08 21:00:26,865 - INFO - Adding NER embeddings
-2025-04-08 21:10:20,929 - INFO - Arguments validated successfully.
-2025-04-08 21:10:20,931 - INFO - Clearing old checkpoints in models/checkpoints
-2025-04-08 21:10:22,577 - INFO - Using CUDA for training.
-2025-04-08 21:10:23,874 - INFO - TRAINING
-2025-04-08 21:10:23,874 - INFO - ========
-2025-04-08 21:10:23,874 - INFO - Training configuration:
+2025-04-24 12:23:07,229 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-24 12:23:07,232 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-24 12:23:15,479 - INFO - Setting random seed to 42
+2025-04-24 12:23:15,505 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-04-24 12:23:15,505 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-24 12:23:15,691 - INFO - Loading lexicon embeddings for: EmotionIntensity
+2025-04-24 12:23:15,703 - INFO - Preparing datasets for training and validation
+2025-04-24 12:23:20,247 - INFO - Loading en_core_web_sm for extra features
+2025-04-24 12:23:20,641 - INFO - Adding NER embeddings
+2025-04-24 12:49:40,737 - INFO - Loading en_core_web_sm for extra features
+2025-04-24 12:49:41,063 - INFO - Adding NER embeddings
+2025-04-24 12:58:35,754 - INFO - Arguments validated successfully.
+2025-04-24 12:58:35,760 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-24 12:58:37,117 - INFO - Using CUDA for training.
+2025-04-24 12:58:38,404 - INFO - TRAINING
+2025-04-24 12:58:38,404 - INFO - ========
+2025-04-24 12:58:38,405 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
-Model name: None
+Model name: NER_Lex-EmotionIntensity
 Filter labels: ['Presence']
 Batch size: 4
 Number of epochs: 10
@@ -34,32 +34,35 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: No
 
-2025-04-08 21:10:23,877 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-{'loss': 0.4899, 'grad_norm': 4.114436149597168, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
-{'eval_loss': 0.43863505125045776, 'eval_f1-score': {'Openness to Change': 0.38, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 85.2217, 'eval_samples_per_second': 89.179, 'eval_steps_per_second': 11.147, 'epoch': 1.0}
-2025-04-08 21:20:16,523 - INFO - Skipping evaluation for warm-up phase (epoch 0).
-{'loss': 0.4146, 'grad_norm': 3.4892170429229736, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
-{'eval_loss': 0.4541760981082916, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 85.3073, 'eval_samples_per_second': 89.09, 'eval_steps_per_second': 11.136, 'epoch': 2.0}
-2025-04-08 21:30:12,975 - INFO - Skipping evaluation for warm-up phase (epoch 1).
-{'loss': 0.3694, 'grad_norm': 9.01817512512207, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
-{'loss': 0.2831, 'grad_norm': 3.4277727603912354, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
-{'eval_loss': 0.5031369924545288, 'eval_f1-score': {'Openness to Change': 0.48, 'Conservation': 0.69}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 85.3688, 'eval_samples_per_second': 89.026, 'eval_steps_per_second': 11.128, 'epoch': 3.0}
-{'loss': 0.2208, 'grad_norm': 5.011105060577393, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
-{'eval_loss': 0.6406420469284058, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.63}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 85.2974, 'eval_samples_per_second': 89.1, 'eval_steps_per_second': 11.138, 'epoch': 4.0}
-{'loss': 0.1743, 'grad_norm': 3.6021173000335693, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
-{'loss': 0.1219, 'grad_norm': 5.138214588165283, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
-{'eval_loss': 0.7625734806060791, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 85.6009, 'eval_samples_per_second': 88.784, 'eval_steps_per_second': 11.098, 'epoch': 5.0}
-{'loss': 0.0915, 'grad_norm': 5.3330912590026855, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
-{'eval_loss': 0.9434636235237122, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.64}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 85.3212, 'eval_samples_per_second': 89.075, 'eval_steps_per_second': 11.134, 'epoch': 6.0}
-{'loss': 0.0694, 'grad_norm': 0.44087886810302734, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
-{'loss': 0.0544, 'grad_norm': 5.027378082275391, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
-{'eval_loss': 1.0673680305480957, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 85.2813, 'eval_samples_per_second': 89.117, 'eval_steps_per_second': 11.14, 'epoch': 7.0}
-{'train_runtime': 4177.0261, 'train_samples_per_second': 55.212, 'train_steps_per_second': 1.724, 'train_loss': 0.2271836807281222, 'epoch': 7.0}
-2025-04-08 22:20:02,351 - INFO - 
+2025-04-24 12:58:38,407 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.4811, 'grad_norm': 3.3791213035583496, 'learning_rate': 1.8611111111111114e-05, 'epoch': 0.69}
+{'eval_loss': 0.43927857279777527, 'eval_f1-score': {'Openness to Change': 0.4, 'Conservation': 0.68}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 208.0695, 'eval_samples_per_second': 36.526, 'eval_steps_per_second': 4.566, 'epoch': 1.0}
+2025-04-24 13:17:37,958 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.4127, 'grad_norm': 3.220970392227173, 'learning_rate': 1.7222222222222224e-05, 'epoch': 1.39}
+{'eval_loss': 0.45027464628219604, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.69}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 208.4908, 'eval_samples_per_second': 36.452, 'eval_steps_per_second': 4.557, 'epoch': 2.0}
+2025-04-24 13:37:39,240 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.3675, 'grad_norm': 5.999222278594971, 'learning_rate': 1.5833333333333333e-05, 'epoch': 2.08}
+{'loss': 0.2787, 'grad_norm': 3.5514185428619385, 'learning_rate': 1.4444444444444446e-05, 'epoch': 2.77}
+{'eval_loss': 0.5213143825531006, 'eval_f1-score': {'Openness to Change': 0.48, 'Conservation': 0.69}, 'eval_macro-avg-f1-score': 0.58, 'eval_runtime': 210.4704, 'eval_samples_per_second': 36.11, 'eval_steps_per_second': 4.514, 'epoch': 3.0}
+{'loss': 0.2133, 'grad_norm': 3.5018842220306396, 'learning_rate': 1.3055555555555557e-05, 'epoch': 3.47}
+{'eval_loss': 0.6495180130004883, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.65}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 211.0105, 'eval_samples_per_second': 36.017, 'eval_steps_per_second': 4.502, 'epoch': 4.0}
+{'loss': 0.1729, 'grad_norm': 9.118078231811523, 'learning_rate': 1.1666666666666668e-05, 'epoch': 4.16}
+{'loss': 0.115, 'grad_norm': 8.439554214477539, 'learning_rate': 1.0277777777777777e-05, 'epoch': 4.86}
+{'eval_loss': 0.7995745539665222, 'eval_f1-score': {'Openness to Change': 0.47, 'Conservation': 0.66}, 'eval_macro-avg-f1-score': 0.56, 'eval_runtime': 210.3593, 'eval_samples_per_second': 36.129, 'eval_steps_per_second': 4.516, 'epoch': 5.0}
+{'loss': 0.0875, 'grad_norm': 7.979309558868408, 'learning_rate': 8.888888888888888e-06, 'epoch': 5.55}
+{'eval_loss': 0.9244251251220703, 'eval_f1-score': {'Openness to Change': 0.46, 'Conservation': 0.67}, 'eval_macro-avg-f1-score': 0.57, 'eval_runtime': 211.317, 'eval_samples_per_second': 35.965, 'eval_steps_per_second': 4.496, 'epoch': 6.0}
+{'loss': 0.0666, 'grad_norm': 9.373076438903809, 'learning_rate': 7.500000000000001e-06, 'epoch': 6.24}
+{'loss': 0.0507, 'grad_norm': 7.042429447174072, 'learning_rate': 6.111111111111112e-06, 'epoch': 6.94}
+{'eval_loss': 1.112707257270813, 'eval_f1-score': {'Openness to Change': 0.45, 'Conservation': 0.64}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 209.3244, 'eval_samples_per_second': 36.307, 'eval_steps_per_second': 4.538, 'epoch': 7.0}
+{'train_runtime': 8399.7395, 'train_samples_per_second': 27.456, 'train_steps_per_second': 0.857, 'train_loss': 0.2230510238140851, 'epoch': 7.0}
+2025-04-24 15:18:53,903 - INFO - 
 
 VALIDATION
-2025-04-08 22:20:02,351 - INFO - ==========
-2025-04-08 22:21:27,505 - INFO - Openness to Change: 0.48
-2025-04-08 22:21:27,505 - INFO - Conservation: 0.69
-2025-04-08 22:21:27,505 - INFO - Macro average: 0.58
-2025-04-08 22:21:27,938 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-24 15:18:53,903 - INFO - ==========
+2025-04-24 15:22:26,225 - INFO - Openness to Change: 0.48
+2025-04-24 15:22:26,225 - INFO - Conservation: 0.69
+2025-04-24 15:22:26,225 - INFO - Macro average: 0.58
+2025-04-24 15:22:26,475 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-24 15:22:26,475 - INFO - Saving best model to models directory
+2025-04-24 15:22:26,475 - INFO - UPLOAD to https://huggingface.co/NER_Lex-EmotionIntensity (using HF_TOKEN environment variable)
+2025-04-24 15:22:26,475 - INFO - SAVE to models

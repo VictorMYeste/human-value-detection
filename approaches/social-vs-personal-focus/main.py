@@ -43,6 +43,9 @@ def main() -> None:
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(args.seed)
 
+    if args.residualblock:
+        args.multilayer = True
+
     # Download resources only once
     download_nltk_resources()
 
@@ -69,6 +72,7 @@ def main() -> None:
             model_name=args.model_name,
             model_directory=args.model_directory,
             multilayer=args.multilayer,
+            residualblock=args.residualblock,
             slice_data=args.slice,
             batch_size=4,
             num_train_epochs=10,
@@ -76,7 +80,7 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            # custom_stopwords = model_config["custom_stopwords"],
+            custom_stopwords = model_config["custom_stopwords"] if args.customstopwords else [],
             augment_data=args.augment_data,
             topic_detection=args.topic_detection,
             filter_labels=filter_labels
@@ -108,6 +112,7 @@ def main() -> None:
             model_name=args.model_name,
             model_directory=args.model_directory,
             multilayer=args.multilayer,
+            residualblock=args.residualblock,
             slice_data=args.slice,
             batch_size=4,
             num_train_epochs=10,
@@ -115,7 +120,7 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            # custom_stopwords = model_config["custom_stopwords"],
+            custom_stopwords = model_config["custom_stopwords"] if args.customstopwords else [],
             augment_data=args.augment_data,
             topic_detection=args.topic_detection,
             token_pruning=args.token_pruning,

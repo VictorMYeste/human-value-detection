@@ -12,12 +12,14 @@ accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../d
 echo "===== MultiLayer ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --multilayer | tee results/MultiLayer.txt
 
-# Residual Block (Manual)
+echo "===== ResidualBlock ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --residualblock | tee results/ResidualBlock.txt
 
 echo "===== Data Augmentation ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --augment-data | tee results/Data-Augmentation.txt
 
-# Custom Stopwords (Manual)
+echo "===== CustomStopwords ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --customstopwords | tee results/CustomStopwords.txt
 
 echo "===== NER ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --ner-features | tee results/NER.txt
@@ -65,4 +67,4 @@ echo "===== Topic Detection - NMF ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
 
 echo "===== Topic Detection - BERTopic ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic-v2.txt
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic.txt

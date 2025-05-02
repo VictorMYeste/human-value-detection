@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "===== Baseline ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 | tee results/Baseline.txt
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --model-name Baseline | tee results/Baseline.txt
 
 echo "===== Token Pruning (TP, IDF = 3.0) ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --token-pruning | tee results/Token-Pruning-3.0.txt
@@ -12,12 +12,14 @@ accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../d
 echo "===== MultiLayer ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --multilayer | tee results/MultiLayer.txt
 
-# Residual Block (Manual)
+echo "===== ResidualBlock ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --residualblock | tee results/ResidualBlock.txt
 
 echo "===== Data Augmentation ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --augment-data | tee results/Data-Augmentation.txt
 
-# Custom Stopwords (Manual)
+echo "===== CustomStopwords ====="
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --customstopwords | tee results/CustomStopwords.txt
 
 echo "===== NER ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --ner-features | tee results/NER.txt
@@ -65,15 +67,4 @@ echo "===== Topic Detection - NMF ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection nmf | tee results/TD-NMF.txt
 
 echo "===== Topic Detection - BERTopic ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic-v2.txt
-
-###################
-
-# echo "===== 2 prev sentences with label + Token Pruning (TP, IDF = 3.0)  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --token-pruning | tee results/Previous-Sentences-2-TokenPruning-3.0-v2.txt
-
-# echo "===== 2 prev sentences with label + Lex - MFD  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon MFD | tee results/Previous-Sentences-2-Lex-MFD.txt
-
-# echo "===== 2 prev sentences with label + Lex - EmoLex  ====="
-# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences --lexicon EmoLex | tee results/Previous-Sentences-2-Lex-EmoLex.txt
+accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --topic-detection bertopic | tee results/TD-BERTopic.txt

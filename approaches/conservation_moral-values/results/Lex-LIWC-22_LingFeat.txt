@@ -1,22 +1,22 @@
-2025-04-22 22:48:51,422 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-22 22:48:51,422 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-22 22:48:58,112 - INFO - Setting random seed to 42
-2025-04-22 22:48:58,113 - INFO - Running training for labels: ['Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility']
-2025-04-22 22:48:58,113 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-04-22 22:48:58,309 - INFO - Loading lexicon embeddings for: LIWC-22
-2025-04-22 22:48:58,309 - INFO - Preparing datasets for training and validation
-2025-04-22 22:49:15,486 - INFO - Loading en_core_web_sm for extra features
-2025-04-22 22:49:15,851 - INFO - Adding Linguistic features
-2025-04-22 22:50:18,421 - INFO - Loading en_core_web_sm for extra features
-2025-04-22 22:50:18,730 - INFO - Adding Linguistic features
-2025-04-22 22:50:40,923 - INFO - Arguments validated successfully.
-2025-04-22 22:50:41,001 - INFO - Clearing old checkpoints in models/checkpoints
-2025-04-22 22:50:42,912 - INFO - Using CUDA for training.
-2025-04-22 22:50:44,281 - INFO - TRAINING
-2025-04-22 22:50:44,281 - INFO - ========
-2025-04-22 22:50:44,281 - INFO - Training configuration:
+2025-04-30 23:22:25,017 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-30 23:22:25,017 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-30 23:22:31,754 - INFO - Setting random seed to 42
+2025-04-30 23:22:31,755 - INFO - Running training for labels: ['Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility']
+2025-04-30 23:22:31,755 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-30 23:22:31,929 - INFO - Loading lexicon embeddings for: LIWC-22
+2025-04-30 23:22:31,929 - INFO - Preparing datasets for training and validation
+2025-04-30 23:22:49,814 - INFO - Loading en_core_web_sm for extra features
+2025-04-30 23:22:50,182 - INFO - Adding Linguistic features
+2025-04-30 23:23:45,727 - INFO - Loading en_core_web_sm for extra features
+2025-04-30 23:23:46,043 - INFO - Adding Linguistic features
+2025-04-30 23:24:05,454 - INFO - Arguments validated successfully.
+2025-04-30 23:24:05,532 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-30 23:24:06,870 - INFO - Using CUDA for training.
+2025-04-30 23:24:07,968 - INFO - TRAINING
+2025-04-30 23:24:07,968 - INFO - ========
+2025-04-30 23:24:07,968 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
-Model name: None
+Model name: Lex-LIWC-22_LingFeat
 Filter labels: ['Conservation']
 Batch size: 4
 Number of epochs: 10
@@ -35,34 +35,37 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: No
 
-2025-04-22 22:50:44,284 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-{'eval_loss': 0.22045809030532837, 'eval_f1-score': {'Face': 0.49, 'Security: personal': 0.56, 'Security: societal': 0.75, 'Tradition': 0.68, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.1, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.48, 'eval_runtime': 35.5896, 'eval_samples_per_second': 89.605, 'eval_steps_per_second': 11.211, 'epoch': 1.0}
-2025-04-22 22:54:20,937 - INFO - Skipping evaluation for warm-up phase (epoch 0).
-{'loss': 0.2475, 'grad_norm': 2.4331846237182617, 'learning_rate': 1.6575342465753425e-05, 'epoch': 1.71}
-{'eval_loss': 0.22735580801963806, 'eval_f1-score': {'Face': 0.41, 'Security: personal': 0.52, 'Security: societal': 0.76, 'Tradition': 0.64, 'Conformity: rules': 0.76, 'Conformity: interpersonal': 0.36, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.49, 'eval_runtime': 35.5138, 'eval_samples_per_second': 89.796, 'eval_steps_per_second': 11.235, 'epoch': 2.0}
-{'eval_loss': 0.23434877395629883, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.6, 'Security: societal': 0.77, 'Tradition': 0.69, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.34, 'Humility': 0.07}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.6058, 'eval_samples_per_second': 89.564, 'eval_steps_per_second': 11.206, 'epoch': 3.0}
-{'loss': 0.138, 'grad_norm': 1.7775901556015015, 'learning_rate': 1.3150684931506849e-05, 'epoch': 3.42}
-{'eval_loss': 0.25497621297836304, 'eval_f1-score': {'Face': 0.43, 'Security: personal': 0.59, 'Security: societal': 0.77, 'Tradition': 0.72, 'Conformity: rules': 0.73, 'Conformity: interpersonal': 0.38, 'Humility': 0.1}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.556, 'eval_samples_per_second': 89.689, 'eval_steps_per_second': 11.222, 'epoch': 4.0}
-{'eval_loss': 0.28708896040916443, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.59, 'Security: societal': 0.76, 'Tradition': 0.72, 'Conformity: rules': 0.74, 'Conformity: interpersonal': 0.33, 'Humility': 0.13}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.0732, 'eval_samples_per_second': 90.924, 'eval_steps_per_second': 11.376, 'epoch': 5.0}
-{'loss': 0.0813, 'grad_norm': 1.0796232223510742, 'learning_rate': 9.726027397260275e-06, 'epoch': 5.13}
-{'eval_loss': 0.3141151964664459, 'eval_f1-score': {'Face': 0.49, 'Security: personal': 0.58, 'Security: societal': 0.78, 'Tradition': 0.71, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.14}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 35.559, 'eval_samples_per_second': 89.682, 'eval_steps_per_second': 11.221, 'epoch': 6.0}
-{'loss': 0.0467, 'grad_norm': 2.0257699489593506, 'learning_rate': 6.301369863013699e-06, 'epoch': 6.84}
-{'eval_loss': 0.3339007496833801, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.6, 'Security: societal': 0.77, 'Tradition': 0.7, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.12}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.4956, 'eval_samples_per_second': 89.842, 'eval_steps_per_second': 11.241, 'epoch': 7.0}
-{'eval_loss': 0.35471299290657043, 'eval_f1-score': {'Face': 0.51, 'Security: personal': 0.57, 'Security: societal': 0.77, 'Tradition': 0.71, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.22}, 'eval_macro-avg-f1-score': 0.55, 'eval_runtime': 35.5833, 'eval_samples_per_second': 89.621, 'eval_steps_per_second': 11.213, 'epoch': 8.0}
-{'loss': 0.0296, 'grad_norm': 1.6646740436553955, 'learning_rate': 2.876712328767123e-06, 'epoch': 8.55}
-{'eval_loss': 0.3570024073123932, 'eval_f1-score': {'Face': 0.47, 'Security: personal': 0.57, 'Security: societal': 0.77, 'Tradition': 0.72, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.09}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.5286, 'eval_samples_per_second': 89.759, 'eval_steps_per_second': 11.23, 'epoch': 9.0}
-{'eval_loss': 0.3636987805366516, 'eval_f1-score': {'Face': 0.49, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.71, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.33, 'Humility': 0.11}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 35.4415, 'eval_samples_per_second': 89.979, 'eval_steps_per_second': 11.258, 'epoch': 9.98}
-{'train_runtime': 2220.3759, 'train_samples_per_second': 42.128, 'train_steps_per_second': 1.315, 'train_loss': 0.09608019802668323, 'epoch': 9.98}
-2025-04-22 23:27:45,219 - INFO - 
+2025-04-30 23:24:07,971 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.21840254962444305, 'eval_f1-score': {'Face': 0.46, 'Security: personal': 0.53, 'Security: societal': 0.78, 'Tradition': 0.69, 'Conformity: rules': 0.73, 'Conformity: interpersonal': 0.08, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.47, 'eval_runtime': 84.3103, 'eval_samples_per_second': 37.825, 'eval_steps_per_second': 4.733, 'epoch': 1.0}
+2025-04-30 23:30:52,259 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.2473, 'grad_norm': 2.233858585357666, 'learning_rate': 1.6575342465753425e-05, 'epoch': 1.71}
+{'eval_loss': 0.22945570945739746, 'eval_f1-score': {'Face': 0.44, 'Security: personal': 0.56, 'Security: societal': 0.75, 'Tradition': 0.67, 'Conformity: rules': 0.76, 'Conformity: interpersonal': 0.34, 'Humility': 0}, 'eval_macro-avg-f1-score': 0.5, 'eval_runtime': 86.3931, 'eval_samples_per_second': 36.913, 'eval_steps_per_second': 4.618, 'epoch': 2.0}
+{'eval_loss': 0.24060679972171783, 'eval_f1-score': {'Face': 0.49, 'Security: personal': 0.61, 'Security: societal': 0.78, 'Tradition': 0.68, 'Conformity: rules': 0.73, 'Conformity: interpersonal': 0.32, 'Humility': 0.04}, 'eval_macro-avg-f1-score': 0.52, 'eval_runtime': 86.0149, 'eval_samples_per_second': 37.075, 'eval_steps_per_second': 4.639, 'epoch': 3.0}
+{'loss': 0.1396, 'grad_norm': 1.6873157024383545, 'learning_rate': 1.3150684931506849e-05, 'epoch': 3.42}
+{'eval_loss': 0.25571364164352417, 'eval_f1-score': {'Face': 0.46, 'Security: personal': 0.59, 'Security: societal': 0.77, 'Tradition': 0.7, 'Conformity: rules': 0.76, 'Conformity: interpersonal': 0.34, 'Humility': 0.08}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 85.7692, 'eval_samples_per_second': 37.181, 'eval_steps_per_second': 4.652, 'epoch': 4.0}
+{'eval_loss': 0.29238513112068176, 'eval_f1-score': {'Face': 0.45, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.7, 'Conformity: rules': 0.73, 'Conformity: interpersonal': 0.33, 'Humility': 0.12}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 86.6695, 'eval_samples_per_second': 36.795, 'eval_steps_per_second': 4.604, 'epoch': 5.0}
+{'loss': 0.0808, 'grad_norm': 1.7898246049880981, 'learning_rate': 9.726027397260275e-06, 'epoch': 5.13}
+{'eval_loss': 0.31813377141952515, 'eval_f1-score': {'Face': 0.48, 'Security: personal': 0.6, 'Security: societal': 0.77, 'Tradition': 0.68, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.13}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 85.8407, 'eval_samples_per_second': 37.15, 'eval_steps_per_second': 4.648, 'epoch': 6.0}
+{'loss': 0.0459, 'grad_norm': 3.579089641571045, 'learning_rate': 6.301369863013699e-06, 'epoch': 6.84}
+{'eval_loss': 0.34744763374328613, 'eval_f1-score': {'Face': 0.45, 'Security: personal': 0.58, 'Security: societal': 0.76, 'Tradition': 0.69, 'Conformity: rules': 0.76, 'Conformity: interpersonal': 0.36, 'Humility': 0.16}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 86.341, 'eval_samples_per_second': 36.935, 'eval_steps_per_second': 4.621, 'epoch': 7.0}
+{'eval_loss': 0.359973669052124, 'eval_f1-score': {'Face': 0.46, 'Security: personal': 0.59, 'Security: societal': 0.77, 'Tradition': 0.69, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.33, 'Humility': 0.14}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 85.7176, 'eval_samples_per_second': 37.204, 'eval_steps_per_second': 4.655, 'epoch': 8.0}
+{'loss': 0.0293, 'grad_norm': 1.136529803276062, 'learning_rate': 2.876712328767123e-06, 'epoch': 8.55}
+{'eval_loss': 0.3710170388221741, 'eval_f1-score': {'Face': 0.45, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.67, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.32, 'Humility': 0.16}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 84.6094, 'eval_samples_per_second': 37.691, 'eval_steps_per_second': 4.716, 'epoch': 9.0}
+{'eval_loss': 0.37464573979377747, 'eval_f1-score': {'Face': 0.44, 'Security: personal': 0.58, 'Security: societal': 0.77, 'Tradition': 0.7, 'Conformity: rules': 0.75, 'Conformity: interpersonal': 0.33, 'Humility': 0.15}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 84.4603, 'eval_samples_per_second': 37.757, 'eval_steps_per_second': 4.724, 'epoch': 9.98}
+{'train_runtime': 4245.3067, 'train_samples_per_second': 22.034, 'train_steps_per_second': 0.688, 'train_loss': 0.09603353951075305, 'epoch': 9.98}
+2025-05-01 00:34:53,731 - INFO - 
 
 VALIDATION
-2025-04-22 23:27:45,219 - INFO - ==========
-2025-04-22 23:28:19,800 - INFO - Face: 0.51
-2025-04-22 23:28:19,800 - INFO - Security: personal: 0.57
-2025-04-22 23:28:19,800 - INFO - Security: societal: 0.77
-2025-04-22 23:28:19,801 - INFO - Tradition: 0.71
-2025-04-22 23:28:19,801 - INFO - Conformity: rules: 0.75
-2025-04-22 23:28:19,801 - INFO - Conformity: interpersonal: 0.32
-2025-04-22 23:28:19,801 - INFO - Humility: 0.22
-2025-04-22 23:28:19,801 - INFO - Macro average: 0.55
-2025-04-22 23:28:20,291 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-01 00:34:53,731 - INFO - ==========
+2025-05-01 00:36:17,218 - INFO - Face: 0.45
+2025-05-01 00:36:17,218 - INFO - Security: personal: 0.58
+2025-05-01 00:36:17,218 - INFO - Security: societal: 0.76
+2025-05-01 00:36:17,218 - INFO - Tradition: 0.69
+2025-05-01 00:36:17,218 - INFO - Conformity: rules: 0.76
+2025-05-01 00:36:17,218 - INFO - Conformity: interpersonal: 0.36
+2025-05-01 00:36:17,219 - INFO - Humility: 0.16
+2025-05-01 00:36:17,219 - INFO - Macro average: 0.54
+2025-05-01 00:36:17,305 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-01 00:36:17,305 - INFO - Saving best model to models directory
+2025-05-01 00:36:17,305 - INFO - UPLOAD to https://huggingface.co/Lex-LIWC-22_LingFeat (using HF_TOKEN environment variable)
+2025-05-01 00:36:17,305 - INFO - SAVE to models

@@ -76,7 +76,7 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"],
+            # custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
             topic_detection=args.topic_detection,
             filter_labels=filter_labels
@@ -115,7 +115,7 @@ def main() -> None:
             weight_decay=0.15,
             gradient_accumulation_steps=4,
             early_stopping_patience=4,
-            #custom_stopwords = model_config["custom_stopwords"],
+            # custom_stopwords = model_config["custom_stopwords"],
             augment_data=args.augment_data,
             topic_detection=args.topic_detection,
             token_pruning=args.token_pruning,

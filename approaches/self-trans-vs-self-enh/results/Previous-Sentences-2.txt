@@ -1,0 +1,83 @@
+2025-05-02 17:20:56,837 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-02 17:20:56,841 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-02 17:21:02,321 - INFO - Setting random seed to 42
+2025-05-02 17:21:02,322 - INFO - Running training for labels: ['Self-Transcendence', 'Self-Enhancement']
+2025-05-02 17:21:02,322 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-05-02 17:21:02,506 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-05-02 17:21:02,506 - INFO - Preparing datasets for training and validation
+2025-05-02 17:28:11,803 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-05-02 17:31:31,317 - INFO - Adding Previous Sentences Labels features with num_categories = 0
+2025-05-02 17:31:33,424 - INFO - Arguments validated successfully.
+2025-05-02 17:31:33,428 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2025-05-02 17:31:33,428 - INFO - Clearing old checkpoints in models/checkpoints
+2025-05-02 17:31:34,711 - INFO - Using CUDA for training.
+2025-05-02 17:31:35,952 - INFO - TRAINING
+2025-05-02 17:31:35,952 - INFO - ========
+2025-05-02 17:31:35,952 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: []
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: Yes
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-05-02 17:31:35,955 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-02 17:31:35,958 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.3637, 'grad_norm': 2.1193771362304688, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.3149, 'grad_norm': 2.2541909217834473, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.3346409797668457, 'eval_f1-score': {'Self-Transcendence': 0.46, 'Self-Enhancement': 0.3}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 183.8636, 'eval_samples_per_second': 81.06, 'eval_steps_per_second': 20.265, 'epoch': 1.0}
+2025-05-02 18:13:06,725 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+2025-05-02 18:17:37,585 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.3014, 'grad_norm': 3.612788200378418, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.2588, 'grad_norm': 3.8727684020996094, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.2636, 'grad_norm': 2.626481771469116, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.3361198902130127, 'eval_f1-score': {'Self-Transcendence': 0.39, 'Self-Enhancement': 0.44}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 184.2927, 'eval_samples_per_second': 80.871, 'eval_steps_per_second': 20.218, 'epoch': 2.0}
+2025-05-02 18:59:11,014 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2025-05-02 19:03:50,215 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2313, 'grad_norm': 3.6277265548706055, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.1875, 'grad_norm': 3.885939359664917, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.1843, 'grad_norm': 5.159002304077148, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.39730799198150635, 'eval_f1-score': {'Self-Transcendence': 0.47, 'Self-Enhancement': 0.43}, 'eval_macro-avg-f1-score': 0.45, 'eval_runtime': 184.4184, 'eval_samples_per_second': 80.816, 'eval_steps_per_second': 20.204, 'epoch': 3.0}
+2025-05-02 19:50:09,136 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1398, 'grad_norm': 8.515857696533203, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1098, 'grad_norm': 6.494395732879639, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.115, 'grad_norm': 6.589747428894043, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.5057467222213745, 'eval_f1-score': {'Self-Transcendence': 0.46, 'Self-Enhancement': 0.39}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 184.476, 'eval_samples_per_second': 80.791, 'eval_steps_per_second': 20.198, 'epoch': 4.0}
+2025-05-02 20:36:27,094 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0693, 'grad_norm': 10.219467163085938, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.0646, 'grad_norm': 5.343649864196777, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.6790646314620972, 'eval_f1-score': {'Self-Transcendence': 0.45, 'Self-Enhancement': 0.43}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 184.562, 'eval_samples_per_second': 80.753, 'eval_steps_per_second': 20.188, 'epoch': 5.0}
+2025-05-02 21:22:50,986 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0648, 'grad_norm': 9.991693496704102, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0365, 'grad_norm': 3.1388447284698486, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0452, 'grad_norm': 6.593160629272461, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.835748553276062, 'eval_f1-score': {'Self-Transcendence': 0.45, 'Self-Enhancement': 0.43}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 184.1717, 'eval_samples_per_second': 80.924, 'eval_steps_per_second': 20.231, 'epoch': 6.0}
+2025-05-02 22:09:09,626 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.0354, 'grad_norm': 3.3423447608947754, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0247, 'grad_norm': 0.4379987120628357, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0262, 'grad_norm': 9.513367652893066, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 0.9820072650909424, 'eval_f1-score': {'Self-Transcendence': 0.45, 'Self-Enhancement': 0.42}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 184.629, 'eval_samples_per_second': 80.724, 'eval_steps_per_second': 20.181, 'epoch': 7.0}
+2025-05-02 22:55:36,512 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 19438.9851, 'train_samples_per_second': 23.025, 'train_steps_per_second': 0.719, 'train_loss': 0.1457181309499459, 'epoch': 7.0}
+2025-05-02 22:55:38,237 - INFO - 
+
+VALIDATION
+2025-05-02 22:55:38,237 - INFO - ==========
+2025-05-02 23:03:25,129 - INFO - Updated evaluation dataset with dynamic previous label features.
+2025-05-02 23:03:25,130 - INFO - Self-Transcendence: 0.47
+2025-05-02 23:03:25,131 - INFO - Self-Enhancement: 0.43
+2025-05-02 23:03:25,131 - INFO - Macro average: 0.45
+2025-05-02 23:03:25,451 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

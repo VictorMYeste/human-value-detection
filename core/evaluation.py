@@ -6,6 +6,12 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 import pandas as pd
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support
+import torch.distributed as dist
+import torch
+import random
+
+from core.config import MODEL_CONFIG
+from core.cli import parse_args
 
 import logging
 # Initialize logging
@@ -111,3 +117,47 @@ def eval(labels, predictions_path, gold_labels_path):
     # Compute macro-average F1-score
     macro_f1 = np.mean(f1)
     print(f"Macro-Average F1-Score: {macro_f1:.2f}")
+
+
+def run(model_group: str = "presence") -> None:
+    """
+    End-to-end evaluation entry point.
+
+    Parameters
+    ----------
+    model_group : str, optional
+        Key in `core.config.MODEL_CONFIG`.  Change this when you copy the tiny
+        `eval.py` wrapper into another model folder.
+    """
+
+    # Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+    if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+        logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+
+    # Load model-specific configuration
+    model_group = "presence"
+    model_config = MODEL_CONFIG[model_group]
+    labels = model_config["labels"]
+
+    # Define CLI arguments for training script
+    args = parse_args(prog_name=model_group)
+
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+
+    # Optionally set the seed if provided
+    if args.seed is not None:
+        logger.info(f"Setting random seed to {args.seed}")
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
+
+    model_name = args.model_name
+
+    # Load predictions and gold labels
+    predictions_path = args.output_directory + "/" + model_name + ".tsv"
+    gold_labels_path = args.test_dataset + "labels-cat.tsv"
+
+    eval(labels, predictions_path, gold_labels_path)

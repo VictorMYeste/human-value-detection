@@ -1,0 +1,71 @@
+2025-05-08 12:43:02,685 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-08 12:43:02,685 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-08 12:43:09,701 - INFO - Setting random seed to 42
+2025-05-08 12:43:09,702 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-05-08 12:43:09,702 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-05-08 12:43:09,886 - INFO - Loading lexicon embeddings for: EmotionIntensity
+2025-05-08 12:43:09,897 - INFO - Preparing datasets for training and validation
+2025-05-08 12:43:35,571 - INFO - Arguments validated successfully.
+2025-05-08 12:43:35,575 - INFO - Clearing old checkpoints in models/checkpoints
+2025-05-08 12:43:36,778 - INFO - Using CUDA for training.
+2025-05-08 12:43:38,069 - INFO - TRAINING
+2025-05-08 12:43:38,069 - INFO - ========
+2025-05-08 12:43:38,069 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: None
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: EmotionIntensity
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 8
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-05-08 12:43:38,072 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.3561, 'grad_norm': 3.057543992996216, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.3375, 'grad_norm': 2.5869290828704834, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.32786405086517334, 'eval_f1-score': {'Openness to Change': 0.22, 'Conservation': 0.25}, 'eval_macro-avg-f1-score': 0.24, 'eval_runtime': 168.896, 'eval_samples_per_second': 88.244, 'eval_steps_per_second': 11.03, 'epoch': 1.0}
+2025-05-08 13:11:40,624 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.3304, 'grad_norm': 2.0937321186065674, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.2824, 'grad_norm': 2.7325124740600586, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.282, 'grad_norm': 2.9379496574401855, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.3291197121143341, 'eval_f1-score': {'Openness to Change': 0.22, 'Conservation': 0.51}, 'eval_macro-avg-f1-score': 0.36, 'eval_runtime': 168.9431, 'eval_samples_per_second': 88.219, 'eval_steps_per_second': 11.027, 'epoch': 2.0}
+2025-05-08 13:39:42,506 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.2564, 'grad_norm': 5.841170787811279, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.208, 'grad_norm': 4.515187740325928, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.2071, 'grad_norm': 3.0654735565185547, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.4211929440498352, 'eval_f1-score': {'Openness to Change': 0.33, 'Conservation': 0.5}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 168.0325, 'eval_samples_per_second': 88.697, 'eval_steps_per_second': 11.087, 'epoch': 3.0}
+{'loss': 0.1618, 'grad_norm': 4.761878490447998, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1312, 'grad_norm': 6.115292549133301, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.1391, 'grad_norm': 3.5580713748931885, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.48545876145362854, 'eval_f1-score': {'Openness to Change': 0.29, 'Conservation': 0.5}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 168.7902, 'eval_samples_per_second': 88.299, 'eval_steps_per_second': 11.037, 'epoch': 4.0}
+{'loss': 0.0871, 'grad_norm': 5.666993618011475, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.0816, 'grad_norm': 3.0694003105163574, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.6235049962997437, 'eval_f1-score': {'Openness to Change': 0.31, 'Conservation': 0.47}, 'eval_macro-avg-f1-score': 0.39, 'eval_runtime': 168.3306, 'eval_samples_per_second': 88.54, 'eval_steps_per_second': 11.068, 'epoch': 5.0}
+{'loss': 0.0861, 'grad_norm': 2.947993278503418, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0508, 'grad_norm': 9.423928260803223, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0534, 'grad_norm': 9.820917129516602, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.7696375250816345, 'eval_f1-score': {'Openness to Change': 0.3, 'Conservation': 0.48}, 'eval_macro-avg-f1-score': 0.39, 'eval_runtime': 168.2327, 'eval_samples_per_second': 88.592, 'eval_steps_per_second': 11.074, 'epoch': 6.0}
+{'loss': 0.0492, 'grad_norm': 0.6276333928108215, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0323, 'grad_norm': 5.105931758880615, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0369, 'grad_norm': 5.095144271850586, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 0.9107628464698792, 'eval_f1-score': {'Openness to Change': 0.27, 'Conservation': 0.48}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 168.3045, 'eval_samples_per_second': 88.554, 'eval_steps_per_second': 11.069, 'epoch': 7.0}
+{'train_runtime': 11770.6505, 'train_samples_per_second': 38.025, 'train_steps_per_second': 1.188, 'train_loss': 0.16284952951687834, 'epoch': 7.0}
+2025-05-08 15:59:49,155 - INFO - 
+
+VALIDATION
+2025-05-08 15:59:49,155 - INFO - ==========
+2025-05-08 16:02:36,405 - INFO - Openness to Change: 0.33
+2025-05-08 16:02:36,405 - INFO - Conservation: 0.50
+2025-05-08 16:02:36,405 - INFO - Macro average: 0.42
+2025-05-08 16:02:36,563 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.

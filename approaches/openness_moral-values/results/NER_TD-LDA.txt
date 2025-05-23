@@ -1,24 +1,24 @@
-2025-04-22 11:05:30,327 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-22 11:05:30,329 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-04-22 11:05:35,940 - INFO - Setting random seed to 42
-2025-04-22 11:05:35,941 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism']
-2025-04-22 11:05:35,941 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-04-22 11:05:36,123 - INFO - Loading lexicon embeddings for: No lexicon used
-2025-04-22 11:05:36,123 - INFO - Preparing datasets for training and validation
-2025-04-22 11:05:42,914 - INFO - Loading en_core_web_sm for extra features
-2025-04-22 11:05:43,489 - INFO - Adding NER embeddings
-2025-04-22 11:09:29,496 - INFO - Applying lda for topic modeling.
-2025-04-22 11:09:31,913 - INFO - Loading en_core_web_sm for extra features
-2025-04-22 11:09:32,228 - INFO - Adding NER embeddings
-2025-04-22 11:10:50,536 - INFO - Applying lda for topic modeling.
-2025-04-22 11:10:50,723 - INFO - Arguments validated successfully.
-2025-04-22 11:10:50,726 - INFO - Clearing old checkpoints in models/checkpoints
-2025-04-22 11:10:52,662 - INFO - Using CUDA for training.
-2025-04-22 11:10:54,140 - INFO - TRAINING
-2025-04-22 11:10:54,140 - INFO - ========
-2025-04-22 11:10:54,140 - INFO - Training configuration:
+2025-04-30 16:04:46,333 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-30 16:04:46,333 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-04-30 16:04:53,236 - INFO - Setting random seed to 42
+2025-04-30 16:04:53,237 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism']
+2025-04-30 16:04:53,237 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-04-30 16:04:53,465 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-04-30 16:04:53,465 - INFO - Preparing datasets for training and validation
+2025-04-30 16:05:00,110 - INFO - Loading en_core_web_sm for extra features
+2025-04-30 16:05:00,479 - INFO - Adding NER embeddings
+2025-04-30 16:08:49,143 - INFO - Applying lda for topic modeling.
+2025-04-30 16:08:51,558 - INFO - Loading en_core_web_sm for extra features
+2025-04-30 16:08:51,888 - INFO - Adding NER embeddings
+2025-04-30 16:10:04,646 - INFO - Applying lda for topic modeling.
+2025-04-30 16:10:04,820 - INFO - Arguments validated successfully.
+2025-04-30 16:10:04,822 - INFO - Clearing old checkpoints in models/checkpoints
+2025-04-30 16:10:06,342 - INFO - Using CUDA for training.
+2025-04-30 16:10:07,439 - INFO - TRAINING
+2025-04-30 16:10:07,439 - INFO - ========
+2025-04-30 16:10:07,439 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
-Model name: None
+Model name: NER_TD-LDA
 Filter labels: ['Openness to Change']
 Batch size: 4
 Number of epochs: 10
@@ -37,29 +37,29 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: Yes
 Applying token pruning: No
 
-2025-04-22 11:10:54,143 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-{'eval_loss': 0.38444390892982483, 'eval_f1-score': {'Self-direction: thought': 0.14, 'Self-direction: action': 0.64, 'Stimulation': 0.7, 'Hedonism': 0.64}, 'eval_macro-avg-f1-score': 0.53, 'eval_runtime': 5.5547, 'eval_samples_per_second': 207.212, 'eval_steps_per_second': 25.924, 'epoch': 0.99}
-2025-04-22 11:12:10,080 - INFO - Skipping evaluation for warm-up phase (epoch 0).
-{'eval_loss': 0.375590056180954, 'eval_f1-score': {'Self-direction: thought': 0.34, 'Self-direction: action': 0.7, 'Stimulation': 0.65, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.64, 'eval_samples_per_second': 204.078, 'eval_steps_per_second': 25.532, 'epoch': 2.0}
-2025-04-22 11:13:25,371 - INFO - Skipping evaluation for warm-up phase (epoch 1).
-{'eval_loss': 0.4029485583305359, 'eval_f1-score': {'Self-direction: thought': 0.34, 'Self-direction: action': 0.72, 'Stimulation': 0.64, 'Hedonism': 0.66}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 5.6648, 'eval_samples_per_second': 203.186, 'eval_steps_per_second': 25.42, 'epoch': 3.0}
-{'eval_loss': 0.47687387466430664, 'eval_f1-score': {'Self-direction: thought': 0.41, 'Self-direction: action': 0.71, 'Stimulation': 0.65, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 5.717, 'eval_samples_per_second': 201.328, 'eval_steps_per_second': 25.188, 'epoch': 4.0}
-{'loss': 0.2955, 'grad_norm': 2.6464314460754395, 'learning_rate': 1.1228070175438597e-05, 'epoch': 4.36}
-{'eval_loss': 0.5270923972129822, 'eval_f1-score': {'Self-direction: thought': 0.37, 'Self-direction: action': 0.72, 'Stimulation': 0.66, 'Hedonism': 0.66}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 5.7152, 'eval_samples_per_second': 201.393, 'eval_steps_per_second': 25.196, 'epoch': 4.99}
-{'eval_loss': 0.5740072727203369, 'eval_f1-score': {'Self-direction: thought': 0.38, 'Self-direction: action': 0.72, 'Stimulation': 0.7, 'Hedonism': 0.66}, 'eval_macro-avg-f1-score': 0.62, 'eval_runtime': 5.7236, 'eval_samples_per_second': 201.095, 'eval_steps_per_second': 25.159, 'epoch': 6.0}
-{'eval_loss': 0.6690614223480225, 'eval_f1-score': {'Self-direction: thought': 0.38, 'Self-direction: action': 0.72, 'Stimulation': 0.64, 'Hedonism': 0.69}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 5.7283, 'eval_samples_per_second': 200.931, 'eval_steps_per_second': 25.138, 'epoch': 7.0}
-{'eval_loss': 0.7006422877311707, 'eval_f1-score': {'Self-direction: thought': 0.41, 'Self-direction: action': 0.71, 'Stimulation': 0.67, 'Hedonism': 0.66}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 5.7608, 'eval_samples_per_second': 199.799, 'eval_steps_per_second': 24.997, 'epoch': 8.0}
-{'loss': 0.0555, 'grad_norm': 4.830851078033447, 'learning_rate': 2.456140350877193e-06, 'epoch': 8.71}
-{'eval_loss': 0.7156533002853394, 'eval_f1-score': {'Self-direction: thought': 0.36, 'Self-direction: action': 0.71, 'Stimulation': 0.68, 'Hedonism': 0.65}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 5.75, 'eval_samples_per_second': 200.174, 'eval_steps_per_second': 25.043, 'epoch': 8.99}
-{'eval_loss': 0.7251278758049011, 'eval_f1-score': {'Self-direction: thought': 0.37, 'Self-direction: action': 0.72, 'Stimulation': 0.68, 'Hedonism': 0.68}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 5.7263, 'eval_samples_per_second': 201.003, 'eval_steps_per_second': 25.147, 'epoch': 9.93}
-{'train_runtime': 793.0572, 'train_samples_per_second': 46.277, 'train_steps_per_second': 1.437, 'train_loss': 0.1566378721019678, 'epoch': 9.93}
-2025-04-22 11:24:08,334 - INFO - 
+2025-04-30 16:10:07,441 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'eval_loss': 0.3870348632335663, 'eval_f1-score': {'Self-direction: thought': 0.15, 'Self-direction: action': 0.64, 'Stimulation': 0.71, 'Hedonism': 0.65}, 'eval_macro-avg-f1-score': 0.54, 'eval_runtime': 9.0133, 'eval_samples_per_second': 127.7, 'eval_steps_per_second': 15.976, 'epoch': 0.99}
+2025-04-30 16:12:21,928 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'eval_loss': 0.3710485100746155, 'eval_f1-score': {'Self-direction: thought': 0.37, 'Self-direction: action': 0.69, 'Stimulation': 0.65, 'Hedonism': 0.68}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 10.5199, 'eval_samples_per_second': 109.412, 'eval_steps_per_second': 13.688, 'epoch': 2.0}
+2025-04-30 16:14:37,921 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'eval_loss': 0.40137985348701477, 'eval_f1-score': {'Self-direction: thought': 0.31, 'Self-direction: action': 0.71, 'Stimulation': 0.66, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.59, 'eval_runtime': 12.054, 'eval_samples_per_second': 95.487, 'eval_steps_per_second': 11.946, 'epoch': 3.0}
+{'eval_loss': 0.46948549151420593, 'eval_f1-score': {'Self-direction: thought': 0.42, 'Self-direction: action': 0.72, 'Stimulation': 0.65, 'Hedonism': 0.69}, 'eval_macro-avg-f1-score': 0.62, 'eval_runtime': 12.5352, 'eval_samples_per_second': 91.821, 'eval_steps_per_second': 11.488, 'epoch': 4.0}
+{'loss': 0.2929, 'grad_norm': 2.4634552001953125, 'learning_rate': 1.1228070175438597e-05, 'epoch': 4.36}
+{'eval_loss': 0.5174354910850525, 'eval_f1-score': {'Self-direction: thought': 0.4, 'Self-direction: action': 0.71, 'Stimulation': 0.66, 'Hedonism': 0.68}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 12.7491, 'eval_samples_per_second': 90.281, 'eval_steps_per_second': 11.295, 'epoch': 4.99}
+{'eval_loss': 0.5744063854217529, 'eval_f1-score': {'Self-direction: thought': 0.37, 'Self-direction: action': 0.71, 'Stimulation': 0.69, 'Hedonism': 0.67}, 'eval_macro-avg-f1-score': 0.61, 'eval_runtime': 12.7164, 'eval_samples_per_second': 90.513, 'eval_steps_per_second': 11.324, 'epoch': 6.0}
+{'eval_loss': 0.6205984950065613, 'eval_f1-score': {'Self-direction: thought': 0.41, 'Self-direction: action': 0.71, 'Stimulation': 0.69, 'Hedonism': 0.69}, 'eval_macro-avg-f1-score': 0.62, 'eval_runtime': 12.6131, 'eval_samples_per_second': 91.254, 'eval_steps_per_second': 11.417, 'epoch': 7.0}
+{'eval_loss': 0.6911973357200623, 'eval_f1-score': {'Self-direction: thought': 0.38, 'Self-direction: action': 0.71, 'Stimulation': 0.67, 'Hedonism': 0.66}, 'eval_macro-avg-f1-score': 0.6, 'eval_runtime': 12.5098, 'eval_samples_per_second': 92.008, 'eval_steps_per_second': 11.511, 'epoch': 8.0}
+{'train_runtime': 1129.2952, 'train_samples_per_second': 32.498, 'train_steps_per_second': 1.009, 'train_loss': 0.1892264185388104, 'epoch': 8.0}
+2025-04-30 16:28:57,288 - INFO - 
 
 VALIDATION
-2025-04-22 11:24:08,334 - INFO - ==========
-2025-04-22 11:24:13,950 - INFO - Self-direction: thought: 0.38
-2025-04-22 11:24:13,950 - INFO - Self-direction: action: 0.72
-2025-04-22 11:24:13,950 - INFO - Stimulation: 0.70
-2025-04-22 11:24:13,950 - INFO - Hedonism: 0.66
-2025-04-22 11:24:13,950 - INFO - Macro average: 0.62
-2025-04-22 11:24:14,084 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-30 16:28:57,288 - INFO - ==========
+2025-04-30 16:29:09,256 - INFO - Self-direction: thought: 0.42
+2025-04-30 16:29:09,256 - INFO - Self-direction: action: 0.72
+2025-04-30 16:29:09,256 - INFO - Stimulation: 0.65
+2025-04-30 16:29:09,256 - INFO - Hedonism: 0.69
+2025-04-30 16:29:09,256 - INFO - Macro average: 0.62
+2025-04-30 16:29:09,477 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-04-30 16:29:09,477 - INFO - Saving best model to models directory
+2025-04-30 16:29:09,477 - INFO - UPLOAD to https://huggingface.co/NER_TD-LDA (using HF_TOKEN environment variable)
+2025-04-30 16:29:09,477 - INFO - SAVE to models

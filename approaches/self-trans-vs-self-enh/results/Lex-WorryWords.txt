@@ -1,0 +1,74 @@
+2025-05-13 15:36:22,366 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-13 15:36:22,366 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-13 15:36:29,306 - INFO - Setting random seed to 42
+2025-05-13 15:36:29,307 - INFO - Running training for labels: ['Self-Transcendence', 'Self-Enhancement']
+2025-05-13 15:36:29,307 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-05-13 15:36:29,543 - INFO - Loading lexicon embeddings for: WorryWords
+2025-05-13 15:36:29,570 - INFO - Preparing datasets for training and validation
+2025-05-13 15:36:54,218 - INFO - Arguments validated successfully.
+2025-05-13 15:36:54,224 - INFO - Clearing old checkpoints in models/checkpoints
+2025-05-13 15:36:54,730 - INFO - Using CUDA for training.
+2025-05-13 15:36:56,051 - INFO - TRAINING
+2025-05-13 15:36:56,051 - INFO - ========
+2025-05-13 15:36:56,051 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Lex-WorryWords
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: WorryWords
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 1
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2025-05-13 15:36:56,054 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.3652, 'grad_norm': 1.7185227870941162, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.3342, 'grad_norm': 2.0495193004608154, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.3244589567184448, 'eval_f1-score': {'Self-Transcendence': 0.44, 'Self-Enhancement': 0.35}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 412.288, 'eval_samples_per_second': 36.149, 'eval_steps_per_second': 4.519, 'epoch': 1.0}
+2025-05-13 16:34:59,961 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.3318, 'grad_norm': 2.0304601192474365, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.2822, 'grad_norm': 2.880037784576416, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.2786, 'grad_norm': 3.056601047515869, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.33441129326820374, 'eval_f1-score': {'Self-Transcendence': 0.48, 'Self-Enhancement': 0.43}, 'eval_macro-avg-f1-score': 0.45, 'eval_runtime': 412.0403, 'eval_samples_per_second': 36.171, 'eval_steps_per_second': 4.521, 'epoch': 2.0}
+2025-05-13 17:34:11,979 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.2525, 'grad_norm': 2.4860785007476807, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.1998, 'grad_norm': 4.1314239501953125, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.2026, 'grad_norm': 5.213171482086182, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.39220497012138367, 'eval_f1-score': {'Self-Transcendence': 0.46, 'Self-Enhancement': 0.44}, 'eval_macro-avg-f1-score': 0.45, 'eval_runtime': 412.3405, 'eval_samples_per_second': 36.145, 'eval_steps_per_second': 4.518, 'epoch': 3.0}
+{'loss': 0.1547, 'grad_norm': 5.527047157287598, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1289, 'grad_norm': 7.54490852355957, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.1282, 'grad_norm': 4.630842685699463, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.48409304022789, 'eval_f1-score': {'Self-Transcendence': 0.44, 'Self-Enhancement': 0.41}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 410.8356, 'eval_samples_per_second': 36.277, 'eval_steps_per_second': 4.535, 'epoch': 4.0}
+{'loss': 0.0871, 'grad_norm': 9.57422161102295, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.0805, 'grad_norm': 10.086044311523438, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.654030442237854, 'eval_f1-score': {'Self-Transcendence': 0.46, 'Self-Enhancement': 0.43}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 413.2718, 'eval_samples_per_second': 36.063, 'eval_steps_per_second': 4.508, 'epoch': 5.0}
+{'loss': 0.0817, 'grad_norm': 6.380233287811279, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0503, 'grad_norm': 3.4668233394622803, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0524, 'grad_norm': 5.371843338012695, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.7648148536682129, 'eval_f1-score': {'Self-Transcendence': 0.45, 'Self-Enhancement': 0.42}, 'eval_macro-avg-f1-score': 0.44, 'eval_runtime': 411.1812, 'eval_samples_per_second': 36.247, 'eval_steps_per_second': 4.531, 'epoch': 6.0}
+{'loss': 0.0465, 'grad_norm': 8.140044212341309, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0311, 'grad_norm': 3.2022528648376465, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0303, 'grad_norm': 15.164571762084961, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 0.976606547832489, 'eval_f1-score': {'Self-Transcendence': 0.47, 'Self-Enhancement': 0.44}, 'eval_macro-avg-f1-score': 0.45, 'eval_runtime': 413.6121, 'eval_samples_per_second': 36.034, 'eval_steps_per_second': 4.504, 'epoch': 7.0}
+{'train_runtime': 24792.963, 'train_samples_per_second': 18.053, 'train_steps_per_second': 0.564, 'train_loss': 0.16032459898777143, 'epoch': 7.0}
+2025-05-13 22:30:09,526 - INFO - 
+
+VALIDATION
+2025-05-13 22:30:09,527 - INFO - ==========
+2025-05-13 22:37:01,425 - INFO - Self-Transcendence: 0.46
+2025-05-13 22:37:01,425 - INFO - Self-Enhancement: 0.44
+2025-05-13 22:37:01,425 - INFO - Macro average: 0.45
+2025-05-13 22:37:01,921 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-13 22:37:01,921 - INFO - Saving best model to models directory
+2025-05-13 22:37:01,921 - INFO - UPLOAD to https://huggingface.co/Lex-WorryWords (using HF_TOKEN environment variable)
+2025-05-13 22:37:01,921 - INFO - SAVE to models

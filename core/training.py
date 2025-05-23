@@ -150,12 +150,6 @@ def train(
         gradient_accumulation_steps
     )
 
-    if ner_features:
-        # ner_feature_dim = 8
-        ner_feature_dim = 768 # DeBERTa hidden size
-    else:
-        ner_feature_dim = 0
-    
     config = AutoConfig.from_pretrained(pretrained_model)
     # Add necessary attributes to config
     config.id2label = id2label
@@ -169,7 +163,8 @@ def train(
         id2label=id2label,
         label2id=label2id,
         num_categories=num_categories,
-        ner_feature_dim=ner_feature_dim,
+        ling_feature_dim=17 if linguistic_features else 0,
+        ner_feature_dim=768 if ner_features else 0,
         multilayer=multilayer,
         residualblock=residualblock,
         topic_feature_dim=discovered_topics,

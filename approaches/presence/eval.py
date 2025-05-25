@@ -2,137 +2,54 @@ import sys
 import os
 # Add the project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+import torch.distributed as dist
+import torch
+import random
+import numpy as np
 
 from core.config import MODEL_CONFIG
-
-import pandas as pd
-import numpy as np
-from sklearn.metrics import precision_recall_fscore_support, classification_report
-
-"""
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(sys.stdout)],
-)
-"""
+from core.cli import parse_args
+from core.evaluation import eval
 
 import logging
-import torch.distributed as dist
+from core.log import logger
 
-# Initialize logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("HVD")
+def main() -> None:
 
-# Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
-if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-    logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
+    # Suppress duplicate logs on multi-GPU runs (only rank 0 logs)
+    if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+        logger.setLevel(logging.WARNING)  # Reduce logging for non-primary ranks
 
-# Load model-specific configuration
-model_group = "presence"
-model_config = MODEL_CONFIG[model_group]
+    # Load model-specific configuration
+    model_group = "presence"
+    model_config = MODEL_CONFIG[model_group]
+    labels = model_config["labels"]
 
-# Load predictions and gold labels
-predictions_path = "output/Text-predictions.tsv"
-gold_labels_path = "../../data/validation-english/labels-cat.tsv"
+    # Define CLI arguments for training script
+    args = parse_args(prog_name=model_group)
 
-# Load the data
-predictions = pd.read_csv(predictions_path, sep='\t')
-print(predictions[['Text-ID', 'Sentence-ID', 'Presence']].describe())
-gold_labels = pd.read_csv(gold_labels_path, sep='\t')
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
 
-# Extract the columns that exist in predictions
-relevant_columns = [col for col in predictions.columns if col in gold_labels.columns]
-gold_labels = gold_labels[relevant_columns]
+    # Optionally set the seed if provided
+    if args.seed is not None:
+        logger.info(f"Setting random seed to {args.seed}")
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
 
-# Ensure alignment by merging on Text-ID and Sentence-ID
-merged = pd.merge(gold_labels, predictions, on=["Text-ID", "Sentence-ID"], suffixes=("_gold", "_pred"))
+    model_name = args.model_name
 
-if merged.empty:
-    raise ValueError("The merge operation resulted in an empty DataFrame. Ensure matching IDs.")
+    # Load predictions and gold labels
+    predictions_path = args.output_directory + "/" + model_name + ".tsv"
+    gold_labels_path = args.test_dataset + "labels-cat.tsv"
 
-# Extract the new labels
-labels = model_config["labels"]
+    eval(labels, predictions_path, gold_labels_path)
 
-# Prepare gold and predicted arrays
-gold = merged[[label + "_gold" for label in labels]].values
-pred = merged[[label + "_pred" for label in labels]].values
-
-print(merged[['Text-ID', 'Sentence-ID', 'Presence_gold', 'Presence_pred']])
-
-# Check for missing values
-if pd.isnull(gold).any().any() or pd.isnull(pred).any().any():
-    raise ValueError("There are missing values in the gold or prediction data.")
-
-if gold.shape != pred.shape:
-    raise ValueError(f"Shape mismatch: gold shape {gold.shape}, pred shape {pred.shape}")
-
-# Ensure numeric types
-gold = gold.astype(float)
-pred = pred.astype(float)
-
-# Debugging output
-
-logger.debug(f"Gold labels shape: {gold.shape}")
-logger.debug(f"Predicted labels shape: {pred.shape}")
-logger.debug(f"Unique values in gold: {np.unique(gold)}")
-logger.debug(f"Unique values in pred: {np.unique(pred)}")
-
-# Apply threshold to predictions
-# Evaluate thresholds
-best_threshold = None
-best_recall_class1 = 0  # Tracking best F1-score for class 1
-min_precision_class1 = 0.55  # Set your precision constraint for class 1
-thresholds = np.arange(0.1, 0.9, 0.01)
-
-for threshold in thresholds:
-    #gold = (gold >= threshold).astype(int)  # Convert to binary (0 or 1)
-    pred = merged[[label + "_pred" for label in labels]].values
-    pred = (pred >= threshold).astype(int)  # Convert predictions to binary (0 or 1)
-    precision, recall, f1, _ = precision_recall_fscore_support(gold, pred, average=None, zero_division=0)
-    macro_f1 = np.mean(f1)
-
-    logger.debug(f"thresold: {threshold}")
-    logger.debug(f"precision: {precision}")
-    logger.debug(f"recall: {recall}")
-    logger.debug(f"f1: {f1}")
-    logger.debug(f"macro_f1: {macro_f1}")
-    
-    # Selection criteria: prioritize recall, precision ≥ 0.55, and balance in F1-score
-    if precision[1] >= min_precision_class1 and recall[1] > best_recall_class1:
-        best_recall_class1 = recall[1]  # Track the best recall
-        best_threshold = threshold  # Store threshold meeting criteria
-
-print(f"Best Threshold: {best_threshold:.2f}, Best Recall (class 1): {best_recall_class1:.4f}")
-
-#gold = (gold >= best_threshold).astype(int)  # Convert to binary (0 or 1)
-pred = merged[[label + "_pred" for label in labels]].values
-pred = (pred >= best_threshold).astype(int)  # Convert predictions to binary (0 or 1)
-
-print(np.unique(gold), np.unique(pred))
-
-print(np.bincount(gold.flatten().astype(int)))
-print(np.bincount(pred.flatten().astype(int)))
-
-assert set(np.unique(gold)).issubset({0, 1}), "Gold labels are not binary."
-assert set(np.unique(pred)).issubset({0, 1}), "Predicted labels are not binary."
-
-# Compute metrics
-precision, recall, f1, _ = precision_recall_fscore_support(gold, pred, average=None, zero_division=0)
-
-# Display results per label
-for i, label in enumerate(labels):
-    print(f"Label: {label}")
-    print(f"  Class 0 (Negative):")
-    print(f"    Precision: {precision[i*2]:.2f}")
-    print(f"    Recall:    {recall[i*2]:.2f}")
-    print(f"    F1-Score:  {f1[i*2]:.2f}")
-
-    print(f"  Class 1 (Positive):")
-    print(f"    Precision: {precision[i*2+1]:.2f}")
-    print(f"    Recall:    {recall[i*2+1]:.2f}")
-    print(f"    F1-Score:  {f1[i*2+1]:.2f}\n")
-
-# Compute macro-average F1-score
-macro_f1 = np.mean(f1)
-print(f"Macro-Average F1-Score: {macro_f1:.2f}")
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        logger.exception("An error occurred: %s", str(e))

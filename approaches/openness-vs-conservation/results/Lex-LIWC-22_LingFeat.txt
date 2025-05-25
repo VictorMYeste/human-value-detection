@@ -1,22 +1,22 @@
-2025-05-09 05:30:22,503 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-05-09 05:30:22,505 - INFO - PyTorch version 2.6.0+cu118 available.
-2025-05-09 05:30:29,643 - INFO - Setting random seed to 42
-2025-05-09 05:30:29,644 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
-2025-05-09 05:30:29,644 - INFO - Initializing tokenizer for model: microsoft/deberta-base
-2025-05-09 05:30:29,824 - INFO - Loading lexicon embeddings for: LIWC-22
-2025-05-09 05:30:29,824 - INFO - Preparing datasets for training and validation
-2025-05-09 05:30:52,815 - INFO - Loading en_core_web_sm for extra features
-2025-05-09 05:30:53,197 - INFO - Adding Linguistic features
-2025-05-09 05:35:31,544 - INFO - Loading en_core_web_sm for extra features
-2025-05-09 05:35:31,849 - INFO - Adding Linguistic features
-2025-05-09 05:37:05,439 - INFO - Arguments validated successfully.
-2025-05-09 05:37:05,518 - INFO - Clearing old checkpoints in models/checkpoints
-2025-05-09 05:37:06,767 - INFO - Using CUDA for training.
-2025-05-09 05:37:08,040 - INFO - TRAINING
-2025-05-09 05:37:08,040 - INFO - ========
-2025-05-09 05:37:08,040 - INFO - Training configuration:
+2025-05-23 20:55:47,856 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-23 20:55:47,860 - INFO - PyTorch version 2.6.0+cu118 available.
+2025-05-23 20:55:54,862 - INFO - Setting random seed to 42
+2025-05-23 20:55:54,863 - INFO - Running training for labels: ['Openness to Change', 'Conservation']
+2025-05-23 20:55:54,863 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-05-23 20:55:55,049 - INFO - Loading lexicon embeddings for: LIWC-22
+2025-05-23 20:55:55,049 - INFO - Preparing datasets for training and validation
+2025-05-23 20:56:18,155 - INFO - Loading en_core_web_sm for extra features
+2025-05-23 20:56:18,525 - INFO - Adding Linguistic features
+2025-05-23 21:00:57,046 - INFO - Loading en_core_web_sm for extra features
+2025-05-23 21:00:57,355 - INFO - Adding Linguistic features
+2025-05-23 21:02:31,142 - INFO - Arguments validated successfully.
+2025-05-23 21:02:31,219 - INFO - Clearing old checkpoints in models/checkpoints
+2025-05-23 21:02:32,744 - INFO - Using CUDA for training.
+2025-05-23 21:02:34,015 - INFO - TRAINING
+2025-05-23 21:02:34,015 - INFO - ========
+2025-05-23 21:02:34,015 - INFO - Training configuration:
 Pre-trained model: microsoft/deberta-base
-Model name: None
+Model name: Lex-LIWC-22_LingFeat
 Filter labels: []
 Batch size: 4
 Number of epochs: 10
@@ -35,41 +35,44 @@ Using data augmentation with paraphrasing: No
 Adding topic detection features: No
 Applying token pruning: No
 
-2025-05-09 05:37:08,043 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-{'loss': 0.375, 'grad_norm': 4.605055809020996, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
-{'loss': 0.3477, 'grad_norm': 3.5558626651763916, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
-{'eval_loss': 0.3261764645576477, 'eval_f1-score': {'Openness to Change': 0.15, 'Conservation': 0.27}, 'eval_macro-avg-f1-score': 0.21, 'eval_runtime': 168.5031, 'eval_samples_per_second': 88.449, 'eval_steps_per_second': 11.056, 'epoch': 1.0}
-2025-05-09 06:05:09,508 - INFO - Skipping evaluation for warm-up phase (epoch 0).
-{'loss': 0.3383, 'grad_norm': 2.8369228839874268, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
-{'loss': 0.2921, 'grad_norm': 3.840946674346924, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
-{'loss': 0.2919, 'grad_norm': 2.947981834411621, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
-{'eval_loss': 0.3295970857143402, 'eval_f1-score': {'Openness to Change': 0.2, 'Conservation': 0.5}, 'eval_macro-avg-f1-score': 0.35, 'eval_runtime': 169.407, 'eval_samples_per_second': 87.977, 'eval_steps_per_second': 10.997, 'epoch': 2.0}
-2025-05-09 06:33:11,744 - INFO - Skipping evaluation for warm-up phase (epoch 1).
-{'loss': 0.2641, 'grad_norm': 6.1823296546936035, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
-{'loss': 0.2145, 'grad_norm': 5.613097190856934, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
-{'loss': 0.2137, 'grad_norm': 3.333996534347534, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
-{'eval_loss': 0.4321901500225067, 'eval_f1-score': {'Openness to Change': 0.33, 'Conservation': 0.48}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 168.3862, 'eval_samples_per_second': 88.511, 'eval_steps_per_second': 11.064, 'epoch': 3.0}
-{'loss': 0.1661, 'grad_norm': 5.907351016998291, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
-{'loss': 0.1341, 'grad_norm': 4.619081974029541, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
-{'loss': 0.142, 'grad_norm': 3.695957660675049, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
-{'eval_loss': 0.5005344152450562, 'eval_f1-score': {'Openness to Change': 0.29, 'Conservation': 0.5}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 169.3357, 'eval_samples_per_second': 88.015, 'eval_steps_per_second': 11.002, 'epoch': 4.0}
-{'loss': 0.0906, 'grad_norm': 4.013422012329102, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
-{'loss': 0.0828, 'grad_norm': 4.248895168304443, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
-{'eval_loss': 0.61180579662323, 'eval_f1-score': {'Openness to Change': 0.3, 'Conservation': 0.45}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 169.1281, 'eval_samples_per_second': 88.123, 'eval_steps_per_second': 11.015, 'epoch': 5.0}
-{'loss': 0.085, 'grad_norm': 3.8505401611328125, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
-{'loss': 0.0526, 'grad_norm': 9.906383514404297, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
-{'loss': 0.0535, 'grad_norm': 4.775690078735352, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
-{'eval_loss': 0.7879627346992493, 'eval_f1-score': {'Openness to Change': 0.29, 'Conservation': 0.46}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 168.8533, 'eval_samples_per_second': 88.266, 'eval_steps_per_second': 11.033, 'epoch': 6.0}
-{'loss': 0.0479, 'grad_norm': 1.2546865940093994, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
-{'loss': 0.0332, 'grad_norm': 5.976899147033691, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
-{'loss': 0.0356, 'grad_norm': 5.917022705078125, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
-{'eval_loss': 0.9280453324317932, 'eval_f1-score': {'Openness to Change': 0.31, 'Conservation': 0.48}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 167.7818, 'eval_samples_per_second': 88.83, 'eval_steps_per_second': 11.104, 'epoch': 7.0}
-{'train_runtime': 11783.3619, 'train_samples_per_second': 37.984, 'train_steps_per_second': 1.186, 'train_loss': 0.16739332185265432, 'epoch': 7.0}
-2025-05-09 08:53:33,399 - INFO - 
+2025-05-23 21:02:34,018 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.3813, 'grad_norm': 7.796945571899414, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.3562, 'grad_norm': 6.306697368621826, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.33311358094215393, 'eval_f1-score': {'Openness to Change': 0.16, 'Conservation': 0.22}, 'eval_macro-avg-f1-score': 0.19, 'eval_runtime': 169.5406, 'eval_samples_per_second': 87.908, 'eval_steps_per_second': 10.989, 'epoch': 1.0}
+2025-05-23 21:30:37,534 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.3494, 'grad_norm': 3.5792529582977295, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.2994, 'grad_norm': 4.6752119064331055, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.2979, 'grad_norm': 3.0377109050750732, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.3305087983608246, 'eval_f1-score': {'Openness to Change': 0.24, 'Conservation': 0.51}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 167.86, 'eval_samples_per_second': 88.788, 'eval_steps_per_second': 11.099, 'epoch': 2.0}
+2025-05-23 21:58:43,611 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.2702, 'grad_norm': 7.840368270874023, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.2246, 'grad_norm': 4.945817947387695, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.2214, 'grad_norm': 4.213753700256348, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.42121872305870056, 'eval_f1-score': {'Openness to Change': 0.34, 'Conservation': 0.51}, 'eval_macro-avg-f1-score': 0.43, 'eval_runtime': 169.5514, 'eval_samples_per_second': 87.903, 'eval_steps_per_second': 10.988, 'epoch': 3.0}
+{'loss': 0.1736, 'grad_norm': 5.894100189208984, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1437, 'grad_norm': 5.269622802734375, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.1512, 'grad_norm': 4.9673662185668945, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.5068371295928955, 'eval_f1-score': {'Openness to Change': 0.31, 'Conservation': 0.52}, 'eval_macro-avg-f1-score': 0.42, 'eval_runtime': 169.0976, 'eval_samples_per_second': 88.138, 'eval_steps_per_second': 11.017, 'epoch': 4.0}
+{'loss': 0.1002, 'grad_norm': 8.218345642089844, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.0879, 'grad_norm': 2.390716314315796, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.6144040822982788, 'eval_f1-score': {'Openness to Change': 0.3, 'Conservation': 0.47}, 'eval_macro-avg-f1-score': 0.38, 'eval_runtime': 168.6095, 'eval_samples_per_second': 88.394, 'eval_steps_per_second': 11.049, 'epoch': 5.0}
+{'loss': 0.0922, 'grad_norm': 3.5058112144470215, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0574, 'grad_norm': 4.88206672668457, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0581, 'grad_norm': 4.028278350830078, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.748631477355957, 'eval_f1-score': {'Openness to Change': 0.3, 'Conservation': 0.51}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 168.8336, 'eval_samples_per_second': 88.276, 'eval_steps_per_second': 11.035, 'epoch': 6.0}
+{'loss': 0.0532, 'grad_norm': 1.237656831741333, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0385, 'grad_norm': 1.8674860000610352, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0415, 'grad_norm': 4.32379150390625, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 0.8506965637207031, 'eval_f1-score': {'Openness to Change': 0.29, 'Conservation': 0.5}, 'eval_macro-avg-f1-score': 0.4, 'eval_runtime': 168.2952, 'eval_samples_per_second': 88.559, 'eval_steps_per_second': 11.07, 'epoch': 7.0}
+{'train_runtime': 11814.2972, 'train_samples_per_second': 37.885, 'train_steps_per_second': 1.183, 'train_loss': 0.1746820201061437, 'epoch': 7.0}
+2025-05-24 00:19:30,337 - INFO - 
 
 VALIDATION
-2025-05-09 08:53:33,399 - INFO - ==========
-2025-05-09 08:56:20,346 - INFO - Openness to Change: 0.33
-2025-05-09 08:56:20,347 - INFO - Conservation: 0.48
-2025-05-09 08:56:20,347 - INFO - Macro average: 0.40
-2025-05-09 08:56:20,535 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-24 00:19:30,337 - INFO - ==========
+2025-05-24 00:22:17,326 - INFO - Openness to Change: 0.34
+2025-05-24 00:22:17,326 - INFO - Conservation: 0.51
+2025-05-24 00:22:17,326 - INFO - Macro average: 0.43
+2025-05-24 00:22:17,413 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-05-24 00:22:17,413 - INFO - Saving best model to models directory
+2025-05-24 00:22:17,413 - INFO - UPLOAD to https://huggingface.co/Lex-LIWC-22_LingFeat (using HF_TOKEN environment variable)
+2025-05-24 00:22:17,413 - INFO - SAVE to models

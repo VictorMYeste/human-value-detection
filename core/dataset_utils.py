@@ -390,8 +390,8 @@ def add_previous_label_features(
         model.eval()
 
         # Step 1: Initialize Previous Predictions
-        prev_pred_1 = [0.0] * (2 * num_labels)  # Placeholder for prev-1 labels
-        prev_pred_2 = [0.0] * (2 * num_labels)  # Placeholder for prev-2 labels
+        prev_pred_1 = [0.0] * num_labels  # Placeholder for prev-1 labels
+        prev_pred_2 = [0.0] * num_labels  # Placeholder for prev-2 labels
 
         for index, row in df.iterrows():
             current_text_id = row["Text-ID"]
@@ -1006,3 +1006,61 @@ def compute_precomputed_scores(
         # If no match, fallback
         return [0.0] * num_categories
     
+def concatenate_text_with_prev_labels(
+    df: pd.DataFrame,
+    idx: int,
+    labels: list[str],
+    prev_feats: list[list[float]]
+) -> str:
+    """
+    Return a string that contains:
+       • the current sentence (row *idx*)
+       • up to two previous sentences of the same Text-ID
+         each prefixed with the model’s predicted tags.
+
+    Parameters
+    ----------
+    df         : DataFrame sorted by ["Text-ID", "Sentence-ID"]
+    idx        : row index of the *current* sentence
+    labels     : list of label names in fixed order
+    prev_feats : list of length len(df); each element is the 2·|labels|
+                 vector produced by `add_previous_label_features`.
+    """
+    row = df.iloc[idx]
+    text_id = row["Text-ID"]
+    sentence_id = row["Sentence-ID"]
+    prev_sentences = []
+
+    for offset in [1, 2]:  # Get prev-1 first, then prev-2
+        prev_idx = df[(df["Text-ID"] == text_id) & (df["Sentence-ID"] == sentence_id - offset)].index
+
+        if len(prev_idx) > 0:
+            prev_idx = prev_idx[0]
+            prev_text = str(df.iloc[prev_idx]["Text"])
+            
+            # Extract correct previous label features
+            prev_feat = prev_feats[prev_idx]
+
+            # Assign prev-1 or prev-2 labels
+            prev_labels = prev_feat[:len(labels)] if offset == 1 else prev_feat[len(labels):]
+
+            # Ensure labels are formatted and added
+            label_str = " ".join(f"<{label}>" for label, value in zip(labels, prev_labels) if value >= 0.5)
+            label_str = label_str if label_str else "<NONE>"  # Ensure a placeholder when no label is present
+
+            prev_sentences.append(f"{label_str} {prev_text}")
+
+            # Debugging: Ensure correct previous label extraction
+            logger.debug(f"Row {idx} (Text-ID {text_id}, Sentence-ID {sentence_id}) Offset {offset}: Extracted prev_labels = {prev_labels}")
+            logger.debug(f"Row {idx} Offset {offset}: label_str before formatting = {label_str}")
+
+    current_text = str(row["Text"])
+
+    if prev_sentences:
+        full_text = current_text + " </s> " + " </s> ".join(prev_sentences)
+    else:
+        full_text = current_text
+
+    logger.debug(f"Concatenated text for row {idx}:\n{full_text}\n")
+
+    return full_text

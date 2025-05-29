@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import spacy
 
-from core.dataset_utils import LEXICON_COMPUTATION_FUNCTIONS, add_previous_label_features, compute_lexicon_scores, compute_linguistic_features, compute_ner_embeddings, compute_precomputed_scores
+from core.dataset_utils import LEXICON_COMPUTATION_FUNCTIONS, add_previous_label_features, compute_lexicon_scores, compute_linguistic_features, compute_ner_embeddings, compute_precomputed_scores, concatenate_text_with_prev_labels
 from core.lexicon_utils import load_embeddings, load_lexicon
 from core.config import LEXICON_PATHS, SCHWARTZ_VALUE_LEXICON
 from core.topic_detection import TopicModeling
@@ -475,9 +475,10 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
 
         # (E) Concatenate to text the previous sentences with their predicted labels
         self.val_df["Text"] = self.val_df["Original_Text"]
-        self.val_df["Text"] = self.val_df.apply(
-            lambda row: self.concatenate_text_with_prev_labels(row, self.labels, new_prev_feats), axis=1
-        )
+        self.val_df["Text"] = [
+            concatenate_text_with_prev_labels(self.val_df, i, self.labels, new_prev_feats)
+            for i in range(len(self.val_df))
+        ]
 
         logger.debug(f"Validation dataset first samples:\n{self.val_df[['Text', 'Original_Text']].head().to_string().strip()}")
 
@@ -575,46 +576,3 @@ class DynamicPrevLabelCallback(transformers.TrainerCallback):
             topic_features.append(row_vector.tolist())
 
         return topic_features
-
-    def concatenate_text_with_prev_labels(self, row, labels, new_prev_feats):
-        """
-        Helper function to reconstruct the text with previous sentences and their labels.
-        """
-        idx = row.name
-        text_id = row["Text-ID"]
-        sentence_id = row["Sentence-ID"]
-        prev_sentences = []
-
-        for offset in [1, 2]:  # Get prev-1 first, then prev-2
-            prev_idx = self.val_df[(self.val_df["Text-ID"] == text_id) & (self.val_df["Sentence-ID"] == sentence_id - offset)].index
-
-            if len(prev_idx) > 0:
-                prev_idx = prev_idx[0]
-                prev_text = str(self.val_df.iloc[prev_idx]["Text"])
-                
-                # Extract correct previous label features
-                prev_feat = new_prev_feats[prev_idx]
-
-                # Assign prev-1 or prev-2 labels
-                prev_labels = prev_feat[:len(labels)] if offset == 1 else prev_feat[len(labels):]
-
-                # Ensure labels are formatted and added
-                label_str = " ".join(f"<{label}>" for label, value in zip(labels, prev_labels) if value >= 0.5)
-                label_str = label_str if label_str else "<NONE>"  # Ensure a placeholder when no label is present
-
-                prev_sentences.append(f"{label_str} {prev_text}")
-
-                # Debugging: Ensure correct previous label extraction
-                logger.debug(f"Row {idx} (Text-ID {text_id}, Sentence-ID {sentence_id}) Offset {offset}: Extracted prev_labels = {prev_labels}")
-                logger.debug(f"Row {idx} Offset {offset}: label_str before formatting = {label_str}")
-
-        current_text = str(row["Text"])
-
-        if prev_sentences:
-            full_text = current_text + " </s> " + " </s> ".join(prev_sentences)
-        else:
-            full_text = current_text
-
-        logger.debug(f"Concatenated text for row {idx}:\n{full_text}\n")
-
-        return full_text

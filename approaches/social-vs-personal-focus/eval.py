@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore", category=UserWarning, module=r"torch\.nn\.para
 
 from core.evaluation import run
 
-MODEL_GROUP = "presence"
+MODEL_GROUP = "social_personal_focus"
 
 if __name__ == "__main__":
     run(model_group=MODEL_GROUP)

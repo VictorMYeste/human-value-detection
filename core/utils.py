@@ -59,4 +59,3 @@ def clear_directory(directory):
                     shutil.rmtree(file_path)  # Remove directory
             except Exception as e:
                 logger.error(f"Failed to delete {file_path}. Reason: {e}")
-                

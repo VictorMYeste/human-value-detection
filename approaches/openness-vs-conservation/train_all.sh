@@ -1,19 +1,19 @@
 #!/bin/bash
 
-echo "===== Baseline ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --model-name Baseline | tee results/Baseline.txt
+# echo "===== Baseline ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --model-name Baseline | tee results/Baseline.txt
 
-echo "===== Token Pruning (TP, IDF = 3.0) ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --token-pruning | tee results/Token-Pruning-3.0.txt
+# echo "===== Token Pruning (TP, IDF = 3.0) ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --token-pruning | tee results/Token-Pruning-3.0.txt
 
-echo "===== 2 prev sentences with label ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences | tee results/Previous-Sentences-2.txt
+# echo "===== 2 prev sentences with label ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --previous-sentences | tee results/Previous-Sentences-2.txt
 
-echo "===== MultiLayer ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --multilayer | tee results/MultiLayer.txt
+# echo "===== MultiLayer ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --multilayer | tee results/MultiLayer.txt
 
-echo "===== ResidualBlock ====="
-accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --residualblock | tee results/ResidualBlock.txt
+# echo "===== ResidualBlock ====="
+# accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --residualblock | tee results/ResidualBlock.txt
 
 echo "===== Data Augmentation ====="
 accelerate launch --multi_gpu main.py -t ../../data/training-english/ -v ../../data/validation-english/ -s 42 --augment-data | tee results/Data-Augmentation.txt

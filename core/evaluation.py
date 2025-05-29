@@ -6,108 +6,218 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 import pandas as pd
 import numpy as np
 from sklearn.metrics import precision_recall_fscore_support
-
+import json
+import torch.distributed as dist
+import torch
+import random
 import logging
-# Initialize logging
+
+from core.config import MODEL_CONFIG
+from core.cli import parse_args
+
+# --------------------------------------------------------------------------- #
+# Logging
+# --------------------------------------------------------------------------- #
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("HVD")
 
-def eval(labels, predictions_path, gold_labels_path):
+# --------------------------------------------------------------------------- #
+# Evaluation logic
+# --------------------------------------------------------------------------- #
+def find_best_threshold(y_true: np.ndarray,
+                        y_pred_scores: np.ndarray,
+                        min_precision: float = 0.4,
+                        step: float = 0.01) -> float:
+    """
+    Searches [0.10 … 0.89] for the threshold that gives the highest recall
+    on the positive class while meeting a precision constraint.
+    """
+    best_th, best_recall = 0.5, 0.0
+    for th in np.arange(0.10, 0.90, step):
+        y_pred = (y_pred_scores >= th).astype(int)
+        prec, rec, _, _ = precision_recall_fscore_support(
+            y_true, y_pred, average=None, zero_division=0
+        )
+        # index 1 == positive class
+        if prec[1] >= min_precision and rec[1] > best_recall:
+            best_recall, best_th = rec[1], th
+    return best_th
 
-    # Load the data
-    predictions = pd.read_csv(predictions_path, sep='\t')
-    print(predictions[['Text-ID', 'Sentence-ID', 'Presence']].describe())
-    gold_labels = pd.read_csv(gold_labels_path, sep='\t')
 
-    # Extract the columns that exist in predictions
-    relevant_columns = [col for col in predictions.columns if col in gold_labels.columns]
-    gold_labels = gold_labels[relevant_columns]
+def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None, thresholds_out=None, compute_tuned=True):
+    # ------------------------------------------------------------------- #
+    # Load & align data
+    # ------------------------------------------------------------------- #
+    preds_df = pd.read_csv(predictions_path, sep="\t")
+    gold_df  = pd.read_csv(gold_labels_path, sep="\t")
 
-    # Ensure alignment by merging on Text-ID and Sentence-ID
-    merged = pd.merge(gold_labels, predictions, on=["Text-ID", "Sentence-ID"], suffixes=("_gold", "_pred"))
+    # Keep only matching columns so accidental extras don’t break the merge
+    keep_cols = ["Text-ID", "Sentence-ID"] + labels
+    preds_df  = preds_df[keep_cols]
+    gold_df   = gold_df[keep_cols]
 
+    merged = pd.merge(
+        gold_df, preds_df,
+        on=["Text-ID", "Sentence-ID"],
+        suffixes=("_gold", "_pred"),
+        validate="one_to_one"
+    )
     if merged.empty:
-        raise ValueError("The merge operation resulted in an empty DataFrame. Ensure matching IDs.")
+        raise ValueError("Merge produced an empty DataFrame – check IDs!")
 
-    # Prepare gold and predicted arrays
-    gold = merged[[label + "_gold" for label in labels]].values
-    pred = merged[[label + "_pred" for label in labels]].values
+    # ------------------------------------------------------------------- #
+    # Per-label evaluation
+    # ------------------------------------------------------------------- #
+    if compute_tuned:
+        macro_f1_tuned  = []  # for threshold-search F1s
+        best_thresholds = {}
+    else:
+        logger.info("Tuned thresholds disabled; only fixed‐0.5 evaluation will run")
+    macro_f1_fixed  = []   # for fixed-0.5-threshold F1s
 
-    print(merged[['Text-ID', 'Sentence-ID', 'Presence_gold', 'Presence_pred']])
+    for label in labels:
+        g = merged[f"{label}_gold"].astype(float).values
+        p_scores = merged[f"{label}_pred"].astype(float).values
 
-    # Check for missing values
-    if pd.isnull(gold).any().any() or pd.isnull(pred).any().any():
-        raise ValueError("There are missing values in the gold or prediction data.")
+        # --- (a) tuned threshold -------------------------------------------------
+        if compute_tuned:
+            # ---------- choose threshold ------------------------------------ #
+            if thresholds_dict is not None:
+                if label not in thresholds_dict:
+                    raise ValueError(f"Threshold for label '{label}' not found "
+                                    "in val_thresholds.json")
+                best_th = thresholds_dict[label]
+            else:
+                best_th = find_best_threshold(g, p_scores)
+                best_thresholds[label] = round(float(best_th), 2)
 
-    if gold.shape != pred.shape:
-        raise ValueError(f"Shape mismatch: gold shape {gold.shape}, pred shape {pred.shape}")
+            p_bin_tuned = (p_scores >= best_th).astype(int)
+            best_thresholds[label] = round(float(best_th), 2)
 
-    # Ensure numeric types
-    gold = gold.astype(float)
-    pred = pred.astype(float)
+            prec_t, rec_t, f1_t, _ = precision_recall_fscore_support(
+                g, p_bin_tuned, average=None, zero_division=0
+            )
+            macro_f1_tuned.append(f1_t[1])
 
-    # Debugging output
+        # --- (b) fixed 0.5 threshold --------------------------------------------
+        p_bin_fixed = (p_scores >= 0.5).astype(int)
+        prec_f, rec_f, f1_f, _ = precision_recall_fscore_support(
+            g, p_bin_fixed, average=None, zero_division=0
+        )
+        macro_f1_fixed.append(f1_f[1])  
 
-    logger.debug(f"Gold labels shape: {gold.shape}")
-    logger.debug(f"Predicted labels shape: {pred.shape}")
-    logger.debug(f"Unique values in gold: {np.unique(gold)}")
-    logger.debug(f"Unique values in pred: {np.unique(pred)}")
+        # ---------------------------------------------------------------- #
+        # Pretty printing
+        # ---------------------------------------------------------------- #
+        if compute_tuned:
+            print(f"\nLabel: {label}  |  best threshold = {best_th:.2f}")
+            print("  Class 0 (negative)")
+            print(f"    Precision: {prec_t[0]:.2f}  Recall: {rec_t[0]:.2f}  F1: {f1_t[0]:.2f}")
+            print("  Class 1 (positive)")
+            print(f"    Precision: {prec_t[1]:.2f}  Recall: {rec_t[1]:.2f}  F1: {f1_t[1]:.2f}")
 
-    # Apply threshold to predictions
-    # Evaluate thresholds
-    best_threshold = None
-    best_recall_class1 = 0  # Tracking best F1-score for class 1
-    min_precision_class1 = 0.55  # Set your precision constraint for class 1
-    thresholds = np.arange(0.1, 0.9, 0.01)
+        print(f"\nLabel: {label}  |  Fixed 0.50 threshold")
+        print("  Class 0 (negative)")
+        print(f"    Precision: {prec_f[0]:.2f}  Recall: {rec_f[0]:.2f}  F1: {f1_f[0]:.2f}")
+        print("  Class 1 (positive)")
+        print(f"    Precision: {prec_f[1]:.2f}  Recall: {rec_f[1]:.2f}  F1: {f1_f[1]:.2f}")
 
-    for threshold in thresholds:
-        #gold = (gold >= threshold).astype(int)  # Convert to binary (0 or 1)
-        pred = merged[[label + "_pred" for label in labels]].values
-        pred = (pred >= threshold).astype(int)  # Convert predictions to binary (0 or 1)
-        precision, recall, f1, _ = precision_recall_fscore_support(gold, pred, average=None, zero_division=0)
-        macro_f1 = np.mean(f1)
+    # ------------------------------------------------------------------- #
+    # Macro-average over all labels (positive class only)
+    # ------------------------------------------------------------------- #
+    print("\n=== SUMMARY =================================================")
+    if compute_tuned:
+        macro_f1_tuned = np.mean(macro_f1_tuned)
+        print(f"\nMacro-average F1 (tuned thresholds) across {len(labels)} labels: {macro_f1_tuned:.2f}")
+    macro_f1_fixed = np.mean(macro_f1_fixed)
+    print(f"\nMacro-average F1 (fixed 0.50 threshold) across {len(labels)} labels: {macro_f1_fixed:.2f}")
 
-        logger.debug(f"thresold: {threshold}")
-        logger.debug(f"precision: {precision}")
-        logger.debug(f"recall: {recall}")
-        logger.debug(f"f1: {f1}")
-        logger.debug(f"macro_f1: {macro_f1}")
-        
-        # Selection criteria: prioritize recall, precision ≥ 0.55, and balance in F1-score
-        if precision[1] >= min_precision_class1 and recall[1] > best_recall_class1:
-            best_recall_class1 = recall[1]  # Track the best recall
-            best_threshold = threshold  # Store threshold meeting criteria
+    # -------- optional: save thresholds found on the validation set -------- #
+    if compute_tuned and thresholds_out is not None:
+        with open(thresholds_out, "w") as fh:
+            json.dump(best_thresholds, fh, indent=2)
+        logger.info(f"Per-label thresholds written to {thresholds_out}")
 
-    print(f"Best Threshold: {best_threshold:.2f}, Best Recall (class 1): {best_recall_class1:.4f}")
 
-    #gold = (gold >= best_threshold).astype(int)  # Convert to binary (0 or 1)
-    pred = merged[[label + "_pred" for label in labels]].values
-    pred = (pred >= best_threshold).astype(int)  # Convert predictions to binary (0 or 1)
+# --------------------------------------------------------------------------- #
+# CLI entry-point – keeps the signature you were already using
+# --------------------------------------------------------------------------- #
+def run(model_group: str = "presence", compute_tuned: bool = True) -> None:
+    """
+    End-to-end evaluation entry point.
 
-    print(np.unique(gold), np.unique(pred))
+    Parameters
+    ----------
+    model_group : str, optional
+        Key in `core.config.MODEL_CONFIG`.  Change this when you copy the tiny
+        `eval.py` wrapper into another model folder.
+    """
+    # Suppress duplicate logs on multi-GPU runs (only rank-0 logs talk)
+    if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+        logger.setLevel(logging.WARNING)
 
-    print(np.bincount(gold.flatten().astype(int)))
-    print(np.bincount(pred.flatten().astype(int)))
+    # ------------------------------- #
+    # Config & CLI
+    # ------------------------------- #
+    model_cfg = MODEL_CONFIG[model_group]
+    labels    = model_cfg["labels"]
 
-    assert set(np.unique(gold)).issubset({0, 1}), "Gold labels are not binary."
-    assert set(np.unique(pred)).issubset({0, 1}), "Predicted labels are not binary."
+    args = parse_args(prog_name=model_group)
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
 
-    # Compute metrics
-    precision, recall, f1, _ = precision_recall_fscore_support(gold, pred, average=None, zero_division=0)
+    # Optional fixed seed
+    if args.seed is not None:
+        logger.info(f"Setting random seed {args.seed}")
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        torch.manual_seed(args.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(args.seed)
+    
+    # ---------------------------------------------------------------- #
+    # Decide which split & which thresholds to use
+    # ---------------------------------------------------------------- #
+    if args.validation_dataset:
+        logger.info("Using validation dataset for threshold search")
+        dataset_path   = args.validation_dataset
+        thresholds_dict  = None
+        thresholds_out = None
+        if compute_tuned:
+            thresholds_out = os.path.join(args.output_directory, "val_thresholds.json")
+        pred_suffix = "val"
+    else:
+        dataset_path   = args.test_dataset
+        thresholds_dict = None
+        if compute_tuned:
+            thresholds_path  = os.path.join(args.output_directory, "val_thresholds.json")
+            if not os.path.exists(thresholds_path):
+                raise FileNotFoundError(
+                    f"val_thresholds.json not found in {args.output_directory}. "
+                    "Run this script first with --validation-dataset to generate "
+                    "the per-label thresholds before evaluating on the test set."
+                )
+            with open(thresholds_path) as fh:
+                thresholds_dict = json.load(fh)
+        thresholds_out = None
+        pred_suffix = "test"
 
-    # Display results per label
-    for i, label in enumerate(labels):
-        print(f"Label: {label}")
-        print(f"  Class 0 (Negative):")
-        print(f"    Precision: {precision[i*2]:.2f}")
-        print(f"    Recall:    {recall[i*2]:.2f}")
-        print(f"    F1-Score:  {f1[i*2]:.2f}")
+    # ------------------------------- #
+    # File paths
+    # ------------------------------- #
+    filename = ""
+    if args.filter_1_model:
+        filename += "1_" + args.filter_1_model + "_" + str(args.filter_1_th) + "_"
+    filename += args.model_name + "-" + pred_suffix + ".tsv"
+    predictions_path  = os.path.join(args.output_directory, filename)
+    gold_labels_path  = os.path.join(dataset_path, "labels-cat.tsv")
 
-        print(f"  Class 1 (Positive):")
-        print(f"    Precision: {precision[i*2+1]:.2f}")
-        print(f"    Recall:    {recall[i*2+1]:.2f}")
-        print(f"    F1-Score:  {f1[i*2+1]:.2f}\n")
+    # ------------------------------- #
+    # Kick-off evaluation
+    # ------------------------------- #
+    eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict, thresholds_out, compute_tuned)
 
-    # Compute macro-average F1-score
-    macro_f1 = np.mean(f1)
-    print(f"Macro-Average F1-Score: {macro_f1:.2f}")
+
+# Allow “python evaluation.py” to run a quick presence check
+if __name__ == "__main__":
+    run()

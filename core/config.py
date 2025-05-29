@@ -169,7 +169,8 @@ MODEL_CONFIG = {
             "situation", "case", "problem", "issue", "matter",
             "people", "person", "individual", "group", "community",
             "leaders", "authorities", "organization", "institutions"
-        ]
+        ],
+        "nmf_topic_feature_dim": 39,
     },
     "self-trans_self-enh": {
         "pretrained_model": "microsoft/deberta-base",

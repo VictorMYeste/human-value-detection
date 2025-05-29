@@ -8,9 +8,9 @@ sys.path.insert(0, str(project_root))                # put it at the front
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module=r"torch\.nn\.parallel")
 
-from core.evaluation import run
+from core.prediction import run
 
-MODEL_GROUP = "presence"
+MODEL_GROUP = "growth"
 
 if __name__ == "__main__":
-    run(model_group=MODEL_GROUP)
+    run(model_group=MODEL_GROUP, filter_label="Growth Anxiety-Free")

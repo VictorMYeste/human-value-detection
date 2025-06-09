@@ -1,0 +1,97 @@
+2025-06-06 11:17:21,022 - INFO - PyTorch version 2.2.2+cu118 available.
+2025-06-06 11:17:21,022 - INFO - PyTorch version 2.2.2+cu118 available.
+2025-06-06 11:17:28,268 - INFO - Setting random seed to 42
+2025-06-06 11:17:28,268 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+2025-06-06 11:17:28,268 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2025-06-06 11:17:28,501 - INFO - Loading lexicon embeddings for: No lexicon used
+2025-06-06 11:17:28,501 - INFO - Preparing datasets for training and validation
+2025-06-06 11:19:53,514 - INFO - Applying nmf for topic modeling.
+2025-06-06 11:20:52,522 - INFO - Applying nmf for topic modeling.
+2025-06-06 11:20:54,964 - INFO - Arguments validated successfully.
+2025-06-06 11:20:54,970 - INFO - Clearing old checkpoints in models/checkpoints
+2025-06-06 11:20:56,378 - INFO - Using CUDA for training.
+2025-06-06 11:20:57,379 - INFO - TRAINING
+2025-06-06 11:20:57,379 - INFO - ========
+2025-06-06 11:20:57,379 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: TD-NMF
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: Yes
+Applying token pruning: No
+
+2025-06-06 11:20:57,381 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.1285, 'grad_norm': 0.46893760561943054, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.1021, 'grad_norm': 0.4564741253852844, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.09636063873767853, 'eval_f1-score': {'Self-direction: thought': 0, 'Self-direction: action': 0.03, 'Stimulation': 0.12, 'Hedonism': 0.25, 'Achievement': 0.25, 'Power: dominance': 0.14, 'Power: resources': 0.18, 'Face': 0.07, 'Security: personal': 0.08, 'Security: societal': 0.25, 'Tradition': 0.19, 'Conformity: rules': 0.03, 'Conformity: interpersonal': 0, 'Humility': 0, 'Benevolence: caring': 0.02, 'Benevolence: dependability': 0.13, 'Universalism: concern': 0.22, 'Universalism: nature': 0.43, 'Universalism: tolerance': 0}, 'eval_macro-avg-f1-score': 0.13, 'eval_runtime': 409.5054, 'eval_samples_per_second': 36.395, 'eval_steps_per_second': 4.549, 'epoch': 1.0}
+2025-06-06 12:16:05,301 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.0988, 'grad_norm': 0.40565454959869385, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.0869, 'grad_norm': 0.5377675294876099, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.0871, 'grad_norm': 0.45315971970558167, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.09349683672189713, 'eval_f1-score': {'Self-direction: thought': 0.01, 'Self-direction: action': 0.11, 'Stimulation': 0.14, 'Hedonism': 0.29, 'Achievement': 0.29, 'Power: dominance': 0.34, 'Power: resources': 0.16, 'Face': 0.19, 'Security: personal': 0.17, 'Security: societal': 0.39, 'Tradition': 0.31, 'Conformity: rules': 0.43, 'Conformity: interpersonal': 0, 'Humility': 0, 'Benevolence: caring': 0.04, 'Benevolence: dependability': 0.08, 'Universalism: concern': 0.29, 'Universalism: nature': 0.53, 'Universalism: tolerance': 0.05}, 'eval_macro-avg-f1-score': 0.2, 'eval_runtime': 412.4272, 'eval_samples_per_second': 36.137, 'eval_steps_per_second': 4.517, 'epoch': 2.0}
+2025-06-06 13:13:55,242 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.0819, 'grad_norm': 0.688900887966156, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.0712, 'grad_norm': 0.4788621664047241, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.0727, 'grad_norm': 0.6068453192710876, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.10028087347745895, 'eval_f1-score': {'Self-direction: thought': 0.05, 'Self-direction: action': 0.22, 'Stimulation': 0.3, 'Hedonism': 0.32, 'Achievement': 0.32, 'Power: dominance': 0.31, 'Power: resources': 0.28, 'Face': 0.25, 'Security: personal': 0.31, 'Security: societal': 0.42, 'Tradition': 0.46, 'Conformity: rules': 0.45, 'Conformity: interpersonal': 0, 'Humility': 0, 'Benevolence: caring': 0.23, 'Benevolence: dependability': 0.26, 'Universalism: concern': 0.28, 'Universalism: nature': 0.57, 'Universalism: tolerance': 0.19}, 'eval_macro-avg-f1-score': 0.27, 'eval_runtime': 411.6774, 'eval_samples_per_second': 36.203, 'eval_steps_per_second': 4.525, 'epoch': 3.0}
+{'loss': 0.063, 'grad_norm': 0.6628326177597046, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.057, 'grad_norm': 0.6504179239273071, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.0579, 'grad_norm': 0.6067084670066833, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.10771582275629044, 'eval_f1-score': {'Self-direction: thought': 0.1, 'Self-direction: action': 0.22, 'Stimulation': 0.29, 'Hedonism': 0.33, 'Achievement': 0.31, 'Power: dominance': 0.36, 'Power: resources': 0.29, 'Face': 0.25, 'Security: personal': 0.31, 'Security: societal': 0.43, 'Tradition': 0.44, 'Conformity: rules': 0.44, 'Conformity: interpersonal': 0.11, 'Humility': 0, 'Benevolence: caring': 0.2, 'Benevolence: dependability': 0.18, 'Universalism: concern': 0.3, 'Universalism: nature': 0.56, 'Universalism: tolerance': 0.24}, 'eval_macro-avg-f1-score': 0.28, 'eval_runtime': 408.6451, 'eval_samples_per_second': 36.472, 'eval_steps_per_second': 4.559, 'epoch': 4.0}
+{'loss': 0.0466, 'grad_norm': 0.7187004685401917, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.0433, 'grad_norm': 0.7860137224197388, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 0.11753904819488525, 'eval_f1-score': {'Self-direction: thought': 0.11, 'Self-direction: action': 0.21, 'Stimulation': 0.26, 'Hedonism': 0.27, 'Achievement': 0.32, 'Power: dominance': 0.32, 'Power: resources': 0.25, 'Face': 0.28, 'Security: personal': 0.29, 'Security: societal': 0.42, 'Tradition': 0.36, 'Conformity: rules': 0.43, 'Conformity: interpersonal': 0.07, 'Humility': 0, 'Benevolence: caring': 0.25, 'Benevolence: dependability': 0.27, 'Universalism: concern': 0.34, 'Universalism: nature': 0.54, 'Universalism: tolerance': 0.19}, 'eval_macro-avg-f1-score': 0.27, 'eval_runtime': 413.4245, 'eval_samples_per_second': 36.05, 'eval_steps_per_second': 4.506, 'epoch': 5.0}
+{'loss': 0.0438, 'grad_norm': 0.5115255117416382, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0336, 'grad_norm': 0.9739720225334167, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0332, 'grad_norm': 1.0973838567733765, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 0.12961427867412567, 'eval_f1-score': {'Self-direction: thought': 0.1, 'Self-direction: action': 0.23, 'Stimulation': 0.26, 'Hedonism': 0.25, 'Achievement': 0.34, 'Power: dominance': 0.29, 'Power: resources': 0.25, 'Face': 0.26, 'Security: personal': 0.29, 'Security: societal': 0.4, 'Tradition': 0.42, 'Conformity: rules': 0.42, 'Conformity: interpersonal': 0.11, 'Humility': 0, 'Benevolence: caring': 0.24, 'Benevolence: dependability': 0.26, 'Universalism: concern': 0.33, 'Universalism: nature': 0.54, 'Universalism: tolerance': 0.25}, 'eval_macro-avg-f1-score': 0.28, 'eval_runtime': 411.9992, 'eval_samples_per_second': 36.175, 'eval_steps_per_second': 4.522, 'epoch': 6.0}
+{'loss': 0.0313, 'grad_norm': 0.42835521697998047, 'learning_rate': 7.839771101573678e-06, 'epoch': 6.08}
+{'loss': 0.0253, 'grad_norm': 0.9616580009460449, 'learning_rate': 7.124463519313305e-06, 'epoch': 6.43}
+{'loss': 0.0257, 'grad_norm': 0.5957658886909485, 'learning_rate': 6.409155937052933e-06, 'epoch': 6.79}
+{'eval_loss': 0.13774757087230682, 'eval_f1-score': {'Self-direction: thought': 0.1, 'Self-direction: action': 0.23, 'Stimulation': 0.24, 'Hedonism': 0.26, 'Achievement': 0.32, 'Power: dominance': 0.32, 'Power: resources': 0.29, 'Face': 0.26, 'Security: personal': 0.26, 'Security: societal': 0.38, 'Tradition': 0.41, 'Conformity: rules': 0.44, 'Conformity: interpersonal': 0.12, 'Humility': 0, 'Benevolence: caring': 0.23, 'Benevolence: dependability': 0.27, 'Universalism: concern': 0.34, 'Universalism: nature': 0.53, 'Universalism: tolerance': 0.23}, 'eval_macro-avg-f1-score': 0.28, 'eval_runtime': 411.2108, 'eval_samples_per_second': 36.244, 'eval_steps_per_second': 4.531, 'epoch': 7.0}
+{'loss': 0.0232, 'grad_norm': 0.5568807721138, 'learning_rate': 5.693848354792561e-06, 'epoch': 7.15}
+{'loss': 0.0205, 'grad_norm': 0.9638440608978271, 'learning_rate': 4.978540772532189e-06, 'epoch': 7.51}
+{'loss': 0.0197, 'grad_norm': 0.3449661135673523, 'learning_rate': 4.2632331902718175e-06, 'epoch': 7.86}
+{'eval_loss': 0.14260251820087433, 'eval_f1-score': {'Self-direction: thought': 0.1, 'Self-direction: action': 0.21, 'Stimulation': 0.25, 'Hedonism': 0.25, 'Achievement': 0.32, 'Power: dominance': 0.32, 'Power: resources': 0.3, 'Face': 0.24, 'Security: personal': 0.27, 'Security: societal': 0.41, 'Tradition': 0.4, 'Conformity: rules': 0.41, 'Conformity: interpersonal': 0.11, 'Humility': 0, 'Benevolence: caring': 0.23, 'Benevolence: dependability': 0.24, 'Universalism: concern': 0.33, 'Universalism: nature': 0.53, 'Universalism: tolerance': 0.23}, 'eval_macro-avg-f1-score': 0.27, 'eval_runtime': 410.6977, 'eval_samples_per_second': 36.289, 'eval_steps_per_second': 4.536, 'epoch': 8.0}
+{'train_runtime': 27499.2653, 'train_samples_per_second': 16.276, 'train_steps_per_second': 0.508, 'train_loss': 0.05633453849812935, 'epoch': 8.0}
+2025-06-06 18:59:17,035 - INFO - 
+
+VALIDATION
+2025-06-06 18:59:17,035 - INFO - ==========
+2025-06-06 19:05:57,430 - INFO - Self-direction: thought: 0.10
+2025-06-06 19:05:57,430 - INFO - Self-direction: action: 0.22
+2025-06-06 19:05:57,430 - INFO - Stimulation: 0.29
+2025-06-06 19:05:57,430 - INFO - Hedonism: 0.33
+2025-06-06 19:05:57,430 - INFO - Achievement: 0.31
+2025-06-06 19:05:57,430 - INFO - Power: dominance: 0.36
+2025-06-06 19:05:57,431 - INFO - Power: resources: 0.29
+2025-06-06 19:05:57,431 - INFO - Face: 0.25
+2025-06-06 19:05:57,431 - INFO - Security: personal: 0.31
+2025-06-06 19:05:57,431 - INFO - Security: societal: 0.43
+2025-06-06 19:05:57,431 - INFO - Tradition: 0.44
+2025-06-06 19:05:57,431 - INFO - Conformity: rules: 0.44
+2025-06-06 19:05:57,431 - INFO - Conformity: interpersonal: 0.11
+2025-06-06 19:05:57,431 - INFO - Humility: 0.00
+2025-06-06 19:05:57,431 - INFO - Benevolence: caring: 0.20
+2025-06-06 19:05:57,431 - INFO - Benevolence: dependability: 0.18
+2025-06-06 19:05:57,431 - INFO - Universalism: concern: 0.30
+2025-06-06 19:05:57,431 - INFO - Universalism: nature: 0.56
+2025-06-06 19:05:57,431 - INFO - Universalism: tolerance: 0.24
+2025-06-06 19:05:57,431 - INFO - Macro average: 0.28
+2025-06-06 19:05:57,432 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-06-06 19:05:57,432 - INFO - Saving best model to models directory
+2025-06-06 19:05:57,432 - INFO - UPLOAD to https://huggingface.co/TD-NMF (using HF_TOKEN environment variable)
+2025-06-06 19:05:57,432 - INFO - SAVE to models

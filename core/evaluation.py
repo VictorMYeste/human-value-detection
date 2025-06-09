@@ -128,9 +128,9 @@ def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None
     print("\n=== SUMMARY =================================================")
     if compute_tuned:
         macro_f1_tuned = np.mean(macro_f1_tuned)
-        print(f"\nMacro-average F1 (tuned thresholds) across {len(labels)} labels: {macro_f1_tuned:.2f}")
+        print(f"\nMacro-average F1 (tuned thresholds) across {len(labels)} labels: {macro_f1_tuned:.5f}")
     macro_f1_fixed = np.mean(macro_f1_fixed)
-    print(f"\nMacro-average F1 (fixed 0.50 threshold) across {len(labels)} labels: {macro_f1_fixed:.2f}")
+    print(f"\nMacro-average F1 (fixed 0.50 threshold) across {len(labels)} labels: {macro_f1_fixed:.5f}")
 
     # -------- optional: save thresholds found on the validation set -------- #
     if compute_tuned and thresholds_out is not None:

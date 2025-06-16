@@ -35,6 +35,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import argparse
 import numpy as np
 import pandas as pd
+from typing import Optional
 from sklearn.metrics import f1_score
 from core.eval_utils import load_multilabel, bootstrap_f1_lower, per_label_mcnemar
 
@@ -53,6 +54,7 @@ MODELS = [
     "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-test.tsv",
     "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-test.tsv",
 ]
+GOLD_VAL  = "../data/validation-english/labels-cat.tsv"
 GOLD      = "../data/test-english/labels-cat.tsv"
 ID_COLS   = ['Text-ID','Sentence-ID']
 PROB_COLS = None   # comma-separated list to explicitly select floats
@@ -60,25 +62,6 @@ BOOTSTRAP = 5000
 ALPHA     = 0.
 # Practical filter: do not add a model unless its *one-sided lower* ΔF1 bound exceeds this minimal effect size
 MIN_GAIN  = 0.005  # ≈ +.5 macro-F1 point
-
-# Validation Macro-F1 for each model basename (for weighted voting)
-DEV_F1 = {
-    os.path.basename(BASELINE):     1,
-    os.path.basename(MODELS[0]):    1,
-    os.path.basename(MODELS[1]):    1,
-    os.path.basename(MODELS[2]):    1,
-    os.path.basename(MODELS[3]):    1,
-    os.path.basename(MODELS[4]):    1,
-    os.path.basename(MODELS[5]):    1,
-    os.path.basename(MODELS[6]):    1,
-    os.path.basename(MODELS[7]):    1,
-    os.path.basename(MODELS[8]):    1,
-    os.path.basename(MODELS[9]):    1,
-    os.path.basename(MODELS[10]):   1,
-}
-# Normalize weights to sum to 1
-_total = sum(DEV_F1.values())
-WEIGHTS = {k: v/_total for k, v in DEV_F1.items()}
 
 # Tuned thresholds per model basename (for binarization)
 TUNED_THRESHOLDS = {
@@ -95,6 +78,39 @@ TUNED_THRESHOLDS = {
     os.path.basename(MODELS[9]):    0.3,    # Previous-Sentences-2
     os.path.basename(MODELS[10]):   0.3,   # ResidualBlock
 }
+
+def compute_weights(baseline_path: str,
+                    model_paths: list[str],
+                    gold_val_path: str,
+                    threshold: float = 0.5,
+                    tuned: Optional[dict] = None) -> dict[str, float]:
+
+    paths      = [baseline_path] + model_paths
+    basenames  = [os.path.basename(p) for p in paths]
+    val_paths  = [p.replace('-test.tsv', '-val.tsv') for p in paths]
+
+    # ---------- load gold validation ----------
+    gold_df = load_multilabel(gold_val_path, ID_COLS, PROB_COLS, threshold)
+
+    weights  = []
+    for vp in val_paths:
+        thr    = tuned.get(os.path.basename(vp), threshold) if tuned else threshold
+        pred_df = load_multilabel(vp, ID_COLS, PROB_COLS, thr).reindex(gold_df.index)
+
+        # ✱ NEW: keep only columns that exist in BOTH dfs
+        common = [c for c in pred_df.columns if c in gold_df.columns]
+        if not common:
+            raise ValueError(f"No shared label columns between {vp} and gold file.")
+
+        gold = gold_df[common].values
+        pred = pred_df[common].values
+        f1   = f1_score(gold, pred, average="macro", zero_division=0)
+        weights.append(max(f1, 1e-6))        # avoid zeros
+
+    weights = np.array(weights)
+    weights = weights / weights.sum()
+
+    return {bn: w for bn, w in zip(basenames, weights)}
 
 
 def assemble_binary(threshold_map):
@@ -209,12 +225,26 @@ def main():
         for m in MODELS:
             threshold_map[os.path.basename(m)] = fixed
 
+    # Compute weights if needed
+    if args.mode == 'weighted':
+        print("Computing weights from validation Macro-F1 …")
+        weights = compute_weights(BASELINE, MODELS, GOLD_VAL,
+                                      threshold=args.threshold,
+                                      tuned=TUNED_THRESHOLDS if args.use_tuned else None)
+        print("Weights:", {k: f"{v:.3f}" for k,v in weights.items()})
+    else:
+        weights = None   # not used in hard / soft modes
+
     print("Assembling...")
     # Assemble
     df, true, base_arr, cand_bin, names, labels = assemble_binary(threshold_map)
-    cand_prob = assemble_prob(df) if args.mode == 'soft' else None
-    candidates = cand_bin if args.mode in ['hard','weighted'] else cand_prob
-    weights = WEIGHTS if args.mode == 'weighted' else None
+    cand_prob_all = assemble_prob(df)
+    if args.mode == 'hard':
+        candidates = cand_bin
+    elif args.mode == 'soft':
+        candidates = cand_prob_all
+    else: # weighted  → use probabilities
+        candidates = cand_prob_all
 
     print("Forward selection...")
 
@@ -250,12 +280,13 @@ def main():
     if args.save_preds:
         # indices of the models that ended up in the ensemble
         sel_idx = [names.index(n) for n in members]
-        stack   = np.stack([candidates[i] for i in sel_idx], axis=1)  # (N, |S|, L)
+        stack   = np.stack([cand_prob_all[i] for i in sel_idx], axis=1)  # (N, |S|, L)
 
-        if args.mode in ('hard', 'soft'):
-            # vote-fraction works for both hard (0/1) and soft (prob) inputs
-            prob_final = stack.mean(axis=1)
-        else:  # weighted
+        if args.mode == 'hard':
+            prob_final = stack.mean(axis=1)        # mean of 0/1
+        elif args.mode == 'soft':
+            prob_final = stack.mean(axis=1)        # mean of probs
+        else:  # ③ NEW – probability-weighted average
             w = np.array([weights[n] for n in members])
             prob_final = (stack * w[None, :, None]).sum(axis=1) / w.sum()
 

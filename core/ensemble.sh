@@ -9,7 +9,7 @@ echo "===== Hard ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode hard --debug | tee ensemble_results/presence/Lex-LIWC-22_LingFeat_0.5-fixed-hard.txt
+python3 -u ensemble_voting.py --mode hard --debug --save-preds ensemble_results/presence/Lex-LIWC-22_LingFeat_0.5-fixed-hard-champion.tsv | tee ensemble_results/presence/Lex-LIWC-22_LingFeat_0.5-fixed-hard.txt
 echo "=========="
 echo "=========="
 echo "=========="

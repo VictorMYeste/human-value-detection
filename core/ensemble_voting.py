@@ -11,12 +11,13 @@ Configuration (edit paths and dev-F1s and thresholds below):
   TUNED_THRESHOLDS: dict mapping basename → tuned threshold for binarization
 
 Usage:
-  python ensemble_voting.py --mode [hard|soft|weighted] [--debug] [--threshold T] [--use-tuned]
+  python ensemble_voting.py --mode [hard|soft|weighted] [--debug] [--threshold T] [--use-tuned] [--save-preds F]
 
 Options:
   --debug        Print per-candidate ΔF1 lower bounds and p-values each round
   --threshold T  Global decision threshold (default 0.5)
   --use-tuned    Use per-model tuned thresholds for binarization instead of fixed 0.5
+  --save-preds F Save predictions in a TSV file to be used as a champion prediction
 
 Procedure:
   1) Load baseline & candidates
@@ -56,7 +57,9 @@ GOLD      = "../data/test-english/labels-cat.tsv"
 ID_COLS   = ['Text-ID','Sentence-ID']
 PROB_COLS = None   # comma-separated list to explicitly select floats
 BOOTSTRAP = 5000
-ALPHA     = 0.05
+ALPHA     = 0.
+# Practical filter: do not add a model unless its *one-sided lower* ΔF1 bound exceeds this minimal effect size
+MIN_GAIN  = 0.005  # ≈ +.5 macro-F1 point
 
 # Validation Macro-F1 for each model basename (for weighted voting)
 DEV_F1 = {
@@ -160,14 +163,14 @@ def forward_selection(baseline, candidates, true, names, labels,
             lower, p_one = bootstrap_f1_lower(baseline, ens, true, B=BOOTSTRAP, alpha=ALPHA)
             if debug:
                 print(f"  {names[idx]:<30} lower={lower:.4f} p={p_one:.4f}")
-            if lower > best_lower and lower > 0:
+            if (lower >= MIN_GAIN) and (lower > best_lower):
                 best_lower, best_idx = lower, idx
         if best_idx is None:
             break
         selected.append(best_idx)
         candidates_idx.remove(best_idx)
         selected_names.append(names[best_idx])
-        print(f" Added {names[best_idx]} -> lower bound={best_lower:.4f}")
+        print(f"\nAdded {names[best_idx]} -> lower bound={best_lower:.4f}")
         round_num += 1
     print(f"Selected: {selected_names}")
     stack = np.stack([candidates[i] for i in selected], axis=1)
@@ -191,6 +194,7 @@ def main():
     parser.add_argument('--debug', action='store_true', help='Show per-candidate stats')
     parser.add_argument('--threshold', type=float, default=0.5, help='Decision threshold for soft/weighted voting')
     parser.add_argument('--use-tuned', action='store_true', help='Use per-model tuned thresholds for binarization')
+    parser.add_argument('--save-preds', metavar='FILE', default=None, help='Write ensemble probabilities to FILE (TSV) so the whole champion can be reused as a single model')
     args = parser.parse_args()
 
     print("Building threshold map...")
@@ -240,6 +244,24 @@ def main():
             print(f" {lbl}: p_adj={p_adj:.5f}, sig={rj}")
     else:
         print("No per-label discordance on final ensemble.")
+
+    print("Saving ensemble predictions...")
+
+    if args.save_preds:
+        # indices of the models that ended up in the ensemble
+        sel_idx = [names.index(n) for n in members]
+        stack   = np.stack([candidates[i] for i in sel_idx], axis=1)  # (N, |S|, L)
+
+        if args.mode in ('hard', 'soft'):
+            # vote-fraction works for both hard (0/1) and soft (prob) inputs
+            prob_final = stack.mean(axis=1)
+        else:  # weighted
+            w = np.array([weights[n] for n in members])
+            prob_final = (stack * w[None, :, None]).sum(axis=1) / w.sum()
+
+        out = pd.DataFrame(prob_final, index=df.index, columns=labels)
+        out.reset_index().to_csv(args.save_preds, sep='\t', index=False)
+        print(f"Ensemble probabilities written to {args.save_preds}")
 
 if __name__ == '__main__':
     main()

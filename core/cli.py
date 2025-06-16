@@ -28,4 +28,5 @@ def parse_args(prog_name) -> argparse.Namespace:
     cli.add_argument("-d2", "--filter-2-dir", default=None, help="Path to file where the predictions that will be used to filter level 1 are stored")
     cli.add_argument("-f2", "--filter-2-model", default=None, help="File name where the predictions that will be used to filter level 2 are stored")
     cli.add_argument("-th2", "--filter-2-th", type=float, default=0.5, help="Threshold above which a sentence is sent to the third-stage value model (0-1).")
+    cli.add_argument("-th", "--threshold", type=float, default=0.5, help="Threshold above which a sentence is finally evaluated (0-1).")
     return cli.parse_args()

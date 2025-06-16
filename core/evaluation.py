@@ -44,7 +44,7 @@ def find_best_threshold(y_true: np.ndarray,
     return best_th
 
 
-def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None, thresholds_out=None, compute_tuned=True):
+def eval_labels(labels, predictions_path, gold_labels_path, fixed_threshold=0.5, thresholds_dict=None, thresholds_out=None, compute_tuned=True):
     # ------------------------------------------------------------------- #
     # Load & align data
     # ------------------------------------------------------------------- #
@@ -72,8 +72,8 @@ def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None
         macro_f1_tuned  = []  # for threshold-search F1s
         best_thresholds = {}
     else:
-        logger.info("Tuned thresholds disabled; only fixed‐0.5 evaluation will run")
-    macro_f1_fixed  = []   # for fixed-0.5-threshold F1s
+        logger.debug("Tuned thresholds disabled; only fixed evaluation will run")
+    macro_f1_fixed  = []   # for fixed-threshold F1s
 
     for label in labels:
         g = merged[f"{label}_gold"].astype(float).values
@@ -99,8 +99,8 @@ def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None
             )
             macro_f1_tuned.append(f1_t[1])
 
-        # --- (b) fixed 0.5 threshold --------------------------------------------
-        p_bin_fixed = (p_scores >= 0.5).astype(int)
+        # --- (b) fixed threshold --------------------------------------------
+        p_bin_fixed = (p_scores >= fixed_threshold).astype(int)
         prec_f, rec_f, f1_f, _ = precision_recall_fscore_support(
             g, p_bin_fixed, average=None, zero_division=0
         )
@@ -116,7 +116,7 @@ def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None
             print("  Class 1 (positive)")
             print(f"    Precision: {prec_t[1]:.2f}  Recall: {rec_t[1]:.2f}  F1: {f1_t[1]:.2f}")
 
-        print(f"\nLabel: {label}  |  Fixed 0.50 threshold")
+        print(f"\nLabel: {label}  |  Fixed {fixed_threshold} threshold")
         print("  Class 0 (negative)")
         print(f"    Precision: {prec_f[0]:.2f}  Recall: {rec_f[0]:.2f}  F1: {f1_f[0]:.2f}")
         print("  Class 1 (positive)")
@@ -130,7 +130,7 @@ def eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict=None
         macro_f1_tuned = np.mean(macro_f1_tuned)
         print(f"\nMacro-average F1 (tuned thresholds) across {len(labels)} labels: {macro_f1_tuned:.5f}")
     macro_f1_fixed = np.mean(macro_f1_fixed)
-    print(f"\nMacro-average F1 (fixed 0.50 threshold) across {len(labels)} labels: {macro_f1_fixed:.5f}")
+    print(f"\nMacro-average F1 (fixed threshold) across {len(labels)} labels: {macro_f1_fixed:.5f}")
 
     # -------- optional: save thresholds found on the validation set -------- #
     if compute_tuned and thresholds_out is not None:
@@ -179,7 +179,7 @@ def run(model_group: str = "presence", compute_tuned: bool = True) -> None:
     # Decide which split & which thresholds to use
     # ---------------------------------------------------------------- #
     if args.validation_dataset:
-        logger.info("Using validation dataset for threshold search")
+        logger.debug("Using validation dataset for threshold search")
         dataset_path   = args.validation_dataset
         thresholds_dict  = None
         thresholds_out = None
@@ -215,7 +215,7 @@ def run(model_group: str = "presence", compute_tuned: bool = True) -> None:
     # ------------------------------- #
     # Kick-off evaluation
     # ------------------------------- #
-    eval_labels(labels, predictions_path, gold_labels_path, thresholds_dict, thresholds_out, compute_tuned)
+    eval_labels(labels, predictions_path, gold_labels_path, args.threshold, thresholds_dict, thresholds_out, compute_tuned)
 
 
 # Allow “python evaluation.py” to run a quick presence check

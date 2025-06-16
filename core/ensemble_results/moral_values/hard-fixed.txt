@@ -1,0 +1,39 @@
+
+Forward selection (hard voting):
+
+Round 1: testing candidates ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  Baseline-test.tsv              lower=0.0000 p=1.0000
+  Previous-Sentences-2-test.tsv  lower=0.0255 p=0.0000
+  Lex-LIWC-22-test.tsv           lower=0.0205 p=0.0000
+  TD-BERTopic-test.tsv           lower=0.0181 p=0.0000
+ Added Previous-Sentences-2-test.tsv → lower bound=0.0255
+
+Round 2: testing candidates ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  Baseline-test.tsv              lower=0.0000 p=1.0000
+  Lex-LIWC-22-test.tsv           lower=-0.0009 p=0.0872
+  TD-BERTopic-test.tsv           lower=-0.0007 p=0.0726
+Selected: ['Baseline', 'Previous-Sentences-2-test.tsv']
+
+=== Final Hard Ensemble (['Baseline', 'Previous-Sentences-2-test.tsv']) ===
+Macro-F1 Base = 0.2811, Ensemble = 0.3118
+One-sided lower 95% ΔF1 = 0.0254
+p(ens>base) = 0.0000 → significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.0662, sig=False
+ Self-direction: action: p_adj=0.0000, sig=True
+ Stimulation: p_adj=0.0000, sig=True
+ Hedonism: p_adj=0.0047, sig=True
+ Achievement: p_adj=0.0000, sig=True
+ Power: dominance: p_adj=0.0000, sig=True
+ Power: resources: p_adj=0.0000, sig=True
+ Face: p_adj=0.0000, sig=True
+ Security: personal: p_adj=0.0000, sig=True
+ Security: societal: p_adj=0.0000, sig=True
+ Tradition: p_adj=0.0000, sig=True
+ Conformity: rules: p_adj=0.0000, sig=True
+ Conformity: interpersonal: p_adj=0.1250, sig=False
+ Benevolence: caring: p_adj=0.0003, sig=True
+ Benevolence: dependability: p_adj=0.0000, sig=True
+ Universalism: concern: p_adj=0.0000, sig=True
+ Universalism: nature: p_adj=0.0000, sig=True
+ Universalism: tolerance: p_adj=0.0176, sig=True

@@ -1,0 +1,45 @@
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=0.0031 p=0.0060
+  Lex-LIWC-22-test.tsv           lower=0.0055 p=0.0002
+  TD-BERTopic-test.tsv           lower=0.0032 p=0.0030
+ Added Lex-LIWC-22-test.tsv -> lower bound=0.0055
+
+Round 2: Testing candidates: ['Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=0.0075 p=0.0020
+  TD-BERTopic-test.tsv           lower=0.0026 p=0.0154
+ Added Previous-Sentences-2-test.tsv -> lower bound=0.0075
+
+Round 3: Testing candidates: ['TD-BERTopic-test.tsv']
+  TD-BERTopic-test.tsv           lower=0.0109 p=0.0004
+ Added TD-BERTopic-test.tsv -> lower bound=0.0109
+
+Round 4: Testing candidates: []
+Selected: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+
+=== Final Hard Ensemble (['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']) ===
+Macro-F1 Base = 0.3115, Ensemble = 0.3313
+One-sided lower 95% ΔF1 = 0.0106
+p(ens>base) = 0.0004 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.0267, sig=True
+ Self-direction: action: p_adj=0.0000, sig=True
+ Stimulation: p_adj=0.0000, sig=True
+ Hedonism: p_adj=0.0393, sig=True
+ Achievement: p_adj=0.0000, sig=True
+ Power: dominance: p_adj=0.0000, sig=True
+ Power: resources: p_adj=0.0000, sig=True
+ Face: p_adj=0.0000, sig=True
+ Security: personal: p_adj=0.0000, sig=True
+ Security: societal: p_adj=0.0000, sig=True
+ Tradition: p_adj=0.0000, sig=True
+ Conformity: rules: p_adj=0.0000, sig=True
+ Conformity: interpersonal: p_adj=0.3185, sig=False
+ Humility: p_adj=1.0000, sig=False
+ Benevolence: caring: p_adj=0.0033, sig=True
+ Benevolence: dependability: p_adj=0.0000, sig=True
+ Universalism: concern: p_adj=0.0000, sig=True
+ Universalism: nature: p_adj=0.0033, sig=True
+ Universalism: tolerance: p_adj=0.0004, sig=True

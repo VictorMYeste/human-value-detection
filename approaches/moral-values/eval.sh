@@ -34,7 +34,7 @@ echo "=========="
 echo "===== Lex-LIWC-22 ====="
 echo "=========="
 echo "----- Predicting Test -----"
-python3 predict.py --test-dataset ../../data/test-english/ --lexicon LIWC-22 --model-name Lex-LIWC-22 --model-name Lex-LIWC-22
+python3 predict.py --test-dataset ../../data/test-english/ --lexicon LIWC-22 --model-name Lex-LIWC-22
 echo "----- Evaluating Test -----"
 python3 eval.py --test-dataset ../../data/test-english/ --model-name Lex-LIWC-22
 

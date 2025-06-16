@@ -1,0 +1,44 @@
+
+Forward selection (soft voting):
+
+Round 1: testing candidates ['Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=-0.0034 p=0.2300
+  Lex-LIWC-22-test.tsv           lower=0.0012 p=0.0222
+  TD-BERTopic-test.tsv           lower=-0.0024 p=0.1780
+ Added Lex-LIWC-22-test.tsv → lower bound=0.0012
+
+Round 2: testing candidates ['Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=-0.0003 p=0.0576
+  TD-BERTopic-test.tsv           lower=0.0015 p=0.0172
+ Added TD-BERTopic-test.tsv → lower bound=0.0015
+
+Round 3: testing candidates ['Previous-Sentences-2-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=0.0011 p=0.0276
+ Added Previous-Sentences-2-test.tsv → lower bound=0.0011
+
+Round 4: testing candidates []
+Selected: ['Baseline', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv', 'Previous-Sentences-2-test.tsv']
+
+=== Final Soft Ensemble (['Baseline', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv', 'Previous-Sentences-2-test.tsv']) ===
+Macro-F1 Base = 0.2811, Ensemble = 0.2885
+One-sided lower 95% ΔF1 = 0.0013
+p(ens>base) = 0.0232 → significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=1.0000, sig=False
+ Self-direction: action: p_adj=1.0000, sig=False
+ Stimulation: p_adj=0.5921, sig=False
+ Hedonism: p_adj=1.0000, sig=False
+ Achievement: p_adj=0.0683, sig=False
+ Power: dominance: p_adj=0.9341, sig=False
+ Power: resources: p_adj=1.0000, sig=False
+ Face: p_adj=0.4304, sig=False
+ Security: personal: p_adj=1.0000, sig=False
+ Security: societal: p_adj=0.8614, sig=False
+ Tradition: p_adj=0.4304, sig=False
+ Conformity: rules: p_adj=0.4507, sig=False
+ Conformity: interpersonal: p_adj=0.3248, sig=False
+ Benevolence: caring: p_adj=0.1145, sig=False
+ Benevolence: dependability: p_adj=1.0000, sig=False
+ Universalism: concern: p_adj=0.3248, sig=False
+ Universalism: nature: p_adj=1.0000, sig=False
+ Universalism: tolerance: p_adj=1.0000, sig=False

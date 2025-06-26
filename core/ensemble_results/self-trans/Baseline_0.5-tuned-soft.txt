@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (soft voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00619 p=0.59460
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.00247 p=0.17280
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.00337 p=0.24880
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29517, Ensemble = 0.29517
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-tuned-soft-champion.tsv

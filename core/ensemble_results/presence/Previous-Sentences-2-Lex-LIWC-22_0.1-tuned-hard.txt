@@ -1,0 +1,30 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-EmotionIntensity-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-LIWC-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-WorryWords-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Previous-Sentences-2-test.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-test.tsv']
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-eMFD-test.tsv lower=-0.00730 p=0.70420
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-EmoLex-test.tsv lower=-0.00416 p=0.56280
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00554 p=0.86560
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-LIWC-22-test.tsv lower=-0.00202 p=0.19580
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-LIWC-test.tsv lower=-0.00526 p=0.73240
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-MFD-20-test.tsv lower=-0.00657 p=0.96440
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-MJD-test.tsv lower=0.00256 p=0.00360
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-VAD-test.tsv lower=-0.00216 p=0.19860
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-WorryWords-test.tsv lower=-0.00073 p=0.10280
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Previous-Sentences-2-test.tsv lower=-0.00778 p=0.92420
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-test.tsv lower=-0.00020 p=0.06100
+
+Selected: ['1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30272, Ensemble = 0.30272
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/Previous-Sentences-2-Lex-LIWC-22_0.1-tuned-hard-champion.tsv

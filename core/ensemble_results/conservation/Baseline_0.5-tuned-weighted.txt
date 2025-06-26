@@ -1,0 +1,36 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Baseline_0.5_Baseline-test.tsv': '0.101', '1_Baseline_0.5_Lex-eMFD-test.tsv': '0.097', '1_Baseline_0.5_Lex-EmoLex-test.tsv': '0.101', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv': '0.098', '1_Baseline_0.5_Lex-LIWC-22-test.tsv': '0.097', '1_Baseline_0.5_Lex-MFD-test.tsv': '0.100', '1_Baseline_0.5_Lex-MJD-test.tsv': '0.104', '1_Baseline_0.5_Lex-Schwartz-test.tsv': '0.099', '1_Baseline_0.5_NER-test.tsv': '0.104', '1_Baseline_0.5_TD-LDA-test.tsv': '0.100'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.01734 p=0.97960
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.01453 p=0.91580
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01469 p=0.95200
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.00726 p=0.48440
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.01509 p=0.92800
+  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.01590 p=0.97560
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.01608 p=0.96440
+  1_Baseline_0.5_NER-test.tsv    lower=-0.01142 p=0.81020
+  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.03411 p=0.99720
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29214, Ensemble = 0.28091
+One-sided lower 95% ΔF1 = -0.01794
+p(ens>base) = 0.99700 -> significant? no
+Per-label improvements:
+ Face: p_adj=0.00073, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.25000, sig=False
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.01875, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-tuned-weighted-champion.tsv

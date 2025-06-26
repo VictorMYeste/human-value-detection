@@ -1,0 +1,30 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_TD-BERTopic_0.19_Baseline-test.tsv': '0.249', '1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv': '0.247', '1_TD-BERTopic_0.19_Lex-MFD-test.tsv': '0.256', '1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv': '0.249'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv', '1_TD-BERTopic_0.19_Lex-MFD-test.tsv', '1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv']
+  1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv lower=-0.00559 p=0.13640
+  1_TD-BERTopic_0.19_Lex-MFD-test.tsv lower=-0.00954 p=0.29040
+  1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv lower=-0.00369 p=0.09760
+
+Selected: ['1_TD-BERTopic_0.19_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_TD-BERTopic_0.19_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.28987, Ensemble = 0.29896
+One-sided lower 95% ΔF1 = 0.00017
+p(ens>base) = 0.04440 -> significant? YES
+Per-label improvements:
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.12500, sig=False
+ Benevolence: dependability: p_adj=0.60000, sig=False
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.60000, sig=False
+ Universalism: tolerance: p_adj=0.02344, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/TD-BERTopic_0.19-tuned-weighted-champion.tsv

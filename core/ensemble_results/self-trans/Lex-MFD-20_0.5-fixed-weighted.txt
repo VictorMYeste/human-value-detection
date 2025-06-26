@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-MFD-20_0.5_Baseline-test.tsv': '0.249', '1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv': '0.248', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv': '0.250', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv': '0.252'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+  1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv lower=-0.02031 p=0.66000
+  1_Lex-MFD-20_0.5_Lex-MFD-test.tsv lower=-0.03371 p=0.90120
+  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=-0.01899 p=0.61540
+
+Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29836, Ensemble = 0.29836
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-fixed-weighted-champion.tsv

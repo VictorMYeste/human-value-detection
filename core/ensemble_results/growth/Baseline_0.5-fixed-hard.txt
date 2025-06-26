@@ -1,0 +1,20 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.00261 p=0.01060
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.26289, Ensemble = 0.26289
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv

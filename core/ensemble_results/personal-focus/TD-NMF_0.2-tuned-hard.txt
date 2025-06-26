@@ -1,0 +1,20 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_TD-NMF_0.2_Lex-MJD-test.tsv']
+  1_TD-NMF_0.2_Lex-MJD-test.tsv  lower=-0.00431 p=0.32480
+
+Selected: ['1_TD-NMF_0.2_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_TD-NMF_0.2_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.28165, Ensemble = 0.28165
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/TD-NMF_0.2-tuned-hard-champion.tsv

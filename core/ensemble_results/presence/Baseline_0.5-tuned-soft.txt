@@ -5,129 +5,59 @@ Forward selection...
 
 Forward selection (soft voting):
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0010 p=0.0260
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.0017 p=0.0102
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=-0.0025 p=0.1994
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0016 p=0.0142
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=-0.0019 p=0.1648
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0023 p=0.0110
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.0079 p=0.0002
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.0033 p=0.0016
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0045 p=0.0004
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.0033 p=0.0052
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.0020 p=0.0086
- Added 1_Baseline_0.5_Lex-MJD-test.tsv -> lower bound=0.0079
+Round 1: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.00325 p=0.00320
+  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.00186 p=0.00840
+  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.00329 p=0.00260
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.00179 p=0.00740
+  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=-0.00253 p=0.20040
+  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.00455 p=0.00020
+  1_Baseline_0.5_Lex-LIWC-test.tsv lower=-0.00180 p=0.16540
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.00134 p=0.02280
+  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.00273 p=0.00720
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.00114 p=0.02500
+  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.00805 p=0.00000
 
-Round 2: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0073 p=0.0002
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.0093 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0055 p=0.0002
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0077 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0108 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0085 p=0.0000
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.0087 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0065 p=0.0000
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.0132 p=0.0000
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.0075 p=0.0000
- Added 1_Baseline_0.5_Previous-Sentences-2-test.tsv -> lower bound=0.0132
+Added 1_Baseline_0.5_Lex-MJD-test.tsv -> lower bound=0.00805 current f1 = 0.31133
 
-Round 3: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0112 p=0.0000
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.0108 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0098 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0103 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0110 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0111 p=0.0000
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.0132 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0104 p=0.0000
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.0118 p=0.0000
- Added 1_Baseline_0.5_Lex-VAD-test.tsv -> lower bound=0.0132
+Round 2: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=-0.00331 p=0.16700
+  1_Baseline_0.5_ResidualBlock-test.tsv lower=-0.00896 p=0.68460
+  1_Baseline_0.5_Lex-VAD-test.tsv lower=-0.00778 p=0.58280
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00688 p=0.50460
+  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=-0.01064 p=0.84660
+  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=-0.00987 p=0.78100
+  1_Baseline_0.5_Lex-LIWC-test.tsv lower=-0.00075 p=0.10040
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.00350 p=0.52060
+  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=-0.00261 p=0.36640
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00388 p=0.61280
 
-Round 4: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0100 p=0.0000
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.0129 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0096 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0105 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0119 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0105 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0110 p=0.0000
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.0127 p=0.0000
- Added 1_Baseline_0.5_Lex-EmoLex-test.tsv -> lower bound=0.0129
-
-Round 5: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0106 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0092 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0110 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0105 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0095 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0090 p=0.0000
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.0117 p=0.0000
- Added 1_Baseline_0.5_ResidualBlock-test.tsv -> lower bound=0.0117
-
-Round 6: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0106 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0095 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.0114 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0111 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0101 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0112 p=0.0000
- Added 1_Baseline_0.5_Lex-LIWC-22-test.tsv -> lower bound=0.0114
-
-Round 7: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0095 p=0.0000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.0095 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0093 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0092 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0094 p=0.0000
- Added 1_Baseline_0.5_Lex-EmotionIntensity-test.tsv -> lower bound=0.0095
-
-Round 8: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0091 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0092 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0080 p=0.0000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.0099 p=0.0000
- Added 1_Baseline_0.5_Lex-WorryWords-test.tsv -> lower bound=0.0099
-
-Round 9: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.0097 p=0.0000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0076 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0088 p=0.0000
- Added 1_Baseline_0.5_Lex-eMFD-test.tsv -> lower bound=0.0097
-
-Round 10: Testing candidates: ['1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv']
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.0071 p=0.0000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0071 p=0.0000
- Added 1_Baseline_0.5_Lex-LIWC-test.tsv -> lower bound=0.0071
-
-Round 11: Testing candidates: ['1_Baseline_0.5_Lex-MFD-20-test.tsv']
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.0066 p=0.0000
- Added 1_Baseline_0.5_Lex-MFD-20-test.tsv -> lower bound=0.0066
-
-Round 12: Testing candidates: []
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv']
+Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv']) ===
-Macro-F1 Base = 0.29686, Ensemble = 0.30865
-One-sided lower 95% ΔF1 = 0.00658
+=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']) ===
+Macro-F1 Base = 0.29686, Ensemble = 0.31133
+One-sided lower 95% ΔF1 = 0.00818
 p(ens>base) = 0.00000 -> significant? YES
 Per-label improvements:
- Self-direction: thought: p_adj=0.11475, sig=False
- Self-direction: action: p_adj=0.14651, sig=False
- Stimulation: p_adj=0.11505, sig=False
- Hedonism: p_adj=1.00000, sig=False
- Achievement: p_adj=0.00010, sig=True
- Power: dominance: p_adj=0.73051, sig=False
- Power: resources: p_adj=0.90059, sig=False
- Face: p_adj=0.06797, sig=False
- Security: personal: p_adj=0.90059, sig=False
- Security: societal: p_adj=0.00000, sig=True
- Tradition: p_adj=0.11034, sig=False
- Conformity: rules: p_adj=0.77336, sig=False
- Conformity: interpersonal: p_adj=0.09919, sig=False
- Benevolence: caring: p_adj=0.26203, sig=False
- Benevolence: dependability: p_adj=0.00229, sig=True
- Universalism: concern: p_adj=0.00013, sig=True
- Universalism: nature: p_adj=0.26203, sig=False
- Universalism: tolerance: p_adj=0.06797, sig=False
+ Self-direction: thought: p_adj=0.81641, sig=False
+ Self-direction: action: p_adj=0.01359, sig=True
+ Stimulation: p_adj=0.23914, sig=False
+ Hedonism: p_adj=0.26673, sig=False
+ Achievement: p_adj=0.00045, sig=True
+ Power: dominance: p_adj=0.21893, sig=False
+ Power: resources: p_adj=0.36958, sig=False
+ Face: p_adj=1.00000, sig=False
+ Security: personal: p_adj=0.89816, sig=False
+ Security: societal: p_adj=0.26673, sig=False
+ Tradition: p_adj=0.35872, sig=False
+ Conformity: rules: p_adj=0.30548, sig=False
+ Conformity: interpersonal: p_adj=0.07422, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.25049, sig=False
+ Benevolence: dependability: p_adj=0.19660, sig=False
+ Universalism: concern: p_adj=0.38253, sig=False
+ Universalism: nature: p_adj=0.31016, sig=False
+ Universalism: tolerance: p_adj=0.38253, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/Baseline_0.5-tuned-soft-champion.tsv

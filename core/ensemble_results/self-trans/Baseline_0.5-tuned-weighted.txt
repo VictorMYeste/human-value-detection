@@ -1,0 +1,28 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Baseline_0.5_Baseline-test.tsv': '0.253', '1_Baseline_0.5_Lex-EmoLex-test.tsv': '0.250', '1_Baseline_0.5_Lex-MFD-test.tsv': '0.251', '1_Baseline_0.5_Lex-Schwartz-test.tsv': '0.247'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.02617 p=0.94600
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.03771 p=0.99480
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.02414 p=0.90800
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29479, Ensemble = 0.28768
+One-sided lower 95% ΔF1 = -0.01530
+p(ens>base) = 0.93320 -> significant? no
+Per-label improvements:
+ Benevolence: caring: p_adj=0.00098, sig=True
+ Benevolence: dependability: p_adj=0.00065, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=0.00006, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-tuned-weighted-champion.tsv

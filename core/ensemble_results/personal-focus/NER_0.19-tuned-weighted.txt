@@ -1,0 +1,31 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_NER_0.19_Baseline-test.tsv': '0.504', '1_NER_0.19_Lex-MJD-test.tsv': '0.496'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_NER_0.19_Lex-MJD-test.tsv']
+  1_NER_0.19_Lex-MJD-test.tsv    lower=0.00061 p=0.03660
+
+Selected: ['1_NER_0.19_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_NER_0.19_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.28359, Ensemble = 0.28422
+One-sided lower 95% ΔF1 = -0.00225
+p(ens>base) = 0.36540 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=1.00000, sig=False
+ Self-direction: action: p_adj=0.00439, sig=True
+ Stimulation: p_adj=0.37500, sig=False
+ Hedonism: p_adj=0.56250, sig=False
+ Achievement: p_adj=0.00014, sig=True
+ Power: dominance: p_adj=0.01758, sig=True
+ Power: resources: p_adj=0.00586, sig=True
+ Face: p_adj=0.22500, sig=False
+ Security: personal: p_adj=0.56250, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/NER_0.19-tuned-weighted-champion.tsv

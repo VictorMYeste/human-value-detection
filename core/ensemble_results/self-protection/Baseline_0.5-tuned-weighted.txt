@@ -1,0 +1,31 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Baseline_0.5_Baseline-test.tsv': '1.000'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: []
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30622, Ensemble = 0.29354
+One-sided lower 95% ΔF1 = -0.02298
+p(ens>base) = 0.98620 -> significant? no
+Per-label improvements:
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00001, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00434, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00002, sig=True
+ Humility: p_adj=0.25000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-protection_moral-values/output/Baseline_0.5-tuned-weighted-champion.tsv

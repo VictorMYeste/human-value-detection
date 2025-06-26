@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv': '0.201', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv': '0.196', '1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv': '0.199', '1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv': '0.204', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv': '0.199'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv lower=-0.00650 p=0.22020
+  1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv lower=-0.00358 p=0.13700
+  1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv lower=-0.00490 p=0.15300
+  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv lower=-0.00289 p=0.10860
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.22277, Ensemble = 0.22277
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/openness_moral-values/output/Lex-LIWC-22_LingFeat_0.5-fixed-weighted-champion.tsv

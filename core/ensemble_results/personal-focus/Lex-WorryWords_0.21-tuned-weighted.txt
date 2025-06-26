@@ -1,0 +1,31 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-WorryWords_0.21_Baseline-test.tsv': '0.504', '1_Lex-WorryWords_0.21_Lex-MJD-test.tsv': '0.496'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-WorryWords_0.21_Lex-MJD-test.tsv']
+  1_Lex-WorryWords_0.21_Lex-MJD-test.tsv lower=-0.00043 p=0.06200
+
+Selected: ['1_Lex-WorryWords_0.21_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-WorryWords_0.21_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.27922, Ensemble = 0.27924
+One-sided lower 95% ΔF1 = -0.00278
+p(ens>base) = 0.50440 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=1.00000, sig=False
+ Self-direction: action: p_adj=0.00586, sig=True
+ Stimulation: p_adj=0.56250, sig=False
+ Hedonism: p_adj=0.56250, sig=False
+ Achievement: p_adj=0.00007, sig=True
+ Power: dominance: p_adj=0.03516, sig=True
+ Power: resources: p_adj=0.00439, sig=True
+ Face: p_adj=0.22500, sig=False
+ Security: personal: p_adj=0.56250, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/Lex-WorryWords_0.21-tuned-weighted-champion.tsv

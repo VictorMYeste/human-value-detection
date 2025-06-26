@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-MFD-20_0.5_Baseline-test.tsv': '0.495', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv': '0.505'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=-0.01548 p=0.91460
+
+Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29507, Ensemble = 0.28349
+One-sided lower 95% ΔF1 = -0.01967
+p(ens>base) = 0.99500 -> significant? no
+Per-label improvements:
+ Hedonism: p_adj=0.25000, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00003, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00008, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion.tsv

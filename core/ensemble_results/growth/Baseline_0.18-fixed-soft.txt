@@ -1,0 +1,35 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (soft voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.18_Previous-Sentences-2-test.tsv']
+  1_Baseline_0.18_Previous-Sentences-2-test.tsv lower=0.00393 p=0.00500
+
+Added 1_Baseline_0.18_Previous-Sentences-2-test.tsv -> lower bound=0.00393 current f1 = 0.28109
+
+Round 2: Testing candidates: []
+
+Selected: ['1_Baseline_0.18_Baseline-test.tsv', '1_Baseline_0.18_Previous-Sentences-2-test.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Baseline_0.18_Baseline-test.tsv', '1_Baseline_0.18_Previous-Sentences-2-test.tsv']) ===
+Macro-F1 Base = 0.26926, Ensemble = 0.28109
+One-sided lower 95% ΔF1 = 0.00394
+p(ens>base) = 0.00420 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.19989, sig=False
+ Self-direction: action: p_adj=1.00000, sig=False
+ Stimulation: p_adj=1.00000, sig=False
+ Hedonism: p_adj=1.00000, sig=False
+ Achievement: p_adj=0.19989, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=1.00000, sig=False
+ Benevolence: dependability: p_adj=1.00000, sig=False
+ Universalism: concern: p_adj=0.35799, sig=False
+ Universalism: nature: p_adj=0.21037, sig=False
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.18-fixed-soft-champion.tsv

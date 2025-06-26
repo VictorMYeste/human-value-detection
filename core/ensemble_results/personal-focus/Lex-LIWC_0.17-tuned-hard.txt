@@ -1,0 +1,20 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC_0.17_Lex-MJD-test.tsv']
+  1_Lex-LIWC_0.17_Lex-MJD-test.tsv lower=-0.00486 p=0.38320
+
+Selected: ['1_Lex-LIWC_0.17_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-LIWC_0.17_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.28053, Ensemble = 0.28053
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/Lex-LIWC_0.17-tuned-hard-champion.tsv

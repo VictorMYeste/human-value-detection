@@ -11,19 +11,20 @@ Configuration (edit paths and dev-F1s and thresholds below):
   TUNED_THRESHOLDS: dict mapping basename → tuned threshold for binarization
 
 Usage:
-  python ensemble_voting.py --mode [hard|soft|weighted] [--debug] [--threshold T] [--use-tuned] [--save-preds F]
+  python ensemble_voting.py --mode [hard|soft|weighted] [--debug] [--threshold T] [--use-tuned] [--save-preds F] [--test]
 
 Options:
-  --debug        Print per-candidate ΔF1 lower bounds and p-values each round
-  --threshold T  Global decision threshold (default 0.5)
-  --use-tuned    Use per-model tuned thresholds for binarization instead of fixed 0.5
-  --save-preds F Save predictions in a TSV file to be used as a champion prediction
+  --debug           Print per-candidate ΔF1 lower bounds and p-values each round
+  --threshold T     Global decision threshold (default 0.5)
+  --use-tuned       Use per-model tuned thresholds for binarization instead of fixed 0.5
+  --save-preds F    Save predictions in a TSV file to be used as a champion prediction
+  --test            Evaluate with the baseline using the test dataset
 
 Procedure:
   1) Load baseline & candidates
   2) Precompute binary arrays (for hard/weighted) or probability arrays (for soft)
   3) Forward selection:
-       - start with baseline only
+       - start with an empty selection, but comparing with using the baseline
        - iteratively add candidate giving largest positive one‐sided lower ΔF1 bound
        - stop when no positive bound
        - in debug mode, show all candidates each round
@@ -40,43 +41,28 @@ from sklearn.metrics import f1_score
 from core.eval_utils import load_multilabel, bootstrap_f1_lower, per_label_mcnemar
 
 # === Configuration ===
-BASELINE = "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv"
+BASELINE = "../approaches/moral-values/output/Baseline-val.tsv"
 MODELS = [
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-EmotionIntensity-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-20-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-VAD-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-test.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-test.tsv",
+    "../approaches/moral-values/output/Previous-Sentences-2-val.tsv",
+    "../approaches/moral-values/output/Lex-LIWC-22-val.tsv",
+    "../approaches/moral-values/output/TD-BERTopic-val.tsv",
 ]
 GOLD_VAL  = "../data/validation-english/labels-cat.tsv"
 GOLD      = "../data/test-english/labels-cat.tsv"
 ID_COLS   = ['Text-ID','Sentence-ID']
 PROB_COLS = None   # comma-separated list to explicitly select floats
 BOOTSTRAP = 5000
-ALPHA     = 0.
+ALPHA     = 0.05
 # Practical filter: do not add a model unless its *one-sided lower* ΔF1 bound exceeds this minimal effect size
-MIN_GAIN  = 0.005  # ≈ +.5 macro-F1 point
+ABS_MIN_GAIN  = 0.001  # ≈ +.1 macro-F1 point
+REL_MIN_GAIN = 0.01   # 1 %
 
 # Tuned thresholds per model basename (for binarization)
 TUNED_THRESHOLDS = {
-    os.path.basename(BASELINE):     0.25,
-    os.path.basename(MODELS[0]):    0.3,    # eMFD
-    os.path.basename(MODELS[1]):    0.25,   # EmoLex
-    os.path.basename(MODELS[2]):    0.25,   # EmotionIntensity
-    os.path.basename(MODELS[3]):    0.25,   # LIWC-22
-    os.path.basename(MODELS[4]):    0.2,    # LIWC
-    os.path.basename(MODELS[5]):    0.25,   # MFD-20
-    os.path.basename(MODELS[6]):    0.2,    # MJD
-    os.path.basename(MODELS[7]):    0.25,   # VAD
-    os.path.basename(MODELS[8]):    0.25,   # WorryWords
-    os.path.basename(MODELS[9]):    0.3,    # Previous-Sentences-2
-    os.path.basename(MODELS[10]):   0.3,   # ResidualBlock
+    os.path.basename(BASELINE):     0.43,     # Baseline
+    os.path.basename(MODELS[0]):    0.41,     # Previous-Sentences-2
+    os.path.basename(MODELS[1]):    0.42,     # Lex-LIWC-22
+    os.path.basename(MODELS[2]):    0.42,     # TD-BERTopic
 }
 
 def compute_weights(baseline_path: str,
@@ -113,7 +99,7 @@ def compute_weights(baseline_path: str,
     return {bn: w for bn, w in zip(basenames, weights)}
 
 
-def assemble_binary(threshold_map):
+def assemble_binary(threshold_map, test):
     """
     Load binary predictions for baseline and models using per-model thresholds.
     threshold_map: dict basename->threshold
@@ -132,7 +118,11 @@ def assemble_binary(threshold_map):
     df = base_df.copy()
     for i, mdf in enumerate(model_dfs):
         df = df.join(mdf.add_suffix(f'_{i}'), how='inner')
-    gold_df = load_multilabel(GOLD, ID_COLS, PROB_COLS, threshold_map.get(base_name, 0.5))
+    if test:
+        gold = GOLD
+    else:
+        gold = GOLD_VAL
+    gold_df = load_multilabel(gold, ID_COLS, PROB_COLS, threshold_map.get(base_name, 0.5))
     labels = base_df.columns.tolist()
     true = gold_df.reindex(df.index)[labels].values
     base_arr = df[labels].values
@@ -155,16 +145,19 @@ def assemble_prob(df):
 
 def forward_selection(baseline, candidates, true, names, labels,
                       mode, weights=None, debug=False, decision_thr=0.5):
-    selected = [0]
-    candidates_idx = list(range(1, len(candidates)))
-    selected_names = [names[0]]
+    selected = []
+    candidates_idx = list(range(1, len(candidates))) # Round 1, without index-0 (baseline)
+    selected_names = []
+    base_ref = baseline
+    current_macro = f1_score(true, base_ref, average='macro', zero_division=0)
     print(f"\nForward selection ({mode} voting):")
     round_num = 1
     while True:
         best_lower = 0.0
         best_idx = None
+        print(f"[round {round_num}] current Macro-F1 = {current_macro:.5f}")
         if debug:
-            print(f"\nRound {round_num}: Testing candidates: {[names[i] for i in candidates_idx]}")
+            print(f"\nTesting candidates: {[names[i] for i in candidates_idx]}")
         for idx in candidates_idx:
             members = selected + [idx]
             stack = np.stack([candidates[i] for i in members], axis=1)
@@ -176,19 +169,33 @@ def forward_selection(baseline, candidates, true, names, labels,
                 w = np.array([weights[names[i]] for i in members])
                 avg = (stack * w[None,:,None]).sum(axis=1) / w.sum()
                 ens = (avg >= decision_thr).astype(int)
-            lower, p_one = bootstrap_f1_lower(baseline, ens, true, B=BOOTSTRAP, alpha=ALPHA)
+            lower, p_one = bootstrap_f1_lower(base_ref, ens, true, B=BOOTSTRAP, alpha=ALPHA)
             if debug:
-                print(f"  {names[idx]:<30} lower={lower:.4f} p={p_one:.4f}")
-            if (lower >= MIN_GAIN) and (lower > best_lower):
+                print(f"  {names[idx]:<30} lower={lower:.5f} p={p_one:.5f}")
+            if lower >= ABS_MIN_GAIN and lower >= REL_MIN_GAIN * current_macro and lower > best_lower:
                 best_lower, best_idx = lower, idx
         if best_idx is None:
             break
+        # Accept the candidate
         selected.append(best_idx)
         candidates_idx.remove(best_idx)
         selected_names.append(names[best_idx])
-        print(f"\nAdded {names[best_idx]} -> lower bound={best_lower:.4f}")
+        # After the **first** successful addition, make sure the baseline (idx 0) is available for subsequent rounds (if not selected yet).
+        if 0 not in selected and 0 not in candidates_idx:
+            candidates_idx.append(0)
+        # Update reference for next round
+        base_pred = ens
+        base_ref = ens
+        current_macro = f1_score(true, base_pred, average='macro', zero_division=0)
+        print(f"\nAdded {names[best_idx]} -> lower bound={best_lower:.5f} current f1 = {current_macro:.5f}")
+
         round_num += 1
-    print(f"Selected: {selected_names}")
+
+    print(f"\nSelected: {selected_names or ['<none – fallback to baseline>']}")
+
+    if not selected:
+        return baseline, []
+
     stack = np.stack([candidates[i] for i in selected], axis=1)
     if mode == 'hard':
         final_ens = (stack.sum(axis=1) >= (len(selected)/2)).astype(int)
@@ -198,7 +205,20 @@ def forward_selection(baseline, candidates, true, names, labels,
         w = np.array([weights[names[i]] for i in selected])
         avg = (stack * w[None,:,None]).sum(axis=1) / w.sum()
         final_ens = (avg >= decision_thr).astype(int)
+
     return final_ens, selected_names
+
+def build_ensemble(member_idx, candidates, names, mode, weights, decision_thr):
+    """Return binary ensemble predictions for the given member indices."""
+    stack = np.stack([candidates[i] for i in member_idx], axis=1)  # (N, |S|, L)
+    if mode == 'hard':
+        return (stack.sum(axis=1) >= (len(member_idx)/2)).astype(int)
+    elif mode == 'soft':
+        return (stack.mean(axis=1) >= decision_thr).astype(int)
+    else:  # weighted
+        w = np.array([weights[names[i]] for i in member_idx])
+        avg = (stack * w[None,:,None]).sum(axis=1) / w.sum()
+        return (avg >= decision_thr).astype(int)
 
 
 def main():
@@ -211,6 +231,8 @@ def main():
     parser.add_argument('--threshold', type=float, default=0.5, help='Decision threshold for soft/weighted voting')
     parser.add_argument('--use-tuned', action='store_true', help='Use per-model tuned thresholds for binarization')
     parser.add_argument('--save-preds', metavar='FILE', default=None, help='Write ensemble probabilities to FILE (TSV) so the whole champion can be reused as a single model')
+    parser.add_argument('--test', action='store_true', help='If to use the list of Basenames (or full paths) of models that form the ensemble. If given, forward-selection is **skipped** and these models are evaluated as a fixed set.')
+ 
     args = parser.parse_args()
 
     print("Building threshold map...")
@@ -237,7 +259,7 @@ def main():
 
     print("Assembling...")
     # Assemble
-    df, true, base_arr, cand_bin, names, labels = assemble_binary(threshold_map)
+    df, true, base_arr, cand_bin, names, labels = assemble_binary(threshold_map, args.test)
     cand_prob_all = assemble_prob(df)
     if args.mode == 'hard':
         candidates = cand_bin
@@ -246,13 +268,20 @@ def main():
     else: # weighted  → use probabilities
         candidates = cand_prob_all
 
-    print("Forward selection...")
+    if args.test:
+        print("Using fixed ensemble")
+        members_idx = [names.index(m) for m in names]
+        ens_final   = build_ensemble(members_idx, candidates, names, args.mode,
+                                    weights, args.threshold)
+    
+    else:
+        print("Forward selection...")
 
-    # Forward selection
-    ens_final, members = forward_selection(
-        base_arr, candidates, true, names, labels,
-        mode=args.mode, weights=weights, debug=args.debug,
-        decision_thr=args.threshold)
+        # Forward selection
+        ens_final, members = forward_selection(
+            base_arr, candidates, true, names, labels,
+            mode=args.mode, weights=weights, debug=args.debug,
+            decision_thr=args.threshold)
     
     print("Evaluating...")
 
@@ -286,7 +315,7 @@ def main():
             prob_final = stack.mean(axis=1)        # mean of 0/1
         elif args.mode == 'soft':
             prob_final = stack.mean(axis=1)        # mean of probs
-        else:  # ③ NEW – probability-weighted average
+        else:  # probability-weighted average
             w = np.array([weights[n] for n in members])
             prob_final = (stack * w[None, :, None]).sum(axis=1) / w.sum()
 

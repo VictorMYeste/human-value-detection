@@ -1,0 +1,181 @@
+
+Forward selection per label (hard voting):
+
+Label 'Self-direction: thought': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0014 p=0.0294
+  try Lex-LIWC-22-test.tsv     : lower=0.0054 p=0.0084
+  try TD-BERTopic-test.tsv     : lower=0.0111 p=0.0014
+ Added TD-BERTopic-test.tsv, bound=0.0111
+  try Previous-Sentences-2-test.tsv: lower=-0.0358 p=0.8764
+  try Lex-LIWC-22-test.tsv     : lower=-0.0056 p=0.1148
+
+Label 'Self-direction: action': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0084 p=0.0012
+  try Lex-LIWC-22-test.tsv     : lower=0.0086 p=0.0004
+  try TD-BERTopic-test.tsv     : lower=0.0076 p=0.0008
+ Added Lex-LIWC-22-test.tsv, bound=0.0086
+  try Previous-Sentences-2-test.tsv: lower=-0.0050 p=0.2230
+  try TD-BERTopic-test.tsv     : lower=-0.0012 p=0.0698
+
+Label 'Stimulation': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0022 p=0.0264
+  try Lex-LIWC-22-test.tsv     : lower=-0.0098 p=0.4344
+  try TD-BERTopic-test.tsv     : lower=-0.0035 p=0.1588
+ Added Previous-Sentences-2-test.tsv, bound=0.0022
+  try Lex-LIWC-22-test.tsv     : lower=-0.0192 p=0.9492
+  try TD-BERTopic-test.tsv     : lower=-0.0130 p=0.6694
+
+Label 'Hedonism': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0000 p=0.0504
+  try Lex-LIWC-22-test.tsv     : lower=-0.0119 p=0.3462
+  try TD-BERTopic-test.tsv     : lower=-0.0106 p=0.3716
+
+Label 'Achievement': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0082 p=0.0002
+  try Lex-LIWC-22-test.tsv     : lower=0.0065 p=0.0000
+  try TD-BERTopic-test.tsv     : lower=0.0003 p=0.0392
+ Added Previous-Sentences-2-test.tsv, bound=0.0082
+  try Lex-LIWC-22-test.tsv     : lower=-0.0033 p=0.1828
+  try TD-BERTopic-test.tsv     : lower=-0.0042 p=0.3138
+
+Label 'Power: dominance': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0102 p=0.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0030 p=0.0158
+  try TD-BERTopic-test.tsv     : lower=0.0045 p=0.0080
+ Added Previous-Sentences-2-test.tsv, bound=0.0102
+  try Lex-LIWC-22-test.tsv     : lower=-0.0028 p=0.1384
+  try TD-BERTopic-test.tsv     : lower=-0.0001 p=0.0532
+
+Label 'Power: resources': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0123 p=0.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0102 p=0.0000
+  try TD-BERTopic-test.tsv     : lower=0.0124 p=0.0000
+ Added TD-BERTopic-test.tsv, bound=0.0124
+  try Previous-Sentences-2-test.tsv: lower=-0.0024 p=0.1358
+  try Lex-LIWC-22-test.tsv     : lower=-0.0014 p=0.0952
+
+Label 'Face': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0152 p=0.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0186 p=0.0000
+  try TD-BERTopic-test.tsv     : lower=0.0102 p=0.0008
+ Added Lex-LIWC-22-test.tsv, bound=0.0186
+  try Previous-Sentences-2-test.tsv: lower=-0.0056 p=0.1690
+  try TD-BERTopic-test.tsv     : lower=-0.0049 p=0.1232
+
+Label 'Security: personal': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0039 p=0.1354
+  try Lex-LIWC-22-test.tsv     : lower=-0.0142 p=0.9110
+  try TD-BERTopic-test.tsv     : lower=-0.0048 p=0.2978
+
+Label 'Security: societal': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0025 p=0.0106
+  try Lex-LIWC-22-test.tsv     : lower=-0.0049 p=0.3598
+  try TD-BERTopic-test.tsv     : lower=0.0009 p=0.0290
+ Added Previous-Sentences-2-test.tsv, bound=0.0025
+  try Lex-LIWC-22-test.tsv     : lower=-0.0055 p=0.4192
+  try TD-BERTopic-test.tsv     : lower=0.0032 p=0.0058
+ Added TD-BERTopic-test.tsv, bound=0.0032
+  try Lex-LIWC-22-test.tsv     : lower=0.0017 p=0.0204
+ Added Lex-LIWC-22-test.tsv, bound=0.0017
+
+Label 'Tradition': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0093 p=0.2584
+  try Lex-LIWC-22-test.tsv     : lower=-0.0045 p=0.1268
+  try TD-BERTopic-test.tsv     : lower=-0.0074 p=0.2186
+
+Label 'Conformity: rules': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0034 p=0.2090
+  try Lex-LIWC-22-test.tsv     : lower=0.0062 p=0.0002
+  try TD-BERTopic-test.tsv     : lower=0.0034 p=0.0028
+ Added Lex-LIWC-22-test.tsv, bound=0.0062
+  try Previous-Sentences-2-test.tsv: lower=0.0023 p=0.0146
+  try TD-BERTopic-test.tsv     : lower=0.0003 p=0.0416
+ Added Previous-Sentences-2-test.tsv, bound=0.0023
+  try TD-BERTopic-test.tsv     : lower=0.0055 p=0.0008
+ Added TD-BERTopic-test.tsv, bound=0.0055
+
+Label 'Conformity: interpersonal': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0006 p=0.0674
+  try Lex-LIWC-22-test.tsv     : lower=-0.0080 p=0.3704
+  try TD-BERTopic-test.tsv     : lower=-0.0047 p=0.3170
+
+Label 'Humility': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0000 p=1.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0000 p=1.0000
+  try TD-BERTopic-test.tsv     : lower=0.0000 p=1.0000
+
+Label 'Benevolence: caring': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0011 p=0.0716
+  try Lex-LIWC-22-test.tsv     : lower=0.0013 p=0.0292
+  try TD-BERTopic-test.tsv     : lower=-0.0034 p=0.2222
+ Added Lex-LIWC-22-test.tsv, bound=0.0013
+  try Previous-Sentences-2-test.tsv: lower=-0.0248 p=0.9136
+  try TD-BERTopic-test.tsv     : lower=-0.0296 p=0.9772
+
+Label 'Benevolence: dependability': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0191 p=0.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0198 p=0.0000
+  try TD-BERTopic-test.tsv     : lower=0.0087 p=0.0002
+ Added Lex-LIWC-22-test.tsv, bound=0.0198
+  try Previous-Sentences-2-test.tsv: lower=-0.0178 p=0.7012
+  try TD-BERTopic-test.tsv     : lower=-0.0088 p=0.2556
+
+Label 'Universalism: concern': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=0.0170 p=0.0000
+  try Lex-LIWC-22-test.tsv     : lower=0.0071 p=0.0002
+  try TD-BERTopic-test.tsv     : lower=0.0071 p=0.0002
+ Added Previous-Sentences-2-test.tsv, bound=0.0170
+  try Lex-LIWC-22-test.tsv     : lower=0.0063 p=0.0016
+  try TD-BERTopic-test.tsv     : lower=0.0043 p=0.0054
+ Added Lex-LIWC-22-test.tsv, bound=0.0063
+  try TD-BERTopic-test.tsv     : lower=0.0076 p=0.0004
+ Added TD-BERTopic-test.tsv, bound=0.0076
+
+Label 'Universalism: nature': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0083 p=0.3240
+  try Lex-LIWC-22-test.tsv     : lower=-0.0072 p=0.4274
+  try TD-BERTopic-test.tsv     : lower=-0.0114 p=0.6388
+
+Label 'Universalism: tolerance': selecting among ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+  try Previous-Sentences-2-test.tsv: lower=-0.0049 p=0.1720
+  try Lex-LIWC-22-test.tsv     : lower=0.0047 p=0.0132
+  try TD-BERTopic-test.tsv     : lower=0.0025 p=0.0218
+ Added Lex-LIWC-22-test.tsv, bound=0.0047
+  try Previous-Sentences-2-test.tsv: lower=-0.0136 p=0.4284
+  try TD-BERTopic-test.tsv     : lower=-0.0090 p=0.2288
+Base F1=0.2811, Ensemble F1=0.3091
+ΔF1 one-sided lower 95% bound = 0.0238, p_one=0.0000
+Per-label selections:
+ Self-direction: thought: ['Baseline-test.tsv', 'TD-BERTopic-test.tsv']
+ Self-direction: action: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+ Stimulation: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv']
+ Hedonism: ['Baseline-test.tsv']
+ Achievement: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv']
+ Power: dominance: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv']
+ Power: resources: ['Baseline-test.tsv', 'TD-BERTopic-test.tsv']
+ Face: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+ Security: personal: ['Baseline-test.tsv']
+ Security: societal: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv', 'Lex-LIWC-22-test.tsv']
+ Tradition: ['Baseline-test.tsv']
+ Conformity: rules: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+ Conformity: interpersonal: ['Baseline-test.tsv']
+ Humility: ['Baseline-test.tsv']
+ Benevolence: caring: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+ Benevolence: dependability: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+ Universalism: concern: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv', 'Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
+ Universalism: nature: ['Baseline-test.tsv']
+ Universalism: tolerance: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+Per-label McNemar:
+ Self-direction: thought: p_adj=0.0042, sig=True
+ Self-direction: action: p_adj=0.0000, sig=True
+ Stimulation: p_adj=0.0000, sig=True
+ Achievement: p_adj=0.0000, sig=True
+ Power: dominance: p_adj=0.0000, sig=True
+ Power: resources: p_adj=0.0000, sig=True
+ Face: p_adj=0.0000, sig=True
+ Security: societal: p_adj=0.0000, sig=True
+ Conformity: rules: p_adj=0.0052, sig=True
+ Benevolence: caring: p_adj=0.0023, sig=True
+ Benevolence: dependability: p_adj=0.0000, sig=True
+ Universalism: concern: p_adj=0.0000, sig=True
+ Universalism: tolerance: p_adj=0.0013, sig=True

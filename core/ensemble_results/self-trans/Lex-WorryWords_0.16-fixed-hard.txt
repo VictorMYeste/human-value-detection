@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.16_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv']
+  1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv lower=-0.00650 p=0.60920
+  1_Lex-WorryWords_0.16_Lex-MFD-test.tsv lower=-0.00089 p=0.09880
+  1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv lower=-0.00361 p=0.26620
+
+Selected: ['1_Lex-WorryWords_0.16_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-WorryWords_0.16_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30067, Ensemble = 0.30067
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-WorryWords_0.16-fixed-hard-champion.tsv

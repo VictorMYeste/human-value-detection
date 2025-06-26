@@ -1,0 +1,30 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_NER_0.1_Lex-eMFD-test.tsv', '1_NER_0.1_Lex-EmoLex-test.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_NER_0.1_Lex-LIWC-22-test.tsv', '1_NER_0.1_Lex-MFD-20-test.tsv', '1_NER_0.1_Lex-MFD-test.tsv', '1_NER_0.1_Lex-MJD-test.tsv', '1_NER_0.1_Lex-Schwartz-test.tsv', '1_NER_0.1_Lex-VAD-test.tsv', '1_NER_0.1_NER-test.tsv', '1_NER_0.1_TD-LDA-test.tsv']
+  1_NER_0.1_Lex-eMFD-test.tsv    lower=-0.01258 p=0.96520
+  1_NER_0.1_Lex-EmoLex-test.tsv  lower=0.00100 p=0.02040
+  1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00586 p=0.52800
+  1_NER_0.1_Lex-LIWC-22-test.tsv lower=-0.00273 p=0.33960
+  1_NER_0.1_Lex-MFD-20-test.tsv  lower=-0.01257 p=0.97640
+  1_NER_0.1_Lex-MFD-test.tsv     lower=0.00136 p=0.01520
+  1_NER_0.1_Lex-MJD-test.tsv     lower=-0.00124 p=0.11900
+  1_NER_0.1_Lex-Schwartz-test.tsv lower=0.00081 p=0.02420
+  1_NER_0.1_Lex-VAD-test.tsv     lower=-0.00163 p=0.15860
+  1_NER_0.1_NER-test.tsv         lower=-0.00551 p=0.58360
+  1_NER_0.1_TD-LDA-test.tsv      lower=-0.00364 p=0.42640
+
+Selected: ['1_NER_0.1_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_NER_0.1_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30932, Ensemble = 0.30932
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/NER_0.1-fixed-hard-champion.tsv

@@ -155,7 +155,7 @@ def forward_selection(baseline, candidates, true, names, labels,
     while True:
         best_lower = 0.0
         best_idx = None
-        print(f"[Round {round_num}]. Current Macro-F1 = {current_macro:.5f}")
+        print(f"[Round {round_num}]. Current Macro-Average F1 = {current_macro:.5f}")
         if debug:
             print(f"\nTesting candidates: {[names[i] for i in candidates_idx]}")
         for idx in candidates_idx:

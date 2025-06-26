@@ -1,0 +1,55 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Previous-Sentences-2_0.1_Baseline-test.tsv': '0.086', '1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv': '0.081', '1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv': '0.084', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv': '0.081', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv': '0.083', '1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv': '0.081', '1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv': '0.084', '1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv': '0.083', '1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv': '0.084', '1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv': '0.084', '1_Previous-Sentences-2_0.1_NER-test.tsv': '0.085', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv': '0.084'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv', '1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2_0.1_NER-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']
+  1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv lower=0.00408 p=0.00200
+  1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv lower=-0.00389 p=0.16060
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=0.00245 p=0.00960
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv lower=0.00443 p=0.00060
+  1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv lower=0.00161 p=0.01460
+  1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv lower=-0.00583 p=0.23920
+  1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv lower=0.00432 p=0.00000
+  1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv lower=-0.00459 p=0.19540
+  1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv lower=0.00297 p=0.00480
+  1_Previous-Sentences-2_0.1_NER-test.tsv lower=0.00425 p=0.00140
+  1_Previous-Sentences-2_0.1_TD-LDA-test.tsv lower=0.00554 p=0.00020
+
+Added 1_Previous-Sentences-2_0.1_TD-LDA-test.tsv -> lower bound=0.00554 current f1 = 0.31657
+
+Round 2: Testing candidates: ['1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv', '1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2_0.1_NER-test.tsv']
+  1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv lower=-0.00442 p=0.45720
+  1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv lower=0.00191 p=0.00740
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00543 p=0.65480
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv lower=-0.00213 p=0.21660
+  1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv lower=-0.00362 p=0.35640
+  1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv lower=-0.00751 p=0.38340
+  1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv lower=0.00125 p=0.01260
+  1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv lower=-0.00744 p=0.34820
+  1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv lower=-0.00056 p=0.08040
+  1_Previous-Sentences-2_0.1_NER-test.tsv lower=-0.00115 p=0.11480
+
+Selected: ['1_Previous-Sentences-2_0.1_Baseline-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Previous-Sentences-2_0.1_Baseline-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']) ===
+Macro-F1 Base = 0.30626, Ensemble = 0.31657
+One-sided lower 95% ΔF1 = 0.00549
+p(ens>base) = 0.00020 -> significant? YES
+Per-label improvements:
+ Security: societal: p_adj=0.24334, sig=False
+ Tradition: p_adj=0.28125, sig=False
+ Conformity: rules: p_adj=0.49283, sig=False
+ Conformity: interpersonal: p_adj=0.57129, sig=False
+ Benevolence: caring: p_adj=0.02115, sig=True
+ Benevolence: dependability: p_adj=0.49283, sig=False
+ Universalism: concern: p_adj=0.28125, sig=False
+ Universalism: nature: p_adj=0.49283, sig=False
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Previous-Sentences-2_0.1-tuned-weighted-champion.tsv

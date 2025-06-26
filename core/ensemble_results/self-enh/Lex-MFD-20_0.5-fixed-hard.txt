@@ -1,0 +1,29 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=0.00300 p=0.00480
+
+Added 1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00300 current f1 = 0.29208
+
+Round 2: Testing candidates: []
+
+Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']) ===
+Macro-F1 Base = 0.28349, Ensemble = 0.29208
+One-sided lower 95% ΔF1 = 0.00292
+p(ens>base) = 0.00360 -> significant? YES
+Per-label improvements:
+ Hedonism: p_adj=0.50000, sig=False
+ Achievement: p_adj=0.00020, sig=True
+ Power: dominance: p_adj=0.00002, sig=True
+ Power: resources: p_adj=0.00002, sig=True
+ Face: p_adj=0.03906, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-MFD-20_0.5-fixed-hard-champion.tsv

@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv lower=-0.00653 p=0.29560
+  1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv lower=-0.00066 p=0.06180
+  1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv lower=-0.00373 p=0.13980
+  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv lower=-0.00590 p=0.24720
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.22277, Ensemble = 0.22277
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/openness_moral-values/output/Lex-LIWC-22_LingFeat_0.5-fixed-hard-champion.tsv

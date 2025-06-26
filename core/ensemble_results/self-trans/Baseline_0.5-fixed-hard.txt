@@ -1,0 +1,32 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.00066 p=0.03220
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=0.00237 p=0.00400
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=0.00360 p=0.00300
+
+Added 1_Baseline_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00360 current f1 = 0.29733
+
+Round 2: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv']
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.02996 p=0.98500
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.02952 p=0.96900
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']) ===
+Macro-F1 Base = 0.28768, Ensemble = 0.29733
+One-sided lower 95% ΔF1 = 0.00367
+p(ens>base) = 0.00360 -> significant? YES
+Per-label improvements:
+ Benevolence: caring: p_adj=0.00049, sig=True
+ Benevolence: dependability: p_adj=0.03125, sig=True
+ Universalism: concern: p_adj=0.00003, sig=True
+ Universalism: tolerance: p_adj=0.00065, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv

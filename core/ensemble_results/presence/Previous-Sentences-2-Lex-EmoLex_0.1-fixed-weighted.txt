@@ -1,0 +1,77 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-test.tsv': '0.084', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv': '0.083', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv': '0.084', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv': '0.082', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv': '0.084', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv': '0.082', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv': '0.083', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv': '0.084', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv': '0.082', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv': '0.083', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv': '0.084', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv': '0.085'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv']
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv lower=0.00301 p=0.00360
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv lower=0.00193 p=0.00960
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv lower=0.00287 p=0.00340
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv lower=0.00242 p=0.00500
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv lower=0.00092 p=0.01980
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv lower=-0.00011 p=0.05540
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv lower=0.00722 p=0.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv lower=0.00548 p=0.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv lower=0.00175 p=0.01240
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv lower=0.00343 p=0.00360
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv lower=0.00110 p=0.02380
+
+Added 1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv -> lower bound=0.00722 current f1 = 0.29566
+
+Round 2: Testing candidates: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv']
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv lower=-0.00191 p=0.15440
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv lower=0.00098 p=0.02240
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00031 p=0.06240
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv lower=0.00010 p=0.04740
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv lower=-0.00333 p=0.31240
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv lower=0.00029 p=0.04100
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv lower=0.00346 p=0.00180
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv lower=0.00143 p=0.01560
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv lower=0.00074 p=0.03220
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv lower=-0.00008 p=0.05360
+
+Added 1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv -> lower bound=0.00346 current f1 = 0.29931
+
+Round 3: Testing candidates: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv']
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv lower=-0.00399 p=0.39320
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv lower=-0.00088 p=0.09840
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv lower=0.00053 p=0.03500
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv lower=-0.00214 p=0.20780
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv lower=-0.00277 p=0.27720
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv lower=-0.00386 p=0.41340
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv lower=-0.00157 p=0.14800
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv lower=0.00173 p=0.01100
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv lower=-0.00303 p=0.44800
+
+Selected: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv']) ===
+Macro-F1 Base = 0.28982, Ensemble = 0.30393
+One-sided lower 95% ΔF1 = 0.00920
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.91406, sig=False
+ Self-direction: action: p_adj=0.91406, sig=False
+ Stimulation: p_adj=0.91406, sig=False
+ Hedonism: p_adj=0.91406, sig=False
+ Achievement: p_adj=0.91406, sig=False
+ Power: dominance: p_adj=0.98106, sig=False
+ Power: resources: p_adj=1.00000, sig=False
+ Face: p_adj=0.91406, sig=False
+ Security: personal: p_adj=0.91406, sig=False
+ Security: societal: p_adj=0.98106, sig=False
+ Tradition: p_adj=1.00000, sig=False
+ Conformity: rules: p_adj=0.98106, sig=False
+ Conformity: interpersonal: p_adj=0.91406, sig=False
+ Benevolence: caring: p_adj=0.88275, sig=False
+ Benevolence: dependability: p_adj=0.91406, sig=False
+ Universalism: concern: p_adj=1.00000, sig=False
+ Universalism: nature: p_adj=0.98106, sig=False
+ Universalism: tolerance: p_adj=0.98106, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/Previous-Sentences-2-Lex-EmoLex_0.1-fixed-weighted-champion.tsv

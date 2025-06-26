@@ -1,0 +1,46 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00122 p=0.12260
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00074 p=0.08120
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00152 p=0.09160
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.00293 p=0.00960
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.00102 p=0.08840
+  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.00031 p=0.06160
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=0.00524 p=0.00120
+  1_Baseline_0.5_NER-test.tsv    lower=0.00060 p=0.03380
+  1_Baseline_0.5_TD-LDA-test.tsv lower=0.00114 p=0.01360
+
+Added 1_Baseline_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00524 current f1 = 0.28593
+
+Round 2: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00812 p=0.76960
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.01114 p=0.80400
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01029 p=0.81820
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.00277 p=0.15360
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.01069 p=0.78760
+  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.01164 p=0.89080
+  1_Baseline_0.5_NER-test.tsv    lower=-0.00730 p=0.49800
+  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.00721 p=0.81600
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']) ===
+Macro-F1 Base = 0.28091, Ensemble = 0.29232
+One-sided lower 95% ΔF1 = 0.00502
+p(ens>base) = 0.00240 -> significant? YES
+Per-label improvements:
+ Face: p_adj=0.00049, sig=True
+ Security: personal: p_adj=0.00073, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=1.00000, sig=False
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00937, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv

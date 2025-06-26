@@ -1,0 +1,46 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (soft voting):
+
+Round 1: Testing candidates: ['Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+  Lex-LIWC-22-test.tsv           lower=0.00705 p=0.00000
+  Previous-Sentences-2-test.tsv  lower=0.00476 p=0.00460
+  TD-BERTopic-test.tsv           lower=0.00586 p=0.00020
+
+Added Lex-LIWC-22-test.tsv -> lower bound=0.00705 current f1 = 0.32172
+
+Round 2: Testing candidates: ['Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+  Previous-Sentences-2-test.tsv  lower=-0.00083 p=0.07060
+  TD-BERTopic-test.tsv           lower=-0.00899 p=0.68800
+
+Selected: ['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['Baseline-test.tsv', 'Lex-LIWC-22-test.tsv']) ===
+Macro-F1 Base = 0.31149, Ensemble = 0.32286
+One-sided lower 95% ΔF1 = 0.00700
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.86538, sig=False
+ Self-direction: action: p_adj=0.00926, sig=True
+ Stimulation: p_adj=0.19976, sig=False
+ Hedonism: p_adj=0.26953, sig=False
+ Achievement: p_adj=0.00276, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.12982, sig=False
+ Face: p_adj=0.06084, sig=False
+ Security: personal: p_adj=1.00000, sig=False
+ Security: societal: p_adj=0.01253, sig=True
+ Tradition: p_adj=0.06381, sig=False
+ Conformity: rules: p_adj=0.10343, sig=False
+ Conformity: interpersonal: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.94863, sig=False
+ Benevolence: dependability: p_adj=0.13826, sig=False
+ Universalism: concern: p_adj=0.12982, sig=False
+ Universalism: nature: p_adj=1.00000, sig=False
+ Universalism: tolerance: p_adj=0.88393, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/moral-values/output/tuned-soft-champion.tsv

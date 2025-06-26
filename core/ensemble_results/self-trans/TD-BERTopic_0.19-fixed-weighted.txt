@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_TD-BERTopic_0.19_Baseline-test.tsv': '0.249', '1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv': '0.247', '1_TD-BERTopic_0.19_Lex-MFD-test.tsv': '0.256', '1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv': '0.249'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv', '1_TD-BERTopic_0.19_Lex-MFD-test.tsv', '1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv']
+  1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv lower=-0.01001 p=0.37760
+  1_TD-BERTopic_0.19_Lex-MFD-test.tsv lower=-0.02083 p=0.72780
+  1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv lower=-0.00792 p=0.26880
+
+Selected: ['1_TD-BERTopic_0.19_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_TD-BERTopic_0.19_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29896, Ensemble = 0.29896
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/TD-BERTopic_0.19-fixed-weighted-champion.tsv

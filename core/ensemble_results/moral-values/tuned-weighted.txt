@@ -1,0 +1,43 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'Baseline-test.tsv': '0.246', 'Lex-LIWC-22-test.tsv': '0.254', 'Previous-Sentences-2-test.tsv': '0.249', 'TD-BERTopic-test.tsv': '0.251'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
+  Lex-LIWC-22-test.tsv           lower=-0.03148 p=1.00000
+  Previous-Sentences-2-test.tsv  lower=-0.03590 p=1.00000
+  TD-BERTopic-test.tsv           lower=-0.03579 p=1.00000
+
+Selected: ['Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['Baseline-test.tsv']) ===
+Macro-F1 Base = 0.31149, Ensemble = 0.28112
+One-sided lower 95% ΔF1 = -0.03853
+p(ens>base) = 1.00000 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00218, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.01649, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00004, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00008, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00000, sig=True
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00001, sig=True
+ Universalism: tolerance: p_adj=0.00014, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/moral-values/output/tuned-weighted-champion.tsv

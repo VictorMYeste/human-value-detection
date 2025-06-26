@@ -5,129 +5,83 @@ Forward selection...
 
 Forward selection (soft voting):
 
-Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=-0.0020 p=0.1884
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=0.0042 p=0.0006
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=-0.0010 p=0.0950
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0010 p=0.0220
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=-0.0003 p=0.0660
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=-0.0018 p=0.1798
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv lower=0.0085 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.0044 p=0.0004
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.0041 p=0.0008
-  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv lower=0.0043 p=0.0014
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0040 p=0.0012
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv -> lower bound=0.0085
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv lower=0.00447 p=0.00100
+  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.00405 p=0.00060
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.00426 p=0.00020
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=0.00425 p=0.00060
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00103 p=0.09380
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.00411 p=0.00080
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=-0.00033 p=0.06600
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.00089 p=0.02220
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=-0.00189 p=0.17380
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=-0.00195 p=0.18160
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv lower=0.00850 p=0.00000
 
-Round 2: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0061 p=0.0004
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=0.0088 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0072 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0068 p=0.0002
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0078 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0059 p=0.0002
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.0086 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.0083 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv lower=0.0152 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0093 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv -> lower bound=0.0152
+Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv -> lower bound=0.00850 current f1 = 0.31072
 
-Round 3: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0106 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=0.0149 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0083 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0112 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0105 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0107 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.0122 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.0133 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0128 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv -> lower bound=0.0149
+Round 2: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv lower=0.00325 p=0.00140
+  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=-0.00217 p=0.28860
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=-0.00297 p=0.46320
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=-0.00243 p=0.35380
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00473 p=0.63400
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=-0.00321 p=0.49580
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=-0.00427 p=0.59240
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=-0.00487 p=0.77720
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=-0.00570 p=0.85240
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=-0.00546 p=0.82920
 
-Round 4: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0116 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0118 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0119 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0127 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0120 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.0141 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.0127 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0135 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv -> lower bound=0.0141
+Added 1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv -> lower bound=0.00325 current f1 = 0.30865
 
-Round 5: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0096 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0102 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0132 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0114 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0095 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.0137 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0125 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv -> lower bound=0.0137
+Round 3: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.00296 p=0.00260
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=0.00236 p=0.00300
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=0.00533 p=0.00000
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00165 p=0.16520
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=0.00326 p=0.00060
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.00075 p=0.02620
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.00119 p=0.01440
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.00137 p=0.00880
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.00152 p=0.00740
 
-Round 6: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0100 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0091 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0109 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0115 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0091 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=0.0126 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv -> lower bound=0.0126
+Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv -> lower bound=0.00533 current f1 = 0.31343
 
-Round 7: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0096 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0111 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=0.0119 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0116 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0083 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv -> lower bound=0.0119
+Round 4: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv lower=-0.00030 p=0.07040
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv lower=-0.00022 p=0.06120
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=-0.00235 p=0.29980
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv lower=-0.00151 p=0.18520
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=-0.00151 p=0.19040
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=-0.00218 p=0.27660
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=-0.00153 p=0.22320
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=-0.00177 p=0.28940
 
-Round 8: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0087 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0092 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv lower=0.0104 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0093 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv -> lower bound=0.0104
-
-Round 9: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=0.0100 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0087 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0089 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv -> lower bound=0.0100
-
-Round 10: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv lower=0.0077 p=0.0000
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0062 p=0.0002
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv -> lower bound=0.0077
-
-Round 11: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv lower=0.0079 p=0.0000
- Added 1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv -> lower bound=0.0079
-
-Round 12: Testing candidates: []
-Selected: ['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']
+Selected: ['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_ResidualBlock-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-test.tsv']) ===
-Macro-F1 Base = 0.29793, Ensemble = 0.31066
-One-sided lower 95% ΔF1 = 0.00765
+=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv']) ===
+Macro-F1 Base = 0.29793, Ensemble = 0.31776
+One-sided lower 95% ΔF1 = 0.01495
 p(ens>base) = 0.00000 -> significant? YES
 Per-label improvements:
- Self-direction: thought: p_adj=0.08679, sig=False
- Self-direction: action: p_adj=0.15732, sig=False
- Stimulation: p_adj=0.15732, sig=False
- Hedonism: p_adj=0.51923, sig=False
- Achievement: p_adj=0.00003, sig=True
- Power: dominance: p_adj=1.00000, sig=False
- Power: resources: p_adj=0.55805, sig=False
- Face: p_adj=0.12783, sig=False
- Security: personal: p_adj=0.65775, sig=False
- Security: societal: p_adj=0.00001, sig=True
- Tradition: p_adj=0.68570, sig=False
- Conformity: rules: p_adj=0.57935, sig=False
- Conformity: interpersonal: p_adj=0.06445, sig=False
- Benevolence: caring: p_adj=0.03824, sig=True
- Benevolence: dependability: p_adj=0.01000, sig=True
- Universalism: concern: p_adj=0.00001, sig=True
- Universalism: nature: p_adj=0.45264, sig=False
- Universalism: tolerance: p_adj=0.08679, sig=False
+ Self-direction: thought: p_adj=0.41782, sig=False
+ Self-direction: action: p_adj=0.27077, sig=False
+ Stimulation: p_adj=0.33288, sig=False
+ Hedonism: p_adj=1.00000, sig=False
+ Achievement: p_adj=0.00136, sig=True
+ Power: dominance: p_adj=0.27077, sig=False
+ Power: resources: p_adj=0.27077, sig=False
+ Face: p_adj=0.41782, sig=False
+ Security: personal: p_adj=1.00000, sig=False
+ Security: societal: p_adj=0.00441, sig=True
+ Tradition: p_adj=1.00000, sig=False
+ Conformity: rules: p_adj=0.67366, sig=False
+ Conformity: interpersonal: p_adj=0.54508, sig=False
+ Benevolence: caring: p_adj=0.01991, sig=True
+ Benevolence: dependability: p_adj=0.19174, sig=False
+ Universalism: concern: p_adj=0.01991, sig=True
+ Universalism: nature: p_adj=0.41782, sig=False
+ Universalism: tolerance: p_adj=0.02285, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/Lex-LIWC-22_LingFeat_0.1-tuned-soft-champion.tsv

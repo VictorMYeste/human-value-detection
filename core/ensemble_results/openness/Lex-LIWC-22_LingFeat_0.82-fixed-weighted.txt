@@ -1,0 +1,36 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-LIWC-22_LingFeat_0.82_Baseline-test.tsv': '0.194', '1_Lex-LIWC-22_LingFeat_0.82_Lex-MJD-test.tsv': '0.199', '1_Lex-LIWC-22_LingFeat_0.82_NER_TD-LDA-test.tsv': '0.203', '1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv': '0.203', '1_Lex-LIWC-22_LingFeat_0.82_TD-LDA-test.tsv': '0.201'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.82_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER_TD-LDA-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_TD-LDA-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.82_Lex-MJD-test.tsv lower=-0.00279 p=0.08660
+  1_Lex-LIWC-22_LingFeat_0.82_NER_TD-LDA-test.tsv lower=-0.00210 p=0.09200
+  1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv lower=0.00401 p=0.01680
+  1_Lex-LIWC-22_LingFeat_0.82_TD-LDA-test.tsv lower=-0.00088 p=0.06700
+
+Added 1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv -> lower bound=0.00401 current f1 = 0.18311
+
+Round 2: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.82_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER_TD-LDA-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_TD-LDA-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.82_Lex-MJD-test.tsv lower=-0.00765 p=0.31120
+  1_Lex-LIWC-22_LingFeat_0.82_NER_TD-LDA-test.tsv lower=-0.00633 p=0.30740
+  1_Lex-LIWC-22_LingFeat_0.82_TD-LDA-test.tsv lower=-0.00113 p=0.07400
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.82_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-LIWC-22_LingFeat_0.82_Baseline-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv']) ===
+Macro-F1 Base = 0.17200, Ensemble = 0.18977
+One-sided lower 95% ΔF1 = 0.00377
+p(ens>base) = 0.01720 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.21875, sig=False
+ Self-direction: action: p_adj=1.00000, sig=False
+ Stimulation: p_adj=0.21875, sig=False
+ Hedonism: p_adj=0.83333, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/openness_moral-values/output/Lex-LIWC-22_LingFeat_0.82-fixed-weighted-champion.tsv

@@ -1,0 +1,28 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (soft voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-Schwartz-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv lower=-0.01215 p=0.66720
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv lower=-0.00793 p=0.33240
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01227 p=0.65820
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv lower=-0.01066 p=0.53120
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-test.tsv lower=-0.00766 p=0.31420
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv lower=-0.01071 p=0.50820
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-Schwartz-test.tsv lower=-0.00757 p=0.29380
+  1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv lower=-0.00925 p=0.40960
+  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv lower=0.00074 p=0.02500
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.28919, Ensemble = 0.28919
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/Lex-LIWC-22_LingFeat_0.5-tuned-soft-champion.tsv

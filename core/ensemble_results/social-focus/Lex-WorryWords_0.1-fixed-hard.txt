@@ -1,0 +1,30 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-MJD-test.tsv', '1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv', '1_Lex-WorryWords_0.1_Lex-VAD-test.tsv', '1_Lex-WorryWords_0.1_NER-test.tsv', '1_Lex-WorryWords_0.1_TD-LDA-test.tsv']
+  1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv lower=-0.01038 p=0.93720
+  1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv lower=0.00120 p=0.01520
+  1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00448 p=0.36100
+  1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv lower=-0.00257 p=0.30900
+  1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv lower=-0.01016 p=0.94140
+  1_Lex-WorryWords_0.1_Lex-MFD-test.tsv lower=0.00217 p=0.00780
+  1_Lex-WorryWords_0.1_Lex-MJD-test.tsv lower=-0.00052 p=0.07500
+  1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv lower=0.00120 p=0.01680
+  1_Lex-WorryWords_0.1_Lex-VAD-test.tsv lower=-0.00143 p=0.15160
+  1_Lex-WorryWords_0.1_NER-test.tsv lower=-0.00477 p=0.53920
+  1_Lex-WorryWords_0.1_TD-LDA-test.tsv lower=-0.00289 p=0.31840
+
+Selected: ['1_Lex-WorryWords_0.1_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-WorryWords_0.1_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30982, Ensemble = 0.30982
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Lex-WorryWords_0.1-fixed-hard-champion.tsv

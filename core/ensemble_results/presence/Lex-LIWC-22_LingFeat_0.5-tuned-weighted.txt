@@ -1,0 +1,51 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv': '0.084', '1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmotionIntensity-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv': '0.084', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-20-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv': '0.084', '1_Lex-LIWC-22_LingFeat_0.5_Lex-VAD-test.tsv': '0.082', '1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-test.tsv': '0.083', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-test.tsv': '0.085', '1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-test.tsv': '0.084'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmotionIntensity-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-20-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-VAD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-test.tsv']
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-test.tsv lower=-0.02363 p=1.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-test.tsv lower=-0.02393 p=0.99980
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmotionIntensity-test.tsv lower=-0.02135 p=0.99940
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-test.tsv lower=-0.02352 p=1.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-test.tsv lower=-0.02292 p=0.99940
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-20-test.tsv lower=-0.02540 p=1.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv lower=-0.01856 p=0.99540
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-VAD-test.tsv lower=-0.01994 p=0.99820
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-test.tsv lower=-0.02420 p=1.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-test.tsv lower=-0.02028 p=0.99480
+  1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-test.tsv lower=-0.02491 p=1.00000
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30868, Ensemble = 0.28802
+One-sided lower 95% ΔF1 = -0.02841
+p(ens>base) = 1.00000 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00004, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.26389, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00000, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00000, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00437, sig=True
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00001, sig=True
+ Universalism: tolerance: p_adj=0.00001, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/Lex-LIWC-22_LingFeat_0.5-tuned-weighted-champion.tsv

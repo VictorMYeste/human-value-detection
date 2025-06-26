@@ -1,0 +1,28 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-MFD-20_0.5_Baseline-test.tsv': '0.249', '1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv': '0.248', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv': '0.250', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv': '0.252'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+
+Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+  1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv lower=-0.02907 p=0.96920
+  1_Lex-MFD-20_0.5_Lex-MFD-test.tsv lower=-0.04208 p=0.99600
+  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=-0.02800 p=0.96120
+
+Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.30734, Ensemble = 0.29836
+One-sided lower 95% ΔF1 = -0.01545
+p(ens>base) = 0.98940 -> significant? no
+Per-label improvements:
+ Benevolence: caring: p_adj=0.12500, sig=False
+ Benevolence: dependability: p_adj=0.01042, sig=True
+ Universalism: concern: p_adj=0.00049, sig=True
+ Universalism: tolerance: p_adj=0.00049, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion.tsv

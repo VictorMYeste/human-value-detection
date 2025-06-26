@@ -1,0 +1,28 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
+  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.01318 p=0.98460
+  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00939 p=0.90540
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01704 p=0.99800
+  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.01833 p=0.98700
+  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.01008 p=0.96200
+  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.01133 p=0.95460
+  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.01094 p=0.92280
+  1_Baseline_0.5_NER-test.tsv    lower=-0.01189 p=0.90760
+  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.00249 p=0.37840
+
+Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29214, Ensemble = 0.29214
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-tuned-hard-champion.tsv

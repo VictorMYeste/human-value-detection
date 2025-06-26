@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv', '1_TD-BERTopic_0.19_Lex-MFD-test.tsv', '1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv']
+  1_TD-BERTopic_0.19_Lex-EmoLex-test.tsv lower=-0.00458 p=0.39120
+  1_TD-BERTopic_0.19_Lex-MFD-test.tsv lower=-0.00174 p=0.17420
+  1_TD-BERTopic_0.19_Lex-Schwartz-test.tsv lower=-0.00231 p=0.16480
+
+Selected: ['1_TD-BERTopic_0.19_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_TD-BERTopic_0.19_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29896, Ensemble = 0.29896
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/TD-BERTopic_0.19-fixed-hard-champion.tsv

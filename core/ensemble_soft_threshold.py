@@ -9,18 +9,10 @@ from sklearn.metrics import f1_score
 
 # === Configuration ===
 MODELS = [
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-eMFD-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-EmotionIntensity-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-22-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-LIWC-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-MFD-20-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-VAD-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv",
-    "../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_ResidualBlock-val.tsv",
+    "../approaches/moral-values/output/Baseline-val.tsv",
+    "../approaches/moral-values/output/Previous-Sentences-2-val.tsv",
+    "../approaches/moral-values/output/Lex-LIWC-22-val.tsv",
+    "../approaches/moral-values/output/TD-BERTopic-val.tsv",
 ]
 GOLD     = "../data/validation-english/labels-cat.tsv"
 ID_COLS  = ['Text-ID','Sentence-ID']

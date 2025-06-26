@@ -1,0 +1,20 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+
+Round 1: Testing candidates: ['1_TD-BERTopic_0.5_Lex-Schwartz-test.tsv']
+  1_TD-BERTopic_0.5_Lex-Schwartz-test.tsv lower=-0.00008 p=0.05380
+
+Selected: ['1_TD-BERTopic_0.5_Baseline-test.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_TD-BERTopic_0.5_Baseline-test.tsv']) ===
+Macro-F1 Base = 0.29053, Ensemble = 0.29053
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/TD-BERTopic_0.5-tuned-hard-champion.tsv

@@ -2,52 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-LIWC_0.1_Baseline-val.tsv  (Macro-F1 = 0.31837)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.31837
 
-Round 1: Testing candidates: ['1_Lex-LIWC_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC_0.1_Lex-MFD-test.tsv', '1_Lex-LIWC_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC_0.1_Lex-Schwartz-test.tsv', '1_Lex-LIWC_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC_0.1_NER-test.tsv', '1_Lex-LIWC_0.1_TD-LDA-test.tsv']
-  1_Lex-LIWC_0.1_Lex-eMFD-test.tsv lower=0.00357 p=0.00240
-  1_Lex-LIWC_0.1_Lex-EmoLex-test.tsv lower=-0.00791 p=0.35540
-  1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=0.00265 p=0.00580
-  1_Lex-LIWC_0.1_Lex-LIWC-22-test.tsv lower=0.00168 p=0.01300
-  1_Lex-LIWC_0.1_Lex-MFD-20-test.tsv lower=-0.00411 p=0.16120
-  1_Lex-LIWC_0.1_Lex-MFD-test.tsv lower=-0.00786 p=0.35880
-  1_Lex-LIWC_0.1_Lex-MJD-test.tsv lower=0.00201 p=0.01120
-  1_Lex-LIWC_0.1_Lex-Schwartz-test.tsv lower=-0.00956 p=0.49100
-  1_Lex-LIWC_0.1_Lex-VAD-test.tsv lower=0.00283 p=0.00260
-  1_Lex-LIWC_0.1_NER-test.tsv    lower=0.00355 p=0.00280
-  1_Lex-LIWC_0.1_TD-LDA-test.tsv lower=0.00397 p=0.00140
+Testing candidates: ['1_Lex-LIWC_0.1_NER-val.tsv', '1_Lex-LIWC_0.1_Lex-Schwartz-val.tsv', '1_Lex-LIWC_0.1_Lex-VAD-val.tsv', '1_Lex-LIWC_0.1_Lex-EmoLex-val.tsv', '1_Lex-LIWC_0.1_Lex-MFD-val.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22-val.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_Lex-LIWC_0.1_Lex-MFD-20-val.tsv', '1_Lex-LIWC_0.1_Lex-eMFD-val.tsv', '1_Lex-LIWC_0.1_Lex-MJD-val.tsv', '1_Lex-LIWC_0.1_TD-LDA-val.tsv']
+  1_Lex-LIWC_0.1_NER-val.tsv     lower=-0.00670 p=0.33460
+  1_Lex-LIWC_0.1_Lex-Schwartz-val.tsv lower=-0.00198 p=0.10640
+  1_Lex-LIWC_0.1_Lex-VAD-val.tsv lower=-0.00530 p=0.27760
+  1_Lex-LIWC_0.1_Lex-EmoLex-val.tsv lower=-0.00265 p=0.12680
+  1_Lex-LIWC_0.1_Lex-MFD-val.tsv lower=-0.00156 p=0.09060
+  1_Lex-LIWC_0.1_Lex-LIWC-22-val.tsv lower=-0.00549 p=0.24560
+  1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01324 p=0.89040
+  1_Lex-LIWC_0.1_Lex-MFD-20-val.tsv lower=-0.00884 p=0.53980
+  1_Lex-LIWC_0.1_Lex-eMFD-val.tsv lower=-0.00842 p=0.49320
+  1_Lex-LIWC_0.1_Lex-MJD-val.tsv lower=-0.00791 p=0.45700
+  1_Lex-LIWC_0.1_TD-LDA-val.tsv  lower=-0.00674 p=0.34200
 
-Added 1_Lex-LIWC_0.1_TD-LDA-test.tsv -> lower bound=0.00397 current f1 = 0.31489
-
-Round 2: Testing candidates: ['1_Lex-LIWC_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-LIWC_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC_0.1_Lex-MFD-20-test.tsv', '1_Lex-LIWC_0.1_Lex-MFD-test.tsv', '1_Lex-LIWC_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC_0.1_Lex-Schwartz-test.tsv', '1_Lex-LIWC_0.1_Lex-VAD-test.tsv', '1_Lex-LIWC_0.1_NER-test.tsv']
-  1_Lex-LIWC_0.1_Lex-eMFD-test.tsv lower=-0.00347 p=0.31340
-  1_Lex-LIWC_0.1_Lex-EmoLex-test.tsv lower=-0.00798 p=0.35260
-  1_Lex-LIWC_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00362 p=0.42060
-  1_Lex-LIWC_0.1_Lex-LIWC-22-test.tsv lower=-0.00058 p=0.08060
-  1_Lex-LIWC_0.1_Lex-MFD-20-test.tsv lower=-0.00279 p=0.25620
-  1_Lex-LIWC_0.1_Lex-MFD-test.tsv lower=-0.00808 p=0.36480
-  1_Lex-LIWC_0.1_Lex-MJD-test.tsv lower=0.00107 p=0.01740
-  1_Lex-LIWC_0.1_Lex-Schwartz-test.tsv lower=-0.00917 p=0.43840
-  1_Lex-LIWC_0.1_Lex-VAD-test.tsv lower=-0.00121 p=0.12220
-  1_Lex-LIWC_0.1_NER-test.tsv    lower=0.00053 p=0.03080
-
-Selected: ['1_Lex-LIWC_0.1_Baseline-test.tsv', '1_Lex-LIWC_0.1_TD-LDA-test.tsv']
+Selected: ['1_Lex-LIWC_0.1_Baseline-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Lex-LIWC_0.1_Baseline-test.tsv', '1_Lex-LIWC_0.1_TD-LDA-test.tsv']) ===
-Macro-F1 Base = 0.30623, Ensemble = 0.31489
-One-sided lower 95% ΔF1 = 0.00395
-p(ens>base) = 0.00160 -> significant? YES
-Per-label improvements:
- Security: societal: p_adj=0.00139, sig=True
- Tradition: p_adj=0.88393, sig=False
- Conformity: rules: p_adj=0.01835, sig=True
- Conformity: interpersonal: p_adj=0.58154, sig=False
- Benevolence: caring: p_adj=0.02216, sig=True
- Benevolence: dependability: p_adj=0.58154, sig=False
- Universalism: concern: p_adj=0.98732, sig=False
- Universalism: nature: p_adj=1.00000, sig=False
- Universalism: tolerance: p_adj=0.28125, sig=False
+=== Final Soft Ensemble (['1_Lex-LIWC_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.31837, Ensemble = 0.31837
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Lex-LIWC_0.1-tuned-soft-champion.tsv
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Lex-LIWC_0.1-tuned-soft-champion-val.tsv

@@ -1,24 +1,26 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Baseline_0.5_Baseline-test.tsv': '0.253', '1_Baseline_0.5_Lex-EmoLex-test.tsv': '0.250', '1_Baseline_0.5_Lex-MFD-test.tsv': '0.251', '1_Baseline_0.5_Lex-Schwartz-test.tsv': '0.247'}
+Weights: {'1_Baseline_0.5_Baseline-val.tsv': '0.253', '1_Baseline_0.5_Lex-Schwartz-val.tsv': '0.247', '1_Baseline_0.5_Lex-EmoLex-val.tsv': '0.250', '1_Baseline_0.5_Lex-MFD-val.tsv': '0.251'}
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Baseline-val.tsv  (Macro-F1 = 0.26614)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.26614
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.01976 p=0.64160
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.03278 p=0.88060
-  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.01908 p=0.57960
+Testing candidates: ['1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-MFD-val.tsv']
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.00252 p=0.22160
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.00242 p=0.19020
+  1_Baseline_0.5_Lex-MFD-val.tsv lower=-0.00193 p=0.15320
 
-Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Selected: ['1_Baseline_0.5_Baseline-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.28768, Ensemble = 0.28768
+=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.26614, Ensemble = 0.26614
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-fixed-weighted-champion-val.tsv

@@ -2,52 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_NER_0.1_Baseline-val.tsv  (Macro-F1 = 0.32097)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.32097
 
-Round 1: Testing candidates: ['1_NER_0.1_Lex-eMFD-test.tsv', '1_NER_0.1_Lex-EmoLex-test.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_NER_0.1_Lex-LIWC-22-test.tsv', '1_NER_0.1_Lex-MFD-20-test.tsv', '1_NER_0.1_Lex-MFD-test.tsv', '1_NER_0.1_Lex-MJD-test.tsv', '1_NER_0.1_Lex-Schwartz-test.tsv', '1_NER_0.1_Lex-VAD-test.tsv', '1_NER_0.1_NER-test.tsv', '1_NER_0.1_TD-LDA-test.tsv']
-  1_NER_0.1_Lex-eMFD-test.tsv    lower=0.00263 p=0.00760
-  1_NER_0.1_Lex-EmoLex-test.tsv  lower=-0.00889 p=0.40360
-  1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=0.00203 p=0.01100
-  1_NER_0.1_Lex-LIWC-22-test.tsv lower=0.00329 p=0.00460
-  1_NER_0.1_Lex-MFD-20-test.tsv  lower=0.00186 p=0.01460
-  1_NER_0.1_Lex-MFD-test.tsv     lower=-0.00969 p=0.46520
-  1_NER_0.1_Lex-MJD-test.tsv     lower=0.00169 p=0.01440
-  1_NER_0.1_Lex-Schwartz-test.tsv lower=-0.00886 p=0.40300
-  1_NER_0.1_Lex-VAD-test.tsv     lower=0.00145 p=0.01560
-  1_NER_0.1_NER-test.tsv         lower=0.00287 p=0.00620
-  1_NER_0.1_TD-LDA-test.tsv      lower=0.00357 p=0.00200
+Testing candidates: ['1_NER_0.1_NER-val.tsv', '1_NER_0.1_Lex-Schwartz-val.tsv', '1_NER_0.1_Lex-VAD-val.tsv', '1_NER_0.1_Lex-EmoLex-val.tsv', '1_NER_0.1_Lex-MFD-val.tsv', '1_NER_0.1_Lex-LIWC-22-val.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_NER_0.1_Lex-MFD-20-val.tsv', '1_NER_0.1_Lex-eMFD-val.tsv', '1_NER_0.1_Lex-MJD-val.tsv', '1_NER_0.1_TD-LDA-val.tsv']
+  1_NER_0.1_NER-val.tsv          lower=-0.00717 p=0.41420
+  1_NER_0.1_Lex-Schwartz-val.tsv lower=-0.00127 p=0.08040
+  1_NER_0.1_Lex-VAD-val.tsv      lower=-0.00549 p=0.28460
+  1_NER_0.1_Lex-EmoLex-val.tsv   lower=-0.00028 p=0.05440
+  1_NER_0.1_Lex-MFD-val.tsv      lower=-0.00087 p=0.07000
+  1_NER_0.1_Lex-LIWC-22-val.tsv  lower=-0.00509 p=0.25520
+  1_NER_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01857 p=0.97080
+  1_NER_0.1_Lex-MFD-20-val.tsv   lower=-0.00921 p=0.62860
+  1_NER_0.1_Lex-eMFD-val.tsv     lower=-0.00849 p=0.54620
+  1_NER_0.1_Lex-MJD-val.tsv      lower=-0.01235 p=0.67980
+  1_NER_0.1_TD-LDA-val.tsv       lower=-0.00542 p=0.26520
 
-Added 1_NER_0.1_TD-LDA-test.tsv -> lower bound=0.00357 current f1 = 0.31756
-
-Round 2: Testing candidates: ['1_NER_0.1_Lex-eMFD-test.tsv', '1_NER_0.1_Lex-EmoLex-test.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_NER_0.1_Lex-LIWC-22-test.tsv', '1_NER_0.1_Lex-MFD-20-test.tsv', '1_NER_0.1_Lex-MFD-test.tsv', '1_NER_0.1_Lex-MJD-test.tsv', '1_NER_0.1_Lex-Schwartz-test.tsv', '1_NER_0.1_Lex-VAD-test.tsv', '1_NER_0.1_NER-test.tsv']
-  1_NER_0.1_Lex-eMFD-test.tsv    lower=-0.00380 p=0.38040
-  1_NER_0.1_Lex-EmoLex-test.tsv  lower=-0.00014 p=0.05540
-  1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00475 p=0.56420
-  1_NER_0.1_Lex-LIWC-22-test.tsv lower=-0.00134 p=0.12760
-  1_NER_0.1_Lex-MFD-20-test.tsv  lower=-0.00354 p=0.34960
-  1_NER_0.1_Lex-MFD-test.tsv     lower=-0.01008 p=0.44040
-  1_NER_0.1_Lex-MJD-test.tsv     lower=-0.00053 p=0.07940
-  1_NER_0.1_Lex-Schwartz-test.tsv lower=-0.01013 p=0.47860
-  1_NER_0.1_Lex-VAD-test.tsv     lower=-0.00011 p=0.05520
-  1_NER_0.1_NER-test.tsv         lower=0.00011 p=0.04480
-
-Selected: ['1_NER_0.1_Baseline-test.tsv', '1_NER_0.1_TD-LDA-test.tsv']
+Selected: ['1_NER_0.1_Baseline-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_NER_0.1_Baseline-test.tsv', '1_NER_0.1_TD-LDA-test.tsv']) ===
-Macro-F1 Base = 0.30932, Ensemble = 0.31756
-One-sided lower 95% ΔF1 = 0.00325
-p(ens>base) = 0.00260 -> significant? YES
-Per-label improvements:
- Security: societal: p_adj=0.02410, sig=True
- Tradition: p_adj=0.67969, sig=False
- Conformity: rules: p_adj=0.10407, sig=False
- Conformity: interpersonal: p_adj=0.12656, sig=False
- Benevolence: caring: p_adj=0.02410, sig=True
- Benevolence: dependability: p_adj=0.84814, sig=False
- Universalism: concern: p_adj=0.87463, sig=False
- Universalism: nature: p_adj=0.80357, sig=False
- Universalism: tolerance: p_adj=0.12656, sig=False
+=== Final Soft Ensemble (['1_NER_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.32097, Ensemble = 0.32097
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/NER_0.1-fixed-soft-champion.tsv
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/NER_0.1-fixed-soft-champion-val.tsv

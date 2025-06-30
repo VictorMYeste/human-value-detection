@@ -1,59 +1,32 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Baseline_0.5_Baseline-test.tsv': '0.101', '1_Baseline_0.5_Lex-eMFD-test.tsv': '0.097', '1_Baseline_0.5_Lex-EmoLex-test.tsv': '0.101', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv': '0.098', '1_Baseline_0.5_Lex-LIWC-22-test.tsv': '0.097', '1_Baseline_0.5_Lex-MFD-test.tsv': '0.100', '1_Baseline_0.5_Lex-MJD-test.tsv': '0.104', '1_Baseline_0.5_Lex-Schwartz-test.tsv': '0.099', '1_Baseline_0.5_NER-test.tsv': '0.104', '1_Baseline_0.5_TD-LDA-test.tsv': '0.100'}
+Weights: {'1_Baseline_0.5_Baseline-val.tsv': '0.101', '1_Baseline_0.5_NER-val.tsv': '0.104', '1_Baseline_0.5_Lex-Schwartz-val.tsv': '0.099', '1_Baseline_0.5_Lex-EmoLex-val.tsv': '0.101', '1_Baseline_0.5_Lex-MFD-val.tsv': '0.100', '1_Baseline_0.5_Lex-LIWC-22-val.tsv': '0.097', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-val.tsv': '0.098', '1_Baseline_0.5_Lex-eMFD-val.tsv': '0.097', '1_Baseline_0.5_Lex-MJD-val.tsv': '0.104', '1_Baseline_0.5_TD-LDA-val.tsv': '0.100'}
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Lex-MJD-val.tsv  (Macro-F1 = 0.27942)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.27942
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00382 p=0.30880
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00215 p=0.13620
-  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00314 p=0.17380
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.00305 p=0.01160
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.00289 p=0.17240
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.00379 p=0.25460
-  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=-0.00416 p=0.24580
-  1_Baseline_0.5_NER-test.tsv    lower=0.00002 p=0.05000
-  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.02351 p=0.72980
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Baseline_0.5_NER-val.tsv', '1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-MFD-val.tsv', '1_Baseline_0.5_Lex-LIWC-22-val.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-val.tsv', '1_Baseline_0.5_Lex-eMFD-val.tsv', '1_Baseline_0.5_TD-LDA-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=-0.01439 p=0.65840
+  1_Baseline_0.5_NER-val.tsv     lower=-0.00342 p=0.48820
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.02202 p=0.99240
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.01757 p=0.82920
+  1_Baseline_0.5_Lex-MFD-val.tsv lower=-0.01854 p=0.89820
+  1_Baseline_0.5_Lex-LIWC-22-val.tsv lower=-0.01653 p=0.81100
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01477 p=0.67240
+  1_Baseline_0.5_Lex-eMFD-val.tsv lower=-0.02773 p=0.95080
+  1_Baseline_0.5_TD-LDA-val.tsv  lower=-0.02533 p=0.89120
 
-Added 1_Baseline_0.5_Lex-LIWC-22-test.tsv -> lower bound=0.00305 current f1 = 0.27361
-
-Round 2: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.00294 p=0.01520
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.00348 p=0.00760
-  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=0.00082 p=0.03580
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=0.00340 p=0.01080
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.00409 p=0.00540
-  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=0.00431 p=0.00700
-  1_Baseline_0.5_NER-test.tsv    lower=-0.00065 p=0.06540
-  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.00282 p=0.13980
-
-Added 1_Baseline_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00431 current f1 = 0.28418
-
-Round 3: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.00208 p=0.01040
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00030 p=0.05820
-  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=0.00151 p=0.01820
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.00146 p=0.11100
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.00016 p=0.04480
-  1_Baseline_0.5_NER-test.tsv    lower=-0.00092 p=0.08060
-  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.00058 p=0.07600
-
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+Selected: ['1_Baseline_0.5_Lex-MJD-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']) ===
-Macro-F1 Base = 0.28091, Ensemble = 0.29173
-One-sided lower 95% ΔF1 = 0.00283
-p(ens>base) = 0.01220 -> significant? YES
-Per-label improvements:
- Face: p_adj=0.08606, sig=False
- Security: personal: p_adj=0.83181, sig=False
- Security: societal: p_adj=0.83181, sig=False
- Tradition: p_adj=0.06445, sig=False
- Conformity: rules: p_adj=0.00005, sig=True
- Conformity: interpersonal: p_adj=0.07812, sig=False
+=== Final Weighted Ensemble (['1_Baseline_0.5_Lex-MJD-val.tsv']) ===
+Macro-F1 Seed = 0.27942, Ensemble = 0.27942
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-fixed-weighted-champion-val.tsv

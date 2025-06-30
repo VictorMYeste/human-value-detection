@@ -1,37 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Baseline_0.18_Baseline-test.tsv': '0.497', '1_Baseline_0.18_Previous-Sentences-2-test.tsv': '0.503'}
+Weights: {'1_Baseline_0.18_Baseline-val.tsv': '0.497', '1_Baseline_0.18_Previous-Sentences-2-val.tsv': '0.503'}
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.18_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.26494)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.26494
 
-Round 1: Testing candidates: ['1_Baseline_0.18_Previous-Sentences-2-test.tsv']
-  1_Baseline_0.18_Previous-Sentences-2-test.tsv lower=0.00278 p=0.00700
+Testing candidates: ['1_Baseline_0.18_Baseline-val.tsv']
+  1_Baseline_0.18_Baseline-val.tsv lower=0.00022 p=0.04540
 
-Added 1_Baseline_0.18_Previous-Sentences-2-test.tsv -> lower bound=0.00278 current f1 = 0.28017
-
-Round 2: Testing candidates: []
-
-Selected: ['1_Baseline_0.18_Baseline-test.tsv', '1_Baseline_0.18_Previous-Sentences-2-test.tsv']
+Selected: ['1_Baseline_0.18_Previous-Sentences-2-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Baseline_0.18_Baseline-test.tsv', '1_Baseline_0.18_Previous-Sentences-2-test.tsv']) ===
-Macro-F1 Base = 0.26926, Ensemble = 0.28017
-One-sided lower 95% ΔF1 = 0.00273
-p(ens>base) = 0.00880 -> significant? YES
-Per-label improvements:
- Self-direction: thought: p_adj=0.12891, sig=False
- Self-direction: action: p_adj=1.00000, sig=False
- Stimulation: p_adj=1.00000, sig=False
- Hedonism: p_adj=1.00000, sig=False
- Achievement: p_adj=0.12891, sig=False
- Humility: p_adj=1.00000, sig=False
- Benevolence: caring: p_adj=1.00000, sig=False
- Benevolence: dependability: p_adj=0.84328, sig=False
- Universalism: concern: p_adj=0.38648, sig=False
- Universalism: nature: p_adj=0.12891, sig=False
- Universalism: tolerance: p_adj=1.00000, sig=False
+=== Final Weighted Ensemble (['1_Baseline_0.18_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.26494, Ensemble = 0.26494
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.18-fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.18-fixed-weighted-champion-val.tsv

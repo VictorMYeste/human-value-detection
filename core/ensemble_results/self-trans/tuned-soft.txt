@@ -1,0 +1,38 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-WorryWords_0.16_Lex-MFD-val.tsv  (Macro-F1 = 0.29092)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29092
+
+Testing candidates: ['1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv', '1_Lex-MFD-20_0.21_Lex-MFD-val.tsv', '1_TD-BERTopic_0.19_Lex-MFD-val.tsv']
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=0.00065 p=0.04120
+  1_Lex-MFD-20_0.5_Lex-MFD-val.tsv lower=0.00437 p=0.00120
+  1_Lex-MFD-20_0.21_Lex-MFD-val.tsv lower=-0.00280 p=0.29960
+  1_TD-BERTopic_0.19_Lex-MFD-val.tsv lower=-0.00064 p=0.07360
+
+Added 1_Lex-MFD-20_0.5_Lex-MFD-val.tsv -> lower bound=0.00437 current f1 = 0.29559
+[Round 2]. Current Macro-Average F1 = 0.29559
+
+Testing candidates: ['1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.21_Lex-MFD-val.tsv', '1_TD-BERTopic_0.19_Lex-MFD-val.tsv']
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.02095 p=0.62880
+  1_Lex-MFD-20_0.21_Lex-MFD-val.tsv lower=-0.00320 p=0.20860
+  1_TD-BERTopic_0.19_Lex-MFD-val.tsv lower=-0.00998 p=0.41440
+
+Selected: ['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29092, Ensemble = 0.30046
+One-sided lower 95% ΔF1 = 0.00436
+p(ens>base) = 0.00080 -> significant? YES
+Per-label improvements:
+ Benevolence: caring: p_adj=0.00122, sig=True
+ Benevolence: dependability: p_adj=0.03581, sig=True
+ Universalism: concern: p_adj=0.00644, sig=True
+ Universalism: nature: p_adj=1.00000, sig=False
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/tuned-soft-champion-val.tsv

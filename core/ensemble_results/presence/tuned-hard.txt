@@ -1,0 +1,35 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Baseline_0.5_Lex-MJD-val.tsv  (Macro-F1 = 0.30397)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.30397
+
+Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-val.tsv lower=-0.00458 p=0.55940
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv lower=-0.00484 p=0.81620
+  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv lower=-0.01097 p=0.95120
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv lower=-0.00911 p=0.98340
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv lower=-0.00396 p=0.55160
+  1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv lower=-0.00299 p=0.31960
+  1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv lower=-0.00524 p=0.89740
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv lower=-0.00216 p=0.35660
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv lower=-0.00534 p=0.71920
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv lower=-0.00377 p=0.34760
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv lower=-0.00415 p=0.70740
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv lower=-0.00919 p=0.99540
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv lower=-0.00350 p=0.55680
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv lower=-0.00693 p=0.93280
+
+Selected: ['1_Baseline_0.5_Lex-MJD-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Baseline_0.5_Lex-MJD-val.tsv']) ===
+Macro-F1 Seed = 0.30397, Ensemble = 0.30397
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/p_moral-values/output/tuned-hard-champion-val.tsv

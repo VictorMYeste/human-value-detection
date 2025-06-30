@@ -1,28 +1,26 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-MFD-20_0.5_Baseline-test.tsv': '0.249', '1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv': '0.248', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv': '0.250', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv': '0.252'}
+Weights: {'1_Lex-MFD-20_0.5_Baseline-val.tsv': '0.250', '1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv': '0.249', '1_Lex-MFD-20_0.5_Lex-EmoLex-val.tsv': '0.249', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv': '0.252'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv  (Macro-F1 = 0.27316)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.27316
 
-Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
-  1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv lower=-0.02907 p=0.96920
-  1_Lex-MFD-20_0.5_Lex-MFD-test.tsv lower=-0.04208 p=0.99600
-  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=-0.02800 p=0.96120
+Testing candidates: ['1_Lex-MFD-20_0.5_Baseline-val.tsv', '1_Lex-MFD-20_0.5_Lex-EmoLex-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv']
+  1_Lex-MFD-20_0.5_Baseline-val.tsv lower=-0.00333 p=0.15980
+  1_Lex-MFD-20_0.5_Lex-EmoLex-val.tsv lower=-0.00482 p=0.80980
+  1_Lex-MFD-20_0.5_Lex-MFD-val.tsv lower=-0.01645 p=0.68300
 
-Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv']
+Selected: ['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30734, Ensemble = 0.29836
-One-sided lower 95% ΔF1 = -0.01545
-p(ens>base) = 0.98940 -> significant? no
-Per-label improvements:
- Benevolence: caring: p_adj=0.12500, sig=False
- Benevolence: dependability: p_adj=0.01042, sig=True
- Universalism: concern: p_adj=0.00049, sig=True
- Universalism: tolerance: p_adj=0.00049, sig=True
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.27316, Ensemble = 0.27316
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion-val.tsv

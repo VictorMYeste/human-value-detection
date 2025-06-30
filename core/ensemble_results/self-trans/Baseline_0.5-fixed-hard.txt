@@ -2,31 +2,23 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Baseline-val.tsv  (Macro-F1 = 0.26614)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.26614
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.00066 p=0.03220
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=0.00237 p=0.00400
-  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=0.00360 p=0.00300
+Testing candidates: ['1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-MFD-val.tsv']
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.00445 p=0.39100
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.00414 p=0.23340
+  1_Baseline_0.5_Lex-MFD-val.tsv lower=-0.00032 p=0.06460
 
-Added 1_Baseline_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00360 current f1 = 0.29733
-
-Round 2: Testing candidates: ['1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv']
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.02996 p=0.98500
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.02952 p=0.96900
-
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+Selected: ['1_Baseline_0.5_Baseline-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']) ===
-Macro-F1 Base = 0.28768, Ensemble = 0.29733
-One-sided lower 95% ΔF1 = 0.00367
-p(ens>base) = 0.00360 -> significant? YES
-Per-label improvements:
- Benevolence: caring: p_adj=0.00049, sig=True
- Benevolence: dependability: p_adj=0.03125, sig=True
- Universalism: concern: p_adj=0.00003, sig=True
- Universalism: tolerance: p_adj=0.00065, sig=True
+=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.26614, Ensemble = 0.26614
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/self-trans_moral-values/output/Baseline_0.5-fixed-hard-champion-val.tsv

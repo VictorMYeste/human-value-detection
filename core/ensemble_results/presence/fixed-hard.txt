@@ -1,0 +1,72 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv  (Macro-F1 = 0.29374)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.29374
+
+Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-val.tsv lower=0.00994 p=0.00000
+  1_Baseline_0.5_Lex-MJD-val.tsv lower=-0.00058 p=0.86340
+  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv lower=0.00325 p=0.00400
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv lower=-0.00261 p=0.24800
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv lower=0.00563 p=0.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv lower=0.01062 p=0.00000
+  1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv lower=0.00748 p=0.00000
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv lower=-0.00183 p=0.73880
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv lower=0.00526 p=0.00000
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv lower=0.00703 p=0.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv lower=0.00573 p=0.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv lower=0.00511 p=0.00000
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv lower=0.00368 p=0.00020
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv lower=0.00432 p=0.00000
+
+Added 1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv -> lower bound=0.01062 current f1 = 0.30191
+[Round 2]. Current Macro-Average F1 = 0.30191
+
+Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv']
+  1_Baseline_0.5_Previous-Sentences-2-val.tsv lower=-0.01042 p=0.70120
+  1_Baseline_0.5_Lex-MJD-val.tsv lower=-0.01405 p=0.99440
+  1_Lex-LIWC-22_LingFeat_0.1_Previous-Sentences-2-val.tsv lower=-0.00564 p=0.36580
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-20-val.tsv lower=-0.00195 p=0.15180
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-EmoLex-val.tsv lower=-0.01727 p=0.99620
+  1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv lower=-0.01457 p=0.99240
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Lex-MJD-val.tsv lower=-0.01095 p=0.97280
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-val.tsv lower=-0.00353 p=0.28260
+  1_Previous-Sentences-2-Lex-eMFD_0.1_Previous-Sentences-2-val.tsv lower=-0.00787 p=0.50540
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv lower=-0.01245 p=0.95880
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv lower=-0.00794 p=0.75480
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_ResidualBlock-val.tsv lower=-0.00887 p=0.79280
+  1_Previous-Sentences-2-Lex-LIWC-22_0.1_Baseline-val.tsv lower=-0.00374 p=0.32740
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.29374, Ensemble = 0.30983
+One-sided lower 95% ΔF1 = 0.01072
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.52778, sig=False
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.03711, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00017, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00000, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.27941, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.00001, sig=True
+ Benevolence: dependability: p_adj=0.00031, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=0.00017, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/p_moral-values/output/fixed-hard-champion-val.tsv

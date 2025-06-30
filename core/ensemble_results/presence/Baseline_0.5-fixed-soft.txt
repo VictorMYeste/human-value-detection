@@ -2,61 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.29269)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29269
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.00349 p=0.00380
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.00150 p=0.01500
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.00598 p=0.00000
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.00175 p=0.01040
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.00299 p=0.00360
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.00187 p=0.01020
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.00154 p=0.01640
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.00286 p=0.00520
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=-0.00092 p=0.08920
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.00170 p=0.01260
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.00673 p=0.00000
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Baseline_0.5_ResidualBlock-val.tsv', '1_Baseline_0.5_Lex-VAD-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-val.tsv', '1_Baseline_0.5_Lex-WorryWords-val.tsv', '1_Baseline_0.5_Lex-LIWC-val.tsv', '1_Baseline_0.5_Lex-LIWC-22-val.tsv', '1_Baseline_0.5_Lex-MFD-20-val.tsv', '1_Baseline_0.5_Lex-eMFD-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=-0.00431 p=0.28220
+  1_Baseline_0.5_ResidualBlock-val.tsv lower=-0.00381 p=0.23100
+  1_Baseline_0.5_Lex-VAD-val.tsv lower=-0.00530 p=0.37400
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.00394 p=0.24140
+  1_Baseline_0.5_Lex-EmotionIntensity-val.tsv lower=0.00103 p=0.02840
+  1_Baseline_0.5_Lex-WorryWords-val.tsv lower=-0.00237 p=0.13000
+  1_Baseline_0.5_Lex-LIWC-val.tsv lower=-0.00125 p=0.08420
+  1_Baseline_0.5_Lex-LIWC-22-val.tsv lower=-0.00292 p=0.18300
+  1_Baseline_0.5_Lex-MFD-20-val.tsv lower=-0.00218 p=0.13640
+  1_Baseline_0.5_Lex-eMFD-val.tsv lower=-0.00447 p=0.27000
+  1_Baseline_0.5_Lex-MJD-val.tsv lower=-0.00045 p=0.06060
 
-Added 1_Baseline_0.5_Lex-MJD-test.tsv -> lower bound=0.00673 current f1 = 0.29580
-
-Round 2: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv']
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=-0.00552 p=0.67660
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=-0.00568 p=0.83400
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=-0.00256 p=0.29900
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00501 p=0.68980
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=-0.00604 p=0.77800
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=-0.00417 p=0.66640
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=-0.00786 p=0.89900
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.00470 p=0.67680
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=-0.00548 p=0.66560
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00674 p=0.81140
-
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
+Selected: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']) ===
-Macro-F1 Base = 0.28411, Ensemble = 0.29580
-One-sided lower 95% ΔF1 = 0.00678
-p(ens>base) = 0.00000 -> significant? YES
-Per-label improvements:
- Self-direction: thought: p_adj=1.00000, sig=False
- Self-direction: action: p_adj=0.74337, sig=False
- Stimulation: p_adj=1.00000, sig=False
- Hedonism: p_adj=1.00000, sig=False
- Achievement: p_adj=0.30013, sig=False
- Power: dominance: p_adj=0.76167, sig=False
- Power: resources: p_adj=1.00000, sig=False
- Face: p_adj=1.00000, sig=False
- Security: personal: p_adj=0.34424, sig=False
- Security: societal: p_adj=1.00000, sig=False
- Tradition: p_adj=1.00000, sig=False
- Conformity: rules: p_adj=1.00000, sig=False
- Conformity: interpersonal: p_adj=1.00000, sig=False
- Benevolence: caring: p_adj=0.34424, sig=False
- Benevolence: dependability: p_adj=0.87231, sig=False
- Universalism: concern: p_adj=0.39793, sig=False
- Universalism: nature: p_adj=1.00000, sig=False
- Universalism: tolerance: p_adj=0.52559, sig=False
+=== Final Soft Ensemble (['1_Baseline_0.5_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.29269, Ensemble = 0.29269
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/p_moral-values/output/Baseline_0.5-fixed-soft-champion.tsv
+Ensemble probabilities written to ../approaches/p_moral-values/output/Baseline_0.5-fixed-soft-champion-val.tsv

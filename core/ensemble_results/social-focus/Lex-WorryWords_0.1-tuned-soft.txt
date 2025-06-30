@@ -2,52 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-WorryWords_0.1_Baseline-val.tsv  (Macro-F1 = 0.31577)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.31577
 
-Round 1: Testing candidates: ['1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-MJD-test.tsv', '1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv', '1_Lex-WorryWords_0.1_Lex-VAD-test.tsv', '1_Lex-WorryWords_0.1_NER-test.tsv', '1_Lex-WorryWords_0.1_TD-LDA-test.tsv']
-  1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv lower=0.00495 p=0.00080
-  1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv lower=-0.00787 p=0.36660
-  1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=0.00226 p=0.00620
-  1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv lower=0.00364 p=0.00240
-  1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv lower=-0.00398 p=0.15640
-  1_Lex-WorryWords_0.1_Lex-MFD-test.tsv lower=-0.00795 p=0.35840
-  1_Lex-WorryWords_0.1_Lex-MJD-test.tsv lower=0.00324 p=0.00080
-  1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv lower=-0.00957 p=0.47740
-  1_Lex-WorryWords_0.1_Lex-VAD-test.tsv lower=0.00490 p=0.00040
-  1_Lex-WorryWords_0.1_NER-test.tsv lower=0.00496 p=0.00040
-  1_Lex-WorryWords_0.1_TD-LDA-test.tsv lower=0.00553 p=0.00000
+Testing candidates: ['1_Lex-WorryWords_0.1_NER-val.tsv', '1_Lex-WorryWords_0.1_Lex-Schwartz-val.tsv', '1_Lex-WorryWords_0.1_Lex-VAD-val.tsv', '1_Lex-WorryWords_0.1_Lex-EmoLex-val.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-val.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22-val.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-20-val.tsv', '1_Lex-WorryWords_0.1_Lex-eMFD-val.tsv', '1_Lex-WorryWords_0.1_Lex-MJD-val.tsv', '1_Lex-WorryWords_0.1_TD-LDA-val.tsv']
+  1_Lex-WorryWords_0.1_NER-val.tsv lower=-0.00581 p=0.30000
+  1_Lex-WorryWords_0.1_Lex-Schwartz-val.tsv lower=-0.00072 p=0.06480
+  1_Lex-WorryWords_0.1_Lex-VAD-val.tsv lower=-0.00513 p=0.24460
+  1_Lex-WorryWords_0.1_Lex-EmoLex-val.tsv lower=-0.00105 p=0.07480
+  1_Lex-WorryWords_0.1_Lex-MFD-val.tsv lower=-0.00077 p=0.06760
+  1_Lex-WorryWords_0.1_Lex-LIWC-22-val.tsv lower=-0.00483 p=0.22180
+  1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01210 p=0.80040
+  1_Lex-WorryWords_0.1_Lex-MFD-20-val.tsv lower=-0.00728 p=0.40180
+  1_Lex-WorryWords_0.1_Lex-eMFD-val.tsv lower=-0.00689 p=0.34600
+  1_Lex-WorryWords_0.1_Lex-MJD-val.tsv lower=-0.00726 p=0.40720
+  1_Lex-WorryWords_0.1_TD-LDA-val.tsv lower=-0.00577 p=0.27340
 
-Added 1_Lex-WorryWords_0.1_TD-LDA-test.tsv -> lower bound=0.00553 current f1 = 0.32014
-
-Round 2: Testing candidates: ['1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv', '1_Lex-WorryWords_0.1_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.1_Lex-MJD-test.tsv', '1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv', '1_Lex-WorryWords_0.1_Lex-VAD-test.tsv', '1_Lex-WorryWords_0.1_NER-test.tsv']
-  1_Lex-WorryWords_0.1_Lex-eMFD-test.tsv lower=-0.00429 p=0.46620
-  1_Lex-WorryWords_0.1_Lex-EmoLex-test.tsv lower=-0.01024 p=0.51540
-  1_Lex-WorryWords_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00512 p=0.63840
-  1_Lex-WorryWords_0.1_Lex-LIWC-22-test.tsv lower=-0.00092 p=0.10100
-  1_Lex-WorryWords_0.1_Lex-MFD-20-test.tsv lower=-0.00355 p=0.37040
-  1_Lex-WorryWords_0.1_Lex-MFD-test.tsv lower=-0.01019 p=0.51120
-  1_Lex-WorryWords_0.1_Lex-MJD-test.tsv lower=-0.00019 p=0.06180
-  1_Lex-WorryWords_0.1_Lex-Schwartz-test.tsv lower=-0.01144 p=0.59500
-  1_Lex-WorryWords_0.1_Lex-VAD-test.tsv lower=-0.00169 p=0.17140
-  1_Lex-WorryWords_0.1_NER-test.tsv lower=0.00048 p=0.03220
-
-Selected: ['1_Lex-WorryWords_0.1_Baseline-test.tsv', '1_Lex-WorryWords_0.1_TD-LDA-test.tsv']
+Selected: ['1_Lex-WorryWords_0.1_Baseline-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Lex-WorryWords_0.1_Baseline-test.tsv', '1_Lex-WorryWords_0.1_TD-LDA-test.tsv']) ===
-Macro-F1 Base = 0.30984, Ensemble = 0.32014
-One-sided lower 95% ΔF1 = 0.00531
-p(ens>base) = 0.00000 -> significant? YES
-Per-label improvements:
- Security: societal: p_adj=0.00617, sig=True
- Tradition: p_adj=0.58259, sig=False
- Conformity: rules: p_adj=0.02807, sig=True
- Conformity: interpersonal: p_adj=0.58154, sig=False
- Benevolence: caring: p_adj=0.01881, sig=True
- Benevolence: dependability: p_adj=0.58154, sig=False
- Universalism: concern: p_adj=1.00000, sig=False
- Universalism: nature: p_adj=1.00000, sig=False
- Universalism: tolerance: p_adj=0.28125, sig=False
+=== Final Soft Ensemble (['1_Lex-WorryWords_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.31577, Ensemble = 0.31577
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Lex-WorryWords_0.1-tuned-soft-champion.tsv
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Lex-WorryWords_0.1-tuned-soft-champion-val.tsv

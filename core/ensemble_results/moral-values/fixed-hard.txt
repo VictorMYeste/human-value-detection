@@ -2,45 +2,48 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: Lex-LIWC-22-val.tsv  (Macro-F1 = 0.28802)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.28802
 
-Round 1: Testing candidates: ['Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
-  Lex-LIWC-22-test.tsv           lower=0.02047 p=0.00000
-  Previous-Sentences-2-test.tsv  lower=0.02566 p=0.00000
-  TD-BERTopic-test.tsv           lower=0.01810 p=0.00000
+Testing candidates: ['Baseline-val.tsv', 'Previous-Sentences-2-val.tsv', 'TD-BERTopic-val.tsv']
+  Baseline-val.tsv               lower=0.01298 p=0.00000
+  Previous-Sentences-2-val.tsv   lower=0.02190 p=0.00000
+  TD-BERTopic-val.tsv            lower=0.01236 p=0.00000
 
-Added Previous-Sentences-2-test.tsv -> lower bound=0.02566 current f1 = 0.30389
+Added Previous-Sentences-2-val.tsv -> lower bound=0.02190 current f1 = 0.30404
+[Round 2]. Current Macro-Average F1 = 0.30404
 
-Round 2: Testing candidates: ['Lex-LIWC-22-test.tsv', 'TD-BERTopic-test.tsv']
-  Lex-LIWC-22-test.tsv           lower=-0.02420 p=1.00000
-  TD-BERTopic-test.tsv           lower=-0.02335 p=1.00000
+Testing candidates: ['Baseline-val.tsv', 'TD-BERTopic-val.tsv']
+  Baseline-val.tsv               lower=-0.02050 p=0.99980
+  TD-BERTopic-val.tsv            lower=-0.01688 p=1.00000
 
-Selected: ['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv']
+Selected: ['Lex-LIWC-22-val.tsv', 'Previous-Sentences-2-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['Baseline-test.tsv', 'Previous-Sentences-2-test.tsv']) ===
-Macro-F1 Base = 0.28112, Ensemble = 0.31178
-One-sided lower 95% ΔF1 = 0.02539
+=== Final Hard Ensemble (['Lex-LIWC-22-val.tsv', 'Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.28802, Ensemble = 0.31466
+One-sided lower 95% ΔF1 = 0.02189
 p(ens>base) = 0.00000 -> significant? YES
 Per-label improvements:
- Self-direction: thought: p_adj=0.06618, sig=False
+ Self-direction: thought: p_adj=0.26471, sig=False
  Self-direction: action: p_adj=0.00000, sig=True
  Stimulation: p_adj=0.00000, sig=True
- Hedonism: p_adj=0.00469, sig=True
+ Hedonism: p_adj=0.26471, sig=False
  Achievement: p_adj=0.00000, sig=True
  Power: dominance: p_adj=0.00000, sig=True
  Power: resources: p_adj=0.00000, sig=True
- Face: p_adj=0.00001, sig=True
+ Face: p_adj=0.00004, sig=True
  Security: personal: p_adj=0.00000, sig=True
  Security: societal: p_adj=0.00000, sig=True
- Tradition: p_adj=0.00001, sig=True
+ Tradition: p_adj=0.00000, sig=True
  Conformity: rules: p_adj=0.00000, sig=True
- Conformity: interpersonal: p_adj=0.12500, sig=False
- Benevolence: caring: p_adj=0.00031, sig=True
- Benevolence: dependability: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.50000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00031, sig=True
  Universalism: concern: p_adj=0.00000, sig=True
  Universalism: nature: p_adj=0.00000, sig=True
- Universalism: tolerance: p_adj=0.01758, sig=True
+ Universalism: tolerance: p_adj=0.03750, sig=True
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/moral-values/output/fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/moral-values/output/fixed-hard-champion-val.tsv

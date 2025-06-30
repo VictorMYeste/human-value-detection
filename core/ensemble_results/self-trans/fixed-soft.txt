@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-WorryWords_0.16_Lex-MFD-val.tsv  (Macro-F1 = 0.29875)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29875
+
+Testing candidates: ['1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv', '1_Lex-MFD-20_0.21_Lex-MFD-val.tsv', '1_TD-BERTopic_0.19_Lex-MFD-val.tsv']
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.05795 p=0.99980
+  1_Lex-MFD-20_0.5_Lex-MFD-val.tsv lower=-0.04670 p=0.99940
+  1_Lex-MFD-20_0.21_Lex-MFD-val.tsv lower=-0.01010 p=0.77060
+  1_TD-BERTopic_0.19_Lex-MFD-val.tsv lower=-0.01707 p=0.69940
+
+Selected: ['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29875, Ensemble = 0.29875
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/fixed-soft-champion-val.tsv

@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv  (Macro-F1 = 0.29726)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29726
+
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=-0.00382 p=0.14260
+  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv lower=-0.00523 p=0.17840
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.29726, Ensemble = 0.29726
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/conservation_moral-values/output/tuned-soft-champion-val.tsv

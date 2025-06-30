@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-LIWC_0.1_NER-val.tsv': '0.199', '1_Lex-WorryWords_0.1_NER-val.tsv': '0.197', '1_NER_0.1_Baseline-val.tsv': '0.205', '1_Previous-Sentences-2_0.1_Baseline-val.tsv': '0.202', '1_TD-NMF_0.5_NER-val.tsv': '0.197'}
+Assembling...
+Forward selection...
+Seed model: 1_NER_0.1_Baseline-val.tsv  (Macro-F1 = 0.32097)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.32097
+
+Testing candidates: ['1_Lex-LIWC_0.1_NER-val.tsv', '1_Lex-WorryWords_0.1_NER-val.tsv', '1_Previous-Sentences-2_0.1_Baseline-val.tsv', '1_TD-NMF_0.5_NER-val.tsv']
+  1_Lex-LIWC_0.1_NER-val.tsv     lower=-0.00896 p=0.40520
+  1_Lex-WorryWords_0.1_NER-val.tsv lower=-0.00928 p=0.45700
+  1_Previous-Sentences-2_0.1_Baseline-val.tsv lower=-0.00645 p=0.38820
+  1_TD-NMF_0.5_NER-val.tsv       lower=-0.02189 p=0.92420
+
+Selected: ['1_NER_0.1_Baseline-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_NER_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.32097, Ensemble = 0.32097
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/tuned-weighted-champion-val.tsv

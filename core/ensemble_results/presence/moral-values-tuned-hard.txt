@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.28947
+
+Testing candidates: ['Previous-Sentences-2-val.tsv', 'Lex-LIWC-22-val.tsv', 'TD-BERTopic-val.tsv']
+  Previous-Sentences-2-val.tsv   lower=-0.00432 p=0.23300
+  Lex-LIWC-22-val.tsv            lower=0.00042 p=0.04060
+  TD-BERTopic-val.tsv            lower=-0.00062 p=0.06640
+
+Selected: ['<none – fallback to baseline>']
+Evaluating...
+
+=== Final Hard Ensemble ([]) ===
+Macro-F1 Base = 0.28947, Ensemble = 0.28947
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+No model passed the gain threshold – ensemble = baseline. Skipping --save-preds.

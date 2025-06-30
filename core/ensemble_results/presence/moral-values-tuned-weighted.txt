@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'Baseline-val.tsv': '0.246', 'Previous-Sentences-2-val.tsv': '0.249', 'Lex-LIWC-22-val.tsv': '0.253', 'TD-BERTopic-val.tsv': '0.252'}
+Assembling...
+Forward selection...
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.28947
+
+Testing candidates: ['Previous-Sentences-2-val.tsv', 'Lex-LIWC-22-val.tsv', 'TD-BERTopic-val.tsv']
+  Previous-Sentences-2-val.tsv   lower=-0.01595 p=0.92320
+  Lex-LIWC-22-val.tsv            lower=-0.00857 p=0.62820
+  TD-BERTopic-val.tsv            lower=-0.01277 p=0.89780
+
+Selected: ['<none – fallback to baseline>']
+Evaluating...
+
+=== Final Weighted Ensemble ([]) ===
+Macro-F1 Base = 0.28947, Ensemble = 0.28947
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+No model passed the gain threshold – ensemble = baseline. Skipping --save-preds.

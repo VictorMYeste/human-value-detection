@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_NER_0.1_Baseline-val.tsv  (Macro-F1 = 0.32225)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.32225
+
+Testing candidates: ['1_Lex-LIWC_0.1_NER-val.tsv', '1_Lex-WorryWords_0.1_NER-val.tsv', '1_Previous-Sentences-2_0.1_Baseline-val.tsv', '1_TD-NMF_0.5_NER-val.tsv']
+  1_Lex-LIWC_0.1_NER-val.tsv     lower=-0.00744 p=0.64640
+  1_Lex-WorryWords_0.1_NER-val.tsv lower=-0.00796 p=0.71460
+  1_Previous-Sentences-2_0.1_Baseline-val.tsv lower=-0.00889 p=0.98640
+  1_TD-NMF_0.5_NER-val.tsv       lower=-0.00011 p=0.05160
+
+Selected: ['1_NER_0.1_Baseline-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_NER_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.32225, Ensemble = 0.32225
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/social-focus_moral-values/output/tuned-hard-champion-val.tsv

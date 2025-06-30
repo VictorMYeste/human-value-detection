@@ -2,22 +2,24 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv  (Macro-F1 = 0.23656)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.23656
 
-Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-test.tsv lower=-0.00642 p=0.25020
-  1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-test.tsv lower=-0.00531 p=0.19100
-  1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv lower=-0.00448 p=0.19760
-  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-test.tsv lower=-0.00565 p=0.21820
+Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv', '1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-val.tsv']
+  1_Lex-LIWC-22_LingFeat_0.5_Baseline-val.tsv lower=-0.01027 p=0.81780
+  1_Lex-LIWC-22_LingFeat_0.5_Lex-MJD-val.tsv lower=-0.01078 p=0.89260
+  1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv lower=-0.02166 p=0.99460
+  1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA-val.tsv lower=-0.01192 p=0.93280
 
-Selected: ['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.22277, Ensemble = 0.22277
+=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv']) ===
+Macro-F1 Seed = 0.23656, Ensemble = 0.23656
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/openness_moral-values/output/Lex-LIWC-22_LingFeat_0.5-tuned-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/openness_moral-values/output/Lex-LIWC-22_LingFeat_0.5-tuned-hard-champion-val.tsv

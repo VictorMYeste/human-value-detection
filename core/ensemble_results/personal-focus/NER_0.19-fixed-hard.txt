@@ -2,19 +2,21 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_NER_0.19_Baseline-val.tsv  (Macro-F1 = 0.27721)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.27721
 
-Round 1: Testing candidates: ['1_NER_0.19_Lex-MJD-test.tsv']
-  1_NER_0.19_Lex-MJD-test.tsv    lower=-0.01023 p=0.86940
+Testing candidates: ['1_NER_0.19_Lex-MJD-val.tsv']
+  1_NER_0.19_Lex-MJD-val.tsv     lower=-0.01074 p=0.87800
 
-Selected: ['1_NER_0.19_Baseline-test.tsv']
+Selected: ['1_NER_0.19_Baseline-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_NER_0.19_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.28422, Ensemble = 0.28422
+=== Final Hard Ensemble (['1_NER_0.19_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.27721, Ensemble = 0.27721
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/NER_0.19-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/personal-focus_moral-values/output/NER_0.19-fixed-hard-champion-val.tsv

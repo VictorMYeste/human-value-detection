@@ -2,27 +2,29 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-LIWC-22_LingFeat_0.1_TD-LDA-val.tsv  (Macro-F1 = 0.30532)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.30532
 
-Round 1: Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.1_TD-LDA-test.tsv']
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-test.tsv lower=-0.01215 p=0.97380
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-test.tsv lower=-0.01254 p=0.96400
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01326 p=0.75680
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-test.tsv lower=-0.01247 p=0.69660
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-test.tsv lower=-0.01274 p=0.95920
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv lower=-0.01582 p=0.99460
-  1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz-test.tsv lower=-0.00740 p=0.41320
-  1_Lex-LIWC-22_LingFeat_0.1_NER-test.tsv lower=-0.01245 p=0.71080
-  1_Lex-LIWC-22_LingFeat_0.1_TD-LDA-test.tsv lower=-0.00483 p=0.64540
+Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_NER-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-val.tsv', '1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv']
+  1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv lower=-0.00942 p=0.84120
+  1_Lex-LIWC-22_LingFeat_0.1_NER-val.tsv lower=-0.01911 p=0.89400
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz-val.tsv lower=-0.01648 p=0.89100
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-EmoLex-val.tsv lower=-0.01456 p=0.83420
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MFD-val.tsv lower=-0.01502 p=0.84300
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22-val.tsv lower=-0.02596 p=1.00000
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01671 p=0.86760
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-eMFD-val.tsv lower=-0.01584 p=0.99760
+  1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-val.tsv lower=-0.01830 p=0.88140
 
-Selected: ['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv']
+Selected: ['1_Lex-LIWC-22_LingFeat_0.1_TD-LDA-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.29164, Ensemble = 0.29164
+=== Final Hard Ensemble (['1_Lex-LIWC-22_LingFeat_0.1_TD-LDA-val.tsv']) ===
+Macro-F1 Seed = 0.30532, Ensemble = 0.30532
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/conservation_moral-values/output/Lex-LIWC-22_LingFeat_0.1-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/conservation_moral-values/output/Lex-LIWC-22_LingFeat_0.1-fixed-hard-champion-val.tsv

@@ -2,21 +2,23 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: Lex-LIWC-22-val.tsv  (Macro-F1 = 0.28802)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.28802
 
-Round 1: Testing candidates: ['Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
-  Lex-LIWC-22-test.tsv           lower=0.00138 p=0.01940
-  Previous-Sentences-2-test.tsv  lower=-0.00368 p=0.23340
-  TD-BERTopic-test.tsv           lower=-0.00222 p=0.16520
+Testing candidates: ['Baseline-val.tsv', 'Previous-Sentences-2-val.tsv', 'TD-BERTopic-val.tsv']
+  Baseline-val.tsv               lower=-0.00992 p=0.91520
+  Previous-Sentences-2-val.tsv   lower=0.00041 p=0.04040
+  TD-BERTopic-val.tsv            lower=-0.00283 p=0.21620
 
-Selected: ['Baseline-test.tsv']
+Selected: ['Lex-LIWC-22-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['Baseline-test.tsv']) ===
-Macro-F1 Base = 0.28112, Ensemble = 0.28112
+=== Final Soft Ensemble (['Lex-LIWC-22-val.tsv']) ===
+Macro-F1 Seed = 0.28802, Ensemble = 0.28802
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/moral-values/output/fixed-soft-champion.tsv
+Ensemble probabilities written to ../approaches/moral-values/output/fixed-soft-champion-val.tsv

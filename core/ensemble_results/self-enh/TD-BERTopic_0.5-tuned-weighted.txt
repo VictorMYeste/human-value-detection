@@ -1,27 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_TD-BERTopic_0.5_Baseline-test.tsv': '0.496', '1_TD-BERTopic_0.5_Lex-Schwartz-test.tsv': '0.504'}
+Weights: {'1_TD-BERTopic_0.5_Baseline-val.tsv': '0.496', '1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv': '0.504'}
 Assembling...
 Forward selection...
+Seed model: 1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv  (Macro-F1 = 0.30115)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.30115
 
-Round 1: Testing candidates: ['1_TD-BERTopic_0.5_Lex-Schwartz-test.tsv']
-  1_TD-BERTopic_0.5_Lex-Schwartz-test.tsv lower=-0.00693 p=0.42740
+Testing candidates: ['1_TD-BERTopic_0.5_Baseline-val.tsv']
+  1_TD-BERTopic_0.5_Baseline-val.tsv lower=-0.00838 p=0.82240
 
-Selected: ['1_TD-BERTopic_0.5_Baseline-test.tsv']
+Selected: ['1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_TD-BERTopic_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.29053, Ensemble = 0.28655
-One-sided lower 95% ΔF1 = -0.01056
-p(ens>base) = 0.84500 -> significant? no
-Per-label improvements:
- Hedonism: p_adj=0.25000, sig=False
- Achievement: p_adj=0.00000, sig=True
- Power: dominance: p_adj=0.00163, sig=True
- Power: resources: p_adj=0.00000, sig=True
- Face: p_adj=0.00488, sig=True
+=== Final Weighted Ensemble (['1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.30115, Ensemble = 0.30115
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-enh_moral-values/output/TD-BERTopic_0.5-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/TD-BERTopic_0.5-tuned-weighted-champion-val.tsv

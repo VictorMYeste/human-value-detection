@@ -9,7 +9,7 @@ echo "===== Hard ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode hard --debug --save-preds ../approaches/moral-values/output/moral-values-fixed-hard-champion-val.tsv | tee ensemble_results/presence/moral-values-fixed-hard.txt
+python3 -u ensemble_voting.py --mode hard --debug --save-preds ../approaches/conservation_moral-values/output/fixed-hard-champion-val.tsv | tee ensemble_results/conservation/fixed-hard.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -17,7 +17,7 @@ echo "===== Soft ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode soft --debug --save-preds ../approaches/moral-values/output/moral-values-fixed-soft-champion-val.tsv | tee ensemble_results/presence/moral-values-fixed-soft.txt
+python3 -u ensemble_voting.py --mode soft --debug --save-preds ../approaches/conservation_moral-values/output/fixed-soft-champion-val.tsv | tee ensemble_results/conservation/fixed-soft.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -25,7 +25,7 @@ echo "===== Hard tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode hard --use-tuned --debug --save-preds ../approaches/moral-values/output/moral-values-tuned-hard-champion-val.tsv | tee ensemble_results/presence/moral-values-tuned-hard.txt
+python3 -u ensemble_voting.py --mode hard --use-tuned --debug --save-preds ../approaches/conservation_moral-values/output/tuned-hard-champion-val.tsv | tee ensemble_results/conservation/tuned-hard.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -33,7 +33,7 @@ echo "===== Soft tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode soft --threshold 0.3 --debug --save-preds ../approaches/moral-values/output/moral-values-tuned-soft-champion-val.tsv | tee ensemble_results/presence/moral-values-tuned-soft.txt
+python3 -u ensemble_voting.py --mode soft --threshold 0.28 --debug --save-preds ../approaches/conservation_moral-values/output/tuned-soft-champion-val.tsv | tee ensemble_results/conservation/tuned-soft.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -41,7 +41,7 @@ echo "===== Weighted ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode weighted --debug --save-preds ../approaches/moral-values/output/moral-values-fixed-weighted-champion-val.tsv | tee ensemble_results/presence/moral-values-fixed-weighted.txt
+python3 -u ensemble_voting.py --mode weighted --debug --save-preds ../approaches/conservation_moral-values/output/fixed-weighted-champion-val.tsv | tee ensemble_results/conservation/fixed-weighted.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -49,7 +49,7 @@ echo "===== Weighted tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds ../approaches/moral-values/output/moral-values-tuned-weighted-champion-val.tsv | tee ensemble_results/presence/moral-values-tuned-weighted.txt
+python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds ../approaches/conservation_moral-values/output/tuned-weighted-champion-val.tsv | tee ensemble_results/conservation/tuned-weighted.txt
 # echo "=========="
 # echo "=========="
 # echo "=========="
@@ -57,7 +57,7 @@ python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds .
 # echo "=========="
 # echo "=========="
 # echo "=========="
-# python3 ensemble_per_label.py --mode hard --debug | tee ensemble_results/moral-values/per_label-hard.txt
+# python3 ensemble_per_label.py --mode hard --debug | tee ensemble_results/conservation/per_label-hard.txt
 # echo "=========="
 # echo "=========="
 # echo "=========="
@@ -65,4 +65,4 @@ python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds .
 # echo "=========="
 # echo "=========="
 # echo "=========="
-# python3 ensemble_per_label.py --mode soft --debug | tee ensemble_results/moral-values/per_label-soft.txt
+# python3 ensemble_per_label.py --mode soft --debug | tee ensemble_results/conservation/per_label-soft.txt

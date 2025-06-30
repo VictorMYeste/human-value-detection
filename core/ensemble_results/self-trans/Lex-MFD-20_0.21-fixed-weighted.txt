@@ -1,24 +1,26 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-MFD-20_0.21_Baseline-test.tsv': '0.248', '1_Lex-MFD-20_0.21_Lex-EmoLex-test.tsv': '0.247', '1_Lex-MFD-20_0.21_Lex-MFD-test.tsv': '0.255', '1_Lex-MFD-20_0.21_Lex-Schwartz-test.tsv': '0.250'}
+Weights: {'1_Lex-MFD-20_0.21_Baseline-val.tsv': '0.248', '1_Lex-MFD-20_0.21_Lex-Schwartz-val.tsv': '0.250', '1_Lex-MFD-20_0.21_Lex-EmoLex-val.tsv': '0.247', '1_Lex-MFD-20_0.21_Lex-MFD-val.tsv': '0.255'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-MFD-20_0.21_Lex-MFD-val.tsv  (Macro-F1 = 0.29094)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.29094
 
-Round 1: Testing candidates: ['1_Lex-MFD-20_0.21_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.21_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.21_Lex-Schwartz-test.tsv']
-  1_Lex-MFD-20_0.21_Lex-EmoLex-test.tsv lower=-0.01345 p=0.51300
-  1_Lex-MFD-20_0.21_Lex-MFD-test.tsv lower=-0.02225 p=0.75840
-  1_Lex-MFD-20_0.21_Lex-Schwartz-test.tsv lower=-0.01160 p=0.41300
+Testing candidates: ['1_Lex-MFD-20_0.21_Baseline-val.tsv', '1_Lex-MFD-20_0.21_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.21_Lex-EmoLex-val.tsv']
+  1_Lex-MFD-20_0.21_Baseline-val.tsv lower=-0.01130 p=0.58640
+  1_Lex-MFD-20_0.21_Lex-Schwartz-val.tsv lower=-0.01016 p=0.88680
+  1_Lex-MFD-20_0.21_Lex-EmoLex-val.tsv lower=-0.00947 p=0.52080
 
-Selected: ['1_Lex-MFD-20_0.21_Baseline-test.tsv']
+Selected: ['1_Lex-MFD-20_0.21_Lex-MFD-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-MFD-20_0.21_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.29862, Ensemble = 0.29862
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.21_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29094, Ensemble = 0.29094
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.21-fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.21-fixed-weighted-champion-val.tsv

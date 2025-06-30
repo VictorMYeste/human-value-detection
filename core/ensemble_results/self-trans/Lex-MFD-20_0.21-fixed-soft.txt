@@ -2,21 +2,23 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-MFD-20_0.21_Lex-MFD-val.tsv  (Macro-F1 = 0.29094)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29094
 
-Round 1: Testing candidates: ['1_Lex-MFD-20_0.21_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.21_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.21_Lex-Schwartz-test.tsv']
-  1_Lex-MFD-20_0.21_Lex-EmoLex-test.tsv lower=-0.01364 p=0.51180
-  1_Lex-MFD-20_0.21_Lex-MFD-test.tsv lower=-0.02282 p=0.76580
-  1_Lex-MFD-20_0.21_Lex-Schwartz-test.tsv lower=-0.01041 p=0.39940
+Testing candidates: ['1_Lex-MFD-20_0.21_Baseline-val.tsv', '1_Lex-MFD-20_0.21_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.21_Lex-EmoLex-val.tsv']
+  1_Lex-MFD-20_0.21_Baseline-val.tsv lower=-0.01180 p=0.59640
+  1_Lex-MFD-20_0.21_Lex-Schwartz-val.tsv lower=-0.01024 p=0.88060
+  1_Lex-MFD-20_0.21_Lex-EmoLex-val.tsv lower=-0.00993 p=0.56460
 
-Selected: ['1_Lex-MFD-20_0.21_Baseline-test.tsv']
+Selected: ['1_Lex-MFD-20_0.21_Lex-MFD-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Lex-MFD-20_0.21_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.29862, Ensemble = 0.29862
+=== Final Soft Ensemble (['1_Lex-MFD-20_0.21_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29094, Ensemble = 0.29094
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.21-fixed-soft-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.21-fixed-soft-champion-val.tsv

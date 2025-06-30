@@ -2,29 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_NER_0.1_Baseline-val.tsv  (Macro-F1 = 0.32225)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.32225
 
-Round 1: Testing candidates: ['1_NER_0.1_Lex-eMFD-test.tsv', '1_NER_0.1_Lex-EmoLex-test.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_NER_0.1_Lex-LIWC-22-test.tsv', '1_NER_0.1_Lex-MFD-20-test.tsv', '1_NER_0.1_Lex-MFD-test.tsv', '1_NER_0.1_Lex-MJD-test.tsv', '1_NER_0.1_Lex-Schwartz-test.tsv', '1_NER_0.1_Lex-VAD-test.tsv', '1_NER_0.1_NER-test.tsv', '1_NER_0.1_TD-LDA-test.tsv']
-  1_NER_0.1_Lex-eMFD-test.tsv    lower=-0.00704 p=0.67820
-  1_NER_0.1_Lex-EmoLex-test.tsv  lower=0.00131 p=0.01520
-  1_NER_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00155 p=0.11720
-  1_NER_0.1_Lex-LIWC-22-test.tsv lower=-0.00157 p=0.13500
-  1_NER_0.1_Lex-MFD-20-test.tsv  lower=-0.00775 p=0.74660
-  1_NER_0.1_Lex-MFD-test.tsv     lower=0.00195 p=0.00940
-  1_NER_0.1_Lex-MJD-test.tsv     lower=-0.00334 p=0.25840
-  1_NER_0.1_Lex-Schwartz-test.tsv lower=0.00134 p=0.01220
-  1_NER_0.1_Lex-VAD-test.tsv     lower=0.00053 p=0.03340
-  1_NER_0.1_NER-test.tsv         lower=-0.00598 p=0.52560
-  1_NER_0.1_TD-LDA-test.tsv      lower=-0.00228 p=0.22300
+Testing candidates: ['1_NER_0.1_NER-val.tsv', '1_NER_0.1_Lex-Schwartz-val.tsv', '1_NER_0.1_Lex-VAD-val.tsv', '1_NER_0.1_Lex-EmoLex-val.tsv', '1_NER_0.1_Lex-MFD-val.tsv', '1_NER_0.1_Lex-LIWC-22-val.tsv', '1_NER_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_NER_0.1_Lex-MFD-20-val.tsv', '1_NER_0.1_Lex-eMFD-val.tsv', '1_NER_0.1_Lex-MJD-val.tsv', '1_NER_0.1_TD-LDA-val.tsv']
+  1_NER_0.1_NER-val.tsv          lower=-0.00788 p=0.47560
+  1_NER_0.1_Lex-Schwartz-val.tsv lower=-0.00608 p=0.87140
+  1_NER_0.1_Lex-VAD-val.tsv      lower=-0.00734 p=0.89920
+  1_NER_0.1_Lex-EmoLex-val.tsv   lower=-0.00597 p=0.84440
+  1_NER_0.1_Lex-MFD-val.tsv      lower=-0.00648 p=0.88520
+  1_NER_0.1_Lex-LIWC-22-val.tsv  lower=-0.00838 p=0.95180
+  1_NER_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01722 p=0.99100
+  1_NER_0.1_Lex-MFD-20-val.tsv   lower=-0.01310 p=0.99720
+  1_NER_0.1_Lex-eMFD-val.tsv     lower=-0.01157 p=0.97540
+  1_NER_0.1_Lex-MJD-val.tsv      lower=-0.01007 p=0.94140
+  1_NER_0.1_TD-LDA-val.tsv       lower=-0.00690 p=0.85960
 
-Selected: ['1_NER_0.1_Baseline-test.tsv']
+Selected: ['1_NER_0.1_Baseline-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_NER_0.1_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30799, Ensemble = 0.30799
+=== Final Hard Ensemble (['1_NER_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.32225, Ensemble = 0.32225
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/NER_0.1-tuned-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/social-focus_moral-values/output/NER_0.1-tuned-hard-champion-val.tsv

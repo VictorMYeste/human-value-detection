@@ -2,61 +2,64 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.29269)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.29269
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=0.01305 p=0.00000
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=0.01128 p=0.00000
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=0.01281 p=0.00000
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=0.01065 p=0.00000
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=0.00784 p=0.00000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=0.01119 p=0.00000
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=0.00888 p=0.00000
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.01202 p=0.00000
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=0.00565 p=0.00000
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=0.00656 p=0.00000
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=0.01521 p=0.00000
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Baseline_0.5_ResidualBlock-val.tsv', '1_Baseline_0.5_Lex-VAD-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-val.tsv', '1_Baseline_0.5_Lex-WorryWords-val.tsv', '1_Baseline_0.5_Lex-LIWC-val.tsv', '1_Baseline_0.5_Lex-LIWC-22-val.tsv', '1_Baseline_0.5_Lex-MFD-20-val.tsv', '1_Baseline_0.5_Lex-eMFD-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=0.01039 p=0.00000
+  1_Baseline_0.5_ResidualBlock-val.tsv lower=0.00913 p=0.00000
+  1_Baseline_0.5_Lex-VAD-val.tsv lower=0.00692 p=0.00000
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=0.01062 p=0.00000
+  1_Baseline_0.5_Lex-EmotionIntensity-val.tsv lower=0.00270 p=0.00580
+  1_Baseline_0.5_Lex-WorryWords-val.tsv lower=0.00965 p=0.00000
+  1_Baseline_0.5_Lex-LIWC-val.tsv lower=0.00606 p=0.00000
+  1_Baseline_0.5_Lex-LIWC-22-val.tsv lower=0.00823 p=0.00000
+  1_Baseline_0.5_Lex-MFD-20-val.tsv lower=0.00737 p=0.00000
+  1_Baseline_0.5_Lex-eMFD-val.tsv lower=0.00711 p=0.00000
+  1_Baseline_0.5_Lex-MJD-val.tsv lower=0.01160 p=0.00000
 
-Added 1_Baseline_0.5_Lex-MJD-test.tsv -> lower bound=0.01521 current f1 = 0.30387
+Added 1_Baseline_0.5_Lex-MJD-val.tsv -> lower bound=0.01160 current f1 = 0.30864
+[Round 2]. Current Macro-Average F1 = 0.30864
 
-Round 2: Testing candidates: ['1_Baseline_0.5_Previous-Sentences-2-test.tsv', '1_Baseline_0.5_ResidualBlock-test.tsv', '1_Baseline_0.5_Lex-VAD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-test.tsv', '1_Baseline_0.5_Lex-WorryWords-test.tsv', '1_Baseline_0.5_Lex-LIWC-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-20-test.tsv', '1_Baseline_0.5_Lex-eMFD-test.tsv']
-  1_Baseline_0.5_Previous-Sentences-2-test.tsv lower=-0.01338 p=0.99980
-  1_Baseline_0.5_ResidualBlock-test.tsv lower=-0.01471 p=1.00000
-  1_Baseline_0.5_Lex-VAD-test.tsv lower=-0.01134 p=0.99740
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.01275 p=0.99980
-  1_Baseline_0.5_Lex-EmotionIntensity-test.tsv lower=-0.01388 p=1.00000
-  1_Baseline_0.5_Lex-WorryWords-test.tsv lower=-0.01286 p=0.99920
-  1_Baseline_0.5_Lex-LIWC-test.tsv lower=-0.01367 p=0.99980
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.01243 p=0.99900
-  1_Baseline_0.5_Lex-MFD-20-test.tsv lower=-0.01653 p=1.00000
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.01464 p=1.00000
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Baseline_0.5_ResidualBlock-val.tsv', '1_Baseline_0.5_Lex-VAD-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-EmotionIntensity-val.tsv', '1_Baseline_0.5_Lex-WorryWords-val.tsv', '1_Baseline_0.5_Lex-LIWC-val.tsv', '1_Baseline_0.5_Lex-LIWC-22-val.tsv', '1_Baseline_0.5_Lex-MFD-20-val.tsv', '1_Baseline_0.5_Lex-eMFD-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=-0.01721 p=0.99820
+  1_Baseline_0.5_ResidualBlock-val.tsv lower=-0.02122 p=0.99980
+  1_Baseline_0.5_Lex-VAD-val.tsv lower=-0.02152 p=1.00000
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.01834 p=0.99900
+  1_Baseline_0.5_Lex-EmotionIntensity-val.tsv lower=-0.01573 p=0.99940
+  1_Baseline_0.5_Lex-WorryWords-val.tsv lower=-0.02006 p=0.99980
+  1_Baseline_0.5_Lex-LIWC-val.tsv lower=-0.01773 p=0.99960
+  1_Baseline_0.5_Lex-LIWC-22-val.tsv lower=-0.01886 p=1.00000
+  1_Baseline_0.5_Lex-MFD-20-val.tsv lower=-0.01449 p=0.98900
+  1_Baseline_0.5_Lex-eMFD-val.tsv lower=-0.01515 p=0.99340
 
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']
+Selected: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv']) ===
-Macro-F1 Base = 0.28411, Ensemble = 0.30387
-One-sided lower 95% ΔF1 = 0.01524
+=== Final Hard Ensemble (['1_Baseline_0.5_Previous-Sentences-2-val.tsv', '1_Baseline_0.5_Lex-MJD-val.tsv']) ===
+Macro-F1 Seed = 0.29269, Ensemble = 0.30864
+One-sided lower 95% ΔF1 = 0.01153
 p(ens>base) = 0.00000 -> significant? YES
 Per-label improvements:
- Self-direction: thought: p_adj=0.06618, sig=False
+ Self-direction: thought: p_adj=0.01758, sig=True
  Self-direction: action: p_adj=0.00000, sig=True
  Stimulation: p_adj=0.00000, sig=True
- Hedonism: p_adj=0.50000, sig=False
+ Hedonism: p_adj=0.03309, sig=True
  Achievement: p_adj=0.00000, sig=True
  Power: dominance: p_adj=0.00000, sig=True
  Power: resources: p_adj=0.00000, sig=True
- Face: p_adj=0.00018, sig=True
- Security: personal: p_adj=0.00059, sig=True
+ Face: p_adj=0.00001, sig=True
+ Security: personal: p_adj=0.00469, sig=True
  Security: societal: p_adj=0.00000, sig=True
- Tradition: p_adj=0.00034, sig=True
+ Tradition: p_adj=0.00018, sig=True
  Conformity: rules: p_adj=0.00000, sig=True
- Conformity: interpersonal: p_adj=0.00879, sig=True
+ Conformity: interpersonal: p_adj=0.00126, sig=True
  Benevolence: caring: p_adj=0.00000, sig=True
- Benevolence: dependability: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00068, sig=True
  Universalism: concern: p_adj=0.00000, sig=True
- Universalism: nature: p_adj=0.00010, sig=True
- Universalism: tolerance: p_adj=0.00059, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=1.00000, sig=False
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/p_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/p_moral-values/output/Baseline_0.5-fixed-hard-champion-val.tsv

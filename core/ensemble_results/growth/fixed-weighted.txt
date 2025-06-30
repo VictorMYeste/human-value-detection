@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Baseline_0.5_Previous-Sentences-2-val.tsv': '0.502', '1_Baseline_0.18_Previous-Sentences-2-val.tsv': '0.498'}
+Assembling...
+Forward selection...
+Seed model: 1_Baseline_0.5_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.26699)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.26699
+
+Testing candidates: ['1_Baseline_0.18_Previous-Sentences-2-val.tsv']
+  1_Baseline_0.18_Previous-Sentences-2-val.tsv lower=0.00047 p=0.03500
+
+Selected: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Baseline_0.5_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.26699, Ensemble = 0.26699
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/growth_moral-values/output/fixed-weighted-champion-val.tsv

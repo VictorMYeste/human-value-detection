@@ -2,29 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-val.tsv  (Macro-F1 = 0.29694)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.29694
 
-Round 1: Testing candidates: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv']
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-test.tsv lower=-0.00524 p=0.87680
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-test.tsv lower=-0.00449 p=0.70100
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-test.tsv lower=-0.01269 p=0.99940
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-test.tsv lower=-0.00379 p=0.69320
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-test.tsv lower=-0.01505 p=0.99960
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-test.tsv lower=-0.00583 p=0.95800
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-test.tsv lower=-0.00157 p=0.18900
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-test.tsv lower=-0.00442 p=0.70140
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-test.tsv lower=-0.00102 p=0.15880
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-test.tsv lower=-0.00820 p=0.96880
-  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-test.tsv lower=-0.00157 p=0.23400
+Testing candidates: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-val.tsv', '1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-val.tsv']
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-val.tsv lower=-0.00685 p=0.98720
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Previous-Sentences-2-val.tsv lower=-0.00636 p=0.71900
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_ResidualBlock-val.tsv lower=-0.00400 p=0.84880
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-VAD-val.tsv lower=-0.00517 p=0.96880
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmotionIntensity-val.tsv lower=-0.01267 p=1.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-WorryWords-val.tsv lower=-0.00433 p=0.96840
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-val.tsv lower=-0.01653 p=1.00000
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-LIWC-22-val.tsv lower=-0.00418 p=0.89200
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MFD-20-val.tsv lower=-0.00514 p=0.96920
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-eMFD-val.tsv lower=-0.00639 p=0.98680
+  1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-MJD-val.tsv lower=-0.00436 p=0.81380
 
-Selected: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-test.tsv']
+Selected: ['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Previous-Sentences-2-Lex-EmoLex_0.1_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30337, Ensemble = 0.30337
+=== Final Hard Ensemble (['1_Previous-Sentences-2-Lex-EmoLex_0.1_Lex-EmoLex-val.tsv']) ===
+Macro-F1 Seed = 0.29694, Ensemble = 0.29694
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/p_moral-values/output/Previous-Sentences-2-Lex-EmoLex_0.1-tuned-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/p_moral-values/output/Previous-Sentences-2-Lex-EmoLex_0.1-tuned-hard-champion-val.tsv

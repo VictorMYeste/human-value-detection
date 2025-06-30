@@ -2,45 +2,29 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Lex-MJD-val.tsv  (Macro-F1 = 0.27942)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.27942
 
-Round 1: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00122 p=0.12260
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.00074 p=0.08120
-  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00152 p=0.09160
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=0.00293 p=0.00960
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.00102 p=0.08840
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.00031 p=0.06160
-  1_Baseline_0.5_Lex-Schwartz-test.tsv lower=0.00524 p=0.00120
-  1_Baseline_0.5_NER-test.tsv    lower=0.00060 p=0.03380
-  1_Baseline_0.5_TD-LDA-test.tsv lower=0.00114 p=0.01360
+Testing candidates: ['1_Baseline_0.5_Baseline-val.tsv', '1_Baseline_0.5_NER-val.tsv', '1_Baseline_0.5_Lex-Schwartz-val.tsv', '1_Baseline_0.5_Lex-EmoLex-val.tsv', '1_Baseline_0.5_Lex-MFD-val.tsv', '1_Baseline_0.5_Lex-LIWC-22-val.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-val.tsv', '1_Baseline_0.5_Lex-eMFD-val.tsv', '1_Baseline_0.5_TD-LDA-val.tsv']
+  1_Baseline_0.5_Baseline-val.tsv lower=0.00039 p=0.03760
+  1_Baseline_0.5_NER-val.tsv     lower=-0.00261 p=0.34720
+  1_Baseline_0.5_Lex-Schwartz-val.tsv lower=-0.00231 p=0.30860
+  1_Baseline_0.5_Lex-EmoLex-val.tsv lower=-0.00300 p=0.45300
+  1_Baseline_0.5_Lex-MFD-val.tsv lower=-0.00291 p=0.45000
+  1_Baseline_0.5_Lex-LIWC-22-val.tsv lower=-0.00816 p=0.97640
+  1_Baseline_0.5_Lex-LIWC-22_LingFeat-val.tsv lower=-0.00365 p=0.46180
+  1_Baseline_0.5_Lex-eMFD-val.tsv lower=-0.00108 p=0.11580
+  1_Baseline_0.5_TD-LDA-val.tsv  lower=0.00040 p=0.03200
 
-Added 1_Baseline_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00524 current f1 = 0.28593
-
-Round 2: Testing candidates: ['1_Baseline_0.5_Lex-eMFD-test.tsv', '1_Baseline_0.5_Lex-EmoLex-test.tsv', '1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_Baseline_0.5_Lex-LIWC-22-test.tsv', '1_Baseline_0.5_Lex-MFD-test.tsv', '1_Baseline_0.5_Lex-MJD-test.tsv', '1_Baseline_0.5_NER-test.tsv', '1_Baseline_0.5_TD-LDA-test.tsv']
-  1_Baseline_0.5_Lex-eMFD-test.tsv lower=-0.00812 p=0.76960
-  1_Baseline_0.5_Lex-EmoLex-test.tsv lower=-0.01114 p=0.80400
-  1_Baseline_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.01029 p=0.81820
-  1_Baseline_0.5_Lex-LIWC-22-test.tsv lower=-0.00277 p=0.15360
-  1_Baseline_0.5_Lex-MFD-test.tsv lower=-0.01069 p=0.78760
-  1_Baseline_0.5_Lex-MJD-test.tsv lower=-0.01164 p=0.89080
-  1_Baseline_0.5_NER-test.tsv    lower=-0.00730 p=0.49800
-  1_Baseline_0.5_TD-LDA-test.tsv lower=-0.00721 p=0.81600
-
-Selected: ['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']
+Selected: ['1_Baseline_0.5_Lex-MJD-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Baseline_0.5_Baseline-test.tsv', '1_Baseline_0.5_Lex-Schwartz-test.tsv']) ===
-Macro-F1 Base = 0.28091, Ensemble = 0.29232
-One-sided lower 95% ΔF1 = 0.00502
-p(ens>base) = 0.00240 -> significant? YES
-Per-label improvements:
- Face: p_adj=0.00049, sig=True
- Security: personal: p_adj=0.00073, sig=True
- Security: societal: p_adj=0.00000, sig=True
- Tradition: p_adj=1.00000, sig=False
- Conformity: rules: p_adj=0.00000, sig=True
- Conformity: interpersonal: p_adj=0.00937, sig=True
+=== Final Hard Ensemble (['1_Baseline_0.5_Lex-MJD-val.tsv']) ===
+Macro-F1 Seed = 0.27942, Ensemble = 0.27942
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/conservation_moral-values/output/Baseline_0.5-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/conservation_moral-values/output/Baseline_0.5-fixed-hard-champion-val.tsv

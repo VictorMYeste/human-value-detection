@@ -1,31 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-WorryWords_0.23_Baseline-test.tsv': '0.497', '1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv': '0.503'}
+Weights: {'1_Lex-WorryWords_0.23_Baseline-val.tsv': '0.498', '1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv': '0.502'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv  (Macro-F1 = 0.31694)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.31694
 
-Round 1: Testing candidates: ['1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv']
-  1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv lower=0.00336 p=0.00520
+Testing candidates: ['1_Lex-WorryWords_0.23_Baseline-val.tsv']
+  1_Lex-WorryWords_0.23_Baseline-val.tsv lower=-0.00564 p=0.61360
 
-Added 1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv -> lower bound=0.00336 current f1 = 0.31916
-
-Round 2: Testing candidates: []
-
-Selected: ['1_Lex-WorryWords_0.23_Baseline-test.tsv', '1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv']
+Selected: ['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-WorryWords_0.23_Baseline-test.tsv', '1_Lex-WorryWords_0.23_Lex-Schwartz-test.tsv']) ===
-Macro-F1 Base = 0.30954, Ensemble = 0.31916
-One-sided lower 95% ΔF1 = 0.00342
-p(ens>base) = 0.00520 -> significant? YES
-Per-label improvements:
- Hedonism: p_adj=0.62500, sig=False
- Achievement: p_adj=0.00000, sig=True
- Power: dominance: p_adj=0.00294, sig=True
- Power: resources: p_adj=0.00294, sig=True
- Face: p_adj=0.00294, sig=True
+=== Final Weighted Ensemble (['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.31694, Ensemble = 0.31694
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-WorryWords_0.23-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-WorryWords_0.23-tuned-weighted-champion-val.tsv

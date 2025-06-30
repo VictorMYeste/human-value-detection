@@ -2,21 +2,23 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-WorryWords_0.16_Lex-MFD-val.tsv  (Macro-F1 = 0.29598)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29598
 
-Round 1: Testing candidates: ['1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.16_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv']
-  1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv lower=-0.00153 p=0.11420
-  1_Lex-WorryWords_0.16_Lex-MFD-test.tsv lower=-0.00316 p=0.23500
-  1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv lower=-0.01351 p=0.60780
+Testing candidates: ['1_Lex-WorryWords_0.16_Baseline-val.tsv', '1_Lex-WorryWords_0.16_Lex-Schwartz-val.tsv', '1_Lex-WorryWords_0.16_Lex-EmoLex-val.tsv']
+  1_Lex-WorryWords_0.16_Baseline-val.tsv lower=-0.01115 p=0.60120
+  1_Lex-WorryWords_0.16_Lex-Schwartz-val.tsv lower=-0.00873 p=0.48260
+  1_Lex-WorryWords_0.16_Lex-EmoLex-val.tsv lower=-0.00997 p=0.58520
 
-Selected: ['1_Lex-WorryWords_0.16_Baseline-test.tsv']
+Selected: ['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Lex-WorryWords_0.16_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30381, Ensemble = 0.30381
+=== Final Soft Ensemble (['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29598, Ensemble = 0.29598
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-WorryWords_0.16-tuned-soft-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-WorryWords_0.16-tuned-soft-champion-val.tsv

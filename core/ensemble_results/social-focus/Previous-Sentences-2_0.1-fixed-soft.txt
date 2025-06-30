@@ -2,52 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Previous-Sentences-2_0.1_Baseline-val.tsv  (Macro-F1 = 0.31627)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.31627
 
-Round 1: Testing candidates: ['1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv', '1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2_0.1_NER-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']
-  1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv lower=0.00123 p=0.02100
-  1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv lower=-0.00664 p=0.29800
-  1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=0.00133 p=0.01860
-  1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv lower=0.00278 p=0.00740
-  1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv lower=-0.00005 p=0.05180
-  1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv lower=-0.00759 p=0.37800
-  1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv lower=0.00180 p=0.01140
-  1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv lower=-0.00682 p=0.30540
-  1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv lower=0.00103 p=0.02220
-  1_Previous-Sentences-2_0.1_NER-test.tsv lower=0.00265 p=0.00640
-  1_Previous-Sentences-2_0.1_TD-LDA-test.tsv lower=0.00409 p=0.00160
+Testing candidates: ['1_Previous-Sentences-2_0.1_NER-val.tsv', '1_Previous-Sentences-2_0.1_Lex-Schwartz-val.tsv', '1_Previous-Sentences-2_0.1_Lex-VAD-val.tsv', '1_Previous-Sentences-2_0.1_Lex-EmoLex-val.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-val.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-val.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-val.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-20-val.tsv', '1_Previous-Sentences-2_0.1_Lex-eMFD-val.tsv', '1_Previous-Sentences-2_0.1_Lex-MJD-val.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-val.tsv']
+  1_Previous-Sentences-2_0.1_NER-val.tsv lower=-0.00649 p=0.37100
+  1_Previous-Sentences-2_0.1_Lex-Schwartz-val.tsv lower=-0.00301 p=0.15120
+  1_Previous-Sentences-2_0.1_Lex-VAD-val.tsv lower=-0.00793 p=0.50160
+  1_Previous-Sentences-2_0.1_Lex-EmoLex-val.tsv lower=-0.00270 p=0.13580
+  1_Previous-Sentences-2_0.1_Lex-MFD-val.tsv lower=-0.00317 p=0.15640
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22-val.tsv lower=-0.00723 p=0.41680
+  1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01465 p=0.95940
+  1_Previous-Sentences-2_0.1_Lex-MFD-20-val.tsv lower=-0.01078 p=0.76060
+  1_Previous-Sentences-2_0.1_Lex-eMFD-val.tsv lower=-0.01041 p=0.70200
+  1_Previous-Sentences-2_0.1_Lex-MJD-val.tsv lower=-0.00772 p=0.47780
+  1_Previous-Sentences-2_0.1_TD-LDA-val.tsv lower=-0.00707 p=0.42740
 
-Added 1_Previous-Sentences-2_0.1_TD-LDA-test.tsv -> lower bound=0.00409 current f1 = 0.31704
-
-Round 2: Testing candidates: ['1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv', '1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv', '1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv', '1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv', '1_Previous-Sentences-2_0.1_NER-test.tsv']
-  1_Previous-Sentences-2_0.1_Lex-eMFD-test.tsv lower=-0.00446 p=0.45060
-  1_Previous-Sentences-2_0.1_Lex-EmoLex-test.tsv lower=0.00070 p=0.02680
-  1_Previous-Sentences-2_0.1_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00520 p=0.59100
-  1_Previous-Sentences-2_0.1_Lex-LIWC-22-test.tsv lower=-0.00228 p=0.22240
-  1_Previous-Sentences-2_0.1_Lex-MFD-20-test.tsv lower=-0.00357 p=0.33960
-  1_Previous-Sentences-2_0.1_Lex-MFD-test.tsv lower=-0.00830 p=0.41160
-  1_Previous-Sentences-2_0.1_Lex-MJD-test.tsv lower=0.00025 p=0.03920
-  1_Previous-Sentences-2_0.1_Lex-Schwartz-test.tsv lower=-0.00778 p=0.37580
-  1_Previous-Sentences-2_0.1_Lex-VAD-test.tsv lower=-0.00057 p=0.08340
-  1_Previous-Sentences-2_0.1_NER-test.tsv lower=-0.00144 p=0.14300
-
-Selected: ['1_Previous-Sentences-2_0.1_Baseline-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']
+Selected: ['1_Previous-Sentences-2_0.1_Baseline-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Previous-Sentences-2_0.1_Baseline-test.tsv', '1_Previous-Sentences-2_0.1_TD-LDA-test.tsv']) ===
-Macro-F1 Base = 0.30823, Ensemble = 0.31704
-One-sided lower 95% ΔF1 = 0.00409
-p(ens>base) = 0.00120 -> significant? YES
-Per-label improvements:
- Security: societal: p_adj=0.01057, sig=True
- Tradition: p_adj=0.65290, sig=False
- Conformity: rules: p_adj=0.11808, sig=False
- Conformity: interpersonal: p_adj=0.09375, sig=False
- Benevolence: caring: p_adj=0.01057, sig=True
- Benevolence: dependability: p_adj=0.84814, sig=False
- Universalism: concern: p_adj=0.87141, sig=False
- Universalism: nature: p_adj=0.56250, sig=False
- Universalism: tolerance: p_adj=0.12656, sig=False
+=== Final Soft Ensemble (['1_Previous-Sentences-2_0.1_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.31627, Ensemble = 0.31627
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Previous-Sentences-2_0.1-fixed-soft-champion.tsv
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/Previous-Sentences-2_0.1-fixed-soft-champion-val.tsv

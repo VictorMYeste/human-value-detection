@@ -1,27 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-MFD-20_0.5_Baseline-test.tsv': '0.495', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv': '0.505'}
+Weights: {'1_Lex-MFD-20_0.5_Baseline-val.tsv': '0.497', '1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv': '0.503'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv  (Macro-F1 = 0.29798)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.29798
 
-Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
-  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=-0.01548 p=0.91460
+Testing candidates: ['1_Lex-MFD-20_0.5_Baseline-val.tsv']
+  1_Lex-MFD-20_0.5_Baseline-val.tsv lower=-0.00569 p=0.69400
 
-Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv']
+Selected: ['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.29507, Ensemble = 0.28349
-One-sided lower 95% ΔF1 = -0.01967
-p(ens>base) = 0.99500 -> significant? no
-Per-label improvements:
- Hedonism: p_adj=0.25000, sig=False
- Achievement: p_adj=0.00000, sig=True
- Power: dominance: p_adj=0.00003, sig=True
- Power: resources: p_adj=0.00000, sig=True
- Face: p_adj=0.00008, sig=True
+=== Final Weighted Ensemble (['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.29798, Ensemble = 0.29798
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-enh_moral-values/output/Lex-MFD-20_0.5-tuned-weighted-champion-val.tsv

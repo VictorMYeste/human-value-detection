@@ -1,24 +1,26 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-WorryWords_0.16_Baseline-test.tsv': '0.246', '1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv': '0.250', '1_Lex-WorryWords_0.16_Lex-MFD-test.tsv': '0.255', '1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv': '0.249'}
+Weights: {'1_Lex-WorryWords_0.16_Baseline-val.tsv': '0.246', '1_Lex-WorryWords_0.16_Lex-Schwartz-val.tsv': '0.249', '1_Lex-WorryWords_0.16_Lex-EmoLex-val.tsv': '0.250', '1_Lex-WorryWords_0.16_Lex-MFD-val.tsv': '0.255'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-WorryWords_0.16_Lex-MFD-val.tsv  (Macro-F1 = 0.29875)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.29875
 
-Round 1: Testing candidates: ['1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv', '1_Lex-WorryWords_0.16_Lex-MFD-test.tsv', '1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv']
-  1_Lex-WorryWords_0.16_Lex-EmoLex-test.tsv lower=-0.00983 p=0.36540
-  1_Lex-WorryWords_0.16_Lex-MFD-test.tsv lower=-0.01788 p=0.64600
-  1_Lex-WorryWords_0.16_Lex-Schwartz-test.tsv lower=-0.00853 p=0.27380
+Testing candidates: ['1_Lex-WorryWords_0.16_Baseline-val.tsv', '1_Lex-WorryWords_0.16_Lex-Schwartz-val.tsv', '1_Lex-WorryWords_0.16_Lex-EmoLex-val.tsv']
+  1_Lex-WorryWords_0.16_Baseline-val.tsv lower=-0.01000 p=0.52220
+  1_Lex-WorryWords_0.16_Lex-Schwartz-val.tsv lower=-0.01092 p=0.89700
+  1_Lex-WorryWords_0.16_Lex-EmoLex-val.tsv lower=-0.01159 p=0.65800
 
-Selected: ['1_Lex-WorryWords_0.16_Baseline-test.tsv']
+Selected: ['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-WorryWords_0.16_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30067, Ensemble = 0.30067
+=== Final Weighted Ensemble (['1_Lex-WorryWords_0.16_Lex-MFD-val.tsv']) ===
+Macro-F1 Seed = 0.29875, Ensemble = 0.29875
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-WorryWords_0.16-fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-WorryWords_0.16-fixed-weighted-champion-val.tsv

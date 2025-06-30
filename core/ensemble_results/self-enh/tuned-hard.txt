@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv  (Macro-F1 = 0.31888)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.31888
+
+Testing candidates: ['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv', '1_Lex-MFD-20_0.24_Lex-Schwartz-val.tsv', '1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv', '1_TD-BERTopic_0.29_Lex-Schwartz-val.tsv']
+  1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv lower=-0.00575 p=0.44400
+  1_Lex-MFD-20_0.24_Lex-Schwartz-val.tsv lower=-0.00339 p=0.25020
+  1_TD-BERTopic_0.5_Lex-Schwartz-val.tsv lower=-0.00875 p=0.68500
+  1_TD-BERTopic_0.29_Lex-Schwartz-val.tsv lower=-0.00839 p=0.76420
+
+Selected: ['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.31888, Ensemble = 0.31888
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/self-enh_moral-values/output/tuned-hard-champion-val.tsv

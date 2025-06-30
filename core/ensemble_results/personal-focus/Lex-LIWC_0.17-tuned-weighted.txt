@@ -1,31 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Lex-LIWC_0.17_Baseline-test.tsv': '0.506', '1_Lex-LIWC_0.17_Lex-MJD-test.tsv': '0.494'}
+Weights: {'1_Lex-LIWC_0.17_Baseline-val.tsv': '0.502', '1_Lex-LIWC_0.17_Lex-MJD-val.tsv': '0.498'}
 Assembling...
 Forward selection...
+Seed model: 1_Lex-LIWC_0.17_Baseline-val.tsv  (Macro-F1 = 0.28048)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.28048
 
-Round 1: Testing candidates: ['1_Lex-LIWC_0.17_Lex-MJD-test.tsv']
-  1_Lex-LIWC_0.17_Lex-MJD-test.tsv lower=0.00006 p=0.04860
+Testing candidates: ['1_Lex-LIWC_0.17_Lex-MJD-val.tsv']
+  1_Lex-LIWC_0.17_Lex-MJD-val.tsv lower=-0.00394 p=0.27240
 
-Selected: ['1_Lex-LIWC_0.17_Baseline-test.tsv']
+Selected: ['1_Lex-LIWC_0.17_Baseline-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Lex-LIWC_0.17_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.28053, Ensemble = 0.28122
-One-sided lower 95% ΔF1 = -0.00221
-p(ens>base) = 0.36360 -> significant? no
-Per-label improvements:
- Self-direction: thought: p_adj=1.00000, sig=False
- Self-direction: action: p_adj=0.00110, sig=True
- Stimulation: p_adj=0.56250, sig=False
- Hedonism: p_adj=0.56250, sig=False
- Achievement: p_adj=0.00014, sig=True
- Power: dominance: p_adj=0.03516, sig=True
- Power: resources: p_adj=0.00146, sig=True
- Face: p_adj=0.22500, sig=False
- Security: personal: p_adj=0.37500, sig=False
+=== Final Weighted Ensemble (['1_Lex-LIWC_0.17_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.28048, Ensemble = 0.28048
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/Lex-LIWC_0.17-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/Lex-LIWC_0.17-tuned-weighted-champion-val.tsv

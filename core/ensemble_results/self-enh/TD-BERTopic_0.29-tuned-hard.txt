@@ -2,19 +2,21 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_TD-BERTopic_0.29_Lex-Schwartz-val.tsv  (Macro-F1 = 0.31650)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.31650
 
-Round 1: Testing candidates: ['1_TD-BERTopic_0.29_Lex-Schwartz-test.tsv']
-  1_TD-BERTopic_0.29_Lex-Schwartz-test.tsv lower=0.00071 p=0.03300
+Testing candidates: ['1_TD-BERTopic_0.29_Baseline-val.tsv']
+  1_TD-BERTopic_0.29_Baseline-val.tsv lower=-0.00907 p=0.90720
 
-Selected: ['1_TD-BERTopic_0.29_Baseline-test.tsv']
+Selected: ['1_TD-BERTopic_0.29_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_TD-BERTopic_0.29_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30736, Ensemble = 0.30736
+=== Final Hard Ensemble (['1_TD-BERTopic_0.29_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.31650, Ensemble = 0.31650
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-enh_moral-values/output/TD-BERTopic_0.29-tuned-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/self-enh_moral-values/output/TD-BERTopic_0.29-tuned-hard-champion-val.tsv

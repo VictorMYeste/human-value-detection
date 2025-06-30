@@ -1,24 +1,26 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'Baseline-test.tsv': '0.246', 'Lex-LIWC-22-test.tsv': '0.254', 'Previous-Sentences-2-test.tsv': '0.249', 'TD-BERTopic-test.tsv': '0.251'}
+Weights: {'Baseline-val.tsv': '0.246', 'Previous-Sentences-2-val.tsv': '0.249', 'Lex-LIWC-22-val.tsv': '0.254', 'TD-BERTopic-val.tsv': '0.251'}
 Assembling...
 Forward selection...
+Seed model: Lex-LIWC-22-val.tsv  (Macro-F1 = 0.28802)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.28802
 
-Round 1: Testing candidates: ['Lex-LIWC-22-test.tsv', 'Previous-Sentences-2-test.tsv', 'TD-BERTopic-test.tsv']
-  Lex-LIWC-22-test.tsv           lower=0.00152 p=0.01620
-  Previous-Sentences-2-test.tsv  lower=-0.00334 p=0.22480
-  TD-BERTopic-test.tsv           lower=-0.00233 p=0.18640
+Testing candidates: ['Baseline-val.tsv', 'Previous-Sentences-2-val.tsv', 'TD-BERTopic-val.tsv']
+  Baseline-val.tsv               lower=-0.00923 p=0.89220
+  Previous-Sentences-2-val.tsv   lower=-0.00059 p=0.06780
+  TD-BERTopic-val.tsv            lower=-0.00270 p=0.22280
 
-Selected: ['Baseline-test.tsv']
+Selected: ['Lex-LIWC-22-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['Baseline-test.tsv']) ===
-Macro-F1 Base = 0.28112, Ensemble = 0.28112
+=== Final Weighted Ensemble (['Lex-LIWC-22-val.tsv']) ===
+Macro-F1 Seed = 0.28802, Ensemble = 0.28802
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/moral-values/output/fixed-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/moral-values/output/fixed-weighted-champion-val.tsv

@@ -1,0 +1,28 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-LIWC_0.17_Baseline-val.tsv': '0.167', '1_Lex-Schwartz_0.21_Baseline-val.tsv': '0.168', '1_Lex-WorryWords_0.21_Baseline-val.tsv': '0.167', '1_NER_0.19_Baseline-val.tsv': '0.165', '1_TD-BERTopic_0.22_Baseline-val.tsv': '0.167', '1_TD-NMF_0.2_Baseline-val.tsv': '0.166'}
+Assembling...
+Forward selection...
+Seed model: 1_Lex-Schwartz_0.21_Baseline-val.tsv  (Macro-F1 = 0.28294)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.28294
+
+Testing candidates: ['1_Lex-LIWC_0.17_Baseline-val.tsv', '1_Lex-WorryWords_0.21_Baseline-val.tsv', '1_NER_0.19_Baseline-val.tsv', '1_TD-BERTopic_0.22_Baseline-val.tsv', '1_TD-NMF_0.2_Baseline-val.tsv']
+  1_Lex-LIWC_0.17_Baseline-val.tsv lower=-0.00270 p=0.27880
+  1_Lex-WorryWords_0.21_Baseline-val.tsv lower=-0.00380 p=0.46920
+  1_NER_0.19_Baseline-val.tsv    lower=-0.00534 p=0.66880
+  1_TD-BERTopic_0.22_Baseline-val.tsv lower=-0.00427 p=0.47980
+  1_TD-NMF_0.2_Baseline-val.tsv  lower=-0.00356 p=0.42100
+
+Selected: ['1_Lex-Schwartz_0.21_Baseline-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-Schwartz_0.21_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.28294, Ensemble = 0.28294
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/personal-focus_moral-values/output/fixed-weighted-champion-val.tsv

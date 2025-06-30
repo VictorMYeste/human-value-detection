@@ -2,18 +2,20 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.5_Baseline-val.tsv  (Macro-F1 = 0.30390)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.30390
 
-Round 1: Testing candidates: []
+Testing candidates: []
 
-Selected: ['1_Baseline_0.5_Baseline-test.tsv']
+Selected: ['1_Baseline_0.5_Baseline-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.30386, Ensemble = 0.30386
+=== Final Soft Ensemble (['1_Baseline_0.5_Baseline-val.tsv']) ===
+Macro-F1 Seed = 0.30390, Ensemble = 0.30390
 One-sided lower 95% ΔF1 = 0.00000
 p(ens>base) = 1.00000 -> significant? no
 No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-protection_moral-values/output/Baseline_0.5-tuned-soft-champion.tsv
+Ensemble probabilities written to ../approaches/self-protection_moral-values/output/Baseline_0.5-tuned-soft-champion-val.tsv

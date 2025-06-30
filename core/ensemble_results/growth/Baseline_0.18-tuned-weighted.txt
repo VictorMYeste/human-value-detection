@@ -1,33 +1,24 @@
 Parsing arguments...
 Building threshold map...
 Computing weights from validation Macro-F1 …
-Weights: {'1_Baseline_0.18_Baseline-test.tsv': '0.497', '1_Baseline_0.18_Previous-Sentences-2-test.tsv': '0.503'}
+Weights: {'1_Baseline_0.18_Baseline-val.tsv': '0.499', '1_Baseline_0.18_Previous-Sentences-2-val.tsv': '0.501'}
 Assembling...
 Forward selection...
+Seed model: 1_Baseline_0.18_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.26494)
 
 Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.26494
 
-Round 1: Testing candidates: ['1_Baseline_0.18_Previous-Sentences-2-test.tsv']
-  1_Baseline_0.18_Previous-Sentences-2-test.tsv lower=0.00130 p=0.02780
+Testing candidates: ['1_Baseline_0.18_Baseline-val.tsv']
+  1_Baseline_0.18_Baseline-val.tsv lower=0.00085 p=0.03580
 
-Selected: ['1_Baseline_0.18_Baseline-test.tsv']
+Selected: ['1_Baseline_0.18_Previous-Sentences-2-val.tsv']
 Evaluating...
 
-=== Final Weighted Ensemble (['1_Baseline_0.18_Baseline-test.tsv']) ===
-Macro-F1 Base = 0.26909, Ensemble = 0.26926
-One-sided lower 95% ΔF1 = -0.00562
-p(ens>base) = 0.53580 -> significant? no
-Per-label improvements:
- Self-direction: thought: p_adj=0.30556, sig=False
- Self-direction: action: p_adj=0.01432, sig=True
- Stimulation: p_adj=0.13750, sig=False
- Hedonism: p_adj=0.30556, sig=False
- Achievement: p_adj=0.00034, sig=True
- Humility: p_adj=1.00000, sig=False
- Benevolence: caring: p_adj=0.13750, sig=False
- Benevolence: dependability: p_adj=0.30556, sig=False
- Universalism: concern: p_adj=0.00002, sig=True
- Universalism: nature: p_adj=1.00000, sig=False
- Universalism: tolerance: p_adj=0.22917, sig=False
+=== Final Weighted Ensemble (['1_Baseline_0.18_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.26494, Ensemble = 0.26494
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.18-tuned-weighted-champion.tsv
+Ensemble probabilities written to ../approaches/growth_moral-values/output/Baseline_0.18-tuned-weighted-champion-val.tsv

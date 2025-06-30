@@ -2,52 +2,31 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_TD-NMF_0.5_NER-val.tsv  (Macro-F1 = 0.31075)
 
 Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.31075
 
-Round 1: Testing candidates: ['1_TD-NMF_0.5_Lex-eMFD-test.tsv', '1_TD-NMF_0.5_Lex-EmoLex-test.tsv', '1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_TD-NMF_0.5_Lex-LIWC-22-test.tsv', '1_TD-NMF_0.5_Lex-MFD-20-test.tsv', '1_TD-NMF_0.5_Lex-MFD-test.tsv', '1_TD-NMF_0.5_Lex-MJD-test.tsv', '1_TD-NMF_0.5_Lex-Schwartz-test.tsv', '1_TD-NMF_0.5_Lex-VAD-test.tsv', '1_TD-NMF_0.5_NER-test.tsv', '1_TD-NMF_0.5_TD-LDA-test.tsv']
-  1_TD-NMF_0.5_Lex-eMFD-test.tsv lower=-0.00356 p=0.32640
-  1_TD-NMF_0.5_Lex-EmoLex-test.tsv lower=0.00347 p=0.00080
-  1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00028 p=0.06080
-  1_TD-NMF_0.5_Lex-LIWC-22-test.tsv lower=0.00126 p=0.01540
-  1_TD-NMF_0.5_Lex-MFD-20-test.tsv lower=-0.00519 p=0.57300
-  1_TD-NMF_0.5_Lex-MFD-test.tsv  lower=0.00278 p=0.00280
-  1_TD-NMF_0.5_Lex-MJD-test.tsv  lower=0.00511 p=0.00000
-  1_TD-NMF_0.5_Lex-Schwartz-test.tsv lower=0.00272 p=0.00440
-  1_TD-NMF_0.5_Lex-VAD-test.tsv  lower=0.00288 p=0.00220
-  1_TD-NMF_0.5_NER-test.tsv      lower=0.00002 p=0.04920
-  1_TD-NMF_0.5_TD-LDA-test.tsv   lower=0.00198 p=0.00740
+Testing candidates: ['1_TD-NMF_0.5_Baseline-val.tsv', '1_TD-NMF_0.5_Lex-Schwartz-val.tsv', '1_TD-NMF_0.5_Lex-VAD-val.tsv', '1_TD-NMF_0.5_Lex-EmoLex-val.tsv', '1_TD-NMF_0.5_Lex-MFD-val.tsv', '1_TD-NMF_0.5_Lex-LIWC-22-val.tsv', '1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-val.tsv', '1_TD-NMF_0.5_Lex-MFD-20-val.tsv', '1_TD-NMF_0.5_Lex-eMFD-val.tsv', '1_TD-NMF_0.5_Lex-MJD-val.tsv', '1_TD-NMF_0.5_TD-LDA-val.tsv']
+  1_TD-NMF_0.5_Baseline-val.tsv  lower=-0.01301 p=0.76900
+  1_TD-NMF_0.5_Lex-Schwartz-val.tsv lower=-0.01372 p=0.84000
+  1_TD-NMF_0.5_Lex-VAD-val.tsv   lower=-0.01353 p=0.81820
+  1_TD-NMF_0.5_Lex-EmoLex-val.tsv lower=-0.01389 p=0.85340
+  1_TD-NMF_0.5_Lex-MFD-val.tsv   lower=-0.01330 p=0.83960
+  1_TD-NMF_0.5_Lex-LIWC-22-val.tsv lower=-0.01333 p=0.82160
+  1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-val.tsv lower=-0.01611 p=0.97860
+  1_TD-NMF_0.5_Lex-MFD-20-val.tsv lower=-0.01821 p=0.98660
+  1_TD-NMF_0.5_Lex-eMFD-val.tsv  lower=-0.01657 p=0.99180
+  1_TD-NMF_0.5_Lex-MJD-val.tsv   lower=-0.01383 p=0.85660
+  1_TD-NMF_0.5_TD-LDA-val.tsv    lower=-0.01464 p=0.86540
 
-Added 1_TD-NMF_0.5_Lex-MJD-test.tsv -> lower bound=0.00511 current f1 = 0.32518
-
-Round 2: Testing candidates: ['1_TD-NMF_0.5_Lex-eMFD-test.tsv', '1_TD-NMF_0.5_Lex-EmoLex-test.tsv', '1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-test.tsv', '1_TD-NMF_0.5_Lex-LIWC-22-test.tsv', '1_TD-NMF_0.5_Lex-MFD-20-test.tsv', '1_TD-NMF_0.5_Lex-MFD-test.tsv', '1_TD-NMF_0.5_Lex-Schwartz-test.tsv', '1_TD-NMF_0.5_Lex-VAD-test.tsv', '1_TD-NMF_0.5_NER-test.tsv', '1_TD-NMF_0.5_TD-LDA-test.tsv']
-  1_TD-NMF_0.5_Lex-eMFD-test.tsv lower=-0.00501 p=0.54540
-  1_TD-NMF_0.5_Lex-EmoLex-test.tsv lower=-0.00113 p=0.11600
-  1_TD-NMF_0.5_Lex-LIWC-22_LingFeat-test.tsv lower=-0.00215 p=0.16820
-  1_TD-NMF_0.5_Lex-LIWC-22-test.tsv lower=-0.00456 p=0.57620
-  1_TD-NMF_0.5_Lex-MFD-20-test.tsv lower=-0.00441 p=0.45600
-  1_TD-NMF_0.5_Lex-MFD-test.tsv  lower=-0.00087 p=0.10180
-  1_TD-NMF_0.5_Lex-Schwartz-test.tsv lower=-0.00126 p=0.12360
-  1_TD-NMF_0.5_Lex-VAD-test.tsv  lower=-0.00055 p=0.07820
-  1_TD-NMF_0.5_NER-test.tsv      lower=-0.00442 p=0.53780
-  1_TD-NMF_0.5_TD-LDA-test.tsv   lower=-0.00019 p=0.06120
-
-Selected: ['1_TD-NMF_0.5_Baseline-test.tsv', '1_TD-NMF_0.5_Lex-MJD-test.tsv']
+Selected: ['1_TD-NMF_0.5_NER-val.tsv']
 Evaluating...
 
-=== Final Soft Ensemble (['1_TD-NMF_0.5_Baseline-test.tsv', '1_TD-NMF_0.5_Lex-MJD-test.tsv']) ===
-Macro-F1 Base = 0.31853, Ensemble = 0.32833
-One-sided lower 95% ΔF1 = 0.00498
-p(ens>base) = 0.00040 -> significant? YES
-Per-label improvements:
- Security: societal: p_adj=0.00463, sig=True
- Tradition: p_adj=0.01758, sig=True
- Conformity: rules: p_adj=0.68314, sig=False
- Conformity: interpersonal: p_adj=1.00000, sig=False
- Benevolence: caring: p_adj=0.03369, sig=True
- Benevolence: dependability: p_adj=0.00005, sig=True
- Universalism: concern: p_adj=0.00000, sig=True
- Universalism: nature: p_adj=0.02812, sig=True
- Universalism: tolerance: p_adj=0.16071, sig=False
+=== Final Soft Ensemble (['1_TD-NMF_0.5_NER-val.tsv']) ===
+Macro-F1 Seed = 0.31075, Ensemble = 0.31075
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/social-focus_moral-values/output/TD-NMF_0.5-tuned-soft-champion.tsv
+Ensemble probabilities written to ../approaches/social-focus_moral-values/output/TD-NMF_0.5-tuned-soft-champion-val.tsv

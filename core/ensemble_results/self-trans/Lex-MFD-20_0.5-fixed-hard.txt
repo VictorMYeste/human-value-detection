@@ -2,31 +2,23 @@ Parsing arguments...
 Building threshold map...
 Assembling...
 Forward selection...
+Seed model: 1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv  (Macro-F1 = 0.27316)
 
 Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.27316
 
-Round 1: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
-  1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv lower=0.00057 p=0.03460
-  1_Lex-MFD-20_0.5_Lex-MFD-test.tsv lower=0.00312 p=0.00300
-  1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv lower=0.00352 p=0.00380
+Testing candidates: ['1_Lex-MFD-20_0.5_Baseline-val.tsv', '1_Lex-MFD-20_0.5_Lex-EmoLex-val.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-val.tsv']
+  1_Lex-MFD-20_0.5_Baseline-val.tsv lower=-0.00488 p=0.27400
+  1_Lex-MFD-20_0.5_Lex-EmoLex-val.tsv lower=-0.00401 p=0.88680
+  1_Lex-MFD-20_0.5_Lex-MFD-val.tsv lower=-0.00104 p=0.13460
 
-Added 1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv -> lower bound=0.00352 current f1 = 0.30778
-
-Round 2: Testing candidates: ['1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv', '1_Lex-MFD-20_0.5_Lex-MFD-test.tsv']
-  1_Lex-MFD-20_0.5_Lex-EmoLex-test.tsv lower=-0.03113 p=0.99600
-  1_Lex-MFD-20_0.5_Lex-MFD-test.tsv lower=-0.03155 p=0.98880
-
-Selected: ['1_Lex-MFD-20_0.5_Baseline-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']
+Selected: ['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']
 Evaluating...
 
-=== Final Hard Ensemble (['1_Lex-MFD-20_0.5_Baseline-test.tsv', '1_Lex-MFD-20_0.5_Lex-Schwartz-test.tsv']) ===
-Macro-F1 Base = 0.29836, Ensemble = 0.30778
-One-sided lower 95% ΔF1 = 0.00334
-p(ens>base) = 0.00520 -> significant? YES
-Per-label improvements:
- Benevolence: caring: p_adj=0.00098, sig=True
- Benevolence: dependability: p_adj=0.03125, sig=True
- Universalism: concern: p_adj=0.00003, sig=True
- Universalism: tolerance: p_adj=0.00130, sig=True
+=== Final Hard Ensemble (['1_Lex-MFD-20_0.5_Lex-Schwartz-val.tsv']) ===
+Macro-F1 Seed = 0.27316, Ensemble = 0.27316
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
 Saving ensemble predictions...
-Ensemble probabilities written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-fixed-hard-champion.tsv
+Binary (0/1) ensemble predictions written to ../approaches/self-trans_moral-values/output/Lex-MFD-20_0.5-fixed-hard-champion-val.tsv

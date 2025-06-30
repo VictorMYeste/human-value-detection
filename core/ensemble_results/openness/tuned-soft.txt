@@ -1,0 +1,30 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv  (Macro-F1 = 0.23338)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.23338
+
+Testing candidates: ['1_Lex-LIWC-22_LingFeat_0.82_NER-val.tsv']
+  1_Lex-LIWC-22_LingFeat_0.82_NER-val.tsv lower=0.00437 p=0.00120
+
+Added 1_Lex-LIWC-22_LingFeat_0.82_NER-val.tsv -> lower bound=0.00437 current f1 = 0.24179
+[Round 2]. Current Macro-Average F1 = 0.24179
+
+Testing candidates: []
+
+Selected: ['1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_NER-val.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-val.tsv']) ===
+Macro-F1 Seed = 0.23338, Ensemble = 0.24179
+One-sided lower 95% ΔF1 = 0.00446
+p(ens>base) = 0.00080 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=1.00000, sig=False
+ Self-direction: action: p_adj=0.00586, sig=True
+ Stimulation: p_adj=0.75000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/openness_moral-values/output/tuned-soft-champion-val.tsv

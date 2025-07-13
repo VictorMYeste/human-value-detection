@@ -19,6 +19,7 @@ Options:
   --use-tuned       Use per-model tuned thresholds for binarization instead of fixed 0.5
   --save-preds F    Save predictions in a TSV file to be used as a champion prediction
   --test            Evaluate with the baseline using the test dataset
+  --subset          Comma-separated list of moral-value labels to evaluate (overrides the baseline label set)
 
 Procedure:
   1) Load baseline & candidates
@@ -41,10 +42,10 @@ from sklearn.metrics import f1_score
 from core.eval_utils import load_multilabel, bootstrap_f1_lower, per_label_mcnemar
 
 # === Configuration ===
-BASELINE = "../approaches/conservation_moral-values/output/1_Baseline_0.5_Baseline-val.tsv"
+BASELINE = "../approaches/self-trans_moral-values/output/self-trans-champion_tuned-soft-champion-test.tsv"
 MODELS = [
-    "../approaches/conservation_moral-values/output/1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv",
-    "../approaches/conservation_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv",
+    # "../approaches/moral-values/output/direct_champion-tuned-soft-champion-val.tsv",
+    # "../approaches/p_moral-values/output/presence_champion-tuned-soft-champion-val.tsv",
 ]
 GOLD_VAL  = "../data/validation-english/labels-cat.tsv"
 GOLD      = "../data/test-english/labels-cat.tsv"
@@ -58,9 +59,9 @@ REL_MIN_GAIN = 0.01   # 1 %
 
 # Tuned thresholds per model basename (for binarization)
 TUNED_THRESHOLDS = {
-    os.path.basename(BASELINE):     0.3,
-    os.path.basename(MODELS[0]):    0.4,
-    os.path.basename(MODELS[1]):    0.35,
+    os.path.basename(BASELINE):     0.29,
+    # os.path.basename(MODELS[0]):    0.3,
+    # os.path.basename(MODELS[1]):    0.31,
 }
 def compute_weights(baseline_path: str,
                     model_paths: List[str],
@@ -96,7 +97,7 @@ def compute_weights(baseline_path: str,
     return {bn: w for bn, w in zip(basenames, weights)}
 
 
-def assemble_binary(threshold_map, test):
+def assemble_binary(threshold_map, test, label_subset=None):
     """
     Load binary predictions for baseline and models using per-model thresholds.
     threshold_map: dict basename->threshold
@@ -104,17 +105,29 @@ def assemble_binary(threshold_map, test):
     base_name = os.path.basename(BASELINE)
     base_thr = threshold_map.get(base_name, 0.5)
     base_df = load_multilabel(BASELINE, ID_COLS, PROB_COLS, base_thr)
+
+    # ── if the user supplied --subset, keep only those columns ───────────
+    if label_subset is not None:
+        missing = [c for c in label_subset if c not in base_df.columns]
+        if missing:
+            raise ValueError(f"Baseline file lacks requested labels: {missing}")
+        base_df = base_df[label_subset]
+
     # models using their thresholds
     model_dfs = []
     for m in MODELS:
         name = os.path.basename(m)
         thr = threshold_map.get(name, 0.5)
         dfm = load_multilabel(m, ID_COLS, PROB_COLS, thr)[base_df.columns]
+        # load, then force same rows & columns as the baseline
+        dfm = load_multilabel(m, ID_COLS, PROB_COLS, thr)
+        dfm = dfm.reindex(base_df.index).reindex(columns=base_df.columns, fill_value=0)
         model_dfs.append(dfm)
     # align
     df = base_df.copy()
     for i, mdf in enumerate(model_dfs):
-        df = df.join(mdf.add_suffix(f'_{i}'), how='inner')
+        df = df.join(mdf.add_suffix(f'_{i}'), how='left')
+        df = df.fillna(0)
     if test:
         gold = GOLD
     else:
@@ -129,14 +142,15 @@ def assemble_binary(threshold_map, test):
     return df, true, base_arr, cand_arrs, names, labels
 
 
-def assemble_prob(df):
+def assemble_prob(df, labels):
     """Load raw probabilities for baseline+models (soft voting)."""
     paths = [BASELINE] + MODELS
     prob_arrs = []
     for path in paths:
         dfp = pd.read_csv(path, sep='\t').set_index(ID_COLS)
-        cols = PROB_COLS.split(',') if PROB_COLS else dfp.select_dtypes(include=['float']).columns.tolist()
-        prob_arrs.append(dfp[cols].reindex(df.index).values)
+        # same rows as baseline, same columns (= label set) – missing → 0
+        dfp = dfp.reindex(df.index).reindex(columns=labels, fill_value=0)
+        prob_arrs.append(dfp.values)
     return prob_arrs
 
 
@@ -240,8 +254,14 @@ def main():
     parser.add_argument('--use-tuned', action='store_true', help='Use per-model tuned thresholds for binarization')
     parser.add_argument('--save-preds', metavar='FILE', default=None, help='Write ensemble probabilities to FILE (TSV) so the whole champion can be reused as a single model')
     parser.add_argument('--test', action='store_true', help='If to use the list of Basenames (or full paths) of models that form the ensemble. If given, forward-selection is **skipped** and these models are evaluated as a fixed set.')
- 
+    parser.add_argument('--subset', metavar='LABELS', help='Comma-separated list of moral-value labels to evaluate (overrides the baseline label set)')
+
     args = parser.parse_args()
+
+    # requested label subset?
+    label_subset = None
+    if args.subset:
+        label_subset = [s.strip() for s in args.subset.split(',') if s.strip()]
 
     print("Building threshold map...")
 
@@ -267,8 +287,8 @@ def main():
 
     print("Assembling...")
     # Assemble
-    df, true, base_arr, cand_bin, names, labels = assemble_binary(threshold_map, args.test)
-    cand_prob_all = assemble_prob(df)
+    df, true, base_arr, cand_bin, names, labels = assemble_binary(threshold_map, args.test, label_subset)
+    cand_prob_all = assemble_prob(df, labels)
     if args.mode == 'hard':
         candidates = cand_bin
     elif args.mode == 'soft':
@@ -282,6 +302,8 @@ def main():
         members = [names[i] for i in members_idx]
         ens_final   = build_ensemble(members_idx, candidates, names, args.mode,
                                     weights, args.threshold)
+        scores    = [f1_score(true, (cand if args.mode=="hard" else (cand >= args.threshold).astype(int)), average='macro', zero_division=0) for cand in candidates]
+        seed_idx  = int(np.argmax(scores))
     
     else:
         print("Forward selection...")

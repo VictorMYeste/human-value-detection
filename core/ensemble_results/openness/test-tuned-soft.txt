@@ -1,0 +1,17 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-LIWC-22_LingFeat_0.5_NER-test.tsv', '1_Lex-LIWC-22_LingFeat_0.82_NER-test.tsv']) ===
+Macro-F1 Seed = 0.22870, Ensemble = 0.22967
+One-sided lower 95% ΔF1 = -0.00544
+p(ens>base) = 0.38180 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=0.06250, sig=False
+ Self-direction: action: p_adj=0.03125, sig=True
+ Stimulation: p_adj=0.66667, sig=False
+ Hedonism: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/openness_moral-values/output/tuned-soft-champion-test.tsv

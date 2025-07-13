@@ -1,0 +1,34 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: self-trans-champion_tuned-soft-champion-val.tsv  (Macro-F1 = 0.27002)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.27002
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=0.01511 p=0.00000
+  presence_champion-tuned-soft-champion-val.tsv lower=0.01819 p=0.00000
+
+Added presence_champion-tuned-soft-champion-val.tsv -> lower bound=0.01819 current f1 = 0.29757
+[Round 2]. Current Macro-Average F1 = 0.29757
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=-0.04931 p=1.00000
+
+Selected: ['self-trans-champion_tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['self-trans-champion_tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.27002, Ensemble = 0.29757
+One-sided lower 95% ΔF1 = 0.01821
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=0.00781, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/self-trans/output/fixed-hard-champion-val.tsv

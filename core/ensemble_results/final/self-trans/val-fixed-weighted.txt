@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'self-trans-champion_tuned-soft-champion-val.tsv': '0.317', 'direct_champion-tuned-soft-champion-val.tsv': '0.342', 'presence_champion-tuned-soft-champion-val.tsv': '0.340'}
+Assembling...
+Forward selection...
+Seed model: self-trans-champion_tuned-soft-champion-val.tsv  (Macro-F1 = 0.27002)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.27002
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=-0.01693 p=0.49400
+  presence_champion-tuned-soft-champion-val.tsv lower=-0.01663 p=0.45120
+
+Selected: ['self-trans-champion_tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['self-trans-champion_tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.27002, Ensemble = 0.27002
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/self-trans/output/fixed-weighted-champion-val.tsv

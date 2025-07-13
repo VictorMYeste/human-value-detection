@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: tuned-soft-champion-val.tsv  (Macro-F1 = 0.32621)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.32621
+
+Testing candidates: ['tuned-soft-champion-val.tsv']
+  tuned-soft-champion-val.tsv    lower=-0.01227 p=0.99900
+
+Selected: ['tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.32621, Ensemble = 0.32621
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/all/output/tuned-hard-champion-val-2.tsv

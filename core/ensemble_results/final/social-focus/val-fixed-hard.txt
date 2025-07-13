@@ -1,0 +1,38 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_NER_0.1_Baseline-val.tsv  (Macro-F1 = 0.32097)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.32097
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=0.00536 p=0.00000
+  presence_champion-tuned-soft-champion-val.tsv lower=0.00238 p=0.00100
+
+Added direct_champion-tuned-soft-champion-val.tsv -> lower bound=0.00536 current f1 = 0.32677
+[Round 2]. Current Macro-Average F1 = 0.32677
+
+Testing candidates: ['presence_champion-tuned-soft-champion-val.tsv']
+  presence_champion-tuned-soft-champion-val.tsv lower=-0.01923 p=0.85340
+
+Selected: ['1_NER_0.1_Baseline-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['1_NER_0.1_Baseline-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.32097, Ensemble = 0.32963
+One-sided lower 95% ΔF1 = 0.00530
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00352, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.07031, sig=False
+ Benevolence: caring: p_adj=0.12500, sig=False
+ Benevolence: dependability: p_adj=0.02344, sig=True
+ Universalism: concern: p_adj=0.00018, sig=True
+ Universalism: nature: p_adj=0.00352, sig=True
+ Universalism: tolerance: p_adj=0.07031, sig=False
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/social-focus/output/fixed-hard-champion-val.tsv

@@ -1,0 +1,31 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['1_Baseline_0.5_Lex-MJD-test.tsv', '1_Previous-Sentences-2-Lex-eMFD_0.1_Baseline-test.tsv']) ===
+Macro-F1 Seed = 0.31158, Ensemble = 0.31828
+One-sided lower 95% ΔF1 = 0.00169
+p(ens>base) = 0.01100 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.45000, sig=False
+ Self-direction: action: p_adj=0.87463, sig=False
+ Stimulation: p_adj=0.14524, sig=False
+ Hedonism: p_adj=0.47694, sig=False
+ Achievement: p_adj=0.18003, sig=False
+ Power: dominance: p_adj=0.09381, sig=False
+ Power: resources: p_adj=0.13231, sig=False
+ Face: p_adj=0.00492, sig=True
+ Security: personal: p_adj=0.11754, sig=False
+ Security: societal: p_adj=0.06475, sig=False
+ Tradition: p_adj=0.07657, sig=False
+ Conformity: rules: p_adj=0.01467, sig=True
+ Conformity: interpersonal: p_adj=0.66176, sig=False
+ Benevolence: caring: p_adj=0.35683, sig=False
+ Benevolence: dependability: p_adj=0.42035, sig=False
+ Universalism: concern: p_adj=0.08136, sig=False
+ Universalism: nature: p_adj=0.00492, sig=True
+ Universalism: tolerance: p_adj=0.40024, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/p_moral-values/output/tuned-soft-champion-test.tsv

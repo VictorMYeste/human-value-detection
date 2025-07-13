@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Baseline_0.5_Previous-Sentences-2-val.tsv  (Macro-F1 = 0.26699)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.26699
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=-0.00691 p=0.29760
+  presence_champion-tuned-soft-champion-val.tsv lower=-0.00930 p=0.40920
+
+Selected: ['1_Baseline_0.5_Previous-Sentences-2-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Baseline_0.5_Previous-Sentences-2-val.tsv']) ===
+Macro-F1 Seed = 0.26699, Ensemble = 0.26699
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/growth/output/fixed-soft-champion-val.tsv

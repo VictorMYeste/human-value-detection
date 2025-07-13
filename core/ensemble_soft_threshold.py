@@ -9,9 +9,9 @@ from sklearn.metrics import f1_score
 
 # === Configuration ===
 MODELS = [
-    "../approaches/conservation_moral-values/output/1_Baseline_0.5_Baseline-val.tsv",
-    "../approaches/conservation_moral-values/output/1_Lex-LIWC-22_LingFeat_0.1_Baseline-val.tsv",
-    "../approaches/conservation_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_TD-LDA-val.tsv",
+    "../approaches/self-trans_moral-values/output/self-trans-champion_tuned-soft-champion-val.tsv",
+    "../approaches/moral-values/output/direct_champion-tuned-soft-champion-val.tsv",
+    "../approaches/p_moral-values/output/presence_champion-tuned-soft-champion-val.tsv",
 ]
 GOLD     = "../data/validation-english/labels-cat.tsv"
 ID_COLS  = ['Text-ID','Sentence-ID']

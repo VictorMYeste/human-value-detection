@@ -9,7 +9,7 @@ echo "===== Hard ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode hard --debug --save-preds ../approaches/conservation_moral-values/output/fixed-hard-champion-val.tsv | tee ensemble_results/conservation/fixed-hard.txt
+python3 -u ensemble_voting.py --mode hard --debug --save-preds ../approaches/ensembles/self-trans/output/fixed-hard-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-fixed-hard.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -17,7 +17,7 @@ echo "===== Soft ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode soft --debug --save-preds ../approaches/conservation_moral-values/output/fixed-soft-champion-val.tsv | tee ensemble_results/conservation/fixed-soft.txt
+python3 -u ensemble_voting.py --mode soft --debug --save-preds ../approaches/ensembles/self-trans/output/fixed-soft-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-fixed-soft.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -25,7 +25,7 @@ echo "===== Hard tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode hard --use-tuned --debug --save-preds ../approaches/conservation_moral-values/output/tuned-hard-champion-val.tsv | tee ensemble_results/conservation/tuned-hard.txt
+python3 -u ensemble_voting.py --mode hard --use-tuned --debug --save-preds ../approaches/ensembles/self-trans/output/tuned-hard-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-tuned-hard.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -33,7 +33,7 @@ echo "===== Soft tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode soft --threshold 0.28 --debug --save-preds ../approaches/conservation_moral-values/output/tuned-soft-champion-val.tsv | tee ensemble_results/conservation/tuned-soft.txt
+python3 -u ensemble_voting.py --mode soft --threshold 0.29 --debug --save-preds ../approaches/ensembles/self-trans/output/tuned-soft-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-tuned-soft.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -41,7 +41,7 @@ echo "===== Weighted ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode weighted --debug --save-preds ../approaches/conservation_moral-values/output/fixed-weighted-champion-val.tsv | tee ensemble_results/conservation/fixed-weighted.txt
+python3 -u ensemble_voting.py --mode weighted --debug --save-preds ../approaches/ensembles/self-trans/output/fixed-weighted-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-fixed-weighted.txt
 echo "=========="
 echo "=========="
 echo "=========="
@@ -49,7 +49,7 @@ echo "===== Weighted tuned ====="
 echo "=========="
 echo "=========="
 echo "=========="
-python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds ../approaches/conservation_moral-values/output/tuned-weighted-champion-val.tsv | tee ensemble_results/conservation/tuned-weighted.txt
+python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds ../approaches/ensembles/self-trans/output/tuned-weighted-champion-test.tsv --test --subset "Humility,Benevolence: caring,Benevolence: dependability,Universalism: concern,Universalism: nature,Universalism: tolerance" | tee ensemble_results/final/self-trans/test-tuned-weighted.txt
 # echo "=========="
 # echo "=========="
 # echo "=========="
@@ -57,7 +57,7 @@ python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds .
 # echo "=========="
 # echo "=========="
 # echo "=========="
-# python3 ensemble_per_label.py --mode hard --debug | tee ensemble_results/conservation/per_label-hard.txt
+# python3 ensemble_per_label.py --mode hard --debug | tee ensemble_results/final/self-trans/per_label-hard.txt
 # echo "=========="
 # echo "=========="
 # echo "=========="
@@ -65,4 +65,4 @@ python3 -u ensemble_voting.py --mode weighted --use-tuned --debug --save-preds .
 # echo "=========="
 # echo "=========="
 # echo "=========="
-# python3 ensemble_per_label.py --mode soft --debug | tee ensemble_results/conservation/per_label-soft.txt
+# python3 ensemble_per_label.py --mode soft --debug | tee ensemble_results/final/self-trans/per_label-soft.txt

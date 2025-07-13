@@ -1,0 +1,36 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv': '0.333', 'direct_champion-tuned-soft-champion-val.tsv': '0.341', 'presence_champion-tuned-soft-champion-val.tsv': '0.326'}
+Assembling...
+Forward selection...
+Seed model: 1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv  (Macro-F1 = 0.31694)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.31694
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=0.00759 p=0.00080
+  presence_champion-tuned-soft-champion-val.tsv lower=-0.00017 p=0.05460
+
+Added direct_champion-tuned-soft-champion-val.tsv -> lower bound=0.00759 current f1 = 0.32546
+[Round 2]. Current Macro-Average F1 = 0.32546
+
+Testing candidates: ['presence_champion-tuned-soft-champion-val.tsv']
+  presence_champion-tuned-soft-champion-val.tsv lower=0.00137 p=0.02700
+
+Selected: ['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.31694, Ensemble = 0.33180
+One-sided lower 95% ΔF1 = 0.00747
+p(ens>base) = 0.00020 -> significant? YES
+Per-label improvements:
+ Hedonism: p_adj=1.00000, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00046, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00229, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/self-enh/output/tuned-weighted-champion-val.tsv

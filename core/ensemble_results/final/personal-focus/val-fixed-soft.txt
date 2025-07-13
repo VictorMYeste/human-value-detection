@@ -1,0 +1,38 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-Schwartz_0.21_Baseline-val.tsv  (Macro-F1 = 0.28294)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.28294
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=0.00086 p=0.03480
+  presence_champion-tuned-soft-champion-val.tsv lower=0.00692 p=0.00160
+
+Added presence_champion-tuned-soft-champion-val.tsv -> lower bound=0.00692 current f1 = 0.29797
+[Round 2]. Current Macro-Average F1 = 0.29797
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=-0.01175 p=0.91800
+
+Selected: ['1_Lex-Schwartz_0.21_Baseline-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-Schwartz_0.21_Baseline-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.28294, Ensemble = 0.29797
+One-sided lower 95% ΔF1 = 0.00672
+p(ens>base) = 0.00100 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.28906, sig=False
+ Self-direction: action: p_adj=0.00185, sig=True
+ Stimulation: p_adj=0.00468, sig=True
+ Hedonism: p_adj=0.02009, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.01773, sig=True
+ Security: personal: p_adj=0.13328, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/personal-focus/output/fixed-soft-champion-val.tsv

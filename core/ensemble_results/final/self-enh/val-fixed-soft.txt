@@ -1,0 +1,34 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: 1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv  (Macro-F1 = 0.31694)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.31694
+
+Testing candidates: ['direct_champion-tuned-soft-champion-val.tsv', 'presence_champion-tuned-soft-champion-val.tsv']
+  direct_champion-tuned-soft-champion-val.tsv lower=0.00722 p=0.00060
+  presence_champion-tuned-soft-champion-val.tsv lower=0.00268 p=0.01760
+
+Added direct_champion-tuned-soft-champion-val.tsv -> lower bound=0.00722 current f1 = 0.32885
+[Round 2]. Current Macro-Average F1 = 0.32885
+
+Testing candidates: ['presence_champion-tuned-soft-champion-val.tsv']
+  presence_champion-tuned-soft-champion-val.tsv lower=-0.00182 p=0.10240
+
+Selected: ['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['1_Lex-WorryWords_0.23_Lex-Schwartz-val.tsv', 'direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.31694, Ensemble = 0.33112
+One-sided lower 95% ΔF1 = 0.00710
+p(ens>base) = 0.00180 -> significant? YES
+Per-label improvements:
+ Hedonism: p_adj=1.00000, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00086, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00427, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/self-enh/output/fixed-soft-champion-val.tsv

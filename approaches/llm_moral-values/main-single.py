@@ -61,7 +61,6 @@ from transformers import (
 )
 # tell Transformers to log only errors
 hf_logging.set_verbosity_error()
-# hf_logging.set_verbosity_info()
 from tqdm.auto import tqdm
 
 try:
@@ -162,7 +161,7 @@ PROMPTS = {
 # accept either the strict form (“ANSWER: 0.7”) or any standalone 0–1 number
 ANSWER_RE = re.compile(r"(?:ANSWER:\s*)?([01](?:\.\d+)?(?:e-?\d+)?)")
 
-BATCH = 2048
+BATCH = 64
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -218,14 +217,7 @@ class ValueLLM:
             token=hf_token,
         )
         self.model.eval()
-        self.generation_cfg = GenerationConfig(max_new_tokens=8,do_sample=False)
-
-        # ---------- one-time CUDA / Triton warm-up --------------
-        with torch.inference_mode():
-            dummy = "Warm-up"
-            toks  = self.tokenizer(dummy, return_tensors="pt").to(self.model.device)
-            _ = self.model.generate(**toks, generation_config=GenerationConfig(max_new_tokens=1,do_sample=False))
-            torch.cuda.synchronize() # make sure kernels finish
+        self.generation_cfg = GenerationConfig(max_new_tokens=32,do_sample=False)
 
     @torch.no_grad()
     def get_answer(self, prompt: str) -> float:

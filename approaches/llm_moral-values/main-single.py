@@ -61,6 +61,7 @@ from transformers import (
 )
 # tell Transformers to log only errors
 hf_logging.set_verbosity_error()
+# hf_logging.set_verbosity_info()
 from tqdm.auto import tqdm
 
 try:
@@ -161,7 +162,7 @@ PROMPTS = {
 # accept either the strict form (“ANSWER: 0.7”) or any standalone 0–1 number
 ANSWER_RE = re.compile(r"(?:ANSWER:\s*)?([01](?:\.\d+)?(?:e-?\d+)?)")
 
-BATCH = 64
+MAX_BATCH = 64
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -217,7 +218,14 @@ class ValueLLM:
             token=hf_token,
         )
         self.model.eval()
-        self.generation_cfg = GenerationConfig(max_new_tokens=32,do_sample=False)
+        self.generation_cfg = GenerationConfig(max_new_tokens=8,do_sample=False)
+
+        # ---------- one-time CUDA / Triton warm-up --------------
+        with torch.inference_mode():
+            dummy = "Warm-up"
+            toks  = self.tokenizer(dummy, return_tensors="pt").to(self.model.device)
+            _ = self.model.generate(**toks, generation_config=GenerationConfig(max_new_tokens=1,do_sample=False))
+            torch.cuda.synchronize() # make sure kernels finish
 
     @torch.no_grad()
     def get_answer(self, prompt: str) -> float:
@@ -325,7 +333,7 @@ def run_zero_or_few_shot(
                 pending_meta.append((idx, value))
 
                 # once we reach BATCH, fire it off
-                if len(pending_prompts) >= BATCH:
+                if len(pending_prompts) >= MAX_BATCH:
                     scores = infer_batch(pending_prompts, model)
                     for (r_i, val), score, pr in zip(pending_meta, scores, pending_prompts):
                         cache[pr] = score

@@ -41,12 +41,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import random
-import re
 import sys
 from pathlib import Path
 from typing import List, Dict, Any
+import re, ast
 
 import numpy as np
 import pandas as pd
@@ -84,6 +83,8 @@ VALUES = [
     "Benevolence: dependability", "Universalism: concern", "Universalism: nature",
     "Universalism: tolerance",
 ]
+VALUES_STR = ", ".join(VALUES)
+VALUES_JSON = json.dumps(VALUES, ensure_ascii=False)
 
 # One-line definition for each of the 19 refined values in Table 1 of the paper “Refining the Theory of Basic Individual Values” (Journal of Personality & Social Psychology, 2012).
 VALUE_DEFINITIONS = {
@@ -108,61 +109,75 @@ VALUE_DEFINITIONS = {
     "Universalism: tolerance":      "Acceptance and understanding of those who are different from oneself",
 }
 
+# Build one multiline definition block – used only in the “definition” prompt
+DEFS_BLOCK = "\n".join(
+    f"- **{k}**: {v}" for k, v in VALUE_DEFINITIONS.items()
+)
+
 PROMPTS = {
+    # 0 ───────────────────────────────────────────────────────────────
+    # “base” – still Chain-of-Thought, but asks for one JSON at the end
     "base": (
-        "Given the following SENTENCE, determine the degree (between 0 and 1) "
-        "that the SENTENCE refers to the human value of {value}. Think step by "
-        "step. Then say \"ANSWER: \" followed by your determined degree as single "
-        "number between 0 and 1 using use up to 3 decimal places.\nSENTENCE: {sentence}\n"
+        "Analyse the SENTENCE with respect to all basic human values.\n"
+        "Reply **only** with a Python list of 19 floats in this order:\n"
+        f"{VALUES_STR}\n"
+        "Example: [0.123, 0.000, …, 0.045]\n"
+        "No explanations, no extra text.\n\n"
+        "SENTENCE: {sentence}\n"
     ),
 
     # 1 ───────────────────────────────────────────────────────────────
-    # terse, no chain-of-thought
+    # terse, no CoT
     "concise": (
-        "Rate from 0 (not present) to 1 (clearly present) using use up to 3 decimal places how much the value "
-        "\"{value}\" appears in this sentence. Respond with "
-        "\"ANSWER: <number>\" and nothing else.\nSENTENCE: {sentence}\n"
+        f"Return a JSON object with these 19 keys:\n"
+        f"{VALUES_JSON}\n"
+        "Each key must map to a float in [0,1] (3 decimals). "
+        "No other text.\nSENTENCE: {sentence}\n"
     ),
 
     # 2 ───────────────────────────────────────────────────────────────
-    # persona + CoT + emphasis on citing cues
+    # persona + short CoT
     "philosopher_cot": (
-        "You are a moral philosopher analysing text. For the value "
-        "\"{value}\", think aloud about keywords, actors, and implications you "
-        "see in the sentence, then conclude. Finish with "
-        "\"ANSWER: <number between 0 and 1 using use up to 3 decimal places>\" on a new line.\nSENTENCE: {sentence}\n"
+        "You are a moral philosopher. Briefly reflect on the cues for each "
+        "value you notice in the SENTENCE. Then emit only the JSON object "
+        f"with the 19 scores as specified here: {VALUES_STR}\n"
+        "SENTENCE: {sentence}\n"
     ),
 
     # 3 ───────────────────────────────────────────────────────────────
-    # includes short definition (you pass it via .format(definition=…))
+    # includes all definitions
     "definition": (
-        "VALUE: {value} — {definition}\n"
-        "Task: Score how strongly the sentence expresses this value on a 0-1 "
-        "scale using use up to 3 decimal places). Think step by step, then output only "
-        "\"ANSWER: <number>\".\nSENTENCE: {sentence}\n"
+        "### Value definitions\n"
+        f"{DEFS_BLOCK}\n\n"
+        "### Task\n"
+        "Score the SENTENCE for every value above on a 0-1 scale "
+        "(3 decimals). Output one JSON object – nothing else.\n"
+        "SENTENCE: {sentence}\n"
     ),
 
     # 4 ───────────────────────────────────────────────────────────────
-    # JSON output to test structured parsing
+    # explicit JSON example
     "json_out": (
-        "Evaluate the presence of the human value \"{value}\" in the sentence "
-        "on a scale 0–1 using use up to 3 decimal places. Think briefly, then respond with a JSON object exactly "
-        "like {\"score\": 0.0}.\nSENTENCE: {sentence}\n"
+        "The output must be a JSON object with the 19 value names as keys "
+        "and floats in [0,1] as values.\nExample format:\n"
+        f'{{"Self-direction: thought": 0.112, ..., "Universalism: tolerance": 0.003}}\n'
+        "Respond with the JSON only.\nSENTENCE: {sentence}\n"
     ),
 
     # 5 ───────────────────────────────────────────────────────────────
-    # one-shot exemplar (supply {example_sentence} & {example_score})
+    # one-shot: give one full JSON exemplar before the target sentence
+    # (you can still use --k to prepend several such exemplars)
     "one_shot": (
-        "Example → \"{example_sentence}\" VALUE: {value} ⇒ ANSWER: {example_score}\n"
-        "Now evaluate the next sentence and give ANSWER likewise using use up to 3 decimal places.\n"
+        "Example\n"
+        "SENTENCE: {example_sentence}\n"
+        "LABELS: {example_labels}\n"
+        "### Now your turn\n"
         "SENTENCE: {sentence}\n"
+        "Return only the JSON labels."
     ),
 }
 
-# accept either the strict form (“ANSWER: 0.7”) or any standalone 0–1 number
-ANSWER_RE = re.compile(r"(?:ANSWER:\s*)?([01](?:\.\d+)?(?:e-?\d+)?)")
-
-BATCH = 2048
+MAX_BATCH = 8
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -194,10 +209,19 @@ def load_split(path: Path) -> pd.DataFrame:
 
     return df
 
+# ─── add once, near the top of the file ────────────────────────────────
+def save_cache(cache_path: Path | None, cache: dict):
+    """Write the current cache dict atomically (safe on interrupt)."""
+    if cache_path is None:
+        return
+    tmp = cache_path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(cache))   # ① write to a temp file
+    tmp.replace(cache_path)             # ② atomic move → cache_path
+
+
 # ---------------------------------------------------------------------
 # MODEL WRAPPERS
 # ---------------------------------------------------------------------
-
 class ValueLLM:
     """Thin wrapper for causal LMs in 4‑bit for fast inference."""
 
@@ -218,7 +242,13 @@ class ValueLLM:
             token=hf_token,
         )
         self.model.eval()
-        self.generation_cfg = GenerationConfig(max_new_tokens=8,do_sample=False)
+        self.generation_cfg = GenerationConfig(
+            max_new_tokens  = 150,
+            do_sample       = True,
+            temperature     = 0.9,
+            top_p           = 0.9,
+            pad_token_id    = self.tokenizer.eos_token_id
+        )
 
         # ---------- one-time CUDA / Triton warm-up --------------
         with torch.inference_mode():
@@ -226,53 +256,74 @@ class ValueLLM:
             toks  = self.tokenizer(dummy, return_tensors="pt").to(self.model.device)
             _ = self.model.generate(**toks, generation_config=GenerationConfig(max_new_tokens=1,do_sample=False))
             torch.cuda.synchronize() # make sure kernels finish
-
-    @torch.no_grad()
-    def get_answer(self, prompt: str) -> float:
-        for _ in range(2):                                      # 1 × normal, 1 × strict retry
-            inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
-            output_ids = self.model.generate(**inputs,
-                                             generation_config=self.generation_cfg)
-            gen_text = self.tokenizer.decode(
-                output_ids[0, inputs["input_ids"].shape[1]:],
-                skip_special_tokens=True,
-            )
-            match = ANSWER_RE.search(gen_text)
-            if match:
-                return round(float(match.group(1)), 3)
-            # first try failed → add an explicit instruction and retry
-            prompt += ("\nRespond **only** with \"ANSWER: <number between 0 and 1>\""
-                       " on one line.")
-        # still no usable number – fall back to 0.0 instead of crashing
-        return 0.0
     
 # ---------------------------------------------------------------------
 # BATCHED INFERENCE HELPER
 # ---------------------------------------------------------------------
-def infer_batch(prompts: List[str], model: ValueLLM) -> List[float]:
+def extract_json(text: str) -> dict[str, float] | None:
+    for line in reversed(text.splitlines()):
+        line = line.strip()
+        if line.startswith("{") and line.endswith("}"):
+            try:
+                return json.loads(line)
+            except json.JSONDecodeError:
+                pass
+    return None
+
+_list_pat = re.compile(
+    r"(\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?){18})"   # 19 comma-separated numbers
+)
+
+def extract_list(text: str) -> list[float] | None:
+    # try the old “[ … ]” first
+    if text.strip().startswith("["):
+        try:
+            return list(map(float, ast.literal_eval(text.strip().splitlines()[-1])))
+        except Exception:
+            pass
+    # fall back to raw comma-list anywhere in the answer
+    m = _list_pat.search(text)
+    if m:
+        nums = [float(x) for x in m.group(1).split(",")]
+        if len(nums) == 19:
+            return nums
+    return None
+
+def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     """
     Tokenize a list of prompts, run one .generate() and return list of floats.
     """
-    toks = model.tokenizer(
-        prompts,
-        padding=True,
-        return_tensors="pt",
-    ).to(model.model.device)
-    out_ids = model.model.generate(
-        **toks,
-        generation_config=model.generation_cfg,
-    )
-    # strip off the input tokens
-    gen_texts = model.tokenizer.batch_decode(
-        out_ids[:, toks.input_ids.shape[1]:],
-        skip_special_tokens=True,
-    )
-    # extract numbers (fallback to 0.0)
-    return [
-        round(float(m.group(1)), 3) if (m := ANSWER_RE.search(txt)) else 0.0
-        for txt in gen_texts
-    ]
+    chat_prompts = []
+    for p in prompts:
+        msg = [
+            {"role": "system",
+             "content": "You are a helpful assistant that scores sentences."},
+            {"role": "user",
+             "content": p}                # p already contains the formatted sentence
+        ]
+        chat_prompts.append(
+            model.tokenizer.apply_chat_template(
+                msg, tokenize=False, add_generation_prompt=True)
+        )
+    toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
+    out_ids = model.model.generate(**toks,generation_config=model.generation_cfg)
+    # ─── DEBUG ───
+    # print("\n\n---- RAW DECODED ----")
+    # for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
+    #     print(repr(t));  print("---------------")
+    # print("---- END ----\n\n")
 
+    # strip off the input tokens
+    gen_texts = model.tokenizer.batch_decode(out_ids[:, toks.input_ids.shape[1]:], skip_special_tokens=True)
+
+    out = []
+    for g in gen_texts:
+        scores = extract_list(g)
+        if scores is None or len(scores) != 19:
+            out.append({v: 0.0 for v in VALUES})
+        else:
+            out.append({k: round(v_,3) for k, v_ in zip(VALUES, scores)})
+    return out
 
 # ---------------------------------------------------------------------
 # INFERENCE MODES
@@ -293,13 +344,15 @@ def run_zero_or_few_shot(
     if cache_path and cache_path.exists():
         cache = json.loads(cache_path.read_text())
 
-    # Few‑shot exemplar pool from *train* set only (assumes df contains that split)
-    exemplar_pool: Dict[str, List[str]] = {}
+    # Few-shot exemplar pool: one list of k random sentences
+    exemplar_pool: list[str] = []
     if fewshot_k > 0:
         rng = random.Random(seed)
-        for value in VALUES:
-            sentences = df.sample(frac=1.0, random_state=rng).head(1000)["Text"].tolist()
-            exemplar_pool[value] = sentences[:fewshot_k]
+        exemplar_pool = (
+            df.sample(frac=1.0, random_state=rng)
+              .head(1000)["Text"]        # draw ≤1 000 to avoid long sampling on huge sets
+              .tolist()[:fewshot_k]
+        )
 
     # prepare storage
     rows: List[Dict[str,float]] = [{} for _ in range(len(df))]
@@ -307,53 +360,60 @@ def run_zero_or_few_shot(
     pending_meta: List[tuple[int,str]] = []
 
     for idx, row in tqdm(df.iterrows(), total=len(df)):
-        sentence = row["Text"]
-        for value in VALUES:
-            # Add extra information to the prompt if needed
-            extra: Dict[str, Any] = {}
-            if "{definition}" in prompt_template:
-                extra["definition"] = VALUE_DEFINITIONS.get(value, "")
-            if "{example_sentence}" in prompt_template and exemplar_dict:
-                ex_s, ex_sc = exemplar_dict[value]
-                extra["example_sentence"] = ex_s
-                extra["example_score"] = ex_sc
-            prompt = prompt_template.format(value=value, sentence=sentence, **extra)
-            if fewshot_k > 0:
-                exemplars = "\n".join(
-                    prompt_template.format(value=value, sentence=s) + "ANSWER: 1.0"  # dummy high
-                    for s in exemplar_pool[value]
+        # 1) build the target prompt for the current sentence
+        prompt = prompt_template.format(sentence=row["Text"])
+
+        # 2) prepend k exemplars if requested **once per sentence**
+        if fewshot_k > 0:
+            exemplar_prompts = []
+            # here we fake labels with 1.0; replace by golds if you have them
+            dummy_labels = {v: 1.0 for v in VALUES}
+            for ex_sent in exemplar_pool:
+                exemplar_prompts.append(
+                    PROMPTS["one_shot"].format(
+                        example_sentence = ex_sent,
+                        example_labels   = json.dumps(dummy_labels, ensure_ascii=False),
+                        sentence         = ex_sent        # re-use for the inner SENTENCE field
+                    )
                 )
-                prompt = exemplars + "\n" + prompt
-            if prompt in cache:
-                # immediate hit
-                rows[idx][value] = cache[prompt]
-            else:
-                # schedule for batch
-                pending_prompts.append(prompt)
-                pending_meta.append((idx, value))
+            prompt = "\n".join(exemplar_prompts) + "\n" + prompt
 
-                # once we reach BATCH, fire it off
-                if len(pending_prompts) >= BATCH:
-                    scores = infer_batch(pending_prompts, model)
-                    for (r_i, val), score, pr in zip(pending_meta, scores, pending_prompts):
-                        cache[pr] = score
-                        rows[r_i][val] = score
-                    pending_prompts.clear()
-                    pending_meta.clear()
+        if prompt in cache:
+            # immediate hit
+            rows[idx] = cache[prompt]
+        else:
+            # schedule for batch
+            pending_prompts.append(prompt)
+            pending_meta.append((idx))
 
-        # flush any remaining prompts
-        if pending_prompts:
-            scores = infer_batch(pending_prompts, model)
-            for (r_i, val), score, pr in zip(pending_meta, scores, pending_prompts):
-                cache[pr] = score
-                rows[r_i][val] = score
+            # once we reach BATCH, fire it off
+            if len(pending_prompts) >= MAX_BATCH:
+                scores = infer_batch(pending_prompts, model)
+                torch.cuda.empty_cache()
+                torch.cuda.ipc_collect()
+                for i, score, pr in zip(pending_meta, scores, pending_prompts):
+                    cache[pr] = score
+                    rows[i] = score
+                pending_prompts.clear()
+                pending_meta.clear()
+                save_cache(cache_path, cache)
+
+    # flush any remaining prompts
+    if pending_prompts:
+        scores = infer_batch(pending_prompts, model)
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+        for i, score, pr in zip(pending_meta, scores, pending_prompts):
+            cache[pr] = score
+            rows[i] = score
+        save_cache(cache_path, cache)
 
     # write back cache            
-    if cache_path:
-        cache_path.write_text(json.dumps(cache))
+    # if cache_path:
+    #     cache_path.write_text(json.dumps(cache))
     
     # assemble final DataFrame
-    out_df = pd.concat([df[["Text-ID", "Sentence-ID"]].reset_index(drop=True), pd.DataFrame(rows)], axis=1)
+    out_df = pd.concat([df[["Text-ID", "Sentence-ID"]].reset_index(drop=True), pd.DataFrame(rows).astype(float)], axis=1)
     return out_df
 
 
@@ -402,21 +462,15 @@ def run_qlora(
     # Build regression‑style training samples
     def make_examples(df: pd.DataFrame):
         for _, r in tqdm(df.iterrows(), total=len(df)):
-            for value in VALUES:
-                # Add extra information to the prompt if needed
-                extra = {}
-                if "{definition}" in prompt_template:
-                    extra["definition"] = VALUE_DEFINITIONS.get(value, "")
-                if "{example_sentence}" in prompt_template and exemplar_dict:
-                    ex_sent, ex_score = exemplar_dict.get(value, ("", 0.0))
-                    extra["example_sentence"] = ex_sent
-                    extra["example_score"] = ex_score
-                prompt = prompt_template.format(
-                    value=value,
+            gold = {v: r[v] for v in VALUES}           # 0/1 floats from label cols
+            yield {
+                "text": prompt_template.format(
                     sentence=r["Text"],
-                    **extra,
-                )
-                yield {"text": prompt + "ANSWER: ", "label": str(r[value])}
+                    example_sentence="",
+                    example_labels=""
+                ) + json.dumps(gold, ensure_ascii=False),
+                "label": json.dumps(gold, ensure_ascii=False)
+            }
 
     train_examples = list(make_examples(train_df))
     val_examples = list(make_examples(val_df))
@@ -513,7 +567,11 @@ def main():
     out_root = output_dir.resolve() if args.run_name else "output"
     out_root.mkdir(parents=True, exist_ok=True)
 
-    cache_path = out_root / "llm_cache.json"
+    # Sanitize model name for file safety
+    safe_model = re.sub(r"[^\w\-]+", "-", args.model)
+
+    cache_filename = f"{safe_model}-{args.split}-cache.json"
+    cache_path = out_root / cache_filename
 
     prompt_template = PROMPTS[args.prompt_id]
 
@@ -561,7 +619,11 @@ def main():
     # after run_zero_or_few_shot / run_qlora returns preds_df
     preds_df.iloc[:, 2:] = preds_df.iloc[:, 2:].round(3)
 
-    out_file = out_root / "predictions.tsv"
+    # Compose new filename
+    filename = f"{safe_model}-{args.split}.tsv"
+
+    # Write predictions
+    out_file = out_root / filename
     preds_df.to_csv(out_file, sep="\t", index=False)
     print(f"Wrote {out_file}")
 

@@ -36,7 +36,7 @@ def find_best_threshold(y_true: np.ndarray,
     for th in np.arange(0.10, 0.90, step):
         y_pred = (y_pred_scores >= th).astype(int)
         prec, rec, _, _ = precision_recall_fscore_support(
-            y_true, y_pred, average=None, zero_division=0
+            y_true, y_pred, average=None, labels=[0,1], zero_division=0
         )
         # index 1 == positive class
         if prec[1] >= min_precision and rec[1] > best_recall:
@@ -95,14 +95,14 @@ def eval_labels(labels, predictions_path, gold_labels_path, fixed_threshold=0.5,
             best_thresholds[label] = round(float(best_th), 2)
 
             prec_t, rec_t, f1_t, _ = precision_recall_fscore_support(
-                g, p_bin_tuned, average=None, zero_division=0
+                g, p_bin_tuned, average=None, labels=[0,1], zero_division=0
             )
             macro_f1_tuned.append(f1_t[1])
 
         # --- (b) fixed threshold --------------------------------------------
         p_bin_fixed = (p_scores >= fixed_threshold).astype(int)
         prec_f, rec_f, f1_f, _ = precision_recall_fscore_support(
-            g, p_bin_fixed, average=None, zero_division=0
+            g, p_bin_fixed, average=None, labels=[0,1], zero_division=0
         )
         macro_f1_fixed.append(f1_f[1])  
 

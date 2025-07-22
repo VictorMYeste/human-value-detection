@@ -116,7 +116,7 @@ DEFS_BLOCK = "\n".join(
 
 PROMPTS = {
     # 0 ───────────────────────────────────────────────────────────────
-    # “base” – still Chain-of-Thought, but asks for one JSON at the end
+    # “base” – Chain-of-Thought, but asks for one Python list at the end
     "base": (
         "Analyse the SENTENCE with respect to all basic human values.\n"
         "Reply **only** with a Python list of 19 floats in this order:\n"
@@ -129,18 +129,20 @@ PROMPTS = {
     # 1 ───────────────────────────────────────────────────────────────
     # terse, no CoT
     "concise": (
-        f"Return a JSON object with these 19 keys:\n"
-        f"{VALUES_JSON}\n"
-        "Each key must map to a float in [0,1] (3 decimals). "
+        f"Return a Python list of 19 floats [0,1] (3 decimals) in this order:\n"
+        f"{VALUES_STR}\n"
         "No other text.\nSENTENCE: {sentence}\n"
     ),
 
     # 2 ───────────────────────────────────────────────────────────────
     # persona + short CoT
-    "philosopher_cot": (
-        "You are a moral philosopher. Briefly reflect on the cues for each "
-        "value you notice in the SENTENCE. Then emit only the JSON object "
-        f"with the 19 scores as specified here: {VALUES_STR}\n"
+    "philosopher": (
+        "You are a moral philosopher. Briefly think about each of the 19 basic "
+        "human values internally, **but do not write your thoughts out**. "
+        "Output **only** a Python list of 19 floats (3-decimals) in this order:\n"
+        f"{VALUES_STR}\n"
+        "Example: [0.123,0.000,…,0.045]\n"
+        "No other text.\n\n"
         "SENTENCE: {sentence}\n"
     ),
 
@@ -151,7 +153,7 @@ PROMPTS = {
         f"{DEFS_BLOCK}\n\n"
         "### Task\n"
         "Score the SENTENCE for every value above on a 0-1 scale "
-        "(3 decimals). Output one JSON object – nothing else.\n"
+        "(3 decimals). Output one Python list of 19 floats [0,1] (3 decimals) – nothing else.\n"
         "SENTENCE: {sentence}\n"
     ),
 
@@ -165,7 +167,7 @@ PROMPTS = {
     ),
 
     # 5 ───────────────────────────────────────────────────────────────
-    # one-shot: give one full JSON exemplar before the target sentence
+    # one-shot: give one full Python list exemplar before the target sentence
     # (you can still use --k to prepend several such exemplars)
     "one_shot": (
         "Example\n"
@@ -173,11 +175,11 @@ PROMPTS = {
         "LABELS: {example_labels}\n"
         "### Now your turn\n"
         "SENTENCE: {sentence}\n"
-        "Return only the JSON labels."
+        "Return only a Python list with the 19 floats [0,1] (3 decimals)."
     ),
 }
 
-MAX_BATCH = 8
+MAX_BATCH = 4
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -243,7 +245,7 @@ class ValueLLM:
         )
         self.model.eval()
         self.generation_cfg = GenerationConfig(
-            max_new_tokens  = 150,
+            max_new_tokens  = 100,
             do_sample       = True,
             temperature     = 0.9,
             top_p           = 0.9,

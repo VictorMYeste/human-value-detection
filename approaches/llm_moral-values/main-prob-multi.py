@@ -114,63 +114,66 @@ DEFS_BLOCK = "\n".join(
     f"- **{k}**: {v}" for k, v in VALUE_DEFINITIONS.items()
 )
 
-# ---------------------------------------------------------------------
-# PROMPT TEMPLATES  – all return *only* a JSON array of the values present
-# ---------------------------------------------------------------------
-PROMPTS: dict[str, str] = {
-
+PROMPTS = {
     # 0 ───────────────────────────────────────────────────────────────
-    # “direct” / keyword spotting
-    "direct": (
-        "List **only** the basic values that are clearly expressed or implied "
-        "in the SENTENCE.\n"
-        f"Return them as a JSON array of strings (choose from: {VALUES_STR}). "
-        "No other text.\n\n"
-        "SENTENCE: {sentence}"
+    # “base” – still Chain-of-Thought, but asks for one JSON at the end
+    "base": (
+        "Analyse the SENTENCE with respect to all basic human values.\n"
+        "Reply **only** with a Python list of 19 floats in this order:\n"
+        f"{VALUES_STR}\n"
+        "Example: [0.123, 0.000, …, 0.045]\n"
+        "No explanations, no extra text.\n\n"
+        "SENTENCE: {sentence}\n"
     ),
 
     # 1 ───────────────────────────────────────────────────────────────
-    # hidden Chain-of-Thought (the model may reason silently)
-    "cot_hidden": (
-        "Think step-by-step about which of the 19 basic human values are present "
-        "in the SENTENCE, **but do not reveal your reasoning**.\n"
-        "Output **only** the JSON array of value names.\n\n"
-        f"Allowed values: {VALUES_STR}\n\n"
-        "SENTENCE: {sentence}"
+    # terse, no CoT
+    "concise": (
+        f"Return a JSON object with these 19 keys:\n"
+        f"{VALUES_JSON}\n"
+        "Each key must map to a float in [0,1] (3 decimals). "
+        "No other text.\nSENTENCE: {sentence}\n"
     ),
 
     # 2 ───────────────────────────────────────────────────────────────
-    # with short definitions (often helps)
+    # persona + short CoT
+    "philosopher_cot": (
+        "You are a moral philosopher. Briefly reflect on the cues for each "
+        "value you notice in the SENTENCE. Then emit only the JSON object "
+        f"with the 19 scores as specified here: {VALUES_STR}\n"
+        "SENTENCE: {sentence}\n"
+    ),
+
+    # 3 ───────────────────────────────────────────────────────────────
+    # includes all definitions
     "definition": (
         "### Value definitions\n"
         f"{DEFS_BLOCK}\n\n"
         "### Task\n"
-        "Identify which of the above values the SENTENCE relates to.  "
-        "Return **only** a JSON array of the matching value names.\n\n"
-        "SENTENCE: {sentence}"
-    ),
-
-    # 3 ───────────────────────────────────────────────────────────────
-    # question–answer style
-    "qa": (
-        "Question: Which basic human values are present in the SENTENCE?\n"
-        "Answer: Return a JSON array (strings) chosen from:\n"
-        f"{VALUES_STR}\n\n"
-        "SENTENCE: {sentence}"
+        "Score the SENTENCE for every value above on a 0-1 scale "
+        "(3 decimals). Output one JSON object – nothing else.\n"
+        "SENTENCE: {sentence}\n"
     ),
 
     # 4 ───────────────────────────────────────────────────────────────
-    # few-shot exemplar template – *MUST* keep the three placeholders
+    # explicit JSON example
+    "json_out": (
+        "The output must be a JSON object with the 19 value names as keys "
+        "and floats in [0,1] as values.\nExample format:\n"
+        f'{{"Self-direction: thought": 0.112, ..., "Universalism: tolerance": 0.003}}\n'
+        "Respond with the JSON only.\nSENTENCE: {sentence}\n"
+    ),
+
+    # 5 ───────────────────────────────────────────────────────────────
+    # one-shot: give one full JSON exemplar before the target sentence
+    # (you can still use --k to prepend several such exemplars)
     "one_shot": (
-        "List **only** the basic values that are clearly expressed or implied "
-        "in the SENTENCE.\n"
-        f"Return them as a JSON array of strings (choose from: {VALUES_STR}). "
-        "No other text.\n\n"
-        "Example:\n"
+        "Example\n"
         "SENTENCE: {example_sentence}\n"
-        "OUTPUT: {example_labels}\n"
-        "–––\n"
-        "SENTENCE: {sentence}"
+        "LABELS: {example_labels}\n"
+        "### Now your turn\n"
+        "SENTENCE: {sentence}\n"
+        "Return only the JSON labels."
     ),
 }
 
@@ -267,20 +270,24 @@ def extract_json(text: str) -> dict[str, float] | None:
                 pass
     return None
 
-def extract_present_values(text: str) -> set[str]:
-    """
-    Pull the JSON array (last {...] or [...] block) from the model output
-    and return a *set* of value names.
-    """
-    obj = extract_json(text)            # re-use the generic helper above
-    if obj is None:                     # maybe the model emitted a plain list
-        try:
-            obj = json.loads(text[text.rfind("[") : text.rfind("]")+1])
-        except Exception:
-            return set()
-    # normalise / defensive strip
-    return {str(v).strip() for v in obj if isinstance(v, str)}
+_list_pat = re.compile(
+    r"(\d+(?:\.\d+)?(?:\s*,\s*\d+(?:\.\d+)?){18})"   # 19 comma-separated numbers
+)
 
+def extract_list(text: str) -> list[float] | None:
+    # try the old “[ … ]” first
+    if text.strip().startswith("["):
+        try:
+            return list(map(float, ast.literal_eval(text.strip().splitlines()[-1])))
+        except Exception:
+            pass
+    # fall back to raw comma-list anywhere in the answer
+    m = _list_pat.search(text)
+    if m:
+        nums = [float(x) for x in m.group(1).split(",")]
+        if len(nums) == 19:
+            return nums
+    return None
 
 def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     """
@@ -290,9 +297,9 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     for p in prompts:
         msg = [
             {"role": "system",
-             "content": "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."},
+             "content": "You are a helpful assistant that scores sentences."},
             {"role": "user",
-             "content": p}  # p already contains the formatted sentence
+             "content": p}                # p already contains the formatted sentence
         ]
         chat_prompts.append(
             model.tokenizer.apply_chat_template(
@@ -301,20 +308,21 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
     out_ids = model.model.generate(**toks,generation_config=model.generation_cfg)
     # ─── DEBUG ───
-    print("\n\n---- RAW DECODED ----")
-    for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
-        print(repr(t));  print("---------------")
-    print("---- END ----\n\n")
+    # print("\n\n---- RAW DECODED ----")
+    # for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
+    #     print(repr(t));  print("---------------")
+    # print("---- END ----\n\n")
 
     # strip off the input tokens
     gen_texts = model.tokenizer.batch_decode(out_ids[:, toks.input_ids.shape[1]:], skip_special_tokens=True)
 
     out = []
     for g in gen_texts:
-        present = extract_present_values(g)
-        out.append(
-            {v: 1.0 if v in present else 0.0 for v in VALUES}
-        )
+        scores = extract_list(g)
+        if scores is None or len(scores) != 19:
+            out.append({v: 0.0 for v in VALUES})
+        else:
+            out.append({k: round(v_,3) for k, v_ in zip(VALUES, scores)})
     return out
 
 # ---------------------------------------------------------------------
@@ -337,23 +345,14 @@ def run_zero_or_few_shot(
         cache = json.loads(cache_path.read_text())
 
     # Few-shot exemplar pool: one list of k random sentences
-    exemplar_pool: list[tuple[str, list[str]]] = []          # (sentence, labels[])
+    exemplar_pool: list[str] = []
     if fewshot_k > 0:
         rng = random.Random(seed)
-
-        # sample up to 1 000 labelled rows
-        sample_df = (
+        exemplar_pool = (
             df.sample(frac=1.0, random_state=rng)
-            .head(1000)
+              .head(1000)["Text"]        # draw ≤1 000 to avoid long sampling on huge sets
+              .tolist()[:fewshot_k]
         )
-
-        # convert each row into (sentence, [labels…]) tuple
-        for _, r in sample_df.iterrows():
-            present = [v for v in VALUES if r.get(v, 0) == 1.0]
-            if present:                                     # skip rows with no positives
-                exemplar_pool.append((r["Text"], present))
-            if len(exemplar_pool) >= fewshot_k:
-                break
 
     # prepare storage
     rows: List[Dict[str,float]] = [{} for _ in range(len(df))]
@@ -367,12 +366,14 @@ def run_zero_or_few_shot(
         # 2) prepend k exemplars if requested **once per sentence**
         if fewshot_k > 0:
             exemplar_prompts = []
-            for ex_sent, ex_labels in exemplar_pool:
+            # here we fake labels with 1.0; replace by golds if you have them
+            dummy_labels = {v: 1.0 for v in VALUES}
+            for ex_sent in exemplar_pool:
                 exemplar_prompts.append(
                     PROMPTS["one_shot"].format(
                         example_sentence = ex_sent,
-                        example_labels   = json.dumps(ex_labels, ensure_ascii=False),
-                        sentence         = ex_sent   # reused inside the exemplar template
+                        example_labels   = json.dumps(dummy_labels, ensure_ascii=False),
+                        sentence         = ex_sent        # re-use for the inner SENTENCE field
                     )
                 )
             prompt = "\n".join(exemplar_prompts) + "\n" + prompt
@@ -414,6 +415,7 @@ def run_zero_or_few_shot(
     # assemble final DataFrame
     out_df = pd.concat([df[["Text-ID", "Sentence-ID"]].reset_index(drop=True), pd.DataFrame(rows).astype(float)], axis=1)
     return out_df
+
 
 # ---------------------------------------------------------------------
 # QLoRA TRAINING
@@ -527,6 +529,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--prompt_id", default="base", help="Choose the prompt to use")
     p.add_argument("--k", type=int, default=0, help="k exemplars per value in few‑shot mode (ignored otherwise)")
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--threshold", type=float, default=0.5, help="Prob. → label threshold for downstream eval utils")
     # QLoRA specific
     p.add_argument("--qlora_lr", type=float, default=2e-4)
     p.add_argument("--qlora_r", type=int, default=16)

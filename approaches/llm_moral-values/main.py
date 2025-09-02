@@ -154,7 +154,7 @@ PROMPTS: dict[str, str] = {
     # question–answer style
     "qa": (
         "Question: Which basic human values are present in the SENTENCE?\n"
-        "Answer: Return a JSON array (strings) chosen from:\n"
+        "Answer: Return **only** a JSON array (strings) chosen from:\n"
         f"{VALUES_STR}\n\n"
         "SENTENCE: {sentence}"
     ),
@@ -162,19 +162,13 @@ PROMPTS: dict[str, str] = {
     # 4 ───────────────────────────────────────────────────────────────
     # few-shot exemplar template – *MUST* keep the three placeholders
     "one_shot": (
-        "List **only** the basic values that are clearly expressed or implied "
-        "in the SENTENCE.\n"
-        f"Return them as a JSON array of strings (choose from: {VALUES_STR}). "
-        "No other text.\n\n"
-        "Example:\n"
         "SENTENCE: {example_sentence}\n"
         "OUTPUT: {example_labels}\n"
         "–––\n"
-        "SENTENCE: {sentence}"
     ),
 }
 
-MAX_BATCH = 4
+MAX_BATCH = 8
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -240,10 +234,8 @@ class ValueLLM:
         )
         self.model.eval()
         self.generation_cfg = GenerationConfig(
-            max_new_tokens  = 64,
-            do_sample       = True,
-            temperature     = 0.9,
-            top_p           = 0.9,
+            max_new_tokens  = 128,
+            do_sample       = False,
             pad_token_id    = self.tokenizer.eos_token_id
         )
 
@@ -301,10 +293,10 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
     out_ids = model.model.generate(**toks,generation_config=model.generation_cfg)
     # ─── DEBUG ───
-    print("\n\n---- RAW DECODED ----")
-    for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
-        print(repr(t));  print("---------------")
-    print("---- END ----\n\n")
+    # print("\n\n---- RAW DECODED ----")
+    # for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
+    #     print(repr(t));  print("---------------")
+    # print("---- END ----\n\n")
 
     # strip off the input tokens
     gen_texts = model.tokenizer.batch_decode(out_ids[:, toks.input_ids.shape[1]:], skip_special_tokens=True)
@@ -325,6 +317,7 @@ def run_zero_or_few_shot(
     df: pd.DataFrame,
     model: ValueLLM,
     prompt_template: str,
+    df_for_exemplars,
     exemplar_dict: Dict[str, tuple] | None = None,
     fewshot_k: int = 0,
     seed: int = 42,
@@ -336,24 +329,42 @@ def run_zero_or_few_shot(
     if cache_path and cache_path.exists():
         cache = json.loads(cache_path.read_text())
 
-    # Few-shot exemplar pool: one list of k random sentences
-    exemplar_pool: list[tuple[str, list[str]]] = []          # (sentence, labels[])
-    if fewshot_k > 0:
+    # ------------------------------------------------------------------
+    # Few-shot exemplar pool: pick at most one exemplar per *dominant* value
+    # ------------------------------------------------------------------
+    exemplar_pool: list[tuple[str, list[str]]] = []
+    if fewshot_k > 0 and df_for_exemplars is not None:
         rng = random.Random(seed)
 
-        # sample up to 1 000 labelled rows
-        sample_df = (
-            df.sample(frac=1.0, random_state=rng)
-            .head(1000)
-        )
+        # build a dict {value_name -> list[rows_with_that_positive_label]}
+        by_value: dict[str, list[pd.Series]] = {v: [] for v in VALUES}
+        for _, row in df_for_exemplars.iterrows():          # ← use the *training* split!
+            for v in VALUES:
+                if row.get(v, 0) == 1.0:
+                    by_value[v].append(row)
 
-        # convert each row into (sentence, [labels…]) tuple
-        for _, r in sample_df.iterrows():
-            present = [v for v in VALUES if r.get(v, 0) == 1.0]
-            if present:                                     # skip rows with no positives
-                exemplar_pool.append((r["Text"], present))
-            if len(exemplar_pool) >= fewshot_k:
-                break
+        # shuffle each list so we get random examples
+        for rows in by_value.values():
+            rng.shuffle(rows)
+
+        # draw up to k distinct values
+        values_shuffled = rng.sample([v for v in VALUES if by_value[v]], k=min(fewshot_k, 19))
+        for v in values_shuffled:
+            row = by_value[v][0]                   # take the first random row
+            labels = [x for x in VALUES if row.get(x, 0) == 1.0]
+            exemplar_pool.append((row["Text"], labels))
+
+        # if the user selects k >= 20, add "none" exemplars
+        if fewshot_k >= len(VALUES) + 1:
+            try:
+                mask = (df_for_exemplars[VALUES].sum(axis=1) == 0)
+                if mask.any():
+                    none_row = df_for_exemplars[mask].sample(n=1, random_state=seed).iloc[0]
+                    exemplar_pool.append((none_row["Text"], []))  # OUTPUT: []
+                else:
+                    print("[warn] No 'none' exemplar available in df_for_exemplars; skipping.")
+            except Exception:
+                print("[warn] Could not add 'none' exemplar due to missing labels; skipping.")
 
     # prepare storage
     rows: List[Dict[str,float]] = [{} for _ in range(len(df))]
@@ -371,8 +382,7 @@ def run_zero_or_few_shot(
                 exemplar_prompts.append(
                     PROMPTS["one_shot"].format(
                         example_sentence = ex_sent,
-                        example_labels   = json.dumps(ex_labels, ensure_ascii=False),
-                        sentence         = ex_sent   # reused inside the exemplar template
+                        example_labels   = json.dumps(ex_labels, ensure_ascii=False)
                     )
                 )
             prompt = "\n".join(exemplar_prompts) + "\n" + prompt
@@ -524,7 +534,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--split", choices=["train", "val", "test"], default="test", help="Which split to run inference on")
     p.add_argument("--mode", choices=["zero-shot", "few-shot", "qlora"], default="zero-shot")
     p.add_argument("--model", default="meta-llama/Llama-3.1-8B-Instruct", help="HF model repo or local path")
-    p.add_argument("--prompt_id", default="base", help="Choose the prompt to use")
+    p.add_argument("--prompt_id", default="direct", help="Choose the prompt to use")
     p.add_argument("--k", type=int, default=0, help="k exemplars per value in few‑shot mode (ignored otherwise)")
     p.add_argument("--seed", type=int, default=42)
     # QLoRA specific
@@ -589,6 +599,7 @@ def main():
             df_target,
             model,
             prompt_template,
+            df_for_exemplars=df_train,
             exemplar_dict=exemplar_by_value,
             fewshot_k=args.k if args.mode == "few-shot" else 0,
             seed=args.seed,

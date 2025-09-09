@@ -168,7 +168,9 @@ PROMPTS: dict[str, str] = {
     ),
 }
 
-MAX_BATCH = 8
+SYS_PROMPT = "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."
+
+MAX_BATCH = 4
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -282,14 +284,23 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     for p in prompts:
         msg = [
             {"role": "system",
-             "content": "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."},
+             "content": SYS_PROMPT},
             {"role": "user",
              "content": p}  # p already contains the formatted sentence
         ]
-        chat_prompts.append(
-            model.tokenizer.apply_chat_template(
-                msg, tokenize=False, add_generation_prompt=True)
-        )
+        try:
+            chat_prompts.append(
+                model.tokenizer.apply_chat_template(
+                    msg, tokenize=False, add_generation_prompt=True)
+            )
+        except Exception:
+            # Fallback for tokenizers/templates that don't support a system role
+            chat_prompts.append(
+                model.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": SYS_PROMPT + "\n\n" + p}],
+                    tokenize=False, add_generation_prompt=True
+                )
+            )
     toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
     out_ids = model.model.generate(**toks,generation_config=model.generation_cfg)
     # ─── DEBUG ───

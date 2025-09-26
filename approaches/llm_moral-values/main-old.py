@@ -188,7 +188,7 @@ PROMPTS: dict[str, str] = {
 
 SYS_PROMPT = "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."
 
-MAX_BATCH = 2
+MAX_BATCH = 4
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -318,31 +318,20 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
                 )
             )
     toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
-    # move to device and preserve correct dtypes
-    for k, v in toks.items():
-        if v.dtype.is_floating_point:          # (rare for tokenizer outputs)
-            toks[k] = v.half().to(model.model.device)
-        else:
-            toks[k] = v.to(model.model.device)
-
-    # optional: some tokenizers add token_type_ids; remove if present
-    toks.pop("token_type_ids", None)
     # choose per-model policy (ValueLLM defaults to fp16 autocast; PEFT wrapper disables it)
     use_fp16_ac = getattr(model, "use_autocast_fp16", True)
-    
+
     if torch.cuda.is_available():
         if use_fp16_ac:
             # New API to silence the FutureWarning
-            with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
+            with torch.amp.autocast("cuda", dtype=torch.float16):
                 out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
         else:
             # Disable autocast for fp32-compute inference
-            with torch.inference_mode(), torch.amp.autocast("cuda", enabled=False):
+            with torch.amp.autocast("cuda", enabled=False):
                 out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
     else:
-        with torch.inference_mode():
-            out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
-
+        out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
     # ─── DEBUG ───
     # print("\n\n---- RAW DECODED ----")
     # for t in model.tokenizer.batch_decode(out_ids, skip_special_tokens=False):
@@ -448,6 +437,8 @@ def run_zero_or_few_shot(
             # once we reach BATCH, fire it off
             if len(pending_prompts) >= MAX_BATCH:
                 scores = infer_batch(pending_prompts, model)
+                torch.cuda.empty_cache()
+                torch.cuda.ipc_collect()
                 for i, score, pr in zip(pending_meta, scores, pending_prompts):
                     cache[pr] = score
                     rows[i] = score
@@ -458,8 +449,8 @@ def run_zero_or_few_shot(
     # flush any remaining prompts
     if pending_prompts:
         scores = infer_batch(pending_prompts, model)
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
         for i, score, pr in zip(pending_meta, scores, pending_prompts):
             cache[pr] = score
             rows[i] = score
@@ -524,126 +515,162 @@ def run_qlora(
     val_df: pd.DataFrame,
     model_name: str,
     prompt_template: str,
-    lora_r: int = 16,
-    lora_alpha: int = 32,
-    lr: float = 2e-4,
-    epochs: int = 3,
+    lora_r: int = 16,           # LoRA rank (size of the low-rank adapters)
+    lora_alpha: int = 32,       # LoRA scaling factor
+    lr: float = 2e-4,           # learning rate for fine-tuning
+    epochs: int = 3,            # how many passes over the training set
     seed: int = 42,
     output_dir: Path = Path("qlora_output"),
 ):
+    """Fine‑tune with QLoRA and return val predictions as DataFrame."""
+
     set_seed(seed)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    if tokenizer.pad_token_id is None:
+    if tokenizer.pad_token_id is None:      # some chat models don't define pad token
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
 
-    # ---- 4-bit weights, **fp16 compute** (consistent with inference) ----
+    # quantize weights to 4-bit, do math in fp16 (safer on older drivers)
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.float16,   # ← was float32
+        bnb_4bit_compute_dtype=torch.float32,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_use_double_quant=False,
     )
     base_model = AutoModelForCausalLM.from_pretrained(
         model_name,
         quantization_config=bnb_cfg,
-        device_map="auto",
-        # device_map={"": 0}, # force everything on GPU0
-        torch_dtype=torch.float16,
-        trust_remote_code=True,
-        attn_implementation="eager",
+        device_map="auto",      # place layers automatically across devices
+        trust_remote_code=True, # allow custom model code if repo uses it
+        attn_implementation="eager",        # <- deactivate SDPA/FA2 in old drivers
         low_cpu_mem_usage=False,
     )
+    
     if torch.cuda.is_available():
         torch.cuda.set_device(0)
+
+    # For checkpointing, avoid KV cache
     base_model.config.use_cache = False
+    # prepare for k-bit training (keeps layernorms/embeddings in fp32, etc.)
     base_model = prepare_model_for_kbit_training(base_model)
 
-    # tiny warm call
     with torch.inference_mode():
-        _ = base_model(**tokenizer("hello", return_tensors="pt").to(base_model.device))
+        toks = tokenizer("hello", return_tensors="pt").to(base_model.device)
+        _ = base_model(**toks)
 
-    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj"]
+    # ---------- LoRA targets & config ----------
+
+    # target_modules = guess_lora_targets(base_model)
+    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj"]   # avoid MLP kernels
     try:
         lora_cfg = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
-            task_type="CAUSAL_LM",
-            target_modules=target_modules,
-            lora_dropout=0.05,
-            lora_dtype=torch.float16,          # match compute dtype
+            task_type="CAUSAL_LM",              # we're training a decoder LM
+            target_modules=target_modules,      # which Linear layers to adapt
+            lora_dropout=0.05,                  # regularization for LoRA weights
+            lora_dtype=torch.float16,           # Prefer the same compute dtype as BitsAndBytes
         )
     except TypeError:
         lora_cfg = LoraConfig(
             r=lora_r,
             lora_alpha=lora_alpha,
-            task_type="CAUSAL_LM",
-            target_modules=target_modules,
-            lora_dropout=0.05,
+            task_type="CAUSAL_LM",              # we're training a decoder LM
+            target_modules=target_modules,      # which Linear layers to adapt
+            lora_dropout=0.05,                  # regularization for LoRA weights
         )
 
+    # ---------- build HF Datasets ----------
+
+    # Build regression‑style training samples
     def make_examples(df: pd.DataFrame):
         for _, r in tqdm(df.iterrows(), total=len(df)):
-            gold = {v: float(r[v]) for v in VALUES}
+            gold = {v: float(r[v]) for v in VALUES}           # 0/1 floats from label cols
             yield {
-                "text": (
+                "text": (                       # the full training prompt
                     prompt_template.format(
                         sentence=r["Text"],
                         example_sentence="",
                         example_labels=""
                     ).rstrip()
-                    + "\nOUTPUT: "
+                    + "\nOUTPUT: "              # ask model to continue with gold JSON
                     + json.dumps(gold, ensure_ascii=False)
                 ),
-                "label": json.dumps(gold, ensure_ascii=False),
+                "label": json.dumps(gold, ensure_ascii=False)
             }
 
     train_ds = Dataset.from_list(list(make_examples(train_df)))
     val_ds   = Dataset.from_list(list(make_examples(val_df)))
 
+    # ---------- TRL SFT config ----------
+
+    # Choose precision + training configuration for TRL. If the GPU is modern enough (Ampere+), we train in bf16; otherwise we fall back to fp16.
+    # bf16_ok = torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8
+
     sft_config = SFTConfig(
-        output_dir=str(output_dir),
-        per_device_train_batch_size=1,
-        gradient_accumulation_steps=8,
+        output_dir=str(output_dir),         # where logs & checkpoints go
+        per_device_train_batch_size=1,      # tiny batch fits 4-bit on small GPUs
+        gradient_accumulation_steps=8,      # simulate batch 8 (1 * 8 steps)
         num_train_epochs=epochs,
-        learning_rate=lr,
-        logging_steps=50,
+        learning_rate=lr,                   # LR for AdamW
+        logging_steps=50,                   # print progress every 50 steps
         eval_strategy="no",
         save_strategy="epoch",
         lr_scheduler_type="cosine",
         warmup_ratio=0.03,
-        gradient_checkpointing=True,
-        gradient_checkpointing_kwargs={"use_reentrant": False},
-        max_grad_norm=1.0,
-        packing=False,
-        dataset_text_field="text",
-        max_length=512,
+        gradient_checkpointing=True,        # trade compute for lower memory
+        gradient_checkpointing_kwargs={"use_reentrant": False}, # avoid GC problems of PyTorch with checkpointing
+        max_grad_norm=1.0,                  # clip gradients
+        packing=False,                      # don't pack multiple samples per sequence
+        dataset_text_field="text",          # which column to read
+        max_length=512,                     # truncate examples to 512 tokens
         bf16=False,
-        fp16=False,                 # we keep fp32 loss; model compute is fp16
-        optim="adamw_torch",
+        fp16=False,
+        optim="adamw_torch",                # ← avoid bitsandbytes optimizer
     )
+
+    # ---------- SFTTrainer (let TRL apply LoRA) ----------
 
     class FP32LossSFTTrainer(SFTTrainer):
         def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
             labels = inputs["labels"]
             model_inputs = {k: v for k, v in inputs.items() if k != "labels"}
+
             outputs = model(**model_inputs)
-            logits = outputs.logits.float()
+            logits = outputs.logits.float()  # fp32 for numerical stability
+
+            # Standard CLM shift
             shift_logits = logits[:, :-1, :].contiguous()
             shift_labels = labels[:, 1:].contiguous()
+
+            # ---- guard for Tm1 == 0 ----
             if shift_logits.numel() == 0 or shift_labels.numel() == 0:
-                loss = logits.sum() * 0.0
+                loss = logits.sum() * 0.0  # keep grad graph alive
                 return (loss, outputs) if return_outputs else loss
+
             B, Tm1, V = shift_logits.shape
             flat_logits = shift_logits.view(B * Tm1, V)
-            flat_labels = shift_labels.view(B * Tm1).to(device=flat_logits.device, dtype=torch.long)
+            flat_labels = shift_labels.view(B * Tm1)
+
+            # Ensure labels are on the same device + correct dtype
+            flat_labels = flat_labels.to(device=flat_logits.device, dtype=torch.long)
+
+            # Sanity: no out-of-range ids
             valid = flat_labels != -100
             if valid.any():
+                max_id = int(flat_labels[valid].max().item())
+                if max_id >= V:
+                    raise ValueError(f"Label id {max_id} >= vocab size {V} (tokenizer/model mismatch).")
+
+                # ----- robust path: mask then NLL loss (no ignore_index kernel) -----
                 sel_logits = flat_logits[valid]
                 sel_labels = flat_labels[valid]
-                loss = F.nll_loss(F.log_softmax(sel_logits, dim=-1), sel_labels, reduction="mean")
+                log_probs = F.log_softmax(sel_logits, dim=-1)
+                loss = F.nll_loss(log_probs, sel_labels, reduction="mean")
             else:
+                # all tokens were padding/special after shift
                 loss = logits.sum() * 0.0
+
             return (loss, outputs) if return_outputs else loss
 
     trainer = FP32LossSFTTrainer(
@@ -656,55 +683,61 @@ def run_qlora(
     )
 
     _cast_lora_to_dtype(base_model, torch.float16)
+
     trainer.train()
 
-        # ---- save adapters only (optional; for later reuse) ----
+    # ---------- Save only the small LoRA adapters (not the full model) ----------
+
     adapters_dir = output_dir / "lora_adapters"
     adapters_dir.mkdir(parents=True, exist_ok=True)
-    trainer.model.save_pretrained(adapters_dir)
-    tokenizer.save_pretrained(adapters_dir)
+    trainer.model.save_pretrained(adapters_dir)         # writes the LoRA weights/config
+    tokenizer.save_pretrained(adapters_dir)             # saves tokenizer for later reload
 
-    # ---- use the already loaded, LoRA-wrapped model for inference ----
-    peft_model = trainer.model          # already quantized + adapters injected
+    # --- free trainer & the wrapped model to avoid double injection ---
+    del trainer
+    torch.cuda.empty_cache()
+    gc.collect()
+
+    peft_model = PeftModel.from_pretrained(base_model, adapters_dir)
     peft_model.eval()
     peft_model.config.use_cache = True
     try:
         peft_model.gradient_checkpointing_disable()
     except Exception:
         pass
-    _cast_lora_to_dtype(peft_model, torch.float16)  # keep everything in fp16
 
-    # free trainer scaffolding but keep the model in memory
-    del trainer
-    torch.cuda.empty_cache()
-    gc.collect()
+    # ensure LoRA outputs match the base compute dtype
+    _cast_lora_to_dtype(peft_model, torch.float16)
 
-    # ---- inference via your existing path ----
-    class _InferWrap: pass
+    # Minimal wrapper to reuse your inference path without reloading ValueLLM again
+    class _InferWrap:
+        pass
     inf_wrapper = _InferWrap()
     inf_wrapper.model = peft_model
     inf_wrapper.tokenizer = tokenizer
     inf_wrapper.generation_cfg = GenerationConfig(
-        max_new_tokens=64,
-        do_sample=False,
-        pad_token_id=tokenizer.eos_token_id,
+        max_new_tokens=64,                         # generation budget per prompt
+        do_sample=False,                            # greedy decoding (deterministic)
+        pad_token_id=tokenizer.eos_token_id
     )
-    # inf_wrapper.use_autocast_fp16 = True   # make generate run under fp16 autocast
-    inf_wrapper.use_autocast_fp16 = False   # disable autocast for PEFT eval
-    peft_model.config.use_cache = False
-    inf_wrapper.generation_cfg.use_cache = False
+    # Flag for infer_batch so it won't enable fp16 autocast
+    inf_wrapper.use_autocast_fp16 = False
 
+    # ---------- run val inference ----------
     val_preds = run_zero_or_few_shot(
         df=val_df,
-        model=inf_wrapper,
-        prompt_template=prompt_template,
-        df_for_exemplars=None,
-        fewshot_k=0,
+        model=inf_wrapper,                  # the PEFT-augmented model
+        prompt_template=prompt_template,    # same prompt style
+        df_for_exemplars=None,              # no few-shot exemplars here
+        fewshot_k=0,                        # zero-shot prompting at eval time
         seed=seed,
         cache_path=None,
     )
 
+    # free training objects early
+    del base_model
     torch.cuda.empty_cache()
+
     return val_preds
 
 # ---------------------------------------------------------------------

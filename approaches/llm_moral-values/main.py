@@ -88,6 +88,10 @@ try:
 except ImportError:
     # Delay failure until user actually requests qlora
     pass
+try:
+    from peft import AutoPeftModelForCausalLM
+except Exception:
+    AutoPeftModelForCausalLM = None
 
 # ---------------------------------------------------------------------
 # CONSTANTS & PROMPTS
@@ -228,7 +232,6 @@ def save_cache(cache_path: Path | None, cache: dict):
     tmp = cache_path.with_suffix(".tmp")
     tmp.write_text(json.dumps(cache))   # ① write to a temp file
     tmp.replace(cache_path)             # ② atomic move → cache_path
-
 
 # ---------------------------------------------------------------------
 # MODEL WRAPPERS
@@ -519,6 +522,120 @@ def _cast_lora_to_dtype(model: torch.nn.Module, dtype: torch.dtype):
                 if isinstance(b, torch.Tensor) and b.dtype.is_floating_point and b.dtype != dtype:
                     m.register_buffer(name, b.to(dtype=dtype), persistent=False)
 
+try:
+    import safetensors.torch as st
+except Exception:
+    st = None
+
+def _load_sd(fp: Path):
+    if fp.suffix == ".safetensors":
+        if st is None:
+            raise RuntimeError("Install safetensors")
+        return st.load_file(str(fp))
+    return torch.load(fp, map_location="cpu")
+
+def adapter_checkpoint_is_clean(adapters_dir: Path) -> bool:
+    ck = adapters_dir / "adapter_model.safetensors"
+    if not ck.exists():
+        ck = adapters_dir / "adapter_model.bin"
+        if not ck.exists():
+            return False
+    try:
+        sd = _load_sd(ck)
+    except Exception:
+        return False
+    keys = list(sd.keys())
+    # Must look like LoRA (contain lora_A/B) and must NOT contain base 4-bit weights
+    has_lora = any((".lora_A." in k) or (".lora_B." in k) for k in keys)
+    bad_base = any(k.endswith("base_layer.weight") for k in keys)
+    return has_lora and not bad_base
+
+def adapters_present(adapters_dir: Path) -> bool:
+    if not adapters_dir.exists():
+        return False
+    cfg_path = adapters_dir / "adapter_config.json"
+    if not cfg_path.exists():
+        return False
+    try:
+        cfg = json.loads(cfg_path.read_text())
+    except Exception:
+        return False
+    if str(cfg.get("peft_type", "")).lower() != "lora":
+        return False
+    if not any((adapters_dir / f).exists() for f in ["adapter_model.safetensors","adapter_model.bin"]):
+        return False
+    if not adapter_checkpoint_is_clean(adapters_dir):
+        print(f"[warn] {adapters_dir} doesn’t look like a clean LoRA adapter. Skipping eval-only path.")
+        return False
+    return True
+
+def adapter_config(adapters_dir: Path) -> dict:
+    try:
+        return json.loads((adapters_dir / "adapter_config.json").read_text())
+    except Exception:
+        return {}
+    
+def _patch_bnb_loader_for_lora():
+    try:
+        import bitsandbytes as bnb, torch
+        Linear4bit = bnb.nn.modules.Linear4bit
+        if getattr(Linear4bit, "_hvd_patched", False):
+            return
+        _orig = Linear4bit._load_from_state_dict
+        def _safe(self, state_dict, prefix, *args, **kwargs):
+            # If there is no 4-bit base weight in the incoming state_dict,
+            # fall back to the parent behavior (ignore missing keys).
+            key = f"{prefix}base_layer.weight"
+            if key not in state_dict:
+                return torch.nn.Module._load_from_state_dict(self, state_dict, prefix, *args, **kwargs)
+            return _orig(self, state_dict, prefix, *args, **kwargs)
+        Linear4bit._load_from_state_dict = _safe
+        Linear4bit._hvd_patched = True
+        print("[patch] Patched bitsandbytes Linear4bit loader for LoRA-only checkpoints")
+    except Exception as e:
+        print(f"[patch] Couldn’t patch bitsandbytes: {e}")
+
+def load_peft_for_inference(adapters_dir: Path, hf_token: str | None = None):
+    _patch_bnb_loader_for_lora()
+    if AutoPeftModelForCausalLM is None:
+        raise RuntimeError("peft.AutoPeftModelForCausalLM not available; please update `peft`.")
+
+    bnb_cfg = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.float16,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=False,
+    )
+
+    # Load the exact base + adapters stack recorded in adapter_config.json
+    peft_model = AutoPeftModelForCausalLM.from_pretrained(
+        str(adapters_dir),
+        device_map="auto" if torch.cuda.is_available() else "cpu",
+        torch_dtype=torch.float16,
+        quantization_config=bnb_cfg,
+        trust_remote_code=True,
+        attn_implementation="eager",
+        low_cpu_mem_usage=False,
+        token=hf_token,
+    )
+    peft_model.eval()
+    peft_model.config.use_cache = True
+
+    # Prefer tokenizer saved next to adapters (you already save it there)
+    tokenizer = AutoTokenizer.from_pretrained(str(adapters_dir), token=hf_token)
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    class _InferWrap: pass
+    inf = _InferWrap()
+    inf.model = peft_model
+    inf.tokenizer = tokenizer
+    inf.generation_cfg = GenerationConfig(
+        max_new_tokens=64, do_sample=False, pad_token_id=tokenizer.eos_token_id
+    )
+    inf.use_autocast_fp16 = False
+    return inf
+
 def run_qlora(
     train_df: pd.DataFrame,
     val_df: pd.DataFrame,
@@ -530,9 +647,38 @@ def run_qlora(
     epochs: int = 3,
     seed: int = 42,
     output_dir: Path = Path("qlora_output"),
+    eval_cache_path: Path | None = None,
+    hf_token: str | None = None,
 ):
     set_seed(seed)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    adapters_dir = output_dir / "lora_adapters"
+
+    # If adapters already exist → evaluate only, no training ──
+    if adapters_present(adapters_dir):
+        cfg = adapter_config(adapters_dir)
+        if cfg:
+            # optional: warn if CLI hyperparams differ from saved adapters
+            if "r" in cfg and int(cfg["r"]) != lora_r:
+                print(f"[warn] Using existing adapters r={cfg['r']} != CLI r={lora_r}")
+            if "lora_alpha" in cfg and int(cfg["lora_alpha"]) != lora_alpha:
+                print(f"[warn] Using existing adapters alpha={cfg['lora_alpha']} != CLI alpha={lora_alpha}")
+        print(f"[qlora] Found trained adapters at {adapters_dir}. Skipping training; running evaluation only.")
+        inf = load_peft_for_inference(adapters_dir, hf_token=hf_token)
+        val_preds = run_zero_or_few_shot(
+            df=val_df,
+            model=inf,
+            prompt_template=prompt_template,
+            df_for_exemplars=None,
+            fewshot_k=0,
+            seed=seed,
+            cache_path=eval_cache_path,
+        )
+        torch.cuda.empty_cache()
+        return val_preds
+
+    # ── SLOW PATH: no adapters saved → train (resumes if checkpoints exist) ──
+    tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
@@ -553,6 +699,7 @@ def run_qlora(
         trust_remote_code=True,
         attn_implementation="eager",
         low_cpu_mem_usage=False,
+        token=hf_token
     )
     if torch.cuda.is_available():
         torch.cuda.set_device(0)
@@ -656,12 +803,13 @@ def run_qlora(
     )
 
     _cast_lora_to_dtype(base_model, torch.float16)
-    trainer.train()
+    trainer.train(resume_from_checkpoint=True)
 
         # ---- save adapters only (optional; for later reuse) ----
     adapters_dir = output_dir / "lora_adapters"
     adapters_dir.mkdir(parents=True, exist_ok=True)
-    trainer.model.save_pretrained(adapters_dir)
+    assert isinstance(trainer.model, PeftModel)
+    trainer.model.save_pretrained(adapters_dir, safe_serialization=True)
     tokenizer.save_pretrained(adapters_dir)
 
     # ---- use the already loaded, LoRA-wrapped model for inference ----
@@ -701,7 +849,7 @@ def run_qlora(
         df_for_exemplars=None,
         fewshot_k=0,
         seed=seed,
-        cache_path=None,
+        cache_path=eval_cache_path,
     )
 
     torch.cuda.empty_cache()
@@ -783,8 +931,17 @@ def main():
         if args.max_sentences > 0:
             df_train = df_train.head(args.max_sentences).reset_index(drop=True)
             df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
+
         active_split = "val"    # we evaluate on val after training
-        cache_path = None       # not used in qlora path
+
+        qlora_cache_filename = (
+            f"{safe_model}-qlora-{args.run_name or 'run'}-"
+            f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
+            f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
+            f"{active_split}-cache.json"
+        )
+        eval_cache_path = out_root / qlora_cache_filename
+
         preds_df = run_qlora(
             train_df=df_train,
             val_df=df_val,
@@ -796,6 +953,8 @@ def main():
             epochs=args.epochs,
             seed=args.seed,
             output_dir=out_root / "qlora_output",
+            eval_cache_path=eval_cache_path,
+            hf_token=args.hf_token,
         )
     else:
         raise ValueError(args.mode)

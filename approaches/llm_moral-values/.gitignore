@@ -9,3 +9,4 @@ results/Test.txt
 train.sh
 tokens.txt
 notes.md
+*.log

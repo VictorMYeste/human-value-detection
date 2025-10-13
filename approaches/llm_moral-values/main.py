@@ -58,8 +58,8 @@ import pandas as pd
 
 import torch
 # ---- safe defaults for older CUDA/kernels ----
-torch.backends.cuda.enable_flash_sdp(False)
-torch.backends.cuda.enable_mem_efficient_sdp(False)
+torch.backends.cuda.enable_flash_sdp(True)
+torch.backends.cuda.enable_mem_efficient_sdp(True)
 torch.backends.cuda.enable_math_sdp(True)
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
@@ -74,6 +74,8 @@ from transformers import (
     generation,
     logging as hf_logging,
     TrainingArguments,
+    StoppingCriteria,
+    StoppingCriteriaList
 )
 from datasets import Dataset
 # tell Transformers to log only errors
@@ -234,6 +236,29 @@ def save_cache(cache_path: Path | None, cache: dict):
     tmp.replace(cache_path)             # ② atomic move → cache_path
 
 # ---------------------------------------------------------------------
+# DEBUG LOGGING (optional)
+# ---------------------------------------------------------------------
+DEBUG_N: int = 0                 # number of generations to log
+DEBUG_FILE: str | None = None    # path to JSONL file
+
+def _log_sample(prompt: str, generation: str, present: set[str]):
+    """Append a single debug record to DEBUG_FILE, if enabled."""
+    global DEBUG_N, DEBUG_FILE
+    if DEBUG_N <= 0 or not DEBUG_FILE:
+        return
+    rec = {
+        "prompt": prompt,
+        "generation": generation,
+        "present": sorted(list(present)),
+    }
+    try:
+        with open(DEBUG_FILE, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        DEBUG_N -= 1
+    except Exception:
+        pass
+
+# ---------------------------------------------------------------------
 # MODEL WRAPPERS
 # ---------------------------------------------------------------------
 class ValueLLM:
@@ -262,38 +287,102 @@ class ValueLLM:
         )
         self.model.eval()
         self.generation_cfg = GenerationConfig(
-            max_new_tokens  = 128,
+            max_new_tokens  = 200,
             do_sample       = False,
-            pad_token_id    = self.tokenizer.eos_token_id
+            pad_token_id    = self.tokenizer.eos_token_id,
+            eos_token_id=self.tokenizer.eos_token_id,
+            # no_repeat_ngram_size=32,
+            # repetition_penalty=1.05,
+            early_stopping=True,
         )
     
 # ---------------------------------------------------------------------
 # BATCHED INFERENCE HELPER
 # ---------------------------------------------------------------------
-def extract_json(text: str) -> dict[str, float] | None:
-    for line in reversed(text.splitlines()):
-        line = line.strip()
-        if line.startswith("{") and line.endswith("}"):
-            try:
-                return json.loads(line)
-            except json.JSONDecodeError:
-                pass
-    return None
+def extract_json(text: str):
+    """
+    Return the last JSON array or object found in the text (multi-line safe),
+    or None if nothing could be parsed.
+    """
+    s = text.strip()
+
+    # find last complete {...} or [...]
+    def last_balanced(s, open_ch, close_ch):
+        span = _last_balanced_span(s, open_ch, close_ch)
+        if not span:
+            return None
+        a, b = span
+        frag = s[a:b]
+        try:
+            return json.loads(frag)
+        except Exception:
+            return None
+
+    obj = last_balanced(s, "{", "}") or last_balanced(s, "[", "]")
+    return obj
+
 
 def extract_present_values(text: str) -> set[str]:
     """
-    Pull the JSON array (last {...] or [...] block) from the model output
-    and return a *set* of value names.
+    Accept either:
+      - a JSON array of value names, or
+      - a JSON object {value_name: 0/1 or prob} and select keys >= 0.5/True.
     """
-    obj = extract_json(text)            # re-use the generic helper above
-    if obj is None:                     # maybe the model emitted a plain list
-        try:
-            obj = json.loads(text[text.rfind("[") : text.rfind("]")+1])
-        except Exception:
-            return set()
-    # normalise / defensive strip
-    return {str(v).strip() for v in obj if isinstance(v, str)}
+    obj = extract_json(text)
+    if obj is None:
+        return set()
 
+    if isinstance(obj, list):
+        return {str(v).strip() for v in obj if isinstance(v, str)}
+
+    if isinstance(obj, dict):
+        out = set()
+        for k, v in obj.items():
+            name = str(k).strip()
+            if isinstance(v, (int, float)) and float(v) >= 0.5:
+                out.add(name)
+            elif isinstance(v, str) and v.strip().lower() in {"1", "true", "yes", "present"}:
+                out.add(name)
+        return out
+
+    return set()
+
+def _slice_after_first_output(text: str) -> str:
+    i = text.find("OUTPUT:")
+    return text[i+7:] if i != -1 else text
+
+def _last_balanced_span(s: str, open_ch: str, close_ch: str) -> tuple[int, int] | None:
+    """
+    Return (start, end_exclusive) of the last balanced {...} or [...] span.
+    Very lightweight: ignores escapes/quotes which is fine for these keys.
+    """
+    start = -1
+    depth = 0
+    last = None
+    for i, ch in enumerate(s):
+        if ch == open_ch:
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == close_ch and depth > 0:
+            depth -= 1
+            if depth == 0 and start != -1:
+                last = (start, i + 1)
+    return last
+
+def clip_to_last_json(text: str) -> str:
+    """
+    Keep only the last complete JSON object or array (after OUTPUT: if present).
+    If none complete → return original (so downstream can still log it).
+    """
+    tail = _slice_after_first_output(text)
+    # try object first, then array
+    span = _last_balanced_span(tail, "{", "}") or _last_balanced_span(tail, "[", "]")
+    if not span:
+        return text
+    a, b = span
+    clipped = tail[a:b]
+    return clipped
 
 def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     """
@@ -332,19 +421,48 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     toks.pop("token_type_ids", None)
     # choose per-model policy (ValueLLM defaults to fp16 autocast; PEFT wrapper disables it)
     use_fp16_ac = getattr(model, "use_autocast_fp16", True)
+
+    class StopAfterFirstClosingBrace(StoppingCriteria):
+        def __init__(self, tokenizer):
+            self.started = False
+            self.p_output = tokenizer.encode("OUTPUT:", add_special_tokens=False)
+            self.p_close  = tokenizer.encode("}\n", add_special_tokens=False)  # also add "}" alone below
+
+        def _endswith(self, seq, pat):
+            L = len(pat)
+            return L and len(seq) >= L and seq[-L:] == pat
+
+        def _contains(self, seq, pat):
+            L = len(pat)
+            if L == 0 or len(seq) < L: return False
+            for i in range(len(seq) - L + 1):
+                if seq[i:i+L] == pat:
+                    return True
+            return False
+
+        def __call__(self, input_ids, scores, **kw):
+            seq = input_ids[0].tolist()
+            if not self.started and self._contains(seq, self.p_output):
+                self.started = True
+            if not self.started:
+                return False
+            # stop on "}\n" or bare "}"
+            return self._endswith(seq, self.p_close) or self._endswith(seq, self.p_close[:-1])
+
+    stops = StoppingCriteriaList([StopAfterFirstClosingBrace(model.tokenizer)])
     
     if torch.cuda.is_available():
         if use_fp16_ac:
             # New API to silence the FutureWarning
             with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
-                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
+                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg, stopping_criteria=stops)
         else:
             # Disable autocast for fp32-compute inference
             with torch.inference_mode(), torch.amp.autocast("cuda", enabled=False):
-                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
+                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg, stopping_criteria=stops)
     else:
         with torch.inference_mode():
-            out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
+            out_ids = model.model.generate(**toks, generation_config=model.generation_cfg, stopping_criteria=stops)
 
     # ─── DEBUG ───
     # print("\n\n---- RAW DECODED ----")
@@ -356,11 +474,15 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
     gen_texts = model.tokenizer.batch_decode(out_ids[:, toks.input_ids.shape[1]:], skip_special_tokens=True)
 
     out = []
-    for g in gen_texts:
-        present = extract_present_values(g)
-        out.append(
-            {v: 1.0 if v in present else 0.0 for v in VALUES}
-        )
+    for j, g in enumerate(gen_texts):
+        clipped = clip_to_last_json(g)
+        present = extract_present_values(clipped)
+        # log the raw generation + parsed set (first DEBUG_N items only)
+        try:
+            _log_sample(prompts[j], clipped, present)
+        except Exception:
+            pass
+        out.append({v: 1.0 if v in present else 0.0 for v in VALUES})
     return out
 
 # ---------------------------------------------------------------------
@@ -614,15 +736,18 @@ def load_peft_for_inference(adapters_dir: Path, hf_token: str | None = None):
         torch_dtype=torch.float16,
         quantization_config=bnb_cfg,
         trust_remote_code=True,
-        attn_implementation="eager",
+        # attn_implementation="eager",
         low_cpu_mem_usage=False,
         token=hf_token,
     )
     peft_model.eval()
     peft_model.config.use_cache = True
 
-    # Prefer tokenizer saved next to adapters (you already save it there)
-    tokenizer = AutoTokenizer.from_pretrained(str(adapters_dir), token=hf_token)
+    # Prefer the *base* tokenizer if recorded in the adapter config; else fall back to the local copy.
+    cfg = adapter_config(Path(adapters_dir))
+    base = (cfg or {}).get("base_model_name_or_path")
+    tok_src = base or str(adapters_dir)
+    tokenizer = AutoTokenizer.from_pretrained(tok_src, token=hf_token)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -631,7 +756,12 @@ def load_peft_for_inference(adapters_dir: Path, hf_token: str | None = None):
     inf.model = peft_model
     inf.tokenizer = tokenizer
     inf.generation_cfg = GenerationConfig(
-        max_new_tokens=64, do_sample=False, pad_token_id=tokenizer.eos_token_id
+        max_new_tokens=200,
+        do_sample=False,
+        pad_token_id=tokenizer.eos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+        # no_repeat_ngram_size=32,
+        # repetition_penalty=1.05,
     )
     inf.use_autocast_fp16 = False
     return inf
@@ -686,7 +816,7 @@ def run_qlora(
     # ---- 4-bit weights, **fp16 compute** (consistent with inference) ----
     bnb_cfg = BitsAndBytesConfig(
         load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.float16,   # ← was float32
+        bnb_4bit_compute_dtype=torch.float16,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_use_double_quant=False,
     )
@@ -697,7 +827,7 @@ def run_qlora(
         # device_map={"": 0}, # force everything on GPU0
         torch_dtype=torch.float16,
         trust_remote_code=True,
-        attn_implementation="eager",
+        # attn_implementation="eager",
         low_cpu_mem_usage=False,
         token=hf_token
     )
@@ -833,9 +963,12 @@ def run_qlora(
     inf_wrapper.model = peft_model
     inf_wrapper.tokenizer = tokenizer
     inf_wrapper.generation_cfg = GenerationConfig(
-        max_new_tokens=64,
+        max_new_tokens=200,
         do_sample=False,
         pad_token_id=tokenizer.eos_token_id,
+        eos_token_id=tokenizer.eos_token_id,
+        # no_repeat_ngram_size=32,
+        # repetition_penalty=1.05,
     )
     # inf_wrapper.use_autocast_fp16 = True   # make generate run under fp16 autocast
     inf_wrapper.use_autocast_fp16 = False   # disable autocast for PEFT eval
@@ -876,6 +1009,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--run_name", default="", help="Sub-folder inside output to store predictions, cache, adapters")
     p.add_argument("--max_sentences", type=int, default=0, help="If >0, process only the first N sentences of the chosen split")
     p.add_argument("--hf_token", default=None, help="Hugging Face token for gated models")
+    p.add_argument("--log_raw", type=int, default=0, help="Log the first N generations (prompt + raw + parsed) to a JSONL file")
+    p.add_argument("--log_file", type=str, default="", help="Optional path for the JSONL (defaults to output/<run_name>/debug_samples.jsonl)")
     return p.parse_args()
 
 
@@ -898,6 +1033,20 @@ def main():
     # ------------- choose (and create) output location -------------
     out_root = output_dir.resolve() if args.run_name else "output"
     out_root.mkdir(parents=True, exist_ok=True)
+
+    # ---- debug logging setup ----
+    global DEBUG_N, DEBUG_FILE
+    DEBUG_N = getattr(args, "log_raw", 0) or 0
+    log_file_cli = getattr(args, "log_file", "") or ""
+    if DEBUG_N > 0:
+        DEBUG_FILE = str((out_root / (log_file_cli if log_file_cli else "debug_samples.jsonl")))
+        # start fresh
+        try:
+            Path(DEBUG_FILE).write_text("", encoding="utf-8")
+        except Exception:
+            pass
+        print(f"[debug] logging first {DEBUG_N} generations to {DEBUG_FILE}")
+
 
     # Sanitize model name for file safety
     safe_model = re.sub(r"[^\w\-]+", "-", args.model)
@@ -970,6 +1119,12 @@ def main():
     preds_df.to_csv(out_file, sep="\t", index=False)
     print(f"Wrote {out_file}")
 
+    try:
+        col_sums = preds_df.iloc[:, 2:].sum(0)
+        nonzero = {k: int(v) for k, v in col_sums[col_sums > 0].to_dict().items()}
+        print(f"[summary] non-zero counts per value (this run): {nonzero}")
+    except Exception:
+        pass
 
 if __name__ == "__main__":
     main()

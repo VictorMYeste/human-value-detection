@@ -2,6 +2,6 @@ torch==2.4.1 torchvision torchaudio --index-url https://download.pytorch.org/whl
 accelerate==1.1.1
 bertopic
 optuna
-bitsandbytes==0.41.2
+bitsandbytes==0.44.1
 triton==3.0.0
 peft==0.17.1

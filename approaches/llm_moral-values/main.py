@@ -95,6 +95,8 @@ try:
 except Exception:
     AutoPeftModelForCausalLM = None
 
+from sklearn.metrics import f1_score
+
 # ---------------------------------------------------------------------
 # CONSTANTS & PROMPTS
 # ---------------------------------------------------------------------
@@ -190,15 +192,6 @@ PROMPTS: dict[str, str] = {
         "OUTPUT: {example_labels}\n"
         "–––\n"
     ),
-
-    # 5 ───────────────────────────────────────────────────────────────
-    # Gate task
-    "gate": (
-        "Return a single character (0 or 1).\n"
-        "1 = the SENTENCE clearly expresses or implies any moral/value content.\n"
-        "0 = otherwise.\n\n"
-        "SENTENCE: {sentence}"
-    ),
 }
 
 SYS_PROMPT = "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."
@@ -244,6 +237,65 @@ def save_cache(cache_path: Path | None, cache: dict):
     tmp.write_text(json.dumps(cache))   # ① write to a temp file
     tmp.replace(cache_path)             # ② atomic move → cache_path
 
+def load_gate_scores(fp: Path, id_cols=("Text-ID","Sentence-ID")) -> pd.DataFrame:
+    if fp is None or (not fp.exists()):
+        raise FileNotFoundError(f"--gate_scores file not found: {fp}")
+    df = pd.read_csv(fp, sep="\t")
+    for c in id_cols:
+        if c not in df.columns:
+            raise ValueError(f"--gate_scores missing ID column: {c}")
+    return df
+
+def _ensure_01(s: pd.Series) -> pd.Series:
+    # Accept probs in [0,1]. If logits/unknown range, min-max as last resort.
+    if (s.min() >= 0.0) and (s.max() <= 1.0):
+        return s.astype(float)
+    lo, hi = float(s.min()), float(s.max())
+    if hi > lo:
+        return ((s - lo) / (hi - lo)).clip(0,1)
+    return (s * 0.0)
+
+def apply_hard_gate(preds_df: pd.DataFrame, gate_df: pd.DataFrame, gate_col: str, tau: float,
+                    values: list[str]) -> pd.DataFrame:
+    """Join by (Text-ID, Sentence-ID); zero all value columns where gate < tau."""
+    if gate_col not in gate_df.columns:
+        raise ValueError(f"Gate column '{gate_col}' not found in --gate_scores.")
+    g = gate_df[["Text-ID","Sentence-ID", gate_col]].copy()
+    g[gate_col] = _ensure_01(g[gate_col])
+    out = preds_df.merge(g, on=["Text-ID","Sentence-ID"], how="left", validate="one_to_one")
+    if out[gate_col].isna().any():
+        miss = out[out[gate_col].isna()][["Text-ID","Sentence-ID"]].head(3).to_dict("records")
+        raise ValueError(f"Missing gate scores for some sentences, examples: {miss} …")
+    mask = out[gate_col] < float(tau)
+    out.loc[mask, values] = 0.0
+    out = out.drop(columns=[gate_col])
+    return out
+
+def macro_f1_from_frames(gold_df: pd.DataFrame, pred_df: pd.DataFrame, values: list[str]) -> float:
+    """Compute macro-F1 over the 19 labels (binary)."""
+    y_true = gold_df[values].astype(int).values
+    y_pred = pred_df[values].round().astype(int).values
+    return f1_score(y_true, y_pred, average="macro")
+
+def tune_tau_on_val(preds_df: pd.DataFrame, gold_df: pd.DataFrame, gate_df: pd.DataFrame,
+                    gate_col: str, values: list[str]) -> dict:
+    """Grid search τ ∈ {0.00, 0.01, …, 1.00} to maximise end-to-end macro-F1 on val."""
+    best = {"tau": 0.0, "macro_f1": -1.0, "coverage": 1.0}
+    s = _ensure_01(gate_df[gate_col])
+    taus = np.linspace(0.0, 1.0, 101)
+    # Join once for speed
+    base = preds_df.merge(gate_df[["Text-ID","Sentence-ID", gate_col]], on=["Text-ID","Sentence-ID"], how="left")
+    if base[gate_col].isna().any():
+        raise ValueError("Gate scores missing for some validation items.")
+    for t in taus:
+        tmp = base.copy()
+        tmp.loc[tmp[gate_col] < t, values] = 0.0
+        f1 = macro_f1_from_frames(gold_df, tmp.drop(columns=[gate_col]), values)
+        cov = float((tmp[gate_col] >= t).mean())
+        if f1 > best["macro_f1"]:
+            best = {"tau": float(t), "macro_f1": float(f1), "coverage": cov}
+    return best
+
 # ---------------------------------------------------------------------
 # DEBUG LOGGING (optional)
 # ---------------------------------------------------------------------
@@ -267,38 +319,6 @@ def _log_sample(prompt: str, generation: str, present: set[str]):
     except Exception:
         pass
 
-def ensure_presence_column(df: pd.DataFrame) -> pd.DataFrame:
-    """If 'Presence' is missing, derive it as (any value==1 across the 19 labels)."""
-    if "Presence" not in df.columns and all(v in df.columns for v in VALUES):
-        pres = (df[VALUES].sum(axis=1) > 0).astype(int)
-        df = df.copy()
-        df["Presence"] = pres
-    return df
-
-def parse_gate_output(text: str) -> int:
-    """
-    Parse model output for the gate into 0/1. Looks for the last '0' or '1' token.
-    Super defensive: tries JSON/int first, then regex.
-    """
-    s = text.strip()
-    # try exact '0'/'1'
-    if s == "0": return 0
-    if s == "1": return 1
-    # try JSON-parse of last {...} or last token
-    try:
-        obj = extract_json(s)
-        if isinstance(obj, (int, float)): return 1 if int(obj) == 1 else 0
-        if isinstance(obj, list) and obj and isinstance(obj[-1], (int, float)):
-            return 1 if int(obj[-1]) == 1 else 0
-    except Exception:
-        pass
-    # fallback: grab last digit 0/1
-    import re
-    m = re.findall(r"[01]", s)
-    if m:
-        return int(m[-1])
-    return 0
-
 # ---------------------------------------------------------------------
 # MODEL WRAPPERS
 # ---------------------------------------------------------------------
@@ -320,7 +340,7 @@ class ValueLLM:
         )
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            device_map="auto" if torch.cuda.is_available() else "cpu",
+            device_map={"": 0} if torch.cuda.is_available() else "cpu",
             quantization_config=bnb_cfg,
             trust_remote_code=True,
             cache_dir=cache_dir,
@@ -361,6 +381,7 @@ def extract_json(text: str):
 
     obj = last_balanced(s, "{", "}") or last_balanced(s, "[", "]")
     return obj
+
 
 def extract_present_values(text: str) -> set[str]:
     """
@@ -449,6 +470,7 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
                     tokenize=False, add_generation_prompt=True
                 )
             )
+    """
     toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
     # move to device and preserve correct dtypes
     for k, v in toks.items():
@@ -456,6 +478,17 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
             toks[k] = v.half().to(model.model.device)
         else:
             toks[k] = v.to(model.model.device)
+    """
+    toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt")
+
+    # >>> move to the embedding device (works for sharded models too)
+    try:
+        emb_device = model.model.get_input_embeddings().weight.device
+    except Exception:
+        emb_device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+    for k, v in toks.items():
+        toks[k] = v.to(emb_device, non_blocking=True)
 
     # optional: some tokenizers add token_type_ids; remove if present
     toks.pop("token_type_ids", None)
@@ -524,57 +557,6 @@ def infer_batch(prompts: List[str], model: ValueLLM) -> List[Dict[str, float]]:
             pass
         out.append({v: 1.0 if v in present else 0.0 for v in VALUES})
     return out
-
-def infer_gate_batch(prompts: List[str], model) -> List[int]:
-    """
-    Same machinery as infer_batch, but parse 0/1 for the gate.
-    `model` can be ValueLLM or the small _InferWrap you use for PEFT eval.
-    """
-    chat_prompts = []
-    for p in prompts:
-        msg = [{"role": "system", "content": SYS_PROMPT},
-               {"role": "user",   "content": p}]
-        try:
-            chat_prompts.append(
-                model.tokenizer.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
-            )
-        except Exception:
-            chat_prompts.append(
-                model.tokenizer.apply_chat_template(
-                    [{"role": "user", "content": SYS_PROMPT + "\n\n" + p}],
-                    tokenize=False, add_generation_prompt=True
-                )
-            )
-    toks = model.tokenizer(chat_prompts, padding=True, return_tensors="pt").to(model.model.device)
-    # move to device and preserve correct dtypes
-    for k, v in toks.items():
-        if v.dtype.is_floating_point:          # (rare for tokenizer outputs)
-            toks[k] = v.half().to(model.model.device)
-        else:
-            toks[k] = v.to(model.model.device)
-
-    # optional: some tokenizers add token_type_ids; remove if present
-    toks.pop("token_type_ids", None)
-    # choose per-model policy (ValueLLM defaults to fp16 autocast; PEFT wrapper disables it)
-    use_fp16_ac = getattr(model, "use_autocast_fp16", True)
-    
-    if torch.cuda.is_available():
-        if use_fp16_ac:
-            # New API to silence the FutureWarning
-            with torch.inference_mode(), torch.amp.autocast("cuda", dtype=torch.float16):
-                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
-        else:
-            # Disable autocast for fp32-compute inference
-            with torch.inference_mode(), torch.amp.autocast("cuda", enabled=False):
-                out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
-    else:
-        with torch.inference_mode():
-            out_ids = model.model.generate(**toks, generation_config=model.generation_cfg)
-
-    gen_texts = model.tokenizer.batch_decode(
-        out_ids[:, toks.input_ids.shape[1]:], skip_special_tokens=True
-    )
-    return [parse_gate_output(t) for t in gen_texts]
 
 # ---------------------------------------------------------------------
 # INFERENCE MODES
@@ -823,7 +805,7 @@ def load_peft_for_inference(adapters_dir: Path, hf_token: str | None = None):
     # Load the exact base + adapters stack recorded in adapter_config.json
     peft_model = AutoPeftModelForCausalLM.from_pretrained(
         str(adapters_dir),
-        device_map="auto" if torch.cuda.is_available() else "cpu",
+        device_map={"": 0} if torch.cuda.is_available() else "cpu",
         torch_dtype=torch.float16,
         quantization_config=bnb_cfg,
         trust_remote_code=True,
@@ -870,17 +852,10 @@ def run_qlora(
     output_dir: Path = Path("qlora_output"),
     eval_cache_path: Path | None = None,
     hf_token: str | None = None,
-    qlora_task: str = "direct",
 ):
     set_seed(seed)
 
-    def _ad_dir_for(task: str) -> Path:
-        if task == "gate":
-            return output_dir / "lora_adapters_gate"
-        if task == "values":
-            return output_dir / "lora_adapters_values"
-        return output_dir / "lora_adapters"   # "direct"
-    adapters_dir = _ad_dir_for(qlora_task)
+    adapters_dir = output_dir / "lora_adapters"
 
     # If adapters already exist → evaluate only, no training ──
     if adapters_present(adapters_dir):
@@ -893,39 +868,23 @@ def run_qlora(
                 print(f"[warn] Using existing adapters alpha={cfg['lora_alpha']} != CLI alpha={lora_alpha}")
         print(f"[qlora] Found trained adapters at {adapters_dir}. Skipping training; running evaluation only.")
         inf = load_peft_for_inference(adapters_dir, hf_token=hf_token)
-        if qlora_task == "gate":
-            # short generations for a single digit
-            inf.generation_cfg.max_new_tokens = 8
-            prompts = [PROMPTS["gate"].format(sentence=s) for s in val_df["Text"].tolist()]
-            preds = infer_gate_batch(prompts, inf)
-            out_df = val_df[["Text-ID", "Sentence-ID"]].copy()
-            out_df["Presence"] = preds
-            torch.cuda.empty_cache()
-            return out_df
-        else:
-            val_preds = run_zero_or_few_shot(
-                df=val_df, model=inf, prompt_template=prompt_template,
-                df_for_exemplars=None, fewshot_k=0, seed=seed, cache_path=eval_cache_path
-            )
-            torch.cuda.empty_cache()
-            return val_preds
+        val_preds = run_zero_or_few_shot(
+            df=val_df,
+            model=inf,
+            prompt_template=prompt_template,
+            df_for_exemplars=None,
+            fewshot_k=0,
+            seed=seed,
+            cache_path=eval_cache_path,
+        )
+        torch.cuda.empty_cache()
+        return val_preds
 
     # ── SLOW PATH: no adapters saved → train (resumes if checkpoints exist) ──
     tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
-
-    # ---- ensure 'Presence' exists if needed ----
-    train_df = ensure_presence_column(train_df)
-    val_df   = ensure_presence_column(val_df)
-
-    # ---- pick prompt for this task ----
-    if qlora_task == "gate":
-        task_prompt = PROMPTS["gate"]  # short, binary
-    else:
-        # values/direct use whatever user selected (e.g., "definition")
-        task_prompt = prompt_template
 
     # ---- 4-bit weights, **fp16 compute** (consistent with inference) ----
     bnb_cfg = BitsAndBytesConfig(
@@ -937,7 +896,7 @@ def run_qlora(
     base_model = AutoModelForCausalLM.from_pretrained(
         model_name,
         quantization_config=bnb_cfg,
-        device_map="auto",
+        device_map={"": 0} if torch.cuda.is_available() else "cpu",
         # device_map={"": 0}, # force everything on GPU0
         torch_dtype=torch.float16,
         trust_remote_code=True,
@@ -974,40 +933,20 @@ def run_qlora(
         )
 
     def make_examples(df: pd.DataFrame):
-        if qlora_task == "gate":
-            # all rows; target is 0/1
-            for _, r in tqdm(df.iterrows(), total=len(df)):
-                y = int(r["Presence"])
-                yield {
-                    "text": (task_prompt.format(
+        for _, r in tqdm(df.iterrows(), total=len(df)):
+            gold = {v: float(r[v]) for v in VALUES}
+            yield {
+                "text": (
+                    prompt_template.format(
                         sentence=r["Text"],
                         example_sentence="",
                         example_labels=""
-                    ).rstrip() + "\nOUTPUT: " + str(y)),
-                    "label": str(y),
-                }
-
-        elif qlora_task in {"values", "direct"}:
-            # values: train only on Presence==1; direct: use all rows (as you had)
-            work_df = df
-            if qlora_task == "values":
-                work_df = df[df["Presence"] == 1].reset_index(drop=True)
-            for _, r in tqdm(work_df.iterrows(), total=len(work_df)):
-                gold = {v: float(r[v]) for v in VALUES}   # 0/1 floats
-                yield {
-                    "text": (
-                        task_prompt.format(
-                            sentence=r["Text"],
-                            example_sentence="",
-                            example_labels=""
-                        ).rstrip()
-                        + "\nOUTPUT: "
-                        + json.dumps(gold, ensure_ascii=False)
-                    ),
-                    "label": json.dumps(gold, ensure_ascii=False),
-                }
-        else:
-            raise ValueError(f"Unknown qlora_task: {qlora_task}")
+                    ).rstrip()
+                    + "\nOUTPUT: "
+                    + json.dumps(gold, ensure_ascii=False)
+                ),
+                "label": json.dumps(gold, ensure_ascii=False),
+            }
 
     train_ds = Dataset.from_list(list(make_examples(train_df)))
     val_ds   = Dataset.from_list(list(make_examples(val_df)))
@@ -1069,8 +1008,8 @@ def run_qlora(
     _cast_lora_to_dtype(base_model, torch.float16)
     trainer.train(resume_from_checkpoint=True)
 
-    # ---- save adapters only (optional; for later reuse) ----
-    adapters_dir = _ad_dir_for(qlora_task)
+        # ---- save adapters only (optional; for later reuse) ----
+    adapters_dir = output_dir / "lora_adapters"
     adapters_dir.mkdir(parents=True, exist_ok=True)
     assert isinstance(trainer.model, PeftModel)
     trainer.model.save_pretrained(adapters_dir, safe_serialization=True)
@@ -1109,115 +1048,18 @@ def run_qlora(
     peft_model.config.use_cache = False
     inf_wrapper.generation_cfg.use_cache = False
 
-    if qlora_task == "gate":
-        # binary eval → return a 3-column DF: ids + Presence
-        prompts = [
-            PROMPTS["gate"].format(sentence=s)
-            for s in val_df["Text"].tolist()
-        ]
-        preds = infer_gate_batch(prompts, inf_wrapper)
-        out_df = val_df[["Text-ID", "Sentence-ID"]].copy()
-        out_df["Presence"] = preds
-        torch.cuda.empty_cache()
-        return out_df
-
-    else:
-        val_preds = run_zero_or_few_shot(
-            df=val_df,
-            model=inf_wrapper,
-            prompt_template=prompt_template,
-            df_for_exemplars=None,
-            fewshot_k=0,
-            seed=seed,
-            cache_path=eval_cache_path,
-        )
-        torch.cuda.empty_cache()
-        return val_preds
-
-def load_peft_for_infer(model_name: str, adapters_dir: Path, hf_token: str | None = None):
-    bnb_cfg = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.float16,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_use_double_quant=False,
+    val_preds = run_zero_or_few_shot(
+        df=val_df,
+        model=inf_wrapper,
+        prompt_template=prompt_template,
+        df_for_exemplars=None,
+        fewshot_k=0,
+        seed=seed,
+        cache_path=eval_cache_path,
     )
-    base = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        quantization_config=bnb_cfg,
-        device_map="auto",
-        trust_remote_code=True,
-        token=hf_token,
-    )
-    peft = PeftModel.from_pretrained(base, str(adapters_dir))
-    peft.eval()
-    return peft
 
-def run_hierarchical_inference(
-    df: pd.DataFrame,
-    model_name: str,
-    gate_adapters: Path,
-    values_adapters: Path,
-    tokenizer: AutoTokenizer,
-    values_prompt_template: str = None,
-    hf_token: str | None = None,
-):
-    df = ensure_presence_column(df)  # not strictly needed at test time, but harmless
-
-    # 1) load gate model
-    gate_model = load_peft_for_infer(model_name, gate_adapters, hf_token=hf_token)
-
-    class _Wrap: pass
-    gate = _Wrap()
-    gate.model = gate_model
-    gate.tokenizer = tokenizer
-    gate.generation_cfg = GenerationConfig(max_new_tokens=8, do_sample=False, pad_token_id=tokenizer.eos_token_id)
-    gate.use_autocast_fp16 = False
-
-    # 2) gate prompts
-    gate_prompts = [PROMPTS["gate"].format(sentence=s)
-                    for s in df["Text"].tolist()]
-    gate_preds = infer_gate_batch(gate_prompts, gate)
-
-    trig = sum(gate_preds); print(f"[hier] gate=1 on {trig}/{len(gate_preds)} ({100*trig/len(gate_preds):.1f}%)")
-
-    # 3) load values model
-    values_model = load_peft_for_infer(model_name, values_adapters, hf_token=hf_token)
-    values = _Wrap()
-    values.model = values_model
-    values.tokenizer = tokenizer
-    values.generation_cfg = GenerationConfig(max_new_tokens=64, do_sample=False, pad_token_id=tokenizer.eos_token_id)
-    values.use_autocast_fp16 = False
-
-    # 4) build outputs
-    out_rows: List[Dict[str, float]] = []
-    texts = df["Text"].tolist()
-    idxs_trigger = [i for i, g in enumerate(gate_preds) if g == 1]
-    # run values only on triggered indices (batch in chunks)
-    preds_values_map: Dict[int, Dict[str, float]] = {}
-
-    B = MAX_BATCH
-    for start in range(0, len(idxs_trigger), B):
-        chunk_idx = idxs_trigger[start:start+B]
-        prompts = [values_prompt_template.format(sentence=texts[i]) for i in chunk_idx]
-        scores = infer_batch(prompts, values)   # returns list of dicts {value: 0/1}
-        for i, sc in zip(chunk_idx, scores):
-            preds_values_map[i] = sc
-
-    # fill rows
-    for i in range(len(df)):
-        if gate_preds[i] == 0:
-            out_rows.append({v: 0.0 for v in VALUES})
-        else:
-            out_rows.append(preds_values_map.get(i, {v: 0.0 for v in VALUES}))
-
-    out_df = pd.concat(
-        [df[["Text-ID", "Sentence-ID"]].reset_index(drop=True),
-         pd.DataFrame(out_rows).astype(float)],
-        axis=1
-    )
-    # also include the gate decision as a convenience column
-    out_df.insert(2, "Presence_pred", gate_preds)
-    return out_df
+    torch.cuda.empty_cache()
+    return val_preds
 
 # ---------------------------------------------------------------------
 # MAIN CLI
@@ -1227,15 +1069,12 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Human value detection with LLMs (direct approach)")
     p.add_argument("--data_dir", type=Path, default="../../data/", help="Directory containing train/val/test TSV files")
     p.add_argument("--split", choices=["train", "val", "test"], default="test", help="Which split to run inference on")
-    p.add_argument("--mode", choices=["zero-shot", "few-shot", "qlora", "hier"], default="zero-shot")
+    p.add_argument("--mode", choices=["zero-shot", "few-shot", "qlora"], default="zero-shot")
     p.add_argument("--model", default="meta-llama/Llama-3.1-8B-Instruct", help="HF model repo or local path")
     p.add_argument("--prompt_id", default="direct", help="Choose the prompt to use")
     p.add_argument("--k", type=int, default=0, help="k exemplars per value in few‑shot mode (ignored otherwise)")
     p.add_argument("--seed", type=int, default=42)
     # QLoRA specific
-    p.add_argument("--qlora_task", choices=["direct","gate","values"], default="direct", help="Which task to train with QLoRA.")
-    p.add_argument("--gate_adapter", type=Path, default=None, help="Path to gate LoRA adapter dir (for --mode hier).")
-    p.add_argument("--values_adapter", type=Path, default=None, help="Path to values LoRA adapter dir (for --mode hier).")
     p.add_argument("--qlora_lr", type=float, default=2e-4)
     p.add_argument("--qlora_r", type=int, default=16)
     p.add_argument("--qlora_alpha", type=int, default=32)
@@ -1245,6 +1084,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--hf_token", default=None, help="Hugging Face token for gated models")
     p.add_argument("--log_raw", type=int, default=0, help="Log the first N generations (prompt + raw + parsed) to a JSONL file")
     p.add_argument("--log_file", type=str, default="", help="Optional path for the JSONL (defaults to output/<run_name>/debug_samples.jsonl)")
+    # Retrofit hierarchy (hard-mask)
+    p.add_argument("--gate_mode", choices=["none", "sbert-hard"], default="none", help="Retrofit hierarchy: SBERT presence gate with hard mask.")
+    p.add_argument("--gate_scores", type=Path, default=None, help="TSV with SBERT scores. Must have Text-ID, Sentence-ID and --gate_col.")
+    p.add_argument("--gate_col", type=str, default="Presence", help="Column in --gate_scores with the gate score (0..1).")
+    p.add_argument("--gate_tau", type=float, default=None, help="Optional manual τ. If not set: auto-tune on val, load on test.")
     return p.parse_args()
 
 
@@ -1265,7 +1109,7 @@ def main():
 
     output_dir = Path("output") / args.run_name
     # ------------- choose (and create) output location -------------
-    out_root = output_dir.resolve() if args.run_name else Path("output")
+    out_root = output_dir.resolve() if args.run_name else "output"
     out_root.mkdir(parents=True, exist_ok=True)
 
     # ---- debug logging setup ----
@@ -1309,79 +1153,127 @@ def main():
             cache_path=cache_path,
         )
     elif args.mode == "qlora":
-        if df_train is None or df_val is None:
-            sys.exit("QLoRA mode requires train and val splits available.")
-        if args.max_sentences > 0:
-            df_train = df_train.head(args.max_sentences).reset_index(drop=True)
-            df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
+        # ---- Eval-only path if adapters already exist ----
+        adapters_dir = (out_root / "qlora_output" / "lora_adapters")
+        if adapters_present(adapters_dir) and args.split in {"val", "test"}:
+            if df_target is None:
+                sys.exit(f"[{args.split}] split not found under {args.data_dir}")
+            if args.max_sentences > 0:
+                df_target = df_target.head(args.max_sentences).reset_index(drop=True)
 
-        active_split = "val"    # we evaluate on val after training
+            # load adapters and run on the requested split (incl. test)
+            values_model = load_peft_for_inference(adapters_dir=adapters_dir, hf_token=args.hf_token)
+            preds_df = run_zero_or_few_shot(
+                df=df_target,
+                model=values_model,
+                prompt_template=prompt_template,
+                df_for_exemplars=None,
+                fewshot_k=0,
+                seed=args.seed,
+                cache_path=cache_path,   # cache filename already uses args.split
+            )
+            # keep active_split = args.split so the output filename is “…-test.tsv”
+        else:
+            if df_train is None or df_val is None:
+                sys.exit("QLoRA mode requires train and val splits available.")
+            if args.max_sentences > 0:
+                df_train = df_train.head(args.max_sentences).reset_index(drop=True)
+                df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
 
-        qlora_cache_filename = (
-            f"{safe_model}-qlora-{args.run_name or 'run'}-"
-            f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
-            f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
-            f"{active_split}-cache.json"
-        )
-        eval_cache_path = out_root / qlora_cache_filename
+            active_split = "val"    # we evaluate on val after training
 
-        preds_df = run_qlora(
-            train_df=df_train,
-            val_df=df_val,
-            model_name=args.model,
-            prompt_template=prompt_template,
-            lora_r=args.qlora_r,
-            lora_alpha=args.qlora_alpha,
-            lr=args.qlora_lr,
-            epochs=args.epochs,
-            seed=args.seed,
-            output_dir=out_root / "qlora_output",
-            eval_cache_path=eval_cache_path,
-            hf_token=args.hf_token,
-            qlora_task=args.qlora_task,
-        )
-    elif args.mode == "hier":
-        if df_target is None:
-            sys.exit(f"[{args.split}] split not found under {args.data_dir}")
-        df_target = df_target.head(args.max_sentences).reset_index(drop=True) if args.max_sentences > 0 else df_target
+            qlora_cache_filename = (
+                f"{safe_model}-qlora-{args.run_name or 'run'}-"
+                f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
+                f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
+                f"{active_split}-cache.json"
+            )
+            eval_cache_path = out_root / qlora_cache_filename
 
-        # figure adapter paths if not provided
-        default_gate = (out_root / "qlora_output" / "lora_adapters_gate")
-        default_vals = (out_root / "qlora_output" / "lora_adapters_values")
-        gate_ad = args.gate_adapter or default_gate
-        val_ad  = args.values_adapter or default_vals
-
-        if not gate_ad.exists():
-            sys.exit(f"Gate adapters not found at {gate_ad}")
-        if not val_ad.exists():
-            sys.exit(f"Values adapters not found at {val_ad}")
-
-        tokenizer = AutoTokenizer.from_pretrained(args.model, token=args.hf_token)
-        if tokenizer.pad_token_id is None:
-            tokenizer.pad_token = tokenizer.eos_token
-
-        # exemplar pool comes from training split if available
-        preds_df = run_hierarchical_inference(
-            df=df_target,
-            model_name=args.model,
-            gate_adapters=gate_ad,
-            values_adapters=val_ad,
-            tokenizer=tokenizer,
-            values_prompt_template=prompt_template,
-            hf_token=args.hf_token,
-        )
+            preds_df = run_qlora(
+                train_df=df_train,
+                val_df=df_val,
+                model_name=args.model,
+                prompt_template=prompt_template,
+                lora_r=args.qlora_r,
+                lora_alpha=args.qlora_alpha,
+                lr=args.qlora_lr,
+                epochs=args.epochs,
+                seed=args.seed,
+                output_dir=out_root / "qlora_output",
+                eval_cache_path=eval_cache_path,
+                hf_token=args.hf_token,
+            )
     else:
         raise ValueError(args.mode)
 
-    value_cols = [c for c in preds_df.columns if c in VALUES]   # 19 Schwartz labels
-    gate_cols  = [c for c in preds_df.columns if c.lower().startswith("presence")]
-
     # after run_zero_or_few_shot / run_qlora returns preds_df
-    if value_cols:
-        preds_df[value_cols] = preds_df[value_cols].round(3)
-    if gate_cols:
-        # ensure ints for readability
-        preds_df[gate_cols] = preds_df[gate_cols].astype(int)
+    preds_df.iloc[:, 2:] = preds_df.iloc[:, 2:].round(3)
+
+    # ----------------- retrofit hierarchy (hard-mask) -----------------
+    gate_cfg_path = Path(out_root) / f"gate_{args.gate_col}_config.json"
+
+    if args.gate_mode == "sbert-hard":
+        if args.split == "val":
+            if df_val is None:
+                sys.exit("Gate requires a validation split with gold labels.")
+            if args.gate_scores is None:
+                sys.exit("--gate_scores TSV is required when --gate_mode sbert-hard.")
+            gate_df = load_gate_scores(args.gate_scores)
+
+            # make sure gold labels exist for F1 on val
+            if not all(v in df_val.columns for v in VALUES):
+                sys.exit("[val] gold label columns missing; cannot tune τ.")
+            # Align gold rows to preds_df rows (defensive)
+            gold = preds_df.merge(df_val[["Text-ID","Sentence-ID"] + VALUES], on=["Text-ID","Sentence-ID"], how="left")
+            if gold[VALUES].isna().any().any():
+                sys.exit("Gold labels missing for some val items after merge.")
+
+            # τ: use user-provided or auto-tune
+            if args.gate_tau is not None:
+                best = {"tau": float(args.gate_tau)}
+                gated = apply_hard_gate(preds_df, gate_df, args.gate_col, best["tau"], VALUES)
+                best["macro_f1"] = macro_f1_from_frames(gold, gated, VALUES)
+                best["coverage"] = float(
+                    load_gate_scores(args.gate_scores)[args.gate_col].pipe(_ensure_01).ge(best["tau"]).mean()
+                )
+            else:
+                best = tune_tau_on_val(preds_df, gold, gate_df, args.gate_col, VALUES)
+                gated = apply_hard_gate(preds_df, gate_df, args.gate_col, best["tau"], VALUES)
+
+            # Save both raw and gated val predictions
+            gated_filename = f"{safe_model}-{active_split}-gated_{args.gate_col}.tsv"
+            (out_root / "gate_metrics").mkdir(exist_ok=True, parents=True)
+            (out_root / gated_filename).write_text(gated.to_csv(sep="\t", index=False))
+            # Save config for reuse on test
+            cfg = {
+                "gate_mode": args.gate_mode,
+                "gate_col": args.gate_col,
+                "tau": best["tau"],
+                "val_macro_f1": best.get("macro_f1", None),
+                "val_coverage": best.get("coverage", None),
+            }
+            (out_root / "gate_metrics" / "README.txt").write_text(
+                "Gate results live here. τ chosen on validation to maximise end-to-end macro-F1."
+            )
+            gate_cfg_path.write_text(json.dumps(cfg, indent=2))
+            print(f"[gate] val: τ={best['tau']:.2f}, macro-F1={best['macro_f1']:.5f}, coverage={best['coverage']:.3f}")
+            # Replace preds_df so the normal writer below emits the gated file too (optional)
+            preds_df = gated
+
+        elif args.split == "test":
+            # Load τ picked on val
+            if not gate_cfg_path.exists():
+                sys.exit(f"Missing {gate_cfg_path}. Run val with --gate_mode first, or provide --gate_tau.")
+            cfg = json.loads(gate_cfg_path.read_text())
+            tau = float(args.gate_tau) if args.gate_tau is not None else float(cfg["tau"])
+            if args.gate_scores is None:
+                sys.exit("--gate_scores TSV is required when --gate_mode sbert-hard.")
+            gate_df = load_gate_scores(args.gate_scores)
+            preds_df = apply_hard_gate(preds_df, gate_df, args.gate_col, tau, VALUES)
+            print(f"[gate] test: applied hard mask with τ={tau:.2f} (gate={args.gate_col}).")
+        else:
+            print("[gate] Skipping gate in train split.")
 
     # Compose new filename
     filename = f"{safe_model}-{active_split}.tsv"
@@ -1392,7 +1284,7 @@ def main():
     print(f"Wrote {out_file}")
 
     try:
-        col_sums = preds_df[value_cols].sum(0) if value_cols else pd.Series(dtype=float)
+        col_sums = preds_df.iloc[:, 2:].sum(0)
         nonzero = {k: int(v) for k, v in col_sums[col_sums > 0].to_dict().items()}
         print(f"[summary] non-zero counts per value (this run): {nonzero}")
     except Exception:

@@ -5,3 +5,4 @@ optuna
 bitsandbytes==0.44.1
 triton==3.0.0
 peft==0.17.1
+sentence_transformers

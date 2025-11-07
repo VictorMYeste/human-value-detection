@@ -10,3 +10,5 @@ train.sh
 tokens.txt
 notes.md
 *.log
+main_*.py
+*__pycache__*

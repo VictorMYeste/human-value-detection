@@ -67,24 +67,39 @@
 # 
 # python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-8 --mode few-shot --k 8 --hf_token HF_TOKEN
 # python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-8 | tee output/definition-8/google-gemma-2-9b-it-val-results.txt
+#
+# echo "=========="
+# echo "===== definition - 12 ====="
+# echo "=========="
 # 
+# python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-12 --mode few-shot --k 12 --hf_token HF_TOKEN
+# python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-12 | tee output/definition-12/google-gemma-2-9b-it-val-results.txt
+# 
+# echo "=========="
+# echo "===== definition - 16 ====="
+# echo "=========="
+# 
+# python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-16 --mode few-shot --k 16 --hf_token HF_TOKEN
+# python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-16 | tee output/definition-16/google-gemma-2-9b-it-val-results.txt
+# 
+# echo "=========="
+# echo "===== definition - 20 ====="
+# echo "=========="
+# 
+# python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-20 --mode few-shot --k 20 --hf_token HF_TOKEN
+# python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-20 | tee output/definition-20/google-gemma-2-9b-it-val-results.txt
+
 echo "=========="
-echo "===== definition - 12 ====="
+echo "===== definition ====="
 echo "=========="
 
-python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-12 --mode few-shot --k 12 --hf_token HF_TOKEN
-python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-12 | tee output/definition-12/google-gemma-2-9b-it-val-results.txt
-
-echo "=========="
-echo "===== definition - 16 ====="
-echo "=========="
-
-python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-16 --mode few-shot --k 16 --hf_token HF_TOKEN
-python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-16 | tee output/definition-16/google-gemma-2-9b-it-val-results.txt
+mkdir output/definition
+python3 main.py --model google/gemma-2-9b-it --split test --prompt_id definition --run_name definition --hf_token HF_TOKEN
+python3 eval.py --test-dataset ../../data/test-english/ --model-name google-gemma-2-9b-it --output-directory output/definition | tee output/definition/google-gemma-2-9b-it-test-results.txt
 
 echo "=========="
 echo "===== definition - 20 ====="
 echo "=========="
 
-python3 main.py --model google/gemma-2-9b-it --split val --prompt_id definition --run_name definition-20 --mode few-shot --k 20 --hf_token HF_TOKEN
-python3 eval.py --validation-dataset ../../data/validation-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-20 | tee output/definition-20/google-gemma-2-9b-it-val-results.txt
+python3 main.py --model google/gemma-2-9b-it --split test --prompt_id definition --run_name definition-20 --mode few-shot --k 20 --hf_token HF_TOKEN
+python3 eval.py --test-dataset ../../data/test-english/ --model-name google-gemma-2-9b-it --output-directory output/definition-20 | tee output/definition-20/google-gemma-2-9b-it-test-results.txt

@@ -1087,36 +1087,57 @@ def main():
             cache_path=cache_path,
         )
     elif args.mode == "qlora":
-        if df_train is None or df_val is None:
-            sys.exit("QLoRA mode requires train and val splits available.")
-        if args.max_sentences > 0:
-            df_train = df_train.head(args.max_sentences).reset_index(drop=True)
-            df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
+        # ---- Eval-only path if adapters already exist ----
+        adapters_dir = (out_root / "qlora_output" / "lora_adapters")
+        if adapters_present(adapters_dir) and args.split in {"val", "test"}:
+            if df_target is None:
+                sys.exit(f"[{args.split}] split not found under {args.data_dir}")
+            if args.max_sentences > 0:
+                df_target = df_target.head(args.max_sentences).reset_index(drop=True)
 
-        active_split = "val"    # we evaluate on val after training
+            # load adapters and run on the requested split (incl. test)
+            values_model = load_peft_for_inference(adapters_dir=adapters_dir, hf_token=args.hf_token)
+            preds_df = run_zero_or_few_shot(
+                df=df_target,
+                model=values_model,
+                prompt_template=prompt_template,
+                df_for_exemplars=None,
+                fewshot_k=0,
+                seed=args.seed,
+                cache_path=cache_path,   # cache filename already uses args.split
+            )
+            # keep active_split = args.split so the output filename is “…-test.tsv”
+        else:
+            if df_train is None or df_val is None:
+                sys.exit("QLoRA mode requires train and val splits available.")
+            if args.max_sentences > 0:
+                df_train = df_train.head(args.max_sentences).reset_index(drop=True)
+                df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
 
-        qlora_cache_filename = (
-            f"{safe_model}-qlora-{args.run_name or 'run'}-"
-            f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
-            f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
-            f"{active_split}-cache.json"
-        )
-        eval_cache_path = out_root / qlora_cache_filename
+            active_split = "val"    # we evaluate on val after training
 
-        preds_df = run_qlora(
-            train_df=df_train,
-            val_df=df_val,
-            model_name=args.model,
-            prompt_template=prompt_template,
-            lora_r=args.qlora_r,
-            lora_alpha=args.qlora_alpha,
-            lr=args.qlora_lr,
-            epochs=args.epochs,
-            seed=args.seed,
-            output_dir=out_root / "qlora_output",
-            eval_cache_path=eval_cache_path,
-            hf_token=args.hf_token,
-        )
+            qlora_cache_filename = (
+                f"{safe_model}-qlora-{args.run_name or 'run'}-"
+                f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
+                f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
+                f"{active_split}-cache.json"
+            )
+            eval_cache_path = out_root / qlora_cache_filename
+
+            preds_df = run_qlora(
+                train_df=df_train,
+                val_df=df_val,
+                model_name=args.model,
+                prompt_template=prompt_template,
+                lora_r=args.qlora_r,
+                lora_alpha=args.qlora_alpha,
+                lr=args.qlora_lr,
+                epochs=args.epochs,
+                seed=args.seed,
+                output_dir=out_root / "qlora_output",
+                eval_cache_path=eval_cache_path,
+                hf_token=args.hf_token,
+            )
     else:
         raise ValueError(args.mode)
 

@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'self-protection_definition/google-gemma-2-9b-it-val.tsv': '0.184', 'self-protection_definition/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv': '0.196', 'self-protection_definition-11/google-gemma-2-9b-it-val.tsv': '0.204', 'self-protection_definition-11/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv': '0.212', 'self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv': '0.204'}
+Assembling...
+Forward selection...
+Seed model: self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv  (Macro-F1 = 0.29131)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.29131
+
+Testing candidates: ['self-protection_definition/google-gemma-2-9b-it-val.tsv', 'self-protection_definition/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv', 'self-protection_definition-11/google-gemma-2-9b-it-val.tsv', 'self-protection_definition-11/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv']
+  self-protection_definition/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  self-protection_definition/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv lower=0.00000 p=1.00000
+  self-protection_definition-11/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  self-protection_definition-11/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv lower=-0.06525 p=1.00000
+
+Selected: ['self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv']) ===
+Macro-F1 Seed = 0.29131, Ensemble = 0.29131
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-protection/fixed-weighted-champion-val.tsv

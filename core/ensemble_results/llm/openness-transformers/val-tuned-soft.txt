@@ -1,0 +1,31 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/presence_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.24531)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.24531
+
+Testing candidates: ['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+  openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=0.01798 p=0.00020
+
+Added openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv -> lower bound=0.01798 current f1 = 0.27707
+[Round 2]. Current Macro-Average F1 = 0.27707
+
+Testing candidates: []
+
+Selected: ['output/presence_champion-tuned-soft-champion-val.tsv', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['output/presence_champion-tuned-soft-champion-val.tsv', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']) ===
+Macro-F1 Seed = 0.24531, Ensemble = 0.27707
+One-sided lower 95% ΔF1 = 0.01755
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00004, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00001, sig=True
+ Hedonism: p_adj=0.68750, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/openness-transformers/tuned-soft-champion-val.tsv

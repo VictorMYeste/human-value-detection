@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-test.tsv', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-test.tsv', 'growth_definition-12/google-gemma-2-9b-it-test.tsv']) ===
+Macro-F1 Seed = 0.19218, Ensemble = 0.20128
+One-sided lower 95% ΔF1 = 0.00235
+p(ens>base) = 0.01320 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.31250, sig=False
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00098, sig=True
+ Hedonism: p_adj=0.31250, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Benevolence: caring: p_adj=1.00000, sig=False
+ Benevolence: dependability: p_adj=0.18229, sig=False
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=0.50347, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/growth/fixed-soft-champion-test.tsv

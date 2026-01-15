@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/presence_champion-tuned-soft-champion-val.tsv': '0.557', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv': '0.443'}
+Assembling...
+Forward selection...
+Seed model: output/presence_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.22656)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.22656
+
+Testing candidates: ['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+  openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=-0.06317 p=0.99420
+
+Selected: ['output/presence_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/presence_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.22656, Ensemble = 0.22656
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/openness-transformers/fixed-weighted-champion-val.tsv

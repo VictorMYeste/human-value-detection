@@ -1,0 +1,46 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.28205)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.28205
+
+Testing candidates: ['all/fixed-hard-champion-val.tsv']
+  all/fixed-hard-champion-val.tsv lower=0.02644 p=0.00000
+
+Added all/fixed-hard-champion-val.tsv -> lower bound=0.02644 current f1 = 0.31898
+[Round 2]. Current Macro-Average F1 = 0.31898
+
+Testing candidates: []
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv', 'all/fixed-hard-champion-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv', 'all/fixed-hard-champion-val.tsv']) ===
+Macro-F1 Seed = 0.28205, Ensemble = 0.31898
+One-sided lower 95% ΔF1 = 0.02660
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00701, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.03332, sig=True
+ Hedonism: p_adj=0.02887, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.01138, sig=True
+ Security: personal: p_adj=0.00156, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00001, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.29610, sig=False
+ Humility: p_adj=0.50000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.32775, sig=False
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00004, sig=True
+ Universalism: tolerance: p_adj=0.15889, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/all-transformers/tuned-soft-champion-val.tsv

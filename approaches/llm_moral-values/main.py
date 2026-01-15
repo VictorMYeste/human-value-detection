@@ -97,17 +97,33 @@ except Exception:
 
 from sklearn.metrics import f1_score
 
+try:
+    from sentence_transformers import SentenceTransformer
+    from sklearn.linear_model import LogisticRegression
+    import joblib
+except Exception:
+    SentenceTransformer = None
+    LogisticRegression = None
+    joblib = None
+
 # ---------------------------------------------------------------------
 # CONSTANTS & PROMPTS
 # ---------------------------------------------------------------------
 
+# VALUES = [
+#     "Self-direction: thought", "Self-direction: action", "Stimulation", "Hedonism",
+#     "Achievement", "Power: dominance", "Power: resources", "Face",
+#     "Security: personal", "Security: societal", "Tradition", "Conformity: rules",
+#     "Conformity: interpersonal", "Humility", "Benevolence: caring",
+#     "Benevolence: dependability", "Universalism: concern", "Universalism: nature",
+#     "Universalism: tolerance",
+# ]
 VALUES = [
-    "Self-direction: thought", "Self-direction: action", "Stimulation", "Hedonism",
-    "Achievement", "Power: dominance", "Power: resources", "Face",
-    "Security: personal", "Security: societal", "Tradition", "Conformity: rules",
-    "Conformity: interpersonal", "Humility", "Benevolence: caring",
-    "Benevolence: dependability", "Universalism: concern", "Universalism: nature",
-    "Universalism: tolerance",
+    "Hedonism",
+    "Achievement",
+    "Power: dominance",
+    "Power: resources",
+    "Face"
 ]
 VALUES_STR = ", ".join(VALUES)
 VALUES_JSON = json.dumps(VALUES, ensure_ascii=False)
@@ -196,7 +212,7 @@ PROMPTS: dict[str, str] = {
 
 SYS_PROMPT = "You are a moral-psychology assistant. Using the “refined basic values” taxonomy (Schwartz 1992; Schwartz et al. 2012), answer the user’s labeling requests exactly as instructed."
 
-MAX_BATCH = 2
+MAX_BATCH = 1
 
 # ---------------------------------------------------------------------
 # UTILS
@@ -295,6 +311,89 @@ def tune_tau_on_val(preds_df: pd.DataFrame, gold_df: pd.DataFrame, gate_df: pd.D
         if f1 > best["macro_f1"]:
             best = {"tau": float(t), "macro_f1": float(f1), "coverage": cov}
     return best
+
+def ensure_presence_column(df: pd.DataFrame) -> pd.DataFrame:
+    """If 'Presence' is missing, derive it as (any of the 19 labels == 1)."""
+    if df is None:
+        return df
+    if "Presence" not in df.columns and all(v in df.columns for v in VALUES):
+        df = df.copy()
+        df["Presence"] = (df[VALUES].sum(axis=1) > 0).astype(int)
+    return df
+
+def _require_gate_libs():
+    if SentenceTransformer is None or LogisticRegression is None or joblib is None:
+        raise RuntimeError(
+            "Auto-generation of gate scores requires 'sentence-transformers', "
+            "'scikit-learn' and 'joblib'. Install them to proceed."
+        )
+
+def train_gate_sbert(df_train: pd.DataFrame, save_path: Path, device="cpu", batch_size=128) -> None:
+    _require_gate_libs()
+    df_train = ensure_presence_column(df_train)
+    if "Presence" not in df_train.columns:
+        raise RuntimeError("Training split lacks Presence (or labels to derive it).")
+    enc = SentenceTransformer("all-MiniLM-L6-v2", device=device)
+    X = enc.encode(
+        df_train["Text"].tolist(),
+        batch_size=batch_size, show_progress_bar=True,
+        convert_to_numpy=True, normalize_embeddings=True,
+    )
+    y = df_train["Presence"].astype(int).values
+    clf = LogisticRegression(max_iter=2000, class_weight="balanced", n_jobs=1)
+    clf.fit(X, y)
+    joblib.dump({"clf": clf, "enc_name": "all-MiniLM-L6-v2"}, save_path)
+
+def score_gate_sbert(df: pd.DataFrame, model_path: Path, device="cpu", batch_size=128) -> np.ndarray:
+    _require_gate_libs()
+    obj = joblib.load(model_path)
+    enc = SentenceTransformer(obj["enc_name"], device=device)
+    X = enc.encode(
+        df["Text"].tolist(),
+        batch_size=batch_size, show_progress_bar=False,
+        convert_to_numpy=True, normalize_embeddings=True,
+    )
+    proba = obj["clf"].predict_proba(X)[:, 1]  # probability of presence
+    return proba
+
+def ensure_gate_scores_file(df_train: pd.DataFrame, df_target: pd.DataFrame,
+                            out_root: Path, split: str, gate_col: str,
+                            gate_model: Path | None, gate_device: str = "cpu",
+                            gate_batch_size: int = 128) -> Path:
+    """
+    Train (if needed) a SBERT+LogReg gate on df_train and score df_target.
+    Write TSV with Text-ID, Sentence-ID, and <gate_col> probabilities.
+    Return the written path.
+    """
+    # where the joblib lives
+    model_path = gate_model if gate_model else (out_root / "gate_sbert.joblib")
+    if model_path.exists() and model_path.is_dir():
+        model_path = model_path / "gate_sbert.joblib"
+
+    # pick device
+    if gate_device == "auto":
+        gate_device = "cuda" if torch.cuda.is_available() else "cpu"
+
+    # train once if missing
+    if not model_path.exists():
+        if df_train is None:
+            raise RuntimeError("No training split available to fit the gate.")
+        print(f"[gate] training SBERT+LogReg → {model_path}")
+        train_gate_sbert(df_train, model_path, device=gate_device, batch_size=gate_batch_size)
+    else:
+        print(f"[gate] using cached gate → {model_path}")
+
+    # score target split
+    print(f"[gate] scoring split={split} …")
+    proba = score_gate_sbert(df_target, model_path, device=gate_device, batch_size=gate_batch_size)
+
+    # write TSV
+    gate_scores_df = df_target[["Text-ID","Sentence-ID"]].copy()
+    gate_scores_df[gate_col] = proba.astype(float)
+    out_path = out_root / f"gate_scores_{gate_col}_{split}.tsv"
+    gate_scores_df.to_csv(out_path, sep="\t", index=False)
+    print(f"[gate] wrote scores → {out_path}")
+    return out_path
 
 # ---------------------------------------------------------------------
 # DEBUG LOGGING (optional)
@@ -596,7 +695,9 @@ def run_zero_or_few_shot(
             rng.shuffle(rows)
 
         # draw up to k distinct values
-        values_shuffled = rng.sample([v for v in VALUES if by_value[v]], k=min(fewshot_k, 19))
+        pool = [v for v in VALUES if by_value[v]]
+        max_k = min(fewshot_k, len(pool))
+        values_shuffled = rng.sample(pool, k=max_k)
         for v in values_shuffled:
             row = by_value[v][0]                   # take the first random row
             labels = [x for x in VALUES if row.get(x, 0) == 1.0]
@@ -1089,6 +1190,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--gate_scores", type=Path, default=None, help="TSV with SBERT scores. Must have Text-ID, Sentence-ID and --gate_col.")
     p.add_argument("--gate_col", type=str, default="Presence", help="Column in --gate_scores with the gate score (0..1).")
     p.add_argument("--gate_tau", type=float, default=None, help="Optional manual τ. If not set: auto-tune on val, load on test.")
+    p.add_argument("--preds_tsv", type=Path, default=None, help="Use precomputed predictions TSV (skip model inference).")
+    # Gate auto-gen (optional)
+    p.add_argument("--gate_model", type=Path, default=None, help="Path to save/load the SBERT gate .joblib (auto-generated if missing).")
+    p.add_argument("--gate_device", choices=["cpu","cuda","auto"], default="cpu", help="Device for SBERT gate (cpu is safest).")
+    p.add_argument("--gate_batch_size", type=int, default=128, help="SBERT encode batch size for the gate.")
     return p.parse_args()
 
 
@@ -1135,77 +1241,87 @@ def main():
 
     prompt_template = PROMPTS[args.prompt_id]
 
-    if args.mode in {"zero-shot", "few-shot"}:
-        if df_target is None:
-            sys.exit(f"[{args.split}] split not found under {args.data_dir}")
+    preds_df = None
+    if args.preds_tsv is not None:
+        # Load already computed predictions (columns: Text-ID, Sentence-ID, 19 value probs)
+        preds_df = pd.read_csv(args.preds_tsv, sep="\t")
+        # Trust the provided split for gating; keep active_split as args.split
+        if not {"Text-ID","Sentence-ID"}.issubset(preds_df.columns):
+            sys.exit(f"--preds_tsv {args.preds_tsv} lacks ID columns.")
+    
+    if preds_df is None:
 
-        if args.max_sentences > 0:
-            df_target = df_target.head(args.max_sentences).reset_index(drop=True)
-            
-        model = ValueLLM(args.model, hf_token=args.hf_token)
-        preds_df = run_zero_or_few_shot(
-            df_target,
-            model,
-            prompt_template,
-            df_for_exemplars=df_train,
-            fewshot_k=args.k if args.mode == "few-shot" else 0,
-            seed=args.seed,
-            cache_path=cache_path,
-        )
-    elif args.mode == "qlora":
-        # ---- Eval-only path if adapters already exist ----
-        adapters_dir = (out_root / "qlora_output" / "lora_adapters")
-        if adapters_present(adapters_dir) and args.split in {"val", "test"}:
+        if args.mode in {"zero-shot", "few-shot"}:
             if df_target is None:
                 sys.exit(f"[{args.split}] split not found under {args.data_dir}")
+
             if args.max_sentences > 0:
                 df_target = df_target.head(args.max_sentences).reset_index(drop=True)
-
-            # load adapters and run on the requested split (incl. test)
-            values_model = load_peft_for_inference(adapters_dir=adapters_dir, hf_token=args.hf_token)
+                
+            model = ValueLLM(args.model, hf_token=args.hf_token)
             preds_df = run_zero_or_few_shot(
-                df=df_target,
-                model=values_model,
-                prompt_template=prompt_template,
-                df_for_exemplars=None,
-                fewshot_k=0,
+                df_target,
+                model,
+                prompt_template,
+                df_for_exemplars=df_train,
+                fewshot_k=args.k if args.mode == "few-shot" else 0,
                 seed=args.seed,
-                cache_path=cache_path,   # cache filename already uses args.split
+                cache_path=cache_path,
             )
-            # keep active_split = args.split so the output filename is “…-test.tsv”
+        elif args.mode == "qlora":
+            # ---- Eval-only path if adapters already exist ----
+            adapters_dir = (out_root / "qlora_output" / "lora_adapters")
+            if adapters_present(adapters_dir) and args.split in {"val", "test"}:
+                if df_target is None:
+                    sys.exit(f"[{args.split}] split not found under {args.data_dir}")
+                if args.max_sentences > 0:
+                    df_target = df_target.head(args.max_sentences).reset_index(drop=True)
+
+                # load adapters and run on the requested split (incl. test)
+                values_model = load_peft_for_inference(adapters_dir=adapters_dir, hf_token=args.hf_token)
+                preds_df = run_zero_or_few_shot(
+                    df=df_target,
+                    model=values_model,
+                    prompt_template=prompt_template,
+                    df_for_exemplars=None,
+                    fewshot_k=0,
+                    seed=args.seed,
+                    cache_path=cache_path,   # cache filename already uses args.split
+                )
+                # keep active_split = args.split so the output filename is “…-test.tsv”
+            else:
+                if df_train is None or df_val is None:
+                    sys.exit("QLoRA mode requires train and val splits available.")
+                if args.max_sentences > 0:
+                    df_train = df_train.head(args.max_sentences).reset_index(drop=True)
+                    df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
+
+                active_split = "val"    # we evaluate on val after training
+
+                qlora_cache_filename = (
+                    f"{safe_model}-qlora-{args.run_name or 'run'}-"
+                    f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
+                    f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
+                    f"{active_split}-cache.json"
+                )
+                eval_cache_path = out_root / qlora_cache_filename
+
+                preds_df = run_qlora(
+                    train_df=df_train,
+                    val_df=df_val,
+                    model_name=args.model,
+                    prompt_template=prompt_template,
+                    lora_r=args.qlora_r,
+                    lora_alpha=args.qlora_alpha,
+                    lr=args.qlora_lr,
+                    epochs=args.epochs,
+                    seed=args.seed,
+                    output_dir=out_root / "qlora_output",
+                    eval_cache_path=eval_cache_path,
+                    hf_token=args.hf_token,
+                )
         else:
-            if df_train is None or df_val is None:
-                sys.exit("QLoRA mode requires train and val splits available.")
-            if args.max_sentences > 0:
-                df_train = df_train.head(args.max_sentences).reset_index(drop=True)
-                df_val   = df_val.head(args.max_sentences).reset_index(drop=True)
-
-            active_split = "val"    # we evaluate on val after training
-
-            qlora_cache_filename = (
-                f"{safe_model}-qlora-{args.run_name or 'run'}-"
-                f"{args.prompt_id}-r{args.qlora_r}-a{args.qlora_alpha}-"
-                f"lr{args.qlora_lr}-ep{args.epochs}-seed{args.seed}-"
-                f"{active_split}-cache.json"
-            )
-            eval_cache_path = out_root / qlora_cache_filename
-
-            preds_df = run_qlora(
-                train_df=df_train,
-                val_df=df_val,
-                model_name=args.model,
-                prompt_template=prompt_template,
-                lora_r=args.qlora_r,
-                lora_alpha=args.qlora_alpha,
-                lr=args.qlora_lr,
-                epochs=args.epochs,
-                seed=args.seed,
-                output_dir=out_root / "qlora_output",
-                eval_cache_path=eval_cache_path,
-                hf_token=args.hf_token,
-            )
-    else:
-        raise ValueError(args.mode)
+            raise ValueError(args.mode)
 
     # after run_zero_or_few_shot / run_qlora returns preds_df
     preds_df.iloc[:, 2:] = preds_df.iloc[:, 2:].round(3)
@@ -1217,34 +1333,70 @@ def main():
         if args.split == "val":
             if df_val is None:
                 sys.exit("Gate requires a validation split with gold labels.")
+            
             if args.gate_scores is None:
-                sys.exit("--gate_scores TSV is required when --gate_mode sbert-hard.")
+                try:
+                    args.gate_scores = ensure_gate_scores_file(
+                        df_train=df_train,                # fit on train (labels → Presence)
+                        df_target=df_val,                 # score val
+                        out_root=out_root,
+                        split="val",
+                        gate_col=args.gate_col,
+                        gate_model=args.gate_model,
+                        gate_device=args.gate_device,
+                        gate_batch_size=args.gate_batch_size,
+                    )
+                except Exception as e:
+                    sys.exit(f"Could not auto-generate gate scores: {e}")
+
             gate_df = load_gate_scores(args.gate_scores)
 
-            # make sure gold labels exist for F1 on val
-            if not all(v in df_val.columns for v in VALUES):
-                sys.exit("[val] gold label columns missing; cannot tune τ.")
-            # Align gold rows to preds_df rows (defensive)
-            gold = preds_df.merge(df_val[["Text-ID","Sentence-ID"] + VALUES], on=["Text-ID","Sentence-ID"], how="left")
-            if gold[VALUES].isna().any().any():
+            # Align gold rows to preds_df rows (defensive): keep preds as-is, suffix gold
+            gold_merge = preds_df.merge(
+                df_val[["Text-ID", "Sentence-ID"] + VALUES],
+                on=["Text-ID", "Sentence-ID"],
+                how="left",
+                suffixes=("", "_gold"),           # <-- keep left (preds) unsuffixed; gold gets _gold
+                validate="one_to_one",
+            )
+
+            # Extract gold-only view and rename back to canonical names
+            gold_true = gold_merge[[f"{v}_gold" for v in VALUES]].rename(
+                columns={f"{v}_gold": v for v in VALUES}
+            )
+
+            # Sanity checks
+            if gold_true.isna().any().any():
                 sys.exit("Gold labels missing for some val items after merge.")
+            if not all(v in gold_true.columns for v in VALUES):
+                sys.exit("[val] gold label columns missing after merge; check labels-cat.tsv.")
 
             # τ: use user-provided or auto-tune
             if args.gate_tau is not None:
                 best = {"tau": float(args.gate_tau)}
                 gated = apply_hard_gate(preds_df, gate_df, args.gate_col, best["tau"], VALUES)
-                best["macro_f1"] = macro_f1_from_frames(gold, gated, VALUES)
-                best["coverage"] = float(
-                    load_gate_scores(args.gate_scores)[args.gate_col].pipe(_ensure_01).ge(best["tau"]).mean()
-                )
+                best["macro_f1"] = macro_f1_from_frames(gold_true, gated, VALUES)
             else:
-                best = tune_tau_on_val(preds_df, gold, gate_df, args.gate_col, VALUES)
+                best = tune_tau_on_val(preds_df, gold_true, gate_df, args.gate_col, VALUES)
                 gated = apply_hard_gate(preds_df, gate_df, args.gate_col, best["tau"], VALUES)
 
+            # coverage on the aligned rows (unchanged)
+            base = preds_df.merge(
+                gate_df[["Text-ID","Sentence-ID", args.gate_col]],
+                on=["Text-ID","Sentence-ID"],
+                how="left",
+                validate="one_to_one",
+            )
+            best["coverage"] = float((base[args.gate_col].pipe(_ensure_01) >= best["tau"]).mean())
+
+            # Round before writing
+            gated.iloc[:, 2:] = gated.iloc[:, 2:].round(3)
+
             # Save both raw and gated val predictions
-            gated_filename = f"{safe_model}-{active_split}-gated_{args.gate_col}.tsv"
+            gated_filename = f"{safe_model}-gated_{args.gate_col}-{active_split}.tsv"
             (out_root / "gate_metrics").mkdir(exist_ok=True, parents=True)
             (out_root / gated_filename).write_text(gated.to_csv(sep="\t", index=False))
+            print(f"[gate] val: applied hard mask with τ={best['tau']:.2f} (gate={args.gate_col}). Wrote {gated_filename}")
             # Save config for reuse on test
             cfg = {
                 "gate_mode": args.gate_mode,
@@ -1259,19 +1411,33 @@ def main():
             gate_cfg_path.write_text(json.dumps(cfg, indent=2))
             print(f"[gate] val: τ={best['tau']:.2f}, macro-F1={best['macro_f1']:.5f}, coverage={best['coverage']:.3f}")
             # Replace preds_df so the normal writer below emits the gated file too (optional)
-            preds_df = gated
 
         elif args.split == "test":
+            if args.gate_scores is None:
+                try:
+                    args.gate_scores = ensure_gate_scores_file(
+                        df_train=df_train,            # train gate (if needed)
+                        df_target=df_test,            # score test
+                        out_root=out_root,
+                        split="test",
+                        gate_col=args.gate_col,
+                        gate_model=args.gate_model,
+                        gate_device=args.gate_device,
+                        gate_batch_size=args.gate_batch_size,
+                    )
+                except Exception as e:
+                    sys.exit(f"Could not auto-generate gate scores: {e}")
             # Load τ picked on val
             if not gate_cfg_path.exists():
                 sys.exit(f"Missing {gate_cfg_path}. Run val with --gate_mode first, or provide --gate_tau.")
             cfg = json.loads(gate_cfg_path.read_text())
             tau = float(args.gate_tau) if args.gate_tau is not None else float(cfg["tau"])
-            if args.gate_scores is None:
-                sys.exit("--gate_scores TSV is required when --gate_mode sbert-hard.")
             gate_df = load_gate_scores(args.gate_scores)
-            preds_df = apply_hard_gate(preds_df, gate_df, args.gate_col, tau, VALUES)
-            print(f"[gate] test: applied hard mask with τ={tau:.2f} (gate={args.gate_col}).")
+            gated = apply_hard_gate(preds_df, gate_df, args.gate_col, tau, VALUES)
+            gated.iloc[:, 2:] = gated.iloc[:, 2:].round(3)
+            gated_filename = f"{safe_model}-gated_{args.gate_col}-{active_split}.tsv"
+            (out_root / gated_filename).write_text(gated.to_csv(sep="\t", index=False))
+            print(f"[gate] test: applied hard mask with τ={tau:.2f} (gate={args.gate_col}). Wrote {gated_filename}")
         else:
             print("[gate] Skipping gate in train split.")
 
@@ -1279,9 +1445,10 @@ def main():
     filename = f"{safe_model}-{active_split}.tsv"
 
     # Write predictions
-    out_file = out_root / filename
-    preds_df.to_csv(out_file, sep="\t", index=False)
-    print(f"Wrote {out_file}")
+    if args.preds_tsv is None:
+        out_file = out_root / filename
+        preds_df.to_csv(out_file, sep="\t", index=False)
+        print(f"Wrote {out_file}")
 
     try:
         col_sums = preds_df.iloc[:, 2:].sum(0)

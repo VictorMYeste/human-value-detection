@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Hard Ensemble (['social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-test.tsv', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-test.tsv']) ===
+Macro-F1 Seed = 0.23411, Ensemble = 0.26669
+One-sided lower 95% ΔF1 = 0.02431
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00004, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=1.00000, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.01302, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.01302, sig=True
+ Universalism: nature: p_adj=0.31250, sig=False
+ Universalism: tolerance: p_adj=0.31250, sig=False
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/social-focus/fixed-hard-champion-test.tsv

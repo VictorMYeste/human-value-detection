@@ -1,0 +1,51 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv  (Macro-F1 = 0.19883)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.19883
+
+Testing candidates: ['growth_definition/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']
+  growth_definition/google-gemma-2-9b-it-val.tsv lower=-0.01740 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-val.tsv lower=-0.02289 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=-0.01762 p=0.99940
+  growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=0.01368 p=0.00000
+
+Added growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv -> lower bound=0.01368 current f1 = 0.21697
+[Round 2]. Current Macro-Average F1 = 0.21697
+
+Testing candidates: ['growth_definition/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']
+  growth_definition/google-gemma-2-9b-it-val.tsv lower=-0.01696 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-val.tsv lower=0.01330 p=0.00000
+  growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=0.01062 p=0.00020
+
+Added growth_definition-12/google-gemma-2-9b-it-val.tsv -> lower bound=0.01330 current f1 = 0.23597
+[Round 3]. Current Macro-Average F1 = 0.23597
+
+Testing candidates: ['growth_definition/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']
+  growth_definition/google-gemma-2-9b-it-val.tsv lower=-0.03953 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=-0.03654 p=1.00000
+
+Selected: ['growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-val.tsv']) ===
+Macro-F1 Seed = 0.19883, Ensemble = 0.23841
+One-sided lower 95% ΔF1 = 0.03117
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.09821, sig=False
+ Self-direction: action: p_adj=0.00043, sig=True
+ Stimulation: p_adj=0.86909, sig=False
+ Hedonism: p_adj=0.47266, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.03900, sig=True
+ Benevolence: dependability: p_adj=0.01396, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/growth/fixed-soft-champion-val.tsv

@@ -1,0 +1,32 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/presence_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.34383)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.34383
+
+Testing candidates: ['self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv']
+  self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv lower=0.00948 p=0.00000
+
+Added self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv -> lower bound=0.00948 current f1 = 0.36043
+[Round 2]. Current Macro-Average F1 = 0.36043
+
+Testing candidates: []
+
+Selected: ['output/presence_champion-tuned-soft-champion-val.tsv', 'self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['output/presence_champion-tuned-soft-champion-val.tsv', 'self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv']) ===
+Macro-F1 Seed = 0.34383, Ensemble = 0.36043
+One-sided lower 95% ΔF1 = 0.00940
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Hedonism: p_adj=0.06250, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00015, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00015, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/self-enhancement-transformers/tuned-hard-champion-val.tsv

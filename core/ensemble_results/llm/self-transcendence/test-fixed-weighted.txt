@@ -1,0 +1,21 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-test.tsv': '0.356', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-test.tsv': '0.380', 'self-transcendence_definition/google-gemma-2-9b-it-test.tsv': '0.265'}
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Weighted Ensemble (['self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-test.tsv', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-test.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-test.tsv']) ===
+Macro-F1 Seed = 0.22149, Ensemble = 0.22009
+One-sided lower 95% ΔF1 = -0.01801
+p(ens>base) = 0.52040 -> significant? no
+Per-label improvements:
+ Humility: p_adj=0.50000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.17520, sig=False
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.17520, sig=False
+ Universalism: tolerance: p_adj=0.07715, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-transcendence/fixed-weighted-champion-test.tsv

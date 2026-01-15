@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'growth_definition/google-gemma-2-9b-it-val.tsv': '0.185', 'growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv': '0.198', 'growth_definition-12/google-gemma-2-9b-it-val.tsv': '0.191', 'growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv': '0.197', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv': '0.229'}
+Assembling...
+Forward selection...
+Seed model: growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv  (Macro-F1 = 0.19883)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.19883
+
+Testing candidates: ['growth_definition/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-val.tsv', 'growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv', 'growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']
+  growth_definition/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=0.00000 p=1.00000
+  growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv lower=-0.04493 p=0.99900
+
+Selected: ['growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv']) ===
+Macro-F1 Seed = 0.19883, Ensemble = 0.19883
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/growth/fixed-weighted-champion-val.tsv

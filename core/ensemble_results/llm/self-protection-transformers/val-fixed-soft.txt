@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.30811)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.30811
+
+Testing candidates: ['self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv']
+  self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-val.tsv lower=-0.03076 p=0.97360
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.30811, Ensemble = 0.30811
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-protection-transformers/fixed-soft-champion-val.tsv

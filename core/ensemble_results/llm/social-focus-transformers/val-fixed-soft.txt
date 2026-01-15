@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.30336)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.30336
+
+Testing candidates: ['social-focus/fixed-hard-champion-val.tsv']
+  social-focus/fixed-hard-champion-val.tsv lower=-0.03659 p=0.99420
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.30336, Ensemble = 0.30336
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/social-focus-transformers/fixed-soft-champion-val.tsv

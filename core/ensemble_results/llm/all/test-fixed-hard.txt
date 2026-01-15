@@ -1,0 +1,32 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Hard Ensemble (['definition-20/google-gemma-2-9b-it-gated_Presence-test.tsv', 'qlora-direct-lr-2e-4/google-gemma-2-9b-it-test.tsv']) ===
+Macro-F1 Seed = 0.23811, Ensemble = 0.27719
+One-sided lower 95% ΔF1 = 0.03356
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.31667, sig=False
+ Self-direction: action: p_adj=0.00001, sig=True
+ Stimulation: p_adj=0.00003, sig=True
+ Hedonism: p_adj=0.01142, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00000, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00019, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.59375, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.00005, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=1.00000, sig=False
+ Universalism: nature: p_adj=0.31667, sig=False
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/all/fixed-hard-champion-test.tsv

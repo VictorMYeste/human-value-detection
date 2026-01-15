@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/direct_champion-tuned-soft-champion-test.tsv': '0.558', 'personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-test.tsv': '0.442'}
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Weighted Ensemble (['output/direct_champion-tuned-soft-champion-test.tsv', 'personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-test.tsv']) ===
+Macro-F1 Seed = 0.27225, Ensemble = 0.20317
+One-sided lower 95% ΔF1 = -0.08308
+p(ens>base) = 1.00000 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=0.04395, sig=True
+ Self-direction: action: p_adj=0.00004, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.00033, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00832, sig=True
+ Face: p_adj=0.11018, sig=False
+ Security: personal: p_adj=0.00002, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/personal-focus-transformers/fixed-weighted-champion-test.tsv

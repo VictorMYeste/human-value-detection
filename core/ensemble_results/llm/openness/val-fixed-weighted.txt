@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'openness_definition/google-gemma-2-9b-it-val.tsv': '0.142', 'openness_definition/google-gemma-2-9b-it-gated_Openness to Change-val.tsv': '0.150', 'openness_definition-5/google-gemma-2-9b-it-val.tsv': '0.151', 'openness_definition-5/google-gemma-2-9b-it-gated_Openness to Change-val.tsv': '0.168', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv': '0.390'}
+Assembling...
+Forward selection...
+Seed model: openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv  (Macro-F1 = 0.17537)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.17537
+
+Testing candidates: ['openness_definition/google-gemma-2-9b-it-val.tsv', 'openness_definition/google-gemma-2-9b-it-gated_Openness to Change-val.tsv', 'openness_definition-5/google-gemma-2-9b-it-val.tsv', 'openness_definition-5/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+  openness_definition/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  openness_definition/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=0.00000 p=1.00000
+  openness_definition-5/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  openness_definition-5/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=0.00000 p=1.00000
+
+Selected: ['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']) ===
+Macro-F1 Seed = 0.17537, Ensemble = 0.17537
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/openness/fixed-weighted-champion-val.tsv

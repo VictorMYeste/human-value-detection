@@ -1,0 +1,19 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/presence_champion-tuned-soft-champion-test.tsv': '0.557', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-test.tsv': '0.443'}
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Weighted Ensemble (['output/presence_champion-tuned-soft-champion-test.tsv', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-test.tsv']) ===
+Macro-F1 Seed = 0.20605, Ensemble = 0.16056
+One-sided lower 95% ΔF1 = -0.06824
+p(ens>base) = 0.99920 -> significant? no
+Per-label improvements:
+ Self-direction: thought: p_adj=0.01042, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.45450, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/openness-transformers/tuned-weighted-champion-test.tsv

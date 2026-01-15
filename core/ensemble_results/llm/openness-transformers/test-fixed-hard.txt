@@ -1,0 +1,16 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Hard Ensemble (['output/presence_champion-tuned-soft-champion-test.tsv', 'openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-test.tsv']) ===
+Macro-F1 Seed = 0.20605, Ensemble = 0.22985
+One-sided lower 95% ΔF1 = 0.01411
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: action: p_adj=0.00146, sig=True
+ Stimulation: p_adj=0.00293, sig=True
+ Hedonism: p_adj=0.01562, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/openness-transformers/fixed-hard-champion-test.tsv

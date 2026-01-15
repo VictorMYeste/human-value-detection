@@ -1,0 +1,20 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-test.tsv', 'conservation_qlora/google-gemma-2-9b-it-gated_Conservation-test.tsv']) ===
+Macro-F1 Seed = 0.31706, Ensemble = 0.33393
+One-sided lower 95% ΔF1 = 0.00103
+p(ens>base) = 0.04320 -> significant? YES
+Per-label improvements:
+ Face: p_adj=0.00016, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.53025, sig=False
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00000, sig=True
+ Humility: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/conservation-transformers/tuned-soft-champion-test.tsv

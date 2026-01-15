@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv  (Macro-F1 = 0.28852)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.28852
+
+Testing candidates: ['conservation_definition/google-gemma-2-9b-it-val.tsv', 'conservation_definition/google-gemma-2-9b-it-gated_Conservation-val.tsv', 'conservation_definition-8/google-gemma-2-9b-it-val.tsv', 'conservation_definition-8/google-gemma-2-9b-it-gated_Conservation-val.tsv']
+  conservation_definition/google-gemma-2-9b-it-val.tsv lower=-0.10091 p=1.00000
+  conservation_definition/google-gemma-2-9b-it-gated_Conservation-val.tsv lower=-0.05567 p=1.00000
+  conservation_definition-8/google-gemma-2-9b-it-val.tsv lower=-0.03746 p=0.99980
+  conservation_definition-8/google-gemma-2-9b-it-gated_Conservation-val.tsv lower=-0.02262 p=0.93840
+
+Selected: ['conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv']) ===
+Macro-F1 Seed = 0.28852, Ensemble = 0.28852
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/conservation/fixed-hard-champion-val.tsv

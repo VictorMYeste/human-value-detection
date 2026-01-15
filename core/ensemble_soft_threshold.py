@@ -8,10 +8,16 @@ import pandas as pd
 from sklearn.metrics import f1_score
 
 # === Configuration ===
+# MODELS = [
+#     "../approaches/llm_moral-values/output/growth_definition/google-gemma-2-9b-it-val.tsv",
+#     "../approaches/llm_moral-values/output/growth_definition/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv",
+#     "../approaches/llm_moral-values/output/growth_definition-12/google-gemma-2-9b-it-val.tsv",
+#     "../approaches/llm_moral-values/output/growth_definition-12/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv",
+#     "../approaches/llm_moral-values/output/growth_qlora/google-gemma-2-9b-it-gated_Growth Anxiety-Free-val.tsv",
+# ]
 MODELS = [
-    "../approaches/self-trans_moral-values/output/self-trans-champion_tuned-soft-champion-val.tsv",
-    "../approaches/moral-values/output/direct_champion-tuned-soft-champion-val.tsv",
     "../approaches/p_moral-values/output/presence_champion-tuned-soft-champion-val.tsv",
+    "../approaches/llm_moral-values/output/self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv"
 ]
 GOLD     = "../data/validation-english/labels-cat.tsv"
 ID_COLS  = ['Text-ID','Sentence-ID']

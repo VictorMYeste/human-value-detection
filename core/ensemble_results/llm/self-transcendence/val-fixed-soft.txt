@@ -1,0 +1,45 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv  (Macro-F1 = 0.21618)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.21618
+
+Testing candidates: ['self-transcendence_definition/google-gemma-2-9b-it-val.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv']
+  self-transcendence_definition/google-gemma-2-9b-it-val.tsv lower=-0.06981 p=1.00000
+  self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=-0.04039 p=1.00000
+  self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv lower=-0.01771 p=1.00000
+  self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=0.00809 p=0.00000
+
+Added self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv -> lower bound=0.00809 current f1 = 0.22887
+[Round 2]. Current Macro-Average F1 = 0.22887
+
+Testing candidates: ['self-transcendence_definition/google-gemma-2-9b-it-val.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv']
+  self-transcendence_definition/google-gemma-2-9b-it-val.tsv lower=0.00245 p=0.00980
+  self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=0.00134 p=0.02760
+  self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv lower=-0.01694 p=1.00000
+
+Added self-transcendence_definition/google-gemma-2-9b-it-val.tsv -> lower bound=0.00245 current f1 = 0.21668
+[Round 3]. Current Macro-Average F1 = 0.21668
+
+Testing candidates: ['self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv']
+  self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=-0.03551 p=0.99980
+  self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv lower=-0.00970 p=0.97060
+
+Selected: ['self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-val.tsv']) ===
+Macro-F1 Seed = 0.21618, Ensemble = 0.23771
+One-sided lower 95% ΔF1 = 0.01496
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.03743, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=1.00000, sig=False
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-transcendence/fixed-soft-champion-val.tsv

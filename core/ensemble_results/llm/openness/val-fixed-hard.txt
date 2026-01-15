@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv  (Macro-F1 = 0.17537)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.17537
+
+Testing candidates: ['openness_definition/google-gemma-2-9b-it-val.tsv', 'openness_definition/google-gemma-2-9b-it-gated_Openness to Change-val.tsv', 'openness_definition-5/google-gemma-2-9b-it-val.tsv', 'openness_definition-5/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+  openness_definition/google-gemma-2-9b-it-val.tsv lower=-0.10461 p=1.00000
+  openness_definition/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=-0.08918 p=1.00000
+  openness_definition-5/google-gemma-2-9b-it-val.tsv lower=-0.10685 p=1.00000
+  openness_definition-5/google-gemma-2-9b-it-gated_Openness to Change-val.tsv lower=-0.06377 p=0.99960
+
+Selected: ['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['openness_qlora/google-gemma-2-9b-it-gated_Openness to Change-val.tsv']) ===
+Macro-F1 Seed = 0.17537, Ensemble = 0.17537
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/openness/fixed-hard-champion-val.tsv

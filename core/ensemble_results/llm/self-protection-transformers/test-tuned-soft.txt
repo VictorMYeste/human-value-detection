@@ -1,0 +1,23 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-test.tsv', 'self-protection_qlora/google-gemma-2-9b-it-gated_Self-Protection Anxiety-Avoidance-test.tsv']) ===
+Macro-F1 Seed = 0.33773, Ensemble = 0.35263
+One-sided lower 95% ΔF1 = 0.00375
+p(ens>base) = 0.01780 -> significant? YES
+Per-label improvements:
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00014, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.50500, sig=False
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00000, sig=True
+ Humility: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-protection-transformers/tuned-soft-champion-test.tsv

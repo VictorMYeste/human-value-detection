@@ -1,0 +1,38 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.25193)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.25193
+
+Testing candidates: ['growth/fixed-hard-champion-val.tsv']
+  growth/fixed-hard-champion-val.tsv lower=0.00268 p=0.02280
+
+Added growth/fixed-hard-champion-val.tsv -> lower bound=0.00268 current f1 = 0.26697
+[Round 2]. Current Macro-Average F1 = 0.26697
+
+Testing candidates: []
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv', 'growth/fixed-hard-champion-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv', 'growth/fixed-hard-champion-val.tsv']) ===
+Macro-F1 Seed = 0.25193, Ensemble = 0.26697
+One-sided lower 95% ΔF1 = 0.00303
+p(ens>base) = 0.01940 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.01719, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.00477, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Humility: p_adj=0.25000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=0.00008, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/growth-transformers/fixed-hard-champion-val.tsv

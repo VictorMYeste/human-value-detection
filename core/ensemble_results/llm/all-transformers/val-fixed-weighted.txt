@@ -1,0 +1,48 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'all/fixed-hard-champion-val.tsv': '0.485', 'output/direct_champion-tuned-soft-champion-val.tsv': '0.515'}
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.29127)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.29127
+
+Testing candidates: ['all/fixed-hard-champion-val.tsv']
+  all/fixed-hard-champion-val.tsv lower=0.01106 p=0.00040
+
+Added all/fixed-hard-champion-val.tsv -> lower bound=0.01106 current f1 = 0.31282
+[Round 2]. Current Macro-Average F1 = 0.31282
+
+Testing candidates: []
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv', 'all/fixed-hard-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv', 'all/fixed-hard-champion-val.tsv']) ===
+Macro-F1 Seed = 0.29127, Ensemble = 0.31282
+One-sided lower 95% ΔF1 = 0.01134
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00084, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.05558, sig=False
+ Hedonism: p_adj=0.01718, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.01718, sig=True
+ Security: personal: p_adj=0.00085, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00000, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.23808, sig=False
+ Humility: p_adj=0.50000, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.45346, sig=False
+ Universalism: concern: p_adj=0.00000, sig=True
+ Universalism: nature: p_adj=0.00002, sig=True
+ Universalism: tolerance: p_adj=0.31996, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/all-transformers/fixed-weighted-champion-val.tsv

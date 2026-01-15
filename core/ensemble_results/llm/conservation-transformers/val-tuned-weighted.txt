@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/direct_champion-tuned-soft-champion-val.tsv': '0.586', 'conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv': '0.414'}
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.30429)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.30429
+
+Testing candidates: ['conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv']
+  conservation_qlora/google-gemma-2-9b-it-gated_Conservation-val.tsv lower=-0.03398 p=0.99620
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.30429, Ensemble = 0.30429
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/conservation-transformers/tuned-weighted-champion-val.tsv

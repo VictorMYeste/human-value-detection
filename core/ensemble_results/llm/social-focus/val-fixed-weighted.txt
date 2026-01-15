@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'social-focus_definition/google-gemma-2-9b-it-val.tsv': '0.171', 'social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv': '0.183', 'social-focus_definition-11/google-gemma-2-9b-it-val.tsv': '0.218', 'social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv': '0.224', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv': '0.204'}
+Assembling...
+Forward selection...
+Seed model: social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv  (Macro-F1 = 0.25289)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.25289
+
+Testing candidates: ['social-focus_definition/google-gemma-2-9b-it-val.tsv', 'social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv', 'social-focus_definition-11/google-gemma-2-9b-it-val.tsv', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv']
+  social-focus_definition/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv lower=0.00000 p=1.00000
+  social-focus_definition-11/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv lower=0.00000 p=1.00000
+
+Selected: ['social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv']) ===
+Macro-F1 Seed = 0.25289, Ensemble = 0.25289
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/social-focus/fixed-weighted-champion-val.tsv

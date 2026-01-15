@@ -1,0 +1,25 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv  (Macro-F1 = 0.24129)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.24129
+
+Testing candidates: ['personal-focus_definition/google-gemma-2-9b-it-val.tsv', 'personal-focus_definition/google-gemma-2-9b-it-gated_Personal Focus-val.tsv', 'personal-focus_definition-10/google-gemma-2-9b-it-val.tsv', 'personal-focus_definition-10/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']
+  personal-focus_definition/google-gemma-2-9b-it-val.tsv lower=-0.03680 p=0.99920
+  personal-focus_definition/google-gemma-2-9b-it-gated_Personal Focus-val.tsv lower=-0.02691 p=0.96340
+  personal-focus_definition-10/google-gemma-2-9b-it-val.tsv lower=-0.03614 p=0.99620
+  personal-focus_definition-10/google-gemma-2-9b-it-gated_Personal Focus-val.tsv lower=-0.02784 p=0.95480
+
+Selected: ['personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']) ===
+Macro-F1 Seed = 0.24129, Ensemble = 0.24129
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/personal-focus/fixed-hard-champion-val.tsv

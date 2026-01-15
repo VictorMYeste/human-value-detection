@@ -1,0 +1,51 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: definition-20/google-gemma-2-9b-it-gated_Presence-val.tsv  (Macro-F1 = 0.23150)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.23150
+
+Testing candidates: ['definition/google-gemma-2-9b-it-val.tsv', 'definition/google-gemma-2-9b-it-gated_Presence-val.tsv', 'definition-20/google-gemma-2-9b-it-val.tsv', 'qlora-direct-lr-2e-4/google-gemma-2-9b-it-val.tsv']
+  definition/google-gemma-2-9b-it-val.tsv lower=-0.01729 p=0.99860
+  definition/google-gemma-2-9b-it-gated_Presence-val.tsv lower=-0.01017 p=0.94320
+  definition-20/google-gemma-2-9b-it-val.tsv lower=-0.00949 p=1.00000
+  qlora-direct-lr-2e-4/google-gemma-2-9b-it-val.tsv lower=0.03772 p=0.00000
+
+Added qlora-direct-lr-2e-4/google-gemma-2-9b-it-val.tsv -> lower bound=0.03772 current f1 = 0.27479
+[Round 2]. Current Macro-Average F1 = 0.27479
+
+Testing candidates: ['definition/google-gemma-2-9b-it-val.tsv', 'definition/google-gemma-2-9b-it-gated_Presence-val.tsv', 'definition-20/google-gemma-2-9b-it-val.tsv']
+  definition/google-gemma-2-9b-it-val.tsv lower=-0.02492 p=1.00000
+  definition/google-gemma-2-9b-it-gated_Presence-val.tsv lower=-0.02807 p=1.00000
+  definition-20/google-gemma-2-9b-it-val.tsv lower=-0.04674 p=1.00000
+
+Selected: ['definition-20/google-gemma-2-9b-it-gated_Presence-val.tsv', 'qlora-direct-lr-2e-4/google-gemma-2-9b-it-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['definition-20/google-gemma-2-9b-it-gated_Presence-val.tsv', 'qlora-direct-lr-2e-4/google-gemma-2-9b-it-val.tsv']) ===
+Macro-F1 Seed = 0.23150, Ensemble = 0.27479
+One-sided lower 95% ΔF1 = 0.03776
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.04018, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00000, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00146, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.15000, sig=False
+ Humility: p_adj=0.52941, sig=False
+ Benevolence: caring: p_adj=0.00001, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=1.00000, sig=False
+ Universalism: nature: p_adj=0.28125, sig=False
+ Universalism: tolerance: p_adj=0.04018, sig=True
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/all/fixed-hard-champion-val.tsv

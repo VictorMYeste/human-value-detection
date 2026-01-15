@@ -1,0 +1,18 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['output/presence_champion-tuned-soft-champion-test.tsv', 'self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-test.tsv']) ===
+Macro-F1 Seed = 0.30302, Ensemble = 0.22667
+One-sided lower 95% ΔF1 = -0.09877
+p(ens>base) = 1.00000 -> significant? no
+Per-label improvements:
+ Hedonism: p_adj=0.09314, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.04462, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-enhancement-transformers/fixed-soft-champion-test.tsv

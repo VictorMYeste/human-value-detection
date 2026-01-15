@@ -1,0 +1,27 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'self-transcendence_definition/google-gemma-2-9b-it-val.tsv': '0.162', 'self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv': '0.187', 'self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv': '0.203', 'self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv': '0.217', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv': '0.232'}
+Assembling...
+Forward selection...
+Seed model: self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv  (Macro-F1 = 0.21618)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.21618
+
+Testing candidates: ['self-transcendence_definition/google-gemma-2-9b-it-val.tsv', 'self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv', 'self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv', 'self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv']
+  self-transcendence_definition/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  self-transcendence_definition/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=0.00000 p=1.00000
+  self-transcendence_definition-7/google-gemma-2-9b-it-val.tsv lower=0.00000 p=1.00000
+  self-transcendence_qlora/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv lower=-0.09521 p=1.00000
+
+Selected: ['self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['self-transcendence_definition-7/google-gemma-2-9b-it-gated_Self-Transcendence-val.tsv']) ===
+Macro-F1 Seed = 0.21618, Ensemble = 0.21618
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-transcendence/fixed-weighted-champion-val.tsv

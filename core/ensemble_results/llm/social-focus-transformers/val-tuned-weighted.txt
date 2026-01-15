@@ -1,0 +1,39 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/direct_champion-tuned-soft-champion-val.tsv': '0.537', 'social-focus/fixed-hard-champion-val.tsv': '0.463'}
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.30336)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.30336
+
+Testing candidates: ['social-focus/fixed-hard-champion-val.tsv']
+  social-focus/fixed-hard-champion-val.tsv lower=0.01212 p=0.00160
+
+Added social-focus/fixed-hard-champion-val.tsv -> lower bound=0.01212 current f1 = 0.33073
+[Round 2]. Current Macro-Average F1 = 0.33073
+
+Testing candidates: []
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv', 'social-focus/fixed-hard-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv', 'social-focus/fixed-hard-champion-val.tsv']) ===
+Macro-F1 Seed = 0.30336, Ensemble = 0.33073
+One-sided lower 95% ΔF1 = 0.01261
+p(ens>base) = 0.00040 -> significant? YES
+Per-label improvements:
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00919, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=0.00000, sig=True
+ Humility: p_adj=0.55556, sig=False
+ Benevolence: caring: p_adj=0.00000, sig=True
+ Benevolence: dependability: p_adj=0.21771, sig=False
+ Universalism: concern: p_adj=0.01025, sig=True
+ Universalism: nature: p_adj=0.00000, sig=True
+ Universalism: tolerance: p_adj=1.00000, sig=False
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/social-focus-transformers/tuned-weighted-champion-val.tsv

@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/direct_champion-tuned-soft-champion-val.tsv': '0.550', 'growth/fixed-hard-champion-val.tsv': '0.450'}
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.25193)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.25193
+
+Testing candidates: ['growth/fixed-hard-champion-val.tsv']
+  growth/fixed-hard-champion-val.tsv lower=-0.00014 p=0.05220
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.25193, Ensemble = 0.25193
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/growth-transformers/fixed-weighted-champion-val.tsv

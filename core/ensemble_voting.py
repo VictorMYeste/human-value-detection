@@ -40,13 +40,19 @@ import pandas as pd
 from typing import Optional, List, Dict
 from sklearn.metrics import f1_score
 from core.eval_utils import load_multilabel, bootstrap_f1_lower, per_label_mcnemar
+from pathlib import Path
 
 # === Configuration ===
-BASELINE = "../approaches/self-trans_moral-values/output/self-trans-champion_tuned-soft-champion-test.tsv"
+BASELINE = "../approaches/p_moral-values/output/presence_champion-tuned-soft-champion-test.tsv"
 MODELS = [
-    # "../approaches/moral-values/output/direct_champion-tuned-soft-champion-val.tsv",
-    # "../approaches/p_moral-values/output/presence_champion-tuned-soft-champion-val.tsv",
+    "../approaches/llm_moral-values/output/self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-test.tsv"
 ]
+
+# BASELINE = "../approaches/ensembles/llm/all/fixed-hard-champion-val.tsv"
+# MODELS = [
+#     "../approaches/moral-values/output/direct_champion-tuned-soft-champion-val.tsv",
+# ]
+
 GOLD_VAL  = "../data/validation-english/labels-cat.tsv"
 GOLD      = "../data/test-english/labels-cat.tsv"
 ID_COLS   = ['Text-ID','Sentence-ID']
@@ -57,12 +63,25 @@ ALPHA     = 0.05
 ABS_MIN_GAIN  = 0.001  # ≈ +.1 macro-F1 point
 REL_MIN_GAIN = 0.01   # 1 %
 
+def short_name(path: str, depth: int = 2) -> str:
+    """
+    Return the last `depth` components of a path joined by '/'.
+    Example: '../.../output/definition/file.tsv' -> 'definition/file.tsv'
+    """
+    parts = Path(path).parts
+    if len(parts) >= depth:
+        return "/".join(parts[-depth:])
+    return "/".join(parts)
+
 # Tuned thresholds per model basename (for binarization)
 TUNED_THRESHOLDS = {
-    os.path.basename(BASELINE):     0.29,
-    # os.path.basename(MODELS[0]):    0.3,
-    # os.path.basename(MODELS[1]):    0.31,
+    short_name(BASELINE):     0.29,
+    short_name(MODELS[0]):    0.5,
+    # short_name(MODELS[1]):    0.31,
+    # short_name(MODELS[2]):    0.31,
+    # short_name(MODELS[3]):    0.31,
 }
+
 def compute_weights(baseline_path: str,
                     model_paths: List[str],
                     gold_val_path: str,
@@ -70,7 +89,7 @@ def compute_weights(baseline_path: str,
                     tuned: Optional[Dict] = None) -> Dict[str, float]:
 
     paths      = [baseline_path] + model_paths
-    basenames  = [os.path.basename(p) for p in paths]
+    basenames  = [short_name(p) for p in paths]
     val_paths  = [p.replace('-test.tsv', '-val.tsv') for p in paths]
 
     # ---------- load gold validation ----------
@@ -78,7 +97,7 @@ def compute_weights(baseline_path: str,
 
     weights  = []
     for vp in val_paths:
-        thr    = tuned.get(os.path.basename(vp), threshold) if tuned else threshold
+        thr    = tuned.get(short_name(vp), threshold) if tuned else threshold
         pred_df = load_multilabel(vp, ID_COLS, PROB_COLS, thr).reindex(gold_df.index)
 
         # ✱ NEW: keep only columns that exist in BOTH dfs
@@ -102,7 +121,7 @@ def assemble_binary(threshold_map, test, label_subset=None):
     Load binary predictions for baseline and models using per-model thresholds.
     threshold_map: dict basename->threshold
     """
-    base_name = os.path.basename(BASELINE)
+    base_name = short_name(BASELINE)
     base_thr = threshold_map.get(base_name, 0.5)
     base_df = load_multilabel(BASELINE, ID_COLS, PROB_COLS, base_thr)
 
@@ -116,7 +135,7 @@ def assemble_binary(threshold_map, test, label_subset=None):
     # models using their thresholds
     model_dfs = []
     for m in MODELS:
-        name = os.path.basename(m)
+        name = short_name(m)
         thr = threshold_map.get(name, 0.5)
         dfm = load_multilabel(m, ID_COLS, PROB_COLS, thr)[base_df.columns]
         # load, then force same rows & columns as the baseline
@@ -138,7 +157,7 @@ def assemble_binary(threshold_map, test, label_subset=None):
     base_arr = df[labels].values
     cand_arrs = [base_arr] + [df[[f"{lbl}_{i}" for lbl in labels]].values
                               for i in range(len(MODELS))]
-    names = [os.path.basename(BASELINE)] + [os.path.basename(m) for m in MODELS]
+    names = [short_name(BASELINE)] + [short_name(m) for m in MODELS]
     return df, true, base_arr, cand_arrs, names, labels
 
 
@@ -271,9 +290,9 @@ def main():
     else:
         # fixed threshold for all models
         fixed = args.threshold
-        threshold_map = {os.path.basename(BASELINE): fixed}
+        threshold_map = {short_name(BASELINE): fixed}
         for m in MODELS:
-            threshold_map[os.path.basename(m)] = fixed
+            threshold_map[short_name(m)] = fixed
 
     # Compute weights if needed
     if args.mode == 'weighted':

@@ -7,3 +7,4 @@ output/
 checkpoints/
 results/Test.txt
 train.sh
+output_old/

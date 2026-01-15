@@ -1,0 +1,24 @@
+Parsing arguments...
+Building threshold map...
+Computing weights from validation Macro-F1 …
+Weights: {'output/presence_champion-tuned-soft-champion-val.tsv': '0.575', 'self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv': '0.425'}
+Assembling...
+Forward selection...
+Seed model: output/presence_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.30678)
+
+Forward selection (weighted voting):
+[Round 1]. Current Macro-Average F1 = 0.30678
+
+Testing candidates: ['self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv']
+  self-enhancement_qlora/google-gemma-2-9b-it-gated_Self-Enhancement-val.tsv lower=-0.01685 p=0.44440
+
+Selected: ['output/presence_champion-tuned-soft-champion-val.tsv']
+Evaluating...
+
+=== Final Weighted Ensemble (['output/presence_champion-tuned-soft-champion-val.tsv']) ===
+Macro-F1 Seed = 0.30678, Ensemble = 0.30678
+One-sided lower 95% ΔF1 = 0.00000
+p(ens>base) = 1.00000 -> significant? no
+No per-label discordance on final ensemble.
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/self-enhancement-transformers/tuned-weighted-champion-val.tsv

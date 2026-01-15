@@ -1,0 +1,43 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv  (Macro-F1 = 0.25289)
+
+Forward selection (hard voting):
+[Round 1]. Current Macro-Average F1 = 0.25289
+
+Testing candidates: ['social-focus_definition/google-gemma-2-9b-it-val.tsv', 'social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv', 'social-focus_definition-11/google-gemma-2-9b-it-val.tsv', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv']
+  social-focus_definition/google-gemma-2-9b-it-val.tsv lower=-0.02890 p=1.00000
+  social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv lower=-0.01508 p=0.99820
+  social-focus_definition-11/google-gemma-2-9b-it-val.tsv lower=-0.00899 p=0.99880
+  social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv lower=0.02221 p=0.00000
+
+Added social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv -> lower bound=0.02221 current f1 = 0.28099
+[Round 2]. Current Macro-Average F1 = 0.28099
+
+Testing candidates: ['social-focus_definition/google-gemma-2-9b-it-val.tsv', 'social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv', 'social-focus_definition-11/google-gemma-2-9b-it-val.tsv']
+  social-focus_definition/google-gemma-2-9b-it-val.tsv lower=-0.02568 p=0.99240
+  social-focus_definition/google-gemma-2-9b-it-gated_Social Focus-val.tsv lower=-0.02733 p=0.99840
+  social-focus_definition-11/google-gemma-2-9b-it-val.tsv lower=-0.03115 p=1.00000
+
+Selected: ['social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv']
+Evaluating...
+
+=== Final Hard Ensemble (['social-focus_definition-11/google-gemma-2-9b-it-gated_Social Focus-val.tsv', 'social-focus_qlora/google-gemma-2-9b-it-gated_Social Focus-val.tsv']) ===
+Macro-F1 Seed = 0.25289, Ensemble = 0.28099
+One-sided lower 95% ΔF1 = 0.02224
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Security: societal: p_adj=0.00000, sig=True
+ Tradition: p_adj=0.00031, sig=True
+ Conformity: rules: p_adj=0.00000, sig=True
+ Conformity: interpersonal: p_adj=1.00000, sig=False
+ Humility: p_adj=1.00000, sig=False
+ Benevolence: caring: p_adj=0.01562, sig=True
+ Benevolence: dependability: p_adj=0.00000, sig=True
+ Universalism: concern: p_adj=0.10417, sig=False
+ Universalism: nature: p_adj=0.17857, sig=False
+ Universalism: tolerance: p_adj=0.31250, sig=False
+Saving ensemble predictions...
+Binary (0/1) ensemble predictions written to ../approaches/ensembles/llm/social-focus/fixed-hard-champion-val.tsv

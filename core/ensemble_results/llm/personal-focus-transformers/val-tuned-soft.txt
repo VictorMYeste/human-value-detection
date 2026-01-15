@@ -1,0 +1,36 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Forward selection...
+Seed model: output/direct_champion-tuned-soft-champion-val.tsv  (Macro-F1 = 0.29525)
+
+Forward selection (soft voting):
+[Round 1]. Current Macro-Average F1 = 0.29525
+
+Testing candidates: ['personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']
+  personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv lower=0.02006 p=0.00000
+
+Added personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv -> lower bound=0.02006 current f1 = 0.32296
+[Round 2]. Current Macro-Average F1 = 0.32296
+
+Testing candidates: []
+
+Selected: ['output/direct_champion-tuned-soft-champion-val.tsv', 'personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-val.tsv', 'personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-val.tsv']) ===
+Macro-F1 Seed = 0.29525, Ensemble = 0.32296
+One-sided lower 95% ΔF1 = 0.01980
+p(ens>base) = 0.00000 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00004, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.28906, sig=False
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.01814, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/personal-focus-transformers/tuned-soft-champion-val.tsv

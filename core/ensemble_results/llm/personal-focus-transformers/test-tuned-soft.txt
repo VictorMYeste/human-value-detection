@@ -1,0 +1,22 @@
+Parsing arguments...
+Building threshold map...
+Assembling...
+Using fixed ensemble
+Evaluating...
+
+=== Final Soft Ensemble (['output/direct_champion-tuned-soft-champion-test.tsv', 'personal-focus_qlora/google-gemma-2-9b-it-gated_Personal Focus-test.tsv']) ===
+Macro-F1 Seed = 0.31406, Ensemble = 0.32592
+One-sided lower 95% ΔF1 = 0.00337
+p(ens>base) = 0.01220 -> significant? YES
+Per-label improvements:
+ Self-direction: thought: p_adj=0.00002, sig=True
+ Self-direction: action: p_adj=0.00000, sig=True
+ Stimulation: p_adj=0.00000, sig=True
+ Hedonism: p_adj=0.00131, sig=True
+ Achievement: p_adj=0.00000, sig=True
+ Power: dominance: p_adj=0.00000, sig=True
+ Power: resources: p_adj=0.00000, sig=True
+ Face: p_adj=0.00013, sig=True
+ Security: personal: p_adj=0.00000, sig=True
+Saving ensemble predictions...
+Ensemble probabilities written to ../approaches/ensembles/llm/personal-focus-transformers/tuned-soft-champion-test.tsv

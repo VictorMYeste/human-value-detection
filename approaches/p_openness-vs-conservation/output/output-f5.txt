@@ -1,0 +1,3263 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.78
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.30  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39398
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42256
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.78
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.30  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38144
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41346
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.29  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39739
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41702
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.29  F1: 0.30
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.57  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38406
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41173
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.66  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41724
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41851
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.74  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41411
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41566
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.16  F1: 0.22
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.36963
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41752
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.36520
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41331
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41538
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41782
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.36  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.36  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41446
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41953
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.17  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37315
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41665
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.36521
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41395
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.34  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41096
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42230
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.74  F1: 0.49
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38595
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42109
+==========
+===== NER (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.77
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.56  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40831
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41712
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.77
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.32  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39056
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42045
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.72  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.70  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.65  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42141
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42045
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.68  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42033
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42236
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39691
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42076
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.49
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37593
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42000
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38939
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42159
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38068
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42295
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.25  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.39  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.59  F1: 0.50
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40890
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42184
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38636
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42128
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-VAD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-VAD (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.22  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.33  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40421
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42559
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.32  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.60  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38743
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42381
+==========
+===== Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.54  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39545
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41742
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38638
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42486
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.41  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.41  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.77  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42293
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42141
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41919
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42561
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.81  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.58  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38434
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42211
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.19  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37480
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42440
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.39  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38342
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42276
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.64  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38249
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42905
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.86
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.81  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.57  F1: 0.50
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39314
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41938
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.86
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38017
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42331
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.25  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.27  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41372
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41896
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.25  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40108
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42061
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.23  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.26  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40591
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41354
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.27  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40204
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42194
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.82
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.66  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38451
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41787
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.82
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.17  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.35  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.69  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37039
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42731
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.72
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39623
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42053
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.72
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37722
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42479
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.75
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39252
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41813
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.75
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.33  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.65  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38443
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.43031
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39913
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42098
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38605
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42401
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-15 (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.23  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40831
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42790
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38519
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42185
+==========
+===== Lex-LIWC-15 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.22  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40189
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42249
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38887
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42219
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-LIWC-15 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.90  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.44  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.90  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.44  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.66  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42311
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42263
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.90  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.90  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.68  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41790
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42215
+==========
+===== Lex-LIWC-15 (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42514
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42329
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.39  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.39  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.73  F1: 0.49
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41083
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42147
+==========
+===== Lex-LIWC-15 (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42623
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42333
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41658
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42371
+==========
+===== Lex-LIWC-15 (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.23  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.41  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.59  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40337
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42408
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38306
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42135
+-----------------------------------------------------
+==========
+==========
+==========
+===== TD-NMF =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== TD-NMF (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.80
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.15
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39803
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42455
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.80
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.15
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38327
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42255
+==========
+===== TD-NMF (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.57  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39084
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41970
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38770
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42354
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== TD-NMF (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.41  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.41  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.74  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.67  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42676
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42524
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.41  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.41  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.74  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.74  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.69  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42368
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42640
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38453
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42499
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37493
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42557
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.63  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42731
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42509
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.37  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.37  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.65  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41996
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42819
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.37  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38847
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42322
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.36  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37664
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42544
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER_Lex-VAD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER_Lex-VAD (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.30  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39874
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42467
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.29  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38493
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41513
+==========
+===== NER_Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.57  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39002
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41654
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38432
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41355
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER_Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.37  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.37  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41771
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41954
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41496
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41906
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.17  F1: 0.24
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.33  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37680
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41994
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.36168
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41614
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41819
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42219
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41282
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42057
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38760
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42131
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.19  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37564
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41609
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.33  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.14
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38854
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42896
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.31  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.14
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37892
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41525
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.57  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38191
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42472
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.30  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37562
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41505
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42499
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42482
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.39  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.39  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.68  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41058
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41562
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42393
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42745
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.35  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.35  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40447
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41323
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42508
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42835
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.36  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.36  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40925
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41613
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42546
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.42812
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40498
+
+Macro-average F1 (fixed threshold) across 2 labels: 0.41330

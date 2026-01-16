@@ -1,0 +1,2663 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:07:34,076 - INFO - Using device: cuda
+2025-05-26 08:07:34,272 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:08:37,501 - INFO - Using device: cuda
+2025-05-26 08:08:37,621 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.48  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.49  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.60  F1: 0.50
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.50  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.50  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:09:34,793 - INFO - Using device: cuda
+2025-05-26 08:09:34,914 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:10:26,589 - INFO - Using device: cuda
+2025-05-26 08:10:26,710 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.47  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.33
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.47  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.59  F1: 0.50
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.50  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.33
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.54  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.49  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:11:22,794 - INFO - Using device: cuda
+2025-05-26 08:11:22,915 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:12:27,188 - INFO - Using device: cuda
+2025-05-26 08:12:27,309 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.53  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.48  F1: 0.44
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.57  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.60  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.55  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.48  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.58  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.48
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:13:34,984 - INFO - Using device: cuda
+2025-05-26 08:13:35,105 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:14:33,380 - INFO - Using device: cuda
+2025-05-26 08:14:33,501 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.51  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.57
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.49  F1: 0.44
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.52  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.60  F1: 0.50
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.53  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.57
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.53  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.48
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:15:35,067 - INFO - Using device: cuda
+2025-05-26 08:15:35,188 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:16:35,434 - INFO - Using device: cuda
+2025-05-26 08:16:35,555 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.51  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.62
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.49  F1: 0.44
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.53  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.60  F1: 0.50
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.54  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.62
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.48
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:17:38,684 - INFO - Using device: cuda
+2025-05-26 08:17:38,807 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:18:37,000 - INFO - Using device: cuda
+2025-05-26 08:18:37,121 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.50  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.52
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.61  F1: 0.50
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.53  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.52
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.52  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.52  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.48
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:19:38,596 - INFO - Using device: cuda
+2025-05-26 08:19:38,803 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:20:42,173 - INFO - Using device: cuda
+2025-05-26 08:20:42,294 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.48  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.46  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.62  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.53  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.56  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.45  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:21:40,657 - INFO - Using device: cuda
+2025-05-26 08:21:40,778 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:22:33,828 - INFO - Using device: cuda
+2025-05-26 08:22:33,951 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.47  F1: 0.46
+
+Label: Self-Enhancement  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.55  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.89
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.45  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.53  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.44  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:23:30,480 - INFO - Using device: cuda
+2025-05-26 08:23:30,601 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:24:36,541 - INFO - Using device: cuda
+2025-05-26 08:24:36,662 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.37
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.51
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.37
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.53
+
+Label: Self-Enhancement  |  best threshold = 0.51
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.52  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:25:46,017 - INFO - Using device: cuda
+2025-05-26 08:25:46,138 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:26:46,197 - INFO - Using device: cuda
+2025-05-26 08:26:46,318 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.33
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.57  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.51  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.48  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.33
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.56  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.49  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:27:49,394 - INFO - Using device: cuda
+2025-05-26 08:27:49,514 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:28:51,697 - INFO - Using device: cuda
+2025-05-26 08:28:51,818 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.51  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.45
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.50  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.57  F1: 0.53
+
+Label: Self-Enhancement  |  best threshold = 0.45
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.52  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.50  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:29:56,481 - INFO - Using device: cuda
+2025-05-26 08:29:56,602 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:30:56,306 - INFO - Using device: cuda
+2025-05-26 08:30:56,427 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.50  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.39
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.54  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.48  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.56  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.39
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.47  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-WorryWords =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-WorryWords (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:31:58,603 - INFO - Using device: cuda
+2025-05-26 08:31:58,799 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:33:02,769 - INFO - Using device: cuda
+2025-05-26 08:33:02,890 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.44  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.55  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.45  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.49  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.45  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-WorryWords (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:34:01,125 - INFO - Using device: cuda
+2025-05-26 08:34:01,246 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:34:54,116 - INFO - Using device: cuda
+2025-05-26 08:34:54,238 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.92  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.43  F1: 0.46
+
+Label: Self-Enhancement  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.55  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.43  F1: 0.44
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.45
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.63  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.48  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.44  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-WorryWords (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:35:50,741 - INFO - Using device: cuda
+2025-05-26 08:35:50,863 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:36:56,972 - INFO - Using device: cuda
+2025-05-26 08:36:57,094 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.61  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.49  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.51
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.25
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.66  F1: 0.53
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.53  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.51
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.51  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-WorryWords (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:38:06,763 - INFO - Using device: cuda
+2025-05-26 08:38:06,886 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:39:06,840 - INFO - Using device: cuda
+2025-05-26 08:39:06,962 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.61  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.47  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.47  F1: 0.44
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.65  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.51  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.48  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-WorryWords (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:40:10,289 - INFO - Using device: cuda
+2025-05-26 08:40:10,410 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:41:12,309 - INFO - Using device: cuda
+2025-05-26 08:41:12,431 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.61  F1: 0.49
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.47  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.44
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.48  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.66  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.51  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.44
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.52  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.49  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-WorryWords (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:42:17,113 - INFO - Using device: cuda
+2025-05-26 08:42:17,235 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:43:16,933 - INFO - Using device: cuda
+2025-05-26 08:43:17,054 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.61  F1: 0.49
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.46  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.39
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.47  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.66  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.50  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.39
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.47  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC-22 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-22 (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:44:19,989 - INFO - Using device: cuda
+2025-05-26 08:44:20,257 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:45:27,728 - INFO - Using device: cuda
+2025-05-26 08:45:27,852 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.45  F1: 0.46
+
+Label: Self-Enhancement  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.45  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.63  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.50  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.56  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.46  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-LIWC-22 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:46:29,821 - INFO - Using device: cuda
+2025-05-26 08:46:29,942 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:47:26,437 - INFO - Using device: cuda
+2025-05-26 08:47:26,559 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.57  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.92  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.44  F1: 0.46
+
+Label: Self-Enhancement  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.44  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.45
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.49  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.56  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.89  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.45  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-LIWC-22 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:48:26,416 - INFO - Using device: cuda
+2025-05-26 08:48:26,538 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:49:36,360 - INFO - Using device: cuda
+2025-05-26 08:49:36,482 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.49  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.54
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.50  F1: 0.44
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.52  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.54  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.54
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.53  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:50:49,928 - INFO - Using device: cuda
+2025-05-26 08:50:50,050 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:51:53,528 - INFO - Using device: cuda
+2025-05-26 08:51:53,649 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.48  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.43
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.48  F1: 0.44
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.52  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.43
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.50  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:53:00,326 - INFO - Using device: cuda
+2025-05-26 08:53:00,448 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:54:05,748 - INFO - Using device: cuda
+2025-05-26 08:54:05,869 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.48  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.46
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.49  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.53  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.46
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.50  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:55:13,870 - INFO - Using device: cuda
+2025-05-26 08:55:13,992 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 08:56:17,472 - INFO - Using device: cuda
+2025-05-26 08:56:17,595 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.47  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.48  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.52  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.53  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.48  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+-----------------------------------------------------
+==========
+==========
+==========
+===== MultiLayer_Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:57:23,714 - INFO - Using device: cuda
+2025-05-26 08:57:23,914 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 08:58:27,873 - INFO - Using device: cuda
+2025-05-26 08:58:27,996 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.49  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.56  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.87  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.48  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.63  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.53  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.29
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.48  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 08:59:26,364 - INFO - Using device: cuda
+2025-05-26 08:59:26,487 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 09:00:19,381 - INFO - Using device: cuda
+2025-05-26 09:00:19,502 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.57  F1: 0.47
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.48  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.55  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.47  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.53  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.88  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.47  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:01:16,192 - INFO - Using device: cuda
+2025-05-26 09:01:16,314 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:02:22,384 - INFO - Using device: cuda
+2025-05-26 09:02:22,505 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.54  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.55  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.64  F1: 0.53
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.52  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.56  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.50
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:03:32,137 - INFO - Using device: cuda
+2025-05-26 09:03:32,259 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:04:32,336 - INFO - Using device: cuda
+2025-05-26 09:04:32,458 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.52  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.45
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.51  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.45
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.52  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:05:35,604 - INFO - Using device: cuda
+2025-05-26 09:05:35,725 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:06:37,368 - INFO - Using device: cuda
+2025-05-26 09:06:37,490 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.91  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.52  F1: 0.49
+
+Label: Self-Enhancement  |  best threshold = 0.48
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.65  F1: 0.53
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.57  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.48
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.54  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.53  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.50
+==========
+===== MultiLayer_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:07:41,973 - INFO - Using device: cuda
+2025-05-26 09:07:42,094 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:08:41,846 - INFO - Using device: cuda
+2025-05-26 09:08:41,967 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.51  F1: 0.49
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.54  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.51  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.65  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.55  F1: 0.52
+
+Label: Self-Enhancement  |  best threshold = 0.42
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.51  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.50
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+-----------------------------------------------------
+==========
+==========
+==========
+===== MultiLayer_Lex-LIWC-22 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:09:44,304 - INFO - Using device: cuda
+2025-05-26 09:09:44,483 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 09:10:52,176 - INFO - Using device: cuda
+2025-05-26 09:10:52,298 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.60  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.47  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.57  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.50  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.48
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.63  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.50  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.56  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.50  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:11:53,880 - INFO - Using device: cuda
+2025-05-26 09:11:54,002 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 09:12:50,584 - INFO - Using device: cuda
+2025-05-26 09:12:50,707 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.58  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.94  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.45  F1: 0.47
+
+Label: Self-Enhancement  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.55  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.86  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.49  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.46
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.61  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.49  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.34
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.55  F1: 0.48
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.87  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.49  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:13:50,733 - INFO - Using device: cuda
+2025-05-26 09:13:50,854 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:15:00,781 - INFO - Using device: cuda
+2025-05-26 09:15:00,903 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.51  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.47  F1: 0.44
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.58  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.54  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.49  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.58  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:16:14,009 - INFO - Using device: cuda
+2025-05-26 09:16:14,131 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:17:17,497 - INFO - Using device: cuda
+2025-05-26 09:17:17,618 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.49  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.54
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.45
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.63  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.52  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.54
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.52  F1: 0.47
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.54  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:18:24,273 - INFO - Using device: cuda
+2025-05-26 09:18:24,395 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:19:29,557 - INFO - Using device: cuda
+2025-05-26 09:19:29,678 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.59  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.49  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.59
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.50  F1: 0.45
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.55  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.46
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.53  F1: 0.51
+
+Label: Self-Enhancement  |  best threshold = 0.59
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.85  F1: 0.87
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.51  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.49
+==========
+===== MultiLayer_Lex-LIWC-22 (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 09:20:37,708 - INFO - Using device: cuda
+2025-05-26 09:20:37,831 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 09:21:40,884 - INFO - Using device: cuda
+2025-05-26 09:21:41,006 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Self-Transcendence  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.61  F1: 0.48
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.48  F1: 0.48
+
+Label: Self-Enhancement  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.53  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.47
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.47
+----- Evaluating Test -----
+
+Label: Self-Transcendence  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.88  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.64  F1: 0.51
+
+Label: Self-Transcendence  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.51  F1: 0.50
+
+Label: Self-Enhancement  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.52  F1: 0.46
+
+Label: Self-Enhancement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.52  F1: 0.46
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.49
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.48

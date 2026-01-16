@@ -1,0 +1,443 @@
+==========
+==========
+==========
+===== Previous-Sentences-2 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Previous-Sentences-2 (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:09:32,221 - INFO - Using device: cuda
+2025-05-26 13:09:32,344 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 13:13:33,389 - INFO - Using device: cuda
+2025-05-26 13:13:33,511 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.62  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.82  F1: 0.59
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.74  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.71  F1: 0.60
+
+Label: Personal Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.64  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.70  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.83  Recall: 0.83  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.49  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.55
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.55
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.60  F1: 0.72
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.82  F1: 0.57
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.72  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.71  F1: 0.58
+
+Label: Personal Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.64  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.69  F1: 0.52
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.81  Recall: 0.82  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.47  F1: 0.48
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53
+==========
+===== Previous-Sentences-2 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:17:40,120 - INFO - Using device: cuda
+2025-05-26 13:17:40,242 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 13:21:28,996 - INFO - Using device: cuda
+2025-05-26 13:21:29,118 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.64  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.78  F1: 0.58
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.75  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.69  F1: 0.60
+
+Label: Personal Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.67  F1: 0.75
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.82  Recall: 0.84  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.47  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.55
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.54
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.63  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.79  F1: 0.57
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.74  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.69  F1: 0.59
+
+Label: Personal Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.67  F1: 0.75
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.68  F1: 0.52
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.81  Recall: 0.84  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.46  F1: 0.48
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.55
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Previous-Sentences-2 (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:25:22,750 - INFO - Using device: cuda
+2025-05-26 13:25:22,875 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 13:30:41,512 - INFO - Using device: cuda
+2025-05-26 13:30:41,633 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.46  F1: 0.61
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.91  F1: 0.56
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.62  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.80  F1: 0.58
+
+Label: Personal Focus  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.65  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.69  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.84  Recall: 0.73  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.59  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.53
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.54
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.45  F1: 0.61
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.92  F1: 0.55
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.62  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.80  F1: 0.57
+
+Label: Personal Focus  |  best threshold = 0.30
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.65  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.82  Recall: 0.73  F1: 0.77
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.58  F1: 0.50
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.53
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53
+==========
+===== Previous-Sentences-2 (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:35:58,725 - INFO - Using device: cuda
+2025-05-26 13:35:58,847 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 13:40:33,309 - INFO - Using device: cuda
+2025-05-26 13:40:33,431 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.54  F1: 0.68
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.86  F1: 0.57
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.68  F1: 0.77
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.75  F1: 0.59
+
+Label: Personal Focus  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.64  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.83  Recall: 0.78  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.53  F1: 0.48
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.54
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.53  F1: 0.67
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.86  F1: 0.55
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.67  F1: 0.76
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.75  F1: 0.58
+
+Label: Personal Focus  |  best threshold = 0.16
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.63  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.70  F1: 0.52
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.82  Recall: 0.78  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.52  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53
+==========
+===== Previous-Sentences-2 (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:45:10,529 - INFO - Using device: cuda
+2025-05-26 13:45:10,651 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 13:49:57,625 - INFO - Using device: cuda
+2025-05-26 13:49:57,746 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.52  F1: 0.66
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.88  F1: 0.57
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.67  F1: 0.76
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.76  F1: 0.59
+
+Label: Personal Focus  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.65  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.69  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.83  Recall: 0.76  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.55  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.54
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.92  Recall: 0.51  F1: 0.66
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.88  F1: 0.56
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.67  F1: 0.76
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.77  F1: 0.58
+
+Label: Personal Focus  |  best threshold = 0.21
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.65  F1: 0.74
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.82  Recall: 0.77  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.53  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.53
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53
+==========
+===== Previous-Sentences-2 (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 13:54:45,313 - INFO - Using device: cuda
+2025-05-26 13:54:45,437 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 13:59:14,620 - INFO - Using device: cuda
+2025-05-26 13:59:14,741 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.55  F1: 0.68
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.84  F1: 0.57
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.69  F1: 0.77
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.73  F1: 0.59
+
+Label: Personal Focus  |  best threshold = 0.15
+  Class 0 (negative)
+    Precision: 0.86  Recall: 0.64  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.83  Recall: 0.78  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.53  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.54
+----- Evaluating Test -----
+
+Label: Social Focus  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.54  F1: 0.68
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.85  F1: 0.56
+
+Label: Social Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.68  F1: 0.77
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.74  F1: 0.58
+
+Label: Personal Focus  |  best threshold = 0.15
+  Class 0 (negative)
+    Precision: 0.85  Recall: 0.64  F1: 0.73
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.70  F1: 0.52
+
+Label: Personal Focus  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.81  Recall: 0.79  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.51  F1: 0.49
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.54
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.53

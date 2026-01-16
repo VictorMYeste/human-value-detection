@@ -1,0 +1,443 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:30:21,536 - INFO - Using device: cuda
+2025-05-28 17:30:21,658 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.15  F1: 0.14
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.27  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.27  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.29  F1: 0.27
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.22
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:30:45,089 - INFO - Using device: cuda
+2025-05-28 17:30:45,212 - INFO - Hierarchical run ➜ 645 / 14569 sentences will be processed by the value model (threshold=0.82)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.05  F1: 0.08
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.14  F1: 0.17
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.16  F1: 0.21
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.18  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.17
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:31:04,472 - INFO - Using device: cuda
+2025-05-28 17:31:04,594 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.16  F1: 0.16
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.28  F1: 0.23
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.35  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.32  F1: 0.27
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.23
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:32:37,622 - INFO - Using device: cuda
+2025-05-28 17:32:37,745 - INFO - Hierarchical run ➜ 645 / 14569 sentences will be processed by the value model (threshold=0.82)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.08  F1: 0.12
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.13  F1: 0.17
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.20  F1: 0.24
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.20  F1: 0.24
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.19
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MJD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MJD (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:33:17,605 - INFO - Using device: cuda
+2025-05-28 17:33:17,729 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.15  Recall: 0.17  F1: 0.16
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.27  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.31  F1: 0.26
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.23
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-MJD (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:33:56,233 - INFO - Using device: cuda
+2025-05-28 17:33:56,355 - INFO - Hierarchical run ➜ 645 / 14569 sentences will be processed by the value model (threshold=0.82)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.08  F1: 0.11
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.13  F1: 0.17
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.17  F1: 0.21
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.21  F1: 0.24
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.18
+-----------------------------------------------------
+==========
+==========
+==========
+===== TD-LDA =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== TD-LDA (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:34:19,408 - INFO - Using device: cuda
+2025-05-28 17:34:19,577 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+2025-05-28 17:34:44,002 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.17  F1: 0.15
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.27  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.30  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.34  F1: 0.26
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.22
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== TD-LDA (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:35:20,081 - INFO - Using device: cuda
+2025-05-28 17:35:20,204 - INFO - Hierarchical run ➜ 645 / 14569 sentences will be processed by the value model (threshold=0.82)
+2025-05-28 17:35:45,051 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.09  F1: 0.13
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.12  F1: 0.16
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.16  F1: 0.21
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.20  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.18
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER + TD-LDA =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER + TD-LDA (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:36:10,592 - INFO - Using device: cuda
+2025-05-28 17:36:10,781 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+2025-05-28 17:36:35,002 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.20  F1: 0.18
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.27  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.32  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.23
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER + TD-LDA (based on Openness = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 17:38:03,401 - INFO - Using device: cuda
+2025-05-28 17:38:03,524 - INFO - Hierarchical run ➜ 645 / 14569 sentences will be processed by the value model (threshold=0.82)
+2025-05-28 17:38:27,618 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.10  F1: 0.14
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.13  F1: 0.16
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.18  F1: 0.23
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.19  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 4 labels: 0.19

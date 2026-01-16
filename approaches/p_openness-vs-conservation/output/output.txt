@@ -1,0 +1,2819 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:03:56,621 - INFO - Using device: cuda
+2025-05-25 21:03:56,742 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 21:04:49,757 - INFO - Using device: cuda
+2025-05-25 21:04:49,878 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.78
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.30  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.78
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.30  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:05:46,747 - INFO - Using device: cuda
+2025-05-25 21:05:46,868 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 21:06:38,405 - INFO - Using device: cuda
+2025-05-25 21:06:38,526 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.29  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.73
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.29  F1: 0.30
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.57  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:07:34,052 - INFO - Using device: cuda
+2025-05-25 21:07:34,174 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 21:08:39,245 - INFO - Using device: cuda
+2025-05-25 21:08:39,367 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.66  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.38  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.74  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:09:47,246 - INFO - Using device: cuda
+2025-05-25 21:09:47,367 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 21:10:46,219 - INFO - Using device: cuda
+2025-05-25 21:10:46,340 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.16  F1: 0.22
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:11:48,113 - INFO - Using device: cuda
+2025-05-25 21:11:48,235 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 21:12:48,536 - INFO - Using device: cuda
+2025-05-25 21:12:48,658 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.36  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.36  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Baseline (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:13:51,637 - INFO - Using device: cuda
+2025-05-25 21:13:51,760 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 21:14:49,773 - INFO - Using device: cuda
+2025-05-25 21:14:49,895 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.17  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:15:51,085 - INFO - Using device: cuda
+2025-05-25 21:15:51,281 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 21:22:17,170 - INFO - Using device: cuda
+2025-05-25 21:22:17,291 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.34  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.74  F1: 0.49
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:28:30,835 - INFO - Using device: cuda
+2025-05-25 21:28:30,957 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 21:34:23,976 - INFO - Using device: cuda
+2025-05-25 21:34:24,098 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.77
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.56  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.77
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.32  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:40:20,564 - INFO - Using device: cuda
+2025-05-25 21:40:20,687 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 21:48:21,790 - INFO - Using device: cuda
+2025-05-25 21:48:21,912 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.72  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.70  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.65  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.40
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.68  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 21:56:20,127 - INFO - Using device: cuda
+2025-05-25 21:56:20,249 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:03:20,872 - INFO - Using device: cuda
+2025-05-25 22:03:20,993 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.87
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.49
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:10:23,265 - INFO - Using device: cuda
+2025-05-25 22:10:23,388 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:17:42,971 - INFO - Using device: cuda
+2025-05-25 22:17:43,092 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:24:57,480 - INFO - Using device: cuda
+2025-05-25 22:24:57,603 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:31:54,032 - INFO - Using device: cuda
+2025-05-25 22:31:54,153 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.25  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.39  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.79  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.59  F1: 0.50
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-VAD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-VAD (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:38:48,896 - INFO - Using device: cuda
+2025-05-25 22:38:49,073 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 22:39:55,857 - INFO - Using device: cuda
+2025-05-25 22:39:55,978 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.22  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.33  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.32  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.11
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.60  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:40:54,213 - INFO - Using device: cuda
+2025-05-25 22:40:54,335 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 22:41:47,176 - INFO - Using device: cuda
+2025-05-25 22:41:47,298 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.21  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.54  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.79
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:42:43,499 - INFO - Using device: cuda
+2025-05-25 22:42:43,620 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:43:49,509 - INFO - Using device: cuda
+2025-05-25 22:43:49,631 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.41  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.41  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.77  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.40  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:44:59,345 - INFO - Using device: cuda
+2025-05-25 22:44:59,467 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:45:59,250 - INFO - Using device: cuda
+2025-05-25 22:45:59,372 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.81  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.58  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.19  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.20
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:47:02,673 - INFO - Using device: cuda
+2025-05-25 22:47:02,795 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:48:04,764 - INFO - Using device: cuda
+2025-05-25 22:48:04,885 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.39  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.89
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.64  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+==========
+===== Lex-VAD (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:49:09,184 - INFO - Using device: cuda
+2025-05-25 22:49:09,307 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:50:09,019 - INFO - Using device: cuda
+2025-05-25 22:50:09,141 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.86
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.37  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.87  Recall: 0.81  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.57  F1: 0.50
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.86
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.36  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.19
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:51:11,453 - INFO - Using device: cuda
+2025-05-25 22:51:11,662 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 22:52:18,373 - INFO - Using device: cuda
+2025-05-25 22:52:18,494 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.25  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.27  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.25  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.18
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:53:17,188 - INFO - Using device: cuda
+2025-05-25 22:53:17,310 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 22:54:10,541 - INFO - Using device: cuda
+2025-05-25 22:54:10,663 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.23  F1: 0.29
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.26  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.56  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.58
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.24  F1: 0.30
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.27  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.17
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:55:07,707 - INFO - Using device: cuda
+2025-05-25 22:55:07,829 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:56:13,845 - INFO - Using device: cuda
+2025-05-25 22:56:13,966 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.82
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.81
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.66  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.82
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.17  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.35  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.41
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.73  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.69  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.37
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:57:23,307 - INFO - Using device: cuda
+2025-05-25 22:57:23,429 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 22:58:23,464 - INFO - Using device: cuda
+2025-05-25 22:58:23,586 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.72
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.72
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 22:59:27,423 - INFO - Using device: cuda
+2025-05-25 22:59:27,545 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:00:29,564 - INFO - Using device: cuda
+2025-05-25 23:00:29,685 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.75
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.75
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.20  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.33  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.32
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.65  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+==========
+===== Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:01:34,065 - INFO - Using device: cuda
+2025-05-25 23:01:34,188 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:02:34,096 - INFO - Using device: cuda
+2025-05-25 23:02:34,218 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.22  F1: 0.28
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.60  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.70
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.27
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:03:36,425 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:03:45,413 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== Lex-LIWC (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:03:57,761 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:04:06,628 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-LIWC (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:04:18,702 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:04:27,533 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== Lex-LIWC (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:04:40,088 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:04:48,945 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== Lex-LIWC (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:05:00,939 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:05:09,953 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== Lex-LIWC (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:05:22,296 - INFO - Using device: cuda
+----- Predicting Test -----
+2025-05-25 23:05:31,211 - INFO - Using device: cuda
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+-----------------------------------------------------
+==========
+==========
+==========
+===== TD-NMF =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== TD-NMF (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:05:43,361 - INFO - Using device: cuda
+2025-05-25 23:05:43,538 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 23:06:41,177 - INFO - Using device: cuda
+2025-05-25 23:06:41,298 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== TD-NMF (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:08:01,544 - INFO - Using device: cuda
+2025-05-25 23:08:01,666 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 23:08:49,993 - INFO - Using device: cuda
+2025-05-25 23:08:50,114 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== TD-NMF (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:10:09,592 - INFO - Using device: cuda
+2025-05-25 23:10:09,715 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:10:56,787 - INFO - Using device: cuda
+2025-05-25 23:10:56,908 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:12:17,655 - INFO - Using device: cuda
+2025-05-25 23:12:17,778 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:13:05,217 - INFO - Using device: cuda
+2025-05-25 23:13:05,339 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:14:25,957 - INFO - Using device: cuda
+2025-05-25 23:14:26,079 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:15:13,756 - INFO - Using device: cuda
+2025-05-25 23:15:13,878 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+==========
+===== TD-NMF (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:16:34,149 - INFO - Using device: cuda
+2025-05-25 23:16:34,271 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:17:22,104 - INFO - Using device: cuda
+2025-05-25 23:17:22,225 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+----- Evaluating Test -----
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER_Lex-VAD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER_Lex-VAD (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:18:42,204 - INFO - Using device: cuda
+2025-05-25 23:18:42,389 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 23:25:06,157 - INFO - Using device: cuda
+2025-05-25 23:25:06,279 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.30  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.75  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.21  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.29  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.68  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.75  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:31:24,301 - INFO - Using device: cuda
+2025-05-25 23:31:24,423 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-25 23:37:19,440 - INFO - Using device: cuda
+2025-05-25 23:37:19,562 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.57  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.76
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.20  F1: 0.27
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.28  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.12
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.84  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.58  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER_Lex-VAD (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:43:16,484 - INFO - Using device: cuda
+2025-05-25 23:43:16,606 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-25 23:51:19,992 - INFO - Using device: cuda
+2025-05-25 23:51:20,114 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.37  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.37  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.35
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.76  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.67  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-25 23:59:19,793 - INFO - Using device: cuda
+2025-05-25 23:59:19,914 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 00:06:25,169 - INFO - Using device: cuda
+2025-05-26 00:06:25,291 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.17  F1: 0.24
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.33  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.88
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.16  F1: 0.23
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.22
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.36
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 00:13:30,509 - INFO - Using device: cuda
+2025-05-26 00:13:30,632 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 00:20:51,674 - INFO - Using device: cuda
+2025-05-26 00:20:51,796 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.35  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.35  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.26
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-VAD (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 00:28:05,781 - INFO - Using device: cuda
+2025-05-26 00:28:05,904 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 00:35:04,957 - INFO - Using device: cuda
+2025-05-26 00:35:05,078 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.60  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.84
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.19  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.33  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.81  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.61  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Baseline) =====
+==========
+----- Predicting Validation -----
+2025-05-26 00:42:01,112 - INFO - Using device: cuda
+2025-05-26 00:42:01,287 - INFO - Hierarchical run ➜ 8968 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 00:48:23,081 - INFO - Using device: cuda
+2025-05-26 00:48:23,203 - INFO - Hierarchical run ➜ 8938 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.33  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.14
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.74  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.59  F1: 0.53
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.39
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.97  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.19  F1: 0.26
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.31  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.14
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.78
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.74  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.82  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 00:54:42,636 - INFO - Using device: cuda
+2025-05-26 00:54:42,758 - INFO - Hierarchical run ➜ 8486 / 14904 sentences will be processed by the value model (threshold=0.5)
+----- Predicting Test -----
+2025-05-26 01:00:37,549 - INFO - Using device: cuda
+2025-05-26 01:00:37,671 - INFO - Hierarchical run ➜ 8435 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.83  F1: 0.85
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.57  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.83
+  Class 0 (negative)
+    Precision: 0.93  Recall: 0.98  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.18  F1: 0.25
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.95  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.30  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.13
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.83  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.59  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.38
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Validation -----
+2025-05-26 01:06:34,082 - INFO - Using device: cuda
+2025-05-26 01:06:34,204 - INFO - Hierarchical run ➜ 11931 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 01:14:38,115 - INFO - Using device: cuda
+2025-05-26 01:14:38,237 - INFO - Hierarchical run ➜ 11715 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.42  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.73  F1: 0.52
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.67  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.39  F1: 0.32
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.39  F1: 0.32
+
+Label: Conservation  |  best threshold = 0.36
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.70  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.75  F1: 0.82
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.68  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-EmoLex) =====
+==========
+----- Predicting Validation -----
+2025-05-26 01:22:37,980 - INFO - Using device: cuda
+2025-05-26 01:22:38,103 - INFO - Hierarchical run ➜ 10303 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 01:29:39,800 - INFO - Using device: cuda
+2025-05-26 01:29:39,922 - INFO - Hierarchical run ➜ 10203 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.33
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.33
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.62  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.42
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.35  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.35  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.23
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.69  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.73  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-LIWC-22) =====
+==========
+----- Predicting Validation -----
+2025-05-26 01:36:43,865 - INFO - Using device: cuda
+2025-05-26 01:36:43,987 - INFO - Hierarchical run ➜ 10733 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 01:44:04,012 - INFO - Using device: cuda
+2025-05-26 01:44:04,134 - INFO - Hierarchical run ➜ 10509 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.40  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.72  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.78  F1: 0.83
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.63  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.43
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.36  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.92  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.36  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.28
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.72  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.79  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.64  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.41
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.42
+==========
+===== NER_Lex-EmotionIntensity (based on Presence = Previous-Sentences-2-Lex-eMFD) =====
+==========
+----- Predicting Validation -----
+2025-05-26 01:51:21,190 - INFO - Using device: cuda
+2025-05-26 01:51:21,312 - INFO - Hierarchical run ➜ 10081 / 14904 sentences will be processed by the value model (threshold=0.1)
+----- Predicting Test -----
+2025-05-26 01:58:17,532 - INFO - Using device: cuda
+2025-05-26 01:58:17,654 - INFO - Hierarchical run ➜ 9937 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Extracting per-label thresholds from Validation -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.38  F1: 0.34
+
+Label: Conservation  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.90  Recall: 0.71  F1: 0.80
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.71  F1: 0.51
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.88  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.61  F1: 0.52
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.43
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.43
+----- Evaluating Test -----
+
+Label: Openness to Change  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Openness to Change  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.94  Recall: 0.93  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.34  F1: 0.31
+
+Label: Conservation  |  best threshold = 0.24
+  Class 0 (negative)
+    Precision: 0.91  Recall: 0.71  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.71  F1: 0.50
+
+Label: Conservation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.89  Recall: 0.80  F1: 0.84
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.62  F1: 0.51
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 2 labels: 0.40
+
+Macro-average F1 (fixed 0.50 threshold) across 2 labels: 0.41

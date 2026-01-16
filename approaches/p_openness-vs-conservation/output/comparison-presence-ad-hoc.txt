@@ -1,0 +1,14 @@
+Model1 = ../approaches/openness-vs-conservation/output/Lex-LIWC-22_LingFeat-test.tsv
+Model1 Threshold = 0.5
+Model2 = ../approaches/p_openness-vs-conservation/output/1_Previous-Sentences-2-Lex-LIWC-22_0.1_Lex-EmotionIntensity-test.tsv
+Model2 Threshold = 0.5
+
+Model1 Macro-F1 = 0.42129
+Model2 Macro-F1 = 0.43031
+
+ΔF1 one-sided lower 95% bound = -0.0015
+one-sided p(Model2>Model1) = 0.0830 -> not significant at α=0.05
+
+Per-label McNemar (FDR-corrected): label_index, p_adj, significant
+Openness to Change, 0.0000, True
+Conservation, 0.0000, True

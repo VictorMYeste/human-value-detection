@@ -1,0 +1,945 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = TD-NMF) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:35:32,008 - INFO - Using device: cuda
+2025-05-28 16:35:32,132 - INFO - Hierarchical run ➜ 3792 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.04  F1: 0.07
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.15  F1: 0.19
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.26  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.22  F1: 0.24
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.36  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.34  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.37  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.14  F1: 0.19
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.20  F1: 0.28
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.25
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = NER) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:36:04,340 - INFO - Using device: cuda
+2025-05-28 16:36:04,463 - INFO - Hierarchical run ➜ 6912 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.07  F1: 0.09
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.25  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.36  F1: 0.30
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.48  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.48  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.53  F1: 0.39
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.25  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.37  F1: 0.36
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Baseline (based on Social Focus = Lex - Schwartz) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:36:50,985 - INFO - Using device: cuda
+2025-05-28 16:36:51,167 - INFO - Hierarchical run ➜ 6802 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.06  F1: 0.08
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.23  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.33  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.36  F1: 0.30
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.46  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.45  F1: 0.31
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.53  F1: 0.39
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.28  F1: 0.26
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.36  F1: 0.36
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Baseline (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:37:36,324 - INFO - Using device: cuda
+2025-05-28 16:37:36,447 - INFO - Hierarchical run ➜ 6899 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.07  F1: 0.09
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.24  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.35  F1: 0.28
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.47  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.45  F1: 0.32
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.53  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.26  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.36  F1: 0.34
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Baseline (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:38:22,156 - INFO - Using device: cuda
+2025-05-28 16:38:22,279 - INFO - Hierarchical run ➜ 6916 / 14569 sentences will be processed by the value model (threshold=0.17)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.07  F1: 0.09
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.24  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.36  F1: 0.29
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.47  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.47  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.52  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.24  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.38  F1: 0.36
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Baseline (based on Social Focus = TD-NMF) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:39:08,363 - INFO - Using device: cuda
+2025-05-28 16:39:08,488 - INFO - Hierarchical run ➜ 6797 / 14569 sentences will be processed by the value model (threshold=0.2)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.07  F1: 0.09
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.24  F1: 0.22
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.33  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.34  F1: 0.28
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.48  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.47  F1: 0.32
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.54  F1: 0.39
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.25  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.34  F1: 0.35
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Baseline (based on Social Focus = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:39:53,592 - INFO - Using device: cuda
+2025-05-28 16:39:53,742 - INFO - Hierarchical run ➜ 6949 / 14569 sentences will be processed by the value model (threshold=0.22)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.06  F1: 0.09
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.23  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.34  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.36  F1: 0.29
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.47  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.45  F1: 0.32
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.55  F1: 0.39
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.26  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.35  F1: 0.35
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MJD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MJD (based on Social Focus = TD-NMF) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:40:39,456 - INFO - Using device: cuda
+2025-05-28 16:40:39,580 - INFO - Hierarchical run ➜ 3792 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.09  F1: 0.12
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.17  F1: 0.19
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.28  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.25  F1: 0.25
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.38  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.32  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.33  F1: 0.34
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.17  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.23  F1: 0.29
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.26
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-MJD (based on Social Focus = NER) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:41:15,781 - INFO - Using device: cuda
+2025-05-28 16:41:15,905 - INFO - Hierarchical run ➜ 6912 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.17  F1: 0.14
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.28  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.36  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.36  F1: 0.26
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.51  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.46  F1: 0.34
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.48  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.30  F1: 0.26
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.43  F1: 0.35
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Lex-MJD (based on Social Focus = Lex - Schwartz) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:42:06,212 - INFO - Using device: cuda
+2025-05-28 16:42:06,336 - INFO - Hierarchical run ➜ 6802 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.16  F1: 0.13
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.26  F1: 0.20
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.36  F1: 0.27
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.36  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.50  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.43  F1: 0.32
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.47  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.31  F1: 0.27
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.41  F1: 0.35
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Lex-MJD (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:42:55,217 - INFO - Using device: cuda
+2025-05-28 16:42:55,340 - INFO - Hierarchical run ➜ 6899 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.16  F1: 0.13
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.27  F1: 0.20
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.37  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.36  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.50  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.47  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.30  F1: 0.27
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.41  F1: 0.33
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Lex-MJD (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:43:44,772 - INFO - Using device: cuda
+2025-05-28 16:43:44,895 - INFO - Hierarchical run ➜ 6916 / 14569 sentences will be processed by the value model (threshold=0.17)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.18  F1: 0.15
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.27  F1: 0.20
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.37  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.37  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.50  F1: 0.34
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.46  F1: 0.34
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.47  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.27  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.43  F1: 0.35
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Lex-MJD (based on Social Focus = TD-NMF) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:44:34,177 - INFO - Using device: cuda
+2025-05-28 16:44:34,300 - INFO - Hierarchical run ➜ 6797 / 14569 sentences will be processed by the value model (threshold=0.2)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.18  F1: 0.15
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.28  F1: 0.21
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.36  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.34  F1: 0.26
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.51  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.45  F1: 0.34
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.47  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.29  F1: 0.27
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.40  F1: 0.34
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28
+==========
+===== Lex-MJD (based on Social Focus = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-28 16:45:22,940 - INFO - Using device: cuda
+2025-05-28 16:45:23,063 - INFO - Hierarchical run ➜ 6949 / 14569 sentences will be processed by the value model (threshold=0.22)
+----- Evaluating Test -----
+
+Label: Self-direction: thought  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.16  F1: 0.14
+
+Label: Self-direction: action  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.26  F1: 0.20
+
+Label: Stimulation  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.37  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.36  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.50  F1: 0.34
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.44  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.49  F1: 0.36
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.30  F1: 0.27
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.39  F1: 0.33
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 9 labels: 0.28

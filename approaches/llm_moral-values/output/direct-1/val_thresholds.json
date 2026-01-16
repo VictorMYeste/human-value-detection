@@ -1,0 +1,21 @@
+{
+  "Self-direction: thought": 0.5,
+  "Self-direction: action": 0.5,
+  "Stimulation": 0.5,
+  "Hedonism": 0.5,
+  "Achievement": 0.5,
+  "Power: dominance": 0.5,
+  "Power: resources": 0.5,
+  "Face": 0.5,
+  "Security: personal": 0.5,
+  "Security: societal": 0.5,
+  "Tradition": 0.1,
+  "Conformity: rules": 0.5,
+  "Conformity: interpersonal": 0.5,
+  "Humility": 0.5,
+  "Benevolence: caring": 0.5,
+  "Benevolence: dependability": 0.5,
+  "Universalism: concern": 0.5,
+  "Universalism: nature": 0.5,
+  "Universalism: tolerance": 0.5
+}

@@ -4,7 +4,6 @@ models/
 valueeval24/
 valueeval24.zip
 checkpoints/
-output/
 results/Test.txt
 train.sh
 tokens.txt
@@ -12,6 +11,7 @@ notes.md
 *.log
 main_*.py
 *__pycache__*
-output/*/*-cache.json
+*.pt
 *.bak
-output/*/output/*/qlora_output/
+output/*/qlora_output/
+*-cache.json

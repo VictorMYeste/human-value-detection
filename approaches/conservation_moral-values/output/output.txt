@@ -1,0 +1,1634 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:30:26,833 - INFO - Using device: cuda
+2025-05-28 18:30:27,022 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.13  F1: 0.19
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.32  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.47  F1: 0.49
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.39  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.04  F1: 0.06
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 1.00  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Baseline (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:31:03,744 - INFO - Using device: cuda
+2025-05-28 18:31:03,885 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.15  F1: 0.21
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.32  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.46  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.38  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.06  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:31:34,924 - INFO - Using device: cuda
+2025-05-28 18:31:35,048 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.23  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.44  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.62  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.67  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.54  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.16  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.03  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:32:17,337 - INFO - Using device: cuda
+2025-05-28 18:32:17,496 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.18  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.29  F1: 0.33
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.42  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.43  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.07  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== NER (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:34:41,220 - INFO - Using device: cuda
+2025-05-28 18:34:41,342 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.20  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.30  F1: 0.33
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.42  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.42  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.09  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.03  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== NER (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:37:04,029 - INFO - Using device: cuda
+2025-05-28 18:37:04,152 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.33  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.42  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.63  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.61  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.61  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.22  F1: 0.15
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.07  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-Schwartz =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:41:31,008 - INFO - Using device: cuda
+2025-05-28 18:41:31,182 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.16  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.31  F1: 0.33
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.43  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.42  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.41  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.08  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+==========
+===== Lex-Schwartz (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:42:11,797 - INFO - Using device: cuda
+2025-05-28 18:42:11,920 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.18  F1: 0.23
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.93  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.45  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.42  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.40  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.10  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:42:44,078 - INFO - Using device: cuda
+2025-05-28 18:42:44,201 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.31  F1: 0.26
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.44  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.85  F1: 0.90
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.64  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.60  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.59  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.19  F1: 0.14
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.07  Recall: 0.07  F1: 0.07
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.30
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmoLex =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmoLex (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:43:30,680 - INFO - Using device: cuda
+2025-05-28 18:43:30,867 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.15  F1: 0.20
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.30  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.42  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.43  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.06  F1: 0.08
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Lex-EmoLex (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:44:10,105 - INFO - Using device: cuda
+2025-05-28 18:44:10,228 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.17  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.30  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.44  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.43  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.42  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.08  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-EmoLex (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:44:40,469 - INFO - Using device: cuda
+2025-05-28 18:44:40,593 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.29  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.44  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.62  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.61  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.61  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.16  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.03  F1: 0.04
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MFD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MFD (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:45:24,291 - INFO - Using device: cuda
+2025-05-28 18:45:24,482 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.15  F1: 0.20
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.42  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.43  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.06  F1: 0.07
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Lex-MFD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:46:04,149 - INFO - Using device: cuda
+2025-05-28 18:46:04,273 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.17  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.31  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.43  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.41  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.08  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.03  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-MFD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:46:34,932 - INFO - Using device: cuda
+2025-05-28 18:46:35,057 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.30  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.45  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.62  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.61  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.61  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.16  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.03  F1: 0.04
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC-22 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-22 (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:47:18,165 - INFO - Using device: cuda
+2025-05-28 18:47:18,357 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.16  F1: 0.21
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.31  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.41  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.40  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.45  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.10  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.03  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Lex-LIWC-22 (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:48:00,684 - INFO - Using device: cuda
+2025-05-28 18:48:00,807 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.18  F1: 0.23
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.31  F1: 0.31
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.40  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.44  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.12  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.03  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-LIWC-22 (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:48:39,352 - INFO - Using device: cuda
+2025-05-28 18:48:39,476 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.30  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.43  F1: 0.32
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.87  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.60  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.59  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.90  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.65  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.26  F1: 0.15
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.07  F1: 0.05
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC-22_LingFeat =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-22_LingFeat (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:49:27,548 - INFO - Using device: cuda
+2025-05-28 18:49:27,736 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+==========
+===== Lex-LIWC-22_LingFeat (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:49:51,333 - INFO - Using device: cuda
+2025-05-28 18:49:51,457 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-LIWC-22_LingFeat (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:50:06,204 - INFO - Using device: cuda
+2025-05-28 18:50:06,328 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-eMFD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-eMFD (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:50:20,897 - INFO - Using device: cuda
+2025-05-28 18:50:21,114 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.09  F1: 0.14
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.30  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.47  F1: 0.50
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.42  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.06  F1: 0.08
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Lex-eMFD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:51:03,373 - INFO - Using device: cuda
+2025-05-28 18:51:03,534 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.11  F1: 0.15
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.30  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.46  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.41  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.09  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-eMFD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:51:44,807 - INFO - Using device: cuda
+2025-05-28 18:51:44,931 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.21  F1: 0.20
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.41  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.62  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.68  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.61  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.19  F1: 0.15
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.03  F1: 0.04
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MJD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MJD (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:52:30,569 - INFO - Using device: cuda
+2025-05-28 18:52:30,787 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.15  F1: 0.20
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.33  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.42  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.51  Recall: 0.42  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.42  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.06  F1: 0.08
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+===== Lex-MJD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:53:12,944 - INFO - Using device: cuda
+2025-05-28 18:53:13,068 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.17  F1: 0.22
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.33  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.44  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.41  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.40  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.09  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.03  F1: 0.06
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-MJD (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:53:46,074 - INFO - Using device: cuda
+2025-05-28 18:53:46,198 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.29  F1: 0.24
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.45  F1: 0.34
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.85  F1: 0.90
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.62  F1: 0.37
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.61  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.18  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.03  Recall: 0.03  F1: 0.03
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.28
+-----------------------------------------------------
+==========
+==========
+==========
+===== TD-LDA =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== TD-LDA (based on Conservation = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:54:31,785 - INFO - Using device: cuda
+2025-05-28 18:54:31,980 - INFO - Hierarchical run ➜ 2843 / 14569 sentences will be processed by the value model (threshold=0.5)
+2025-05-28 18:54:56,314 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.13  F1: 0.18
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.34  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.42  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.56  Recall: 0.39  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.40  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.15  Recall: 0.03  F1: 0.04
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.27
+==========
+===== TD-LDA (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:55:34,631 - INFO - Using device: cuda
+2025-05-28 18:55:34,754 - INFO - Hierarchical run ➜ 2937 / 14569 sentences will be processed by the value model (threshold=0.5)
+2025-05-28 18:55:58,792 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.15  F1: 0.21
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.34  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.39  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.39  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.15  Recall: 0.03  F1: 0.04
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.27
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== TD-LDA (based on Conservation = Lex-LIWC-22_LingFeat) =====
+==========
+----- Predicting Test -----
+2025-05-28 18:56:28,101 - INFO - Using device: cuda
+2025-05-28 18:56:28,225 - INFO - Hierarchical run ➜ 5934 / 14569 sentences will be processed by the value model (threshold=0.1)
+2025-05-28 18:56:52,602 - INFO - Using topic_feature_dim = 60
+----- Evaluating Test -----
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.26  F1: 0.25
+
+Label: Security: personal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.47  F1: 0.35
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.86  F1: 0.91
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.63  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.56  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.10  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 7 labels: 0.29

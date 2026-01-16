@@ -1,0 +1,5 @@
+Model1 = ../approaches/grwoth_moral-values/output/1_Lex-LIWC-22_LingFeat_0.1_Baseline-test.tsv
+Model1 Threshold = 0.5
+Model2 = ../approaches/self-protection_moral-values/output/1_Lex-LIWC-22_LingFeat_0.1_Lex-MJD-test.tsv
+Model2 Threshold = 0.5
+

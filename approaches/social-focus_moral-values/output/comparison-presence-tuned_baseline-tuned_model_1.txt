@@ -1,0 +1,21 @@
+Model1 = ../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Baseline-test.tsv
+Model1 Threshold = 0.25
+Model2 = ../approaches/p_moral-values/output/1_Lex-LIWC-22_LingFeat_0.5_Lex-WorryWords-test.tsv
+Model2 Threshold = 0.25
+
+Model1 Macro-F1 = 0.32627
+Model2 Macro-F1 = 0.33214
+
+ΔF1 one-sided lower 95% bound = -0.0019
+one-sided p(Model2>Model1) = 0.1005 -> not significant at α=0.05
+
+Per-label McNemar (FDR-corrected): label_index, p_adj, significant
+Security: societal, 0.9327, False
+Tradition, 0.8713, False
+Conformity: rules, 0.0018, True
+Conformity: interpersonal, 0.0058, True
+Benevolence: caring, 0.0009, True
+Benevolence: dependability, 0.0000, True
+Universalism: concern, 0.9327, False
+Universalism: nature, 0.5153, False
+Universalism: tolerance, 0.6359, False

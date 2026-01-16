@@ -1,0 +1,21 @@
+Model1 = ../approaches/social-focus_moral-values/output/1_TD-NMF_0.5_Baseline-test.tsv
+Model1 Threshold = 0.25
+Model2 = ../approaches/social-focus_moral-values/output/1_TD-NMF_0.5_Lex-MJD-test.tsv
+Model2 Threshold = 0.25
+
+Model1 Macro-F1 = 0.31830
+Model2 Macro-F1 = 0.32561
+
+ΔF1 one-sided lower 95% bound = -0.0003
+one-sided p(Model2>Model1) = 0.0585 -> not significant at α=0.05
+
+Per-label McNemar (FDR-corrected): label_index, p_adj, significant
+Security: societal, 0.4273, False
+Tradition, 0.4273, False
+Conformity: rules, 0.0243, True
+Conformity: interpersonal, 0.5713, False
+Benevolence: caring, 0.0510, False
+Benevolence: dependability, 0.1188, False
+Universalism: concern, 0.0001, True
+Universalism: nature, 0.0388, True
+Universalism: tolerance, 1.0000, False

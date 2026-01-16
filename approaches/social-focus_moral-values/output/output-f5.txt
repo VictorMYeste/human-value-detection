@@ -1,0 +1,4295 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.41  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.52  Recall: 0.43  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.43  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.05  F1: 0.06
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.07  F1: 0.12
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.21  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.21  F1: 0.25
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.40  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.58  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.15  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30904
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.59  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.55  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.40
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.15  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.31  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.31  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.46  F1: 0.37
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.23  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30823
+==========
+===== Baseline (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.88  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.59  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.52  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.14  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.07  F1: 0.10
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.33  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.32  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.47  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.70  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.22  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30932
+==========
+===== Baseline (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.59  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.53  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.58  F1: 0.40
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.12  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.07  F1: 0.09
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.33  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.32  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.47  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.70  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.22  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30982
+==========
+===== Baseline (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.60  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.52  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.58  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.11  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.07  F1: 0.09
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.32  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.32  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.47  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.70  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.21  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30626
+-----------------------------------------------------
+==========
+==========
+==========
+===== NER =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== NER (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.39  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.41  F1: 0.48
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.42  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.04  F1: 0.06
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.20  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.21  F1: 0.25
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.42  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.58  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.14  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30419
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.57  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.51  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.56  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.11  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.03  F1: 0.04
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.30  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.31  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.49  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.73  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.20  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30707
+==========
+===== NER (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.57  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.49  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.11  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.06  Recall: 0.03  F1: 0.04
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.32  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.71  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.20  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30772
+==========
+===== NER (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.57  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.50  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.03  F1: 0.04
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.32  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.32  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.71  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.21  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31056
+==========
+===== NER (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.57  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.49  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.58  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.09  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.03  F1: 0.04
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.31  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.71  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.20  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30573
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-Schwartz =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.37  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.60  Recall: 0.40  F1: 0.48
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.39  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.02  F1: 0.03
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.19  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.23  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.44  F1: 0.43
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.61  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.11  F1: 0.15
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29763
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.50  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.51  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.10  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.29  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.51  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.77  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.15  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30635
+==========
+===== Lex-Schwartz (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.48  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.55  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.10  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.31  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.33  F1: 0.31
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.75  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.15  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30674
+==========
+===== Lex-Schwartz (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.49  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.55  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.31  F1: 0.27
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.33  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.51  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.75  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.16  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30898
+==========
+===== Lex-Schwartz (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.47  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.54  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.30  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.32  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.75  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.15  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30372
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-VAD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-VAD (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.38  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.56  Recall: 0.45  F1: 0.50
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.41  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.03  F1: 0.05
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.20  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.20  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.44  F1: 0.43
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.60  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.10  F1: 0.14
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29965
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.57  F1: 0.48
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.54  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.29  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.30  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.50  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.75  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.16  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30741
+==========
+===== Lex-VAD (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.57  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.30  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.31  F1: 0.31
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.50  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.72  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.15  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30640
+==========
+===== Lex-VAD (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.57  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.57  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.07  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.31  F1: 0.27
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.31  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.50  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.15  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30796
+==========
+===== Lex-VAD (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.57  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.54  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.57  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.30  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.31  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.50  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.73  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.14  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30496
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmoLex =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmoLex (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.37  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.60  Recall: 0.40  F1: 0.48
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.39  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.02  F1: 0.03
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.19  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.22  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.45  F1: 0.43
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.62  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.11  F1: 0.15
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29699
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.50  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.51  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.28  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.30  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.78  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.16  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30458
+==========
+===== Lex-EmoLex (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.48  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.54  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.29  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.32  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.75  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.16  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30622
+==========
+===== Lex-EmoLex (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.49  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.54  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.30  F1: 0.27
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.32  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.75  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.17  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30845
+==========
+===== Lex-EmoLex (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.47  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.54  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.28  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.76  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.15  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30314
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MFD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MFD (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.37  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.41  F1: 0.49
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.39  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.02  F1: 0.03
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.19  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.21  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.45  F1: 0.43
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.61  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.12  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29830
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.53  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.51  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.51  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.10  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.29  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.30  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.77  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.17  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30625
+==========
+===== Lex-MFD (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.49  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.55  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.10  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.30  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.31  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.74  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.17  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30706
+==========
+===== Lex-MFD (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.91  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.50  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.55  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.31  F1: 0.27
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.74  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.18  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30970
+==========
+===== Lex-MFD (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.54  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.48  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.54  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.08  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.30  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.30  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.52  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.75  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.16  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30406
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC-22 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-22 (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.38  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.41  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.40  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.07  Recall: 0.02  F1: 0.03
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.17  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.23  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.46  F1: 0.42
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.56  Recall: 0.60  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.09  F1: 0.13
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29260
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.51  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.52  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.11  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.26  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.32  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.74  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.14  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30224
+==========
+===== Lex-LIWC-22 (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.56  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.49  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.56  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.11  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.27  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.33  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.13  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30325
+==========
+===== Lex-LIWC-22 (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.50  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.55  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.10  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.28  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.34  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.72  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.14  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30689
+==========
+===== Lex-LIWC-22 (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.48  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.55  F1: 0.44
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.26  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.33  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.53  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.13  F1: 0.17
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30089
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-LIWC-22_LingFeat =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-LIWC-22_LingFeat (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.37  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.45  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.43  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.07  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.07  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.21  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.24  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.44  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.56  Recall: 0.58  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.20  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31629
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.59  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.57  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.17  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.29  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.34  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.52  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.28  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30892
+==========
+===== Lex-LIWC-22_LingFeat (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.57  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.60  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.18  F1: 0.15
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.31  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.35  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.52  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.70  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.28  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31225
+==========
+===== Lex-LIWC-22_LingFeat (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.55  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.57  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.60  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.16  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.31  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.36  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.52  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.70  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.29  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31521
+==========
+===== Lex-LIWC-22_LingFeat (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.56  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.60  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.16  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.30  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.35  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.52  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.71  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.27  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31167
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MFD-20 =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MFD-20 (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.38  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.43  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.42  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.07  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.17  F1: 0.20
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.28  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.41  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.57  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.18  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29625
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.55  F1: 0.41
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.20  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.25  F1: 0.20
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.38  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.48  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.71  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.25  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29445
+==========
+===== Lex-MFD-20 (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.52  F1: 0.40
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.58  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.23  F1: 0.15
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.26  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.39  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.49  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.69  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.24  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29604
+==========
+===== Lex-MFD-20 (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.53  F1: 0.41
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.58  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.20  F1: 0.14
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.26  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.40  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.49  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.69  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.25  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29880
+==========
+===== Lex-MFD-20 (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.51  F1: 0.39
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.57  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.19  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.25  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.38  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.49  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.70  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.24  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29483
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-eMFD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-eMFD (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.37  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.42  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.43  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.07
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.17  F1: 0.20
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.27  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.42  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.55  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.18  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29519
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.53  F1: 0.44
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.56  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.22  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.23  F1: 0.20
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.36  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.50  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.70  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.26  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29526
+==========
+===== Lex-eMFD (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.54  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.51  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.24  F1: 0.14
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.25  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.38  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.67  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.25  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29748
+==========
+===== Lex-eMFD (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.54  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.52  F1: 0.43
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.91  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.59  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.21  F1: 0.13
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.26  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.38  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.38
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.67  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.26  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29969
+==========
+===== Lex-eMFD (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.50  F1: 0.42
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.58  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.20  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.24  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.37  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.50  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.68  F1: 0.53
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.25  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.29537
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MJD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MJD (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.38  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.45  F1: 0.50
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.39  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.03  F1: 0.05
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.23  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.22  F1: 0.26
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.43  F1: 0.43
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.54  Recall: 0.60  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.13  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30320
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.56  F1: 0.48
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.52  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.11  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.34  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.31  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.48  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.75  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.20  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31045
+==========
+===== Lex-MJD (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.89  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.39
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.55  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.13  Recall: 0.11  F1: 0.12
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.35  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.33  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.49  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.73  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.19  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31098
+==========
+===== Lex-MJD (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.54  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.55  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.09  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.37  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.33  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.49  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.74  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.20  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31378
+==========
+===== Lex-MJD (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.56  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.53  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.55  F1: 0.43
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.10  F1: 0.11
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.35  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.32  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.49  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.74  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.19  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.30988
+-----------------------------------------------------
+==========
+==========
+==========
+===== TD-LDA =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== TD-LDA (based on Social Focus = TD-NMF) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.37  F1: 0.38
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.44  F1: 0.50
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.39  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.03  F1: 0.05
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.67  Recall: 0.07  F1: 0.12
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.26  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.22  F1: 0.25
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.39  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.56  Recall: 0.58  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.13  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31177
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Social Focus = Previous-Sentences-2) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.55  F1: 0.47
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.51  F1: 0.41
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.09  F1: 0.09
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.07  F1: 0.10
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.37  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.32  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.45  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.72  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.19  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31458
+==========
+===== TD-LDA (based on Social Focus = NER) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.39  Recall: 0.52  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.54  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.10  Recall: 0.10  F1: 0.10
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.07  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.38  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.33  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.45  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.70  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.18  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31381
+==========
+===== TD-LDA (based on Social Focus = Lex - WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.41
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.41  Recall: 0.53  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.54  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.08  F1: 0.08
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.07  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.39  F1: 0.26
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.33  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.45  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.70  F1: 0.55
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.19  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31689
+==========
+===== TD-LDA (based on Social Focus = Lex - LIWC 15) =====
+==========
+----- Evaluating Test -----
+
+Label: Security: societal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.90  F1: 0.93
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.55  F1: 0.40
+
+Label: Tradition  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.52  F1: 0.45
+
+Label: Conformity: rules  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.53  F1: 0.42
+
+Label: Conformity: interpersonal  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.08  F1: 0.08
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.07  F1: 0.10
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.38  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.32  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.45  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.70  F1: 0.54
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.18  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 10 labels: 0.31238

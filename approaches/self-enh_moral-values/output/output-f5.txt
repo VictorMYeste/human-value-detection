@@ -1,0 +1,415 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Self-Enhancement = Lex-MFD-20) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.23  F1: 0.25
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.33  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.30  F1: 0.32
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.26  F1: 0.32
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.12  F1: 0.16
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.28349
+==========
+===== Baseline (based on Self-Enhancement = TD-BERTopic) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.26  F1: 0.25
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.34  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.27  F1: 0.31
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.31  F1: 0.34
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.13  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.28655
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Self-Enhancement = Lex-WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.39  F1: 0.30
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.43  F1: 0.37
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.37  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.39  F1: 0.37
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.21  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31398
+==========
+===== Baseline (based on Self-Enhancement = Lex-MFD-20) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.32  F1: 0.26
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.43  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.41  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.41  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.21  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31191
+==========
+===== Baseline (based on Self-Enhancement = TD-BERTopic) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.34  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.43  F1: 0.38
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.38  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.41  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.19  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31167
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-Schwartz =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Self-Enhancement = Lex-MFD-20) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.21  F1: 0.24
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.33  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.31  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.26  F1: 0.32
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.14  F1: 0.18
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.28510
+==========
+===== Lex-Schwartz (based on Self-Enhancement = TD-BERTopic) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.24  F1: 0.25
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.34  F1: 0.35
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.28  F1: 0.31
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.31  F1: 0.35
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.14  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.28914
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Self-Enhancement = Lex-WorryWords) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.35  F1: 0.30
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.44  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.39  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.39  F1: 0.37
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.23  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31881
+==========
+===== Lex-Schwartz (based on Self-Enhancement = Lex-MFD-20) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.30  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.93  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.43  F1: 0.36
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.43  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.41  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.23  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31351
+==========
+===== Lex-Schwartz (based on Self-Enhancement = TD-BERTopic) =====
+==========
+----- Evaluating Test -----
+
+Label: Hedonism  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.31  F1: 0.27
+
+Label: Achievement  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.94  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.32  Recall: 0.43  F1: 0.37
+
+Label: Power: dominance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.39  F1: 0.33
+
+Label: Power: resources  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.42  F1: 0.38
+
+Label: Face  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.21  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 5 labels: 0.31453

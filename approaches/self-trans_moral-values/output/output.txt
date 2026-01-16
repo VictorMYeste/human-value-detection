@@ -1,0 +1,1011 @@
+==========
+==========
+==========
+===== Baseline =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Baseline (based on Self-Transcendence = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:27:24,945 - INFO - Using device: cuda
+2025-05-29 13:27:25,159 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.07  F1: 0.10
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.21  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.20  F1: 0.22
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.39  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.62  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.18  F1: 0.19
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29
+==========
+===== Baseline (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:28:04,757 - INFO - Using device: cuda
+2025-05-29 13:28:04,905 - INFO - Hierarchical run ➜ 1534 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.10  F1: 0.15
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.19  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.20  F1: 0.23
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.39  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.59  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.19  F1: 0.20
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Baseline (based on Self-Transcendence = Lex-WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:28:30,412 - INFO - Using device: cuda
+2025-05-29 13:28:30,546 - INFO - Hierarchical run ➜ 2569 / 14569 sentences will be processed by the value model (threshold=0.16)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.10  F1: 0.10
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.26  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.34  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.48  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.74  F1: 0.59
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.26  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Baseline (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:28:59,859 - INFO - Using device: cuda
+2025-05-29 13:28:59,981 - INFO - Hierarchical run ➜ 2476 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.14  Recall: 0.10  F1: 0.12
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.25  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.35  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.47  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.48  Recall: 0.70  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.24  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Baseline (based on Self-Transcendence = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:29:28,305 - INFO - Using device: cuda
+2025-05-29 13:29:28,442 - INFO - Hierarchical run ➜ 2572 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.10  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.25  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.34  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.48  F1: 0.39
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.73  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.27  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-Schwartz =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Self-Transcendence = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:29:57,069 - INFO - Using device: cuda
+2025-05-29 13:29:57,255 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.22  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.18  F1: 0.22
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.39  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.61  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.25  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29
+==========
+===== Lex-Schwartz (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:30:32,641 - INFO - Using device: cuda
+2025-05-29 13:30:32,765 - INFO - Hierarchical run ➜ 1534 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.07  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.19  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.18  F1: 0.22
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.46  Recall: 0.38  F1: 0.42
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.58  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.25  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-Schwartz (based on Self-Transcendence = Lex-WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:30:58,358 - INFO - Using device: cuda
+2025-05-29 13:30:58,482 - INFO - Hierarchical run ➜ 2569 / 14569 sentences will be processed by the value model (threshold=0.16)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.28  F1: 0.23
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.30  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.46  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.72  F1: 0.59
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.33  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Lex-Schwartz (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:31:29,177 - INFO - Using device: cuda
+2025-05-29 13:31:29,300 - INFO - Hierarchical run ➜ 2476 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.27  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.46  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.68  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.30  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Lex-Schwartz (based on Self-Transcendence = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:31:59,797 - INFO - Using device: cuda
+2025-05-29 13:31:59,920 - INFO - Hierarchical run ➜ 2572 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.27  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.29  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.47  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.71  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.37  F1: 0.25
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-EmoLex =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-EmoLex (based on Self-Transcendence = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:32:31,057 - INFO - Using device: cuda
+2025-05-29 13:32:31,260 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.20  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.18  F1: 0.22
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.39  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.61  F1: 0.58
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.23  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.28
+==========
+===== Lex-EmoLex (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:33:08,965 - INFO - Using device: cuda
+2025-05-29 13:33:09,089 - INFO - Hierarchical run ➜ 1534 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.07  F1: 0.11
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.17  F1: 0.20
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.18  F1: 0.23
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.45  Recall: 0.38  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.58  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.24  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-EmoLex (based on Self-Transcendence = Lex-WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:33:35,649 - INFO - Using device: cuda
+2025-05-29 13:33:35,773 - INFO - Hierarchical run ➜ 2569 / 14569 sentences will be processed by the value model (threshold=0.16)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.26  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.31  F1: 0.29
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.35  Recall: 0.46  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.72  F1: 0.59
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.32  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Lex-EmoLex (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:34:05,091 - INFO - Using device: cuda
+2025-05-29 13:34:05,213 - INFO - Hierarchical run ➜ 2476 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.26  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.32  F1: 0.30
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.46  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.68  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.16  Recall: 0.29  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Lex-EmoLex (based on Self-Transcendence = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:34:34,681 - INFO - Using device: cuda
+2025-05-29 13:34:34,804 - INFO - Hierarchical run ➜ 2572 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.11  Recall: 0.07  F1: 0.08
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.97  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.25  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.30  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.47  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.71  F1: 0.56
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.36  F1: 0.24
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+-----------------------------------------------------
+==========
+==========
+==========
+===== Lex-MFD =====
+==========
+==========
+==========
+==========
+==========
+===== Fixed Threshold (0.5) =====
+==========
+==========
+==========
+===== Lex-MFD (based on Self-Transcendence = Baseline) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:35:04,220 - INFO - Using device: cuda
+2025-05-29 13:35:04,447 - INFO - Hierarchical run ➜ 1673 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.21  F1: 0.24
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.15  F1: 0.20
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.40  Recall: 0.42  F1: 0.41
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.55  Recall: 0.60  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.19  F1: 0.21
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.27
+==========
+===== Lex-MFD (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:35:44,775 - INFO - Using device: cuda
+2025-05-29 13:35:44,898 - INFO - Hierarchical run ➜ 1534 / 14569 sentences will be processed by the value model (threshold=0.5)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 1.00  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.17  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.15  F1: 0.21
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.41  F1: 0.42
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.57  Recall: 0.57  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.27  Recall: 0.20  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.28
+==========
+==========
+===== Tuned Threshold =====
+==========
+==========
+==========
+===== Lex-MFD (based on Self-Transcendence = Lex-WorryWords) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:36:10,173 - INFO - Using device: cuda
+2025-05-29 13:36:10,299 - INFO - Hierarchical run ➜ 2569 / 14569 sentences will be processed by the value model (threshold=0.16)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.26  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.24  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.50  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.73  F1: 0.59
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.23  F1: 0.23
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.30
+==========
+===== Lex-MFD (based on Self-Transcendence = Lex-MFD-20) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:36:39,699 - INFO - Using device: cuda
+2025-05-29 13:36:39,822 - INFO - Hierarchical run ➜ 2476 / 14569 sentences will be processed by the value model (threshold=0.21)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.25  F1: 0.22
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.25  F1: 0.28
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.34  Recall: 0.50  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.49  Recall: 0.69  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.22  Recall: 0.23  F1: 0.22
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29
+==========
+===== Lex-MFD (based on Self-Transcendence = TD-BERTopic) =====
+==========
+----- Predicting Test -----
+2025-05-29 13:37:08,549 - INFO - Using device: cuda
+2025-05-29 13:37:08,673 - INFO - Hierarchical run ➜ 2572 / 14569 sentences will be processed by the value model (threshold=0.19)
+----- Evaluating Test -----
+
+Label: Humility  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.03  F1: 0.06
+
+Label: Benevolence: caring  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.25  F1: 0.21
+
+Label: Benevolence: dependability  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.31  Recall: 0.24  F1: 0.27
+
+Label: Universalism: concern  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.33  Recall: 0.51  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.71  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.50 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.24  Recall: 0.26  F1: 0.25
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed 0.50 threshold) across 6 labels: 0.29

@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Self-Protection Anxiety-Avoidance",
+  "tau": 0.36,
+  "val_macro_f1": 0.2390903947123443,
+  "val_coverage": 0.7332259796027912
+}

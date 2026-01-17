@@ -1,0 +1,11 @@
+{
+  "Self-direction: thought": 0.5,
+  "Self-direction: action": 0.1,
+  "Stimulation": 0.1,
+  "Hedonism": 0.1,
+  "Achievement": 0.1,
+  "Power: dominance": 0.1,
+  "Power: resources": 0.5,
+  "Face": 0.1,
+  "Security: personal": 0.1
+}

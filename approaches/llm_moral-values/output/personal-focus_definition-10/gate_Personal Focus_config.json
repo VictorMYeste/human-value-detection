@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Personal Focus",
+  "tau": 0.29,
+  "val_macro_f1": 0.2092687848376904,
+  "val_coverage": 0.821256038647343
+}

@@ -1,0 +1,13 @@
+{
+  "Self-direction: thought": 0.5,
+  "Self-direction: action": 0.5,
+  "Stimulation": 0.5,
+  "Hedonism": 0.5,
+  "Achievement": 0.5,
+  "Humility": 0.5,
+  "Benevolence: caring": 0.5,
+  "Benevolence: dependability": 0.5,
+  "Universalism: concern": 0.5,
+  "Universalism: nature": 0.1,
+  "Universalism: tolerance": 0.5
+}

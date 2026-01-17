@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Conservation",
+  "tau": 0.45,
+  "val_macro_f1": 0.2143002016950768,
+  "val_coverage": 0.5918545356951154
+}

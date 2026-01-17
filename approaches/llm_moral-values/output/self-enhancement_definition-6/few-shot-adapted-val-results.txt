@@ -1,0 +1,66 @@
+
+Label: Hedonism  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.67  F1: 0.14
+
+Label: Hedonism  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.08  Recall: 0.67  F1: 0.14
+
+Label: Achievement  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.43  F1: 0.32
+
+Label: Achievement  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.43  F1: 0.32
+
+Label: Power: dominance  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.30  F1: 0.29
+
+Label: Power: dominance  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.30  F1: 0.29
+
+Label: Power: resources  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.86  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.63  F1: 0.29
+
+Label: Power: resources  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.86  F1: 0.92
+  Class 1 (positive)
+    Precision: 0.19  Recall: 0.63  F1: 0.29
+
+Label: Face  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.77  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.66  F1: 0.10
+
+Label: Face  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.77  F1: 0.86
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.66  F1: 0.10
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 5 labels: 0.22906
+
+Macro-average F1 (fixed threshold) across 5 labels: 0.22906

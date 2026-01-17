@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Presence",
+  "tau": 0.5,
+  "val_macro_f1": 0.18440869342141494,
+  "val_coverage": 0.5120772946859904
+}

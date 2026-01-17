@@ -1,0 +1,78 @@
+
+Label: Humility  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.03  Recall: 0.23  F1: 0.05
+
+Label: Humility  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.03  Recall: 0.23  F1: 0.05
+
+Label: Benevolence: caring  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.93  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.41  F1: 0.18
+
+Label: Benevolence: caring  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.93  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.12  Recall: 0.41  F1: 0.18
+
+Label: Benevolence: dependability  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.79  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.43  F1: 0.07
+
+Label: Benevolence: dependability  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.79  F1: 0.88
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.43  F1: 0.07
+
+Label: Universalism: concern  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.67  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.68  F1: 0.15
+
+Label: Universalism: concern  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.67  F1: 0.79
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.68  F1: 0.15
+
+Label: Universalism: nature  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.93  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.89  F1: 0.40
+
+Label: Universalism: nature  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.93  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.89  F1: 0.40
+
+Label: Universalism: tolerance  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.06  Recall: 0.36  F1: 0.11
+
+Label: Universalism: tolerance  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.06  Recall: 0.36  F1: 0.11
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 6 labels: 0.16094
+
+Macro-average F1 (fixed threshold) across 6 labels: 0.16094

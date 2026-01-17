@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Growth Anxiety-Free",
+  "tau": 0.36,
+  "val_macro_f1": 0.19882694006117596,
+  "val_coverage": 0.7332259796027912
+}

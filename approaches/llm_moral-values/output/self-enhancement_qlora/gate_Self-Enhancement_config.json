@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Self-Enhancement",
+  "tau": 0.11,
+  "val_macro_f1": 0.2808581228302951,
+  "val_coverage": 0.9756441223832528
+}

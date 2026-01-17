@@ -1,0 +1,54 @@
+
+Label: Self-direction: thought  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.19  F1: 0.08
+
+Label: Self-direction: thought  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.19  F1: 0.08
+
+Label: Self-direction: action  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.84  F1: 0.90
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.21  F1: 0.07
+
+Label: Self-direction: action  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.84  F1: 0.90
+  Class 1 (positive)
+    Precision: 0.04  Recall: 0.21  F1: 0.07
+
+Label: Stimulation  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.25  F1: 0.13
+
+Label: Stimulation  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.92  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.09  Recall: 0.25  F1: 0.13
+
+Label: Hedonism  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.37  F1: 0.08
+
+Label: Hedonism  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.95  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.05  Recall: 0.37  F1: 0.08
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 4 labels: 0.08870
+
+Macro-average F1 (fixed threshold) across 4 labels: 0.08870

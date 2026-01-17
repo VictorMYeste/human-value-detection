@@ -1,0 +1,7 @@
+{
+  "gate_mode": "sbert-hard",
+  "gate_col": "Social Focus",
+  "tau": 0.38,
+  "val_macro_f1": 0.25288746433645776,
+  "val_coverage": 0.7029656468062265
+}

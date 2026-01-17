@@ -1,0 +1,9 @@
+{
+  "Face": 0.1,
+  "Security: personal": 0.1,
+  "Security: societal": 0.1,
+  "Tradition": 0.1,
+  "Conformity: rules": 0.1,
+  "Conformity: interpersonal": 0.5,
+  "Humility": 0.5
+}

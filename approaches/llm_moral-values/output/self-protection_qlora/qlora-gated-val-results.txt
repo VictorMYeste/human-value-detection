@@ -1,0 +1,126 @@
+
+Label: Achievement  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.24  F1: 0.33
+
+Label: Achievement  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.24  F1: 0.33
+
+Label: Power: dominance  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.20  F1: 0.28
+
+Label: Power: dominance  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.99  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.47  Recall: 0.20  F1: 0.28
+
+Label: Power: resources  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Power: resources  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.22  F1: 0.28
+
+Label: Face  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.17  F1: 0.24
+
+Label: Face  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.42  Recall: 0.17  F1: 0.24
+
+Label: Security: personal  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.24  F1: 0.33
+
+Label: Security: personal  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.53  Recall: 0.24  F1: 0.33
+
+Label: Security: societal  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.43  F1: 0.46
+
+Label: Security: societal  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.95  Recall: 0.96  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.50  Recall: 0.43  F1: 0.46
+
+Label: Tradition  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.30  F1: 0.40
+
+Label: Tradition  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.30  F1: 0.40
+
+Label: Conformity: rules  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.38  F1: 0.46
+
+Label: Conformity: rules  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.98  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.59  Recall: 0.38  F1: 0.46
+
+Label: Conformity: interpersonal  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.02  F1: 0.04
+
+Label: Conformity: interpersonal  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.25  Recall: 0.02  F1: 0.04
+
+Label: Humility  |  best threshold = 0.50
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.05  F1: 0.07
+
+Label: Humility  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.05  F1: 0.07
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 10 labels: 0.29131
+
+Macro-average F1 (fixed threshold) across 10 labels: 0.29131

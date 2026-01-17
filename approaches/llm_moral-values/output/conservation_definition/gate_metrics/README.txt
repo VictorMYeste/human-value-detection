@@ -1,0 +1,1 @@
+Gate results live here. τ chosen on validation to maximise end-to-end macro-F1.

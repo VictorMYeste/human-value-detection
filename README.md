@@ -321,6 +321,7 @@ Please cite the relevant paper(s) if you use this repository:
 
 -TO BE PUBLISHED IN THE FOLLOWING DAYS-
 
+```bibtex
 @article{yeste2026human-values-single-sentence,
   title   = {Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum},
   author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
@@ -334,6 +335,7 @@ Please cite the relevant paper(s) if you use this repository:
   journal = {arXiv preprint arXiv:-},
   year    = {2026}
 }
+```
 
 ---
 

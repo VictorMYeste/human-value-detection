@@ -131,6 +131,8 @@ The repo uses standard libraries such as:
 - sentencepiece
 - etc. (see requirements.txt for the full list)
 
+---
+
 ## Data
 
 The repository does not redistribute the ValueEval’24 / ValuesML corpus.
@@ -174,6 +176,8 @@ You can either:
 - regenerate the presence and high-order categories fields yourself (presence = 1 iff any of the 19 value columns is non-zero), or
 - adapt/use a small helper script in data-prep/.
 
+---
+
 ## Quickstart
 
 Predictions
@@ -212,6 +216,8 @@ Note:
 The argument --model-name controls which configuration in approaches/ is instantiated.
 Baseline is the simplest DeBERTa-based model. Other names correspond to feature-augmented, hierarchical, or ensemble variants used in the papers.
 
+---
+
 ## Reproducing the papers
 
 The codebase is shared; different configurations and model names correspond to the two papers.
@@ -236,8 +242,8 @@ In this repo, the main pieces are:
 - Ensemble definitions (soft-voting, hard-voting, hybrid ensembles).
 
 The workflow is:
-	1.	Run predict.py for the model you want (e.g., presence gate, direct value model, presence-gated hierarchy, ensemble).
-	2.	Run eval.py to tune thresholds and evaluate.
+1.	Run predict.py for the model you want (e.g., presence gate, direct value model, presence-gated hierarchy, ensemble).
+2.	Run eval.py to tune thresholds and evaluate.
 
 Example (placeholder model names – replace with your actual ones):
 
@@ -287,9 +293,9 @@ In this repo, the main ingredients for this paper are:
 - Shared components in core/ (data loading, training, evaluation, thresholding).
 
 Typical workflow (conceptual):
-	1.	Choose the HO-aware model you want to reproduce (see the comments and model registry inside approaches/).
-	2.	Run predict.py on the validation and/or test sets with that --model-name.
-	3.	Run eval.py to perform threshold tuning and evaluation.
+1.	Choose the HO-aware model you want to reproduce (see the comments and model registry inside approaches/).
+2.	Run predict.py on the validation and/or test sets with that --model-name.
+3.	Run eval.py to perform threshold tuning and evaluation.
 
 Example (placeholder model name – update to your actual one):
 
@@ -306,6 +312,8 @@ python3 eval.py \
 ```
 
 Please consult the model registry (e.g., in approaches/__init__.py or similar) for the exact names corresponding to the HO models reported in the paper.
+
+---
 
 ## Citation
 
@@ -325,10 +333,17 @@ Please cite the relevant paper(s) if you use this repository:
   year    = {2025}
 }
 
+---
+
 ## License
 
-The code in this repository is released under the license specified in the LICENSE file (if present).
-If no license file is included yet, please contact the author(s) before using the code in other projects.
+The code in this repository is released under the **Apache License 2.0**.
+See the `LICENSE.txt` file for details.
+
+Please also respect the licenses and Data Usage Agreements of any external
+resources (e.g., ValueEval/ValuesML datasets, proprietary lexica such as LIWC).
+
+---
 
 ## Contact
 

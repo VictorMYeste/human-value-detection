@@ -123,13 +123,13 @@ pip install -r requirements.txt
 ```
 
 The repo uses standard libraries such as:
-	•	torch
-	•	transformers
-	•	accelerate
-	•	scikit-learn
-	•	pandas, numpy
-	•	sentencepiece
-	•	etc. (see requirements.txt for the full list)
+- torch
+- transformers
+- accelerate
+- scikit-learn
+- pandas, numpy
+- sentencepiece
+- etc. (see requirements.txt for the full list)
 
 ## Data
 
@@ -139,13 +139,13 @@ You must obtain it yourself and accept the corresponding Data Usage Agreement.
 1. Download ValueEval’24 / ValuesML
 	1.	Register and download the English machine-translated splits (train / validation / test) from the official release (see the papers for the exact Zenodo link / DOI).
 	2.	You should obtain at least:
-	•	sentences.tsv
-	•	labels-cat.tsv
+- sentences.tsv
+- labels-cat.tsv
 for each split.
 
 We assume the official columns are present, including:
-	•	Text-ID, Sentence-ID
-	•	19 value columns
+- Text-ID, Sentence-ID
+- 19 value columns
 
 2. Directory layout
 
@@ -171,8 +171,8 @@ You can of course keep data elsewhere; just pass the correct paths with --train-
 relative to the repo root (as in the original minimal README).
 
 You can either:
-	•	regenerate the presence and high-order categories fields yourself (presence = 1 iff any of the 19 value columns is non-zero), or
-	•	adapt/use a small helper script in data-prep/.
+- regenerate the presence and high-order categories fields yourself (presence = 1 iff any of the 19 value columns is non-zero), or
+- adapt/use a small helper script in data-prep/.
 
 ## Quickstart
 
@@ -187,9 +187,9 @@ python3 predict.py \
 ```
 
 This will:
-	•	load the specified model configuration,
-	•	run inference on the validation sentences,
-	•	write predictions to a standard location (typically under an internal outputs/ or similar directory, as configured in the code).
+- load the specified model configuration,
+- run inference on the validation sentences,
+- write predictions to a standard location (typically under an internal outputs/ or similar directory, as configured in the code).
 
 Evaluation
 
@@ -203,10 +203,10 @@ python3 eval.py \
 ```
 
 Typical behaviour:
-	•	load validation predictions (or run them if missing),
-	•	tune thresholds on the validation split,
-	•	apply the tuned thresholds to test predictions,
-	•	print and/or save evaluation metrics (e.g., macro-averaged F1 over the 19 values and presence F1).
+- load validation predictions (or run them if missing),
+- tune thresholds on the validation split,
+- apply the tuned thresholds to test predictions,
+- print and/or save evaluation metrics (e.g., macro-averaged F1 over the 19 values and presence F1).
 
 Note:
 The argument --model-name controls which configuration in approaches/ is instantiated.
@@ -221,19 +221,19 @@ The codebase is shared; different configurations and model names correspond to t
 Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum (arXiv:2501.01235)
 
 This paper focuses on:
-	•	A sentence-level moral presence task (presence = any value yes/no).
-	•	Direct 19-value detection vs. presence-gated hierarchies.
-	•	Lightweight signals (LIWC-22, eMFD/MJD, topics, prior-sentence context).
-	•	Compute-frugal ensembles of:
-	•	Supervised DeBERTa models,
-	•	Instruction-tuned LLMs (Gemma, Llama, Qwen, Mistral),
-	•	QLoRA-adapted LLMs.
+- A sentence-level moral presence task (presence = any value yes/no).
+- Direct 19-value detection vs. presence-gated hierarchies.
+- Lightweight signals (LIWC-22, eMFD/MJD, topics, prior-sentence context).
+- Compute-frugal ensembles of:
+- Supervised DeBERTa models,
+- Instruction-tuned LLMs (Gemma, Llama, Qwen, Mistral),
+- QLoRA-adapted LLMs.
 
 In this repo, the main pieces are:
-	•	Presence-only models in approaches/ (gate training and evaluation).
-	•	Value models with optional presence gating.
-	•	LLM integrations and their wrappers (for zero-/few-shot and QLoRA).
-	•	Ensemble definitions (soft-voting, hard-voting, hybrid ensembles).
+- Presence-only models in approaches/ (gate training and evaluation).
+- Value models with optional presence gating.
+- LLM integrations and their wrappers (for zero-/few-shot and QLoRA).
+- Ensemble definitions (soft-voting, hard-voting, hybrid ensembles).
 
 The workflow is:
 	1.	Run predict.py for the model you want (e.g., presence gate, direct value model, presence-gated hierarchy, ensemble).
@@ -271,20 +271,20 @@ Check the code in approaches/ for the exact model names used in the paper tables
 Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts (arXiv:2501.01234)
 
 This paper focuses on:
-	•	The 19 values and eight derived higher-order (HO) categories (e.g., Openness to Change, Conservation, Self-Transcendence, etc.).
-	•	Comparing:
-	•	Direct 19-value prediction,
-	•	Category → Values hierarchical pipelines,
-	•	Presence → Category → Values cascades.
-	•	Effects of:
-	•	Threshold calibration,
-	•	Auxiliary features (lexica, topics, short context),
-	•	Small supervised ensembles,
-	•	Medium-sized instruction-tuned LLMs.
+- The 19 values and eight derived higher-order (HO) categories (e.g., Openness to Change, Conservation, Self-Transcendence, etc.).
+- Comparing:
+- Direct 19-value prediction,
+- Category → Values hierarchical pipelines,
+- Presence → Category → Values cascades.
+- Effects of:
+- Threshold calibration,
+- Auxiliary features (lexica, topics, short context),
+- Small supervised ensembles,
+- Medium-sized instruction-tuned LLMs.
 
 In this repo, the main ingredients for this paper are:
-	•	Model definitions and configs in approaches/ (HO-related models and gates).
-	•	Shared components in core/ (data loading, training, evaluation, thresholding).
+- Model definitions and configs in approaches/ (HO-related models and gates).
+- Shared components in core/ (data loading, training, evaluation, thresholding).
 
 Typical workflow (conceptual):
 	1.	Choose the HO-aware model you want to reproduce (see the comments and model registry inside approaches/).

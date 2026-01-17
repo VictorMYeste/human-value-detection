@@ -4,3 +4,5 @@ data/
 lexicons/
 **/.DS_Store
 .vscode/
+._
+**/.*

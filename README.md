@@ -224,7 +224,7 @@ The codebase is shared; different configurations and model names correspond to t
 
 1. Moral presence & ensembles paper
 
-Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum (arXiv:2501.01235)
+Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum (arXiv:-)
 
 This paper focuses on:
 - A sentence-level moral presence task (presence = any value yes/no).
@@ -274,7 +274,7 @@ Check the code in approaches/ for the exact model names used in the paper tables
 
 2. Higher-Order values paper
 
-Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts (arXiv:2501.01234)
+Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts (arXiv:-)
 
 This paper focuses on:
 - The 19 values and eight derived higher-order (HO) categories (e.g., Openness to Change, Conservation, Self-Transcendence, etc.).
@@ -319,18 +319,20 @@ Please consult the model registry (e.g., in approaches/__init__.py or similar) f
 
 Please cite the relevant paper(s) if you use this repository:
 
-@article{yeste2025schwartz-ho-values,
-  title   = {Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts},
-  author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
-  journal = {arXiv preprint arXiv:2501.01234},
-  year    = {2025}
-}
+-TO BE PUBLISHED IN THE FOLLOWING DAYS-
 
-@article{yeste2025human-values-single-sentence,
+@article{yeste2026human-values-single-sentence,
   title   = {Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum},
   author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
-  journal = {arXiv preprint arXiv:2501.01235},
-  year    = {2025}
+  journal = {arXiv preprint arXiv:-},
+  year    = {2026}
+}
+
+@article{yeste2026schwartz-ho-values,
+  title   = {Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts},
+  author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
+  journal = {arXiv preprint arXiv:-},
+  year    = {2026}
 }
 
 ---

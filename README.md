@@ -8,7 +8,7 @@ This repository contains implementations, experiments, and pre-/post-processing 
 
 Both papers are currently available as arXiv preprints:
 
-- Yeste & Rosso, *Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts*, arXiv:-
+- Yeste & Rosso, *Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts*, arXiv:2601.14172
 - Yeste & Rosso, *Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum*, arXiv:-
 
 If you use this code, models, or results in your research, **please cite at least one of the two papers** (see [Citation](#citation)).
@@ -224,7 +224,7 @@ The codebase is shared; different configurations and model names correspond to t
 
 1. Moral presence & ensembles paper
 
-Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum (arXiv:-)
+Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum (arXiv:2601.14172)
 
 This paper focuses on:
 - A sentence-level moral presence task (presence = any value yes/no).
@@ -322,11 +322,14 @@ Please cite the relevant paper(s) if you use this repository:
 -TO BE PUBLISHED IN THE FOLLOWING DAYS-
 
 ```bibtex
-@article{yeste2026human-values-single-sentence,
-  title   = {Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum},
-  author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
-  journal = {arXiv preprint arXiv:-},
-  year    = {2026}
+@misc{yeste2026humanvaluessinglesentence,
+      title={Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum}, 
+      author={Víctor Yeste and Paolo Rosso},
+      year={2026},
+      eprint={2601.14172},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2601.14172}, 
 }
 
 @article{yeste2026schwartz-ho-values,

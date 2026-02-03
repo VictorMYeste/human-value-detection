@@ -8,8 +8,8 @@ This repository contains implementations, experiments, and pre-/post-processing 
 
 Both papers are currently available as arXiv preprints:
 
-- Yeste & Rosso, *Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts*, arXiv:2601.14172
-- Yeste & Rosso, *Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum*, arXiv:-
+- Yeste & Rosso, *Human Values in a Single Sentence: Moral Presence, Hierarchies, and Transformer Ensembles on the Schwartz Continuum*, arXiv:2601.14172
+- Yeste & Rosso, *Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts*, arXiv:2602.00913
 
 If you use this code, models, or results in your research, **please cite at least one of the two papers** (see [Citation](#citation)).
 
@@ -274,7 +274,7 @@ Check the code in approaches/ for the exact model names used in the paper tables
 
 2. Higher-Order values paper
 
-Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts (arXiv:-)
+Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts (arXiv:2602.00913)
 
 This paper focuses on:
 - The 19 values and eight derived higher-order (HO) categories (e.g., Openness to Change, Conservation, Self-Transcendence, etc.).
@@ -332,11 +332,14 @@ Please cite the relevant paper(s) if you use this repository:
       url={https://arxiv.org/abs/2601.14172}, 
 }
 
-@article{yeste2026schwartz-ho-values,
-  title   = {Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts},
-  author  = {Yeste, V{\'\i}ctor and Rosso, Paolo},
-  journal = {arXiv preprint arXiv:-},
-  year    = {2026}
+@misc{yeste2026schwartzhigherordervalueshelp,
+      title={Do Schwartz Higher-Order Values Help Sentence-Level Human Value Detection? When Hard Gating Hurts}, 
+      author={Víctor Yeste and Paolo Rosso},
+      year={2026},
+      eprint={2602.00913},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2602.00913}, 
 }
 ```
 

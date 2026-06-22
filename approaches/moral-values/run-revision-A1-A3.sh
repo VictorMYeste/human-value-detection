@@ -21,8 +21,8 @@
 #   output/[1_<gate>_<th>_]<model-name>-<split>.tsv (core/prediction.py:237,
 #   core/evaluation.py:209), so each seed uses a unique -s<N> model-name and never
 #   overwrites the published seed-42 artefacts in output/.
-# - Seed 42 == the existing paper outputs; this adds seeds 1,2 -> mean ± std over
-#   {42,1,2}. Running all seeds on the SAME machine keeps std = seed variance only.
+# - Seed 42 == the existing paper outputs; this adds seeds 7,1701 -> mean ± std over
+#   {42,7,1701}. Running all seeds on the SAME machine keeps std = seed variance only.
 #
 # IMPORTANT — keep the 8 GB config even on a bigger GPU.
 #   Do NOT raise batch_size / lower grad-accum / change seq-len. The paper's
@@ -37,7 +37,7 @@ TRAIN=../../data/training-english/
 VAL=../../data/validation-english/
 TEST=../../data/test-english/
 
-SEEDS="1 2"                       # seed 42 already on disk; "1 2 3 4" for n=5
+SEEDS="7 1701"                       # seed 42 already on disk
 GATE_BASE="Previous-Sentences-2-Lex-LIWC-22"   # presence gate = Prev-2 + LIWC-22
 GATE_TH=0.1                                     # t_gate from the paper (Table 3)
 SWEEP="0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.0"

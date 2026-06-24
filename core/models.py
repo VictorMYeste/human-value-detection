@@ -331,7 +331,7 @@ class EnhancedDebertaModel(nn.Module):
     
 class CustomTrainer(transformers.Trainer):
     """Custom Trainer with modified loss function for multi-label classification."""
-    def compute_loss(self, model, inputs, return_outputs=False):
+    def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
         logger.debug(f"Keys in inputs: {inputs.keys()}")
         logger.debug(f"Input IDs Shape: {inputs['input_ids'].shape}")
         logger.debug(f"Attention Mask Shape: {inputs['attention_mask'].shape}")

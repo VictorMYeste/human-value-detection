@@ -31,6 +31,7 @@
 #   RTX 3070.
 # =============================================================================
 set -e
+set -o pipefail   # so a failed `accelerate ... | tee` aborts instead of silently continuing to predict
 cd "$(dirname "$0")"
 
 TRAIN=../../data/training-english/
@@ -47,9 +48,13 @@ mkdir -p results
 # Train a moral-values config + predict val & test (no eval).  $1=name $2=seed; rest=flags
 mv_train () {
   local NAME=$1 SEED=$2; shift 2; local FLAGS="$*"
-  echo "----- train ${NAME} (seed ${SEED}) flags:[${FLAGS}] -----"
-  accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
-      $FLAGS --model-name "$NAME" | tee "results/${NAME}.txt"
+  if [ -d "models/${NAME}" ]; then
+    echo "----- SKIP train ${NAME}: models/${NAME} already exists (reusing checkpoint) -----"
+  else
+    echo "----- train ${NAME} (seed ${SEED}) flags:[${FLAGS}] -----"
+    accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
+        $FLAGS --model-name "$NAME" | tee "results/${NAME}.txt"
+  fi
   python3 predict.py --validation-dataset "$VAL" $FLAGS --model-name "$NAME"
   python3 predict.py --test-dataset      "$TEST" $FLAGS --model-name "$NAME"
 }
@@ -68,9 +73,13 @@ mv_eval_direct () {
 pmv_gated () {
   local VNAME=$1 SEED=$2 GATE=$3; shift 3; local FLAGS="$*"
   ( cd ../p_moral-values
-    echo "----- p_moral-values (FILTERED) train ${VNAME} (seed ${SEED}) flags:[${FLAGS}] -----"
-    accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
-        $FLAGS --model-name "$VNAME" | tee "results/${VNAME}.txt"
+    if [ -d "models/${VNAME}" ]; then
+      echo "----- SKIP p_moral-values train ${VNAME}: models/${VNAME} already exists (reusing checkpoint) -----"
+    else
+      echo "----- p_moral-values (FILTERED) train ${VNAME} (seed ${SEED}) flags:[${FLAGS}] -----"
+      accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
+          $FLAGS --model-name "$VNAME" | tee "results/${VNAME}.txt"
+    fi
     python3 predict.py --validation-dataset "$VAL" $FLAGS --model-name "$VNAME" \
         --filter-1-model "$GATE" --filter-1-th "$GATE_TH"
     python3 predict.py --test-dataset      "$TEST" $FLAGS --model-name "$VNAME" \
@@ -93,9 +102,13 @@ pmv_gated () {
 pres_train_predict () {
   local NAME=$1 SEED=$2; shift 2; local FLAGS="$*"
   ( cd ../presence
-    echo "----- presence train ${NAME} (seed ${SEED}) flags:[${FLAGS}] -----"
-    accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
-        $FLAGS --model-name "$NAME" | tee "results/${NAME}.txt"
+    if [ -d "models/${NAME}" ]; then
+      echo "----- SKIP presence train ${NAME}: models/${NAME} already exists (reusing checkpoint) -----"
+    else
+      echo "----- presence train ${NAME} (seed ${SEED}) flags:[${FLAGS}] -----"
+      accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
+          $FLAGS --model-name "$NAME" | tee "results/${NAME}.txt"
+    fi
     python3 predict.py --validation-dataset "$VAL" $FLAGS --model-name "$NAME"
     python3 predict.py --test-dataset      "$TEST" $FLAGS --model-name "$NAME" )
 }

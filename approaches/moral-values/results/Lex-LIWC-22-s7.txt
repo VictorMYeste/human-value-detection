@@ -1,0 +1,68 @@
+2026-06-24 04:55:04,055 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-24 04:55:04,055 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-24 04:55:13,975 - INFO - Setting random seed to 7
+2026-06-24 04:55:14,008 - INFO - Running training for labels: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Humility', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+2026-06-24 04:55:14,008 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2026-06-24 04:55:14,253 - INFO - Loading lexicon embeddings for: LIWC-22
+2026-06-24 04:55:14,253 - INFO - Preparing datasets for training and validation
+2026-06-24 04:55:58,119 - INFO - Arguments validated successfully.
+2026-06-24 04:55:58,206 - INFO - Clearing old checkpoints in models/checkpoints
+2026-06-24 04:55:59,063 - INFO - Using CUDA for training.
+2026-06-24 04:56:00,180 - INFO - TRAINING
+2026-06-24 04:56:00,181 - INFO - ========
+2026-06-24 04:56:00,181 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Lex-LIWC-22-s7
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: LIWC-22
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 118
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2026-06-24 04:56:00,183 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-24 04:56:00,817 - ERROR - An error occurred: compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/moral-values/main.py", line 132, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/moral-values/main.py", line 103, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 81, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 268, in train
+    trainer.train()
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+TypeError: compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+2026-06-24 04:56:00,820 - ERROR - An error occurred: compute_loss() got an unexpected keyword argument 'num_items_in_batch'
+Traceback (most recent call last):
+  File "/home/vicyesmo/human-value-detection/approaches/moral-values/main.py", line 132, in <module>
+    main()
+  File "/home/vicyesmo/human-value-detection/approaches/moral-values/main.py", line 103, in main
+    run_training(
+  File "/home/vicyesmo/human-value-detection/core/runner.py", line 81, in run_training
+    trainer = train(
+  File "/home/vicyesmo/human-value-detection/core/training.py", line 268, in train
+    trainer.train()
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/home/vicyesmo/miniconda3/envs/hvd/lib/python3.9/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+TypeError: compute_loss() got an unexpected keyword argument 'num_items_in_batch'

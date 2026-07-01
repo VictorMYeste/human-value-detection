@@ -1,0 +1,141 @@
+T=0.05  F1=0.26064
+T=0.10  F1=0.29566
+T=0.15  F1=0.30772
+T=0.20  F1=0.31166
+T=0.25  F1=0.31314
+T=0.30  F1=0.30968
+T=0.35  F1=0.30411
+T=0.40  F1=0.29718
+T=0.45  F1=0.28792
+T=0.50  F1=0.27629
+T=0.55  F1=0.26191
+T=0.60  F1=0.24398
+T=0.65  F1=0.22486
+T=0.70  F1=0.20546
+T=0.75  F1=0.18284
+T=0.80  F1=0.15335
+T=0.85  F1=0.12763
+T=0.90  F1=0.08876
+T=0.95  F1=0.03566
+T=1.0   F1=0.00000
+
+Best threshold on validation for Lex-LIWC-22-s1701: 0.25  (Macro-F1 0.31314)
+-------------------------------------------------------------------
+
+Label: Self-direction: thought  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.17  Recall: 0.21  F1: 0.19
+
+Label: Self-direction: action  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.94  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.18  Recall: 0.34  F1: 0.24
+
+Label: Stimulation  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.96  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.21  Recall: 0.40  F1: 0.28
+
+Label: Hedonism  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.29  Recall: 0.42  F1: 0.35
+
+Label: Achievement  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.95  F1: 0.95
+  Class 1 (positive)
+    Precision: 0.36  Recall: 0.44  F1: 0.39
+
+Label: Power: dominance  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.30  Recall: 0.43  F1: 0.36
+
+Label: Power: resources  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.95  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.47  F1: 0.41
+
+Label: Face  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.26  Recall: 0.31  F1: 0.28
+
+Label: Security: personal  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.37  Recall: 0.39  F1: 0.38
+
+Label: Security: societal  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.92  F1: 0.94
+  Class 1 (positive)
+    Precision: 0.38  Recall: 0.56  F1: 0.45
+
+Label: Tradition  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.57  F1: 0.50
+
+Label: Conformity: rules  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.96  Recall: 0.96  F1: 0.96
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.45  F1: 0.44
+
+Label: Conformity: interpersonal  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 1.00  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.15  Recall: 0.06  F1: 0.08
+
+Label: Humility  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 1.00  F1: 1.00
+  Class 1 (positive)
+    Precision: 0.00  Recall: 0.00  F1: 0.00
+
+Label: Benevolence: caring  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.98  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.23  Recall: 0.29  F1: 0.25
+
+Label: Benevolence: dependability  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.98  F1: 0.98
+  Class 1 (positive)
+    Precision: 0.28  Recall: 0.35  F1: 0.31
+
+Label: Universalism: concern  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.97  Recall: 0.97  F1: 0.97
+  Class 1 (positive)
+    Precision: 0.43  Recall: 0.41  F1: 0.42
+
+Label: Universalism: nature  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 1.00  Recall: 0.98  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.44  Recall: 0.79  F1: 0.57
+
+Label: Universalism: tolerance  |  Fixed 0.25 threshold
+  Class 0 (negative)
+    Precision: 0.99  Recall: 0.99  F1: 0.99
+  Class 1 (positive)
+    Precision: 0.20  Recall: 0.30  F1: 0.24
+
+=== SUMMARY =================================================
+
+Macro-average F1 (fixed threshold) across 19 labels: 0.32369

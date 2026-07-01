@@ -1,0 +1,56 @@
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.74  Recall: 0.61  F1: 0.67
+  Class 1 (positive)
+    Precision: 0.68  Recall: 0.80  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.71  Recall: 0.68  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.73  F1: 0.71
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.73159
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71428
+--- presence Previous-Sentences-2-Lex-EmoLex-s7 @ tuned t* ---
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.74  Recall: 0.59  F1: 0.66
+  Class 1 (positive)
+    Precision: 0.67  Recall: 0.80  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.71  Recall: 0.66  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.74  F1: 0.72
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.72960
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71771
+--- presence Previous-Sentences-2-Lex-EmoLex-s7 @ 0.5 ---
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.74  Recall: 0.59  F1: 0.66
+  Class 1 (positive)
+    Precision: 0.67  Recall: 0.80  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.71  Recall: 0.66  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.74  F1: 0.72
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.72960
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71771

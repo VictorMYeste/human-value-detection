@@ -7,3 +7,4 @@ checkpoints/
 results/Test.txt
 train.sh
 run-revision-A1-A3.md
+__pycache__/

@@ -1,0 +1,72 @@
+# Paired per-seed tests — IP&M resubmission
+# Generated 2026-09-09 15:55
+# Answers R1-W2b (second part): gains of 0.007-0.009 could be seed variance
+
+==============================================================================
+PAIRED PER-SEED TESTS  (seeds 42, 7, 1701; each arm at its own tuned t*)
+==============================================================================
+Three seeds -> 2 df. Read sign-consistency and effect-vs-seed-noise,
+not the p-value alone.
+
+------------------------------------------------------------------------------
+A. THRESHOLD CALIBRATION  (the paper's headline claim)
+------------------------------------------------------------------------------
+
+Baseline: default t=0.5  vs  validation-tuned t*
+  seed   42:  t=0.5 = 0.2811 (t=0.50)   t* = 0.3115 (t=0.30)   delta = +0.0304
+  seed    7:  t=0.5 = 0.2827 (t=0.50)   t* = 0.3201 (t=0.25)   delta = +0.0373
+  seed 1701:  t=0.5 = 0.2830 (t=0.50)   t* = 0.3149 (t=0.25)   delta = +0.0319
+  mean delta        +0.0332  (std 0.0037)
+  seed std          t=0.5: 0.0010   t*: 0.0043
+  same sign in all 3 seeds: True
+  paired t-test     t = +15.657, p = 0.0041  (df = 2)
+  |mean delta| / mean seed std = 12.39
+
+------------------------------------------------------------------------------
+B. AUXILIARY FEATURES vs CALIBRATED BASELINE  (Reviewer #1's concern)
+------------------------------------------------------------------------------
+
+Calibrated baseline  vs  Prev-2
+  seed   42:  baseline = 0.3115 (t=0.30)   Prev-2 = 0.3177 (t=0.15)   delta = +0.0062
+  seed    7:  baseline = 0.3201 (t=0.25)   Prev-2 = 0.3176 (t=0.15)   delta = -0.0024
+  seed 1701:  baseline = 0.3149 (t=0.25)   Prev-2 = 0.3165 (t=0.15)   delta = +0.0016
+  mean delta        +0.0018  (std 0.0043)
+  seed std          baseline: 0.0043   Prev-2: 0.0007
+  same sign in all 3 seeds: False
+  paired t-test     t = +0.719, p = 0.5469  (df = 2)
+  |mean delta| / mean seed std = 0.72
+
+Calibrated baseline  vs  LIWC-22
+  seed   42:  baseline = 0.3115 (t=0.30)   LIWC-22 = 0.3199 (t=0.25)   delta = +0.0084
+  seed    7:  baseline = 0.3201 (t=0.25)   LIWC-22 = 0.3175 (t=0.25)   delta = -0.0026
+  seed 1701:  baseline = 0.3149 (t=0.25)   LIWC-22 = 0.3237 (t=0.25)   delta = +0.0088
+  mean delta        +0.0049  (std 0.0065)
+  seed std          baseline: 0.0043   LIWC-22: 0.0031
+  same sign in all 3 seeds: False
+  paired t-test     t = +1.306, p = 0.3215  (df = 2)
+  |mean delta| / mean seed std = 1.31
+
+Calibrated baseline  vs  BERTopic
+  seed   42:  baseline = 0.3115 (t=0.30)   BERTopic = 0.3187 (t=0.20)   delta = +0.0072
+  seed    7:  baseline = 0.3201 (t=0.25)   BERTopic = 0.3196 (t=0.25)   delta = -0.0005
+  seed 1701:  baseline = 0.3149 (t=0.25)   BERTopic = 0.3213 (t=0.20)   delta = +0.0065
+  mean delta        +0.0044  (std 0.0043)
+  seed std          baseline: 0.0043   BERTopic: 0.0013
+  same sign in all 3 seeds: False
+  paired t-test     t = +1.790, p = 0.2154  (df = 2)
+  |mean delta| / mean seed std = 1.55
+
+------------------------------------------------------------------------------
+C. DIRECT vs PRESENCE-GATED, feature-matched (Table 4)
+------------------------------------------------------------------------------
+
+Direct + MJD  vs  Presence-gated (MJD)
+  gate = Prev-2 + LIWC-22 at t_gate = 0.10
+  seed   42:  direct = 0.3169 (t=0.25)   gated = 0.3126 (t=0.40)   delta = -0.0043
+  seed    7:  direct = 0.3155 (t=0.20)   gated = 0.2982 (t=0.35)   delta = -0.0174
+  seed 1701:  direct = 0.3156 (t=0.20)   gated = 0.2954 (t=0.25)   delta = -0.0201
+  mean delta        -0.0140  (std 0.0084)
+  seed std          direct: 0.0008   gated: 0.0092
+  same sign in all 3 seeds: True
+  paired t-test     t = -2.861, p = 0.1036  (df = 2)
+  |mean delta| / mean seed std = 2.79

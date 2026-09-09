@@ -1,0 +1,83 @@
+# Provenance-split analysis — IP&M resubmission
+# Generated 2026-09-09 15:38
+# Answers AE6, R4-W9, R4-SC9, R2-n3
+
+
+=== Baseline ===
+  Baseline                 t*=0.30  overall=0.3115  EN-orig=0.2400  translated=0.3175  delta=-0.0775
+  Baseline-s7              t*=0.25  overall=0.3201  EN-orig=0.2554  translated=0.3248  delta=-0.0695
+  Baseline-s1701           t*=0.25  overall=0.3149  EN-orig=0.2672  translated=0.3176  delta=-0.0504
+
+=== Lex-LIWC-22 ===
+  Lex-LIWC-22              t*=0.25  overall=0.3199  EN-orig=0.2749  translated=0.3227  delta=-0.0478
+  Lex-LIWC-22-s7           t*=0.25  overall=0.3175  EN-orig=0.2542  translated=0.3223  delta=-0.0681
+  Lex-LIWC-22-s1701        t*=0.25  overall=0.3237  EN-orig=0.2632  translated=0.3277  delta=-0.0645
+
+========================================================================
+MACRO-F1 BY SOURCE PROVENANCE  (mean +/- std over seeds 42, 7, 1701)
+========================================================================
+
+Baseline
+  overall           0.3155 +/- 0.0043
+  English-original  0.2542 +/- 0.0136   (n=2005)
+  machine-translated0.3200 +/- 0.0042   (n=12564)
+  EN-orig - translated: -0.0658
+
+Lex-LIWC-22
+  overall           0.3204 +/- 0.0031
+  English-original  0.2641 +/- 0.0104   (n=2005)
+  machine-translated0.3242 +/- 0.0030   (n=12564)
+  EN-orig - translated: -0.0601
+
+========================================================================
+DO LEXICON FEATURES HELP LESS ON TRANSLATED TEXT?
+(Reviewer #2's hypothesis: word-frequency features are the exposed signal)
+========================================================================
+  LIWC-22 gain on English-original : +0.0099
+  LIWC-22 gain on translated       : +0.0043
+  difference in gain               : +0.0057
+
+========================================================================
+MACRO-F1 BY SOURCE LANGUAGE  (Baseline, mean over seeds)
+========================================================================
+  BG  n= 1302   0.2911 +/- 0.0092
+  DE  n= 1874   0.2907 +/- 0.0031
+  EL  n= 1402   0.3327 +/- 0.0133
+  EN  n= 2005   0.2542 +/- 0.0136  <- English-original
+  FR  n=  931   0.2644 +/- 0.0189
+  HE  n= 1480   0.3613 +/- 0.0061
+  IT  n= 1238   0.2312 +/- 0.0066
+  NL  n= 2150   0.2623 +/- 0.0020
+  TR  n= 2187   0.3098 +/- 0.0086
+
+############ PREVALENCE-CONTROLLED ############
+
+vectorised macro-F1 verified identical to core/evaluation.py
+
+Baseline  (t* = 0.30)
+  English-original            0.2400   (n=2005)
+  translated, raw             0.3175   (n=12564)
+  translated, prevalence-matched  0.2389 [95% CI 0.2057, 0.2732]
+  raw gap        (EN - translated)        -0.0775
+  controlled gap (EN - matched)           +0.0011
+  English-original inside matched 95% CI? True
+  value-count distribution matched: {0: 1437, 1: 544, 2: 23, 3: 1}
+
+Baseline-s7  (t* = 0.25)
+  English-original            0.2554   (n=2005)
+  translated, raw             0.3248   (n=12564)
+  translated, prevalence-matched  0.2440 [95% CI 0.2155, 0.2714]
+  raw gap        (EN - translated)        -0.0695
+  controlled gap (EN - matched)           +0.0114
+  English-original inside matched 95% CI? True
+  value-count distribution matched: {0: 1437, 1: 544, 2: 23, 3: 1}
+
+Baseline-s1701  (t* = 0.25)
+  English-original            0.2672   (n=2005)
+  translated, raw             0.3176   (n=12564)
+  translated, prevalence-matched  0.2351 [95% CI 0.2080, 0.2635]
+  raw gap        (EN - translated)        -0.0504
+  controlled gap (EN - matched)           +0.0321
+  English-original inside matched 95% CI? False
+  value-count distribution matched: {0: 1437, 1: 544, 2: 23, 3: 1}
+

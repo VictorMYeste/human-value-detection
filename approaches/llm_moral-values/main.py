@@ -110,20 +110,18 @@ except Exception:
 # CONSTANTS & PROMPTS
 # ---------------------------------------------------------------------
 
-# VALUES = [
-#     "Self-direction: thought", "Self-direction: action", "Stimulation", "Hedonism",
-#     "Achievement", "Power: dominance", "Power: resources", "Face",
-#     "Security: personal", "Security: societal", "Tradition", "Conformity: rules",
-#     "Conformity: interpersonal", "Humility", "Benevolence: caring",
-#     "Benevolence: dependability", "Universalism: concern", "Universalism: nature",
-#     "Universalism: tolerance",
-# ]
+# The 19 refined Schwartz values, in the fixed order used throughout the paper.
+# Value-group runs (self-enhancement, conservation, growth, ...) are produced by
+# temporarily narrowing this list and VALUE_DEFINITIONS, as each per-group shell
+# script explains. The committed default must stay the full 19-value
+# configuration that the paper reports.
 VALUES = [
-    "Hedonism",
-    "Achievement",
-    "Power: dominance",
-    "Power: resources",
-    "Face"
+    "Self-direction: thought", "Self-direction: action", "Stimulation", "Hedonism",
+    "Achievement", "Power: dominance", "Power: resources", "Face",
+    "Security: personal", "Security: societal", "Tradition", "Conformity: rules",
+    "Conformity: interpersonal", "Humility", "Benevolence: caring",
+    "Benevolence: dependability", "Universalism: concern", "Universalism: nature",
+    "Universalism: tolerance",
 ]
 VALUES_STR = ", ".join(VALUES)
 VALUES_JSON = json.dumps(VALUES, ensure_ascii=False)

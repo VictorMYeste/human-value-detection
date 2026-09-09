@@ -2,7 +2,13 @@
 # GLOBAL VARIABLES
 # ========================================================
 
-PRETRAINED_MODEL = "microsoft/deberta-base"
+import os
+
+# Encoder backbone for the direct value detector. Overridable via the
+# HVD_PRETRAINED_MODEL environment variable so the cross-encoder replication
+# (RoBERTa, IP&M revision) reuses the published training protocol unchanged.
+# The default preserves the original configuration exactly.
+PRETRAINED_MODEL = os.environ.get("HVD_PRETRAINED_MODEL", "microsoft/deberta-base")
 
 LEXICON_PATHS = {
     "VAD": "../../lexicons/NRC-VAD-Lexicon.txt",
@@ -209,7 +215,7 @@ MODEL_CONFIG = {
         ]
     },
     "moral_values": {
-        "pretrained_model": "microsoft/deberta-base",
+        "pretrained_model": PRETRAINED_MODEL,
         "labels": [
             "Self-direction: thought",
             "Self-direction: action",

@@ -92,6 +92,18 @@ class EnhancedDebertaModel(nn.Module):
 
         self.transformer = transformers.AutoModel.from_pretrained(pretrained_model)
 
+        # forward() reads last_hidden_state only and never uses pooler_output, so a
+        # pooler's parameters receive no gradient. Under DistributedDataParallel that
+        # aborts the step with "parameters that were not used in producing loss".
+        # DeBERTa has no pooler, so this is a no-op for the published runs; RoBERTa and
+        # BERT do. We freeze the layer rather than dropping it (add_pooling_layer=False)
+        # so the architecture stays identical between training and prediction, where the
+        # checkpoint is rebuilt with AutoModel and load_state_dict.
+        pooler = getattr(self.transformer, "pooler", None)
+        if pooler is not None:
+            for param in pooler.parameters():
+                param.requires_grad = False
+
         """
         if torch.cuda.device_count() > 1:
             print(f"Using {torch.cuda.device_count()} GPUs.")

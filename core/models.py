@@ -101,8 +101,15 @@ class EnhancedDebertaModel(nn.Module):
         # checkpoint is rebuilt with AutoModel and load_state_dict.
         pooler = getattr(self.transformer, "pooler", None)
         if pooler is not None:
+            n_frozen = 0
             for param in pooler.parameters():
                 param.requires_grad = False
+                n_frozen += 1
+            logger.info("Encoder pooler is unused: froze %d parameter tensors so "
+                        "DistributedDataParallel does not treat them as missing "
+                        "gradients (ddp_find_unused_parameters is False).", n_frozen)
+        else:
+            logger.info("Encoder has no pooler; nothing to freeze.")
 
         """
         if torch.cuda.device_count() > 1:

@@ -1,0 +1,65 @@
+2026-06-28 12:05:49,772 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-28 12:05:49,775 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-28 12:05:59,669 - INFO - Setting random seed to 7
+2026-06-28 12:05:59,700 - INFO - Running training for labels: ['Presence']
+2026-06-28 12:05:59,701 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2026-06-28 12:05:59,943 - INFO - Loading lexicon embeddings for: No lexicon used
+2026-06-28 12:05:59,943 - INFO - Preparing datasets for training and validation
+2026-06-28 12:06:21,486 - INFO - Arguments validated successfully.
+2026-06-28 12:06:21,490 - INFO - Clearing old checkpoints in models/checkpoints
+2026-06-28 12:06:22,318 - INFO - Using CUDA for training.
+2026-06-28 12:06:23,597 - INFO - TRAINING
+2026-06-28 12:06:23,597 - INFO - ========
+2026-06-28 12:06:23,597 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Baseline-s7
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: No
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 0
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2026-06-28 12:06:23,600 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6104, 'grad_norm': 3.9994664192199707, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.5668, 'grad_norm': 2.910886526107788, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.5651811361312866, 'eval_f1-score': {'Presence': 0.76}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 405.2769, 'eval_samples_per_second': 36.775, 'eval_steps_per_second': 4.597, 'epoch': 1.0}
+2026-06-28 13:02:34,082 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.5427, 'grad_norm': 4.518613338470459, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.4791, 'grad_norm': 4.399189472198486, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.4844, 'grad_norm': 5.59087610244751, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.5647380352020264, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 407.0899, 'eval_samples_per_second': 36.611, 'eval_steps_per_second': 4.576, 'epoch': 2.0}
+2026-06-28 13:59:32,523 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.4262, 'grad_norm': 4.642347812652588, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.15}
+{'loss': 0.3486, 'grad_norm': 8.253876686096191, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.3493, 'grad_norm': 6.430959224700928, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.6577261090278625, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 404.9343, 'eval_samples_per_second': 36.806, 'eval_steps_per_second': 4.601, 'epoch': 3.0}
+{'loss': 0.2728, 'grad_norm': 10.101923942565918, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.217, 'grad_norm': 14.084919929504395, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.58}
+{'loss': 0.2215, 'grad_norm': 10.623866081237793, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.8997589349746704, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 404.9509, 'eval_samples_per_second': 36.804, 'eval_steps_per_second': 4.601, 'epoch': 4.0}
+{'loss': 0.1532, 'grad_norm': 10.560086250305176, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1393, 'grad_norm': 6.055427074432373, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1346938610076904, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 405.1422, 'eval_samples_per_second': 36.787, 'eval_steps_per_second': 4.598, 'epoch': 5.0}
+{'train_runtime': 16992.0529, 'train_samples_per_second': 26.341, 'train_steps_per_second': 0.823, 'train_loss': 0.35411418974825926, 'epoch': 5.0}
+2026-06-28 16:49:36,303 - INFO - 
+
+VALIDATION
+2026-06-28 16:49:36,303 - INFO - ==========
+2026-06-28 16:56:24,618 - INFO - Presence: 0.73
+2026-06-28 16:56:24,618 - INFO - Macro average: 0.73
+2026-06-28 16:56:25,138 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-28 16:56:25,138 - INFO - Saving best model to models directory
+2026-06-28 16:56:25,138 - INFO - UPLOAD to https://huggingface.co/Baseline-s7 (using HF_TOKEN environment variable)
+2026-06-28 16:56:25,138 - INFO - SAVE to models

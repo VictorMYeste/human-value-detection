@@ -1,0 +1,74 @@
+2026-06-30 00:38:32,371 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-30 00:38:32,372 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-30 00:38:42,108 - INFO - Setting random seed to 1701
+2026-06-30 00:38:42,109 - INFO - Running training for labels: ['Presence']
+2026-06-30 00:38:42,109 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2026-06-30 00:38:42,323 - INFO - Loading lexicon embeddings for: EmoLex
+2026-06-30 00:38:42,421 - INFO - Preparing datasets for training and validation
+2026-06-30 00:45:55,284 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2026-06-30 00:49:13,071 - INFO - Adding Previous Sentences Labels features with num_categories = 10
+2026-06-30 00:49:15,022 - INFO - Arguments validated successfully.
+2026-06-30 00:49:15,026 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2026-06-30 00:49:15,026 - INFO - Clearing old checkpoints in models/checkpoints
+2026-06-30 00:49:16,049 - INFO - Using CUDA for training.
+2026-06-30 00:49:17,160 - INFO - TRAINING
+2026-06-30 00:49:17,160 - INFO - ========
+2026-06-30 00:49:17,160 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Previous-Sentences-2-Lex-EmoLex-s1701
+Filter labels: []
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: Yes
+Using lexicon: EmoLex
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 10
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2026-06-30 00:49:17,163 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-30 00:49:17,294 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.5695, 'grad_norm': 4.526538372039795, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.5174, 'grad_norm': 2.5704264640808105, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.5865617990493774, 'eval_f1-score': {'Presence': 0.75}, 'eval_macro-avg-f1-score': 0.75, 'eval_runtime': 426.3349, 'eval_samples_per_second': 34.958, 'eval_steps_per_second': 8.74, 'epoch': 1.0}
+2026-06-30 02:15:12,485 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2026-06-30 02:19:39,991 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4977, 'grad_norm': 2.8980860710144043, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.4331, 'grad_norm': 4.611938953399658, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.4331, 'grad_norm': 4.235082149505615, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.5640236139297485, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 427.8916, 'eval_samples_per_second': 34.831, 'eval_steps_per_second': 8.708, 'epoch': 2.0}
+2026-06-30 03:51:26,551 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.3825, 'grad_norm': 8.098984718322754, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.3009, 'grad_norm': 10.977808952331543, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.2947, 'grad_norm': 10.153281211853027, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.6818581223487854, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 427.8335, 'eval_samples_per_second': 34.836, 'eval_steps_per_second': 8.709, 'epoch': 3.0}
+2026-06-30 05:23:32,949 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2139, 'grad_norm': 9.533018112182617, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.1773, 'grad_norm': 9.37879753112793, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.1748, 'grad_norm': 4.871782302856445, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.9978247880935669, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 428.7473, 'eval_samples_per_second': 34.762, 'eval_steps_per_second': 8.69, 'epoch': 4.0}
+2026-06-30 06:55:25,908 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1175, 'grad_norm': 10.314982414245605, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1034, 'grad_norm': 7.794788837432861, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1781299114227295, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 430.5033, 'eval_samples_per_second': 34.62, 'eval_steps_per_second': 8.655, 'epoch': 5.0}
+2026-06-30 08:27:10,265 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 27474.3242, 'train_samples_per_second': 16.291, 'train_steps_per_second': 0.509, 'train_loss': 0.30952769423315063, 'epoch': 5.0}
+2026-06-30 08:27:14,016 - INFO - 
+
+VALIDATION
+2026-06-30 08:27:14,016 - INFO - ==========
+2026-06-30 08:39:15,755 - INFO - Updated evaluation dataset with dynamic previous label features.
+2026-06-30 08:39:15,758 - INFO - Presence: 0.73
+2026-06-30 08:39:15,758 - INFO - Macro average: 0.73
+2026-06-30 08:39:16,277 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-30 08:39:16,277 - INFO - Saving best model to models directory
+2026-06-30 08:39:16,277 - INFO - UPLOAD to https://huggingface.co/Previous-Sentences-2-Lex-EmoLex-s1701 (using HF_TOKEN environment variable)
+2026-06-30 08:39:16,277 - INFO - SAVE to models

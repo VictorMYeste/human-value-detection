@@ -1,0 +1,79 @@
+2026-06-27 12:44:26,936 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-27 12:44:26,941 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-27 12:44:36,878 - INFO - Setting random seed to 1701
+2026-06-27 12:44:36,886 - INFO - Running training for labels: ['Presence']
+2026-06-27 12:44:36,886 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2026-06-27 12:44:37,130 - INFO - Loading lexicon embeddings for: LIWC-22
+2026-06-27 12:44:37,130 - INFO - Preparing datasets for training and validation
+2026-06-27 12:51:57,753 - INFO - Adding Previous Sentences Labels features with num_categories = 118
+2026-06-27 12:55:16,170 - INFO - Adding Previous Sentences Labels features with num_categories = 118
+2026-06-27 12:55:18,279 - INFO - Arguments validated successfully.
+2026-06-27 12:55:18,349 - INFO - Previous sentences or augmented data detected. Adjusting batch size: 4 -> 2 and gradient accumulation steps: 4 -> 8
+2026-06-27 12:55:18,349 - INFO - Clearing old checkpoints in models/checkpoints
+2026-06-27 12:55:18,996 - INFO - Using CUDA for training.
+2026-06-27 12:55:20,065 - INFO - TRAINING
+2026-06-27 12:55:20,065 - INFO - ========
+2026-06-27 12:55:20,065 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Previous-Sentences-2-Lex-LIWC-22-s1701
+Filter labels: []
+Batch size: 2
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 8
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: Yes
+Using lexicon: LIWC-22
+Adding linguistic features: No
+Adding NER features: No
+Number of categories (lexicon): 118
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2026-06-27 12:55:20,067 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-27 12:55:20,196 - INFO - Rebuilding validation dataset with dynamically predicted previous labels.
+{'loss': 0.6508, 'grad_norm': 5.267503261566162, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.5509, 'grad_norm': 4.5114569664001465, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.6059417724609375, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 425.3429, 'eval_samples_per_second': 35.04, 'eval_steps_per_second': 8.76, 'epoch': 1.0}
+2026-06-27 14:19:42,422 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+2026-06-27 14:24:15,093 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.5217, 'grad_norm': 4.038316249847412, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.4693, 'grad_norm': 5.044710159301758, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.468, 'grad_norm': 4.351203441619873, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.5936779379844666, 'eval_f1-score': {'Presence': 0.75}, 'eval_macro-avg-f1-score': 0.75, 'eval_runtime': 425.4716, 'eval_samples_per_second': 35.029, 'eval_steps_per_second': 8.757, 'epoch': 2.0}
+2026-06-27 15:53:42,673 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.4197, 'grad_norm': 9.647890090942383, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.14}
+{'loss': 0.3405, 'grad_norm': 4.09830379486084, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.3357, 'grad_norm': 7.435502052307129, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.740401566028595, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 424.5178, 'eval_samples_per_second': 35.108, 'eval_steps_per_second': 8.777, 'epoch': 3.0}
+2026-06-27 17:22:57,499 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.2495, 'grad_norm': 14.847203254699707, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.2075, 'grad_norm': 12.772789001464844, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.57}
+{'loss': 0.2062, 'grad_norm': 10.572684288024902, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 1.07193922996521, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 425.42, 'eval_samples_per_second': 35.034, 'eval_steps_per_second': 8.758, 'epoch': 4.0}
+2026-06-27 18:52:51,257 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1399, 'grad_norm': 15.145580291748047, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1233, 'grad_norm': 10.829916954040527, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.2624661922454834, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 425.7277, 'eval_samples_per_second': 35.008, 'eval_steps_per_second': 8.752, 'epoch': 5.0}
+2026-06-27 20:21:55,791 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'loss': 0.1294, 'grad_norm': 6.636077880859375, 'learning_rate': 9.985693848354794e-06, 'epoch': 5.0}
+{'loss': 0.0832, 'grad_norm': 23.632518768310547, 'learning_rate': 9.270386266094421e-06, 'epoch': 5.36}
+{'loss': 0.0886, 'grad_norm': 11.30377197265625, 'learning_rate': 8.555078683834049e-06, 'epoch': 5.72}
+{'eval_loss': 1.6583646535873413, 'eval_f1-score': {'Presence': 0.72}, 'eval_macro-avg-f1-score': 0.72, 'eval_runtime': 428.5953, 'eval_samples_per_second': 34.774, 'eval_steps_per_second': 8.694, 'epoch': 6.0}
+2026-06-27 21:52:12,604 - INFO - Updated evaluation dataset with dynamic previous label features.
+{'train_runtime': 32225.4235, 'train_samples_per_second': 13.889, 'train_steps_per_second': 0.434, 'train_loss': 0.30147945457678454, 'epoch': 6.0}
+2026-06-27 21:52:25,980 - INFO - 
+
+VALIDATION
+2026-06-27 21:52:25,980 - INFO - ==========
+2026-06-27 22:04:18,118 - INFO - Updated evaluation dataset with dynamic previous label features.
+2026-06-27 22:04:18,144 - INFO - Presence: 0.75
+2026-06-27 22:04:18,144 - INFO - Macro average: 0.75
+2026-06-27 22:04:18,663 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-27 22:04:18,663 - INFO - Saving best model to models directory
+2026-06-27 22:04:18,663 - INFO - UPLOAD to https://huggingface.co/Previous-Sentences-2-Lex-LIWC-22-s1701 (using HF_TOKEN environment variable)
+2026-06-27 22:04:18,663 - INFO - SAVE to models

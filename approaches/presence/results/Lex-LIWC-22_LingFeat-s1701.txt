@@ -1,0 +1,69 @@
+2026-06-29 19:29:54,266 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-29 19:29:54,266 - INFO - PyTorch version 2.4.1+cu118 available.
+2026-06-29 19:30:04,064 - INFO - Setting random seed to 1701
+2026-06-29 19:30:04,065 - INFO - Running training for labels: ['Presence']
+2026-06-29 19:30:04,065 - INFO - Initializing tokenizer for model: microsoft/deberta-base
+2026-06-29 19:30:04,316 - INFO - Loading lexicon embeddings for: LIWC-22
+2026-06-29 19:30:04,317 - INFO - Preparing datasets for training and validation
+2026-06-29 19:30:30,904 - INFO - Loading en_core_web_sm for extra features
+2026-06-29 19:30:31,284 - INFO - Adding Linguistic features
+2026-06-29 19:34:10,136 - INFO - Loading en_core_web_sm for extra features
+2026-06-29 19:34:10,461 - INFO - Adding Linguistic features
+2026-06-29 19:35:24,127 - INFO - Arguments validated successfully.
+2026-06-29 19:35:24,197 - INFO - Clearing old checkpoints in models/checkpoints
+2026-06-29 19:35:25,180 - INFO - Using CUDA for training.
+2026-06-29 19:35:26,348 - INFO - TRAINING
+2026-06-29 19:35:26,348 - INFO - ========
+2026-06-29 19:35:26,348 - INFO - Training configuration:
+Pre-trained model: microsoft/deberta-base
+Model name: Lex-LIWC-22_LingFeat-s1701
+Filter labels: []
+Batch size: 4
+Number of epochs: 10
+Learning rate: 2e-05
+Weight decay: 0.15
+Gradient accumulation steps: 4
+Early stopping patience: 4
+Multilayer: No
+ResidualBlock: No
+Previous sentences used: No
+Using lexicon: LIWC-22
+Adding linguistic features: Yes
+Adding NER features: No
+Number of categories (lexicon): 118
+Using data augmentation with paraphrasing: No
+Adding topic detection features: No
+Applying token pruning: No
+
+2026-06-29 19:35:26,351 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 0.6519, 'grad_norm': 5.873474597930908, 'learning_rate': 1.928469241773963e-05, 'epoch': 0.36}
+{'loss': 0.6005, 'grad_norm': 10.25409984588623, 'learning_rate': 1.8569384835479257e-05, 'epoch': 0.71}
+{'eval_loss': 0.5680955648422241, 'eval_f1-score': {'Presence': 0.76}, 'eval_macro-avg-f1-score': 0.76, 'eval_runtime': 405.7845, 'eval_samples_per_second': 36.729, 'eval_steps_per_second': 4.591, 'epoch': 1.0}
+2026-06-29 20:32:30,744 - INFO - Skipping evaluation for warm-up phase (epoch 0).
+{'loss': 0.5624, 'grad_norm': 7.130638599395752, 'learning_rate': 1.7854077253218886e-05, 'epoch': 1.07}
+{'loss': 0.5081, 'grad_norm': 6.856168746948242, 'learning_rate': 1.7138769670958512e-05, 'epoch': 1.43}
+{'loss': 0.5065, 'grad_norm': 5.612173080444336, 'learning_rate': 1.642346208869814e-05, 'epoch': 1.79}
+{'eval_loss': 0.5551316142082214, 'eval_f1-score': {'Presence': 0.74}, 'eval_macro-avg-f1-score': 0.74, 'eval_runtime': 409.5656, 'eval_samples_per_second': 36.39, 'eval_steps_per_second': 4.549, 'epoch': 2.0}
+2026-06-29 21:30:50,088 - INFO - Skipping evaluation for warm-up phase (epoch 1).
+{'loss': 0.4494, 'grad_norm': 9.126441955566406, 'learning_rate': 1.570815450643777e-05, 'epoch': 2.15}
+{'loss': 0.3676, 'grad_norm': 9.646238327026367, 'learning_rate': 1.4992846924177399e-05, 'epoch': 2.5}
+{'loss': 0.3674, 'grad_norm': 7.814410209655762, 'learning_rate': 1.4277539341917026e-05, 'epoch': 2.86}
+{'eval_loss': 0.6437563896179199, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 409.3426, 'eval_samples_per_second': 36.41, 'eval_steps_per_second': 4.551, 'epoch': 3.0}
+{'loss': 0.2793, 'grad_norm': 5.940081596374512, 'learning_rate': 1.3562231759656654e-05, 'epoch': 3.22}
+{'loss': 0.225, 'grad_norm': 8.608175277709961, 'learning_rate': 1.284692417739628e-05, 'epoch': 3.58}
+{'loss': 0.2256, 'grad_norm': 8.649993896484375, 'learning_rate': 1.213161659513591e-05, 'epoch': 3.93}
+{'eval_loss': 0.878536581993103, 'eval_f1-score': {'Presence': 0.73}, 'eval_macro-avg-f1-score': 0.73, 'eval_runtime': 407.1818, 'eval_samples_per_second': 36.603, 'eval_steps_per_second': 4.575, 'epoch': 4.0}
+{'loss': 0.1493, 'grad_norm': 13.21273422241211, 'learning_rate': 1.1416309012875537e-05, 'epoch': 4.29}
+{'loss': 0.1327, 'grad_norm': 12.739381790161133, 'learning_rate': 1.0701001430615166e-05, 'epoch': 4.65}
+{'eval_loss': 1.1544252634048462, 'eval_f1-score': {'Presence': 0.71}, 'eval_macro-avg-f1-score': 0.71, 'eval_runtime': 407.3639, 'eval_samples_per_second': 36.586, 'eval_steps_per_second': 4.573, 'epoch': 5.0}
+{'train_runtime': 17462.0064, 'train_samples_per_second': 25.632, 'train_steps_per_second': 0.801, 'train_loss': 0.3701641099135763, 'epoch': 5.0}
+2026-06-30 00:26:28,801 - INFO - 
+
+VALIDATION
+2026-06-30 00:26:28,802 - INFO - ==========
+2026-06-30 00:33:19,372 - INFO - Presence: 0.71
+2026-06-30 00:33:19,372 - INFO - Macro average: 0.71
+2026-06-30 00:33:19,891 - WARNING - Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2026-06-30 00:33:19,891 - INFO - Saving best model to models directory
+2026-06-30 00:33:19,891 - INFO - UPLOAD to https://huggingface.co/Lex-LIWC-22_LingFeat-s1701 (using HF_TOKEN environment variable)
+2026-06-30 00:33:19,891 - INFO - SAVE to models

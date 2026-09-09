@@ -1,0 +1,56 @@
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.75  Recall: 0.57  F1: 0.65
+  Class 1 (positive)
+    Precision: 0.66  Recall: 0.81  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.70  Recall: 0.68  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.73  F1: 0.71
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.72999
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71426
+--- presence Lex-LIWC-22_LingFeat-s1701 @ tuned t* ---
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.75  Recall: 0.56  F1: 0.64
+  Class 1 (positive)
+    Precision: 0.66  Recall: 0.82  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.71  Recall: 0.68  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.73  F1: 0.71
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.73102
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71447
+--- presence Lex-LIWC-22_LingFeat-s1701 @ 0.5 ---
+
+Label: Presence  |  best threshold = 0.10
+  Class 0 (negative)
+    Precision: 0.75  Recall: 0.56  F1: 0.64
+  Class 1 (positive)
+    Precision: 0.66  Recall: 0.82  F1: 0.73
+
+Label: Presence  |  Fixed 0.5 threshold
+  Class 0 (negative)
+    Precision: 0.71  Recall: 0.68  F1: 0.69
+  Class 1 (positive)
+    Precision: 0.70  Recall: 0.73  F1: 0.71
+
+=== SUMMARY =================================================
+
+Macro-average F1 (tuned thresholds) across 1 labels: 0.73102
+
+Macro-average F1 (fixed threshold) across 1 labels: 0.71447

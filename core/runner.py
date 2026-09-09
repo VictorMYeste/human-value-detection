@@ -42,8 +42,14 @@ def run_training(
 
     # Tokenizer
     logger.info("Initializing tokenizer for model: %s", pretrained_model)
-    tokenizer = transformers.DebertaTokenizer.from_pretrained(
+    # Resolve the tokenizer from the checkpoint rather than hardcoding DeBERTa:
+    # feeding one model's token ids into another's embedding table produces
+    # out-of-range indices and a device-side assert. use_fast=False keeps the
+    # DeBERTa runs on exactly the slow DebertaTokenizer used for the published
+    # results, while returning the correct class for other encoders.
+    tokenizer = transformers.AutoTokenizer.from_pretrained(
         pretrained_model,
+        use_fast=False,
         truncation_side = "left" if previous_sentences else "right"
     )
 

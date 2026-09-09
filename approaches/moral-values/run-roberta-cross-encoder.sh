@@ -68,11 +68,24 @@ for SEED in $SEEDS; do
   NAME="RoBERTa-Baseline-s${SEED}"
 
   echo "===== [${NAME}] train ====="
-  if [ -d "models/${NAME}" ]; then
+  if [ -d "models/${NAME}" ] && [ -n "$(ls -A "models/${NAME}" 2>/dev/null)" ]; then
     echo "----- SKIP: models/${NAME} already exists (reusing checkpoint) -----"
   else
+    rm -rf "models/${NAME}"   # drop any empty/partial directory from a failed run
     accelerate launch --multi_gpu main.py -t "$TRAIN" -v "$VAL" -s "$SEED" \
         --model-name "$NAME" | tee "results/${NAME}.txt"
+  fi
+
+  # main.py catches its own exceptions and still exits 0, so a crashed run looks
+  # successful to `set -e`. Without this guard the script would carry on to
+  # predict.py, which treats a missing models/<NAME> as a HuggingFace repo id and
+  # fails with a confusing 404 instead of the real traceback.
+  if [ ! -d "models/${NAME}" ] || [ -z "$(ls -A "models/${NAME}" 2>/dev/null)" ]; then
+    echo "" >&2
+    echo "ERROR: training produced no checkpoint at models/${NAME}." >&2
+    echo "       The real error is in results/${NAME}.txt - read that, not the" >&2
+    echo "       404 that predict.py would otherwise raise next." >&2
+    exit 1
   fi
 
   echo "===== [${NAME}] predict val + test ====="

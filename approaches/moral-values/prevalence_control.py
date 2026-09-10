@@ -53,7 +53,26 @@ def check_equivalence(y, pb):
     return ref
 
 
+def stratum_composition() -> None:
+    """Report the value density of each stratum. This is the confound the matching
+    below controls for, and the figures quoted in Section 6.9 of the paper."""
+    from analyze_provenance import load_gold
+    g = load_gold("test")
+    lang = g["Text-ID"].str.split("_").str[0].to_numpy()
+    Y = (g[VALUES].to_numpy() >= 0.5).astype(int)
+    en = lang == "EN"
+    print("stratum composition (test split)")
+    print(f"  English-original    n = {en.sum():5d}   "
+          f"{100*(Y[en].sum(1) > 0).mean():5.2f}% of sentences carry a value   "
+          f"positive rate {100*Y[en].mean():.2f}%")
+    print(f"  machine-translated  n = {(~en).sum():5d}   "
+          f"{100*(Y[~en].sum(1) > 0).mean():5.2f}% of sentences carry a value   "
+          f"positive rate {100*Y[~en].mean():.2f}%")
+    print()
+
+
 def main() -> None:
+    stratum_composition()
     for name in ["Baseline", "Baseline-s7", "Baseline-s1701"]:
         t = tune(name)
         y, p, lang = aligned(name, "test", "test")

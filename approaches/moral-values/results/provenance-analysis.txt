@@ -1,6 +1,6 @@
 # Provenance-split analysis — IP&M resubmission
-# Generated 2026-09-09 15:38
-# Answers AE6, R4-W9, R4-SC9, R2-n3
+# Generated 2026-09-10 17:59
+# Answers AE item 6, Reviewer #4 weaknesses 9, Reviewer #2
 
 
 === Baseline ===
@@ -51,6 +51,10 @@ MACRO-F1 BY SOURCE LANGUAGE  (Baseline, mean over seeds)
   TR  n= 2187   0.3098 +/- 0.0086
 
 ############ PREVALENCE-CONTROLLED ############
+
+stratum composition (test split)
+  English-original    n =  2005   28.33% of sentences carry a value   positive rate 1.56%
+  machine-translated  n = 12564   54.39% of sentences carry a value   positive rate 3.29%
 
 vectorised macro-F1 verified identical to core/evaluation.py
 

@@ -1,0 +1,24 @@
+GOLD-STANDARD RELIABILITY BY SOURCE LANGUAGE -- ValueEval'24 English test split
+Krippendorff's alpha (19 refined values, before curation; ValuesML Table 5): all languages 0.486.
+Main system: Feature ensemble, prevalence-matched thresholds (CC@prev), mean of seeds [42, 7, 1701].
+
+  lang  alpha sentences  valued % labels/sent  macro-F1  micro-F1 count err %
+  EL    0.680      1402      61.8       0.697     0.354     0.415        -2.6
+  FR    0.656       931      32.7       0.382     0.258     0.301       +45.4
+  IT    0.609      1238      62.6       0.693     0.224     0.324        -7.2
+  HE    0.533      1480      88.4       0.989     0.384     0.456        -4.8
+  BG    0.473      1302      62.6       0.735     0.296     0.351       -15.1
+  TR    0.408      2187      44.9       0.590     0.334     0.408        -5.1
+  NL    0.380      2150      35.3       0.378     0.280     0.336       +15.7
+  EN    0.371      2005      28.3       0.296     0.284     0.333       +43.8
+  DE    0.340      1874      54.7       0.604     0.309     0.385        -8.7
+  all   0.486     14569      50.8       0.579
+  count err: predicted / gold value mentions - 1 (positive = overcount).
+
+  Spearman correlations across the nine languages (exact permutation p, two-sided):
+    alpha vs macro-F1                               rho = +0.00  p = 1.000
+    alpha vs micro-F1                               rho = +0.00  p = 1.000
+    alpha vs absolute count error                   rho = -0.33  p = 0.385
+    alpha vs share of sentences with a gold value   rho = +0.37  p = 0.336
+    alpha vs gold labels per sentence               rho = +0.45  p = 0.230
+    gold labels per sentence vs signed count error  rho = -0.62  p = 0.086

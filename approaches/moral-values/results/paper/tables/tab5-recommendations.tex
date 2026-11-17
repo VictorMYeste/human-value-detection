@@ -1,0 +1,23 @@
+\begin{table}[t]
+\caption{Recommendations for measuring values with a classifier}
+\label{tab:recommendations}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.24\columnwidth}p{0.70\columnwidth}@{}}
+\toprule
+Goal & Recommendation \\
+\midrule
+Any analysis & Report the decision rule as part of the instrument: how thresholds were chosen and on which annotated data. \\
+\addlinespace
+Counts and prevalence & Use per-label thresholds fitted to reproduce validation prevalence. They keep the macro-F1 of F1-tuned thresholds and give unbiased totals. Do not count with a threshold tuned for macro-F1. \\
+\addlinespace
+Corpus totals only & Averages of calibrated probabilities are also accurate, but not for group differences: their intervals are tight around differences that are biased value by value. \\
+\addlinespace
+Group comparisons & Check the attenuation of comparable contrasts on annotated validation data and divide by it (regression calibration), carrying its uncertainty. Measure it on the same kind of comparison: it transfers to a group left out of the fit, not across kinds of comparison. \\
+\addlinespace
+Avoid & Adjusted counts with pooled error rates for group comparisons, unless the error rates are shown to be equal across the groups. \\
+\addlinespace
+LLM labels & Validate them against annotated data before counting. At 7--9B, neither adjusted counts nor regression calibration repaired their group comparisons. \\
+\bottomrule
+\end{tabular}
+\end{table}

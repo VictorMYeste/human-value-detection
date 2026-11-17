@@ -28,6 +28,7 @@ If you use this code, models, or results in your research, **please cite at leas
 - [Reproducing the papers](#reproducing-the-papers)
   - [Higher-Order values paper](#1-higher-order-values-paper)
   - [Moral presence & ensembles paper](#2-moral-presence--ensembles-paper)
+  - [Measurement analysis (paper in preparation)](#3-measurement-analysis-paper-in-preparation)
 - [Citation](#citation)
 - [License](#license)
 - [Contact](#contact)
@@ -312,6 +313,44 @@ python3 eval.py \
 ```
 
 Please consult the model registry (e.g., in approaches/__init__.py or similar) for the exact names corresponding to the HO models reported in the paper.
+
+### 3. Measurement analysis (paper in preparation)
+
+This analysis asks how well classifier outputs measure **how often** each value occurs and **how groups differ**, for example manifestos vs. news or one source language vs. another. Every number, table and figure comes from one script. It needs no GPU and no training: it reads the cached per-seed predictions tracked in this repository (`approaches/moral-values/output/`, `approaches/presence/output/`, `approaches/llm_moral-values/output/`, `approaches/ensembles/llm/all/`) and the gold labels.
+
+1. **Gold labels.** Download the English ValueEval'24 release (see [Data](#data)). Put each split's `labels.tsv` under `data/training-english/`, `data/validation-english/` and `data/test-english/`. Then build the per-value files the analysis reads:
+
+   ```bash
+   python3 data-prep/make_labels_cat.py
+   ```
+
+   This writes `labels-cat.tsv` for each split. It applies the same rule as the Colab notebook `data-prep/Human_values_dataset_to_categories.ipynb`: a value counts when it is attained or constrained.
+
+2. **Packages.** Python ≥ 3.10 with numpy, pandas, scipy, scikit-learn and matplotlib. The versions used are pinned in `approaches/moral-values/requirements-analysis.txt`.
+
+3. **Run.**
+
+   ```bash
+   cd approaches/moral-values
+   python3 reproduce.py          # about 12 min on one core
+   python3 reproduce.py -j 4     # independent steps in parallel, about 10 min
+   python3 reproduce.py --list   # the steps and what each produces
+   ```
+
+   The steps write to `approaches/moral-values/results/`:
+   - text reports and CSVs from `threshold_schemes.py`, `measurement_analysis.py`, `shift_tests.py`, `llm_measurement.py`, `gold_reliability.py` and `worked_example.py`;
+   - the paper's figures (`results/paper/figures/*.pdf`) and LaTeX tables (`results/paper/tables/*.tex`) from `paper_assets.py`.
+
+4. **Check.** `results/reproduce-manifest.tsv` records the SHA-256 of every input and every output of the reference run. After running, `reproduce.py` compares each output with it and reports one of three results:
+   - identical;
+   - equal to the printed precision (CSV numbers at most one unit apart in the fourth decimal);
+   - different.
+
+   If inputs differ from the reference, it lists them first. `python3 reproduce.py --verify` repeats the comparison without running anything.
+
+   Figures depend on the matplotlib version and the fonts installed (Times New Roman, else Times or the STIX fonts bundled with matplotlib), so their PDFs may differ from the reference even when every number matches.
+
+To regenerate the predictions themselves (GPU), see the training and evaluation commands above.
 
 ---
 

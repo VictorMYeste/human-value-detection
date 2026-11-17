@@ -1,0 +1,8 @@
+# Packages for reproduce.py and the analysis scripts it runs (no GPU, no deep-learning stack).
+# These are the versions the reference manifest (results/reproduce-manifest.tsv) was recorded with,
+# under Python 3.11.8. Other recent versions should give the same numbers to the printed precision.
+numpy==1.26.4
+pandas==2.1.4
+scipy==1.11.4
+scikit-learn==1.2.2
+matplotlib==3.8.0

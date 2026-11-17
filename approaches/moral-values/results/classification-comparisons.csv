@@ -1,0 +1,34 @@
+family,comparison,A,B,delta,lo,hi,p,q,same_sign,per_seed_delta
+Decision rules,DeBERTa: global t* vs t=0.5,DeBERTa [t=0.5],DeBERTa [global t*],0.034626,0.027412,0.041993,0.001000,0.002999,yes,+0.0304 +0.0406 +0.0329
+Decision rules,RoBERTa: global t* vs t=0.5,RoBERTa [t=0.5],RoBERTa [global t*],0.042233,0.033946,0.050781,0.001000,0.002999,yes,+0.0249 +0.0535 +0.0483
+Decision rules,Feature ensemble: global t* vs t=0.5,Feature ensemble [t=0.5],Feature ensemble [global t*],0.051048,0.042781,0.059226,0.001000,0.002999,yes,+0.0445 +0.0485 +0.0601
+Decision rules,Seed ensemble: global t* vs t=0.5,Seed ensemble [t=0.5],Seed ensemble [global t*],0.046946,0.035759,0.057581,0.001000,0.002999,,
+Decision rules,DeBERTa: label t* vs global t*,DeBERTa [global t*],DeBERTa [label t*],0.002269,-0.002117,0.006413,0.309845,0.464768,yes,+0.0032 +0.0008 +0.0028
+Decision rules,RoBERTa: label t* vs global t*,RoBERTa [global t*],RoBERTa [label t*],-0.000640,-0.005110,0.003707,0.809595,0.883195,no,+0.0025 +0.0039 -0.0083
+Decision rules,Feature ensemble: label t* vs global t*,Feature ensemble [global t*],Feature ensemble [label t*],0.003154,-0.001583,0.007806,0.216892,0.371814,yes,+0.0005 +0.0014 +0.0076
+Decision rules,Seed ensemble: label t* vs global t*,Seed ensemble [global t*],Seed ensemble [label t*],-0.001963,-0.009375,0.004974,0.562719,0.750292,,
+Decision rules,DeBERTa: label prev vs global t*,DeBERTa [global t*],DeBERTa [label prev],-0.000006,-0.003859,0.004061,0.974513,0.974513,no,+0.0033 -0.0015 -0.0019
+Decision rules,RoBERTa: label prev vs global t*,RoBERTa [global t*],RoBERTa [label prev],-0.003810,-0.007843,0.000029,0.052974,0.105947,yes,-0.0007 -0.0037 -0.0070
+Decision rules,Feature ensemble: label prev vs global t*,Feature ensemble [global t*],Feature ensemble [label prev],0.000683,-0.003624,0.005118,0.806597,0.883195,no,+0.0025 -0.0024 +0.0019
+Decision rules,Seed ensemble: label prev vs global t*,Seed ensemble [global t*],Seed ensemble [label prev],-0.006393,-0.012190,-0.000317,0.039980,0.095952,,
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + LIWC-22 [global t*],DeBERTa [global t*],DeBERTa + LIWC-22 [global t*],0.002914,-0.001508,0.007376,0.221889,0.820923,no,+0.0073 -0.0063 +0.0078
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + Prev-2 [global t*],DeBERTa [global t*],DeBERTa + Prev-2 [global t*],-0.000156,-0.006291,0.006813,0.955522,0.955522,no,+0.0045 -0.0055 +0.0005
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + MJD [global t*],DeBERTa [global t*],DeBERTa + MJD [global t*],-0.001017,-0.005639,0.003604,0.648676,0.955522,no,+0.0054 -0.0078 -0.0007
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + BERTopic [global t*],DeBERTa [global t*],DeBERTa + BERTopic [global t*],0.002975,-0.001334,0.007472,0.178911,0.820923,no,+0.0090 -0.0040 +0.0040
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + LIWC-22 [label prev],DeBERTa [label prev],DeBERTa + LIWC-22 [label prev],0.001315,-0.003487,0.006122,0.625687,0.955522,no,+0.0016 -0.0100 +0.0124
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + Prev-2 [label prev],DeBERTa [label prev],DeBERTa + Prev-2 [label prev],-0.000153,-0.006658,0.006222,0.918541,0.955522,no,+0.0014 -0.0087 +0.0069
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + MJD [label prev],DeBERTa [label prev],DeBERTa + MJD [label prev],0.000510,-0.004517,0.005212,0.821589,0.955522,no,+0.0111 -0.0077 -0.0019
+"Auxiliary inputs (vs text-only DeBERTa, same rule)",DeBERTa + BERTopic [label prev],DeBERTa [label prev],DeBERTa + BERTopic [label prev],0.002710,-0.002459,0.008198,0.307846,0.820923,yes,+0.0029 +0.0003 +0.0049
+Encoders and ensembles (same rule),RoBERTa vs DeBERTa [global t*],DeBERTa [global t*],RoBERTa [global t*],-0.008054,-0.015012,-0.000517,0.036982,0.041091,yes,-0.0101 -0.0107 -0.0033
+Encoders and ensembles (same rule),Feature ensemble vs DeBERTa [global t*],DeBERTa [global t*],Feature ensemble [global t*],0.018047,0.014051,0.021856,0.001000,0.001428,yes,+0.0204 +0.0117 +0.0221
+Encoders and ensembles (same rule),Feature ensemble vs DeBERTa + LIWC-22 [global t*],DeBERTa + LIWC-22 [global t*],Feature ensemble [global t*],0.015133,0.010776,0.019180,0.001000,0.001428,yes,+0.0131 +0.0180 +0.0143
+Encoders and ensembles (same rule),Seed ensemble vs DeBERTa [global t*],DeBERTa [global t*],Seed ensemble [global t*],0.013656,0.010031,0.017309,0.001000,0.001428,,
+Encoders and ensembles (same rule),Feature ensemble vs seed ensemble [global t*],Seed ensemble [global t*],Feature ensemble [global t*],0.004391,-0.000335,0.009035,0.069965,0.069965,,
+Encoders and ensembles (same rule),RoBERTa vs DeBERTa [label prev],DeBERTa [label prev],RoBERTa [label prev],-0.011858,-0.018824,-0.004173,0.001999,0.002499,yes,-0.0142 -0.0129 -0.0084
+Encoders and ensembles (same rule),Feature ensemble vs DeBERTa [label prev],DeBERTa [label prev],Feature ensemble [label prev],0.018736,0.014224,0.023108,0.001000,0.001428,yes,+0.0196 +0.0108 +0.0259
+Encoders and ensembles (same rule),Feature ensemble vs DeBERTa + LIWC-22 [label prev],DeBERTa + LIWC-22 [label prev],Feature ensemble [label prev],0.017421,0.012907,0.021757,0.001000,0.001428,yes,+0.0180 +0.0207 +0.0135
+Encoders and ensembles (same rule),Seed ensemble vs DeBERTa [label prev],DeBERTa [label prev],Seed ensemble [label prev],0.007269,0.003385,0.010750,0.001000,0.001428,,
+Encoders and ensembles (same rule),Feature ensemble vs seed ensemble [label prev],Seed ensemble [label prev],Feature ensemble [label prev],0.011467,0.006576,0.016011,0.001000,0.001428,,
+"Presence gate (same value classifier, vs no gate, global t*)",DeBERTa + hard gate 0.10 vs no gate,DeBERTa [global t*],DeBERTa + hard gate 0.10 [global t*],0.001396,-0.001710,0.004469,0.390805,0.842579,no,+0.0076 -0.0047 +0.0013
+"Presence gate (same value classifier, vs no gate, global t*)",DeBERTa + hard gate tuned vs no gate,DeBERTa [global t*],DeBERTa + hard gate tuned [global t*],0.000495,-0.002048,0.002946,0.664668,0.842579,no,+0.0060 -0.0051 +0.0005
+"Presence gate (same value classifier, vs no gate, global t*)",DeBERTa + soft gate vs no gate,DeBERTa [global t*],DeBERTa + soft gate [global t*],0.000423,-0.003849,0.004869,0.842579,0.842579,no,+0.0049 -0.0093 +0.0057

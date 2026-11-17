@@ -1,0 +1,115 @@
+WORKED EXAMPLE -- Which values do manifestos emphasise relative to news? (ValueEval'24 English test split)
+Main system: Feature ensemble, seeds [42, 7, 1701]; per-value estimates averaged over runs. LLM: Gemma-2-9B few-shot + gate (single run).
+Difference = share of manifesto sentences - share of news sentences, percentage points. * = BH q < 0.05 (bootstrap, B = 2000); ! = significant with the opposite sign to a significant gold difference.
+Language-adjusted: within-language differences weighted by manifesto sentences (BG 0.08, DE 0.28, EL 0.08, EN 0.14, FR 0.07, HE 0.12, IT 0.07, NL 0.11, TR 0.04).
+RC validation slopes (mean over runs): crude 0.94, language-adjusted 0.93.
+
+============================================================================================================================
+CRUDE: 10 of 19 gold differences significant
+============================================================================================================================
+  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   RC@prev       LLM
+  Univ.: concern             +10.2* [+6.6, +13.7]     +8.1*    +12.1*    +10.5*     +6.5*    +30.4*    +11.1*    +11.2*
+  Univ.: nature               +6.1* [+2.0, +11.3]     +6.3*     +7.5*     +6.3*     +4.9*    +11.4*     +6.7*     +7.9*
+  Sec.: societal               +6.1* [+2.7, +9.8]     +2.6      +4.9*     +3.7      +3.9*     +9.0      +3.9     +11.4*
+  Stimulation                  +4.8* [+2.2, +8.0]     +3.5*     +8.5*     +6.5*     +3.4*    +20.4*     +6.9*     -3.2!
+  Pow.: resources              +4.6* [+1.8, +7.6]     +1.5      +5.0*     +3.4      +3.0*    +11.1      +3.6      +5.0*
+  Tradition                    +1.3  [-0.1, +3.0]     +1.1      +1.2      +1.3      +1.0      +2.8      +1.3      +1.9 
+  Achievement                  +0.9  [-1.4, +3.4]     +0.0      -0.1      -0.3      +0.9      -0.9      -0.3     +10.0*
+  Univ.: tolerance             +0.6  [-0.4, +1.7]     +0.3      +1.1      +0.8      +0.4*     +3.2      +0.8      +1.6 
+  SD: thought                  +0.4  [-0.5, +1.3]     -0.0      -0.0      -0.1      +0.1      -0.1      -0.1      +1.1 
+  SD: action                   -0.1  [-1.4, +1.3]     +0.3      +1.4      +1.0      +1.3*     +4.1      +1.0      +7.5*
+  Benev.: dependability        -0.1  [-0.9, +0.6]     +0.1      +0.0      +0.0      +0.4*     +0.1      +0.0      -0.0 
+  Humility                     -0.2* [-0.3, -0.1]     +0.0      -0.0      -0.0      -0.1*     +0.0      -0.0      -0.0 
+  Benev.: caring               -0.3  [-1.4, +1.2]     -0.5*     -0.3      -0.0      +0.8*     -0.1      -0.0      +1.4 
+  Conf.: interpersonal         -0.5  [-1.2, +0.3]     -0.3*     -1.4*     -1.2*     -0.5*     -2.3*     -1.2*     -2.9*
+  Conf.: rules                 -0.6  [-2.9, +1.8]     +0.0      +1.3      +0.6      +0.8      +1.4      +0.7      +1.8 
+  Hedonism                     -0.9* [-1.3, -0.7]     -0.6*     -1.2*     -1.0*     -0.5*     -2.4*     -1.1*     -1.4*
+  Face                         -1.4* [-2.0, -0.8]     -0.5*     -1.3*     -1.3*     -0.6*     -1.6*     -1.4*     -0.8*
+  Pow.: dominance              -1.8* [-3.1, -0.4]     -1.8*     -2.3*     -2.2*     -0.5      -4.4*     -2.3*     -0.1 
+  Sec.: personal               -1.8* [-2.5, -1.1]     -1.5*     -2.8*     -1.9*     -1.1*     -2.5*     -2.0*     -0.4 
+
+  Conclusions per estimator (per run, mean over the main system's 3 runs): of the 10 significant gold differences, how many are found with the right sign, missed or reversed; spurious = significant
+  where gold is not; top/bottom 3 = overlap with gold's three most manifesto- / news-leaning values.
+  estimator   found  missed  reversed  spurious       slope [95% CI]  rank rho  MAE pp  top 3  bottom 3
+  CC@0.5        7.0     3.0       0.0       1.7    0.73 [0.58, 0.85]      0.94    0.82    2.0       2.3
+  CC@t*         8.7     1.3       0.0       1.0    1.16 [0.96, 1.30]      0.89    0.92    2.0       2.3
+  CC@prev       7.3     2.7       0.0       1.0    0.96 [0.80, 1.09]      0.89    0.64    2.0       3.0
+  PCC-Platt     9.3     0.7       0.0       4.7    0.62 [0.52, 0.69]      0.90    0.99    3.0       2.3
+  ACC@prev      6.0     4.0       0.0       0.3    2.49 [1.93, 2.97]      0.86    3.75    1.7       1.7
+  RC@prev       7.3     2.7       0.0       1.0    1.02 [0.82, 1.27]      0.89    0.72    2.0       3.0
+  LLM           6.0     3.0       1.0       3.0    0.91 [0.60, 1.21]      0.66    2.45    2.0       0.0
+
+  Significantly more in manifestos:
+    gold       ( 5) Univ.: concern, Univ.: nature, Sec.: societal, Stimulation, Pow.: resources
+    CC@0.5     ( 3) Univ.: concern, Univ.: nature, Stimulation
+    CC@t*      ( 5) Univ.: concern, Stimulation, Univ.: nature, Pow.: resources, Sec.: societal
+    CC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
+    PCC-Platt  ( 9) Univ.: concern, Univ.: nature, Sec.: societal, Stimulation, Pow.: resources, SD: action, Benev.: caring, Univ.: tolerance, Benev.: dependability
+    ACC@prev   ( 3) Univ.: concern, Stimulation, Univ.: nature
+    RC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
+    LLM        ( 6) Sec.: societal, Univ.: concern, Achievement, Univ.: nature, SD: action, Pow.: resources
+  Significantly more in news:
+    gold       ( 5) Sec.: personal, Pow.: dominance, Face, Hedonism, Humility
+    CC@0.5     ( 6) Pow.: dominance, Sec.: personal, Hedonism, Face, Benev.: caring, Conf.: interpersonal
+    CC@t*      ( 5) Sec.: personal, Pow.: dominance, Conf.: interpersonal, Face, Hedonism
+    CC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    PCC-Platt  ( 5) Sec.: personal, Face, Conf.: interpersonal, Hedonism, Humility
+    ACC@prev   ( 5) Pow.: dominance, Sec.: personal, Hedonism, Conf.: interpersonal, Face
+    RC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    LLM        ( 4) Stimulation, Conf.: interpersonal, Hedonism, Face
+
+============================================================================================================================
+LANGUAGE-ADJUSTED: 10 of 19 gold differences significant
+============================================================================================================================
+  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   RC@prev       LLM
+  Univ.: concern              +9.9* [+6.4, +13.6]     +7.9*    +11.9*    +10.3*     +6.4*    +29.5*    +11.1*    +11.1*
+  Sec.: societal              +6.1* [+2.8, +10.0]     +2.5      +4.7*     +3.5      +3.8*     +8.7*     +3.8     +10.6*
+  Univ.: nature               +6.1* [+2.0, +11.0]     +6.4*     +7.6*     +6.4*     +5.0*    +11.4*     +6.9*     +7.9*
+  Stimulation                  +4.8* [+2.3, +7.2]     +3.4*     +8.4*     +6.5*     +3.4*    +19.5*     +7.0*     -3.4!
+  Pow.: resources              +4.5* [+1.7, +7.6]     +1.6      +5.2*     +3.5*     +3.1*    +11.0*     +3.8*     +4.8*
+  Tradition                    +1.4  [+0.1, +3.2]     +1.3      +1.5      +1.5      +1.2*     +2.7      +1.6      +2.2*
+  Achievement                  +0.8  [-1.5, +3.2]     +0.2      +0.2      -0.0      +1.0      +1.5      -0.0     +11.0*
+  Univ.: tolerance             +0.5  [-0.5, +1.7]     +0.2      +1.0      +0.7      +0.4      +3.0      +0.8      +1.4 
+  SD: thought                  +0.2  [-0.6, +1.2]     +0.0      -0.0      -0.1      +0.1      +0.1      -0.1      +1.0 
+  Benev.: dependability        +0.0  [-0.7, +0.9]     +0.1      +0.1      +0.1      +0.4*     +0.6      +0.1      -0.0 
+  Benev.: caring               -0.0  [-1.2, +1.3]     -0.3*     -0.1      +0.1      +0.9*     +1.6      +0.1      +1.4 
+  Humility                     -0.2* [-0.3, -0.1]     +0.0      -0.0      -0.0      -0.0*     -0.0      -0.0      -0.0 
+  Conf.: interpersonal         -0.4  [-1.1, +0.4]     -0.3*     -1.3*     -1.1*     -0.6*     -2.4*     -1.2*     -2.9*
+  SD: action                   -0.6  [-2.0, +1.0]     -0.0      +0.8      +0.4      +1.1*     +1.8      +0.5      +7.6*
+  Hedonism                     -0.9* [-1.2, -0.6]     -0.5*     -1.0*     -0.8*     -0.4*     -1.6*     -0.9*     -1.4*
+  Conf.: rules                 -1.0  [-3.6, +1.5]     -0.1      +1.1      +0.5      +0.7      +2.2      +0.5      +1.1 
+  Face                         -1.5* [-2.2, -0.9]     -0.5*     -1.4*     -1.4*     -0.7*     -1.9*     -1.5*     -1.0*
+  Sec.: personal               -1.7* [-2.6, -1.0]     -1.5*     -2.7*     -1.9*     -1.1*     -2.7*     -2.1*     +0.1 
+  Pow.: dominance              -2.2* [-3.6, -0.7]     -2.1*     -2.8*     -2.5*     -0.7*     -4.1*     -2.7*     -0.2 
+
+  Conclusions per estimator (per run, mean over the main system's 3 runs): of the 10 significant gold differences, how many are found with the right sign, missed or reversed; spurious = significant
+  where gold is not; top/bottom 3 = overlap with gold's three most manifesto- / news-leaning values.
+  estimator   found  missed  reversed  spurious       slope [95% CI]  rank rho  MAE pp  top 3  bottom 3
+  CC@0.5        7.0     3.0       0.0       1.3    0.72 [0.57, 0.85]      0.93    0.82    2.0       2.3
+  CC@t*         8.3     1.7       0.0       1.0    1.16 [0.95, 1.30]      0.85    0.94    2.0       2.3
+  CC@prev       7.3     2.7       0.0       1.0    0.96 [0.79, 1.09]      0.86    0.64    2.0       3.0
+  PCC-Platt     9.3     0.7       0.0       5.7    0.62 [0.51, 0.69]      0.87    1.00    2.7       3.0
+  ACC@prev      6.7     3.3       0.0       0.3    2.40 [1.84, 2.79]      0.86    3.61    1.7       2.3
+  RC@prev       7.3     2.7       0.0       1.0    1.04 [0.83, 1.30]      0.86    0.73    2.0       3.0
+  LLM           6.0     3.0       1.0       4.0    0.87 [0.56, 1.17]      0.58    2.54    2.0       0.0
+
+  Significantly more in manifestos:
+    gold       ( 5) Univ.: concern, Sec.: societal, Univ.: nature, Stimulation, Pow.: resources
+    CC@0.5     ( 3) Univ.: concern, Univ.: nature, Stimulation
+    CC@t*      ( 5) Univ.: concern, Stimulation, Univ.: nature, Pow.: resources, Sec.: societal
+    CC@prev    ( 4) Univ.: concern, Stimulation, Univ.: nature, Pow.: resources
+    PCC-Platt  ( 9) Univ.: concern, Univ.: nature, Sec.: societal, Stimulation, Pow.: resources, Tradition, SD: action, Benev.: caring, Benev.: dependability
+    ACC@prev   ( 5) Univ.: concern, Stimulation, Univ.: nature, Pow.: resources, Sec.: societal
+    RC@prev    ( 4) Univ.: concern, Stimulation, Univ.: nature, Pow.: resources
+    LLM        ( 7) Univ.: concern, Achievement, Sec.: societal, Univ.: nature, SD: action, Pow.: resources, Tradition
+  Significantly more in news:
+    gold       ( 5) Pow.: dominance, Sec.: personal, Face, Hedonism, Humility
+    CC@0.5     ( 6) Pow.: dominance, Sec.: personal, Hedonism, Face, Benev.: caring, Conf.: interpersonal
+    CC@t*      ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    CC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    PCC-Platt  ( 6) Sec.: personal, Pow.: dominance, Face, Conf.: interpersonal, Hedonism, Humility
+    ACC@prev   ( 5) Pow.: dominance, Sec.: personal, Conf.: interpersonal, Face, Hedonism
+    RC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    LLM        ( 4) Stimulation, Conf.: interpersonal, Hedonism, Face
+
+Crude vs language-adjusted gold: rank rho 0.98; significant in crude only: none; in adjusted only: none.

@@ -285,7 +285,7 @@ def table1_data() -> None:
         man = docs.str.contains("_M_").sum()
         rows[label] = [f"{len(docs) - man:,} / {man:,}", f"{len(g):,}", f"{y.any(1).mean() * 100:.1f}",
                        f"{y.sum(1).mean():.2f}"]
-    names = ["Documents (news / manifestos)", "Sentences", r"Sentences with $\geq$1 value (\%)", "Value labels per sentence"]
+    names = ["Documents (news / manifestos)", "Sentences", r"Sentences with $\geq$1 value (\%)", "Value mentions per sentence"]
     lines = [f"{n} & " + " & ".join(rows[s][k] for s in rows) + r" \\" for k, n in enumerate(names)]
     write_table("tab1-data.tex", r"""
 \begin{table}[t]
@@ -299,7 +299,7 @@ def table1_data() -> None:
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{4}{@{}p{0.96\columnwidth}@{}}{\scriptsize Nine source languages (BG, DE, EL, EN, FR, HE, IT, NL, TR), machine-translated into English (DeepL; Google Translate for Hebrew). Each language was annotated by its own team; final labels were curated. Annotator agreement before curation: Krippendorff's $\alpha = 0.486$ for the 19 values (0.340--0.680 by language).}
+\multicolumn{4}{@{}p{0.96\columnwidth}@{}}{\scriptsize Source languages: Bulgarian (BG), German (DE), Greek (EL), English (EN), French (FR), Hebrew (HE), Italian (IT), Dutch (NL) and Turkish (TR). Documents not written in English were machine-translated by the task organizers (DeepL, and Google Translate for Hebrew). Each language was annotated and curated by its own team. Annotator agreement before curation: Krippendorff's $\alpha = 0.486$ for the 19 values (0.340--0.680 by language).}
 \end{tabular}
 \end{table}
 """)

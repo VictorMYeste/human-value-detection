@@ -463,11 +463,10 @@ Estimator & Found & Missed & Rev. & Spur. & Slope & MAE \\
 
 def table5_recommendations() -> None:
     rows = [
-        ("Any analysis", "Report the decision rule with the results: how the thresholds were chosen, and on which annotated data."),
-        ("Corpus totals", "Give each value the threshold at which it is labeled as often as in the annotated validation data. Macro-F1 stays the same and totals are unbiased. Do not count with a threshold tuned for macro-F1. Averages of calibrated probabilities also give accurate totals."),
-        ("Group comparisons", "Measure on annotated validation data how much differences shrink, divide by that slope (regression calibration) and keep its uncertainty in the intervals. Measure it on comparisons of the same kind. It carries over to a group without validation data of its own, but not to another kind of comparison."),
-        ("Avoid", "For group comparisons, calibrated probability averages, which shrink differences behind narrow intervals, and adjusted counts, unless the classifier errs at the same rates in every group."),
-        ("LLM labels", "Check them against annotated data before counting. For the 7--9B models tested here, neither adjusted counts nor regression calibration repaired their group comparisons."),
+        ("Any analysis", "Report how the thresholds were chosen and on which annotated data."),
+        ("Corpus totals", "Set each value's threshold so that it is labeled as often as in the validation data, or average calibrated probabilities. Do not count with thresholds tuned for macro-F1."),
+        ("Group comparisons", "Divide each difference by the shrinkage measured on validation data for the same kind of comparison (regression calibration), and keep its uncertainty in the intervals. Avoid calibrated averages, which shrink differences, and adjusted counts, unless error rates are equal across groups."),
+        ("LLM labels", "Check them against annotated data before counting, because corrections fitted on validation data may not repair them."),
     ]
     lines = [f"{a} & {b}" + r" \\" for a, b in rows]
     write_table("tab5-recommendations.tex", r"""

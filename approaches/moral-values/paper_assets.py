@@ -299,7 +299,7 @@ def table1_data() -> None:
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{4}{@{}p{0.96\columnwidth}@{}}{\scriptsize Source languages: Bulgarian (BG), German (DE), Greek (EL), English (EN), French (FR), Hebrew (HE), Italian (IT), Dutch (NL) and Turkish (TR). Documents not written in English were machine-translated by the task organizers (DeepL, and Google Translate for Hebrew). Each language was annotated and curated by its own team. Annotator agreement before curation: Krippendorff's $\alpha = 0.486$ for the 19 values (0.340--0.680 by language).}
+\multicolumn{4}{@{}p{0.96\columnwidth}@{}}{\scriptsize Source languages: Bulgarian, German, Greek, English, French, Hebrew, Italian, Dutch and Turkish. Documents not written in English were machine-translated by the task organizers (DeepL, and Google Translate for Hebrew).}
 \end{tabular}
 \end{table}
 """)
@@ -316,7 +316,11 @@ def table2_classification(llm: pd.DataFrame) -> None:
     """Table II of the paper (main systems) and its full version for the supplement (all systems)."""
     classification_table(llm, ["DeBERTa", "RoBERTa", "Seed ensemble", "Feature ensemble"], "tab2-classification.tex",
                          "tab:classification",
-                         CLASSIFICATION_NOTE + " Models with auxiliary inputs and presence gates are in the supplement.")
+                         r"Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, "
+                         r"prevalence-matched ones as quantiles of the validation probabilities. Bold: main system. "
+                         r"The seed ensemble averages three training runs of DeBERTa and is reported as one system. "
+                         r"LLM labels are in Table~\ref{tab:measurement}, and models with auxiliary inputs and presence "
+                         r"gates in the supplement.", include_llm=False)
     classification_table(llm, ["DeBERTa", "DeBERTa + LIWC-22", "DeBERTa + MJD", "DeBERTa + Prev-2", "DeBERTa + BERTopic",
                                "DeBERTa + soft gate", "DeBERTa + hard gate 0.10", "DeBERTa + hard gate tuned", "RoBERTa",
                                "Seed ensemble", "Feature ensemble"], "tabS1-classification-full.tex",
@@ -325,7 +329,7 @@ def table2_classification(llm: pd.DataFrame) -> None:
 
 
 def classification_table(llm: pd.DataFrame, systems: list[str], filename: str, label: str, note: str,
-                         caption_extra: str = "") -> None:
+                         caption_extra: str = "", include_llm: bool = True) -> None:
     c = pd.read_csv(RES / "classification-table.csv")
     agg = c.groupby(["system", "rule"]).agg(f1=("macro_f1", "mean"), sd=("macro_f1", "std"), n=("macro_f1", "size"),
                                             ratio=("pred_gold_ratio", "mean"))
@@ -347,9 +351,10 @@ def classification_table(llm: pd.DataFrame, systems: list[str], filename: str, l
                      f"{ratio(s, 'label prev')}" + r" \\")
         if s in {"DeBERTa + BERTopic", "DeBERTa + hard gate tuned"} and s != systems[-1]:
             lines.append(r"\addlinespace")
-    lines.append(r"\midrule")
-    llm_names = {"Gemma-2-9B few-shot + gate": "Gemma-2-9B, few-shot + gate", "Gemma-2-9B few-shot": "Gemma-2-9B, few-shot",
+    llm_names = {} if not include_llm else {"Gemma-2-9B few-shot + gate": "Gemma-2-9B, few-shot + gate", "Gemma-2-9B few-shot": "Gemma-2-9B, few-shot",
                  "Gemma-2-9B QLoRA": "Gemma-2-9B, QLoRA", "LLM ensemble (hard vote)": "LLM union (few-shot + QLoRA)"}
+    if llm_names:
+        lines.append(r"\midrule")
     for s, row_name in llm_names.items():
         r = llm.loc[(s, "CC")]
         lines.append(f"{row_name} & \\multicolumn{{4}}{{c}}{{{r.macro_f1:.3f} (labels as returned)}} & "
@@ -429,7 +434,7 @@ Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Bia
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (paired stratified document bootstrap, $B = 2000$, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size, below 1 = they shrink). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values. Intervals for ACC, PACC, ACC-group and RC include the sampling error of the validation error rates and slopes.}
+\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
 \end{tabular}
 \end{table*}
 """)

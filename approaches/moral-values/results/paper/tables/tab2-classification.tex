@@ -13,12 +13,7 @@ DeBERTa & 0.282 $\pm$ 0.001 & 0.317 $\pm$ 0.006 & 0.319 $\pm$ 0.005 & 0.317 $\pm
 RoBERTa & 0.267 $\pm$ 0.009 & 0.309 $\pm$ 0.006 & 0.308 $\pm$ 0.007 & 0.305 $\pm$ 0.004 & 1.53 & 0.99 \\
 Seed ensemble & 0.284 & 0.331 & 0.329 & 0.324 & 1.38 & 1.01 \\
 \textbf{Feature ensemble} & 0.284 $\pm$ 0.005 & 0.335 $\pm$ 0.003 & 0.338 $\pm$ 0.007 & 0.336 $\pm$ 0.004 & 1.28 & 1.01 \\
-\midrule
-Gemma-2-9B, few-shot + gate & \multicolumn{4}{c}{0.238 (labels as returned)} & \multicolumn{2}{c}{1.61} \\
-Gemma-2-9B, few-shot & \multicolumn{4}{c}{0.233 (labels as returned)} & \multicolumn{2}{c}{1.86} \\
-Gemma-2-9B, QLoRA & \multicolumn{4}{c}{0.236 (labels as returned)} & \multicolumn{2}{c}{0.46} \\
-LLM union (few-shot + QLoRA) & \multicolumn{4}{c}{0.277 (labels as returned)} & \multicolumn{2}{c}{1.80} \\
 \bottomrule
-\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, prevalence-matched ones as quantiles of the validation probabilities. The feature ensemble (soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system. The seed ensemble averages three training runs of DeBERTa and is reported as one system. LLM outputs are label sets, so no threshold can be tuned, and each LLM system was run once. Models with auxiliary inputs and presence gates are in the supplement.}
+\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, prevalence-matched ones as quantiles of the validation probabilities. Bold: main system. The seed ensemble averages three training runs of DeBERTa and is reported as one system. LLM labels are in Table~\ref{tab:measurement}, and models with auxiliary inputs and presence gates in the supplement.}
 \end{tabular}
 \end{table*}

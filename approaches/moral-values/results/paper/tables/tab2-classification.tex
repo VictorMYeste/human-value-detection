@@ -1,11 +1,11 @@
 \begin{table*}[t]
-\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three seeds) and predicted/gold value mentions}
+\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three training runs) and predicted/reference value mentions}
 \label{tab:classification}
 \centering
 \footnotesize
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
- & \multicolumn{4}{c}{Macro-F1 by decision rule} & \multicolumn{2}{c}{Predicted / gold mentions} \\
+ & \multicolumn{4}{c}{Macro-F1 by decision rule} & \multicolumn{2}{c}{Predicted / reference mentions} \\
 \cmidrule(lr){2-5}\cmidrule(l){6-7}
 System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t_j$ & at $t^*$ & prev.-matched \\
 \midrule
@@ -19,6 +19,6 @@ Gemma-2-9B, few-shot & \multicolumn{4}{c}{0.233 (labels as returned)} & \multico
 Gemma-2-9B, QLoRA & \multicolumn{4}{c}{0.236 (labels as returned)} & \multicolumn{2}{c}{0.46} \\
 LLM union (few-shot + QLoRA) & \multicolumn{4}{c}{0.277 (labels as returned)} & \multicolumn{2}{c}{1.80} \\
 \bottomrule
-\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, prevalence-matched ones as quantiles of the validation probabilities. The feature ensemble (soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system; the seed ensemble (three DeBERTa seeds) is a single run. LLM outputs are label sets, so no threshold can be tuned; they are single runs. Models with auxiliary inputs and presence gates are in the supplement.}
+\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, prevalence-matched ones as quantiles of the validation probabilities. The feature ensemble (soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system. The seed ensemble averages three training runs of DeBERTa and is reported as one system. LLM outputs are label sets, so no threshold can be tuned, and each LLM system was run once. Models with auxiliary inputs and presence gates are in the supplement.}
 \end{tabular}
 \end{table*}

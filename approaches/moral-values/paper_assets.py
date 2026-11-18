@@ -94,7 +94,7 @@ def ci_bar(ax, x, lo, hi, y, color, marker, filled=True, ms=3.6, lw=0.8, zorder=
 
 # ============================================================================ figures
 def figure1_prevalence() -> None:
-    """Per-value estimated / gold prevalence for three decision rules (main system, mean of runs)."""
+    """Per-value estimated / reference prevalence for three decision rules (main system, mean of runs)."""
     gt, gv = load_gold("test"), load_gold("validation")
     yt = (gt[VALUES].to_numpy() >= 0.5).astype(int)
     yv = (gv[VALUES].to_numpy() >= 0.5).astype(int)
@@ -119,26 +119,31 @@ def figure1_prevalence() -> None:
     a.set_xlim(0, gold[0].max() * 100 * 1.32)
     a.set_xlabel("% of sentences")
     a.set_yticks(y, [VALUES[j] for j in order])
-    a.set_title("(a) Gold prevalence", loc="left")
+    a.set_title("(a) Reference prevalence", loc="left")
     style_axis(a)
 
+    # A ratio of 0 (the rule never predicts the value; Humility at t = 0.5) has no place on a log
+    # axis. It is drawn at an explicit "0" left of an axis break, and intervals that reach 0 run to it.
+    ZERO, BREAK = 0.032, 0.0395
     b.axvline(1, color=INK2, lw=0.7, zorder=1)
+    b.axvline(BREAK, color=INK2, lw=0.5, ls=(0, (1, 2)), zorder=1)
     for k, (r, color, marker) in enumerate(rules):
         rr = ratio[r][:, order]
         lo, hi = np.percentile(rr[1:], [2.5, 97.5], axis=0)
+        lo, hi = np.where(lo > 0, lo, ZERO), np.where(hi > 0, hi, ZERO)
         for i, yi in enumerate(y):
             yk = yi + (k - 1) * 0.24
-            if rr[0, i] == 0:  # nothing predicted: no point on a log axis, so flag it at the left edge
-                b.plot([0.048], [yk], marker="<", ms=3.6, color=color, ls="none", zorder=4)
-                b.text(0.052, yk - 0.1, "none predicted", fontsize=6, color=INK2, va="center")
-                continue
-            ci_bar(b, rr[0, i], lo[i], hi[i], yk, color, marker, label=LABEL[r] if i == 0 else None)
+            x = rr[0, i] if rr[0, i] > 0 else ZERO
+            ci_bar(b, x, lo[i], hi[i], yk, color, marker, label=LABEL[r] if i == 0 else None)
     b.set_xscale("log")
-    ticks = [0.05, 0.1, 0.2, 0.5, 1, 2]
-    b.set_xticks(ticks, [f"{t:g}" for t in ticks])
-    b.set_xlim(0.045, 2.6)
-    b.set_xlabel("Estimated / gold prevalence (log scale; 1 = unbiased)")
-    b.set_title("(b) Bias of each decision rule (95% bootstrap intervals)", loc="left")
+    b.minorticks_off()
+    ticks = [ZERO, 0.05, 0.1, 0.2, 0.5, 1, 2]
+    b.set_xticks(ticks, ["0"] + [f"{t:g}" for t in ticks[1:]])
+    b.set_xlim(0.027, 2.6)
+    b.text(BREAK, 0, "//", transform=b.get_xaxis_transform(), ha="center", va="center", fontsize=7,
+           color=INK2, clip_on=False, bbox={"fc": "white", "ec": "none", "pad": 0.1}, zorder=5)
+    b.set_xlabel("Estimated / reference prevalence (log scale; 1 = count is right)")
+    b.set_title("(b) Over- and undercounting by decision rule (95% intervals)", loc="left")
     b.text(0.06, y[0] + 0.55, "undercount", fontsize=6.5, color=INK2, ha="left", va="bottom")
     b.text(2.3, y[0] + 0.55, "overcount", fontsize=6.5, color=INK2, ha="right", va="bottom")
     handles, labels = b.get_legend_handles_labels()
@@ -177,7 +182,7 @@ def figure2_slopes(summary: pd.DataFrame) -> None:
         if r in RECOMMENDED:
             t.set_fontweight("bold")
     axes[0].set_ylim(-0.7, len(rules) - 0.3)
-    fig.supxlabel("Slope of estimated on gold contrasts (log scale; 1 = faithful)", fontsize=8)
+    fig.supxlabel("Attenuation slope (log scale; 1 = differences keep their size)", fontsize=8)
     fig.legend(handles=[Line2D([], [], color=BLUE, marker="o", ms=3.6, lw=0.8, label=f"{MAIN} (95% CI)"),
                         Line2D([], [], color=MUTED, marker="o", ms=2.4, mfc="white", lw=0, label="other systems")],
                loc="outside upper center", ncol=2, handletextpad=0.3, columnspacing=1.2)
@@ -216,7 +221,7 @@ def figure3_shift(shift: pd.DataFrame) -> None:
                         Line2D([], [], color=BLUE, marker="o", ms=3.6, lw=0.8, label="group left out of the fit")],
                loc="outside upper center", ncol=2, handletextpad=0.3, columnspacing=1.2)
     axes[1].set_xlim(0.2, 2.0)
-    axes[1].set_xlabel("Slope of estimated on gold contrasts (1 = faithful)")
+    axes[1].set_xlabel("Attenuation slope (1 = differences keep their size)")
     save(fig, "fig3-shift.pdf")
     plt.close(fig)
 
@@ -253,8 +258,8 @@ def figure4_worked(values: pd.DataFrame) -> None:
     axes[0].set_xlim(-4.5, 13.5)
     fig.supxlabel("Manifesto minus news, percentage points of sentences", fontsize=8)
     fig.legend(handles=[
-        Line2D([], [], color=BAND, lw=3.2, label="gold 95% CI"),
-        Line2D([], [], color=INK, marker="|", ms=6, mew=1.1, lw=0, label="gold"),
+        Line2D([], [], color=BAND, lw=3.2, label="reference 95% CI"),
+        Line2D([], [], color=INK, marker="|", ms=6, mew=1.1, lw=0, label="reference"),
         Line2D([], [], color=BLUE, marker="o", ms=3.6, lw=0, label="estimate, significant"),
         Line2D([], [], color=BLUE, marker="o", ms=3.6, mfc="white", lw=0, label="estimate, not significant")],
         loc="outside upper center", ncol=4, handletextpad=0.4, columnspacing=1.6)
@@ -302,9 +307,9 @@ def table1_data() -> None:
 
 CLASSIFICATION_NOTE = (r"Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, "
                        r"prevalence-matched ones as quantiles of the validation probabilities. The feature ensemble "
-                       r"(soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system; the seed "
-                       r"ensemble (three DeBERTa seeds) is a single run. LLM outputs are label sets, so no threshold "
-                       r"can be tuned; they are single runs.")
+                       r"(soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system. The seed "
+                       r"ensemble averages three training runs of DeBERTa and is reported as one system. LLM outputs "
+                       r"are label sets, so no threshold can be tuned, and each LLM system was run once.")
 
 
 def table2_classification(llm: pd.DataFrame) -> None:
@@ -351,13 +356,13 @@ def classification_table(llm: pd.DataFrame, systems: list[str], filename: str, l
                      f"\\multicolumn{{2}}{{c}}{{{r.ratio:.2f}}}" + r" \\")
     write_table(filename, r"""
 \begin{table*}[t]
-\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three seeds) and predicted/gold value mentions""" + caption_extra + r"""}
+\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three training runs) and predicted/reference value mentions""" + caption_extra + r"""}
 \label{""" + label + r"""}
 \centering
 \footnotesize
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
- & \multicolumn{4}{c}{Macro-F1 by decision rule} & \multicolumn{2}{c}{Predicted / gold mentions} \\
+ & \multicolumn{4}{c}{Macro-F1 by decision rule} & \multicolumn{2}{c}{Predicted / reference mentions} \\
 \cmidrule(lr){2-5}\cmidrule(l){6-7}
 System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t_j$ & at $t^*$ & prev.-matched \\
 \midrule
@@ -420,11 +425,11 @@ def table3_measurement(summary: pd.DataFrame, llm: pd.DataFrame) -> None:
 \toprule
  & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{2}{c}{Manifesto vs.\ news} & \multicolumn{3}{c}{Language pairs} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-10}
-Estimator & Macro-F1 & Pred./gold & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
+Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics per seed averaged over three seeds. Pred./gold: total estimated value mentions over gold mentions; $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (paired stratified document bootstrap, $B = 2000$, Benjamini--Hochberg $q < 0.05$). Slope: OLS slope of estimated on gold contrasts (1 = faithful; below 1 = differences shrunk). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values. Intervals for ACC, PACC, ACC-group and RC include the sampling error of the validation error rates and slopes.}
+\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (paired stratified document bootstrap, $B = 2000$, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size, below 1 = they shrink). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values. Intervals for ACC, PACC, ACC-group and RC include the sampling error of the validation error rates and slopes.}
 \end{tabular}
 \end{table*}
 """)

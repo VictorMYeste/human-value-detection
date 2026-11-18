@@ -8,7 +8,7 @@
 \toprule
  & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{2}{c}{Manifesto vs.\ news} & \multicolumn{3}{c}{Language pairs} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-10}
-Estimator & Macro-F1 & Pred./gold & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
+Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
 \midrule
 \multicolumn{10}{@{}l}{\emph{Decision rules (classify and count)}} \\
 \quad CC, $t = 0.5$ & 0.284 & 0.61$^\dagger$ & 1.21 & 17.0 / 0.0 & 0.73 [0.58, 0.85] & 18 & 0.38 [0.32, 0.47] & 17.8 & 0.61 \\
@@ -34,6 +34,6 @@ Estimator & Macro-F1 & Pred./gold & MAE (pp) & Under / over & Slope [95\% CI] & 
 \quad Gemma QLoRA, CC & 0.236 & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.30 [0.18, 0.47] & 37 & 0.37 [0.29, 0.46] & 18.1 & 0.57 \\
 \quad LLM union, CC & 0.277 & 1.80$^\dagger$ & 2.64 & 3 / 15 & 1.00 [0.70, 1.28] & 32 & 0.53 [0.43, 0.71] & 13.3 & 0.39 \\
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics per seed averaged over three seeds. Pred./gold: total estimated value mentions over gold mentions; $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (paired stratified document bootstrap, $B = 2000$, Benjamini--Hochberg $q < 0.05$). Slope: OLS slope of estimated on gold contrasts (1 = faithful; below 1 = differences shrunk). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values. Intervals for ACC, PACC, ACC-group and RC include the sampling error of the validation error rates and slopes.}
+\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (paired stratified document bootstrap, $B = 2000$, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size, below 1 = they shrink). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values. Intervals for ACC, PACC, ACC-group and RC include the sampling error of the validation error rates and slopes.}
 \end{tabular}
 \end{table*}

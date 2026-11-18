@@ -17,6 +17,7 @@ Writes to results/paper/:
     figures/fig3-shift.pdf        slopes when a language or genre is left out of the fit (column width)
     figures/fig4-worked.pdf       worked example: manifesto-news differences (full width)
     tables/tab1-data.tex ... tab5-recommendations.tex   LaTeX tables (IEEEtran + booktabs)
+    tables/tabS1-classification-full.tex                Table II with every system, for the supplement
 
 Figures are vector PDFs with embedded TrueType fonts (Times), 8 pt text, IEEE widths
 (column 3.47 in, page 7.11 in, to fit IEEEtran). Colours: the first three slots of the validated categorical
@@ -299,14 +300,31 @@ def table1_data() -> None:
 """)
 
 
+CLASSIFICATION_NOTE = (r"Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, "
+                       r"prevalence-matched ones as quantiles of the validation probabilities. The feature ensemble "
+                       r"(soft vote of DeBERTa, DeBERTa + LIWC-22 and DeBERTa + Prev-2) is the main system; the seed "
+                       r"ensemble (three DeBERTa seeds) is a single run. LLM outputs are label sets, so no threshold "
+                       r"can be tuned; they are single runs.")
+
+
 def table2_classification(llm: pd.DataFrame) -> None:
+    """Table II of the paper (main systems) and its full version for the supplement (all systems)."""
+    classification_table(llm, ["DeBERTa", "RoBERTa", "Seed ensemble", "Feature ensemble"], "tab2-classification.tex",
+                         "tab:classification",
+                         CLASSIFICATION_NOTE + " Models with auxiliary inputs and presence gates are in the supplement.")
+    classification_table(llm, ["DeBERTa", "DeBERTa + LIWC-22", "DeBERTa + MJD", "DeBERTa + Prev-2", "DeBERTa + BERTopic",
+                               "DeBERTa + soft gate", "DeBERTa + hard gate 0.10", "DeBERTa + hard gate tuned", "RoBERTa",
+                               "Seed ensemble", "Feature ensemble"], "tabS1-classification-full.tex",
+                         "tab:classification-full", CLASSIFICATION_NOTE + " Gated systems use the global threshold only.",
+                         caption_extra=", all systems")
+
+
+def classification_table(llm: pd.DataFrame, systems: list[str], filename: str, label: str, note: str,
+                         caption_extra: str = "") -> None:
     c = pd.read_csv(RES / "classification-table.csv")
     agg = c.groupby(["system", "rule"]).agg(f1=("macro_f1", "mean"), sd=("macro_f1", "std"), n=("macro_f1", "size"),
                                             ratio=("pred_gold_ratio", "mean"))
     rules = ["t=0.5", "global t*", "label t*", "label prev"]
-    systems = ["DeBERTa", "DeBERTa + LIWC-22", "DeBERTa + MJD", "DeBERTa + Prev-2", "DeBERTa + BERTopic",
-               "DeBERTa + soft gate", "DeBERTa + hard gate 0.10", "DeBERTa + hard gate tuned", "RoBERTa",
-               "Seed ensemble", "Feature ensemble"]
 
     def cell(system, rule):
         if (system, rule) not in agg.index:
@@ -322,19 +340,19 @@ def table2_classification(llm: pd.DataFrame) -> None:
         name = r"\textbf{Feature ensemble}" if s == MAIN else tex_escape(s)
         lines.append(f"{name} & " + " & ".join(cell(s, r) for r in rules) + f" & {ratio(s, 'global t*')} & "
                      f"{ratio(s, 'label prev')}" + r" \\")
-        if s in {"DeBERTa + BERTopic", "DeBERTa + hard gate tuned"}:
+        if s in {"DeBERTa + BERTopic", "DeBERTa + hard gate tuned"} and s != systems[-1]:
             lines.append(r"\addlinespace")
     lines.append(r"\midrule")
     llm_names = {"Gemma-2-9B few-shot + gate": "Gemma-2-9B, few-shot + gate", "Gemma-2-9B few-shot": "Gemma-2-9B, few-shot",
                  "Gemma-2-9B QLoRA": "Gemma-2-9B, QLoRA", "LLM ensemble (hard vote)": "LLM union (few-shot + QLoRA)"}
-    for s, label in llm_names.items():
+    for s, row_name in llm_names.items():
         r = llm.loc[(s, "CC")]
-        lines.append(f"{label} & \\multicolumn{{4}}{{c}}{{{r.macro_f1:.3f} (labels as returned)}} & "
+        lines.append(f"{row_name} & \\multicolumn{{4}}{{c}}{{{r.macro_f1:.3f} (labels as returned)}} & "
                      f"\\multicolumn{{2}}{{c}}{{{r.ratio:.2f}}}" + r" \\")
-    write_table("tab2-classification.tex", r"""
+    write_table(filename, r"""
 \begin{table*}[t]
-\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three seeds) and predicted/gold value mentions}
-\label{tab:classification}
+\caption{Classification: test macro-F1 under each decision rule (mean $\pm$ sd over three seeds) and predicted/gold value mentions""" + caption_extra + r"""}
+\label{""" + label + r"""}
 \centering
 \footnotesize
 \begin{tabular}{@{}lcccccc@{}}
@@ -345,7 +363,7 @@ System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize All thresholds are fitted on the validation split (grid 0.01--0.99). Gated systems use the global threshold only. The feature ensemble (DeBERTa, DeBERTa + LIWC-22, DeBERTa + Prev-2, soft vote) is the main system; the seed ensemble (three DeBERTa seeds) is a single run. LLM outputs are label sets, so no threshold can be tuned; they are single runs.}
+\multicolumn{7}{@{}p{0.98\textwidth}@{}}{\scriptsize """ + note + r"""}
 \end{tabular}
 \end{table*}
 """)
@@ -364,7 +382,7 @@ def table3_measurement(summary: pd.DataFrame, llm: pd.DataFrame) -> None:
     groups = [("Decision rules (classify and count)", ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]),
               ("Probability averages", ["PCC", "PCC-Platt"]),
               ("Quantification methods", ["ACC@t*", "ACC@prev", "PACC", "EM", "ACC-G@prev"]),
-              ("Contrast correction (this paper)", ["RC@prev"])]
+              ("Contrast correction (regression calibration)", ["RC@prev"])]
     lines = []
     for title, rules in groups:
         lines.append(f"\\multicolumn{{10}}{{@{{}}l}}{{\\emph{{{title}}}}}" + r" \\")

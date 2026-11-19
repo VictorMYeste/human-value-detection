@@ -69,7 +69,7 @@ LABEL = {  # math in $...$ renders in matplotlib mathtext and in LaTeX alike
     "CC@0.5": "CC, $t = 0.5$", "CC@t*": "CC, macro-F1 $t^*$", "CC@label-t*": "CC, per-label F1 $t_j$",
     "CC@prev": "CC, prevalence-matched", "PCC": "PCC, raw", "PCC-Platt": "PCC, Platt",
     "ACC@t*": "ACC, $t^*$", "ACC@prev": "ACC, prevalence-matched", "PACC": "PACC", "EM": "EM",
-    "ACC-G@prev": "ACC, group rates", "RC@prev": "RC, prevalence-matched",
+    "ACC-G@prev": "ACC-G, prevalence-matched", "RC@prev": "RC, prevalence-matched",
 }
 RECOMMENDED = {"CC@prev", "RC@prev"}
 

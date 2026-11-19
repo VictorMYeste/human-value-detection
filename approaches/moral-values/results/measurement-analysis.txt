@@ -28,6 +28,10 @@ Feature ensemble  (3 run(s))
   EM                0.63    -32.18 [-60.84, 113.90]       3.39 [-12.78, 22.68]              1 / 0    0.99 [0.87, 1.17]             --
   ACC-G@prev        0.71     -17.76 [-46.90, 89.33]       4.59 [-11.49, 22.14]              0 / 0    1.04 [0.93, 1.19]             --
   RC@prev           0.21      -1.62 [-13.07, 17.42]         1.00 [-4.58, 7.81]              0 / 0    1.01 [0.96, 1.06]             --
+  Gold-only         0.27       3.19 [-11.37, 28.82]         0.18 [-6.15, 9.57]              0 / 0    1.00 [0.94, 1.05]             --
+  PPI@prev          0.21      -2.48 [-13.78, 16.28]         0.81 [-4.75, 7.60]              0 / 0    1.01 [0.96, 1.06]             --
+  PPI-Platt         0.19      -0.30 [-11.68, 19.32]        -0.05 [-4.87, 6.27]              0 / 0    1.00 [0.95, 1.04]             --
+  Platt-G           0.19      -0.30 [-11.68, 19.31]        -0.05 [-4.87, 6.27]              0 / 0    1.00 [0.95, 1.04]             --
 
 DeBERTa  (3 run(s))
   rule          MAE (pp)     signed rel. err rare %    signed rel. err freq. %  biased under/over                ratio       macro-F1
@@ -43,6 +47,10 @@ DeBERTa  (3 run(s))
   EM                0.54    -17.01 [-59.38, 197.25]       2.78 [-12.83, 22.08]              1 / 0    0.99 [0.87, 1.18]             --
   ACC-G@prev        0.71      2.84 [-39.55, 171.34]       2.50 [-13.40, 20.76]              0 / 0    1.02 [0.92, 1.19]             --
   RC@prev           0.18       2.82 [-10.79, 23.95]         0.18 [-5.18, 7.14]              0 / 0    1.00 [0.96, 1.05]             --
+  Gold-only         0.27       3.19 [-11.37, 28.82]         0.18 [-6.15, 9.57]              0 / 0    1.00 [0.94, 1.05]             --
+  PPI@prev          0.18       1.96 [-11.66, 23.06]        -0.01 [-5.37, 6.94]              0 / 0    1.00 [0.96, 1.05]             --
+  PPI-Platt         0.20       0.53 [-10.97, 21.02]        -0.05 [-4.91, 6.34]              0 / 0    1.00 [0.95, 1.04]             --
+  Platt-G           0.20       0.53 [-10.97, 21.02]        -0.05 [-4.91, 6.34]              0 / 0    1.00 [0.95, 1.04]             --
 
 RoBERTa  (3 run(s))
   rule          MAE (pp)     signed rel. err rare %    signed rel. err freq. %  biased under/over                ratio       macro-F1
@@ -58,6 +66,10 @@ RoBERTa  (3 run(s))
   EM                0.58    -37.91 [-64.28, 101.38]       3.68 [-12.52, 22.60]              0 / 0    0.97 [0.84, 1.17]             --
   ACC-G@prev        0.55    -16.94 [-55.07, 102.53]       3.48 [-12.14, 22.10]              0 / 0    0.98 [0.88, 1.16]             --
   RC@prev           0.18      -1.34 [-14.59, 17.25]         0.35 [-4.95, 7.26]              0 / 0    0.99 [0.95, 1.04]             --
+  Gold-only         0.27       3.19 [-11.37, 28.82]         0.18 [-6.15, 9.57]              0 / 0    1.00 [0.94, 1.05]             --
+  PPI@prev          0.18      -2.20 [-15.44, 16.25]         0.16 [-5.12, 7.10]              0 / 0    0.99 [0.95, 1.04]             --
+  PPI-Platt         0.21       0.03 [-11.60, 20.01]         0.20 [-4.67, 6.64]              0 / 0    1.00 [0.95, 1.04]             --
+  Platt-G           0.21       0.03 [-11.60, 20.01]         0.20 [-4.67, 6.64]              0 / 0    1.00 [0.95, 1.04]             --
 
 Seed ensemble  (1 run(s))
   rule          MAE (pp)     signed rel. err rare %    signed rel. err freq. %  biased under/over                ratio       macro-F1
@@ -73,6 +85,10 @@ Seed ensemble  (1 run(s))
   EM                0.56    -22.88 [-60.84, 191.54]       2.79 [-12.76, 22.07]              1 / 0    0.98 [0.86, 1.18]             --
   ACC-G@prev        0.77     57.40 [-47.57, 336.58]       2.38 [-13.71, 21.97]              0 / 0    1.05 [0.92, 1.23]             --
   RC@prev           0.19       5.36 [-11.08, 26.56]         0.18 [-5.39, 7.53]              0 / 0    1.01 [0.96, 1.06]             --
+  Gold-only         0.27       3.19 [-11.37, 28.82]         0.18 [-6.15, 9.57]              0 / 0    1.00 [0.94, 1.05]             --
+  PPI@prev          0.19       4.50 [-12.00, 25.38]        -0.01 [-5.54, 7.30]              0 / 0    1.01 [0.96, 1.06]             --
+  PPI-Platt         0.20       0.22 [-11.09, 20.70]        -0.09 [-4.97, 6.27]              0 / 0    0.99 [0.95, 1.04]             --
+  Platt-G           0.20       0.22 [-11.09, 20.70]        -0.09 [-4.97, 6.27]              0 / 0    0.99 [0.95, 1.04]             --
 
 ============================================================================================================
 B. MANIFESTO vs NEWS CONTRAST PER VALUE (19 contrasts)
@@ -85,6 +101,10 @@ B. MANIFESTO vs NEWS CONTRAST PER VALUE (19 contrasts)
            over ALL contrasts in the family -- i.e. differential measurement error between the groups.
    Slope: least squares of estimated on gold contrasts through the origin (1 = faithful, < 1 = shrunk).
    All metrics on the mean of a system's runs; 'runs' gives the range of the slope over single runs.
+   Slope and rank rho are not shown for Gold-only, PPI@prev, PPI-Platt, Platt-G: they add annotated documents other than
+           the test documents, so they do not share the reference's sampling noise and regress to its mean.
+           Reliability of these reference contrasts (1 - sampling variance / mean square): 0.89; an
+           unbiased estimator from other documents would have a slope near it, not near 1.
 ============================================================================================================
 
 Feature ensemble
@@ -101,6 +121,10 @@ Feature ensemble
   EM                100.0          77.8      88.9      31.6      8.74    3.90 [3.02, 4.56]   3.70-4.26
   ACC-G@prev        100.0           0.0      11.1       0.0      1.71    0.97 [0.58, 1.72]   0.90-1.01
   RC@prev           100.0          77.8      77.8       0.0      0.74    1.05 [0.84, 1.34]   1.03-1.07
+  Gold-only          88.9          77.8      88.9       0.0      0.98                   --          --
+  PPI@prev           88.9          66.7      77.8       0.0      0.66                   --          --
+  PPI-Platt          88.9          88.9      88.9       0.0      0.76                   --          --
+  Platt-G            88.9          88.9      88.9       0.0      0.74                   --          --
 
 DeBERTa
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs
@@ -116,6 +140,10 @@ DeBERTa
   EM                100.0          66.7      88.9      31.6      9.29    3.78 [2.94, 4.44]   3.71-3.88
   ACC-G@prev         88.9           0.0       0.0       0.0      1.91    1.11 [0.64, 1.84]   0.91-1.25
   RC@prev           100.0          88.9      88.9       0.0      0.79    1.10 [0.86, 1.38]   1.03-1.18
+  Gold-only          88.9          77.8      88.9       0.0      0.98                   --          --
+  PPI@prev           88.9          66.7      88.9       0.0      0.69                   --          --
+  PPI-Platt          88.9          88.9      88.9       0.0      0.77                   --          --
+  Platt-G            88.9          88.9      88.9       0.0      0.75                   --          --
 
 RoBERTa
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs
@@ -131,6 +159,10 @@ RoBERTa
   EM                100.0          88.9      88.9      36.8     10.57    4.53 [3.47, 5.30]   4.48-4.60
   ACC-G@prev         88.9           0.0       0.0       0.0      1.62    0.91 [0.55, 1.64]   0.82-1.06
   RC@prev           100.0         100.0     100.0       0.0      0.60    1.03 [0.83, 1.29]   0.98-1.13
+  Gold-only          88.9          77.8      88.9       0.0      0.98                   --          --
+  PPI@prev           88.9          66.7      77.8       0.0      0.75                   --          --
+  PPI-Platt          88.9          88.9      88.9       0.0      0.82                   --          --
+  Platt-G            88.9          88.9      88.9       0.0      0.80                   --          --
 
 Seed ensemble
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs
@@ -146,6 +178,10 @@ Seed ensemble
   EM                100.0          66.7      77.8      31.6      9.15    3.77 [2.93, 4.41]          --
   ACC-G@prev         88.9           0.0       0.0       0.0      1.82    1.13 [0.65, 1.92]          --
   RC@prev           100.0          77.8      88.9       0.0      0.82    1.10 [0.85, 1.42]          --
+  Gold-only          88.9          77.8      88.9       0.0      0.98                   --          --
+  PPI@prev           88.9          55.6      77.8       0.0      0.67                   --          --
+  PPI-Platt          88.9          88.9      88.9       0.0      0.76                   --          --
+  Platt-G            88.9          88.9      88.9       0.0      0.73                   --          --
 
    Largest share of gold-significant contrasts reproduced with the WRONG sign, any system/rule: 0.0%
 
@@ -171,6 +207,10 @@ C. SOURCE-LANGUAGE PAIRWISE CONTRASTS (36 pairs x 19 values = 684)
            over ALL contrasts in the family -- i.e. differential measurement error between the groups.
    Slope: least squares of estimated on gold contrasts through the origin (1 = faithful, < 1 = shrunk).
    All metrics on the mean of a system's runs; 'runs' gives the range of the slope over single runs.
+   Slope and rank rho are not shown for Gold-only, PPI@prev, PPI-Platt, Platt-G: they add annotated documents other than
+           the test documents, so they do not share the reference's sampling noise and regress to its mean.
+           Reliability of these reference contrasts (1 - sampling variance / mean square): 0.77; an
+           unbiased estimator from other documents would have a slope near it, not near 1.
 ============================================================================================================
 
 Feature ensemble
@@ -187,6 +227,10 @@ Feature ensemble
   EM                 93.7          17.5      45.2       0.0      3.91    2.02 [1.65, 2.31]   1.96-2.06    0.66 [0.55, 0.71]
   ACC-G@prev         81.7           0.0      10.3       0.0      3.43    1.27 [0.93, 2.04]   1.24-1.31    0.42 [0.31, 0.53]
   RC@prev            95.2           0.0      50.0       0.0      1.54    0.90 [0.74, 1.13]   0.89-0.92    0.64 [0.52, 0.68]
+  Gold-only          94.4          55.6      73.8       0.0      1.34                   --          --                   --
+  PPI@prev          100.0          35.7      68.3       0.0      1.00                   --          --                   --
+  PPI-Platt         100.0          77.0      85.7       0.0      0.94                   --          --                   --
+  Platt-G           100.0          76.2      85.7       0.0      0.90                   --          --                   --
 
 DeBERTa
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs       lang. rank rho
@@ -202,6 +246,10 @@ DeBERTa
   EM                 92.9           1.6      42.1       0.4      3.73    1.95 [1.57, 2.24]   1.87-2.02    0.66 [0.55, 0.70]
   ACC-G@prev         80.2           0.0       5.6       0.0      3.55    1.06 [0.81, 1.85]   1.04-1.09    0.42 [0.30, 0.52]
   RC@prev            96.0           4.0      42.1       0.0      1.54    0.87 [0.71, 1.10]   0.82-0.91    0.65 [0.52, 0.68]
+  Gold-only          94.4          55.6      73.8       0.0      1.34                   --          --                   --
+  PPI@prev          100.0          31.0      69.8       0.0      1.01                   --          --                   --
+  PPI-Platt         100.0          76.2      87.3       0.0      0.98                   --          --                   --
+  Platt-G           100.0          75.4      87.3       0.0      0.95                   --          --                   --
 
 RoBERTa
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs       lang. rank rho
@@ -217,6 +265,10 @@ RoBERTa
   EM                 94.4          13.5      50.8       0.6      4.10    2.10 [1.70, 2.36]   2.04-2.19    0.63 [0.54, 0.70]
   ACC-G@prev         85.7           0.0       7.9       0.0      3.40    1.17 [0.85, 1.88]   1.05-1.25    0.52 [0.33, 0.54]
   RC@prev            94.4          11.1      46.8       0.1      1.47    0.88 [0.72, 1.09]   0.86-0.90    0.63 [0.52, 0.68]
+  Gold-only          94.4          55.6      73.8       0.0      1.34                   --          --                   --
+  PPI@prev           99.2          46.8      73.0       0.0      0.97                   --          --                   --
+  PPI-Platt         100.0          75.4      87.3       0.0      1.00                   --          --                   --
+  Platt-G           100.0          73.0      85.7       0.0      0.97                   --          --                   --
 
 Seed ensemble
   rule          sign ok %  reproduced %  single %  biased %  MAE (pp)                slope        runs       lang. rank rho
@@ -232,6 +284,10 @@ Seed ensemble
   EM                 91.3           1.6      42.1       0.3      3.71    1.94 [1.57, 2.24]          --    0.65 [0.55, 0.71]
   ACC-G@prev         81.0           0.0       7.1       0.1      3.60    1.16 [0.83, 1.92]          --    0.44 [0.28, 0.51]
   RC@prev            95.2           0.0      38.9       0.0      1.58    0.87 [0.71, 1.09]          --    0.63 [0.50, 0.67]
+  Gold-only          94.4          55.6      73.8       0.0      1.34                   --          --                   --
+  PPI@prev          100.0          28.6      68.3       0.0      1.05                   --          --                   --
+  PPI-Platt         100.0          73.8      86.5       0.0      0.97                   --          --                   --
+  Platt-G           100.0          73.8      86.5       0.0      0.94                   --          --                   --
 
    Largest share of gold-significant contrasts reproduced with the WRONG sign, any system/rule: 0.0%
 
@@ -254,6 +310,10 @@ Feature ensemble
   EM           --  (group-level estimator; no document-level estimate)
   ACC-G@prev   r = 0.543±0.006   MAE = 5.98±0.14 pp
   RC@prev      --  (group-level estimator; no document-level estimate)
+  Gold-only    --  (group-level estimator; no document-level estimate)
+  PPI@prev     --  (group-level estimator; no document-level estimate)
+  PPI-Platt    --  (group-level estimator; no document-level estimate)
+  Platt-G      --  (group-level estimator; no document-level estimate)
 
 DeBERTa
   CC@0.5       r = 0.559±0.003   MAE = 2.51±0.02 pp
@@ -268,6 +328,10 @@ DeBERTa
   EM           --  (group-level estimator; no document-level estimate)
   ACC-G@prev   r = 0.526±0.006   MAE = 6.27±0.12 pp
   RC@prev      --  (group-level estimator; no document-level estimate)
+  Gold-only    --  (group-level estimator; no document-level estimate)
+  PPI@prev     --  (group-level estimator; no document-level estimate)
+  PPI-Platt    --  (group-level estimator; no document-level estimate)
+  Platt-G      --  (group-level estimator; no document-level estimate)
 
 RoBERTa
   CC@0.5       r = 0.542±0.026   MAE = 2.54±0.01 pp
@@ -282,6 +346,10 @@ RoBERTa
   EM           --  (group-level estimator; no document-level estimate)
   ACC-G@prev   r = 0.520±0.011   MAE = 6.45±0.08 pp
   RC@prev      --  (group-level estimator; no document-level estimate)
+  Gold-only    --  (group-level estimator; no document-level estimate)
+  PPI@prev     --  (group-level estimator; no document-level estimate)
+  PPI-Platt    --  (group-level estimator; no document-level estimate)
+  Platt-G      --  (group-level estimator; no document-level estimate)
 
 Seed ensemble
   CC@0.5       r = 0.564   MAE = 2.47 pp
@@ -296,6 +364,10 @@ Seed ensemble
   EM           --  (group-level estimator; no document-level estimate)
   ACC-G@prev   r = 0.541   MAE = 6.06 pp
   RC@prev      --  (group-level estimator; no document-level estimate)
+  Gold-only    --  (group-level estimator; no document-level estimate)
+  PPI@prev     --  (group-level estimator; no document-level estimate)
+  PPI-Platt    --  (group-level estimator; no document-level estimate)
+  Platt-G      --  (group-level estimator; no document-level estimate)
 
 ============================================================================================================
 E. PROBABILITY CALIBRATION ON TEST (pooled over sentence-value pairs; mean over runs)
@@ -310,7 +382,8 @@ E. PROBABILITY CALIBRATION ON TEST (pooled over sentence-value pairs; mean over 
 F. QUANTIFICATION DIAGNOSTICS (original sample, summed over runs)
    Cells: group x value estimates (corpus, manifestos, news, 9 languages = 12 groups x 19 values per run).
    Fallback: tpr - fpr <= 0 or undefined, so the adjusted count reverts to CC (for RC: slope <= 0.05, no correction).
-   At 0 / at 1: raw estimate below 0 or above 1 before clipping (EM: solution on the boundary).
+   At 0 / at 1: raw estimate below 0 or above 1 before clipping (EM: solution on the boundary;
+   PPI: estimates below 0 or above 1, which are kept, because clipping would bias them).
 ============================================================================================================
 
 Feature ensemble
@@ -320,6 +393,8 @@ Feature ensemble
   EM           cells   684   fallback   0.0%   at 0:  171   at 1:    0
   ACC-G@prev   cells   684   fallback  10.7%   at 0:  112   at 1:    0
   RC@prev      slopes    6   fallback 0   at 0:   25   at 1:    0
+  PPI@prev     cells   684   fallback   0.0%   at 0:   23   at 1:    0
+  PPI-Platt    cells   684   fallback   0.0%   at 0:    6   at 1:    0
   validation attenuation slopes (CC@prev): language 0.62, 0.65, 0.64; genre 0.91, 0.87, 0.97
   EM binning check: max |binned - exact| corpus prevalence over values and runs = 5.19e-05
   Platt refit check (original sample): max |histogram fit - exact fit| of the parameters = 7.9e-03; max |binned - exact| PCC-Platt count per document = 1.9e-04
@@ -332,6 +407,8 @@ DeBERTa
   EM           cells   684   fallback   0.0%   at 0:  159   at 1:    0
   ACC-G@prev   cells   684   fallback  10.8%   at 0:  108   at 1:    0
   RC@prev      slopes    6   fallback 0   at 0:   26   at 1:    0
+  PPI@prev     cells   684   fallback   0.0%   at 0:   18   at 1:    0
+  PPI-Platt    cells   684   fallback   0.0%   at 0:    6   at 1:    0
   validation attenuation slopes (CC@prev): language 0.57, 0.58, 0.65; genre 0.91, 0.79, 0.84
   EM binning check: max |binned - exact| corpus prevalence over values and runs = 5.01e-05
   Platt refit check (original sample): max |histogram fit - exact fit| of the parameters = 2.8e-03; max |binned - exact| PCC-Platt count per document = 1.4e-04
@@ -344,6 +421,8 @@ RoBERTa
   EM           cells   684   fallback   0.0%   at 0:  166   at 1:    0
   ACC-G@prev   cells   684   fallback  10.2%   at 0:  117   at 1:    0
   RC@prev      slopes    6   fallback 0   at 0:   25   at 1:    0
+  PPI@prev     cells   684   fallback   0.0%   at 0:   17   at 1:    0
+  PPI-Platt    cells   684   fallback   0.0%   at 0:    7   at 1:    0
   validation attenuation slopes (CC@prev): language 0.59, 0.60, 0.61; genre 0.94, 0.97, 0.95
   EM binning check: max |binned - exact| corpus prevalence over values and runs = 4.60e-05
   Platt refit check (original sample): max |histogram fit - exact fit| of the parameters = 8.1e-03; max |binned - exact| PCC-Platt count per document = 1.0e-04
@@ -356,12 +435,15 @@ Seed ensemble
   EM           cells   228   fallback   0.0%   at 0:   52   at 1:    0
   ACC-G@prev   cells   228   fallback  11.0%   at 0:   29   at 1:    0
   RC@prev      slopes    2   fallback 0   at 0:   12   at 1:    0
+  PPI@prev     cells   228   fallback   0.0%   at 0:    8   at 1:    0
+  PPI-Platt    cells   228   fallback   0.0%   at 0:    2   at 1:    0
   validation attenuation slopes (CC@prev): language 0.62; genre 0.83
   EM binning check: max |binned - exact| corpus prevalence over values and runs = 4.99e-05
   Platt refit check (original sample): max |histogram fit - exact fit| of the parameters = 4.5e-03; max |binned - exact| PCC-Platt count per document = 1.3e-04
   CC@prev slope with an intercept (diagnostic): genre 0.90 (intercept +0.10 pp), language pairs 0.54 (intercept -0.04 pp)
 
   Reference contrasts with no mentions in one group, tested with Fisher's exact test instead of the bootstrap: 2 genre, 14 language-pair; significant after BH: genre ['Hedonism'], language pairs 1
+  Platt-G: values with no positive validation sentence in a group (that group's map then predicts about 0): IT: Conformity: interpersonal, Humility
 
 ============================================================================================================
 G. DO ERROR RATES DIFFER BETWEEN GENRES? (CC@prev decisions on test; mean over runs)
@@ -374,3 +456,181 @@ G. DO ERROR RATES DIFFER BETWEEN GENRES? (CC@prev decisions on test; mean over r
   DeBERTa           rho(contrast, tpr gap) +0.74   rho(contrast, fpr gap) +0.75   fpr gap has the contrast's sign for 68% of values
   RoBERTa           rho(contrast, tpr gap) +0.75   rho(contrast, fpr gap) +0.80   fpr gap has the contrast's sign for 75% of values
   Seed ensemble     rho(contrast, tpr gap) +0.75   rho(contrast, fpr gap) +0.78   fpr gap has the contrast's sign for 74% of values
+
+============================================================================================================
+H. ACCURACY AND COVERAGE OF TOTALS AND CONTRASTS (mean of a system's runs)
+   Signed: totals, mean of (estimate - reference); contrasts, mean of (estimate - reference) x sign(reference),
+           so below 0 means differences shrink toward zero and above 0 that they grow. Percentage points.
+   MAE, RMSE: mean absolute and root mean squared error, pp.
+   Cover: share of quantities whose error (estimate - reference, same bootstrap rows) is within sampling noise
+          (p >= 0.05, single test), %. Pairing keeps the noise the estimate shares with the reference out of the
+          interval and the noise it does not share in, so the share is comparable across estimators; about 95%
+          for an estimator whose errors are only sampling noise.
+   Gold-only, PPI@prev, PPI-Platt, Platt-G use annotated documents other than the test documents: their errors include the
+   reference's own sampling noise, and on contrasts they regress to its mean (negative signed error even when
+   unbiased). A study that annotates a sample of its own documents would see smaller errors for them.
+   Sig. / other: MAE of the contrasts that are significant in the reference, and of the others.
+   Totals: 19 values; genre: 19 manifesto-news contrasts; language pairs: 684 contrasts.
+============================================================================================================
+
+Feature ensemble
+               |          totals           |          manifesto vs. news           |            language pairs            
+  rule         |  signed   MAE  RMSE cover |  signed   MAE  RMSE cover  sig. other |  signed   MAE  RMSE cover  sig. other
+  CC@0.5       |   -1.19  1.21  1.39     5 |   -0.76  0.81  1.27    74  1.31  0.36 |   -1.30  1.45  2.11    73  3.17  1.06
+  CC@t*        |   +0.84  0.94  1.31    42 |   +0.21  0.88  1.25    79  1.13  0.65 |   -0.68  1.32  1.94    83  1.93  1.18
+  CC@label-t*  |   +0.91  0.99  1.55    79 |   +0.12  0.73  0.95   100  0.85  0.62 |   -0.69  1.31  1.93    84  1.93  1.17
+  CC@prev      |   +0.03  0.21  0.27   100 |   -0.24  0.62  0.90   100  0.72  0.54 |   -0.89  1.29  1.90    81  2.25  1.08
+  PCC          |   +0.42  0.44  0.56    47 |   -0.48  0.67  0.89    89  0.68  0.65 |   -1.03  1.28  1.89    76  2.57  0.99
+  PCC-Platt    |   -0.01  0.19  0.24   100 |   -0.98  0.98  1.31    63  1.48  0.53 |   -1.29  1.41  2.05    70  3.18  1.01
+  ACC@t*       |   +0.03  0.69  0.80    95 |   +3.05  4.10  6.98    74  6.79  1.67 |   +1.16  2.99  4.35    90  4.11  2.74
+  ACC@prev     |   +0.11  0.71  0.87   100 |   +2.73  3.69  6.39    84  6.14  1.49 |   +1.08  3.02  4.35    91  4.02  2.79
+  PACC         |   -0.03  0.69  0.82    84 |   +2.94  5.29  8.33    63  7.77  3.06 |   +1.38  3.19  4.60    85  4.34  2.93
+  EM           |   -0.05  0.63  0.75    84 |   +3.66  8.74 13.40    63 11.55  6.21 |   +2.04  3.91  5.86    84  5.67  3.51
+  ACC-G@prev   |   +0.11  0.71  0.87   100 |   -0.16  1.71  2.24   100  1.41  1.99 |   +0.31  3.43  5.32    98  4.55  3.17
+  RC@prev      |   +0.03  0.21  0.27   100 |   -0.07  0.74  0.98   100  0.92  0.58 |   -0.26  1.54  2.29    88  1.83  1.48
+  Gold-only    |   -0.01  0.27  0.35   100 |   -0.19  0.98  1.42    95  1.44  0.57 |   -0.44  1.34  2.07    95  1.84  1.23
+  PPI@prev     |   +0.02  0.21  0.27   100 |   -0.21  0.66  0.90    95  0.78  0.55 |   -0.14  1.00  1.32    96  1.14  0.97
+  PPI-Platt    |   -0.01  0.19  0.24   100 |   -0.27  0.76  1.08    95  0.94  0.61 |   -0.27  0.94  1.35    96  1.19  0.88
+  Platt-G      |   -0.01  0.19  0.24   100 |   -0.28  0.74  1.07    95  0.88  0.61 |   -0.22  0.90  1.28    96  1.16  0.84
+
+DeBERTa
+               |          totals           |          manifesto vs. news           |            language pairs            
+  rule         |  signed   MAE  RMSE cover |  signed   MAE  RMSE cover  sig. other |  signed   MAE  RMSE cover  sig. other
+  CC@0.5       |   -0.93  0.93  1.14    21 |   -0.77  0.78  1.16    79  1.15  0.45 |   -1.25  1.44  2.10    73  3.12  1.06
+  CC@t*        |   +0.74  0.83  1.17    58 |   -0.03  0.79  1.11    84  0.75  0.83 |   -0.82  1.34  1.93    82  2.22  1.14
+  CC@label-t*  |   +1.05  1.09  1.56    74 |   -0.13  0.87  1.27    84  0.65  1.07 |   -0.73  1.33  1.94    81  2.16  1.15
+  CC@prev      |   +0.01  0.18  0.26    95 |   -0.41  0.66  0.91    95  0.64  0.68 |   -1.00  1.34  1.94    78  2.55  1.07
+  PCC          |   +0.36  0.43  0.59    63 |   -0.60  0.74  0.99    79  0.70  0.78 |   -1.08  1.31  1.92    74  2.69  1.00
+  PCC-Platt    |   -0.02  0.20  0.25   100 |   -1.17  1.17  1.61    63  1.79  0.62 |   -1.38  1.47  2.13    70  3.40  1.04
+  ACC@t*       |   -0.03  0.67  0.80    89 |   +2.67  4.49  7.30    79  6.85  2.38 |   +0.96  2.90  4.25    89  3.71  2.72
+  ACC@prev     |   +0.06  0.71  0.86    95 |   +2.50  4.17  6.91    74  6.43  2.14 |   +0.92  2.82  4.13    90  3.48  2.68
+  PACC         |   -0.03  0.63  0.78    89 |   +2.49  5.48  8.42    63  7.42  3.73 |   +1.25  3.12  4.50    87  4.03  2.91
+  EM           |   -0.04  0.54  0.69    89 |   +2.82  9.29 14.31    63 11.09  7.67 |   +1.87  3.73  5.58    85  5.23  3.39
+  ACC-G@prev   |   +0.06  0.71  0.86    95 |   -0.17  1.91  2.57   100  1.88  1.95 |   -0.07  3.55  5.80    98  4.55  3.32
+  RC@prev      |   +0.01  0.18  0.26    95 |   -0.09  0.79  1.09    95  0.83  0.75 |   -0.32  1.54  2.29    88  1.89  1.46
+  Gold-only    |   -0.01  0.27  0.35   100 |   -0.19  0.98  1.42    95  1.44  0.57 |   -0.44  1.34  2.07    95  1.84  1.23
+  PPI@prev     |   +0.01  0.18  0.26    95 |   -0.16  0.69  0.89   100  0.84  0.55 |   -0.20  1.01  1.35    96  1.21  0.96
+  PPI-Platt    |   -0.02  0.20  0.25   100 |   -0.27  0.77  1.09    95  0.95  0.62 |   -0.28  0.98  1.45    95  1.29  0.91
+  Platt-G      |   -0.02  0.20  0.25   100 |   -0.28  0.75  1.07    95  0.90  0.61 |   -0.24  0.95  1.40    96  1.25  0.88
+
+RoBERTa
+               |          totals           |          manifesto vs. news           |            language pairs            
+  rule         |  signed   MAE  RMSE cover |  signed   MAE  RMSE cover  sig. other |  signed   MAE  RMSE cover  sig. other
+  CC@0.5       |   -0.89  0.89  1.08    16 |   -0.79  0.80  1.07    84  1.10  0.53 |   -1.24  1.42  2.05    74  3.05  1.06
+  CC@t*        |   +1.63  1.64  2.28    21 |   +0.37  1.47  2.15    58  1.68  1.28 |   -0.54  1.27  1.89    84  1.82  1.15
+  CC@label-t*  |   +1.50  1.51  2.07    58 |   +0.35  1.24  1.64    79  1.31  1.17 |   -0.61  1.26  1.86    86  1.87  1.12
+  CC@prev      |   -0.02  0.18  0.22   100 |   -0.27  0.55  0.73   100  0.43  0.66 |   -0.98  1.28  1.88    80  2.44  1.02
+  PCC          |   +0.14  0.41  0.59    63 |   -0.54  0.62  0.89    68  0.55  0.68 |   -1.08  1.29  1.89    76  2.66  0.99
+  PCC-Platt    |   -0.01  0.21  0.25   100 |   -1.07  1.11  1.50    68  1.71  0.58 |   -1.39  1.46  2.11    72  3.40  1.03
+  ACC@t*       |   -0.07  0.72  0.82    95 |   +3.27  6.32  9.68    58  9.03  3.88 |   +1.39  3.15  4.61    87  4.90  2.76
+  ACC@prev     |   -0.05  0.55  0.67    95 |   +2.96  4.63  7.28    68  7.14  2.36 |   +1.10  2.99  4.29    89  4.28  2.70
+  PACC         |   -0.09  0.63  0.77    89 |   +3.18  5.75  8.77    58  8.28  3.48 |   +1.39  3.19  4.60    86  4.68  2.85
+  EM           |   -0.08  0.58  0.72    89 |   +5.23 10.57 15.80    58 13.94  7.53 |   +2.11  4.10  6.17    83  6.22  3.62
+  ACC-G@prev   |   -0.05  0.55  0.67    95 |   -0.24  1.62  2.23   100  1.97  1.31 |   +0.28  3.40  5.50    99  4.55  3.14
+  RC@prev      |   -0.02  0.18  0.22   100 |   -0.17  0.60  0.78   100  0.51  0.69 |   -0.30  1.47  2.18    88  1.82  1.39
+  Gold-only    |   -0.01  0.27  0.35   100 |   -0.19  0.98  1.42    95  1.44  0.57 |   -0.44  1.34  2.07    95  1.84  1.23
+  PPI@prev     |   -0.03  0.18  0.22   100 |   -0.27  0.75  1.04   100  0.86  0.65 |   -0.18  0.97  1.27    97  1.20  0.92
+  PPI-Platt    |   -0.01  0.21  0.25   100 |   -0.24  0.82  1.16    95  1.00  0.65 |   -0.30  1.00  1.45    96  1.32  0.93
+  Platt-G      |   -0.01  0.21  0.25   100 |   -0.24  0.80  1.16    95  0.97  0.65 |   -0.25  0.97  1.41    96  1.29  0.90
+
+Seed ensemble
+               |          totals           |          manifesto vs. news           |            language pairs            
+  rule         |  signed   MAE  RMSE cover |  signed   MAE  RMSE cover  sig. other |  signed   MAE  RMSE cover  sig. other
+  CC@0.5       |   -1.09  1.09  1.30    16 |   -0.85  0.86  1.31    79  1.31  0.45 |   -1.28  1.46  2.13    74  3.16  1.08
+  CC@t*        |   +1.17  1.22  1.68    42 |   +0.24  0.95  1.31    68  1.08  0.83 |   -0.69  1.37  1.97    82  2.04  1.22
+  CC@label-t*  |   +0.94  1.12  1.56    84 |   -0.26  0.79  1.15    95  0.66  0.90 |   -0.80  1.36  1.99    85  2.22  1.16
+  CC@prev      |   +0.03  0.19  0.28   100 |   -0.41  0.65  0.90    95  0.67  0.63 |   -0.95  1.35  1.95    80  2.48  1.10
+  PCC          |   +0.36  0.43  0.59    63 |   -0.60  0.74  0.99    79  0.70  0.78 |   -1.08  1.31  1.92    74  2.69  1.00
+  PCC-Platt    |   -0.02  0.20  0.25   100 |   -1.11  1.12  1.52    63  1.66  0.63 |   -1.35  1.45  2.10    70  3.33  1.02
+  ACC@t*       |   -0.07  0.74  0.84    95 |   +2.92  4.41  7.43    74  7.13  1.95 |   +1.02  2.94  4.27    90  3.84  2.74
+  ACC@prev     |   +0.14  0.77  0.88   100 |   +2.39  3.77  6.30    74  5.86  1.89 |   +0.97  3.06  4.36    93  3.53  2.96
+  PACC         |   -0.03  0.64  0.78    89 |   +2.50  5.48  8.42    63  7.44  3.72 |   +1.25  3.10  4.48    86  4.03  2.89
+  EM           |   -0.05  0.56  0.70    89 |   +2.82  9.15 14.15    63 11.05  7.45 |   +1.86  3.71  5.57    86  5.20  3.37
+  ACC-G@prev   |   +0.14  0.77  0.88   100 |   +0.12  1.82  2.24   100  1.92  1.73 |   +0.26  3.60  5.75    98  4.49  3.40
+  RC@prev      |   +0.03  0.19  0.28   100 |   -0.03  0.82  1.09    95  0.95  0.70 |   -0.30  1.58  2.32    89  1.86  1.51
+  Gold-only    |   -0.01  0.27  0.35   100 |   -0.19  0.98  1.42    95  1.44  0.57 |   -0.44  1.34  2.07    95  1.84  1.23
+  PPI@prev     |   +0.02  0.19  0.28   100 |   -0.08  0.67  0.84   100  0.84  0.51 |   -0.17  1.05  1.38    96  1.23  1.01
+  PPI-Platt    |   -0.02  0.20  0.25   100 |   -0.28  0.76  1.07    95  0.92  0.62 |   -0.28  0.97  1.42    95  1.26  0.90
+  Platt-G      |   -0.02  0.20  0.25   100 |   -0.28  0.73  1.06    95  0.87  0.62 |   -0.23  0.94  1.37    96  1.23  0.87
+
+============================================================================================================
+I. TOTALS PER GROUP (every rule fitted on all validation data; under shift: shift-tests.txt)
+   Total err: |estimated / reference value mentions in the group - 1|, %; MAE over the 19 values, pp.
+   Languages: mean (max) over the nine.
+============================================================================================================
+
+Feature ensemble
+  rule          manifestos: total err    MAE  news: total err    MAE     languages: total err    MAE
+  CC@0.5                         36.9   1.64             39.5   1.16             35.7 ( 51.9)   1.42
+  CC@t*                          26.5   1.31             27.7   0.91             35.7 ( 86.5)   1.24
+  CC@label-t*                    28.2   1.34             30.3   0.96             38.2 ( 88.3)   1.33
+  CC@prev                         0.5   0.60              1.2   0.24             16.5 ( 45.4)   0.85
+  PCC                            12.1   0.78             13.9   0.44             22.8 ( 72.3)   0.94
+  PCC-Platt                       3.8   0.85              0.1   0.21             21.7 ( 55.7)   0.94
+  ACC@t*                         68.8   3.85              6.6   0.68             27.4 ( 70.6)   2.05
+  ACC@prev                       61.8   3.61              2.8   0.66             26.9 ( 74.5)   2.06
+  PACC                          100.4   4.91             12.9   0.73             31.8 ( 89.1)   2.18
+  EM                            180.3   8.27             13.6   0.69             41.4 (141.8)   2.55
+  ACC-G@prev                      3.6   1.63              4.7   0.73             32.1 ( 78.1)   2.20
+  RC@prev                         2.1   0.70              0.8   0.23             12.8 ( 41.4)   1.02
+  Gold-only                       8.0   0.85              1.8   0.30              6.5 ( 15.3)   0.92
+  PPI@prev                        5.5   0.63              0.0   0.22              4.8 ( 10.3)   0.68
+  PPI-Platt                       8.7   0.70              2.0   0.21              3.6 ( 11.1)   0.63
+  Platt-G                         8.9   0.68              2.0   0.22              3.7 ( 11.7)   0.60
+
+DeBERTa
+  rule          manifestos: total err    MAE  news: total err    MAE     languages: total err    MAE
+  CC@0.5                         29.9   1.35             30.6   0.89             26.8 ( 43.1)   1.25
+  CC@t*                          23.8   1.11             24.3   0.83             32.8 ( 89.4)   1.21
+  CC@label-t*                    37.6   1.72             34.1   1.02             43.3 (101.0)   1.40
+  CC@prev                         1.9   0.60              0.2   0.21             18.0 ( 47.8)   0.88
+  PCC                            10.3   0.80             12.0   0.44             22.3 ( 72.7)   0.98
+  PCC-Platt                       5.2   1.04              0.3   0.22             23.1 ( 60.6)   0.99
+  ACC@t*                         82.6   4.21             10.6   0.71             24.3 ( 56.2)   1.98
+  ACC@prev                       76.4   4.07              6.6   0.73             23.7 ( 58.8)   1.93
+  PACC                          104.8   5.06             13.2   0.81             29.5 ( 77.5)   2.11
+  EM                            194.5   8.80             14.7   0.76             39.2 (124.9)   2.43
+  ACC-G@prev                      7.5   1.82              1.0   0.70             33.5 ( 94.5)   2.29
+  RC@prev                         8.0   0.74              0.8   0.21             11.3 ( 38.6)   1.02
+  Gold-only                       8.0   0.85              1.8   0.30              6.5 ( 15.3)   0.92
+  PPI@prev                        8.5   0.66              1.2   0.19              4.2 (  8.9)   0.68
+  PPI-Platt                       9.1   0.70              2.1   0.22              3.5 ( 10.7)   0.65
+  Platt-G                         9.0   0.68              2.1   0.22              3.9 ( 11.4)   0.65
+
+RoBERTa
+  rule          manifestos: total err    MAE  news: total err    MAE     languages: total err    MAE
+  CC@0.5                         24.6   1.22             30.1   0.88             25.4 ( 40.7)   1.21
+  CC@t*                          62.6   2.75             51.9   1.52             63.5 (124.8)   1.81
+  CC@label-t*                    55.6   2.44             48.2   1.41             59.6 (119.9)   1.72
+  CC@prev                         2.8   0.56              1.3   0.18             17.6 ( 41.0)   0.85
+  PCC                             9.2   0.85              4.0   0.38             18.7 ( 54.7)   0.93
+  PCC-Platt                       3.4   0.98              0.0   0.22             23.0 ( 59.5)   0.99
+  ACC@t*                        117.7   5.82             17.1   0.86             36.4 ( 75.6)   2.15
+  ACC@prev                       80.0   4.27             11.0   0.72             29.4 ( 67.1)   2.05
+  PACC                          107.1   5.24             16.5   0.79             35.7 ( 88.3)   2.16
+  EM                            221.1  10.04             17.9   0.70             46.8 (164.6)   2.64
+  ACC-G@prev                      2.1   1.50              1.8   0.57             29.3 ( 82.2)   2.19
+  RC@prev                         4.5   0.63              1.6   0.18             11.2 ( 35.6)   0.97
+  Gold-only                       8.0   0.85              1.8   0.30              6.5 ( 15.3)   0.92
+  PPI@prev                        6.5   0.70              2.2   0.19              4.8 (  9.7)   0.67
+  PPI-Platt                       8.8   0.72              1.9   0.24              3.5 ( 10.9)   0.67
+  Platt-G                         8.9   0.71              2.0   0.24              4.3 ( 11.7)   0.66
+
+Seed ensemble
+  rule          manifestos: total err    MAE  news: total err    MAE     languages: total err    MAE
+  CC@0.5                         34.6   1.55             36.0   1.05             31.6 ( 49.3)   1.35
+  CC@t*                          36.8   1.69             38.6   1.17             47.5 (106.6)   1.49
+  CC@label-t*                    26.6   1.52             31.5   1.09             39.5 ( 94.4)   1.41
+  CC@prev                         0.1   0.61              1.1   0.22             17.7 ( 47.9)   0.89
+  PCC                            10.3   0.80             12.0   0.44             22.3 ( 72.7)   0.98
+  PCC-Platt                       4.3   0.99              0.0   0.21             22.6 ( 58.9)   0.97
+  ACC@t*                         80.4   4.25             12.0   0.75             25.0 ( 58.0)   2.03
+  ACC@prev                       64.7   3.72              2.1   0.77             26.2 ( 73.2)   2.08
+  PACC                          104.5   5.07             13.3   0.81             29.3 ( 76.8)   2.11
+  EM                            190.1   8.71             14.7   0.77             38.8 (122.6)   2.43
+  ACC-G@prev                      1.6   1.76              4.8   0.76             30.3 ( 67.4)   2.28
+  RC@prev                         6.0   0.79              0.1   0.21             11.3 ( 39.3)   1.04
+  Gold-only                       8.0   0.85              1.8   0.30              6.5 ( 15.3)   0.92
+  PPI@prev                        6.7   0.67              0.3   0.20              5.4 ( 10.8)   0.71
+  PPI-Platt                       9.0   0.70              2.2   0.22              3.6 ( 10.6)   0.65
+  Platt-G                         8.9   0.67              2.2   0.22              3.8 ( 11.3)   0.64

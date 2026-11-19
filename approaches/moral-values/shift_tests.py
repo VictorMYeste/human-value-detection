@@ -21,9 +21,15 @@ the ValueEval'24 English test split:
      an artefact of languages differing in their share of manifestos? RC uses the language
      slope measured within news validation.
 
-Rules: CC@t* (macro-F1 threshold, the shared-task practice), CC@prev (prevalence-matched
-per-label thresholds), PCC-Platt (calibrated probability average), and RC@prev (CC@prev
-with group deviations from the corpus total divided by the validation attenuation slope).
+Rules: every estimator of measurement_analysis.py that needs no annotated documents of the
+group being estimated: CC@t* (macro-F1 threshold, the shared-task practice), CC@prev
+(prevalence-matched per-label thresholds), PCC (raw probability average), PCC-Platt
+(calibrated probability average), ACC@prev and PACC (adjusted counts with error rates from the
+validation subset), EM (prior shift, with the subset's Platt maps and prevalence), and RC@prev
+(CC@prev with group deviations from the corpus total divided by a validation attenuation slope).
+The estimators that use each group's own annotated documents (ACC-G, Gold-only, PPI, Platt-G)
+cannot be computed for a language left out of the fit or for manifestos under a news-only fit:
+that is the situation these tests describe. measurement_analysis.py reports them with the full fit.
 
 Metrics, as in measurement_analysis.py: contrast slope (OLS of estimated on gold contrasts;
 1 = faithful), share of contrasts with differential bias (paired bootstrap, BH q < 0.05),
@@ -44,11 +50,11 @@ import numpy as np
 import pandas as pd
 
 from analyze_provenance import VALUES, load_gold
-from measurement_analysis import (ALPHA, B, MIN_SLOPE, RES, RNG_SEED, SYSTEMS, RowFits, bh, boot_p, ci,
-                                  document_design, lpair_reference_p, slope, system_probs, system_seeds, wsum)
+from measurement_analysis import (ALPHA, B, MIN_SLOPE, RES, RNG_SEED, SYSTEMS, EMGroups, RowFits, adjust, bh,
+                                  boot_p, ci, document_design, lpair_reference_p, slope, system_probs, system_seeds,
+                                  wsum)
 
-RULES = ["CC@t*", "CC@prev", "PCC-Platt", "RC@prev"]
-BASE = {"CC@t*": "CC@t*", "CC@prev": "CC@prev", "PCC-Platt": "PCC-Platt", "RC@prev": "CC@prev"}
+RULES = ["CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "PACC", "EM", "RC@prev"]
 
 
 class Groups:
@@ -121,8 +127,8 @@ def main() -> None:
     gold_t, gold_v = T.S @ yt, V.S @ yv
     gold_lang = T.langs(gold_t, langs)
     gold_lang_news = T.langs(gold_t, langs, news_t)
-    gold_man = T.prev(gold_t, man_t)
-    gold_genre = gold_man - T.prev(gold_t, news_t)
+    gold_man, gold_news = T.prev(gold_t, man_t), T.prev(gold_t, news_t)
+    gold_genre = gold_man - gold_news
     lpairs = all_pairs(len(langs))
     lang_masks_t = [T.lang == l for l in langs]
     n_gold_sig_news = int((bh(lpair_reference_p(pair_contrasts(gold_lang_news, lpairs), gold_t, T.nsent,
@@ -140,12 +146,44 @@ def main() -> None:
     def val_genre_slope(c: np.ndarray) -> np.ndarray:
         return safe_slope(slope(V.prev(gold_v, man_v) - V.prev(gold_v, news_v), V.prev(c, man_v) - V.prev(c, news_v)))
 
-    def fitted(pv: np.ndarray, pt: np.ndarray, val_sent_mask: np.ndarray):
-        """Refit every rule on each validation bootstrap row, using only the selected validation sentences.
-        Returns per-row, per-document test counts per rule, and the per-row CC@prev counts on the whole
+    class Fit:
+        """Every rule refitted on each validation bootstrap row, using only the selected validation sentences.
+        prev(rule, mask) gives a group's prevalence per row; cv holds the per-row CC@prev counts on the whole
         validation split (for slopes on any subset)."""
-        rf = RowFits(pv, yv, Vdesign, sent_mask=val_sent_mask)
-        return {r: rf.counts(r, pt, T.S) for r in ["CC@t*", "CC@prev", "PCC-Platt"]}, rf.counts("CC@prev", pv, V.S)
+
+        def __init__(self, pv: np.ndarray, pt: np.ndarray, val_sent_mask: np.ndarray):
+            rf = RowFits(pv, yv, Vdesign, sent_mask=val_sent_mask)
+            self.counts = {r: rf.counts(r, pt, T.S) for r in ["CC@t*", "CC@prev", "PCC-Platt"]}
+            self.counts["PCC"] = T.S @ pt
+            self.cv = rf.counts("CC@prev", pv, V.S)
+            w = val_sent_mask[:, None].astype(float)            # error rates on the selected sentences only
+            pos, neg = V.S @ (yv * w), V.S @ ((1 - yv) * w)
+            tp = rf.counts("CC@prev", pv, V.S, weight=yv * w)
+            fp = rf.counts("CC@prev", pv, V.S, weight=(1 - yv) * w)
+            with np.errstate(invalid="ignore", divide="ignore"):
+                P, N = V.W @ pos, V.W @ neg
+                self.rates = {"ACC@prev": (wsum(V.W, tp, V.all) / P, wsum(V.W, fp, V.all) / N),
+                              "PACC": ((V.W @ (V.S @ (pv * yv * w))) / P, (V.W @ (V.S @ (pv * (1 - yv) * w))) / N)}
+            self.em = EMGroups(T.S, T.W, pt, rf.platt, rf.prior)
+            self._em: dict[bytes, np.ndarray] = {}
+
+        def prev(self, rule: str, mask: np.ndarray) -> np.ndarray:
+            if rule in self.counts:
+                return T.prev(self.counts[rule], mask)
+            if rule == "ACC@prev":
+                return adjust(T.prev(self.counts["CC@prev"], mask), *self.rates[rule])
+            if rule == "PACC":
+                return adjust(T.prev(self.counts["PCC"], mask), *self.rates[rule])
+            if rule == "EM":
+                key = np.packbits(mask).tobytes()
+                if key not in self._em:
+                    self._em[key] = self.em.prevalence(mask)
+                return self._em[key]
+            raise KeyError(rule)
+
+        def langs(self, rule: str, doc_mask: np.ndarray | None = None) -> np.ndarray:
+            m = T.all if doc_mask is None else doc_mask
+            return np.stack([self.prev(rule, (T.lang == l) & m) for l in langs], axis=1)
 
     res: dict[tuple[str, str, str], dict] = {}
     beta_log: dict[str, list] = {s: [] for s in SYSTEMS}
@@ -162,8 +200,8 @@ def main() -> None:
 
         for seed in system_seeds(system):
             pv, pt = system_probs(system, seed, "val"), system_probs(system, seed, "test")
-            full_counts, full_cv = fitted(pv, pt, every_val_sent)
-            beta_full_lang = val_lang_slope(full_cv, langs)
+            full = Fit(pv, pt, every_val_sent)
+            beta_full_lang = val_lang_slope(full.cv, langs)
 
             # ---- A. leave one language out, and the in-distribution reference
             for scen in ["full fit", "leave-one-language-out"]:
@@ -173,16 +211,16 @@ def main() -> None:
                     others = [l for l in langs if l != held]
                     oi = [langs.index(l) for l in others]
                     if scen == "full fit":
-                        counts, beta = full_counts, beta_full_lang
+                        fit, beta = full, beta_full_lang
                     else:
-                        counts, cv = fitted(pv, pt, val_lang_sent != held)
-                        beta = val_lang_slope(cv, others)
+                        fit = Fit(pv, pt, val_lang_sent != held)
+                        beta = val_lang_slope(fit.cv, others)
                     betas.append(beta[0])
                     for r in RULES:
-                        c = counts[BASE[r]]
-                        lp, total = T.langs(c, langs), T.prev(c, T.all)
+                        base = "CC@prev" if r == "RC@prev" else r
+                        lp = fit.langs(base)
                         if r == "RC@prev":
-                            lp = rc(lp, total, beta)
+                            lp = rc(lp, fit.prev(base, T.all), beta)
                         est_c[r].append((lp[:, [li]] - lp[:, oi]).reshape(B + 1, -1))
                         held_prev[r].append(lp[:, li])
                 if scen == "leave-one-language-out":
@@ -192,26 +230,26 @@ def main() -> None:
                         beta=np.mean(betas))
 
             # ---- B. genre transfer: fit on news validation only, estimate manifestos
-            news_counts, news_cv = fitted(pv, pt, val_news_sent)
-            beta_proxy = val_lang_slope(news_cv, langs, news_v)
-            beta_genre = val_genre_slope(full_cv)
-            for scen, counts, beta in [("full fit", full_counts, beta_genre),
-                                       ("news-only fit", news_counts, beta_proxy)]:
+            news_fit = Fit(pv, pt, val_news_sent)
+            beta_proxy = val_lang_slope(news_fit.cv, langs, news_v)
+            beta_genre = val_genre_slope(full.cv)
+            for scen, fit, beta in [("full fit", full, beta_genre), ("news-only fit", news_fit, beta_proxy)]:
                 for r in RULES:
-                    c = counts[BASE[r]]
-                    total, m, n = T.prev(c, T.all), T.prev(c, man_t), T.prev(c, news_t)
+                    base = "CC@prev" if r == "RC@prev" else r
+                    m, n = fit.prev(base, man_t), fit.prev(base, news_t)
                     if r == "RC@prev":
+                        total = fit.prev(base, T.all)
                         m, n = rc(m, total, beta), rc(n, total, beta)
-                    add(f"B {scen}", r, est=m - n, man=m, beta=beta[0])
+                    add(f"B {scen}", r, est=m - n, man=m, news=n, beta=beta[0])
 
             # ---- C. language contrasts within news only (full fit), next to all documents
-            beta_news_lang = val_lang_slope(full_cv, langs, news_v)
+            beta_news_lang = val_lang_slope(full.cv, langs, news_v)
             for scen, mask, beta in [("all documents", None, beta_full_lang), ("news only", news_t, beta_news_lang)]:
                 for r in RULES:
-                    c = full_counts[BASE[r]]
-                    lp = T.langs(c, langs, mask)
+                    base = "CC@prev" if r == "RC@prev" else r
+                    lp = full.langs(base, mask)
                     if r == "RC@prev":
-                        lp = rc(lp, T.prev(c, T.all if mask is None else mask), beta)
+                        lp = rc(lp, full.prev(base, T.all if mask is None else mask), beta)
                     add(f"C {scen}", r, est=pair_contrasts(lp, lpairs), beta=beta[0])
 
         # ---- metrics on the mean of the runs
@@ -229,6 +267,7 @@ def main() -> None:
                           "prev_mae": pm["prev_mae"].mean(), "prev_biased": pm["prev_biased"].mean()})
             elif scen.startswith("B"):
                 m.update(prevalence_metrics(mean["man"], gold_man))
+                m.update({f"news_{k}": v for k, v in prevalence_metrics(mean["news"], gold_news).items()})
             res[(system, scen, r)] = m
 
     # ---- report
@@ -239,6 +278,8 @@ def main() -> None:
         return float(res[(system, scen, r)][k])
 
     out("SHIFT TESTS -- ValueEval'24 English test split; rules fitted on validation subsets")
+    out("Estimators that need annotated documents of the group itself (ACC-G, Gold-only, PPI, Platt-G) cannot be")
+    out("computed for a language left out of the fit or for manifestos under a news-only fit; see measurement-analysis.txt.")
     out(f"Stratified document bootstrap B = {B} (test and validation); metrics on the mean of a system's runs.")
     out()
 
@@ -266,19 +307,20 @@ def main() -> None:
     out("=" * 112)
     out("B. GENRE TRANSFER: rules fitted on news validation only; manifesto prevalence and manifesto-news contrasts")
     out("   With no manifesto validation data, RC divides by the language-pair slope measured within news validation.")
-    out("   Total err: |predicted / gold value mentions in manifestos - 1|, %.")
+    out("   Total err: |predicted / gold value mentions in manifestos - 1|, %; news: the same for news documents.")
     out("=" * 112)
     for system in SYSTEMS:
         out(f"\n{system}")
         out(f"  {'fit':16s} {'rule':10s} {'genre slope':>20s} {'biased %':>9s} {'MAE pp':>7s} {'total err %':>12s} "
-            f"{'prev MAE pp':>12s} {'biased values':>14s} {'RC slope':>9s}")
+            f"{'prev MAE pp':>12s} {'biased values':>14s} {'news err %':>11s} {'RC slope':>9s}")
         for scen in ["full fit", "news-only fit"]:
             for r in RULES:
                 k = f"B {scen}"
                 beta = f"{avg(system, k, r, 'beta'):.2f}" if r == "RC@prev" else ""
                 out(f"  {scen:16s} {r:10s} {slope_ci(system, k, r):>20s} {avg(system, k, r, 'biased'):9.1f} "
                     f"{avg(system, k, r, 'mae'):7.2f} {avg(system, k, r, 'total_err'):12.1f} "
-                    f"{avg(system, k, r, 'prev_mae'):12.2f} {avg(system, k, r, 'prev_biased'):14.1f} {beta:>9s}")
+                    f"{avg(system, k, r, 'prev_mae'):12.2f} {avg(system, k, r, 'prev_biased'):14.1f} "
+                    f"{avg(system, k, r, 'news_total_err'):11.1f} {beta:>9s}")
 
     out()
     out("=" * 112)
@@ -304,7 +346,8 @@ def main() -> None:
         sl = m["slope"]
         row = {"system": system, "scenario": scen, "rule": r, "slope": sl[0],
                "slope_lo": np.percentile(sl[1:], 2.5), "slope_hi": np.percentile(sl[1:], 97.5)}
-        for k in ["biased", "mae", "total_err", "total_err_max", "prev_mae", "prev_biased", "beta"]:
+        for k in ["biased", "mae", "total_err", "total_err_max", "prev_mae", "prev_biased", "news_total_err",
+                  "news_prev_mae", "news_prev_biased", "beta"]:
             if k in m:
                 row[k] = float(m[k])
         rows.append(row)

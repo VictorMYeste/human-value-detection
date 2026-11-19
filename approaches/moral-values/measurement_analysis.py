@@ -40,6 +40,16 @@ both built on CC@prev:
                divided by the attenuation slope measured on validation (language-pair contrasts
                for languages, manifesto-news contrasts for genre).
 
+Estimators that use the annotated validation documents of each group directly (step 5.2, AE
+item 4). Like ACC-G and RC, they need annotated documents from every group being compared:
+  Gold-only    the share of validation sentences with the value in the group: no classifier;
+  PPI@prev     prediction-powered (difference) estimate per group: the CC@prev share on test
+               plus the mean of (label - CC@prev decision) over the group's validation sentences
+               (Angelopoulos et al. 2023); not clipped, so it can fall below 0;
+  PPI-Platt    the same with Platt-calibrated probabilities as the predictions;
+  Platt-G      calibrated probability average with Platt maps fitted on each group's own
+               validation documents (each genre, each language); pooled maps for the corpus total.
+
 Systems:
   Feature ensemble  soft vote of DeBERTa-base Baseline + LIWC-22 + Prev-2, rebuilt within
                     each seed (the paper's main system);
@@ -96,10 +106,11 @@ SYSTEMS = ["Feature ensemble", "DeBERTa", "RoBERTa", "Seed ensemble"]
 CLASSIFY_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev", "PCC", "PCC-Platt"]
 QUANT_RULES = ["ACC@t*", "ACC@prev", "PACC", "EM"]
 GROUP_RULES = ["ACC-G@prev", "RC@prev"]
-RULES = CLASSIFY_RULES + QUANT_RULES + GROUP_RULES
+ANNOT_RULES = ["Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"]   # use each group's annotated documents
+RULES = CLASSIFY_RULES + QUANT_RULES + GROUP_RULES + ANNOT_RULES
 CC_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]
 EM_BIN_WIDTH = 0.1    # EM works on per-group histograms of raw logits, with bins of 0.1 logit
-EM_STEPS = 40         # bisection steps for the maximum-likelihood prior (precision ~1e-12)
+EM_STEPS = 40         # at most this many Newton (or bisection) steps for the maximum-likelihood prior
 MIN_SLOPE = 0.05      # RC falls back to no correction if the validation slope is below this
 RARE = 0.02          # values below 2% gold test prevalence count as rare
 MIN_DOC_SENTS = 10   # documents shorter than this are excluded from the document-level analysis
@@ -397,33 +408,44 @@ def platt_newton(n: np.ndarray, ypos: np.ndarray, zbar: np.ndarray, a: np.ndarra
                  steps: int = 100) -> tuple[np.ndarray, np.ndarray]:
     """Platt map per row from histograms (rows x bins: counts n, positives ypos, mean logit zbar):
     minimises the logistic loss of a * z + c plus a^2 / (2 PLATT_C), as LogisticRegression(C=PLATT_C)
-    does. Damped Newton: each row's step is halved until its loss does not increase."""
-    def loss(a, c, rows=slice(None)):
-        eta = a[:, None] * zbar[rows] + c[:, None]
-        return (n[rows] * np.logaddexp(0, eta) - ypos[rows] * eta).sum(1) + a ** 2 / (2 * PLATT_C)
-    cur = loss(a, c)
+    does. Damped Newton: each row's step is halved until its loss does not increase. A row stops when
+    its step or its loss decrease becomes negligible; a group with no positive sentence has no finite
+    optimum (the intercept drifts down), and stops once its calibrated probabilities are about 0."""
+    a, c = a.astype(float).copy(), c.astype(float).copy()
+
+    def loss(rows, a_, c_):
+        eta = a_[:, None] * zbar[rows] + c_[:, None]
+        return (n[rows] * np.logaddexp(0, eta) - ypos[rows] * eta).sum(1) + a_ ** 2 / (2 * PLATT_C)
+
+    act = np.arange(len(a))                       # rows still iterating
+    cur = loss(act, a, c)
     for _ in range(steps):
-        mu = 0.5 * (1 + np.tanh(0.5 * (a[:, None] * zbar + c[:, None])))   # overflow-free logistic
-        r, v = ypos - n * mu, n * mu * (1 - mu)
-        ga, gc = (r * zbar).sum(1) - a / PLATT_C, r.sum(1)                  # minus the gradient
-        haa, hac, hcc = (v * zbar ** 2).sum(1) + 1 / PLATT_C, (v * zbar).sum(1), v.sum(1)
+        aa, cc, nn, yy, zz = a[act], c[act], n[act], ypos[act], zbar[act]
+        mu = 0.5 * (1 + np.tanh(0.5 * (aa[:, None] * zz + cc[:, None])))   # overflow-free logistic
+        r, v = yy - nn * mu, nn * mu * (1 - mu)
+        ga, gc = (r * zz).sum(1) - aa / PLATT_C, r.sum(1)                     # minus the gradient
+        haa, hac, hcc = (v * zz ** 2).sum(1) + 1 / PLATT_C, (v * zz).sum(1), v.sum(1)
         det = haa * hcc - hac ** 2
         ok = det > 1e-12 * np.maximum(haa * hcc, 1e-300)
         safe = np.where(ok, det, 1.0)
         da = np.where(ok, (hcc * ga - hac * gc) / safe, ga / np.maximum(haa, 1e-12))
         dc = np.where(ok, (haa * gc - hac * ga) / safe, gc / np.maximum(hcc, 1e-12))
-        t = np.ones_like(a)
-        new = loss(a + da, c + dc)
+        t = np.ones_like(aa)
+        new = loss(act, aa + da, cc + dc)
         for _ in range(40):                     # halve the step only where the loss went up
             worse = np.flatnonzero(~(new <= cur + 1e-12 * np.abs(cur)))
             if not len(worse):
                 break
             t[worse] /= 2
-            new[worse] = loss(a[worse] + t[worse] * da[worse], c[worse] + t[worse] * dc[worse], worse)
+            new[worse] = loss(act[worse], aa[worse] + t[worse] * da[worse], cc[worse] + t[worse] * dc[worse])
         keep = new <= cur + 1e-12 * np.abs(cur)
-        a, c = np.where(keep, a + t * da, a), np.where(keep, c + t * dc, c)
+        a[act] = np.where(keep, aa + t * da, aa)
+        c[act] = np.where(keep, cc + t * dc, cc)
+        gain = np.where(keep, cur - new, 0.0)
         cur = np.where(keep, new, cur)
-        if max(np.abs(t * da).max(), np.abs(t * dc).max()) < 1e-9:
+        done = (np.maximum(np.abs(t * da), np.abs(t * dc)) < 1e-9) | (gain < 1e-9) | ~keep
+        act, cur = act[~done], cur[~done]
+        if not len(act):
             break
     return a, c
 
@@ -439,10 +461,12 @@ class RowFits:
               validation probabilities (inverted empirical distribution);
       Platt   per-label logistic map of the logit, fitted by Newton's method on per-row
               histograms of the logit (bins of PLATT_BIN).
-    sent_mask restricts the fit to some validation sentences (the shift tests).
+    sent_mask restricts the fit to some validation sentences (the shift tests, per-group fits);
+    platt_only skips the thresholds (Platt-G).
     """
 
-    def __init__(self, pv: np.ndarray, yv: np.ndarray, design_v: dict, sent_mask: np.ndarray | None = None):
+    def __init__(self, pv: np.ndarray, yv: np.ndarray, design_v: dict, sent_mask: np.ndarray | None = None,
+                 platt_only: bool = False):
         W = design_v["W"]
         n_docs = W.shape[1]
         m = np.ones(len(pv), bool) if sent_mask is None else sent_mask
@@ -450,40 +474,41 @@ class RowFits:
         k, G = p.shape[1], THRESHOLD_GRID
         self.k = k
 
-        # grid rules: weighted true and false positives at every grid threshold
-        tp = np.stack([counts_at_or_above(d, p[:, j], n_docs, G, y[:, j]) for j in range(k)], 1)
-        fp = np.stack([counts_at_or_above(d, p[:, j], n_docs, G, 1 - y[:, j]) for j in range(k)], 1)
-        pos_doc = np.stack([np.bincount(d, weights=y[:, j], minlength=n_docs) for j in range(k)], 1)
-        TP = (W @ tp.reshape(n_docs, -1)).reshape(-1, k, len(G))
-        FP = (W @ fp.reshape(n_docs, -1)).reshape(-1, k, len(G))
-        POS = (W @ pos_doc)[:, :, None]
-        den = TP + FP + POS                       # 2 TP + FP + FN, with FN = POS - TP
-        f1 = np.divide(2 * TP, den, out=np.zeros_like(den), where=den > 0)
-        self.g_label = f1.argmax(2)               # (B+1, k) grid indices
-        self.g_star = f1.mean(1).argmax(1)        # (B+1,)
-        self.tlabel, self.tstar = G[self.g_label], G[self.g_star]
-
-        # prevalence-matched thresholds: per row, the first sentence (in order of probability) at which
-        # the row's cumulative weight reaches (1 - prevalence) of its total, found by bisection on a
-        # per-document table of how many of each document's sentences come first
         rows = W.shape[0]
-        n_doc_sent = np.bincount(d, minlength=n_docs).astype(float)
-        tot = W @ n_doc_sent
-        prev = (W @ pos_doc) / tot[:, None]
-        self.prior = prev                         # each row's validation prevalence (the prior of EM)
-        self.tprev = np.zeros((rows, k))
-        for j in range(k):
-            order = np.argsort(p[:, j], kind="stable")
-            first = np.zeros((n_docs, len(order) + 1), np.float32)     # first[d, i]: doc d's sentences among the first i
-            first[d[order], np.arange(1, len(order) + 1)] = 1
-            np.cumsum(first, axis=1, out=first)
-            target = (1 - prev[:, j]) * tot
-            lo, hi = np.zeros(rows, int), np.full(rows, len(order) - 1)
-            while (lo < hi).any():
-                mid = (lo + hi) // 2
-                reach = np.einsum("bd,db->b", W, first[:, mid + 1]) >= target
-                hi, lo = np.where(reach, mid, hi), np.where(reach, lo, mid + 1)
-            self.tprev[:, j] = p[order[lo], j]
+        if not platt_only:
+            # grid rules: weighted true and false positives at every grid threshold
+            tp = np.stack([counts_at_or_above(d, p[:, j], n_docs, G, y[:, j]) for j in range(k)], 1)
+            fp = np.stack([counts_at_or_above(d, p[:, j], n_docs, G, 1 - y[:, j]) for j in range(k)], 1)
+            pos_doc = np.stack([np.bincount(d, weights=y[:, j], minlength=n_docs) for j in range(k)], 1)
+            TP = (W @ tp.reshape(n_docs, -1)).reshape(-1, k, len(G))
+            FP = (W @ fp.reshape(n_docs, -1)).reshape(-1, k, len(G))
+            POS = (W @ pos_doc)[:, :, None]
+            den = TP + FP + POS                       # 2 TP + FP + FN, with FN = POS - TP
+            f1 = np.divide(2 * TP, den, out=np.zeros_like(den), where=den > 0)
+            self.g_label = f1.argmax(2)               # (B+1, k) grid indices
+            self.g_star = f1.mean(1).argmax(1)        # (B+1,)
+            self.tlabel, self.tstar = G[self.g_label], G[self.g_star]
+
+            # prevalence-matched thresholds: per row, the first sentence (in order of probability) at which
+            # the row's cumulative weight reaches (1 - prevalence) of its total, found by bisection on a
+            # per-document table of how many of each document's sentences come first
+            n_doc_sent = np.bincount(d, minlength=n_docs).astype(float)
+            tot = W @ n_doc_sent
+            prev = (W @ pos_doc) / tot[:, None]
+            self.prior = prev                         # each row's validation prevalence (the prior of EM)
+            self.tprev = np.zeros((rows, k))
+            for j in range(k):
+                order = np.argsort(p[:, j], kind="stable")
+                first = np.zeros((n_docs, len(order) + 1), np.float32)     # first[d, i]: doc d's sentences among the first i
+                first[d[order], np.arange(1, len(order) + 1)] = 1
+                np.cumsum(first, axis=1, out=first)
+                target = (1 - prev[:, j]) * tot
+                lo, hi = np.zeros(rows, int), np.full(rows, len(order) - 1)
+                while (lo < hi).any():
+                    mid = (lo + hi) // 2
+                    reach = np.einsum("bd,db->b", W, first[:, mid + 1]) >= target
+                    hi, lo = np.where(reach, mid, hi), np.where(reach, lo, mid + 1)
+                self.tprev[:, j] = p[order[lo], j]
 
         # Platt maps, fitted per row on histograms of the logit over its observed range
         z = logit(p)
@@ -506,7 +531,7 @@ class RowFits:
         above the row's threshold (times weight, e.g. the gold label, if given), or for PCC-Platt the
         sum of the row's calibrated probabilities."""
         doc, n_docs, k = doc_index(S), S.shape[0], self.k
-        rows = len(self.tstar)
+        rows = self.platt.shape[0]
         wt = (lambda j: None) if weight is None else (lambda j: weight[:, j])
         out = np.zeros((rows, n_docs, k), np.float32)
         if rule in ("CC@t*", "CC@label-t*"):
@@ -566,7 +591,7 @@ class EMGroups:
     bin counts and logit sums make every bootstrap row a weighted histogram. Each row maps its bins'
     mean logit through that row's Platt map and uses that row's validation prevalence as the prior,
     so the calibration is refitted with the row. The concave log-likelihood is then maximised by
-    bisection (vectorised over rows and labels).
+    Newton steps kept inside a bisection bracket (vectorised over rows and labels).
     """
 
     def __init__(self, S, W: np.ndarray, p_raw: np.ndarray, platt: np.ndarray, prior: np.ndarray):
@@ -587,21 +612,43 @@ class EMGroups:
         rows = self.W.shape[0]
         h = (self.W[:, mask] @ self.H[mask]).reshape(rows, self.k, self.nb)
         zs = (self.W[:, mask] @ self.Z[mask]).reshape(rows, self.k, self.nb)
+        occ = h.any(axis=(0, 1))                  # bins the group never reaches add nothing
+        h, zs, centres = h[:, :, occ], zs[:, :, occ], self.centres[occ]
         with np.errstate(invalid="ignore", divide="ignore"):
-            zbar = np.where(h > 0, zs / h, self.centres[None, None, :])
+            zbar = np.where(h > 0, zs / h, centres[None, None, :])
         pbar = 1 / (1 + np.exp(-(self.a * zbar + self.c)))
         prior = self.prior
         a = pbar / prior - (1 - pbar) / (1 - prior)
         b = (1 - pbar) / (1 - prior)
-        d = lambda x: (h * a / (b + x[:, :, None] * a)).sum(2)
-        lo, hi = np.zeros((rows, self.k)), np.ones((rows, self.k))
-        for _ in range(EM_STEPS):
-            mid = (lo + hi) / 2
-            up = d(mid) > 0
-            lo, hi = np.where(up, mid, lo), np.where(up, hi, mid)
-        est = (lo + hi) / 2
-        est = np.where(d(np.zeros_like(est)) <= 0, 0.0, est)
-        return np.where(d(np.ones_like(est)) >= 0, 1.0, est)
+        d = lambda x: (h * a / (b + x[:, :, None] * a)).sum(2)   # derivative of the log-likelihood, decreasing
+        # Newton steps on the concave log-likelihood, kept inside a shrinking bracket (bisection if a step leaves it)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            g_lo, g_hi = d(np.zeros((rows, self.k))).ravel(), d(np.ones((rows, self.k))).ravel()
+            at0, at1 = g_lo <= 0, g_hi >= 0                       # maxima on the boundary
+            A, Bv, Hh = (m.reshape(rows * self.k, -1) for m in (a, b, h))
+            lo, hi = np.zeros(rows * self.k), np.ones(rows * self.k)
+            x = np.broadcast_to(prior[:, :, 0], (rows, self.k)).ravel().copy()
+            act = np.flatnonzero(~at0 & ~at1)                     # estimates still iterating
+            for _ in range(EM_STEPS):
+                if not len(act):
+                    break
+                xa, aa = x[act], A[act]
+                q = aa / (Bv[act] + xa[:, None] * aa)
+                g, hess = (Hh[act] * q).sum(1), -(Hh[act] * q * q).sum(1)
+                up = g > 0
+                lo[act], g_lo[act] = np.where(up, xa, lo[act]), np.where(up, g, g_lo[act])
+                hi[act], g_hi[act] = np.where(up, hi[act], xa), np.where(up, g_hi[act], g)
+                l_, h_, gl, gh = lo[act], hi[act], g_lo[act], g_hi[act]
+                xn = xa - g / hess
+                # a Newton step that leaves the bracket is replaced by the secant through its two ends
+                sec = (l_ * gh - h_ * gl) / (gh - gl)
+                sec = np.where(np.isfinite(sec) & (sec > l_) & (sec < h_), sec, (l_ + h_) / 2)
+                xn = np.where(~np.isfinite(xn) | (xn <= l_) | (xn >= h_), sec, xn)
+                x[act] = xn
+                act = act[np.abs(xn - xa) >= 1e-12]
+            x = x.reshape(rows, self.k)
+            at0, at1 = at0.reshape(rows, self.k), at1.reshape(rows, self.k)
+            return np.where(at0, 0.0, np.where(at1, 1.0, x))
 
 
 # ----------------------------------------------------------------------------- main
@@ -641,7 +688,7 @@ def main() -> None:
         """The quantities every section evaluates: totals, contrasts, document shares."""
         lp = gl["lang"]
         return {
-            "all": gl["all"],
+            "all": gl["all"], "man": gl["man"], "news": gl["news"],
             "genre": gl["man"] - gl["news"],
             "lang": lp,
             "lpair": np.stack([lp[:, i] - lp[:, j] for i, j in pairs], axis=1).reshape(B + 1, -1),
@@ -702,6 +749,18 @@ def main() -> None:
     gold_doc = S @ yt
     gold = views(gold_doc)
     gold_v_doc = Sv @ yv
+    all_v = np.ones(Sv.shape[0], bool)
+    doc_t, doc_v = doc_index(S), doc_index(Sv)
+    nodoc = np.full((int(long_docs.sum()), len(VALUES)), np.nan)
+
+    def val_level(cdoc: np.ndarray) -> dict[str, np.ndarray]:
+        """Group prevalences on the validation resamples (Wv rows, paired with the test rows by index)."""
+        return {"all": val_group_prev(cdoc, all_v), "man": val_group_prev(cdoc, man_v), "news": val_group_prev(cdoc, news_v),
+                "lang": np.stack([val_group_prev(cdoc, m) for m in lang_masks_v], axis=1)}
+
+    gold_vgl = val_level(gold_v_doc)
+    v_groups = [("manifestos", man_v), ("news", news_v)] + list(zip(langs, lang_masks_v))
+    no_pos = {g: [VALUES[j] for j in np.flatnonzero(gold_v_doc[m].sum(0) == 0)] for g, m in v_groups}
     rare = gold["all"][0] < RARE
     gold_p = {"genre": genre_reference_p(gold["genre"], gold_doc, nsent, man, news),
               "lpair": lpair_reference_p(gold["lpair"], gold_doc, nsent, lang_masks, pairs)}
@@ -716,8 +775,8 @@ def main() -> None:
     # ---- run every system x seed x rule
     rows = {s: {r: [] for r in RULES} for s in SYSTEMS}
     diag = {s: [] for s in SYSTEMS}
-    qstats = {s: {r: {"cells": 0, "fallback": 0, "clip0": 0, "clip1": 0} for r in QUANT_RULES + GROUP_RULES}
-              for s in SYSTEMS}
+    qstats = {s: {r: {"cells": 0, "fallback": 0, "clip0": 0, "clip1": 0}
+                  for r in QUANT_RULES + GROUP_RULES + ["PPI@prev", "PPI-Platt"]} for s in SYSTEMS}
     em_check, slopes_v = {s: [] for s in SYSTEMS}, {s: [] for s in SYSTEMS}
     platt_check = {s: [] for s in SYSTEMS}
     pos_v, neg_v = Sv @ yv, Sv @ (1 - yv)
@@ -792,6 +851,29 @@ def main() -> None:
             slopes_v[system].append((beta_lang[0], beta_genre[0]))
             rows[system]["RC@prev"].append(regression_calibrated(gl["CC@prev"], beta_lang, beta_genre,
                                                                  qs["RC@prev"]))
+
+            # estimators that use each group's annotated validation documents (step 5.2, AE item 4)
+            rows[system]["Gold-only"].append(derive({**gold_vgl, "doc": nodoc}))
+            pred_v = {"CC@prev": vcounts["CC@prev"][0] + vcounts["CC@prev"][1], "PCC-Platt": rf.counts("PCC-Platt", pv, Sv)}
+            for name, base in [("PPI@prev", "CC@prev"), ("PPI-Platt", "PCC-Platt")]:
+                pgl = val_level(pred_v[base])
+                ppi = {g: gl[base][g] + gold_vgl[g] - pgl[g] for g in ["all", "man", "news", "lang"]}
+                for g in ppi:
+                    qs[name]["cells"] += ppi[g][0].size
+                    qs[name]["clip0"] += int((ppi[g][0] < 0).sum()); qs[name]["clip1"] += int((ppi[g][0] > 1).sum())
+                rows[system][name].append(derive({**ppi, "doc": nodoc}))
+            del pred_v
+
+            def platt_group(mask_v: np.ndarray, mask_t: np.ndarray) -> np.ndarray:
+                """Calibrated average in one group, with Platt maps fitted on that group's validation documents."""
+                rfg = RowFits(pv, yv, vdesign, sent_mask=mask_v[doc_v], platt_only=True)
+                cols = np.flatnonzero(mask_t[doc_t])
+                return group_prev(rfg.counts("PCC-Platt", pt[cols], S[:, cols]), mask_t)
+
+            rows[system]["Platt-G"].append(derive({
+                "all": gl["PCC-Platt"]["all"], "man": platt_group(man_v, man), "news": platt_group(news_v, news),
+                "lang": np.stack([platt_group(mv, mt) for mv, mt in zip(lang_masks_v, lang_masks)], axis=1),
+                "doc": nodoc}))
             del vcounts, gl
 
     for system in SYSTEMS:
@@ -812,7 +894,8 @@ def main() -> None:
         """A system's estimate: the mean of its runs, row by row. Every test is on this mean."""
         if (system, rule) not in _means:
             vs = rows[system][rule]
-            _means[(system, rule)] = {k: np.mean([v[k] for v in vs], axis=0) for k in ["all", "genre", "lang", "lpair"]}
+            _means[(system, rule)] = {k: np.mean([v[k] for v in vs], axis=0)
+                                      for k in ["all", "man", "news", "genre", "lang", "lpair"]}
         return _means[(system, rule)]
 
     summary: dict[tuple[str, str], dict] = {}  # system x rule -> metrics, written to measurement-summary.csv
@@ -877,6 +960,11 @@ def main() -> None:
         out("           over ALL contrasts in the family -- i.e. differential measurement error between the groups.")
         out("   Slope: least squares of estimated on gold contrasts through the origin (1 = faithful, < 1 = shrunk).")
         out("   All metrics on the mean of a system's runs; 'runs' gives the range of the slope over single runs.")
+        rel = 1 - gold[key][1:].var(0).sum() / (gold[key][0] ** 2).sum()
+        out(f"   Slope and rank rho are not shown for {', '.join(ANNOT_RULES)}: they add annotated documents other than")
+        out("           the test documents, so they do not share the reference's sampling noise and regress to its mean.")
+        out(f"           Reliability of these reference contrasts (1 - sampling variance / mean square): {rel:.2f}; an")
+        out("           unbiased estimator from other documents would have a slope near it, not near 1.")
         out("=" * 108)
         gs = gsig[key]
         reversed_max = 0.0
@@ -895,22 +983,25 @@ def main() -> None:
                 reversed_max = max(reversed_max, (esig & ~same)[gs].mean() * 100)
                 st = [same[gs].mean() * 100, (esig & same)[gs].mean() * 100, ((p_est < ALPHA) & same)[gs].mean() * 100,
                       (bh(boot_p(vm[key] - gold[key])) < ALPHA).mean() * 100, np.abs(e0 - g0).mean() * 100]
+                annot = r in ANNOT_RULES
                 sl = slope(gold[key], vm[key])
                 per_run = [slope(gold[key], v[key])[0] for v in rows[system][r]]
-                rng_txt = f"{min(per_run):.2f}-{max(per_run):.2f}" if len(per_run) > 1 else "--"
-                line = (f"  {r:12s} {st[0]:10.1f} {st[1]:13.1f} {st[2]:9.1f} {st[3]:9.1f} {st[4]:9.2f} {ci(sl):>20s} "
-                        f"{rng_txt:>11s}")
+                rng_txt = f"{min(per_run):.2f}-{max(per_run):.2f}" if len(per_run) > 1 and not annot else "--"
+                line = (f"  {r:12s} {st[0]:10.1f} {st[1]:13.1f} {st[2]:9.1f} {st[3]:9.1f} {st[4]:9.2f} "
+                        f"{'--' if annot else ci(sl):>20s} {rng_txt:>11s}")
                 for name, value in zip(["sign_ok", "reproduced", "detected", "biased", "mae"], st):
                     put(system, r, f"{key}_{name}", value)
-                put(system, r, f"{key}_slope", sl[0], sl)
-                put_spread(system, r, f"{key}_slope", per_run)
+                if not annot:
+                    put(system, r, f"{key}_slope", sl[0], sl)
+                    put_spread(system, r, f"{key}_slope", per_run)
                 put_spread(system, r, f"{key}_mae", [np.abs(v[key][0] - g0).mean() * 100 for v in rows[system][r]])
                 put_spread(system, r, f"{key}_biased", [(bh(boot_p(v[key] - gold[key])) < ALPHA).mean() * 100
                                                         for v in rows[system][r]])
                 if key == "lpair":
                     rho = rank_corr(gold["lang"], vm["lang"])
-                    line += f" {ci(rho):>20s}"
-                    put(system, r, "lang_rank_rho", rho[0], rho)
+                    line += f" {'--' if annot else ci(rho):>20s}"
+                    if not annot:
+                        put(system, r, "lang_rank_rho", rho[0], rho)
                 out(line)
         out(f"\n   Largest share of gold-significant contrasts reproduced with the WRONG sign, any system/rule: {reversed_max:.1f}%")
 
@@ -962,11 +1053,12 @@ def main() -> None:
     out("   Cells: group x value estimates (corpus, manifestos, news, 9 languages = 12 groups x 19 values per run).")
     out("   Fallback: tpr - fpr <= 0 or undefined, so the adjusted count reverts to CC (for RC: slope <= "
         f"{MIN_SLOPE}, no correction).")
-    out("   At 0 / at 1: raw estimate below 0 or above 1 before clipping (EM: solution on the boundary).")
+    out("   At 0 / at 1: raw estimate below 0 or above 1 before clipping (EM: solution on the boundary;")
+    out("   PPI: estimates below 0 or above 1, which are kept, because clipping would bias them).")
     out("=" * 108)
     for system in SYSTEMS:
         out(f"\n{system}")
-        for r in QUANT_RULES + GROUP_RULES:
+        for r in QUANT_RULES + GROUP_RULES + ["PPI@prev", "PPI-Platt"]:
             q = qstats[system][r]
             if r == "RC@prev":
                 line = f"  {r:12s} slopes {q['cells']:4d}   fallback {q['fallback']:d}"
@@ -992,6 +1084,8 @@ def main() -> None:
         f"bootstrap: {sum(k == 'genre' for k, _ in empty)} genre, {sum(k == 'lpair' for k, _ in empty)} language-pair; "
         f"significant after BH: genre {[VALUES[j] for k, j in empty if k == 'genre' and gsig['genre'][j]]}, "
         f"language pairs {sum(1 for k, j in empty if k == 'lpair' and gsig['lpair'][j])}")
+    out("  Platt-G: values with no positive validation sentence in a group (that group's map then predicts about 0): "
+        + ("; ".join(f"{g}: {', '.join(v)}" for g, v in no_pos.items() if v) or "none"))
 
     # ---- G. why adjusted counts with pooled error rates fail between genres
     out()
@@ -1006,6 +1100,76 @@ def main() -> None:
         m = np.array(mechanism[system])
         out(f"  {system:17s} rho(contrast, tpr gap) {m[:, 0].mean():+.2f}   rho(contrast, fpr gap) {m[:, 1].mean():+.2f}   "
             f"fpr gap has the contrast's sign for {m[:, 2].mean() * 100:.0f}% of values")
+
+    # ---- H. accuracy and coverage (step 5.2, AE item 2)
+    out()
+    out("=" * 108)
+    out("H. ACCURACY AND COVERAGE OF TOTALS AND CONTRASTS (mean of a system's runs)")
+    out("   Signed: totals, mean of (estimate - reference); contrasts, mean of (estimate - reference) x sign(reference),")
+    out("           so below 0 means differences shrink toward zero and above 0 that they grow. Percentage points.")
+    out("   MAE, RMSE: mean absolute and root mean squared error, pp.")
+    out("   Cover: share of quantities whose error (estimate - reference, same bootstrap rows) is within sampling noise")
+    out(f"          (p >= {ALPHA}, single test), %. Pairing keeps the noise the estimate shares with the reference out of the")
+    out("          interval and the noise it does not share in, so the share is comparable across estimators; about 95%")
+    out("          for an estimator whose errors are only sampling noise.")
+    out(f"   {', '.join(ANNOT_RULES)} use annotated documents other than the test documents: their errors include the")
+    out("   reference's own sampling noise, and on contrasts they regress to its mean (negative signed error even when")
+    out("   unbiased). A study that annotates a sample of its own documents would see smaller errors for them.")
+    out("   Sig. / other: MAE of the contrasts that are significant in the reference, and of the others.")
+    out("   Totals: 19 values; genre: 19 manifesto-news contrasts; language pairs: 684 contrasts.")
+    out("=" * 108)
+
+    def accuracy(est: np.ndarray, ref: np.ndarray, sig: np.ndarray | None = None) -> dict:
+        d = est[0] - ref[0]
+        m = {"signed": (d if sig is None else d * np.sign(ref[0])).mean() * 100,
+             "rmse": np.sqrt((d ** 2).mean()) * 100, "cover": (boot_p(est - ref) >= ALPHA).mean() * 100}
+        if sig is not None:
+            m["mae_refsig"], m["mae_refother"] = np.abs(d[sig]).mean() * 100, np.abs(d[~sig]).mean() * 100
+        return m
+
+    for system in SYSTEMS:
+        out(f"\n{system}")
+        out(f"  {'':12s} | {'totals':^25s} | {'manifesto vs. news':^37s} | {'language pairs':^37s}")
+        out(f"  {'rule':12s} | {'signed':>7s} {'MAE':>5s} {'RMSE':>5s} {'cover':>5s} | {'signed':>7s} {'MAE':>5s} {'RMSE':>5s} "
+            f"{'cover':>5s} {'sig.':>5s} {'other':>5s} | {'signed':>7s} {'MAE':>5s} {'RMSE':>5s} {'cover':>5s} {'sig.':>5s} {'other':>5s}")
+        for r in RULES:
+            vm = run_mean(system, r)
+            acc = {"prev": accuracy(vm["all"], gold["all"]), "genre": accuracy(vm["genre"], gold["genre"], gsig["genre"]),
+                   "lpair": accuracy(vm["lpair"], gold["lpair"], gsig["lpair"])}
+            mae = {k: np.abs(vm[k2][0] - gold[k2][0]).mean() * 100 for k, k2 in [("prev", "all"), ("genre", "genre"), ("lpair", "lpair")]}
+            cells = [f"{acc['prev']['signed']:+7.2f} {mae['prev']:5.2f} {acc['prev']['rmse']:5.2f} {acc['prev']['cover']:5.0f}"]
+            for k in ["genre", "lpair"]:
+                a = acc[k]
+                cells.append(f"{a['signed']:+7.2f} {mae[k]:5.2f} {a['rmse']:5.2f} {a['cover']:5.0f} "
+                             f"{a['mae_refsig']:5.2f} {a['mae_refother']:5.2f}")
+            out(f"  {r:12s} | " + " | ".join(cells))
+            for k, m in acc.items():
+                for name, value in m.items():
+                    put(system, r, f"{k}_{name}", value)
+
+    # ---- I. totals per group (step 5.2, AE item 1)
+    out()
+    out("=" * 108)
+    out("I. TOTALS PER GROUP (every rule fitted on all validation data; under shift: shift-tests.txt)")
+    out("   Total err: |estimated / reference value mentions in the group - 1|, %; MAE over the 19 values, pp.")
+    out("   Languages: mean (max) over the nine.")
+    out("=" * 108)
+    total_err = lambda e, g: abs(e[0].sum() / g[0].sum() - 1) * 100
+    for system in SYSTEMS:
+        out(f"\n{system}")
+        out(f"  {'rule':12s} {'manifestos: total err':>22s} {'MAE':>6s} {'news: total err':>16s} {'MAE':>6s} "
+            f"{'languages: total err':>24s} {'MAE':>6s}")
+        for r in RULES:
+            vm = run_mean(system, r)
+            te = {g: total_err(vm[g], gold[g]) for g in ["man", "news"]}
+            te_lang = [total_err(vm["lang"][:, i], gold["lang"][:, i]) for i in range(len(langs))]
+            gm = {g: np.abs(vm[g][0] - gold[g][0]).mean() * 100 for g in ["man", "news", "lang"]}
+            out(f"  {r:12s} {te['man']:22.1f} {gm['man']:6.2f} {te['news']:16.1f} {gm['news']:6.2f} "
+                f"{np.mean(te_lang):16.1f} ({max(te_lang):5.1f}) {gm['lang']:6.2f}")
+            for name, value in [("man_total_err", te["man"]), ("news_total_err", te["news"]), ("lang_total_err", np.mean(te_lang)),
+                                ("lang_total_err_max", max(te_lang)), ("man_mae", gm["man"]), ("news_mae", gm["news"]),
+                                ("lang_mae", gm["lang"])]:
+                put(system, r, name, value)
 
     # ---- CSVs
     RES.mkdir(exist_ok=True)

@@ -1,4 +1,6 @@
 SHIFT TESTS -- ValueEval'24 English test split; rules fitted on validation subsets
+Estimators that need annotated documents of the group itself (ACC-G, Gold-only, PPI, Platt-G) cannot be
+computed for a language left out of the fit or for manifestos under a news-only fit; see measurement-analysis.txt.
 Stratified document bootstrap B = 2000 (test and validation); metrics on the mean of a system's runs.
 
 ================================================================================================================
@@ -12,11 +14,19 @@ Feature ensemble
   fit                      rule             contrast slope  biased %  MAE pp      total err %  prev MAE pp  biased values
   full fit                 CC@t*         0.69 [0.58, 0.81]       0.7    1.32     35.7 ( 86.5)         1.24            3.2
   full fit                 CC@prev       0.58 [0.49, 0.67]       1.2    1.29     16.5 ( 45.4)         0.85            0.4
+  full fit                 PCC           0.50 [0.43, 0.57]       7.5    1.28     22.8 ( 72.3)         0.94            5.4
   full fit                 PCC-Platt     0.37 [0.31, 0.42]      11.1    1.41     21.7 ( 55.7)         0.94            3.4
+  full fit                 ACC@prev      1.60 [1.32, 1.85]       0.0    3.02     26.9 ( 74.5)         2.06            0.9
+  full fit                 PACC          1.73 [1.44, 1.96]       0.4    3.19     31.8 ( 89.1)         2.18            1.4
+  full fit                 EM            2.02 [1.65, 2.31]       0.0    3.91     41.4 (141.8)         2.55            1.7
   full fit                 RC@prev       0.90 [0.74, 1.13]       0.0    1.54     12.8 ( 41.4)         1.02            0.2
   leave-one-language-out   CC@t*         0.68 [0.59, 0.81]       0.6    1.31     32.5 ( 86.1)         1.19            2.4
   leave-one-language-out   CC@prev       0.57 [0.49, 0.67]       1.0    1.30     18.5 ( 51.2)         0.92            0.9
+  leave-one-language-out   PCC           0.50 [0.43, 0.57]       7.5    1.28     22.8 ( 72.3)         0.94            5.4
   leave-one-language-out   PCC-Platt     0.36 [0.31, 0.42]      11.1    1.42     24.2 ( 63.4)         1.03            4.0
+  leave-one-language-out   ACC@prev      1.61 [1.33, 1.87]       0.0    3.05     30.5 ( 87.4)         2.20            1.2
+  leave-one-language-out   PACC          1.75 [1.45, 1.98]       0.1    3.26     36.2 (101.1)         2.40            1.7
+  leave-one-language-out   EM            2.05 [1.67, 2.35]       0.1    4.02     47.9 (160.7)         2.84            2.1
   leave-one-language-out   RC@prev       0.98 [0.78, 1.18]       0.0    1.67     17.9 ( 44.6)         1.18            0.2
   validation language slope without the held-out language: 0.42-0.73 (full fit: 0.64)
 
@@ -24,11 +34,19 @@ DeBERTa
   fit                      rule             contrast slope  biased %  MAE pp      total err %  prev MAE pp  biased values
   full fit                 CC@t*         0.63 [0.55, 0.83]       0.7    1.34     32.8 ( 89.4)         1.21            1.8
   full fit                 CC@prev       0.52 [0.45, 0.62]       3.2    1.34     18.0 ( 47.8)         0.88            1.0
+  full fit                 PCC           0.48 [0.41, 0.55]       6.7    1.31     22.3 ( 72.7)         0.98            5.6
   full fit                 PCC-Platt     0.32 [0.27, 0.37]      13.2    1.47     23.1 ( 60.6)         0.99            3.8
+  full fit                 ACC@prev      1.53 [1.25, 1.78]       0.0    2.82     23.7 ( 58.8)         1.93            0.6
+  full fit                 PACC          1.66 [1.38, 1.89]       0.3    3.12     29.5 ( 77.5)         2.11            1.3
+  full fit                 EM            1.95 [1.57, 2.24]       0.4    3.73     39.2 (124.9)         2.43            1.1
   full fit                 RC@prev       0.87 [0.71, 1.10]       0.0    1.54     11.3 ( 38.6)         1.02            0.0
   leave-one-language-out   CC@t*         0.64 [0.56, 0.82]       0.7    1.33     39.5 (131.2)         1.32            2.6
   leave-one-language-out   CC@prev       0.52 [0.44, 0.61]       3.1    1.34     20.2 ( 55.8)         0.95            1.9
+  leave-one-language-out   PCC           0.48 [0.41, 0.55]       6.7    1.31     22.3 ( 72.7)         0.98            5.6
   leave-one-language-out   PCC-Platt     0.32 [0.27, 0.37]      12.9    1.48     25.8 ( 69.0)         1.08            4.6
+  leave-one-language-out   ACC@prev      1.55 [1.27, 1.79]       0.0    2.86     26.7 ( 69.7)         2.07            1.3
+  leave-one-language-out   PACC          1.68 [1.40, 1.91]       0.3    3.21     34.5 ( 87.4)         2.35            1.6
+  leave-one-language-out   EM            1.98 [1.60, 2.29]       0.5    3.86     45.7 (140.6)         2.72            1.9
   leave-one-language-out   RC@prev       0.94 [0.75, 1.15]       0.0    1.64     15.8 ( 41.6)         1.16            0.0
   validation language slope without the held-out language: 0.40-0.70 (full fit: 0.60)
 
@@ -36,11 +54,19 @@ RoBERTa
   fit                      rule             contrast slope  biased %  MAE pp      total err %  prev MAE pp  biased values
   full fit                 CC@t*         0.76 [0.63, 0.85]       0.6    1.27     63.5 (124.8)         1.81            7.7
   full fit                 CC@prev       0.53 [0.46, 0.61]       4.8    1.28     17.6 ( 41.0)         0.85            0.6
+  full fit                 PCC           0.48 [0.41, 0.55]       7.5    1.29     18.7 ( 54.7)         0.93            4.1
   full fit                 PCC-Platt     0.32 [0.27, 0.36]      11.8    1.46     23.0 ( 59.5)         0.99            4.9
+  full fit                 ACC@prev      1.63 [1.36, 1.87]       0.1    2.99     29.4 ( 67.1)         2.05            1.0
+  full fit                 PACC          1.77 [1.47, 1.97]       0.3    3.19     35.7 ( 88.3)         2.16            1.4
+  full fit                 EM            2.10 [1.70, 2.36]       0.6    4.10     46.8 (164.6)         2.64            2.0
   full fit                 RC@prev       0.88 [0.72, 1.09]       0.1    1.47     11.2 ( 35.6)         0.97            0.4
   leave-one-language-out   CC@t*         0.75 [0.63, 0.85]       0.6    1.27     62.8 (124.8)         1.78            7.6
   leave-one-language-out   CC@prev       0.53 [0.45, 0.61]       4.7    1.28     19.4 ( 46.2)         0.91            0.8
+  leave-one-language-out   PCC           0.48 [0.41, 0.55]       7.5    1.29     18.7 ( 54.7)         0.93            4.1
   leave-one-language-out   PCC-Platt     0.32 [0.27, 0.36]      12.8    1.47     25.7 ( 67.6)         1.08            5.2
+  leave-one-language-out   ACC@prev      1.65 [1.37, 1.89]       0.1    3.01     30.4 ( 75.8)         2.18            1.2
+  leave-one-language-out   PACC          1.79 [1.49, 2.00]       0.3    3.24     37.4 (101.0)         2.35            1.7
+  leave-one-language-out   EM            2.14 [1.74, 2.40]       1.0    4.20     51.4 (184.8)         2.89            2.0
   leave-one-language-out   RC@prev       0.95 [0.76, 1.14]       0.0    1.56     15.5 ( 39.0)         1.08            0.6
   validation language slope without the held-out language: 0.40-0.68 (full fit: 0.60)
 
@@ -48,63 +74,103 @@ Seed ensemble
   fit                      rule             contrast slope  biased %  MAE pp      total err %  prev MAE pp  biased values
   full fit                 CC@t*         0.69 [0.56, 0.80]       1.2    1.37     47.5 (106.6)         1.49            4.3
   full fit                 CC@prev       0.54 [0.46, 0.64]       0.6    1.35     17.7 ( 47.9)         0.89            0.2
+  full fit                 PCC           0.48 [0.41, 0.55]       6.7    1.31     22.3 ( 72.7)         0.98            5.6
   full fit                 PCC-Platt     0.34 [0.29, 0.39]      12.9    1.45     22.6 ( 58.9)         0.97            3.7
+  full fit                 ACC@prev      1.53 [1.26, 1.80]       0.0    3.06     26.2 ( 73.2)         2.08            0.6
+  full fit                 PACC          1.66 [1.37, 1.89]       0.3    3.10     29.3 ( 76.8)         2.11            1.3
+  full fit                 EM            1.94 [1.57, 2.24]       0.3    3.71     38.8 (122.6)         2.43            1.3
   full fit                 RC@prev       0.87 [0.71, 1.09]       0.0    1.58     11.3 ( 39.3)         1.04            0.2
   leave-one-language-out   CC@t*         0.69 [0.56, 0.80]       1.0    1.37     45.8 (106.6)         1.46            3.8
   leave-one-language-out   CC@prev       0.54 [0.46, 0.64]       0.7    1.36     19.6 ( 54.0)         0.96            0.7
+  leave-one-language-out   PCC           0.48 [0.41, 0.55]       6.7    1.31     22.3 ( 72.7)         0.98            5.6
   leave-one-language-out   PCC-Platt     0.34 [0.29, 0.39]      12.5    1.46     25.2 ( 67.0)         1.06            4.0
+  leave-one-language-out   ACC@prev      1.55 [1.27, 1.81]       0.0    3.05     29.1 ( 78.3)         2.16            1.0
+  leave-one-language-out   PACC          1.68 [1.39, 1.91]       0.3    3.19     34.2 ( 86.5)         2.34            1.6
+  leave-one-language-out   EM            1.97 [1.59, 2.28]       0.4    3.84     45.3 (137.8)         2.72            2.1
   leave-one-language-out   RC@prev       0.94 [0.75, 1.15]       0.0    1.69     16.2 ( 44.7)         1.20            0.0
   validation language slope without the held-out language: 0.42-0.68 (full fit: 0.62)
 
 ================================================================================================================
 B. GENRE TRANSFER: rules fitted on news validation only; manifesto prevalence and manifesto-news contrasts
    With no manifesto validation data, RC divides by the language-pair slope measured within news validation.
-   Total err: |predicted / gold value mentions in manifestos - 1|, %.
+   Total err: |predicted / gold value mentions in manifestos - 1|, %; news: the same for news documents.
 ================================================================================================================
 
 Feature ensemble
-  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  RC slope
-  full fit         CC@t*         1.17 [0.96, 1.33]       5.3    0.88         26.5         1.31            2.0          
-  full fit         CC@prev       0.96 [0.80, 1.10]       0.0    0.62          0.5         0.60            0.0          
-  full fit         PCC-Platt     0.66 [0.55, 0.74]      21.1    0.98          3.8         0.85            2.0          
-  full fit         RC@prev       1.05 [0.84, 1.34]       0.0    0.74          2.1         0.70            0.0      0.92
-  news-only fit    CC@t*         1.14 [0.95, 1.36]       5.3    0.84         21.8         1.17            0.0          
-  news-only fit    CC@prev       0.97 [0.80, 1.11]       0.0    0.67          0.8         0.73            0.0          
-  news-only fit    PCC-Platt     0.63 [0.52, 0.72]      21.1    1.03          6.5         0.98            4.0          
-  news-only fit    RC@prev       1.48 [1.17, 1.84]       0.0    1.41         16.5         1.34            2.0      0.65
+  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  news err %  RC slope
+  full fit         CC@t*         1.17 [0.96, 1.33]       5.3    0.88         26.5         1.31            2.0        27.7          
+  full fit         CC@prev       0.96 [0.80, 1.10]       0.0    0.62          0.5         0.60            0.0         1.2          
+  full fit         PCC           0.89 [0.74, 0.98]       5.3    0.67         12.1         0.78            5.0        13.9          
+  full fit         PCC-Platt     0.66 [0.55, 0.74]      21.1    0.98          3.8         0.85            2.0         0.1          
+  full fit         ACC@prev      2.56 [2.01, 3.11]      15.8    3.69         61.8         3.61            5.0         2.8          
+  full fit         PACC          2.99 [2.36, 3.52]      31.6    5.29        100.4         4.91            7.0        12.9          
+  full fit         EM            3.90 [3.02, 4.56]      31.6    8.74        180.3         8.27            9.0        13.6          
+  full fit         RC@prev       1.05 [0.84, 1.34]       0.0    0.74          2.1         0.70            0.0         0.8      0.92
+  news-only fit    CC@t*         1.14 [0.95, 1.36]       5.3    0.84         21.8         1.17            0.0        23.2          
+  news-only fit    CC@prev       0.97 [0.80, 1.11]       0.0    0.67          0.8         0.73            0.0         0.1          
+  news-only fit    PCC           0.89 [0.74, 0.98]       5.3    0.67         12.1         0.78            5.0        13.9          
+  news-only fit    PCC-Platt     0.63 [0.52, 0.72]      21.1    1.03          6.5         0.98            4.0         2.0          
+  news-only fit    ACC@prev      2.88 [2.19, 3.56]      15.8    4.18         82.6         4.51            6.0         4.4          
+  news-only fit    PACC          3.30 [2.55, 3.96]      15.8    5.76        122.8         5.88            9.0         2.2          
+  news-only fit    EM            4.42 [3.38, 5.20]      31.6    9.98        220.1        10.01            9.0         3.0          
+  news-only fit    RC@prev       1.48 [1.17, 1.84]       0.0    1.41         16.5         1.34            2.0         2.4      0.65
 
 DeBERTa
-  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  RC slope
-  full fit         CC@t*         1.09 [0.93, 1.41]       5.3    0.79         23.8         1.11            1.0          
-  full fit         CC@prev       0.93 [0.76, 1.05]       0.0    0.66          1.9         0.60            0.0          
-  full fit         PCC-Platt     0.58 [0.48, 0.66]      26.3    1.17          5.2         1.04            4.0          
-  full fit         RC@prev       1.10 [0.86, 1.38]       0.0    0.79          8.0         0.74            0.0      0.85
-  news-only fit    CC@t*         1.09 [0.93, 1.44]       5.3    0.80         24.7         1.15            0.0          
-  news-only fit    CC@prev       0.91 [0.76, 1.05]       0.0    0.73          1.0         0.74            0.0          
-  news-only fit    PCC-Platt     0.55 [0.44, 0.64]      26.3    1.23          8.1         1.18            4.0          
-  news-only fit    RC@prev       1.48 [1.17, 1.86]       5.3    1.47         22.6         1.44            2.0      0.62
+  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  news err %  RC slope
+  full fit         CC@t*         1.09 [0.93, 1.41]       5.3    0.79         23.8         1.11            1.0        24.3          
+  full fit         CC@prev       0.93 [0.76, 1.05]       0.0    0.66          1.9         0.60            0.0         0.2          
+  full fit         PCC           0.85 [0.72, 0.94]       5.3    0.74         10.3         0.80            5.0        12.0          
+  full fit         PCC-Platt     0.58 [0.48, 0.66]      26.3    1.17          5.2         1.04            4.0         0.3          
+  full fit         ACC@prev      2.65 [2.04, 3.16]      21.1    4.17         76.4         4.07            7.0         6.6          
+  full fit         PACC          2.92 [2.30, 3.42]      31.6    5.48        104.8         5.06           10.0        13.2          
+  full fit         EM            3.78 [2.94, 4.44]      31.6    9.29        194.5         8.80            9.0        14.7          
+  full fit         RC@prev       1.10 [0.86, 1.38]       0.0    0.79          8.0         0.74            0.0         0.8      0.85
+  news-only fit    CC@t*         1.09 [0.93, 1.44]       5.3    0.80         24.7         1.15            0.0        25.7          
+  news-only fit    CC@prev       0.91 [0.76, 1.05]       0.0    0.73          1.0         0.74            0.0         1.0          
+  news-only fit    PCC           0.85 [0.72, 0.94]       5.3    0.74         10.3         0.80            5.0        12.0          
+  news-only fit    PCC-Platt     0.55 [0.44, 0.64]      26.3    1.23          8.1         1.18            4.0         2.1          
+  news-only fit    ACC@prev      2.88 [2.20, 3.58]      21.1    4.60         94.8         4.89            7.0         1.1          
+  news-only fit    PACC          3.20 [2.48, 3.83]      26.3    5.91        126.8         6.03           10.0         2.6          
+  news-only fit    EM            4.29 [3.29, 5.05]      31.6   10.59        235.9        10.59            9.0         3.3          
+  news-only fit    RC@prev       1.48 [1.17, 1.86]       5.3    1.47         22.6         1.44            2.0         4.1      0.62
 
 RoBERTa
-  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  RC slope
-  full fit         CC@t*         1.42 [1.16, 1.58]      36.8    1.47         62.6         2.75            8.0          
-  full fit         CC@prev       0.98 [0.82, 1.10]       0.0    0.55          2.8         0.56            0.0          
-  full fit         PCC-Platt     0.62 [0.51, 0.69]      26.3    1.11          3.4         0.98            4.0          
-  full fit         RC@prev       1.03 [0.83, 1.29]       0.0    0.60          4.5         0.63            0.0      0.95
-  news-only fit    CC@t*         1.42 [1.17, 1.57]      36.8    1.47         62.6         2.75            8.0          
-  news-only fit    CC@prev       1.00 [0.82, 1.12]       0.0    0.59          3.5         0.65            0.0          
-  news-only fit    PCC-Platt     0.59 [0.48, 0.67]      26.3    1.16          5.8         1.09            4.0          
-  news-only fit    RC@prev       1.60 [1.27, 1.97]       0.0    1.68         25.9         1.63            1.0      0.62
+  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  news err %  RC slope
+  full fit         CC@t*         1.42 [1.16, 1.58]      36.8    1.47         62.6         2.75            8.0        51.9          
+  full fit         CC@prev       0.98 [0.82, 1.10]       0.0    0.55          2.8         0.56            0.0         1.3          
+  full fit         PCC           0.93 [0.78, 1.02]      10.5    0.62          9.2         0.85            5.0         4.0          
+  full fit         PCC-Platt     0.62 [0.51, 0.69]      26.3    1.11          3.4         0.98            4.0         0.0          
+  full fit         ACC@prev      2.85 [2.23, 3.38]      15.8    4.63         80.0         4.27            5.0        11.0          
+  full fit         PACC          3.15 [2.49, 3.65]      31.6    5.75        107.1         5.24           11.0        16.5          
+  full fit         EM            4.53 [3.47, 5.30]      36.8   10.57        221.1        10.04           10.0        17.9          
+  full fit         RC@prev       1.03 [0.83, 1.29]       0.0    0.60          4.5         0.63            0.0         1.6      0.95
+  news-only fit    CC@t*         1.42 [1.17, 1.57]      36.8    1.47         62.6         2.75            8.0        51.9          
+  news-only fit    CC@prev       1.00 [0.82, 1.12]       0.0    0.59          3.5         0.65            0.0         2.1          
+  news-only fit    PCC           0.93 [0.78, 1.02]      10.5    0.62          9.2         0.85            5.0         4.0          
+  news-only fit    PCC-Platt     0.59 [0.48, 0.67]      26.3    1.16          5.8         1.09            4.0         2.0          
+  news-only fit    ACC@prev      3.19 [2.42, 3.86]      15.8    5.18        104.4         5.33            6.0         1.8          
+  news-only fit    PACC          3.47 [2.69, 4.10]      31.6    6.25        131.4         6.29           11.0         4.7          
+  news-only fit    EM            5.24 [3.95, 6.15]      36.8   12.30        273.0        12.32           11.0         4.3          
+  news-only fit    RC@prev       1.60 [1.27, 1.97]       0.0    1.68         25.9         1.63            1.0         5.4      0.62
 
 Seed ensemble
-  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  RC slope
-  full fit         CC@t*         1.21 [0.94, 1.35]      15.8    0.95         36.8         1.69            5.0          
-  full fit         CC@prev       0.91 [0.75, 1.05]       0.0    0.65          0.1         0.61            0.0          
-  full fit         PCC-Platt     0.61 [0.50, 0.69]      21.1    1.12          4.3         0.99            4.0          
-  full fit         RC@prev       1.10 [0.85, 1.42]       0.0    0.82          6.0         0.79            0.0      0.83
-  news-only fit    CC@t*         1.21 [0.90, 1.34]      10.5    0.95         36.8         1.69            2.0          
-  news-only fit    CC@prev       0.92 [0.74, 1.05]       0.0    0.72          0.0         0.77            0.0          
-  news-only fit    PCC-Platt     0.58 [0.47, 0.67]      31.6    1.18          7.1         1.13            4.0          
-  news-only fit    RC@prev       1.44 [1.11, 1.80]       0.0    1.43         19.2         1.45            1.0      0.63
+  fit              rule                genre slope  biased %  MAE pp  total err %  prev MAE pp  biased values  news err %  RC slope
+  full fit         CC@t*         1.21 [0.94, 1.35]      15.8    0.95         36.8         1.69            5.0        38.6          
+  full fit         CC@prev       0.91 [0.75, 1.05]       0.0    0.65          0.1         0.61            0.0         1.1          
+  full fit         PCC           0.85 [0.72, 0.94]       5.3    0.74         10.3         0.80            5.0        12.0          
+  full fit         PCC-Platt     0.61 [0.50, 0.69]      21.1    1.12          4.3         0.99            4.0         0.0          
+  full fit         ACC@prev      2.50 [1.94, 3.05]      10.5    3.77         64.7         3.72            5.0         2.1          
+  full fit         PACC          2.92 [2.31, 3.42]      31.6    5.48        104.5         5.07           10.0        13.3          
+  full fit         EM            3.77 [2.93, 4.41]      31.6    9.15        190.1         8.71            9.0        14.7          
+  full fit         RC@prev       1.10 [0.85, 1.42]       0.0    0.82          6.0         0.79            0.0         0.1      0.83
+  news-only fit    CC@t*         1.21 [0.90, 1.34]      10.5    0.95         36.8         1.69            2.0        38.6          
+  news-only fit    CC@prev       0.92 [0.74, 1.05]       0.0    0.72          0.0         0.77            0.0         0.0          
+  news-only fit    PCC           0.85 [0.72, 0.94]       5.3    0.74         10.3         0.80            5.0        12.0          
+  news-only fit    PCC-Platt     0.58 [0.47, 0.67]      31.6    1.18          7.1         1.13            4.0         2.2          
+  news-only fit    ACC@prev      2.74 [2.08, 3.40]      21.1    4.14         84.5         4.46            7.0         5.1          
+  news-only fit    PACC          3.20 [2.49, 3.83]      31.6    5.91        126.3         6.03           10.0         2.9          
+  news-only fit    EM            4.26 [3.27, 5.03]      31.6   10.40        230.4        10.46            9.0         3.8          
+  news-only fit    RC@prev       1.44 [1.11, 1.80]       0.0    1.43         19.2         1.45            1.0         2.7      0.63
 
 ================================================================================================================
 C. LANGUAGE CONTRASTS WITHIN NEWS ONLY (full fit), next to all documents
@@ -116,42 +182,74 @@ Feature ensemble
   documents      rule             language slope  biased %  MAE pp  RC slope
   all documents  CC@t*         0.69 [0.58, 0.81]       0.7    1.32          
   all documents  CC@prev       0.58 [0.49, 0.67]       1.2    1.29          
+  all documents  PCC           0.50 [0.43, 0.57]       7.5    1.28          
   all documents  PCC-Platt     0.37 [0.31, 0.42]      11.1    1.41          
+  all documents  ACC@prev      1.60 [1.32, 1.85]       0.0    3.02          
+  all documents  PACC          1.73 [1.44, 1.96]       0.4    3.19          
+  all documents  EM            2.02 [1.65, 2.31]       0.0    3.91          
   all documents  RC@prev       0.90 [0.74, 1.13]       0.0    1.54      0.64
   news only      CC@t*         0.70 [0.57, 0.83]       0.7    1.38          
   news only      CC@prev       0.58 [0.49, 0.69]       0.7    1.34          
+  news only      PCC           0.51 [0.42, 0.59]       2.8    1.29          
   news only      PCC-Platt     0.38 [0.31, 0.44]       8.0    1.41          
+  news only      ACC@prev      1.58 [1.27, 1.85]       0.1    3.18          
+  news only      PACC          1.70 [1.37, 1.95]       0.9    3.30          
+  news only      EM            1.94 [1.54, 2.26]       0.3    3.89          
   news only      RC@prev       0.87 [0.71, 1.10]       0.0    1.59      0.67
 
 DeBERTa
   documents      rule             language slope  biased %  MAE pp  RC slope
   all documents  CC@t*         0.63 [0.55, 0.83]       0.7    1.34          
   all documents  CC@prev       0.52 [0.45, 0.62]       3.2    1.34          
+  all documents  PCC           0.48 [0.41, 0.55]       6.7    1.31          
   all documents  PCC-Platt     0.32 [0.27, 0.37]      13.2    1.47          
+  all documents  ACC@prev      1.53 [1.25, 1.78]       0.0    2.82          
+  all documents  PACC          1.66 [1.38, 1.89]       0.3    3.12          
+  all documents  EM            1.95 [1.57, 2.24]       0.4    3.73          
   all documents  RC@prev       0.87 [0.71, 1.10]       0.0    1.54      0.60
   news only      CC@t*         0.63 [0.54, 0.84]       0.7    1.39          
   news only      CC@prev       0.53 [0.44, 0.63]       1.8    1.37          
+  news only      PCC           0.49 [0.41, 0.57]       4.8    1.32          
   news only      PCC-Platt     0.33 [0.27, 0.39]       8.8    1.47          
+  news only      ACC@prev      1.51 [1.22, 1.79]       0.6    2.96          
+  news only      PACC          1.64 [1.32, 1.89]       1.5    3.21          
+  news only      EM            1.87 [1.45, 2.19]       1.0    3.65          
   news only      RC@prev       0.84 [0.69, 1.09]       0.0    1.58      0.63
 
 RoBERTa
   documents      rule             language slope  biased %  MAE pp  RC slope
   all documents  CC@t*         0.76 [0.63, 0.85]       0.6    1.27          
   all documents  CC@prev       0.53 [0.46, 0.61]       4.8    1.28          
+  all documents  PCC           0.48 [0.41, 0.55]       7.5    1.29          
   all documents  PCC-Platt     0.32 [0.27, 0.36]      11.8    1.46          
+  all documents  ACC@prev      1.63 [1.36, 1.87]       0.1    2.99          
+  all documents  PACC          1.77 [1.47, 1.97]       0.3    3.19          
+  all documents  EM            2.10 [1.70, 2.36]       0.6    4.10          
   all documents  RC@prev       0.88 [0.72, 1.09]       0.1    1.47      0.60
   news only      CC@t*         0.76 [0.62, 0.86]       0.6    1.31          
   news only      CC@prev       0.54 [0.45, 0.63]       2.2    1.30          
+  news only      PCC           0.49 [0.41, 0.56]       3.5    1.30          
   news only      PCC-Platt     0.33 [0.27, 0.37]       8.9    1.46          
+  news only      ACC@prev      1.61 [1.30, 1.87]       0.0    3.13          
+  news only      PACC          1.73 [1.39, 1.96]       0.3    3.25          
+  news only      EM            1.97 [1.55, 2.26]       0.1    3.95          
   news only      RC@prev       0.86 [0.69, 1.09]       0.0    1.50      0.63
 
 Seed ensemble
   documents      rule             language slope  biased %  MAE pp  RC slope
   all documents  CC@t*         0.69 [0.56, 0.80]       1.2    1.37          
   all documents  CC@prev       0.54 [0.46, 0.64]       0.6    1.35          
+  all documents  PCC           0.48 [0.41, 0.55]       6.7    1.31          
   all documents  PCC-Platt     0.34 [0.29, 0.39]      12.9    1.45          
+  all documents  ACC@prev      1.53 [1.26, 1.80]       0.0    3.06          
+  all documents  PACC          1.66 [1.37, 1.89]       0.3    3.10          
+  all documents  EM            1.94 [1.57, 2.24]       0.3    3.71          
   all documents  RC@prev       0.87 [0.71, 1.09]       0.0    1.58      0.62
   news only      CC@t*         0.69 [0.55, 0.81]       1.0    1.44          
   news only      CC@prev       0.55 [0.46, 0.66]       0.6    1.38          
+  news only      PCC           0.49 [0.41, 0.57]       4.8    1.32          
   news only      PCC-Platt     0.35 [0.29, 0.41]       8.8    1.45          
+  news only      ACC@prev      1.53 [1.23, 1.82]       0.0    3.20          
+  news only      PACC          1.64 [1.32, 1.89]       1.5    3.20          
+  news only      EM            1.86 [1.45, 2.19]       1.0    3.65          
   news only      RC@prev       0.85 [0.69, 1.09]       0.0    1.60      0.65

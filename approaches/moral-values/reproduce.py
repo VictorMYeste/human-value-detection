@@ -23,8 +23,8 @@ precision (CSV numbers at most one unit apart in the fourth decimal), or differe
 reference manifest unless asked to (--update-manifest); if there is none, it writes one.
 
 Usage (from this folder):
-    python3 reproduce.py                    # run everything (about 25 min on an Apple M1), then compare
-    python3 reproduce.py -j 4               # independent steps in parallel (the shift step alone takes ~16 min)
+    python3 reproduce.py                    # run everything (about 50 min on an Apple M1), then compare
+    python3 reproduce.py -j 4               # independent steps in parallel (the shift step alone takes ~30 min)
     python3 reproduce.py --steps shift,assets
     python3 reproduce.py --verify           # compare the files on disk with the manifest; run nothing
     python3 reproduce.py --update-manifest  # after an intended change: run, then record the new reference
@@ -66,10 +66,11 @@ class Step:
 
 STEPS = [
     # minutes: wall time on an Apple M1, steps run one at a time, 19 Nov 2026 (rules refitted on every
-    # validation resample since then; numpy may use several cores)
+    # validation resample; annotated-sample estimators and the extra shift-test rules added the same day;
+    # shift scaled from a parallel run, to be re-measured; numpy may use several cores)
     Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 0.3),
-    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 7.4),
-    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 15.6),
+    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 15.0),
+    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 31.0),
     Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.8),
     Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.1),
     Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.5),

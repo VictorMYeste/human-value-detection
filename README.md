@@ -332,8 +332,8 @@ This analysis asks how well classifier outputs measure **how often** each value 
 
    ```bash
    cd approaches/moral-values
-   python3 reproduce.py          # about 25 min (Apple M1)
-   python3 reproduce.py -j 4     # independent steps in parallel; the shift step alone takes about 16 min
+   python3 reproduce.py          # about 50 min (Apple M1)
+   python3 reproduce.py -j 4     # independent steps in parallel; the shift step alone takes about 30 min
    python3 reproduce.py --list   # the steps and what each produces
    ```
 

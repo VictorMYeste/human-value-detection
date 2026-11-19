@@ -1,0 +1,36 @@
+\begin{table*}[t]
+\caption{Error rates of the prevalence-matched decisions by genre and language (main system, \%)}
+\label{tab:error-rates}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Validation, tpr / fpr} & \multicolumn{2}{c}{Test, tpr / fpr} & \multicolumn{2}{c}{Test, range over languages} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+Value & Manifestos & News & Manifestos & News & tpr & fpr \\
+\midrule
+Self-direction: thought & 15 / 1.0 & 14 / 1.0 & 8 / 0.9 & 18 / 0.8 & 0--28 & 0.5--1.3 \\
+Self-direction: action & 38 / 3.2 & 25 / 2.4 & 35 / 3.1 & 22 / 2.5 & 0--34 & 1.6--3.8 \\
+Stimulation & 53 / 5.6 & 26 / 1.5 & 49 / 5.4 & 24 / 1.4 & 20--50 & 1.1--3.1 \\
+Hedonism & 0 / 0.0 & 29 / 0.5 & -- / 0.1 & 38 / 0.8 & 0--56 & 0.2--1.3 \\
+Achievement & 38 / 5.2 & 39 / 4.1 & 34 / 3.9 & 40 / 4.2 & 28--53 & 3.1--6.2 \\
+Power: dominance & 27 / 2.3 & 39 / 3.0 & 22 / 1.7 & 36 / 2.9 & 12--54 & 1.7--5.2 \\
+Power: resources & 32 / 6.7 & 34 / 3.0 & 40 / 5.4 & 41 / 3.4 & 20--48 & 2.2--6.8 \\
+Face & 50 / 0.7 & 29 / 1.5 & 33 / 0.3 & 27 / 1.3 & 17--33 & 0.8--2.0 \\
+Security: personal & 0 / 0.1 & 37 / 1.4 & 0 / 0.1 & 35 / 1.2 & 15--47 & 0.3--1.5 \\
+Security: societal & 43 / 6.3 & 46 / 4.9 & 51 / 5.9 & 46 / 5.3 & 34--60 & 3.0--10.6 \\
+Tradition & 44 / 0.7 & 47 / 1.0 & 71 / 0.7 & 48 / 0.6 & 7--65 & 0.1--2.3 \\
+Conformity: rules & 44 / 3.0 & 49 / 3.6 & 44 / 5.0 & 48 / 3.8 & 29--57 & 2.3--6.6 \\
+Conformity: interpersonal & 0 / 0.3 & 20 / 1.2 & 6 / 0.3 & 17 / 1.3 & 0--21 & 0.8--2.0 \\
+Humility & 0 / 0.2 & 11 / 0.3 & -- / 0.2 & 9 / 0.2 & 0--50 & 0.1--0.5 \\
+Benevolence: caring & 27 / 2.8 & 31 / 1.5 & 18 / 2.1 & 30 / 1.8 & 0--35 & 0.7--3.6 \\
+Benevolence: dependability & 16 / 1.3 & 28 / 1.4 & 21 / 1.3 & 28 / 1.1 & 22--42 & 0.5--1.8 \\
+Universalism: concern & 50 / 7.2 & 33 / 2.5 & 55 / 8.1 & 41 / 2.8 & 26--58 & 1.6--5.2 \\
+Universalism: nature & 68 / 4.2 & 53 / 0.8 & 74 / 2.4 & 52 / 0.8 & 49--73 & 0.5--2.2 \\
+Universalism: tolerance & 26 / 0.9 & 25 / 0.6 & 32 / 1.2 & 21 / 0.7 & 11--55 & 0.3--1.7 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize tpr: share of the sentences with the value that are labeled with it; fpr: share of those without it that are. --: no manifesto sentence with the value. Means of three training runs. Section~\ref{M-sec:res-acc} of the article correlates the manifesto--news gaps with the reference contrasts.\end{minipage}
+\end{table*}

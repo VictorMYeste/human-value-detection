@@ -5,7 +5,6 @@ Figures and tables for the TCSS manuscript (step 1.8 of paper/tcss-plan.md).
 Reads the outputs of the analysis scripts, which must be run first:
     threshold_schemes.py   -> results/classification-table.csv
     measurement_analysis.py-> results/measurement-summary.csv
-    shift_tests.py         -> results/shift-tests.csv
     llm_measurement.py     -> results/llm-measurement.csv
     worked_example.py      -> results/worked-example-values.csv, worked-example-summary.csv
 Figure 1 and Table 1 are computed here from the gold labels and the cached predictions,
@@ -13,8 +12,7 @@ with the bootstrap shared by every script.
 
 Writes to results/paper/:
     figures/fig1-prevalence.pdf   per-value prevalence bias of three decision rules (full width)
-    figures/fig3-shift.pdf        slopes when a language or genre is left out of the fit (column width)
-    figures/fig4-worked.pdf       worked example: manifesto-news differences (full width)
+    figures/fig4-worked.pdf       worked example: manifesto-news differences (full width; Fig. 2 of the article)
     tables/tab1-data.tex ... tab5-recommendations.tex   LaTeX tables (IEEEtran + booktabs)
     tables/tabS1-classification-full.tex                Table II with every system, for the supplement
 
@@ -155,42 +153,6 @@ def figure1_prevalence() -> None:
     style_axis(b)
     b.set_ylim(-0.7, len(VALUES) - 0.1)
     save(fig, "fig1-prevalence.pdf")
-    plt.close(fig)
-
-
-def figure3_shift(shift: pd.DataFrame) -> None:
-    """Contrast slopes with every group in the fit vs with a language or genre left out."""
-    rules = ["CC@t*", "CC@prev", "PCC-Platt", "SC@prev"]
-    s = shift[shift["system"] == MAIN].set_index(["scenario", "rule"])
-    panels = [("A full fit", "A leave-one-language-out", "(a) Language pairs; each language left out in turn"),
-              ("B full fit", "B news-only fit", "(b) Manifesto vs. news; fitted on news only")]
-    y = np.arange(len(rules))[::-1].astype(float)
-    fig, axes = new_figure(COL_W, 2.85, 2, 1, sharex=True)
-    for ax, (full, shifted, title) in zip(axes, panels):
-        ax.axvline(1, color=INK2, lw=0.7, zorder=1)
-        for i, r in enumerate(rules):
-            a, b = s.loc[(full, r)], s.loc[(shifted, r)]
-            ax.plot([a["slope"], b["slope"]], [y[i], y[i]], color=MUTED, lw=0.6, zorder=1)
-            ci_bar(ax, a["slope"], a["slope_lo"], a["slope_hi"], y[i] + 0.17, INK2, "o", filled=False)
-            ci_bar(ax, b["slope"], b["slope_lo"], b["slope_hi"], y[i] - 0.17, BLUE, "o")
-        ax.set_yticks(y, [LABEL[r] for r in rules])
-        for t, r in zip(ax.get_yticklabels(), rules):
-            if r in RECOMMENDED:
-                t.set_fontweight("bold")
-        ax.set_title(title, loc="left")
-        ax.set_ylim(-0.6, len(rules) - 0.4)
-        style_axis(ax)
-    b = s.loc[("B news-only fit", "SC@prev")]
-    axes[1].annotate("slope borrowed from\nlanguage pairs", xy=(b["slope"], y[-1] - 0.17),
-                     xytext=(1.45, y[-1] + 1.4), fontsize=6.5, color=INK2, va="center",
-                     arrowprops={"arrowstyle": "-", "color": MUTED, "lw": 0.5})
-    fig.legend(handles=[Line2D([], [], color=INK2, marker="o", ms=3.6, mfc="white", lw=0.8,
-                               label="every group in the fit"),
-                        Line2D([], [], color=BLUE, marker="o", ms=3.6, lw=0.8, label="group left out of the fit")],
-               loc="outside upper center", ncol=2, handletextpad=0.3, columnspacing=1.2)
-    axes[1].set_xlim(0.2, 2.0)
-    axes[1].set_xlabel("Attenuation slope (1 = differences keep their size)")
-    save(fig, "fig3-shift.pdf")
     plt.close(fig)
 
 
@@ -459,12 +421,10 @@ def main() -> None:
     TAB.mkdir(parents=True, exist_ok=True)
     summary = pd.read_csv(RES / "measurement-summary.csv").set_index(["system", "rule"])
     llm = pd.read_csv(RES / "llm-measurement.csv").set_index(["system", "estimator"])
-    shift = pd.read_csv(RES / "shift-tests.csv")
     worked_values = pd.read_csv(RES / "worked-example-values.csv")
     worked_summary = pd.read_csv(RES / "worked-example-summary.csv")
 
     figure1_prevalence()
-    figure3_shift(shift)
     figure4_worked(worked_values)
     table1_data()
     table2_classification(llm)

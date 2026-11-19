@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\caption{Each source language left out of the fit in turn (main system)}
+\label{tab:lolo}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccccc@{}}
+\toprule
+ & & \multicolumn{2}{c}{Slope of its contrasts} & \multicolumn{2}{c}{MAE (pp)} & \multicolumn{2}{c}{Total error (\%)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}
+Left-out language & Fitted slope & CC [95\% CI] & SC [95\% CI] & CC & SC & CC & SC \\
+\midrule
+Bulgarian & 0.64 & 0.55 [0.42, 0.71] & 0.86 [0.62, 1.15] & 1.32 & 1.60 & 16.9 & 13.9 \\
+German & 0.64 & 0.62 [0.48, 0.74] & 0.97 [0.74, 1.24] & 1.03 & 1.23 & 10.0 & 12.7 \\
+Greek & 0.64 & 0.58 [0.47, 0.71] & 0.91 [0.70, 1.16] & 1.31 & 1.59 & 3.4 & 4.0 \\
+English & 0.67 & 0.62 [0.54, 0.72] & 0.93 [0.76, 1.15] & 1.20 & 1.26 & 51.2 & 25.1 \\
+French & 0.68 & 0.36 [0.27, 0.55] & 0.53 [0.39, 0.84] & 1.52 & 1.70 & 48.0 & 44.6 \\
+Hebrew & 0.43 & 0.69 [0.56, 0.81] & 1.57 [1.10, 1.88] & 1.44 & 3.02 & 5.8 & 41.6 \\
+Italian & 0.72 & 0.40 [0.27, 0.59] & 0.55 [0.37, 0.88] & 1.85 & 2.01 & 9.5 & 6.1 \\
+Dutch & 0.63 & 0.63 [0.54, 0.73] & 1.00 [0.81, 1.24] & 1.05 & 1.27 & 17.3 & 5.7 \\
+Turkish & 0.62 & 0.70 [0.57, 0.80] & 1.12 [0.87, 1.35] & 0.97 & 1.33 & 4.6 & 7.0 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize Thresholds and slope are fitted on the validation documents of the other eight languages. Fitted slope: the validation slope of language-pair contrasts without the language, which SC divides by. Slope and MAE over the 152 contrasts between the left-out language and the other eight; total error: of the left-out language's value mentions. CC: prevalence-matched thresholds; SC: slope correction of the same counts. Means of three training runs.\end{minipage}
+\end{table*}

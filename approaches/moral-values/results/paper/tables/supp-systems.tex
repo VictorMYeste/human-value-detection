@@ -8,22 +8,26 @@
 \toprule
  & \multicolumn{5}{c}{DeBERTa} & \multicolumn{5}{c}{RoBERTa} & \multicolumn{5}{c}{Seed ensemble} \\
 \cmidrule(lr){2-6}\cmidrule(lr){7-11}\cmidrule(l){12-16}
-Method & Ratio & G.\ slope & G.\ bias & L.\ slope & L.\ bias & Ratio & G.\ slope & G.\ bias & L.\ slope & L.\ bias & Ratio & G.\ slope & G.\ bias & L.\ slope & L.\ bias \\
+Method & Ratio & G.\ slope & G.\ cover & L.\ slope & L.\ cover & Ratio & G.\ slope & G.\ cover & L.\ slope & L.\ cover & Ratio & G.\ slope & G.\ cover & L.\ slope & L.\ cover \\
 \midrule
-CC, $t = 0.5$ & 0.69$^\dagger$ & 0.74 & 5 & 0.39 & 12.0 & 0.71$^\dagger$ & 0.78 & 11 & 0.41 & 10.8 & 0.64$^\dagger$ & 0.70 & 5 & 0.38 & 11.5 \\
-CC, macro-F1 $t^*$ & 1.24$^\dagger$ & 1.09 & 5 & 0.63 & 0.7 & 1.53$^\dagger$ & 1.42 & 37 & 0.76 & 0.6 & 1.38$^\dagger$ & 1.21 & 16 & 0.69 & 1.2 \\
-CC, per-label F1 $t_j$ & 1.35$^\dagger$ & 1.10 & 0 & 0.65 & 2.2 & 1.49$^\dagger$ & 1.29 & 0 & 0.72 & 0.7 & 1.31$^\dagger$ & 0.98 & 0 & 0.62 & 1.2 \\
-CC, prevalence-matched & 1.00 & 0.93 & 0 & 0.52 & 3.2 & 0.99 & 0.98 & 0 & 0.53 & 4.8 & 1.01 & 0.91 & 0 & 0.54 & 0.6 \\
-PCC, raw & 1.12$^\dagger$ & 0.85 & 5 & 0.48 & 6.7 & 1.05$^\dagger$ & 0.93 & 11 & 0.48 & 7.5 & 1.12$^\dagger$ & 0.85 & 5 & 0.48 & 6.7 \\
-PCC, Platt & 1.00 & 0.58 & 26 & 0.32 & 13.2 & 1.00 & 0.62 & 26 & 0.32 & 11.8 & 0.99 & 0.61 & 21 & 0.34 & 12.9 \\
-ACC, $t^*$ & 0.99 & 2.71 & 21 & 1.58 & 0.3 & 0.98 & 3.33 & 32 & 1.82 & 0.4 & 0.98 & 2.81 & 26 & 1.60 & 0.4 \\
-ACC, prevalence-matched & 1.02 & 2.65 & 21 & 1.53 & 0.0 & 0.98 & 2.85 & 16 & 1.63 & 0.1 & 1.05 & 2.50 & 11 & 1.53 & 0.0 \\
-PACC & 0.99 & 2.92 & 32 & 1.66 & 0.3 & 0.97 & 3.15 & 32 & 1.77 & 0.3 & 0.99 & 2.92 & 32 & 1.66 & 0.3 \\
-EM & 0.99 & 3.78 & 32 & 1.95 & 0.4 & 0.97 & 4.53 & 37 & 2.10 & 0.6 & 0.98 & 3.77 & 32 & 1.94 & 0.3 \\
-ACC-G, prevalence-matched & 1.02 & 1.11 & 0 & 1.06 & 0.0 & 0.98 & 0.91 & 0 & 1.17 & 0.0 & 1.05 & 1.13 & 0 & 1.16 & 0.1 \\
-SC, prevalence-matched & 1.00 & 1.10 & 0 & 0.87 & 0.0 & 0.99 & 1.03 & 0 & 0.88 & 0.1 & 1.01 & 1.10 & 0 & 0.87 & 0.0 \\
+CC, $t = 0.5$ & 0.69$^\dagger$ & 0.74 & 79 & 0.39 & 73 & 0.71$^\dagger$ & 0.78 & 84 & 0.41 & 74 & 0.64$^\dagger$ & 0.70 & 79 & 0.38 & 74 \\
+CC, macro-F1 $t^*$ & 1.24$^\dagger$ & 1.09 & 84 & 0.63 & 82 & 1.53$^\dagger$ & 1.42 & 58 & 0.76 & 84 & 1.38$^\dagger$ & 1.21 & 68 & 0.69 & 82 \\
+CC, per-label F1 $t_j$ & 1.35$^\dagger$ & 1.10 & 84 & 0.65 & 81 & 1.49$^\dagger$ & 1.29 & 79 & 0.72 & 86 & 1.31$^\dagger$ & 0.98 & 95 & 0.62 & 85 \\
+CC, prevalence-matched & 1.00 & 0.93 & 95 & 0.52 & 78 & 0.99 & 0.98 & 100 & 0.53 & 80 & 1.01 & 0.91 & 95 & 0.54 & 80 \\
+PCC, raw & 1.12$^\dagger$ & 0.85 & 79 & 0.48 & 74 & 1.05$^\dagger$ & 0.93 & 68 & 0.48 & 76 & 1.12$^\dagger$ & 0.85 & 79 & 0.48 & 74 \\
+PCC, Platt & 1.00 & 0.58 & 63 & 0.32 & 70 & 1.00 & 0.62 & 68 & 0.32 & 72 & 0.99 & 0.61 & 63 & 0.34 & 70 \\
+ACC, $t^*$ & 0.99 & 2.71 & 79 & 1.58 & 89 & 0.98 & 3.33 & 58 & 1.82 & 87 & 0.98 & 2.81 & 74 & 1.60 & 90 \\
+ACC, prevalence-matched & 1.02 & 2.65 & 74 & 1.53 & 90 & 0.98 & 2.85 & 68 & 1.63 & 89 & 1.05 & 2.50 & 74 & 1.53 & 93 \\
+PACC & 0.99 & 2.92 & 63 & 1.66 & 87 & 0.97 & 3.15 & 58 & 1.77 & 86 & 0.99 & 2.92 & 63 & 1.66 & 86 \\
+EM & 0.99 & 3.78 & 63 & 1.95 & 85 & 0.97 & 4.53 & 58 & 2.10 & 83 & 0.98 & 3.77 & 63 & 1.94 & 86 \\
+ACC-G, prevalence-matched & 1.02 & 1.11 & 100 & 1.06 & 98 & 0.98 & 0.91 & 100 & 1.17 & 99 & 1.05 & 1.13 & 100 & 1.16 & 98 \\
+SC, prevalence-matched & 1.00 & 1.10 & 95 & 0.87 & 88 & 0.99 & 1.03 & 100 & 0.88 & 88 & 1.01 & 1.10 & 95 & 0.87 & 89 \\
+Annotated share & 1.00 & -- & 95 & -- & 95 & 1.00 & -- & 95 & -- & 95 & 1.00 & -- & 95 & -- & 95 \\
+PPI, prevalence-matched & 1.00 & -- & 100 & -- & 96 & 0.99 & -- & 100 & -- & 97 & 1.01 & -- & 100 & -- & 96 \\
+PPI, Platt & 1.00 & -- & 95 & -- & 95 & 1.00 & -- & 95 & -- & 96 & 0.99 & -- & 95 & -- & 95 \\
+Platt per group & 1.00 & -- & 95 & -- & 96 & 1.00 & -- & 95 & -- & 96 & 0.99 & -- & 95 & -- & 96 \\
 \bottomrule
 \end{tabular*}
 \par\vspace{2pt}
-\begin{minipage}{\textwidth}\scriptsize Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. G.: the 19 manifesto--news contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope. Bias: share of contrasts whose error differs from zero (\%, Benjamini--Hochberg $q < 0.05$). DeBERTa and RoBERTa: means of three training runs; seed ensemble: one system. The main system is in Table~\ref{M-tab:measurement} of the article.\end{minipage}
+\begin{minipage}{\textwidth}\scriptsize Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. G.: the 19 manifesto--news contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope, not shown for the estimates from each group's annotated documents (Section~\ref{M-sec:metrics} of the article). Cover: share of totals or contrasts whose error is within sampling noise (\%, paired document bootstrap, $p \geq 0.05$), about 95 for an unbiased method. DeBERTa and RoBERTa: means of three training runs; seed ensemble: one system. The main system is in Table~\ref{M-tab:measurement} of the article.\end{minipage}
 \end{table*}

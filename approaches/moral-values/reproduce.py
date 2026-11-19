@@ -72,14 +72,14 @@ STEPS = [
     # minutes: wall time on an Apple M1 with one BLAS thread per step, 19 Nov 2026 (rules refitted on
     # every validation resample, annotated-sample estimators, extra shift-test rules, subsampling)
     Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 0.3),
-    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 10.7),
-    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 21.5),
-    Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.8),
+    Step("measurement", "measurement_analysis.py", "Table III, Fig. 1: prevalence, contrasts, error rates", 10.7),
+    Step("shift", "shift_tests.py", "Tables S13-S14: a language or genre left out of the fit", 21.5),
+    Step("llm", "llm_measurement.py", "Table II, Table S17: LLM labels used as counts", 0.8),
     Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.1),
-    Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.5),
-    Step("subsample", "subsample_validation.py", "Supplement: how large the annotated sample must be", 4.6),
-    Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.4, final=True),
-    Step("supplement", "supplement_assets.py", "Supplement: Tables S1-S13 and Figures S1-S2", 0.3, final=True),
+    Step("worked", "worked_example.py", "Fig. 2, Tables S10-S11: manifesto vs. news", 0.5),
+    Step("subsample", "subsample_validation.py", "Table S15: how large the annotated sample must be", 4.6),
+    Step("assets", "paper_assets.py", "Figures 1-2 (PDF), Tables I-IV, S5 and S10 (LaTeX)", 0.4, final=True),
+    Step("supplement", "supplement_assets.py", "Supplement: the other S tables and Figures S1-S2", 0.3, final=True),
 ]
 BY_NAME = {s.name: s for s in STEPS}
 

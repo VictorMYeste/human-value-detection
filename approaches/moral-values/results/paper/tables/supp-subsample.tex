@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\caption{Accuracy by size of the annotated sample: every method refitted on random subsamples of the validation documents (main system)}
+\label{tab:subsample}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccccccccccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Corpus total (\%)} & \multicolumn{2}{c}{Languages (\%)} & \multicolumn{4}{c}{Language pairs, MAE} & \multicolumn{3}{c}{Large differences, MAE} & \multicolumn{2}{c}{Genre, MAE} & \multicolumn{3}{c}{Detected (\%)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-9}\cmidrule(lr){10-12}\cmidrule(lr){13-14}\cmidrule(lr){15-17}
+Annotated documents (sentences) & $t^*$ & CC & CC & PPI & CC & SC & PPI & P-G & CC & SC & PPI & CC & PPI & CC & SC & PPI \\
+\midrule
+25 (723) & 31.1 & 7.6 & 18.0 & 16.5 & 1.35 & 1.68 & 3.00 & 3.33 & 2.26 & 2.12 & 4.03 & 0.86 & 2.45 & 37 & 36 & 17 \\
+50 (1,432) & 35.4 & 4.4 & 17.0 & 12.5 & 1.32 & 1.67 & 2.27 & 2.40 & 2.26 & 2.03 & 2.94 & 0.72 & 1.92 & 44 & 42 & 21 \\
+100 (2,848) & 27.5 & 3.1 & 16.7 & 8.7 & 1.30 & 1.56 & 1.71 & 1.76 & 2.26 & 1.92 & 2.18 & 0.68 & 1.42 & 49 & 45 & 36 \\
+200 (5,704) & 27.4 & 1.5 & 16.7 & 6.5 & 1.30 & 1.56 & 1.34 & 1.33 & 2.26 & 1.86 & 1.72 & 0.64 & 1.11 & 51 & 50 & 60 \\
+523 (14,904) & 27.5 & 1.0 & 16.5 & 3.6 & 1.29 & 1.54 & 0.94 & 0.90 & 2.25 & 1.83 & 1.19 & 0.62 & 0.76 & 52 & 52 & 87 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize Medians over 100 random subsamples of each size; detection is the mean over 20 of them, each with 50 bootstrap resamples. Manifestos (about 11\% of the documents, at least two) and news (at least two per language, the rest in proportion to each language's size) are drawn separately. The last row is the full validation split, about 58 documents per language. Corpus total and languages: error of the total value mentions, \%, for the corpus and on average over the nine languages. MAE in percentage points over the 684 language-pair contrasts, the 126 that are significant in the reference (large differences) and the 19 manifesto--news contrasts. Detected: share of the 126 found significant with the reference's sign (single test). CC: prevalence-matched thresholds; $t^*$: macro-F1 threshold; SC: slope correction; PPI: prediction-powered estimate with Platt-scaled probabilities; P-G: Platt per group.\end{minipage}
+\end{table*}

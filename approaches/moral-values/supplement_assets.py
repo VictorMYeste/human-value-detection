@@ -10,6 +10,9 @@ script last), together with the gold labels and the cached predictions:
     shift_tests.py           -> results/shift-tests.csv
     llm_measurement.py       -> results/llm-measurement.csv
     worked_example.py        -> results/worked-example-values.csv
+    subsample_validation.py  -> results/subsample-validation.csv
+    shift_tests.py           -> results/shift-lolo-languages.csv
+    measurement_analysis.py  -> results/measurement-error-rates.csv
     ../llm_moral-values/output/<prompt>/<model>-val-results.txt
                                 validation macro-F1 logged by each LLM run. The log is read
                                 rather than the prediction file because one prediction file
@@ -27,6 +30,10 @@ Writes to results/paper/ (the paper's own tables and figures come from paper_ass
     tables/supp-worked-values.tex     the 19 manifesto-news differences under each method
     tables/supp-shift.tex             shift tests for every supervised system
     tables/supp-llm.tex               LLM labels with each correction
+    tables/supp-subsample.tex         accuracy by size of the annotated sample (subsample_validation.py)
+    tables/supp-lolo.tex              each language left out of the fit (shift_tests.py)
+    tables/supp-composition.tex       language contrasts on value composition
+    tables/supp-error-rates.tex       tpr and fpr per value by genre, validation and test
     figures/figS1-reliability.pdf     reliability diagram of the main system
     figures/figS2-language-contrasts.pdf   the 684 language contrasts, estimated against reference
 
@@ -82,7 +89,14 @@ SHOTS = [1, 2, 4, 8, 12, 16, 20]
 LLM_SYSTEMS = {"Gemma-2-9B few-shot + gate": "Gemma few-shot + gate", "Gemma-2-9B few-shot": "Gemma few-shot",
                "Gemma-2-9B QLoRA": "Gemma QLoRA", "LLM ensemble (hard vote)": "LLM union"}
 ALL_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev", "PCC", "PCC-Platt", "ACC@t*", "ACC@prev", "PACC", "EM",
-             "ACC-G@prev", "SC@prev"]
+             "ACC-G@prev", "SC@prev", "Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"]
+COVER_NOTE = (r"Cover: share of totals or contrasts whose error is within sampling noise (\%, paired document "
+              r"bootstrap, $p \geq 0.05$), about 95 for an unbiased method.")
+
+
+def slope_or_dash(x: float) -> str:
+    """Slopes are not reported for the estimators from each group's annotated documents (article, Section V-D)."""
+    return "--" if pd.isna(x) else f"{x:.2f}"
 
 
 # ============================================================================ formatting
@@ -347,20 +361,21 @@ def table_systems() -> None:
         cells = []
         for s in OTHERS:
             x = m.loc[(s, r)]
-            cells += [excl1(x.ratio, x.ratio_lo, x.ratio_hi), f"{x.genre_slope:.2f}", f"{x.genre_biased:.0f}",
-                      f"{x.lpair_slope:.2f}", f"{x.lpair_biased:.1f}"]
+            cells += [excl1(x.ratio, x.ratio_lo, x.ratio_hi), slope_or_dash(x.genre_slope), f"{x.genre_cover:.0f}",
+                      slope_or_dash(x.lpair_slope), f"{x.lpair_cover:.0f}"]
         rows.append(f"{LABEL[r]} & " + " & ".join(cells) + r" \\")
     head = " & ".join(rf"\multicolumn{{5}}{{c}}{{{s}}}" for s in OTHERS)
     write_table("supp-systems.tex", table(
         "table*", "Measurement with the other supervised systems: totals, manifesto--news contrasts and "
                   "language-pair contrasts", "tab:systems", r"@{}l ccccc ccccc ccccc@{}",
         rf" & {head} \\" "\n" r"\cmidrule(lr){2-6}\cmidrule(lr){7-11}\cmidrule(l){12-16}"
-        "\n" r"Method & " + " & ".join(["Ratio", "G.\\ slope", "G.\\ bias", "L.\\ slope", "L.\\ bias"] * 3) + r" \\",
+        "\n" r"Method & " + " & ".join(["Ratio", "G.\\ slope", "G.\\ cover", "L.\\ slope", "L.\\ cover"] * 3) + r" \\",
         rows,
         r"Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. G.: the 19 manifesto--news "
-        r"contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope. Bias: share of contrasts whose "
-        r"error differs from zero (\%, Benjamini--Hochberg $q < 0.05$). DeBERTa and RoBERTa: means of three "
-        r"training runs; seed ensemble: one system. The main system is in Table~\ref{M-tab:measurement} of the article.",
+        r"contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope, not shown for the estimates from "
+        r"each group's annotated documents (Section~\ref{M-sec:metrics} of the article). " + COVER_NOTE + r" DeBERTa "
+        r"and RoBERTa: means of three training runs; seed ensemble: one system. The main system is in "
+        r"Table~\ref{M-tab:measurement} of the article.",
         size=r"\scriptsize", colsep="2.5pt"))
 
 
@@ -432,20 +447,22 @@ def table_shift() -> None:
         wn_cc, wn_sc = get("C news only", "CC@prev"), get("C news only", "SC@prev")
         name = r"\textbf{Feature ensemble}" if sysname == MAIN else sysname
         rows.append(" & ".join([
-            name, f"{lo_cc.slope:.2f}", interval(lo_sc.slope, lo_sc.slope_lo, lo_sc.slope_hi), f"{lo_sc.biased:.1f}",
-            f"{lo_cc.total_err:.1f}", f"{nw_cc.slope:.2f}", interval(nw_sc.slope, nw_sc.slope_lo, nw_sc.slope_hi),
-            f"{nw_sc.biased:.0f}", f"{wn_cc.slope:.2f}", f"{wn_sc.slope:.2f}"]) + r" \\")
+            name, f"{lo_cc.slope:.2f}", interval(lo_sc.slope, lo_sc.slope_lo, lo_sc.slope_hi),
+            f"{lo_cc.mae:.2f} / {lo_sc.mae:.2f}", f"{lo_cc.total_err:.1f}", f"{nw_cc.slope:.2f}",
+            interval(nw_sc.slope, nw_sc.slope_lo, nw_sc.slope_hi), f"{nw_cc.mae:.2f} / {nw_sc.mae:.2f}",
+            f"{wn_cc.slope:.2f}", f"{wn_sc.slope:.2f}"]) + r" \\")
     write_table("supp-shift.tex", table(
         "table*", "Shift tests for every supervised system", "tab:shift", r"@{}l cccc ccc cc@{}",
         r" & \multicolumn{4}{c}{(a) One language left out of the fit} & \multicolumn{3}{c}{(b) Fitted on news only} "
         r"& \multicolumn{2}{c}{(c) Within news} \\"
         "\n" r"\cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(l){9-10}"
-        "\n" r"System & CC slope & SC slope [95\% CI] & SC bias (\%) & CC total err.\ (\%) & CC slope & "
-        r"SC slope [95\% CI] & SC bias (\%) & CC slope & SC slope \\", rows,
+        "\n" r"System & CC slope & SC slope [95\% CI] & MAE CC / SC & CC total err.\ (\%) & CC slope & "
+        r"SC slope [95\% CI] & MAE CC / SC & CC slope & SC slope \\", rows,
         r"CC: prevalence-matched thresholds; SC: slope correction on the same counts. (a) Thresholds and "
         r"slope fitted without the language whose contrasts are estimated (contrasts of that language with the "
         r"other eight, pooled over languages); total err.: mean absolute error of the left-out language's value "
-        r"mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with SC borrowing the "
+        r"mentions. MAE: mean absolute error of the contrasts, percentage points. "
+        r"(b) Rules fitted on news validation documents; manifesto--news contrasts, with SC borrowing the "
         r"language slope. (c) Language-pair contrasts within news documents. Means of three training runs (seed "
         r"ensemble: one system).", size=r"\scriptsize", colsep="3pt"))
 
@@ -458,24 +475,146 @@ def table_llm() -> None:
             x = m.loc[(s, e)]
             f1 = "--" if pd.isna(x.macro_f1) else f"{x.macro_f1:.3f}"
             rows.append(" & ".join([
-                f"{name}, {e}", f1, excl1(x.ratio, x.ratio_lo, x.ratio_hi), f"{x.mae:.2f}", f"{x.under:.0f} / {x.over:.0f}",
-                interval(x.genre_slope, x.genre_slope_lo, x.genre_slope_hi), f"{x.genre_biased:.0f}",
-                f"{x.genre_reversed:.0f}", interval(x.lpair_slope, x.lpair_slope_lo, x.lpair_slope_hi),
-                f"{x.lpair_biased:.1f}", f"{x.lpair_reversed:.1f}", f"{x.rho:.2f}"]) + r" \\")
+                f"{name}, {e}", f1, excl1(x.ratio, x.ratio_lo, x.ratio_hi), f"{x.mae:.2f}", f"{x.cover:.0f}",
+                interval(x.genre_slope, x.genre_slope_lo, x.genre_slope_hi), f"{x.genre_mae:.2f}",
+                f"{x.genre_cover:.0f}", f"{x.genre_reversed:.0f}",
+                interval(x.lpair_slope, x.lpair_slope_lo, x.lpair_slope_hi), f"{x.lpair_mae:.2f}",
+                f"{x.lpair_cover:.0f}", f"{x.lpair_reversed:.1f}"]) + r" \\")
         if s != list(LLM_SYSTEMS)[-1]:
             rows.append(r"\addlinespace")
     write_table("supp-llm.tex", table(
-        "table*", "LLM labels used as counts, with each correction", "tab:llm", r"@{}lccccccccccc@{}",
-        r" & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{3}{c}{Manifesto vs.\ news} & "
+        "table*", "LLM labels used as counts, with each correction", "tab:llm", r"@{}lcccccccccccc@{}",
+        r" & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{4}{c}{Manifesto vs.\ news} & "
         r"\multicolumn{4}{c}{Language pairs} \\"
-        "\n" r"\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(l){9-12}"
-        "\n" r"System, estimator & Macro-F1 & Ratio & MAE & Under / over & Slope [95\% CI] & Bias (\%) & Rev.\ (\%) "
-        r"& Slope [95\% CI] & Bias (\%) & Rev.\ (\%) & Rank $\rho$ \\", rows,
+        "\n" r"\cmidrule(lr){3-5}\cmidrule(lr){6-9}\cmidrule(l){10-13}"
+        "\n" r"System, estimator & Macro-F1 & Ratio & MAE & Cover & Slope [95\% CI] & MAE & Cover & Rev.\ (\%) "
+        r"& Slope [95\% CI] & MAE & Cover & Rev.\ (\%) \\", rows,
         r"Single runs. CC: the labels as returned; ACC: adjusted with error rates measured on validation; SC: "
         r"contrasts divided by the validation slope. Ratio: estimated over reference value mentions, $^\dagger$ "
-        r"95\% CI excludes 1. MAE in percentage points over the 19 values. Rev.: share of the significant "
-        r"reference contrasts that the method finds significant with the opposite sign. Other columns as in "
-        r"Table~\ref{M-tab:measurement} of the article.", size=r"\scriptsize", colsep="2.5pt"))
+        r"95\% CI excludes 1. MAE: mean absolute error in percentage points, over the 19 values or the contrasts. "
+        + COVER_NOTE + r" Rev.: share of the significant reference contrasts that the method finds significant "
+        r"with the opposite sign (Benjamini--Hochberg $q < 0.05$).", size=r"\scriptsize", colsep="2.5pt"))
+
+
+# ============================================================================ step 5.2: new analyses
+def table_subsample() -> None:
+    """Accuracy of each estimator when it is fitted on fewer annotated documents (medians over 100 subsamples)."""
+    d = pd.read_csv(RES / "subsample-validation.csv", dtype={"size": str}).set_index(["size", "rule"])
+    sizes = ["25", "50", "100", "200", "all"]
+    cols = [("Corpus total (\\%)", "total_err", ["CC@t*", "CC@prev"], 1),
+            ("Languages (\\%)", "lang_total_err", ["CC@prev", "PPI-Platt"], 1),
+            ("Language pairs, MAE", "lpair_mae", ["CC@prev", "SC@prev", "PPI-Platt", "Platt-G"], 2),
+            ("Large differences, MAE", "lpair_mae_refsig", ["CC@prev", "SC@prev", "PPI-Platt"], 2),
+            ("Genre, MAE", "genre_mae", ["CC@prev", "PPI-Platt"], 2),
+            ("Detected (\\%)", "lpair_detected", ["CC@prev", "SC@prev", "PPI-Platt"], 0)]
+    rows = []
+    for z in sizes:
+        x = d.loc[(z, "CC@prev")]
+        cells = [f"{x.docs:.0f} ({x.sentences:,.0f})"]
+        for _, k, rules, nd in cols:
+            cells += [f"{d.loc[(z, r), k]:.{nd}f}" for r in rules]
+        rows.append(" & ".join(cells) + r" \\")
+    short = {"CC@t*": "$t^*$", "CC@prev": "CC", "SC@prev": "SC", "PPI-Platt": "PPI", "Platt-G": "P-G"}
+    head1 = " & ".join(rf"\multicolumn{{{len(rs)}}}{{c}}{{{t}}}" for t, _, rs, _ in cols)
+    spans, start = [], 2
+    for _, _, rs, _ in cols:
+        spans.append(rf"\cmidrule(lr){{{start}-{start + len(rs) - 1}}}")
+        start += len(rs)
+    rule_heads = " & ".join(short[r] for _, _, rs, _ in cols for r in rs)
+    write_table("supp-subsample.tex", table(
+        "table*", "Accuracy by size of the annotated sample: every method refitted on random subsamples of the "
+                  "validation documents (main system)", "tab:subsample",
+        "@{}l" + "c" * sum(len(rs) for _, _, rs, _ in cols) + "@{}",
+        rf" & {head1} \\" + "\n" + "".join(spans) + "\n" + rf"Annotated documents (sentences) & {rule_heads} \\",
+        rows,
+        r"Medians over 100 random subsamples of each size; detection is the mean over 20 of them, each with 50 "
+        r"bootstrap resamples. Manifestos (about 11\% of the documents, at least two) and news (at least two per "
+        r"language, the rest in proportion to each language's size) are drawn separately. The last row is the full "
+        r"validation split, about 58 documents per language. Corpus total and languages: error of the total value "
+        r"mentions, \%, for the corpus and on average over the nine languages. MAE in percentage points over the "
+        r"684 language-pair contrasts, the 126 that are significant in the reference (large differences) and the "
+        r"19 manifesto--news contrasts. Detected: share of the 126 found significant with the reference's sign "
+        r"(single test). CC: prevalence-matched thresholds; $t^*$: macro-F1 threshold; SC: slope correction; PPI: "
+        r"prediction-powered estimate with Platt-scaled probabilities; P-G: Platt per group.",
+        size=r"\scriptsize", colsep="3pt"))
+
+
+def table_lolo() -> None:
+    """Each language left out of the fit in turn: prevalence-matched counts and the slope correction."""
+    d = pd.read_csv(RES / "shift-lolo-languages.csv")
+    d = d[(d.system == MAIN) & (d.fit == "leave-one-language-out")].set_index(["rule", "language"])
+    rows = []
+    for code, name in LANGUAGES.items():
+        cc, sc = d.loc[("CC@prev", code)], d.loc[("SC@prev", code)]
+        rows.append(" & ".join([
+            name, f"{cc.fitted_slope:.2f}", interval(cc.contrast_slope, cc.contrast_slope_lo, cc.contrast_slope_hi),
+            interval(sc.contrast_slope, sc.contrast_slope_lo, sc.contrast_slope_hi), f"{cc.mae:.2f}", f"{sc.mae:.2f}",
+            f"{cc.total_err:.1f}", f"{sc.total_err:.1f}"]) + r" \\")
+    write_table("supp-lolo.tex", table(
+        "table*", "Each source language left out of the fit in turn (main system)", "tab:lolo", "@{}lccccccc@{}",
+        r" & & \multicolumn{2}{c}{Slope of its contrasts} & \multicolumn{2}{c}{MAE (pp)} & "
+        r"\multicolumn{2}{c}{Total error (\%)} \\" + "\n" + r"\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}"
+        + "\n" + r"Left-out language & Fitted slope & CC [95\% CI] & SC [95\% CI] & CC & SC & CC & SC \\", rows,
+        r"Thresholds and slope are fitted on the validation documents of the other eight languages. Fitted slope: "
+        r"the validation slope of language-pair contrasts without the language, which SC divides by. Slope and MAE "
+        r"over the 152 contrasts between the left-out language and the other eight; total error: of the left-out "
+        r"language's value mentions. CC: prevalence-matched thresholds; SC: slope correction of the same counts. "
+        r"Means of three training runs.", size=r"\scriptsize", colsep="3pt"))
+
+
+def table_composition() -> None:
+    """Language contrasts on value composition, which removes the teams' differences in labeling rate."""
+    m = pd.read_csv(RES / "measurement-summary.csv").set_index(["system", "rule"])
+    rules = ["CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "SC@prev", "Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"]
+    rows = []
+    for r in rules:
+        x = m.loc[(MAIN, r)]
+        slope = "--" if pd.isna(x.comp_slope) else interval(x.comp_slope, x.comp_slope_lo, x.comp_slope_hi)
+        rows.append(" & ".join([LABEL[r], slope, f"{x.comp_mae:.2f}", f"{x.comp_cover:.0f}", f"{x.comp_detected:.0f}",
+                                slope_or_dash(x.lpair_slope), f"{x.lpair_mae:.2f}"]) + r" \\")
+    write_table("supp-composition.tex", table(
+        "table*", "Language-pair contrasts on value composition, each value's share of all value mentions in the "
+                  "language (main system)", "tab:composition", "@{}lcccccc@{}",
+        r" & \multicolumn{4}{c}{Composition} & \multicolumn{2}{c}{Prevalence} \\"
+        + "\n" + r"\cmidrule(lr){2-5}\cmidrule(l){6-7}"
+        + "\n" + r"Method & Slope [95\% CI] & MAE (pp) & Cover & Detected (\%) & Slope & MAE (pp) \\", rows,
+        r"684 contrasts, 64 of them significant in the reference. Composition removes the differences between the "
+        r"teams in how many sentences they labeled, so a contrast compares which values a language's texts stress. "
+        r"Estimates are turned into shares the same way, with negative estimates set to zero first. Detected: share "
+        r"of the significant reference contrasts found significant with the same sign (single test). " + COVER_NOTE
+        + r" Prevalence columns repeat Table~\ref{M-tab:measurement} of the article.",
+        size=r"\scriptsize", colsep="3pt"))
+
+
+def table_error_rates() -> None:
+    """tpr and fpr of the prevalence-matched decisions per value, by genre, on validation and test."""
+    e = pd.read_csv(RES / "measurement-error-rates.csv")
+    e = e[e.system == MAIN].set_index(["split", "group", "value"])
+    langs = list(LANGUAGES)
+
+    def pct(x: float) -> str:
+        return "--" if pd.isna(x) else f"{100 * x:.0f}"
+
+    rows = []
+    for v in VALUES:
+        cells = [f"{pct(e.loc[(sp, g, v), 'tpr'])} / {100 * e.loc[(sp, g, v), 'fpr']:.1f}"
+                 for sp in ["validation", "test"] for g in ["manifestos", "news"]]
+        lt = np.array([e.loc[("test", l, v), "tpr"] for l in langs], dtype=float)
+        lf = np.array([e.loc[("test", l, v), "fpr"] for l in langs], dtype=float)
+        cells += [f"{100 * np.nanmin(lt):.0f}--{100 * np.nanmax(lt):.0f}",
+                  f"{100 * np.nanmin(lf):.1f}--{100 * np.nanmax(lf):.1f}"]
+        rows.append(f"{v} & " + " & ".join(cells) + r" \\")
+    write_table("supp-error-rates.tex", table(
+        "table*", r"Error rates of the prevalence-matched decisions by genre and language (main system, \%)",
+        "tab:error-rates", "@{}lcccccc@{}",
+        r" & \multicolumn{2}{c}{Validation, tpr / fpr} & \multicolumn{2}{c}{Test, tpr / fpr} & "
+        r"\multicolumn{2}{c}{Test, range over languages} \\"
+        + "\n" + r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}"
+        + "\n" + r"Value & Manifestos & News & Manifestos & News & tpr & fpr \\", rows,
+        r"tpr: share of the sentences with the value that are labeled with it; fpr: share of those without it that "
+        r"are. --: no manifesto sentence with the value. Means of three training runs. Section~\ref{M-sec:res-acc} "
+        r"of the article correlates the manifesto--news gaps with the reference contrasts.",
+        size=r"\scriptsize", colsep="3pt"))
 
 
 def main() -> None:
@@ -492,6 +631,10 @@ def main() -> None:
     table_worked_values()
     table_shift()
     table_llm()
+    table_subsample()
+    table_lolo()
+    table_composition()
+    table_error_rates()
     print(f"Wrote the supplement's tables and figures to {TAB.parent}")
 
 

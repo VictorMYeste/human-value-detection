@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\caption{LLM labels on the validation split: macro-F1 by prompt style (zero-shot) and by number of labeled examples in the prompt (few-shot)}
+\label{tab:prompts}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc ccccccc@{}}
+\toprule
+ & \multicolumn{4}{c}{Zero-shot prompt style} & \multicolumn{7}{c}{Few-shot, number of examples $k$} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-12}
+Model & direct & hidden reasoning & definitions & question & 1 & 2 & 4 & 8 & 12 & 16 & 20 \\
+\midrule
+Gemma-2-9B & 0.184 & 0.182 & \textbf{0.215} & 0.176 & 0.204 & 0.209 & 0.215 & 0.210 & 0.201 & 0.215 & 0.225 \\
+Llama-3.1-8B & 0.119 & 0.100 & \textbf{0.163} & 0.097 & 0.141 & 0.146 & 0.156 & 0.162 & 0.155 & 0.169 & 0.182 \\
+Ministral-8B & 0.106 & 0.087 & \textbf{0.177} & 0.102 & 0.085 & 0.107 & 0.138 & 0.131 & 0.146 & 0.156 & 0.168 \\
+Qwen-2.5-7B & \textbf{0.091} & 0.037 & 0.068 & 0.061 & 0.107 & 0.127 & 0.146 & 0.127 & 0.152 & 0.169 & 0.175 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize Validation macro-F1 of the returned label sets, as logged by each run (single runs). Bold: best zero-shot style. Few-shot prompts use the definitions style (Qwen: the direct style, its best). With the presence gate, Gemma-2-9B with $k = 20$ reaches 0.232. The four styles are described in Section~\ref{sec:llms}.\end{minipage}
+\end{table*}

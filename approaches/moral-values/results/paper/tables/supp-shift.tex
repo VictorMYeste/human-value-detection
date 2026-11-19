@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\caption{Shift tests for every supervised system}
+\label{tab:shift}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l cccc ccc cc@{}}
+\toprule
+ & \multicolumn{4}{c}{(a) One language left out of the fit} & \multicolumn{3}{c}{(b) Fitted on news only} & \multicolumn{2}{c}{(c) Within news} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(l){9-10}
+System & CC slope & RC slope [95\% CI] & RC bias (\%) & CC total err.\ (\%) & CC slope & RC slope [95\% CI] & RC bias (\%) & CC slope & RC slope \\
+\midrule
+\textbf{Feature ensemble} & 0.57 & 0.98 [0.78, 1.18] & 0.7 & 18.5 & 0.97 & 1.47 [1.17, 1.83] & 14 & 0.58 & 0.88 \\
+DeBERTa & 0.52 & 0.94 [0.76, 1.15] & 0.7 & 20.2 & 0.89 & 1.42 [1.13, 1.80] & 21 & 0.53 & 0.85 \\
+RoBERTa & 0.53 & 0.95 [0.77, 1.15] & 0.0 & 19.4 & 0.97 & 1.54 [1.25, 1.89] & 21 & 0.54 & 0.86 \\
+Seed ensemble & 0.54 & 0.94 [0.76, 1.16] & 0.0 & 19.6 & 0.90 & 1.41 [1.12, 1.77] & 21 & 0.55 & 0.85 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize CC: prevalence-matched thresholds; RC: regression calibration on the same counts. (a) Thresholds and slope fitted without the language whose contrasts are estimated (contrasts of that language with the other eight, pooled over languages); total err.: mean absolute error of the left-out language's value mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with RC borrowing the language slope. (c) Language-pair contrasts within news documents. Means of three training runs (seed ensemble: one system).\end{minipage}
+\end{table*}

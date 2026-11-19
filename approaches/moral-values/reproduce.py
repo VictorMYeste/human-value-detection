@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Regenerate every number, table and figure of the measurement paper from the cached predictions.
+Regenerate every number, table and figure of the measurement paper and its supplement from the cached predictions.
 
 No GPU and no model training: the scripts below read the gold labels of ValueEval'24 (data/, not
 redistributed) and the per-seed predictions tracked in this repository (approaches/*/output/).
 
-Steps, in order (the first six are independent; `assets` reads their CSVs):
+Steps, in order (the first six are independent; `assets` and `supplement` read their CSVs):
     classification  threshold_schemes.py     macro-F1 by decision rule, gates, presence diagnostics
     measurement     measurement_analysis.py  prevalence, contrasts and slopes for every estimator
     shift           shift_tests.py           leave-one-language-out, genre transfer, news-only
@@ -13,6 +13,7 @@ Steps, in order (the first six are independent; `assets` reads their CSVs):
     reliability     gold_reliability.py      annotation agreement vs. per-language error
     worked          worked_example.py        manifesto vs. news, value by value
     assets          paper_assets.py          Figures 1-4 (PDF) and Tables I-V (LaTeX)
+    supplement      supplement_assets.py     the supplement's tables and figures (supp-*.tex, figS*.pdf)
 
 Every step runs in its own Python process, under an audit hook that records which files under
 the repository root it reads and writes. The result is results/reproduce-manifest.tsv: the
@@ -22,8 +23,8 @@ precision (CSV numbers at most one unit apart in the fourth decimal), or differe
 reference manifest unless asked to (--update-manifest); if there is none, it writes one.
 
 Usage (from this folder):
-    python3 reproduce.py                    # run everything (about 12 min on one core), then compare
-    python3 reproduce.py -j 4               # independent steps in parallel (about 10 min: one step takes 7-9)
+    python3 reproduce.py                    # run everything (about 9 min on one core of an Apple M1), then compare
+    python3 reproduce.py -j 4               # independent steps in parallel (the measurement step alone takes ~6 min)
     python3 reproduce.py --steps shift,assets
     python3 reproduce.py --verify           # compare the files on disk with the manifest; run nothing
     python3 reproduce.py --update-manifest  # after an intended change: run, then record the new reference
@@ -64,13 +65,15 @@ class Step:
 
 
 STEPS = [
-    Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 1.5),
-    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 7.0),
-    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 2.5),
-    Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 1.0),
-    Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.2),
-    Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.3),
-    Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.2, final=True),
+    # minutes: measured single-threaded on an Apple M1, 18 Nov 2026 (8 min 16 s for the first seven steps)
+    Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 0.3),
+    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 6.3),
+    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 0.8),
+    Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.6),
+    Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.1),
+    Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.1),
+    Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.1, final=True),
+    Step("supplement", "supplement_assets.py", "Supplement: Tables S1-S13 and Figures S1-S2", 0.3, final=True),
 ]
 BY_NAME = {s.name: s for s in STEPS}
 

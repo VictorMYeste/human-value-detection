@@ -320,7 +320,7 @@ def table2_classification(llm: pd.DataFrame) -> None:
                          r"prevalence-matched ones as quantiles of the validation probabilities. Bold: main system. "
                          r"The seed ensemble averages three training runs of DeBERTa and is reported as one system. "
                          r"LLM labels are in Table~\ref{tab:measurement}, and models with auxiliary inputs and presence "
-                         r"gates in the supplement.", include_llm=False)
+                         r"gates in Table~\ref{S-tab:classification-full} of the supplement.", include_llm=False)
     classification_table(llm, ["DeBERTa", "DeBERTa + LIWC-22", "DeBERTa + MJD", "DeBERTa + Prev-2", "DeBERTa + BERTopic",
                                "DeBERTa + soft gate", "DeBERTa + hard gate 0.10", "DeBERTa + hard gate tuned", "RoBERTa",
                                "Seed ensemble", "Feature ensemble"], "tabS1-classification-full.tex",
@@ -449,18 +449,18 @@ def table4_worked(worked: pd.DataFrame) -> None:
              f"{w.loc[e, 'spurious']:.1f} & {w.loc[e, 'slope']:.2f} & {w.loc[e, 'mae']:.2f}" + r" \\" for e in names]
     write_table("tab4-worked.tex", r"""
 \begin{table}[t]
-\caption{Worked example: which of the 10 significant gold manifesto--news differences each estimator recovers}
+\caption{Worked example: how each method fares on the 10 significant reference differences between manifestos and news}
 \label{tab:worked}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
-Estimator & Found & Missed & Rev. & Spur. & Slope & MAE \\
+Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the gold sign. Rev.: significant with the opposite sign. Spur.: significant where gold is not (of 9). Supervised rows: per seed, averaged over three seeds; LLM: single run. MAE in percentage points over the 19 differences. Comparing manifestos only with news from the same language gives the same gold answer.}
+\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of 9). Supervised methods: main system, counted in each training run and averaged over the three runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
 \end{tabular}
 \end{table}
 """)

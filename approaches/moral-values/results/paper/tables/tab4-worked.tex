@@ -1,12 +1,12 @@
 \begin{table}[t]
-\caption{Worked example: which of the 10 significant gold manifesto--news differences each estimator recovers}
+\caption{Worked example: how each method fares on the 10 significant reference differences between manifestos and news}
 \label{tab:worked}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
-Estimator & Found & Missed & Rev. & Spur. & Slope & MAE \\
+Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 \midrule
 CC, $t = 0.5$ & 7.0 & 3.0 & 0 & 1.7 & 0.73 & 0.82 \\
 CC, macro-F1 $t^*$ & 8.7 & 1.3 & 0 & 1.0 & 1.16 & 0.92 \\
@@ -16,6 +16,6 @@ ACC, prev.-matched & 6.0 & 4.0 & 0 & 0.3 & 2.49 & 3.75 \\
 \textbf{RC, prev.-matched} & 7.3 & 2.7 & 0 & 1.0 & 1.02 & 0.72 \\
 Gemma few-shot + gate & 6.0 & 3.0 & 1 & 3.0 & 0.91 & 2.45 \\
 \bottomrule
-\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the gold sign. Rev.: significant with the opposite sign. Spur.: significant where gold is not (of 9). Supervised rows: per seed, averaged over three seeds; LLM: single run. MAE in percentage points over the 19 differences. Comparing manifestos only with news from the same language gives the same gold answer.}
+\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of 9). Supervised methods: main system, counted in each training run and averaged over the three runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
 \end{tabular}
 \end{table}

@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\caption{Source languages: size, annotation and the main system's errors on each language's test sentences}
+\label{tab:languages}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llllrrrrr@{}}
+\toprule
+Code & Language & Translation & Sentences (train / val. / test) & Test docs (news / man.) & With a value (\%) & $\alpha$ & Macro-F1 & Count error (\%) \\
+\midrule
+BG & Bulgarian & DeepL & 4,096 / 1,521 / 1,302 & 45 / 6 & 64.2 & 0.473 & 0.296 & $-$15.1 \\
+DE & German & DeepL & 5,616 / 1,693 / 1,874 & 43 / 8 & 53.4 & 0.340 & 0.309 & $-$8.7 \\
+EL & Greek & DeepL & 4,524 / 1,423 / 1,402 & 59 / 6 & 61.6 & 0.680 & 0.354 & $-$2.6 \\
+EN & English & none (original) & 6,251 / 2,049 / 2,005 & 74 / 7 & 30.6 & 0.371 & 0.284 & $+$43.8 \\
+FR & French & DeepL & 2,768 / 951 / 931 & 37 / 6 & 30.4 & 0.656 & 0.258 & $+$45.4 \\
+HE & Hebrew & Google & 4,504 / 1,347 / 1,480 & 42 / 7 & 85.9 & 0.533 & 0.384 & $-$4.8 \\
+IT & Italian & DeepL & 3,815 / 1,326 / 1,238 & 49 / 6 & 63.3 & 0.609 & 0.224 & $-$7.2 \\
+NL & Dutch & DeepL & 6,564 / 2,268 / 2,150 & 58 / 6 & 36.6 & 0.380 & 0.280 & $+$15.7 \\
+TR & Turkish & DeepL & 6,620 / 2,326 / 2,187 & 59 / 4 & 47.3 & 0.408 & 0.334 & $-$5.1 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize Translation into English by the task organizers. With a value: share of sentences with at least one value, all splits. $\alpha$: Krippendorff's alpha before curation for the 19 values, by language (ValuesML, Table 5~\cite{Scharfbillig2026}; all languages 0.486). Macro-F1 and count error: main system with prevalence-matched thresholds on the test sentences of each language, mean of three training runs; count error = predicted over reference value mentions minus 1 (positive = overcount).\end{minipage}
+\end{table*}

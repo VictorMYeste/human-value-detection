@@ -1,0 +1,21 @@
+\begin{table}[t]
+\caption{Calibration of the probabilities on the test split, raw and after Platt scaling}
+\label{tab:calibration}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{ECE} & \multicolumn{2}{c}{Mean prob. / rate} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+System & raw & Platt & raw & Platt & $t^*$ \\
+\midrule
+\textbf{Feature ensemble} & 0.0118 & 0.0021 & 1.137 & 0.995 & 0.23--0.29 \\
+DeBERTa & 0.0164 & 0.0029 & 1.118 & 0.995 & 0.23--0.30 \\
+RoBERTa & 0.0193 & 0.0034 & 1.047 & 0.996 & 0.13--0.17 \\
+Seed ensemble & 0.0137 & 0.0026 & 1.118 & 0.994 & 0.22 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\columnwidth}\scriptsize ECE: expected calibration error over all sentence--value pairs, 15 equal-width bins. Mean prob.\ / rate: mean predicted probability over the reference rate (1 = the average is right). Means of three training runs (seed ensemble: one system). $t^*$: macro-F1 threshold, range over runs.\end{minipage}
+\end{table}

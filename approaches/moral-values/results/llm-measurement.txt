@@ -29,22 +29,62 @@ A. CORPUS PREVALENCE AND MANIFESTO-NEWS CONTRASTS
 ======================================================================================================================
 B. SOURCE-LANGUAGE PAIRWISE CONTRASTS (684)
 ======================================================================================================================
-  system                       est.           language slope reprod. %  single %  biased %  MAE pp       lang. rank rho
-  Feature ensemble             CC@t*       0.69 [0.58, 0.81]       8.7      51.6       0.7    1.32    0.68 [0.55, 0.70]
-  Feature ensemble             CC@prev     0.58 [0.49, 0.67]       0.8      49.2       1.2    1.29    0.64 [0.52, 0.68]
-  Feature ensemble             RC@prev     0.90 [0.74, 1.13]       0.0      50.0       0.0    1.54    0.64 [0.52, 0.68]
-  Gemma-2-9B few-shot + gate   CC          0.33 [0.25, 0.53]       2.4      19.0      12.7    2.28    0.34 [0.25, 0.45]
-  Gemma-2-9B few-shot + gate   ACC         0.81 [0.52, 1.51]       1.6       7.9       2.3    4.99    0.35 [0.25, 0.45]
-  Gemma-2-9B few-shot + gate   RC          0.78 [0.50, 1.28]       2.4      16.7       7.3    4.25    0.34 [0.26, 0.45]
-  Gemma-2-9B few-shot          CC          0.30 [0.21, 0.52]       3.2      16.7      14.0    2.51    0.29 [0.23, 0.44]
-  Gemma-2-9B few-shot          ACC         0.63 [0.33, 1.38]       1.6       5.6       2.6    5.36    0.28 [0.21, 0.42]
-  Gemma-2-9B few-shot          RC          0.76 [0.45, 1.34]       3.2      16.7       6.3    5.20    0.29 [0.23, 0.43]
-  Gemma-2-9B QLoRA             CC          0.37 [0.29, 0.45]       4.0      40.5      13.5    1.46    0.57 [0.43, 0.61]
-  Gemma-2-9B QLoRA             ACC         2.73 [1.81, 3.17]       8.7      28.6       0.0    4.30    0.59 [0.44, 0.63]
-  Gemma-2-9B QLoRA             RC          0.67 [0.51, 0.88]       1.6      32.5       6.1    1.45    0.59 [0.45, 0.63]
-  LLM ensemble (hard vote)     CC          0.53 [0.43, 0.71]       4.8      28.6       9.5    2.11    0.39 [0.33, 0.52]
-  LLM ensemble (hard vote)     ACC         0.99 [0.74, 1.44]       1.6      10.3       1.9    3.94    0.40 [0.32, 0.52]
-  LLM ensemble (hard vote)     RC          0.78 [0.59, 1.10]       4.8      28.6       6.1    2.73    0.39 [0.33, 0.52]
+  system                       est.           language slope reprod. %  single %  biased %  MAE pp       lang. rank rho  cover % (total/genre/lpair)
+  Feature ensemble             CC@t*       0.69 [0.58, 0.81]       8.7      51.6       0.7    1.32    0.68 [0.55, 0.70]             42/ 79/ 83
+  Feature ensemble             CC@prev     0.58 [0.49, 0.67]       0.8      49.2       1.2    1.29    0.64 [0.52, 0.68]            100/100/ 81
+  Feature ensemble             RC@prev     0.90 [0.74, 1.13]       0.0      50.0       0.0    1.54    0.64 [0.52, 0.68]            100/100/ 88
+  Gemma-2-9B few-shot + gate   CC          0.33 [0.25, 0.53]       2.4      19.0      12.7    2.28    0.34 [0.25, 0.45]              0/ 53/ 72
+  Gemma-2-9B few-shot + gate   ACC         0.81 [0.52, 1.51]       1.6       7.9       2.3    4.99    0.35 [0.25, 0.45]             32/ 58/ 85
+  Gemma-2-9B few-shot + gate   RC          0.78 [0.50, 1.28]       2.4      16.7       7.3    4.25    0.34 [0.26, 0.45]              0/ 63/ 76
+  Gemma-2-9B few-shot          CC          0.30 [0.21, 0.52]       3.2      16.7      14.0    2.51    0.29 [0.23, 0.44]              0/ 63/ 71
+  Gemma-2-9B few-shot          ACC         0.63 [0.33, 1.38]       1.6       5.6       2.6    5.36    0.28 [0.21, 0.42]             32/ 53/ 83
+  Gemma-2-9B few-shot          RC          0.76 [0.45, 1.34]       3.2      16.7       6.3    5.20    0.29 [0.23, 0.43]              0/ 68/ 77
+  Gemma-2-9B QLoRA             CC          0.37 [0.29, 0.45]       4.0      40.5      13.5    1.46    0.57 [0.43, 0.61]              0/ 63/ 73
+  Gemma-2-9B QLoRA             ACC         2.73 [1.81, 3.17]       8.7      28.6       0.0    4.30    0.59 [0.44, 0.63]             84/ 95/ 91
+  Gemma-2-9B QLoRA             RC          0.67 [0.51, 0.88]       1.6      32.5       6.1    1.45    0.59 [0.45, 0.63]              0/ 79/ 78
+  LLM ensemble (hard vote)     CC          0.53 [0.43, 0.71]       4.8      28.6       9.5    2.11    0.39 [0.33, 0.52]              5/ 63/ 74
+  LLM ensemble (hard vote)     ACC         0.99 [0.74, 1.44]       1.6      10.3       1.9    3.94    0.40 [0.32, 0.52]             37/ 58/ 88
+  LLM ensemble (hard vote)     RC          0.78 [0.59, 1.10]       4.8      28.6       6.1    2.73    0.39 [0.33, 0.52]              5/ 68/ 78
+  Cover: share of totals / contrasts whose paired error (estimate - reference) is within sampling noise
+  (p >= 0.05), as in measurement-analysis.txt section H.
 
   Gold-significant contrasts found significant with the WRONG sign: Gemma-2-9B few-shot + gate CC genre 11.1%; Gemma-2-9B few-shot + gate RC genre 11.1%; Gemma-2-9B few-shot CC genre 11.1%; Gemma-2-9B few-shot CC language 2.4%; Gemma-2-9B few-shot ACC genre 11.1%; Gemma-2-9B few-shot RC genre 11.1%; Gemma-2-9B few-shot RC language 3.2%; LLM ensemble (hard vote) CC genre 11.1%; LLM ensemble (hard vote) RC genre 11.1%
   Validation slopes used by RC (language, genre): Feature ensemble: 0.62/0.91, 0.65/0.87, 0.64/0.97; Gemma-2-9B few-shot + gate: 0.41/1.12; Gemma-2-9B few-shot: 0.37/1.01; Gemma-2-9B QLoRA: 0.54/0.31; LLM ensemble (hard vote): 0.68/1.18
+
+======================================================================================================================
+C. EMPTY ANSWERS: share of sentences labeled with no value, %, by group (test and validation)
+   The LLM runner stored an answer it could not parse as an empty set and kept no raw generations, so
+   unparseable answers cannot be counted. They are among the empty answers, which bound them from above.
+   Reference: the expert labels. Feature ensemble: prevalence-matched decisions, mean over runs.
+======================================================================================================================
+
+  test
+  labels                          all  manif   news     BG     DE     EL     EN     FR     HE     IT     NL     TR
+  reference                      49.2   32.9   50.9   37.4   45.3   38.2   71.7   67.3   11.6   37.4   64.7   55.1
+  Feature ensemble               50.1   33.3   51.9   47.0   51.0   43.2   61.6   50.9   27.5   45.2   60.1   52.8
+  Gemma-2-9B few-shot + gate     20.7    5.1   22.4   16.5   19.6   15.9   22.8   19.1   10.9   17.9   25.8   29.1
+  Gemma-2-9B few-shot             6.5    1.2    7.1    6.3    4.4    5.8    7.2    4.6    4.7    5.7    6.6   10.7
+  Gemma-2-9B QLoRA               73.9   65.0   74.9   70.7   75.3   72.7   85.2   81.6   51.1   69.7   80.4   73.3
+  LLM ensemble (hard vote)       19.4    4.6   21.0   15.4   18.4   15.0   22.1   18.6    9.1   16.1   24.7   27.2
+
+  validation
+  labels                          all  manif   news     BG     DE     EL     EN     FR     HE     IT     NL     TR
+  reference                      49.0   25.7   51.6   37.6   46.7   37.9   68.4   72.5   17.5   36.6   59.9   52.9
+  Feature ensemble               50.8   31.8   52.9   48.8   50.9   44.4   57.1   60.9   33.4   51.6   57.8   49.4
+  Gemma-2-9B few-shot + gate     19.2    4.5   20.8   21.4   16.4   13.9   19.4   23.9   11.4   17.6   23.7   21.8
+  Gemma-2-9B few-shot             5.3    1.2    5.8   11.4    3.2    4.5    4.8    3.8    3.5    5.6    4.7    6.0
+  Gemma-2-9B QLoRA               74.0   66.1   74.8   69.7   77.0   69.5   82.6   84.2   45.6   74.3   82.1   73.8
+  LLM ensemble (hard vote)       18.1    4.3   19.6   20.4   15.5   12.8   18.8   22.9    9.5   16.5   22.5   20.8
+
+======================================================================================================================
+D. STIMULATION, MANIFESTOS MINUS NEWS (the reversal in the Introduction), pp
+   Test: difference [95% CI] and p (bootstrap); validation: difference. Bound: the most the difference could
+   move toward the reference if every empty manifesto answer had been an unparsed answer carrying Stimulation
+   at the system's own rate among its non-empty manifesto answers.
+======================================================================================================================
+  reference                    test   +4.8 [+2.1, +7.9]  p 0.002   validation   +5.7   bound --
+  Feature ensemble             test   +6.5 [+4.2, +9.0]  p 0.000   validation   +7.2   bound --
+  Gemma-2-9B few-shot + gate   test   -3.2 [-4.5, -2.0]  p 0.000   validation   -1.2   bound 0.09
+  Gemma-2-9B few-shot          test   -6.3 [-8.0, -4.7]  p 0.000   validation   -3.6   bound 0.03
+  Gemma-2-9B QLoRA             test   +1.5 [+0.8, +2.2]  p 0.000   validation   +1.6   bound 3.31
+  LLM ensemble (hard vote)     test   -1.9 [-3.2, -0.5]  p 0.005   validation   -0.6   bound 0.15

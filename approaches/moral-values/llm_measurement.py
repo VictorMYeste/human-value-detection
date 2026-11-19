@@ -29,9 +29,15 @@ Uncertainty: the stratified document bootstraps of test and validation shared wi
 measurement_analysis.py (B = 2000). LLM results are single runs, so their intervals cover
 sampling of documents only, not run-to-run variation.
 
+Unparseable answers (step 5.2, AE item 6): the LLM runner turned an answer it could not parse
+into an empty set, the same as "no value", and kept no raw generations. Section C therefore
+reports empty answers by genre and language, an upper bound on unparseable ones, next to the
+expert labels and the main system. Section D gives the Stimulation contrast of every system, on
+test and validation, and the most that empty answers could move it.
+
 Usage:
     python3 llm_measurement.py
-Writes results/llm-measurement.txt and results/llm-measurement.csv.
+Writes results/llm-measurement.txt, results/llm-measurement.csv and results/llm-empty-answers.csv.
 """
 
 from __future__ import annotations
@@ -43,7 +49,7 @@ import pandas as pd
 
 from analyze_provenance import KEY, VALUES, load_gold
 from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, RowFits, adjust, bh, boot_p, boot_rates, ci,
-                                  genre_reference_p, lpair_reference_p,
+                                  genre_reference_p, lpair_reference_p, doc_index,
                                   document_design, macro_f1, rank_corr, slope, system_probs)
 from shift_tests import Groups, all_pairs, pair_contrasts, rc, safe_slope
 
@@ -121,7 +127,7 @@ def main() -> None:
         sig = bh(boot_p(diff)) < ALPHA
         m = {"ratio": v["all"].sum(1) / gold["all"].sum(1), "mae": np.abs(diff[0]).mean() * 100,
              "under": int((sig & (diff[0] < 0)).sum()), "over": int((sig & (diff[0] > 0)).sum()),
-             "rho": rank_corr(gold["lang"], v["lang"])}
+             "rho": rank_corr(gold["lang"], v["lang"]), "cover": (boot_p(diff) >= ALPHA).mean() * 100}
         for key in ["genre", "lpair"]:
             e0, g0, gs = v[key][0], gold[key][0], gsig[key]
             esig = bh(boot_p(v[key])) < ALPHA
@@ -131,6 +137,7 @@ def main() -> None:
                       f"{key}_reversed": (esig & ~same)[gs].mean() * 100,
                       f"{key}_biased": (bh(boot_p(v[key] - gold[key])) < ALPHA).mean() * 100,
                       f"{key}_mae": np.abs(e0 - g0).mean() * 100,
+                      f"{key}_cover": (boot_p(v[key] - gold[key]) >= ALPHA).mean() * 100,
                       f"{key}_slope": slope(gold[key], v[key])})
         return m
 
@@ -146,12 +153,15 @@ def main() -> None:
     # ---- reference: the main supervised system, rules refitted on every validation row; metrics on the
     #      mean of its three runs, as in measurement_analysis.py
     ref_views: dict[str, list[dict]] = {"CC@t*": [], "CC@prev": [], "RC@prev": []}
+    decisions = {"test": {}, "val": {}}           # system -> 0/1 labels (main system: one array per run)
     for seed in SEEDS:
         pv, pt = system_probs(REFERENCE, seed, "val"), system_probs(REFERENCE, seed, "test")
         rf = RowFits(pv, yv, Vdesign)
         f1s.setdefault(REFERENCE, {}).setdefault("CC@t*", []).append(macro_f1(yt, (pt >= rf.tstar[0]).astype(int)))
         f1s[REFERENCE].setdefault("CC@prev", []).append(macro_f1(yt, (pt >= rf.tprev[0]).astype(int)))
         c_prev = rf.counts("CC@prev", pt, T.S)
+        decisions["test"].setdefault(REFERENCE, []).append((pt >= rf.tprev[0]).astype(int))
+        decisions["val"].setdefault(REFERENCE, []).append((pv >= rf.tprev[0]).astype(int))
         ref_views["CC@t*"].append(cc_views(rf.counts("CC@t*", pt, T.S)))
         ref_views["CC@prev"].append(cc_views(c_prev))
         v, bl, bg = rc_views(c_prev, rf.counts("CC@prev", pv, V.S))
@@ -164,6 +174,7 @@ def main() -> None:
     # ---- LLM systems, single runs
     for system, (pattern, published) in LLM_SYSTEMS.items():
         dec_v, dec_t = load_labels(pattern, "val"), load_labels(pattern, "test")
+        decisions["test"][system], decisions["val"][system] = [dec_t], [dec_v]
         f1 = macro_f1(yt, dec_t)
         if abs(f1 - published) > 0.0006:
             raise ValueError(f"{system}: test macro-F1 {f1:.4f} differs from the published {published:.3f}")
@@ -205,13 +216,17 @@ def main() -> None:
     out("=" * 118)
     out("B. SOURCE-LANGUAGE PAIRWISE CONTRASTS (684)")
     out("=" * 118)
-    out(f"  {'system':28s} {'est.':8s} {'language slope':>20s} {'reprod. %':>9s} {'single %':>9s} {'biased %':>9s} {'MAE pp':>7s} {'lang. rank rho':>20s}")
+    out(f"  {'system':28s} {'est.':8s} {'language slope':>20s} {'reprod. %':>9s} {'single %':>9s} {'biased %':>9s} "
+        f"{'MAE pp':>7s} {'lang. rank rho':>20s} {'cover % (total/genre/lpair)':>28s}")
     for system, ests in results.items():
         for est in ests:
             out(f"  {system:28s} {est:8s} {ci(mean_arr(system, est, 'lpair_slope')):>20s} "
                 f"{avg(system, est, 'lpair_reproduced'):9.1f} {avg(system, est, 'lpair_detected'):9.1f} "
                 f"{avg(system, est, 'lpair_biased'):9.1f} "
-                f"{avg(system, est, 'lpair_mae'):7.2f} {ci(mean_arr(system, est, 'rho')):>20s}")
+                f"{avg(system, est, 'lpair_mae'):7.2f} {ci(mean_arr(system, est, 'rho')):>20s} "
+                f"{avg(system, est, 'cover'):14.0f}/{avg(system, est, 'genre_cover'):3.0f}/{avg(system, est, 'lpair_cover'):3.0f}")
+    out("  Cover: share of totals / contrasts whose paired error (estimate - reference) is within sampling noise")
+    out(f"  (p >= {ALPHA}), as in measurement-analysis.txt section H.")
     reversals = [f"{system} {est} {'genre' if k == 'genre' else 'language'} {avg(system, est, f'{k}_reversed'):.1f}%"
                  for system, ests in results.items() for est in ests for k in ["genre", "lpair"]
                  if avg(system, est, f"{k}_reversed") > 0]
@@ -219,7 +234,59 @@ def main() -> None:
     out("  Validation slopes used by RC (language, genre): " + "; ".join(
         f"{s}: " + ", ".join(f"{bl:.2f}/{bg:.2f}" for bl, bg in v) for s, v in slopes_used.items()))
 
+    # ---- C. empty answers by group (unparseable answers are among them)
+    split_y = {"test": yt, "val": yv}
+    split_groups = {}
+    for sp, G in [("test", T), ("val", V)]:
+        d = doc_index(G.S)
+        split_groups[sp] = {"all": np.ones(len(d), bool), "manifestos": G.genre[d] == "manifesto",
+                            "news": G.genre[d] == "news", **{l: G.lang[d] == l for l in langs}}
+    out()
+    out("=" * 118)
+    out("C. EMPTY ANSWERS: share of sentences labeled with no value, %, by group (test and validation)")
+    out("   The LLM runner stored an answer it could not parse as an empty set and kept no raw generations, so")
+    out("   unparseable answers cannot be counted. They are among the empty answers, which bound them from above.")
+    out(f"   Reference: the expert labels. {REFERENCE}: prevalence-matched decisions, mean over runs.")
+    out("=" * 118)
+    empty_rows = []
+    for sp in ["test", "val"]:
+        groups = split_groups[sp]
+        out(f"\n  {'test' if sp == 'test' else 'validation'}")
+        out(f"  {'labels':28s} " + " ".join(f"{g[:5]:>6s}" for g in groups))
+        for name, decs in [("reference", [split_y[sp]])] + list(decisions[sp].items()):
+            empty = np.mean([~(d.astype(bool).any(1)) for d in decs], axis=0)
+            shares = {g: empty[m].mean() * 100 for g, m in groups.items()}
+            out(f"  {name:28s} " + " ".join(f"{v:6.1f}" for v in shares.values()))
+            empty_rows.append({"split": sp, "labels": name, **shares})
+
+    # ---- D. the Stimulation contrast under every system
+    j = VALUES.index("Stimulation")
+    out()
+    out("=" * 118)
+    out("D. STIMULATION, MANIFESTOS MINUS NEWS (the reversal in the Introduction), pp")
+    out("   Test: difference [95% CI] and p (bootstrap); validation: difference. Bound: the most the difference could")
+    out("   move toward the reference if every empty manifesto answer had been an unparsed answer carrying Stimulation")
+    out("   at the system's own rate among its non-empty manifesto answers.")
+    out("=" * 118)
+    for name, decs in [("reference", [yt])] + list(decisions["test"].items()):
+        cnt = np.mean([T.S @ d for d in decs], axis=0)
+        g = T.prev(cnt, man_t)[:, j] - T.prev(cnt, news_t)[:, j]
+        lo, hi = np.percentile(g[1:] * 100, [2.5, 97.5])
+        dv = [split_y["val"]] if name == "reference" else decisions["val"][name]
+        cv = np.mean([V.S @ d for d in dv], axis=0)
+        gv_ = (V.prev(cv, V.genre == "manifesto")[0, j] - V.prev(cv, V.genre == "news")[0, j]) * 100
+        bound = "--"
+        if name in LLM_SYSTEMS:
+            dm = np.mean([d for d in decs], axis=0)
+            m = split_groups["test"]["manifestos"]
+            empty = ~(dm[m] > 0).any(1)
+            rate = dm[m][~empty, j].mean()
+            bound = f"{empty.mean() * rate * 100:.2f}"
+        out(f"  {name:28s} test {g[0] * 100:+6.1f} [{lo:+.1f}, {hi:+.1f}]  p {boot_p(g[:, None])[0]:.3f}   "
+            f"validation {gv_:+6.1f}   bound {bound}")
+
     # ---- write
+    pd.DataFrame(empty_rows).to_csv(RES / "llm-empty-answers.csv", index=False, float_format="%.3f")
     rows = []
     for system, ests in results.items():
         for est, ms in ests.items():
@@ -228,8 +295,9 @@ def main() -> None:
             for k in ["ratio", "genre_slope", "lpair_slope", "rho"]:
                 a = mean_arr(system, est, k)
                 row[k], row[f"{k}_lo"], row[f"{k}_hi"] = a[0], np.percentile(a[1:], 2.5), np.percentile(a[1:], 97.5)
-            for k in ["mae", "under", "over", "genre_reproduced", "genre_detected", "genre_reversed", "genre_biased",
-                      "genre_mae", "lpair_reproduced", "lpair_detected", "lpair_reversed", "lpair_biased", "lpair_mae"]:
+            for k in ["mae", "under", "over", "cover", "genre_reproduced", "genre_detected", "genre_reversed",
+                      "genre_biased", "genre_mae", "genre_cover", "lpair_reproduced", "lpair_detected", "lpair_reversed",
+                      "lpair_biased", "lpair_mae", "lpair_cover"]:
                 row[k] = avg(system, est, k)
             rows.append(row)
     RES.mkdir(exist_ok=True)

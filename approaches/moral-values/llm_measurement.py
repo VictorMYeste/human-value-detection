@@ -11,7 +11,7 @@ whether the two corrections that need only validation labels repair them:
 
   CC     the LLM labels as returned (classify and count);
   ACC    adjusted count, (CC - fpr) / (tpr - fpr) with tpr and fpr of the LLM on validation;
-  RC     regression calibration: group deviations from the corpus total divided by the
+  SC     slope correction: group deviations from the corpus total divided by the
          attenuation slope of the LLM's own validation contrasts (language pairs for
          languages, manifesto-news for genre).
 
@@ -22,7 +22,7 @@ LLM systems (single runs; the paper's Section on LLM baselines):
   LLM ensemble                hard vote of the gated few-shot and the QLoRA Gemma models
 
 Reference: the feature ensemble (the paper's main system, three seeds) with CC@t*, CC@prev
-and RC@prev, computed here with the same code: rules refitted on every validation resample and
+and SC@prev, computed here with the same code: rules refitted on every validation resample and
 metrics on the mean of the three runs, as in measurement_analysis.py.
 
 Uncertainty: the stratified document bootstraps of test and validation shared with
@@ -51,7 +51,7 @@ from analyze_provenance import KEY, VALUES, load_gold
 from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, RowFits, adjust, bh, boot_p, boot_rates, ci,
                                   genre_reference_p, lpair_reference_p, doc_index,
                                   document_design, macro_f1, rank_corr, slope, system_probs)
-from shift_tests import Groups, all_pairs, pair_contrasts, rc, safe_slope
+from shift_tests import Groups, all_pairs, pair_contrasts, sc, safe_slope
 
 HERE = Path(__file__).resolve().parent
 LLM_OUT = HERE / ".." / "llm_moral-values" / "output"
@@ -108,14 +108,14 @@ def main() -> None:
         return views(adjust(T.prev(c, T.all), tpr, fpr), adjust(T.prev(c, man_t), tpr, fpr),
                      adjust(T.prev(c, news_t), tpr, fpr), adjust(T.langs(c, langs), tpr[:, None], fpr[:, None]))
 
-    def rc_views(c: np.ndarray, cv: np.ndarray) -> tuple[dict, float, float]:
-        """Regression calibration from per-document test counts c and validation counts cv."""
+    def sc_views(c: np.ndarray, cv: np.ndarray) -> tuple[dict, float, float]:
+        """Slope correction from per-document test counts c and validation counts cv."""
         e_l, g_l = pair_contrasts(V.langs(cv, langs), lpairs), pair_contrasts(V.langs(gold_v, langs), lpairs)
         beta_l = safe_slope(slope(g_l, e_l))
         beta_g = safe_slope(slope(V.prev(gold_v, man_v) - V.prev(gold_v, news_v), V.prev(cv, man_v) - V.prev(cv, news_v)))
         total = T.prev(c, T.all)
-        return (views(total, rc(T.prev(c, man_t), total, beta_g), rc(T.prev(c, news_t), total, beta_g),
-                      rc(T.langs(c, langs), total, beta_l)), beta_l[0], beta_g[0])
+        return (views(total, sc(T.prev(c, man_t), total, beta_g), sc(T.prev(c, news_t), total, beta_g),
+                      sc(T.langs(c, langs), total, beta_l)), beta_l[0], beta_g[0])
 
     gold = cc_views(T.S @ yt)
     gold_doc = T.S @ yt
@@ -152,7 +152,7 @@ def main() -> None:
 
     # ---- reference: the main supervised system, rules refitted on every validation row; metrics on the
     #      mean of its three runs, as in measurement_analysis.py
-    ref_views: dict[str, list[dict]] = {"CC@t*": [], "CC@prev": [], "RC@prev": []}
+    ref_views: dict[str, list[dict]] = {"CC@t*": [], "CC@prev": [], "SC@prev": []}
     decisions = {"test": {}, "val": {}}           # system -> 0/1 labels (main system: one array per run)
     for seed in SEEDS:
         pv, pt = system_probs(REFERENCE, seed, "val"), system_probs(REFERENCE, seed, "test")
@@ -164,8 +164,8 @@ def main() -> None:
         decisions["val"].setdefault(REFERENCE, []).append((pv >= rf.tprev[0]).astype(int))
         ref_views["CC@t*"].append(cc_views(rf.counts("CC@t*", pt, T.S)))
         ref_views["CC@prev"].append(cc_views(c_prev))
-        v, bl, bg = rc_views(c_prev, rf.counts("CC@prev", pv, V.S))
-        ref_views["RC@prev"].append(v)
+        v, bl, bg = sc_views(c_prev, rf.counts("CC@prev", pv, V.S))
+        ref_views["SC@prev"].append(v)
         slopes_used.setdefault(REFERENCE, []).append((bl, bg))
         del c_prev
     for est_name, vs in ref_views.items():
@@ -180,8 +180,8 @@ def main() -> None:
             raise ValueError(f"{system}: test macro-F1 {f1:.4f} differs from the published {published:.3f}")
         record(system, "CC", cc_views(T.S @ dec_t), f1)
         record(system, "ACC", acc_views(dec_t, dec_v))
-        v, bl, bg = rc_views(T.S @ dec_t, V.S @ dec_v)
-        record(system, "RC", v)
+        v, bl, bg = sc_views(T.S @ dec_t, V.S @ dec_v)
+        record(system, "SC", v)
         slopes_used[system] = [(bl, bg)]
 
     # ---- report
@@ -231,7 +231,7 @@ def main() -> None:
                  for system, ests in results.items() for est in ests for k in ["genre", "lpair"]
                  if avg(system, est, f"{k}_reversed") > 0]
     out("\n  Gold-significant contrasts found significant with the WRONG sign: " + ("; ".join(reversals) or "none"))
-    out("  Validation slopes used by RC (language, genre): " + "; ".join(
+    out("  Validation slopes used by SC (language, genre): " + "; ".join(
         f"{s}: " + ", ".join(f"{bl:.2f}/{bg:.2f}" for bl, bg in v) for s, v in slopes_used.items()))
 
     # ---- C. empty answers by group (unparseable answers are among them)

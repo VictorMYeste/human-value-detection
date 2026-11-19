@@ -14,18 +14,18 @@ the ValueEval'24 English test split:
      Reference: the same quantities with everything fitted on the full validation split.
   B. Genre transfer. Every rule is fitted on news validation documents only, and we estimate
      manifesto prevalence and the manifesto-news contrast. With no manifesto validation data
-     the genre slope cannot be estimated, so RC uses the language-pair slope measured within
+     the genre slope cannot be estimated, so SC uses the language-pair slope measured within
      news validation as a proxy: a stress test of borrowing a slope across kinds of contrast.
-     Reference: the full fit, with RC using the genre slope measured on validation.
+     Reference: the full fit, with SC using the genre slope measured on validation.
   C. Language contrasts within news only (full fit): is the attenuation of language contrasts
-     an artefact of languages differing in their share of manifestos? RC uses the language
+     an artefact of languages differing in their share of manifestos? SC uses the language
      slope measured within news validation.
 
 Rules: every estimator of measurement_analysis.py that needs no annotated documents of the
 group being estimated: CC@t* (macro-F1 threshold, the shared-task practice), CC@prev
 (prevalence-matched per-label thresholds), PCC (raw probability average), PCC-Platt
 (calibrated probability average), ACC@prev and PACC (adjusted counts with error rates from the
-validation subset), EM (prior shift, with the subset's Platt maps and prevalence), and RC@prev
+validation subset), EM (prior shift, with the subset's Platt maps and prevalence), and SC@prev
 (CC@prev with group deviations from the corpus total divided by a validation attenuation slope).
 The estimators that use each group's own annotated documents (ACC-G, Gold-only, PPI, Platt-G)
 cannot be computed for a language left out of the fit or for manifestos under a news-only fit:
@@ -54,7 +54,7 @@ from measurement_analysis import (ALPHA, B, MIN_SLOPE, RES, RNG_SEED, SYSTEMS, E
                                   boot_p, ci, document_design, lpair_reference_p, slope, system_probs, system_seeds,
                                   wsum)
 
-RULES = ["CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "PACC", "EM", "RC@prev"]
+RULES = ["CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "PACC", "EM", "SC@prev"]
 
 
 class Groups:
@@ -87,8 +87,8 @@ def safe_slope(beta: np.ndarray) -> np.ndarray:
     return np.where(np.isfinite(beta) & (beta > MIN_SLOPE), beta, 1.0)
 
 
-def rc(group: np.ndarray, total: np.ndarray, beta: np.ndarray) -> np.ndarray:
-    """Regression calibration: divide a group's deviation from the corpus total by the slope."""
+def sc(group: np.ndarray, total: np.ndarray, beta: np.ndarray) -> np.ndarray:
+    """Slope correction: divide a group's deviation from the corpus total by the slope."""
     t = total.reshape(total.shape[0], *([1] * (group.ndim - 2)), total.shape[-1])
     b = beta.reshape(-1, *([1] * (group.ndim - 1)))
     return np.clip(t + (group - t) / b, 0.0, 1.0)
@@ -218,10 +218,10 @@ def main() -> None:
                         beta = val_lang_slope(fit.cv, others)
                     betas.append(beta[0])
                     for r in RULES:
-                        base = "CC@prev" if r == "RC@prev" else r
+                        base = "CC@prev" if r == "SC@prev" else r
                         lp = fit.langs(base)
-                        if r == "RC@prev":
-                            lp = rc(lp, fit.prev(base, T.all), beta)
+                        if r == "SC@prev":
+                            lp = sc(lp, fit.prev(base, T.all), beta)
                         est_c[r].append((lp[:, [li]] - lp[:, oi]).reshape(B + 1, -1))
                         held_prev[r].append(lp[:, li])
                 if scen == "leave-one-language-out":
@@ -236,21 +236,21 @@ def main() -> None:
             beta_genre = val_genre_slope(full.cv)
             for scen, fit, beta in [("full fit", full, beta_genre), ("news-only fit", news_fit, beta_proxy)]:
                 for r in RULES:
-                    base = "CC@prev" if r == "RC@prev" else r
+                    base = "CC@prev" if r == "SC@prev" else r
                     m, n = fit.prev(base, man_t), fit.prev(base, news_t)
-                    if r == "RC@prev":
+                    if r == "SC@prev":
                         total = fit.prev(base, T.all)
-                        m, n = rc(m, total, beta), rc(n, total, beta)
+                        m, n = sc(m, total, beta), sc(n, total, beta)
                     add(f"B {scen}", r, est=m - n, man=m, news=n, beta=beta[0])
 
             # ---- C. language contrasts within news only (full fit), next to all documents
             beta_news_lang = val_lang_slope(full.cv, langs, news_v)
             for scen, mask, beta in [("all documents", None, beta_full_lang), ("news only", news_t, beta_news_lang)]:
                 for r in RULES:
-                    base = "CC@prev" if r == "RC@prev" else r
+                    base = "CC@prev" if r == "SC@prev" else r
                     lp = full.langs(base, mask)
-                    if r == "RC@prev":
-                        lp = rc(lp, full.prev(base, T.all if mask is None else mask), beta)
+                    if r == "SC@prev":
+                        lp = sc(lp, full.prev(base, T.all if mask is None else mask), beta)
                     add(f"C {scen}", r, est=pair_contrasts(lp, lpairs), beta=beta[0])
 
         # ---- metrics on the mean of the runs
@@ -314,20 +314,20 @@ def main() -> None:
                     f"{avg(system, k, r, 'prev_mae'):12.2f} {avg(system, k, r, 'prev_biased'):14.1f}")
         b = np.array(beta_log[system])
         out(f"  validation language slope without the held-out language: {b.min():.2f}-{b.max():.2f} "
-            f"(full fit: {res[(system, 'C all documents', 'RC@prev')]['beta']:.2f})")
+            f"(full fit: {res[(system, 'C all documents', 'SC@prev')]['beta']:.2f})")
     lolo = pd.DataFrame(lolo_rows)
     main_sys = SYSTEMS[0]
     out(f"\n  Each left-out language, {main_sys} (AE item 5): fitted = validation language slope without it;")
     out("  slopes and MAE over its 152 contrasts with the other eight; total err as above.")
-    out(f"  {'language':8s} {'fitted':>6s} {'CC@prev slope':>21s} {'RC@prev slope':>21s} {'MAE CC':>7s} {'MAE RC':>7s} "
-        f"{'total err CC':>13s} {'total err RC':>13s}")
+    out(f"  {'language':8s} {'fitted':>6s} {'CC@prev slope':>21s} {'SC@prev slope':>21s} {'MAE CC':>7s} {'MAE SC':>7s} "
+        f"{'total err CC':>13s} {'total err SC':>13s}")
     sel = lolo[(lolo["system"] == main_sys) & (lolo["fit"] == "leave-one-language-out")].set_index(["rule", "language"])
     for held in langs:
-        cc, rcr = sel.loc[("CC@prev", held)], sel.loc[("RC@prev", held)]
+        cc, scr = sel.loc[("CC@prev", held)], sel.loc[("SC@prev", held)]
         cell = lambda x: f"{x['contrast_slope']:.2f} [{x['contrast_slope_lo']:.2f}, {x['contrast_slope_hi']:.2f}]"
-        out(f"  {held:8s} {cc['fitted_slope']:6.2f} {cell(cc):>21s} {cell(rcr):>21s} {cc['mae']:7.2f} {rcr['mae']:7.2f} "
-            f"{cc['total_err']:13.1f} {rcr['total_err']:13.1f}")
-    for r in ["CC@prev", "RC@prev"]:
+        out(f"  {held:8s} {cc['fitted_slope']:6.2f} {cell(cc):>21s} {cell(scr):>21s} {cc['mae']:7.2f} {scr['mae']:7.2f} "
+            f"{cc['total_err']:13.1f} {scr['total_err']:13.1f}")
+    for r in ["CC@prev", "SC@prev"]:
         x = sel.loc[r]
         out(f"  {r}: contrast slope over the nine languages {x['contrast_slope'].min():.2f}-{x['contrast_slope'].max():.2f} "
             f"(median {x['contrast_slope'].median():.2f}); MAE {x['mae'].min():.2f}-{x['mae'].max():.2f}; "
@@ -336,17 +336,17 @@ def main() -> None:
     out()
     out("=" * 112)
     out("B. GENRE TRANSFER: rules fitted on news validation only; manifesto prevalence and manifesto-news contrasts")
-    out("   With no manifesto validation data, RC divides by the language-pair slope measured within news validation.")
+    out("   With no manifesto validation data, SC divides by the language-pair slope measured within news validation.")
     out("   Total err: |predicted / gold value mentions in manifestos - 1|, %; news: the same for news documents.")
     out("=" * 112)
     for system in SYSTEMS:
         out(f"\n{system}")
         out(f"  {'fit':16s} {'rule':10s} {'genre slope':>20s} {'biased %':>9s} {'MAE pp':>7s} {'total err %':>12s} "
-            f"{'prev MAE pp':>12s} {'biased values':>14s} {'news err %':>11s} {'RC slope':>9s}")
+            f"{'prev MAE pp':>12s} {'biased values':>14s} {'news err %':>11s} {'SC slope':>9s}")
         for scen in ["full fit", "news-only fit"]:
             for r in RULES:
                 k = f"B {scen}"
-                beta = f"{avg(system, k, r, 'beta'):.2f}" if r == "RC@prev" else ""
+                beta = f"{avg(system, k, r, 'beta'):.2f}" if r == "SC@prev" else ""
                 out(f"  {scen:16s} {r:10s} {slope_ci(system, k, r):>20s} {avg(system, k, r, 'biased'):9.1f} "
                     f"{avg(system, k, r, 'mae'):7.2f} {avg(system, k, r, 'total_err'):12.1f} "
                     f"{avg(system, k, r, 'prev_mae'):12.2f} {avg(system, k, r, 'prev_biased'):14.1f} "
@@ -357,15 +357,15 @@ def main() -> None:
     out("C. LANGUAGE CONTRASTS WITHIN NEWS ONLY (full fit), next to all documents")
     out(f"   Gold-significant language-pair contrasts: {n_gold_sig_all} of {len(lpairs) * 19} on all documents, "
         f"{n_gold_sig_news} within news.")
-    out("   RC divides by the language slope measured on validation over the same documents (all / news only).")
+    out("   SC divides by the language slope measured on validation over the same documents (all / news only).")
     out("=" * 112)
     for system in SYSTEMS:
         out(f"\n{system}")
-        out(f"  {'documents':14s} {'rule':10s} {'language slope':>20s} {'biased %':>9s} {'MAE pp':>7s} {'RC slope':>9s}")
+        out(f"  {'documents':14s} {'rule':10s} {'language slope':>20s} {'biased %':>9s} {'MAE pp':>7s} {'SC slope':>9s}")
         for scen in ["all documents", "news only"]:
             for r in RULES:
                 k = f"C {scen}"
-                beta = f"{avg(system, k, r, 'beta'):.2f}" if r == "RC@prev" else ""
+                beta = f"{avg(system, k, r, 'beta'):.2f}" if r == "SC@prev" else ""
                 out(f"  {scen:14s} {r:10s} {slope_ci(system, k, r):>20s} {avg(system, k, r, 'biased'):9.1f} "
                     f"{avg(system, k, r, 'mae'):7.2f} {beta:>9s}")
 

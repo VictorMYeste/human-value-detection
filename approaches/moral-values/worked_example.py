@@ -13,7 +13,7 @@ decision rule can be read as substantive conclusions:
   CC@prev    prevalence-matched per-label thresholds (the recommended rule)
   PCC-Platt  average of Platt-calibrated probabilities
   ACC@prev   adjusted count with pooled validation error rates (standard quantification)
-  RC@prev    CC@prev contrast divided by the attenuation slope of the same contrast on validation
+  SC@prev    CC@prev contrast divided by the attenuation slope of the same contrast on validation
   LLM        Gemma-2-9B few-shot + presence gate labels, counted as they are (single run)
 
 Two versions of the question:
@@ -50,7 +50,7 @@ from shift_tests import Groups, safe_slope
 
 SYSTEM = "Feature ensemble"
 LLM = "Gemma-2-9B few-shot + gate"
-ESTIMATORS = ["CC@0.5", "CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "RC@prev", "LLM"]
+ESTIMATORS = ["CC@0.5", "CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "SC@prev", "LLM"]
 VERSIONS = ["crude", "language-adjusted"]
 SHORT = {v: v.replace("Self-direction", "SD").replace("Security", "Sec.").replace("Conformity", "Conf.")
          .replace("Benevolence", "Benev.").replace("Universalism", "Univ.").replace("Power", "Pow.") for v in VALUES}
@@ -135,7 +135,7 @@ def main() -> None:
         for k in VERSIONS:
             beta = safe_slope(slope(gold_v[k], est_v[k]))
             betas[k].append(float(beta[0]))
-            runs[k]["RC@prev"].append(runs[k]["CC@prev"][-1] / beta[:, None])
+            runs[k]["SC@prev"].append(runs[k]["CC@prev"][-1] / beta[:, None])
     for k, c in T.of(T.G.S @ load_labels(LLM_SYSTEMS[LLM][0], "test")).items():
         runs[k]["LLM"].append(c)
 
@@ -147,7 +147,7 @@ def main() -> None:
         f"(bootstrap, B = {B}); ! = significant with the opposite sign to a significant gold difference.")
     out(f"Language-adjusted: within-language differences weighted by manifesto sentences "
         f"({', '.join(f'{l} {w:.2f}' for l, w in zip(T.langs, T.w))}).")
-    out(f"RC validation slopes (mean over runs): crude {np.mean(betas['crude']):.2f}, "
+    out(f"SC validation slopes (mean over runs): crude {np.mean(betas['crude']):.2f}, "
         f"language-adjusted {np.mean(betas['language-adjusted']):.2f}.")
 
     rows, summ = [], []

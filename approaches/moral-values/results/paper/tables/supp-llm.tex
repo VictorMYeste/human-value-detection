@@ -12,21 +12,21 @@ System, estimator & Macro-F1 & Ratio & MAE & Under / over & Slope [95\% CI] & Bi
 \midrule
 Gemma few-shot + gate, CC & 0.238 & 1.61$^\dagger$ & 2.27 & 4 / 15 & 1.08 [0.77, 1.35] & 26 & 11 & 0.33 [0.25, 0.53] & 12.7 & 0.0 & 0.34 \\
 Gemma few-shot + gate, ACC & -- & 1.31$^\dagger$ & 3.83 & 9 / 3 & 2.38 [1.44, 3.37] & 37 & 0 & 0.81 [0.52, 1.51] & 2.3 & 0.0 & 0.35 \\
-Gemma few-shot + gate, RC & -- & 1.61$^\dagger$ & 2.27 & 4 / 15 & 0.97 [0.67, 1.38] & 26 & 11 & 0.78 [0.50, 1.28] & 7.3 & 0.0 & 0.34 \\
+Gemma few-shot + gate, SC & -- & 1.61$^\dagger$ & 2.27 & 4 / 15 & 0.97 [0.67, 1.38] & 26 & 11 & 0.78 [0.50, 1.28] & 7.3 & 0.0 & 0.34 \\
 \addlinespace
 Gemma few-shot, CC & 0.233 & 1.86$^\dagger$ & 3.01 & 4 / 15 & 1.00 [0.69, 1.29] & 32 & 11 & 0.30 [0.21, 0.52] & 14.0 & 2.4 & 0.29 \\
 Gemma few-shot, ACC & -- & 1.46$^\dagger$ & 4.28 & 9 / 3 & 2.13 [1.23, 3.12] & 37 & 11 & 0.63 [0.33, 1.38] & 2.6 & 0.0 & 0.28 \\
-Gemma few-shot, RC & -- & 1.86$^\dagger$ & 3.01 & 4 / 15 & 0.99 [0.66, 1.48] & 32 & 11 & 0.76 [0.45, 1.34] & 6.3 & 3.2 & 0.29 \\
+Gemma few-shot, SC & -- & 1.86$^\dagger$ & 3.01 & 4 / 15 & 0.99 [0.66, 1.48] & 32 & 11 & 0.76 [0.45, 1.34] & 6.3 & 3.2 & 0.29 \\
 \addlinespace
 Gemma QLoRA, CC & 0.236 & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.31 [0.18, 0.48] & 21 & 0 & 0.37 [0.29, 0.45] & 13.5 & 0.0 & 0.57 \\
 Gemma QLoRA, ACC & -- & 1.08 & 1.14 & 3 / 0 & 3.18 [1.37, 5.44] & 0 & 0 & 2.73 [1.81, 3.17] & 0.0 & 0.0 & 0.59 \\
-Gemma QLoRA, RC & -- & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.98 [0.49, 1.90] & 16 & 0 & 0.67 [0.51, 0.88] & 6.1 & 0.0 & 0.59 \\
+Gemma QLoRA, SC & -- & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.98 [0.49, 1.90] & 16 & 0 & 0.67 [0.51, 0.88] & 6.1 & 0.0 & 0.59 \\
 \addlinespace
 LLM union, CC & 0.277 & 1.80$^\dagger$ & 2.64 & 3 / 15 & 1.16 [0.86, 1.43] & 32 & 11 & 0.53 [0.43, 0.71] & 9.5 & 0.0 & 0.39 \\
 LLM union, ACC & -- & 1.07 & 3.07 & 9 / 2 & 2.23 [1.55, 2.93] & 32 & 0 & 0.99 [0.74, 1.44] & 1.9 & 0.0 & 0.40 \\
-LLM union, RC & -- & 1.80$^\dagger$ & 2.64 & 3 / 15 & 0.98 [0.71, 1.35] & 26 & 11 & 0.78 [0.59, 1.10] & 6.1 & 0.0 & 0.39 \\
+LLM union, SC & -- & 1.80$^\dagger$ & 2.64 & 3 / 15 & 0.98 [0.71, 1.35] & 26 & 11 & 0.78 [0.59, 1.10] & 6.1 & 0.0 & 0.39 \\
 \bottomrule
 \end{tabular*}
 \par\vspace{2pt}
-\begin{minipage}{\textwidth}\scriptsize Single runs. CC: the labels as returned; ACC: adjusted with error rates measured on validation; RC: contrasts divided by the validation slope. Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. MAE in percentage points over the 19 values. Rev.: share of the significant reference contrasts that the method finds significant with the opposite sign. Other columns as in Table~\ref{M-tab:measurement} of the article.\end{minipage}
+\begin{minipage}{\textwidth}\scriptsize Single runs. CC: the labels as returned; ACC: adjusted with error rates measured on validation; SC: contrasts divided by the validation slope. Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. MAE in percentage points over the 19 values. Rev.: share of the significant reference contrasts that the method finds significant with the opposite sign. Other columns as in Table~\ref{M-tab:measurement} of the article.\end{minipage}
 \end{table*}

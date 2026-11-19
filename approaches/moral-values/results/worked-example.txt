@@ -2,12 +2,12 @@ WORKED EXAMPLE -- Which values do manifestos emphasise relative to news? (ValueE
 Main system: Feature ensemble, seeds [42, 7, 1701]; per-value estimates averaged over runs. LLM: Gemma-2-9B few-shot + gate (single run).
 Difference = share of manifesto sentences - share of news sentences, percentage points. * = BH q < 0.05 (bootstrap, B = 2000); ! = significant with the opposite sign to a significant gold difference.
 Language-adjusted: within-language differences weighted by manifesto sentences (BG 0.08, DE 0.28, EL 0.08, EN 0.14, FR 0.07, HE 0.12, IT 0.07, NL 0.11, TR 0.04).
-RC validation slopes (mean over runs): crude 0.92, language-adjusted 0.91.
+SC validation slopes (mean over runs): crude 0.92, language-adjusted 0.91.
 
 ============================================================================================================================
 CRUDE: 9 of 19 gold differences significant
 ============================================================================================================================
-  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   RC@prev       LLM
+  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   SC@prev       LLM
   Univ.: concern             +10.2* [+6.3, +14.5]     +8.1*    +12.1*    +10.5*     +6.5*    +30.4*    +11.4*    +11.2*
   Univ.: nature               +6.1* [+1.7, +11.2]     +6.3*     +7.5*     +6.3*     +4.9*    +11.4*     +6.9*     +7.9*
   Sec.: societal              +6.1* [+2.3, +10.0]     +2.6      +4.9      +3.7      +3.9*     +9.0      +4.0     +11.4*
@@ -36,7 +36,7 @@ CRUDE: 9 of 19 gold differences significant
   CC@prev         7       2         0         1    0.96 [0.80, 1.10]      0.89    0.62      2         3
   PCC-Platt       8       1         0         5    0.66 [0.55, 0.74]      0.91    0.98      3         2
   ACC@prev        4       5         0         0    2.56 [2.01, 3.11]      0.88    3.69      2         2
-  RC@prev         7       2         0         1    1.05 [0.84, 1.35]      0.89    0.74      2         3
+  SC@prev         7       2         0         1    1.05 [0.84, 1.35]      0.89    0.74      2         3
   LLM             6       2         1         3    1.08 [0.77, 1.35]      0.66    2.45      2         0
 
   Significantly more in manifestos:
@@ -46,7 +46,7 @@ CRUDE: 9 of 19 gold differences significant
     CC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
     PCC-Platt  ( 8) Univ.: concern, Univ.: nature, Sec.: societal, Stimulation, Pow.: resources, SD: action, Benev.: caring, Benev.: dependability
     ACC@prev   ( 3) Univ.: concern, Stimulation, Univ.: nature
-    RC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
+    SC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
     LLM        ( 6) Sec.: societal, Univ.: concern, Achievement, Univ.: nature, SD: action, Pow.: resources
   Significantly more in news:
     gold       ( 4) Sec.: personal, Pow.: dominance, Face, Hedonism
@@ -55,13 +55,13 @@ CRUDE: 9 of 19 gold differences significant
     CC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
     PCC-Platt  ( 5) Sec.: personal, Face, Conf.: interpersonal, Hedonism, Humility
     ACC@prev   ( 1) Pow.: dominance
-    RC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    SC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
     LLM        ( 4) Stimulation, Conf.: interpersonal, Hedonism, Face
 
 ============================================================================================================================
 LANGUAGE-ADJUSTED: 9 of 19 gold differences significant
 ============================================================================================================================
-  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   RC@prev       LLM
+  value                             gold [95% CI]    CC@0.5     CC@t*   CC@prev PCC-Platt  ACC@prev   SC@prev       LLM
   Univ.: concern              +9.9* [+6.1, +14.3]     +7.9*    +11.9*    +10.3*     +6.4*    +29.5*    +11.3*    +11.1*
   Sec.: societal              +6.1* [+2.5, +10.3]     +2.5      +4.7      +3.5      +3.8*     +8.7      +3.9     +10.6*
   Univ.: nature               +6.1* [+1.9, +10.8]     +6.4*     +7.6*     +6.4*     +5.0*    +11.4*     +7.0*     +7.9*
@@ -90,7 +90,7 @@ LANGUAGE-ADJUSTED: 9 of 19 gold differences significant
   CC@prev         7       2         0         1    0.97 [0.79, 1.11]      0.85    0.61      2         3
   PCC-Platt       8       1         0         4    0.66 [0.55, 0.75]      0.88    1.00      3         3
   ACC@prev        5       4         0         0    2.51 [1.95, 2.97]      0.85    3.53      2         2
-  RC@prev         7       2         0         1    1.06 [0.86, 1.35]      0.85    0.74      2         3
+  SC@prev         7       2         0         1    1.06 [0.86, 1.35]      0.85    0.74      2         3
   LLM             6       2         1         3    1.04 [0.74, 1.31]      0.58    2.54      2         0
 
   Significantly more in manifestos:
@@ -100,7 +100,7 @@ LANGUAGE-ADJUSTED: 9 of 19 gold differences significant
     CC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
     PCC-Platt  ( 8) Univ.: concern, Univ.: nature, Sec.: societal, Stimulation, Pow.: resources, SD: action, Benev.: caring, Benev.: dependability
     ACC@prev   ( 3) Univ.: concern, Stimulation, Univ.: nature
-    RC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
+    SC@prev    ( 3) Univ.: concern, Stimulation, Univ.: nature
     LLM        ( 6) Univ.: concern, Achievement, Sec.: societal, Univ.: nature, SD: action, Pow.: resources
   Significantly more in news:
     gold       ( 4) Pow.: dominance, Sec.: personal, Face, Hedonism
@@ -109,7 +109,7 @@ LANGUAGE-ADJUSTED: 9 of 19 gold differences significant
     CC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
     PCC-Platt  ( 4) Sec.: personal, Face, Conf.: interpersonal, Hedonism
     ACC@prev   ( 2) Pow.: dominance, Sec.: personal
-    RC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
+    SC@prev    ( 5) Pow.: dominance, Sec.: personal, Face, Conf.: interpersonal, Hedonism
     LLM        ( 4) Stimulation, Conf.: interpersonal, Hedonism, Face
 
 Crude vs language-adjusted gold: rank rho 0.98; significant in crude only: none; in adjusted only: none.

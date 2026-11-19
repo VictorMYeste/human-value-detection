@@ -1,19 +1,23 @@
 \begin{table}[t]
-\caption{Recommendations for measuring values with a classifier}
+\caption{Recommendations for measuring values with a classifier, from the comparisons tested here: two genres and nine source languages of one translated corpus}
 \label{tab:recommendations}
 \centering
 \footnotesize
-\begin{tabular}{@{}p{0.24\columnwidth}p{0.70\columnwidth}@{}}
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.67\columnwidth}@{}}
 \toprule
 Goal & Recommendation \\
 \midrule
-Any analysis & Report how the thresholds were chosen and on which annotated data. \\
+\raggedright Any analysis & Report how the thresholds were chosen, and on how many annotated documents from which groups. \\
 \addlinespace
-Corpus totals & Set each value's threshold so that it is labeled as often as in the validation data, or average calibrated probabilities. Do not count with thresholds tuned for macro-F1. \\
+\raggedright Corpus totals & Set each value's threshold so that it is labeled as often as in the annotated sample, or average calibrated probabilities. With 50 annotated documents, totals were within about 5\% here. Both assume that the corpus resembles the sample, and neither makes each group's total right. Do not count with thresholds tuned for macro-F1. \\
 \addlinespace
-Group comparisons & Divide each difference by the shrinkage measured on validation data for the same kind of comparison (regression calibration), and keep its uncertainty in the intervals. Avoid calibrated averages, which shrink differences, and adjusted counts, unless error rates are equal across groups. \\
+\raggedright Group differences, about 20 or more annotated documents per group & Add the classifier's mean error on each group's annotated documents to its count (prediction-powered estimate), or calibrate it on each group's documents. \\
 \addlinespace
-LLM labels & Check them against annotated data before counting, because corrections fitted on validation data may not repair them. \\
+\raggedright Group differences, fewer annotated documents & Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind. \\
+\addlinespace
+\raggedright Group differences, to avoid & Calibrated averages, which shrink differences. Adjusted counts, which inflate them when the classifier's error rates differ between groups, and are too noisy with error rates measured in each group. \\
+\addlinespace
+\raggedright LLM labels & Check them against annotated documents from each group before counting. Here no correction brought their differences as close to the expert labels as the classifier's counts. \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -36,7 +36,7 @@ both built on CC@prev:
   ACC-G@prev   adjusted count with group-specific error rates: rates estimated on the
                validation documents of each language (language contrasts) or genre (genre
                contrasts); pooled rates for the corpus total;
-  RC@prev      regression calibration of contrasts: group deviations from the corpus total are
+  SC@prev      slope correction of contrasts: group deviations from the corpus total are
                divided by the attenuation slope measured on validation (language-pair contrasts
                for languages, manifesto-news contrasts for genre).
 
@@ -45,7 +45,7 @@ test (AE item 8; measurement-error-rates.csv); H accuracy and coverage; I totals
 contrasts on value composition, which removes the teams' differences in labeling rate (AE item 5).
 
 Estimators that use the annotated validation documents of each group directly (step 5.2, AE
-item 4). Like ACC-G and RC, they need annotated documents from every group being compared:
+item 4). Like ACC-G and SC, they need annotated documents from every group being compared:
   Gold-only    the share of validation sentences with the value in the group: no classifier;
   PPI@prev     prediction-powered (difference) estimate per group: the CC@prev share on test
                plus the mean of (label - CC@prev decision) over the group's validation sentences
@@ -77,7 +77,7 @@ Slopes are least-squares fits through the origin.
 Everything fitted on validation is refitted on every validation resample (documents
 resampled in the same way; independent resamples, paired by index): the thresholds, the
 Platt maps, the error rates of ACC, PACC and ACC-G, the prior of EM and the attenuation
-slopes of RC (class RowFits). Validation sampling error therefore enters every interval.
+slopes of SC (class RowFits). Validation sampling error therefore enters every interval.
 
 Usage:
     python3 measurement_analysis.py
@@ -109,13 +109,13 @@ ENS_MEMBERS = ["Baseline", "Lex-LIWC-22", "Previous-Sentences-2"]
 SYSTEMS = ["Feature ensemble", "DeBERTa", "RoBERTa", "Seed ensemble"]
 CLASSIFY_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev", "PCC", "PCC-Platt"]
 QUANT_RULES = ["ACC@t*", "ACC@prev", "PACC", "EM"]
-GROUP_RULES = ["ACC-G@prev", "RC@prev"]
+GROUP_RULES = ["ACC-G@prev", "SC@prev"]
 ANNOT_RULES = ["Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"]   # use each group's annotated documents
 RULES = CLASSIFY_RULES + QUANT_RULES + GROUP_RULES + ANNOT_RULES
 CC_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]
 EM_BIN_WIDTH = 0.1    # EM works on per-group histograms of raw logits, with bins of 0.1 logit
 EM_STEPS = 40         # at most this many Newton (or bisection) steps for the maximum-likelihood prior
-MIN_SLOPE = 0.05      # RC falls back to no correction if the validation slope is below this
+MIN_SLOPE = 0.05      # SC falls back to no correction if the validation slope is below this
 RARE = 0.02          # values below 2% gold test prevalence count as rare
 MIN_DOC_SENTS = 10   # documents shorter than this are excluded from the document-level analysis
 ALPHA = 0.05
@@ -295,7 +295,7 @@ def lpair_reference_p(d: np.ndarray, gold_doc: np.ndarray, nsent: np.ndarray, la
 def slope(g: np.ndarray, e: np.ndarray) -> np.ndarray:
     """Least-squares slope of estimated on gold contrasts through the origin, per bootstrap row
     (1 = no attenuation). A contrast changes sign with the order of its two groups; a fit through
-    the origin does not depend on that order, and it matches RC, which divides by the slope alone."""
+    the origin does not depend on that order, and it matches SC, which divides by the slope alone."""
     return (g * e).sum(1) / (g ** 2).sum(1)
 
 
@@ -458,7 +458,7 @@ class RowFits:
     """Decision rules refitted on every validation bootstrap row (row 0 = the original sample).
 
     Thresholds and Platt maps are refitted on each resample of validation documents, so their
-    fitting error enters every interval, as the error rates of ACC and the slopes of RC do.
+    fitting error enters every interval, as the error rates of ACC and the slopes of SC do.
       t*      the 0.01-grid threshold that maximises the row's weighted macro-F1 (ties -> lowest);
       t_j     per-label grid thresholds that maximise each label's weighted F1;
       prev    per-label thresholds at the weighted (1 - prevalence) quantile of the row's
@@ -737,7 +737,7 @@ def main() -> None:
             "doc": adjust(gl["doc"], *doc_rates),
         })
 
-    def regression_calibrated(gl: dict, beta_lang: np.ndarray, beta_genre: np.ndarray, stats: dict) -> dict:
+    def slope_corrected(gl: dict, beta_lang: np.ndarray, beta_genre: np.ndarray, stats: dict) -> dict:
         """Divide group deviations from the corpus total by the validation attenuation slope."""
         fixed = {}
         for name, beta in [("lang", beta_lang), ("genre", beta_genre)]:
@@ -874,8 +874,8 @@ def main() -> None:
                 by_lang=tuple(np.stack(x, axis=1) for x in zip(*[rates("CC@prev", m) for m in lang_masks_v]))))
             beta_lang, beta_genre = val_slopes(vcounts["CC@prev"][0] + vcounts["CC@prev"][1], gold_v_doc)
             slopes_v[system].append((beta_lang[0], beta_genre[0]))
-            rows[system]["RC@prev"].append(regression_calibrated(gl["CC@prev"], beta_lang, beta_genre,
-                                                                 qs["RC@prev"]))
+            rows[system]["SC@prev"].append(slope_corrected(gl["CC@prev"], beta_lang, beta_genre,
+                                                                 qs["SC@prev"]))
 
             # estimators that use each group's annotated validation documents (step 5.2, AE item 4)
             rows[system]["Gold-only"].append(derive({**gold_vgl, "doc": nodoc}))
@@ -1076,7 +1076,7 @@ def main() -> None:
     out("=" * 108)
     out("F. QUANTIFICATION DIAGNOSTICS (original sample, summed over runs)")
     out("   Cells: group x value estimates (corpus, manifestos, news, 9 languages = 12 groups x 19 values per run).")
-    out("   Fallback: tpr - fpr <= 0 or undefined, so the adjusted count reverts to CC (for RC: slope <= "
+    out("   Fallback: tpr - fpr <= 0 or undefined, so the adjusted count reverts to CC (for SC: slope <= "
         f"{MIN_SLOPE}, no correction).")
     out("   At 0 / at 1: raw estimate below 0 or above 1 before clipping (EM: solution on the boundary;")
     out("   PPI: estimates below 0 or above 1, which are kept, because clipping would bias them).")
@@ -1085,7 +1085,7 @@ def main() -> None:
         out(f"\n{system}")
         for r in QUANT_RULES + GROUP_RULES + ["PPI@prev", "PPI-Platt"]:
             q = qstats[system][r]
-            if r == "RC@prev":
+            if r == "SC@prev":
                 line = f"  {r:12s} slopes {q['cells']:4d}   fallback {q['fallback']:d}"
             else:
                 line = f"  {r:12s} cells {q['cells']:5d}   fallback {100 * q['fallback'] / max(q['cells'], 1):5.1f}%"

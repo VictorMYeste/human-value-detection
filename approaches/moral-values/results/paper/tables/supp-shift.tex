@@ -8,7 +8,7 @@
 \toprule
  & \multicolumn{4}{c}{(a) One language left out of the fit} & \multicolumn{3}{c}{(b) Fitted on news only} & \multicolumn{2}{c}{(c) Within news} \\
 \cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(l){9-10}
-System & CC slope & RC slope [95\% CI] & RC bias (\%) & CC total err.\ (\%) & CC slope & RC slope [95\% CI] & RC bias (\%) & CC slope & RC slope \\
+System & CC slope & SC slope [95\% CI] & SC bias (\%) & CC total err.\ (\%) & CC slope & SC slope [95\% CI] & SC bias (\%) & CC slope & SC slope \\
 \midrule
 \textbf{Feature ensemble} & 0.57 & 0.98 [0.78, 1.18] & 0.0 & 18.5 & 0.97 & 1.48 [1.17, 1.84] & 0 & 0.58 & 0.87 \\
 DeBERTa & 0.52 & 0.94 [0.75, 1.15] & 0.0 & 20.2 & 0.91 & 1.48 [1.17, 1.86] & 5 & 0.53 & 0.84 \\
@@ -17,5 +17,5 @@ Seed ensemble & 0.54 & 0.94 [0.75, 1.15] & 0.0 & 19.6 & 0.92 & 1.44 [1.11, 1.80]
 \bottomrule
 \end{tabular*}
 \par\vspace{2pt}
-\begin{minipage}{\textwidth}\scriptsize CC: prevalence-matched thresholds; RC: regression calibration on the same counts. (a) Thresholds and slope fitted without the language whose contrasts are estimated (contrasts of that language with the other eight, pooled over languages); total err.: mean absolute error of the left-out language's value mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with RC borrowing the language slope. (c) Language-pair contrasts within news documents. Means of three training runs (seed ensemble: one system).\end{minipage}
+\begin{minipage}{\textwidth}\scriptsize CC: prevalence-matched thresholds; SC: slope correction on the same counts. (a) Thresholds and slope fitted without the language whose contrasts are estimated (contrasts of that language with the other eight, pooled over languages); total err.: mean absolute error of the left-out language's value mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with SC borrowing the language slope. (c) Language-pair contrasts within news documents. Means of three training runs (seed ensemble: one system).\end{minipage}
 \end{table*}

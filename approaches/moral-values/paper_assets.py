@@ -13,7 +13,6 @@ with the bootstrap shared by every script.
 
 Writes to results/paper/:
     figures/fig1-prevalence.pdf   per-value prevalence bias of three decision rules (full width)
-    figures/fig2-slopes.pdf       contrast attenuation slopes by estimator (column width)
     figures/fig3-shift.pdf        slopes when a language or genre is left out of the fit (column width)
     figures/fig4-worked.pdf       worked example: manifesto-news differences (full width)
     tables/tab1-data.tex ... tab5-recommendations.tex   LaTeX tables (IEEEtran + booktabs)
@@ -69,9 +68,11 @@ LABEL = {  # math in $...$ renders in matplotlib mathtext and in LaTeX alike
     "CC@0.5": "CC, $t = 0.5$", "CC@t*": "CC, macro-F1 $t^*$", "CC@label-t*": "CC, per-label F1 $t_j$",
     "CC@prev": "CC, prevalence-matched", "PCC": "PCC, raw", "PCC-Platt": "PCC, Platt",
     "ACC@t*": "ACC, $t^*$", "ACC@prev": "ACC, prevalence-matched", "PACC": "PACC", "EM": "EM",
-    "ACC-G@prev": "ACC-G, prevalence-matched", "RC@prev": "RC, prevalence-matched",
+    "ACC-G@prev": "ACC-G, prevalence-matched", "SC@prev": "SC, prevalence-matched",
+    "Gold-only": "Annotated share", "PPI@prev": "PPI, prevalence-matched", "PPI-Platt": "PPI, Platt",
+    "Platt-G": "Platt per group",
 }
-RECOMMENDED = {"CC@prev", "RC@prev"}
+RECOMMENDED = {"CC@prev", "PPI-Platt", "Platt-G"}   # the methods Table IV recommends (step 5.2 E)
 
 
 def save(fig, name: str) -> None:
@@ -157,45 +158,9 @@ def figure1_prevalence() -> None:
     plt.close(fig)
 
 
-def figure2_slopes(summary: pd.DataFrame) -> None:
-    """Attenuation slopes of genre and language contrasts by estimator (main system and others)."""
-    rules = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev", "PCC", "PCC-Platt",
-             "ACC@t*", "ACC@prev", "PACC", "EM", "ACC-G@prev", "RC@prev"]
-    breaks = {"CC@prev", "PCC-Platt", "ACC-G@prev"}
-    y = np.arange(len(rules))[::-1].astype(float)
-    fig, axes = new_figure(COL_W, 3.1, 1, 2, sharey=True)
-    for ax, key, title in [(axes[0], "genre", "(a) Manifesto vs. news"), (axes[1], "lpair", "(b) Language pairs")]:
-        ax.axvline(1, color=INK2, lw=0.7, zorder=1)
-        for i, r in enumerate(rules):
-            for system in OTHERS:
-                v = summary.loc[(system, r), f"{key}_slope"]
-                ax.plot([v], [y[i] - 0.22], marker="o", ms=2.4, mfc="white", mec=MUTED, mew=0.6, ls="none", zorder=2)
-            m = summary.loc[(MAIN, r)]
-            ci_bar(ax, m[f"{key}_slope"], m[f"{key}_slope_lo"], m[f"{key}_slope_hi"], y[i] + 0.08, BLUE, "o")
-            if r in breaks:
-                ax.axhline(y[i] - 0.5, color=GRID, lw=0.6, zorder=0)
-        ax.set_xscale("log")
-        ticks = [0.25, 0.5, 1, 2, 4]
-        ax.set_xticks(ticks, ["¼", "½", "1", "2", "4"])
-        ax.set_xlim(0.22, 5.2)
-        ax.set_title(title, loc="left")
-        style_axis(ax)
-    axes[0].set_yticks(y, [LABEL[r] for r in rules])
-    for t, r in zip(axes[0].get_yticklabels(), rules):
-        if r in RECOMMENDED:
-            t.set_fontweight("bold")
-    axes[0].set_ylim(-0.7, len(rules) - 0.3)
-    fig.supxlabel("Attenuation slope (log scale; 1 = differences keep their size)", fontsize=8)
-    fig.legend(handles=[Line2D([], [], color=BLUE, marker="o", ms=3.6, lw=0.8, label=f"{MAIN} (95% CI)"),
-                        Line2D([], [], color=MUTED, marker="o", ms=2.4, mfc="white", lw=0, label="other systems")],
-               loc="outside upper center", ncol=2, handletextpad=0.3, columnspacing=1.2)
-    save(fig, "fig2-slopes.pdf")
-    plt.close(fig)
-
-
 def figure3_shift(shift: pd.DataFrame) -> None:
     """Contrast slopes with every group in the fit vs with a language or genre left out."""
-    rules = ["CC@t*", "CC@prev", "PCC-Platt", "RC@prev"]
+    rules = ["CC@t*", "CC@prev", "PCC-Platt", "SC@prev"]
     s = shift[shift["system"] == MAIN].set_index(["scenario", "rule"])
     panels = [("A full fit", "A leave-one-language-out", "(a) Language pairs; each language left out in turn"),
               ("B full fit", "B news-only fit", "(b) Manifesto vs. news; fitted on news only")]
@@ -215,7 +180,7 @@ def figure3_shift(shift: pd.DataFrame) -> None:
         ax.set_title(title, loc="left")
         ax.set_ylim(-0.6, len(rules) - 0.4)
         style_axis(ax)
-    b = s.loc[("B news-only fit", "RC@prev")]
+    b = s.loc[("B news-only fit", "SC@prev")]
     axes[1].annotate("slope borrowed from\nlanguage pairs", xy=(b["slope"], y[-1] - 0.17),
                      xytext=(1.45, y[-1] + 1.4), fontsize=6.5, color=INK2, va="center",
                      arrowprops={"arrowstyle": "-", "color": MUTED, "lw": 0.5})
@@ -322,7 +287,7 @@ def table2_classification(llm: pd.DataFrame) -> None:
                          r"Thresholds are fitted on the validation split: F1-tuned ones on a grid of 0.01--0.99, "
                          r"prevalence-matched ones as quantiles of the validation probabilities. Bold: main system. "
                          r"The seed ensemble averages three training runs of DeBERTa and is reported as one system. "
-                         r"LLM labels are in Table~\ref{tab:measurement}, and models with auxiliary inputs and presence "
+                         r"LLM labels are in Table~\ref{S-tab:llm}, and models with auxiliary inputs and presence "
                          r"gates in Table~\ref{S-tab:classification-full} of the supplement.", include_llm=False)
     classification_table(llm, ["DeBERTa", "DeBERTa + LIWC-22", "DeBERTa + MJD", "DeBERTa + Prev-2", "DeBERTa + BERTopic",
                                "DeBERTa + soft gate", "DeBERTa + hard gate 0.10", "DeBERTa + hard gate tuned", "RoBERTa",
@@ -382,12 +347,14 @@ System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t
 """)
 
 
-def table3_measurement(summary: pd.DataFrame, llm: pd.DataFrame) -> None:
+def table3_measurement(summary: pd.DataFrame) -> None:
+    """Main system only (step 5.2 E): accuracy (MAE) and coverage for totals and both families of contrasts,
+    with the estimators that use each group's annotated documents. LLM rows are in Table S13."""
     def excl1(v, lo, hi):
         return f"{v:.2f}" + (r"$^\dagger$" if lo > 1 or hi < 1 else "")
 
     def slope_cell(v, lo, hi):
-        return f"{v:.2f} [{lo:.2f}, {hi:.2f}]"
+        return "--" if pd.isna(v) else f"{v:.2f} [{lo:.2f}, {hi:.2f}]"
 
     def f1(v):
         return "--" if pd.isna(v) else f"{v:.3f}"
@@ -395,50 +362,38 @@ def table3_measurement(summary: pd.DataFrame, llm: pd.DataFrame) -> None:
     groups = [("Decision rules (classify and count)", ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]),
               ("Probability averages", ["PCC", "PCC-Platt"]),
               ("Quantification methods", ["ACC@t*", "ACC@prev", "PACC", "EM", "ACC-G@prev"]),
-              ("Contrast correction (regression calibration)", ["RC@prev"])]
+              ("Slope correction", ["SC@prev"]),
+              ("Estimates from each group's annotated documents", ["Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"])]
     lines = []
     for title, rules in groups:
-        lines.append(f"\\multicolumn{{10}}{{@{{}}l}}{{\\emph{{{title}}}}}" + r" \\")
+        lines.append(f"\\multicolumn{{11}}{{@{{}}l}}{{\\emph{{{title}}}}}" + r" \\")
         for r in rules:
             m = summary.loc[(MAIN, r)]
             name = f"\\textbf{{{LABEL[r]}}}" if r in RECOMMENDED else LABEL[r]
             lines.append(" & ".join([
                 r"\quad " + name, f1(m.macro_f1), excl1(m.ratio, m.ratio_lo, m.ratio_hi), f"{m.prev_mae:.2f}",
-                f"{m.biased_under:.0f} / {m.biased_over:.0f}",  # counts of values, on the mean of the runs
-                slope_cell(m.genre_slope, m.genre_slope_lo, m.genre_slope_hi), f"{m.genre_biased:.0f}",
-                slope_cell(m.lpair_slope, m.lpair_slope_lo, m.lpair_slope_hi), f"{m.lpair_biased:.1f}",
-                f"{m.lang_rank_rho:.2f}"]) + r" \\")
-    lines.append(r"\multicolumn{10}{@{}l}{\emph{LLM labels (single runs)}} \\")
-    llm_rows = [("Gemma-2-9B few-shot + gate", "CC", "Gemma few-shot + gate, CC"),
-                ("Gemma-2-9B few-shot + gate", "ACC", "Gemma few-shot + gate, ACC"),
-                ("Gemma-2-9B few-shot + gate", "RC", "Gemma few-shot + gate, RC"),
-                ("Gemma-2-9B few-shot", "CC", "Gemma few-shot, CC"),
-                ("Gemma-2-9B QLoRA", "CC", "Gemma QLoRA, CC"),
-                ("LLM ensemble (hard vote)", "CC", "LLM union, CC")]
-    for s, est, label in llm_rows:
-        m = llm.loc[(s, est)]
-        lines.append(" & ".join([
-            r"\quad " + label, f1(m.macro_f1), excl1(m.ratio, m.ratio_lo, m.ratio_hi), f"{m.mae:.2f}",
-            f"{m.under:.0f} / {m.over:.0f}", slope_cell(m.genre_slope, m.genre_slope_lo, m.genre_slope_hi),
-            f"{m.genre_biased:.0f}", slope_cell(m.lpair_slope, m.lpair_slope_lo, m.lpair_slope_hi),
-            f"{m.lpair_biased:.1f}", f"{m.rho:.2f}"]) + r" \\")
+                f"{m.prev_cover:.0f}",
+                slope_cell(m.genre_slope, m.genre_slope_lo, m.genre_slope_hi), f"{m.genre_mae:.2f}",
+                f"{m.genre_cover:.0f}",
+                slope_cell(m.lpair_slope, m.lpair_slope_lo, m.lpair_slope_hi), f"{m.lpair_mae:.2f}",
+                f"{m.lpair_cover:.0f}"]) + r" \\")
     write_table("tab3-measurement.tex", r"""
 \begin{table*}[t]
-\caption{Measurement: corpus prevalence, manifesto--news contrasts (19) and source-language pair contrasts (684) for the main system and for LLM labels}
+\caption{Measurement: corpus prevalence of the 19 values, manifesto--news contrasts (19) and source-language pair contrasts (684), main system}
 \label{tab:measurement}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lccccccccc@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccccccc@{}}
 \toprule
- & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{2}{c}{Manifesto vs.\ news} & \multicolumn{3}{c}{Language pairs} \\
-\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-10}
-Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
+ & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{3}{c}{Manifesto vs.\ news} & \multicolumn{3}{c}{Language pairs} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(l){9-11}
+Method & Macro-F1 & Pred./ref. & MAE & Cover & Slope [95\% CI] & MAE & Cover & Slope [95\% CI] & MAE & Cover \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
-\end{tabular}
+\multicolumn{11}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. MAE: mean absolute error in percentage points, over the 19 values or the contrasts. Cover: share of values or contrasts (\%) whose error is within sampling noise (paired document bootstrap, $p \geq 0.05$), about 95 for an unbiased method. Slope: attenuation slope (Section~\ref{sec:attenuation}, 1 = differences keep their size), not shown for estimates from other annotated documents (Section~\ref{sec:metrics}). LLM labels: Table~\ref{S-tab:llm} of the supplement.}
+\end{tabular*}
 \end{table*}
 """)
 
@@ -448,7 +403,7 @@ def table4_worked(worked: pd.DataFrame, values: pd.DataFrame) -> None:
     ref = values[(values["version"] == "crude") & (values["estimator"] == "gold")]
     n_sig = int(ref["significant"].sum()); n_other = len(ref) - n_sig
     names = {"CC@0.5": "CC, $t = 0.5$", "CC@t*": "CC, macro-F1 $t^*$", "CC@prev": r"\textbf{CC, prev.-matched}",
-             "PCC-Platt": "PCC, Platt", "ACC@prev": "ACC, prev.-matched", "RC@prev": r"\textbf{RC, prev.-matched}",
+             "PCC-Platt": "PCC, Platt", "ACC@prev": "ACC, prev.-matched", "SC@prev": r"\textbf{SC, prev.-matched}",
              "LLM": "Gemma few-shot + gate"}
     lines = [f"{names[e]} & {w.loc[e, 'found']:.0f} & {w.loc[e, 'missed']:.0f} & {w.loc[e, 'reversed']:.0f} & "
              f"{w.loc[e, 'spurious']:.0f} & {w.loc[e, 'slope']:.2f} & {w.loc[e, 'mae']:.2f}" + r" \\" for e in names]
@@ -472,20 +427,23 @@ Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 
 
 def table5_recommendations() -> None:
+    # step 5.2 E: from the results of steps B-D (annotated-sample estimators, subsampling, LLM checks)
     rows = [
-        ("Any analysis", "Report how the thresholds were chosen and on which annotated data."),
-        ("Corpus totals", "Set each value's threshold so that it is labeled as often as in the validation data, or average calibrated probabilities. Do not count with thresholds tuned for macro-F1."),
-        ("Group comparisons", "Divide each difference by the shrinkage measured on validation data for the same kind of comparison (regression calibration), and keep its uncertainty in the intervals. Avoid calibrated averages, which shrink differences, and adjusted counts, unless error rates are equal across groups."),
-        ("LLM labels", "Check them against annotated data before counting, because corrections fitted on validation data may not repair them."),
+        ("Any analysis", r"Report how the thresholds were chosen, and on how many annotated documents from which groups."),
+        ("Corpus totals", r"Set each value's threshold so that it is labeled as often as in the annotated sample, or average calibrated probabilities. With 50 annotated documents, totals were within about 5\% here. Both assume that the corpus resembles the sample, and neither makes each group's total right. Do not count with thresholds tuned for macro-F1."),
+        ("Group differences, about 20 or more annotated documents per group", r"Add the classifier's mean error on each group's annotated documents to its count (prediction-powered estimate), or calibrate it on each group's documents."),
+        ("Group differences, fewer annotated documents", r"Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind."),
+        ("Group differences, to avoid", r"Calibrated averages, which shrink differences. Adjusted counts, which inflate them when the classifier's error rates differ between groups, and are too noisy with error rates measured in each group."),
+        ("LLM labels", r"Check them against annotated documents from each group before counting. Here no correction brought their differences as close to the expert labels as the classifier's counts."),
     ]
-    lines = [f"{a} & {b}" + r" \\" for a, b in rows]
+    lines = [r"\raggedright " + f"{a} & {b}" + r" \\" for a, b in rows]   # ragged goal labels, local to the cell
     write_table("tab5-recommendations.tex", r"""
 \begin{table}[t]
-\caption{Recommendations for measuring values with a classifier}
+\caption{Recommendations for measuring values with a classifier, from the comparisons tested here: two genres and nine source languages of one translated corpus}
 \label{tab:recommendations}
 \centering
 \footnotesize
-\begin{tabular}{@{}p{0.24\columnwidth}p{0.70\columnwidth}@{}}
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.67\columnwidth}@{}}
 \toprule
 Goal & Recommendation \\
 \midrule
@@ -506,12 +464,11 @@ def main() -> None:
     worked_summary = pd.read_csv(RES / "worked-example-summary.csv")
 
     figure1_prevalence()
-    figure2_slopes(summary)
     figure3_shift(shift)
     figure4_worked(worked_values)
     table1_data()
     table2_classification(llm)
-    table3_measurement(summary, llm)
+    table3_measurement(summary)
     table4_worked(worked_summary, worked_values)
     table5_recommendations()
     print(f"Wrote {len(list(FIG.glob('*.pdf')))} figures to {FIG} and {len(list(TAB.glob('*.tex')))} tables to {TAB}")

@@ -82,7 +82,7 @@ SHOTS = [1, 2, 4, 8, 12, 16, 20]
 LLM_SYSTEMS = {"Gemma-2-9B few-shot + gate": "Gemma few-shot + gate", "Gemma-2-9B few-shot": "Gemma few-shot",
                "Gemma-2-9B QLoRA": "Gemma QLoRA", "LLM ensemble (hard vote)": "LLM union"}
 ALL_RULES = ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev", "PCC", "PCC-Platt", "ACC@t*", "ACC@prev", "PACC", "EM",
-             "ACC-G@prev", "RC@prev"]
+             "ACC-G@prev", "SC@prev"]
 
 
 # ============================================================================ formatting
@@ -249,14 +249,14 @@ def table_comparisons() -> None:
 def table_prevalence() -> None:
     v = pd.read_csv(RES / "measurement-per-value.csv")
     v = v[v.system == MAIN].sort_values("gold_prev", ascending=False)
-    cols = ["CC@0.5", "CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "EM", "RC@prev"]
+    cols = ["CC@0.5", "CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "EM", "SC@prev"]
     rows = []
     for _, r in v.iterrows():
         rows.append(f"{r.value} & {100 * r.gold_prev:.2f} [{100 * r.gold_lo:.2f}, {100 * r.gold_hi:.2f}] & "
-                    + " & ".join(f"{100 * r[c]:.2f}" for c in cols if c != "RC@prev") + r" \\")
+                    + " & ".join(f"{100 * r[c]:.2f}" for c in cols if c != "SC@prev") + r" \\")
     # drop the method name where the group header already gives it ("PCC, raw" -> "raw"); keep "ACC, ..."
     head = " & ".join(re.sub(r"^P?CC, ", "", LABEL[c]).replace("prevalence-matched", "prev.-matched")
-                      for c in cols if c != "RC@prev")
+                      for c in cols if c != "SC@prev")
     write_table("supp-prevalence.tex", table(
         "table*", "Corpus prevalence of each value on the test split: reference and estimates of the main system (\\%)",
         "tab:prevalence", r"@{}lcccccccc@{}",
@@ -264,7 +264,7 @@ def table_prevalence() -> None:
         r"\multicolumn{2}{c}{Quantification} \\" "\n" r"\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}"
         "\n" rf"Value & Reference [95\% CI] & {head} \\", rows,
         r"Share of test sentences with the value, in percent; estimates are means over three training runs. "
-        r"Values sorted by reference prevalence. RC leaves the corpus total unchanged, so its column equals "
+        r"Values sorted by reference prevalence. SC leaves the corpus total unchanged, so its column equals "
         r"prevalence-matched classify and count. Fig.~\ref{M-fig:prevalence} of the article plots the ratios of the first three columns."))
 
 
@@ -370,8 +370,8 @@ def figure_language_contrasts() -> None:
     sig = lc.gold_sig.to_numpy(bool)
     g = 100 * lc.gold_diff.to_numpy()
     fig, axes = new_figure(COL_W, 2.15, 1, 2, sharey=True)
-    lim = np.ceil(np.abs(np.r_[g, 100 * lc["CC@prev"], 100 * lc["RC@prev"]]).max())
-    for ax, rule, tag in [(axes[0], "CC@prev", "(a)"), (axes[1], "RC@prev", "(b)")]:
+    lim = np.ceil(np.abs(np.r_[g, 100 * lc["CC@prev"], 100 * lc["SC@prev"]]).max())
+    for ax, rule, tag in [(axes[0], "CC@prev", "(a)"), (axes[1], "SC@prev", "(b)")]:
         e = 100 * lc[rule].to_numpy()
         ax.plot([-lim, lim], [-lim, lim], color=MUTED, lw=0.7, ls=(0, (3, 2)), zorder=1)
         ax.scatter(g[~sig], e[~sig], s=4, color=GRID, edgecolors=MUTED, linewidths=0.3, zorder=2)
@@ -394,7 +394,7 @@ def table_worked_values() -> None:
     w = w[w.version == "crude"]
     gold = w[w.estimator == "gold"].set_index("value")
     order = gold.sort_values("diff_pp", ascending=False).index
-    est = ["CC@0.5", "CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "RC@prev", "LLM"]
+    est = ["CC@0.5", "CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "SC@prev", "LLM"]
     piv = w.set_index(["value", "estimator"])
     rows = []
     for v in order:
@@ -408,7 +408,7 @@ def table_worked_values() -> None:
                 mark = r"$^\ddagger$" if gr.significant and np.sign(x.diff_pp) != np.sign(gr.diff_pp) else r"$^*$"
             cells.append(signed(x.diff_pp) + mark)
         rows.append(f"{v} & " + " & ".join(cells) + r" \\")
-    head = ["CC, $t = 0.5$", "CC, $t^*$", "CC, prev.", "PCC, Platt", "ACC, prev.", "RC, prev.", "LLM"]
+    head = ["CC, $t = 0.5$", "CC, $t^*$", "CC, prev.", "PCC, Platt", "ACC, prev.", "SC, prev.", "LLM"]
     write_table("supp-worked-values.tex", table(
         "table*", "Worked example: manifesto minus news difference for each value (percentage points)",
         "tab:worked-values", r"@{}lcccccccc@{}",
@@ -427,25 +427,25 @@ def table_shift() -> None:
     for sysname in SUPERVISED:
         def get(sc, r):
             return s.loc[(sysname, sc, r)]
-        lo_cc, lo_rc = get("A leave-one-language-out", "CC@prev"), get("A leave-one-language-out", "RC@prev")
-        nw_cc, nw_rc = get("B news-only fit", "CC@prev"), get("B news-only fit", "RC@prev")
-        wn_cc, wn_rc = get("C news only", "CC@prev"), get("C news only", "RC@prev")
+        lo_cc, lo_sc = get("A leave-one-language-out", "CC@prev"), get("A leave-one-language-out", "SC@prev")
+        nw_cc, nw_sc = get("B news-only fit", "CC@prev"), get("B news-only fit", "SC@prev")
+        wn_cc, wn_sc = get("C news only", "CC@prev"), get("C news only", "SC@prev")
         name = r"\textbf{Feature ensemble}" if sysname == MAIN else sysname
         rows.append(" & ".join([
-            name, f"{lo_cc.slope:.2f}", interval(lo_rc.slope, lo_rc.slope_lo, lo_rc.slope_hi), f"{lo_rc.biased:.1f}",
-            f"{lo_cc.total_err:.1f}", f"{nw_cc.slope:.2f}", interval(nw_rc.slope, nw_rc.slope_lo, nw_rc.slope_hi),
-            f"{nw_rc.biased:.0f}", f"{wn_cc.slope:.2f}", f"{wn_rc.slope:.2f}"]) + r" \\")
+            name, f"{lo_cc.slope:.2f}", interval(lo_sc.slope, lo_sc.slope_lo, lo_sc.slope_hi), f"{lo_sc.biased:.1f}",
+            f"{lo_cc.total_err:.1f}", f"{nw_cc.slope:.2f}", interval(nw_sc.slope, nw_sc.slope_lo, nw_sc.slope_hi),
+            f"{nw_sc.biased:.0f}", f"{wn_cc.slope:.2f}", f"{wn_sc.slope:.2f}"]) + r" \\")
     write_table("supp-shift.tex", table(
         "table*", "Shift tests for every supervised system", "tab:shift", r"@{}l cccc ccc cc@{}",
         r" & \multicolumn{4}{c}{(a) One language left out of the fit} & \multicolumn{3}{c}{(b) Fitted on news only} "
         r"& \multicolumn{2}{c}{(c) Within news} \\"
         "\n" r"\cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(l){9-10}"
-        "\n" r"System & CC slope & RC slope [95\% CI] & RC bias (\%) & CC total err.\ (\%) & CC slope & "
-        r"RC slope [95\% CI] & RC bias (\%) & CC slope & RC slope \\", rows,
-        r"CC: prevalence-matched thresholds; RC: regression calibration on the same counts. (a) Thresholds and "
+        "\n" r"System & CC slope & SC slope [95\% CI] & SC bias (\%) & CC total err.\ (\%) & CC slope & "
+        r"SC slope [95\% CI] & SC bias (\%) & CC slope & SC slope \\", rows,
+        r"CC: prevalence-matched thresholds; SC: slope correction on the same counts. (a) Thresholds and "
         r"slope fitted without the language whose contrasts are estimated (contrasts of that language with the "
         r"other eight, pooled over languages); total err.: mean absolute error of the left-out language's value "
-        r"mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with RC borrowing the "
+        r"mentions. (b) Rules fitted on news validation documents; manifesto--news contrasts, with SC borrowing the "
         r"language slope. (c) Language-pair contrasts within news documents. Means of three training runs (seed "
         r"ensemble: one system).", size=r"\scriptsize", colsep="3pt"))
 
@@ -454,7 +454,7 @@ def table_llm() -> None:
     m = pd.read_csv(RES / "llm-measurement.csv").set_index(["system", "estimator"])
     rows = []
     for s, name in LLM_SYSTEMS.items():
-        for e in ["CC", "ACC", "RC"]:
+        for e in ["CC", "ACC", "SC"]:
             x = m.loc[(s, e)]
             f1 = "--" if pd.isna(x.macro_f1) else f"{x.macro_f1:.3f}"
             rows.append(" & ".join([
@@ -471,7 +471,7 @@ def table_llm() -> None:
         "\n" r"\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(l){9-12}"
         "\n" r"System, estimator & Macro-F1 & Ratio & MAE & Under / over & Slope [95\% CI] & Bias (\%) & Rev.\ (\%) "
         r"& Slope [95\% CI] & Bias (\%) & Rev.\ (\%) & Rank $\rho$ \\", rows,
-        r"Single runs. CC: the labels as returned; ACC: adjusted with error rates measured on validation; RC: "
+        r"Single runs. CC: the labels as returned; ACC: adjusted with error rates measured on validation; SC: "
         r"contrasts divided by the validation slope. Ratio: estimated over reference value mentions, $^\dagger$ "
         r"95\% CI excludes 1. MAE in percentage points over the 19 values. Rev.: share of the significant "
         r"reference contrasts that the method finds significant with the opposite sign. Other columns as in "

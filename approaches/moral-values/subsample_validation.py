@@ -43,7 +43,7 @@ REPS = 100                            # subsamples per size
 COVER_REPS = 20                       # of which get an inner bootstrap (intervals, coverage, detection)
 B_IN = 50                             # bootstrap resamples per covered subsample (enough for a standard error)
 SEED = RNG_SEED + 2
-RULES = ["CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "ACC-G@prev", "RC@prev",
+RULES = ["CC@t*", "CC@prev", "PCC-Platt", "ACC@prev", "ACC-G@prev", "SC@prev",
          "Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"]
 ANNOT_RULES = {"Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"}   # no slope (see measurement_analysis, C)
 
@@ -165,13 +165,13 @@ def main() -> None:
                 "all": adjust(cc["all"], *pooled), "man": adjust(cc["man"], *rates(groups_v["man"])),
                 "news": adjust(cc["news"], *rates(groups_v["news"])),
                 "lang": adjust(cc["lang"], np.stack([x[0] for x in by_lang], 1), np.stack([x[1] for x in by_lang], 1))}))
-            # RC: slopes measured on the (sub)sample's own validation contrasts
+            # SC: slopes measured on the (sub)sample's own validation contrasts
             pred_v = tp + fp
             ev, gvv = val_lpairs(pred_v), derive(gold_val)
             b_lang, b_genre = slope(gvv["lpair"], ev["lpair"]), slope(gvv["genre"], ev["genre"])
             fix = lambda b: np.where(np.isfinite(b) & (b > MIN_SLOPE), b, 1.0)
             a = cc["all"]
-            per_run["RC@prev"].append(derive({
+            per_run["SC@prev"].append(derive({
                 "all": a, "man": np.clip(a + (cc["man"] - a) / fix(b_genre)[:, None], 0, 1),
                 "news": np.clip(a + (cc["news"] - a) / fix(b_genre)[:, None], 0, 1),
                 "lang": np.clip(a[:, None] + (cc["lang"] - a[:, None]) / fix(b_lang)[:, None, None], 0, 1)}))

@@ -187,6 +187,7 @@ def main() -> None:
 
     res: dict[tuple[str, str, str], dict] = {}
     beta_log: dict[str, list] = {s: [] for s in SYSTEMS}
+    lolo_rows: list[dict] = []          # one row per system, fit, rule and left-out language
 
     for system in SYSTEMS:
         # sums over the system's runs of every array a metric needs; the metrics are computed on the mean
@@ -263,6 +264,18 @@ def main() -> None:
             m = {**contrast_metrics(mean["est"], gold), "beta": float(mean["beta"])}
             if scen.startswith("A"):
                 pm = pd.DataFrame([prevalence_metrics(mean["prev"][:, li], gold_lang[:, li]) for li in range(len(langs))])
+                width = (len(langs) - 1) * len(VALUES)            # the left-out language against the other eight
+                for li, held in enumerate(langs):
+                    cols = slice(li * width, (li + 1) * width)
+                    sl = slope(gold[:, cols], mean["est"][:, cols])
+                    lo, hi = np.percentile(sl[1:], [2.5, 97.5])
+                    fitted = (float(np.mean([b[li] for b in beta_log[system]])) if scen.endswith("out")
+                              else float(mean["beta"]))
+                    lolo_rows.append({"system": system, "fit": scen[2:], "rule": r, "language": held,
+                                      "fitted_slope": fitted, "contrast_slope": sl[0], "contrast_slope_lo": lo,
+                                      "contrast_slope_hi": hi,
+                                      "mae": np.abs(mean["est"][0, cols] - gold[0, cols]).mean() * 100,
+                                      "total_err": pm["total_err"][li], "prev_mae": pm["prev_mae"][li]})
                 m.update({"total_err": pm["total_err"].mean(), "total_err_max": pm["total_err"].max(),
                           "prev_mae": pm["prev_mae"].mean(), "prev_biased": pm["prev_biased"].mean()})
             elif scen.startswith("B"):
@@ -302,6 +315,23 @@ def main() -> None:
         b = np.array(beta_log[system])
         out(f"  validation language slope without the held-out language: {b.min():.2f}-{b.max():.2f} "
             f"(full fit: {res[(system, 'C all documents', 'RC@prev')]['beta']:.2f})")
+    lolo = pd.DataFrame(lolo_rows)
+    main_sys = SYSTEMS[0]
+    out(f"\n  Each left-out language, {main_sys} (AE item 5): fitted = validation language slope without it;")
+    out("  slopes and MAE over its 152 contrasts with the other eight; total err as above.")
+    out(f"  {'language':8s} {'fitted':>6s} {'CC@prev slope':>21s} {'RC@prev slope':>21s} {'MAE CC':>7s} {'MAE RC':>7s} "
+        f"{'total err CC':>13s} {'total err RC':>13s}")
+    sel = lolo[(lolo["system"] == main_sys) & (lolo["fit"] == "leave-one-language-out")].set_index(["rule", "language"])
+    for held in langs:
+        cc, rcr = sel.loc[("CC@prev", held)], sel.loc[("RC@prev", held)]
+        cell = lambda x: f"{x['contrast_slope']:.2f} [{x['contrast_slope_lo']:.2f}, {x['contrast_slope_hi']:.2f}]"
+        out(f"  {held:8s} {cc['fitted_slope']:6.2f} {cell(cc):>21s} {cell(rcr):>21s} {cc['mae']:7.2f} {rcr['mae']:7.2f} "
+            f"{cc['total_err']:13.1f} {rcr['total_err']:13.1f}")
+    for r in ["CC@prev", "RC@prev"]:
+        x = sel.loc[r]
+        out(f"  {r}: contrast slope over the nine languages {x['contrast_slope'].min():.2f}-{x['contrast_slope'].max():.2f} "
+            f"(median {x['contrast_slope'].median():.2f}); MAE {x['mae'].min():.2f}-{x['mae'].max():.2f}; "
+            f"total err {x['total_err'].min():.1f}-{x['total_err'].max():.1f}%")
 
     out()
     out("=" * 112)
@@ -352,6 +382,7 @@ def main() -> None:
                 row[k] = float(m[k])
         rows.append(row)
     pd.DataFrame(rows).to_csv(RES / "shift-tests.csv", index=False, float_format="%.5f")
+    lolo.to_csv(RES / "shift-lolo-languages.csv", index=False, float_format="%.5f")
     (RES / "shift-tests.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"\nWrote {RES / 'shift-tests.txt'} and shift-tests.csv")
 

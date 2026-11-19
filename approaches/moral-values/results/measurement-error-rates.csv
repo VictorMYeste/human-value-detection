@@ -1,0 +1,1825 @@
+system,split,group,value,tpr,fpr,positives,negatives
+Feature ensemble,validation,all,Self-direction: thought,0.13840,0.01000,171.00000,14733.00000
+Feature ensemble,validation,all,Self-direction: action,0.26337,0.02483,486.00000,14418.00000
+Feature ensemble,validation,all,Stimulation,0.33651,0.01924,420.00000,14484.00000
+Feature ensemble,validation,all,Hedonism,0.28667,0.00482,100.00000,14804.00000
+Feature ensemble,validation,all,Achievement,0.38491,0.04188,950.00000,13954.00000
+Feature ensemble,validation,all,Power: dominance,0.37093,0.02896,656.00000,14248.00000
+Feature ensemble,validation,all,Power: resources,0.33840,0.03378,724.00000,14180.00000
+Feature ensemble,validation,all,Face,0.29211,0.01370,283.00000,14621.00000
+Feature ensemble,validation,all,Security: personal,0.35612,0.01224,278.00000,14626.00000
+Feature ensemble,validation,all,Security: societal,0.45890,0.05001,1261.00000,13643.00000
+Feature ensemble,validation,all,Tradition,0.46472,0.01003,274.00000,14630.00000
+Feature ensemble,validation,all,Conformity: rules,0.48710,0.03515,956.00000,13948.00000
+Feature ensemble,validation,all,Conformity: interpersonal,0.18954,0.01125,204.00000,14700.00000
+Feature ensemble,validation,all,Humility,0.10078,0.00260,43.00000,14861.00000
+Feature ensemble,validation,all,Benevolence: caring,0.30312,0.01637,342.00000,14562.00000
+Feature ensemble,validation,all,Benevolence: dependability,0.27431,0.01430,288.00000,14616.00000
+Feature ensemble,validation,all,Universalism: concern,0.37457,0.02949,671.00000,14233.00000
+Feature ensemble,validation,all,Universalism: nature,0.56571,0.01145,383.00000,14521.00000
+Feature ensemble,validation,all,Universalism: tolerance,0.25344,0.00611,121.00000,14783.00000
+Feature ensemble,validation,manifestos,Self-direction: thought,0.14815,0.00956,9.00000,1465.00000
+Feature ensemble,validation,manifestos,Self-direction: action,0.38298,0.03224,47.00000,1427.00000
+Feature ensemble,validation,manifestos,Stimulation,0.52707,0.05551,117.00000,1357.00000
+Feature ensemble,validation,manifestos,Hedonism,0.00000,0.00023,2.00000,1472.00000
+Feature ensemble,validation,manifestos,Achievement,0.37626,0.05166,132.00000,1342.00000
+Feature ensemble,validation,manifestos,Power: dominance,0.27203,0.02307,87.00000,1387.00000
+Feature ensemble,validation,manifestos,Power: resources,0.32216,0.06744,179.00000,1295.00000
+Feature ensemble,validation,manifestos,Face,0.50000,0.00658,6.00000,1468.00000
+Feature ensemble,validation,manifestos,Security: personal,0.00000,0.00068,11.00000,1463.00000
+Feature ensemble,validation,manifestos,Security: societal,0.42730,0.06350,188.00000,1286.00000
+Feature ensemble,validation,manifestos,Tradition,0.44218,0.00725,49.00000,1425.00000
+Feature ensemble,validation,manifestos,Conformity: rules,0.44186,0.03026,86.00000,1388.00000
+Feature ensemble,validation,manifestos,Conformity: interpersonal,0.00000,0.00343,15.00000,1459.00000
+Feature ensemble,validation,manifestos,Humility,0.00000,0.00181,3.00000,1471.00000
+Feature ensemble,validation,manifestos,Benevolence: caring,0.27333,0.02786,50.00000,1424.00000
+Feature ensemble,validation,manifestos,Benevolence: dependability,0.15942,0.01332,23.00000,1451.00000
+Feature ensemble,validation,manifestos,Universalism: concern,0.50090,0.07215,185.00000,1289.00000
+Feature ensemble,validation,manifestos,Universalism: nature,0.68000,0.04197,100.00000,1374.00000
+Feature ensemble,validation,manifestos,Universalism: tolerance,0.26389,0.00851,24.00000,1450.00000
+Feature ensemble,validation,news,Self-direction: thought,0.13786,0.01005,162.00000,13268.00000
+Feature ensemble,validation,news,Self-direction: action,0.25057,0.02402,439.00000,12991.00000
+Feature ensemble,validation,news,Stimulation,0.26293,0.01549,303.00000,13127.00000
+Feature ensemble,validation,news,Hedonism,0.29252,0.00533,98.00000,13332.00000
+Feature ensemble,validation,news,Achievement,0.38631,0.04083,818.00000,12612.00000
+Feature ensemble,validation,news,Power: dominance,0.38606,0.02960,569.00000,12861.00000
+Feature ensemble,validation,news,Power: resources,0.34373,0.03040,545.00000,12885.00000
+Feature ensemble,validation,news,Face,0.28761,0.01450,277.00000,13153.00000
+Feature ensemble,validation,news,Security: personal,0.37079,0.01352,267.00000,13163.00000
+Feature ensemble,validation,news,Security: societal,0.46443,0.04861,1073.00000,12357.00000
+Feature ensemble,validation,news,Tradition,0.46963,0.01032,225.00000,13205.00000
+Feature ensemble,validation,news,Conformity: rules,0.49157,0.03570,870.00000,12560.00000
+Feature ensemble,validation,news,Conformity: interpersonal,0.20459,0.01211,189.00000,13241.00000
+Feature ensemble,validation,news,Humility,0.10833,0.00269,40.00000,13390.00000
+Feature ensemble,validation,news,Benevolence: caring,0.30822,0.01512,292.00000,13138.00000
+Feature ensemble,validation,news,Benevolence: dependability,0.28428,0.01441,265.00000,13165.00000
+Feature ensemble,validation,news,Universalism: concern,0.32647,0.02524,486.00000,12944.00000
+Feature ensemble,validation,news,Universalism: nature,0.52532,0.00827,283.00000,13147.00000
+Feature ensemble,validation,news,Universalism: tolerance,0.25086,0.00585,97.00000,13333.00000
+Feature ensemble,validation,BG,Self-direction: thought,0.15152,0.01347,11.00000,1510.00000
+Feature ensemble,validation,BG,Self-direction: action,0.22939,0.02871,93.00000,1428.00000
+Feature ensemble,validation,BG,Stimulation,0.36626,0.02477,81.00000,1440.00000
+Feature ensemble,validation,BG,Hedonism,0.00000,0.00351,2.00000,1519.00000
+Feature ensemble,validation,BG,Achievement,0.33681,0.03789,96.00000,1425.00000
+Feature ensemble,validation,BG,Power: dominance,0.19167,0.01958,40.00000,1481.00000
+Feature ensemble,validation,BG,Power: resources,0.29012,0.04476,54.00000,1467.00000
+Feature ensemble,validation,BG,Face,0.24138,0.01787,29.00000,1492.00000
+Feature ensemble,validation,BG,Security: personal,0.25000,0.00398,12.00000,1509.00000
+Feature ensemble,validation,BG,Security: societal,0.35700,0.04315,169.00000,1352.00000
+Feature ensemble,validation,BG,Tradition,0.45022,0.01062,77.00000,1444.00000
+Feature ensemble,validation,BG,Conformity: rules,0.56510,0.04618,128.00000,1393.00000
+Feature ensemble,validation,BG,Conformity: interpersonal,0.12698,0.00933,21.00000,1500.00000
+Feature ensemble,validation,BG,Humility,0.00000,0.00286,6.00000,1515.00000
+Feature ensemble,validation,BG,Benevolence: caring,0.25490,0.03087,85.00000,1436.00000
+Feature ensemble,validation,BG,Benevolence: dependability,0.20952,0.01795,35.00000,1486.00000
+Feature ensemble,validation,BG,Universalism: concern,0.27174,0.02496,92.00000,1429.00000
+Feature ensemble,validation,BG,Universalism: nature,0.54971,0.01025,57.00000,1464.00000
+Feature ensemble,validation,BG,Universalism: tolerance,0.14286,0.00242,7.00000,1514.00000
+Feature ensemble,validation,DE,Self-direction: thought,0.21839,0.01002,29.00000,1664.00000
+Feature ensemble,validation,DE,Self-direction: action,0.28049,0.01779,82.00000,1611.00000
+Feature ensemble,validation,DE,Stimulation,0.33908,0.02345,58.00000,1635.00000
+Feature ensemble,validation,DE,Hedonism,0.33333,0.00397,12.00000,1681.00000
+Feature ensemble,validation,DE,Achievement,0.43379,0.04482,146.00000,1547.00000
+Feature ensemble,validation,DE,Power: dominance,0.28070,0.02139,57.00000,1636.00000
+Feature ensemble,validation,DE,Power: resources,0.26866,0.03280,67.00000,1626.00000
+Feature ensemble,validation,DE,Face,0.32624,0.01195,47.00000,1646.00000
+Feature ensemble,validation,DE,Security: personal,0.29412,0.01065,34.00000,1659.00000
+Feature ensemble,validation,DE,Security: societal,0.54480,0.03354,93.00000,1600.00000
+Feature ensemble,validation,DE,Tradition,0.43056,0.00639,24.00000,1669.00000
+Feature ensemble,validation,DE,Conformity: rules,0.48958,0.02577,128.00000,1565.00000
+Feature ensemble,validation,DE,Conformity: interpersonal,0.28125,0.00943,32.00000,1661.00000
+Feature ensemble,validation,DE,Humility,0.00000,0.00336,4.00000,1689.00000
+Feature ensemble,validation,DE,Benevolence: caring,0.23333,0.01291,40.00000,1653.00000
+Feature ensemble,validation,DE,Benevolence: dependability,0.30000,0.00882,30.00000,1663.00000
+Feature ensemble,validation,DE,Universalism: concern,0.36047,0.03983,86.00000,1607.00000
+Feature ensemble,validation,DE,Universalism: nature,0.56140,0.01813,38.00000,1655.00000
+Feature ensemble,validation,DE,Universalism: tolerance,0.18667,0.00979,25.00000,1668.00000
+Feature ensemble,validation,EL,Self-direction: thought,0.00000,0.00939,3.00000,1420.00000
+Feature ensemble,validation,EL,Self-direction: action,0.33333,0.02104,13.00000,1410.00000
+Feature ensemble,validation,EL,Stimulation,0.50000,0.02206,48.00000,1375.00000
+Feature ensemble,validation,EL,Hedonism,0.77778,0.00872,9.00000,1414.00000
+Feature ensemble,validation,EL,Achievement,0.41126,0.03987,77.00000,1346.00000
+Feature ensemble,validation,EL,Power: dominance,0.52698,0.04426,105.00000,1318.00000
+Feature ensemble,validation,EL,Power: resources,0.42655,0.05109,118.00000,1305.00000
+Feature ensemble,validation,EL,Face,0.34409,0.01844,31.00000,1392.00000
+Feature ensemble,validation,EL,Security: personal,0.43860,0.00522,19.00000,1404.00000
+Feature ensemble,validation,EL,Security: societal,0.38997,0.06656,206.00000,1217.00000
+Feature ensemble,validation,EL,Tradition,0.33333,0.01012,6.00000,1417.00000
+Feature ensemble,validation,EL,Conformity: rules,0.53704,0.02626,90.00000,1333.00000
+Feature ensemble,validation,EL,Conformity: interpersonal,0.15591,0.01298,62.00000,1361.00000
+Feature ensemble,validation,EL,Humility,0.00000,0.00188,1.00000,1422.00000
+Feature ensemble,validation,EL,Benevolence: caring,0.33333,0.01988,31.00000,1392.00000
+Feature ensemble,validation,EL,Benevolence: dependability,0.30065,0.01409,51.00000,1372.00000
+Feature ensemble,validation,EL,Universalism: concern,0.31694,0.02741,61.00000,1362.00000
+Feature ensemble,validation,EL,Universalism: nature,0.54386,0.01348,38.00000,1385.00000
+Feature ensemble,validation,EL,Universalism: tolerance,0.00000,0.00331,14.00000,1409.00000
+Feature ensemble,validation,EN,Self-direction: thought,0.05556,0.00669,6.00000,2043.00000
+Feature ensemble,validation,EN,Self-direction: action,0.34783,0.02064,46.00000,2003.00000
+Feature ensemble,validation,EN,Stimulation,0.42222,0.01344,15.00000,2034.00000
+Feature ensemble,validation,EN,Hedonism,0.48718,0.00606,13.00000,2036.00000
+Feature ensemble,validation,EN,Achievement,0.45704,0.04184,97.00000,1952.00000
+Feature ensemble,validation,EN,Power: dominance,0.33333,0.02489,40.00000,2009.00000
+Feature ensemble,validation,EN,Power: resources,0.26316,0.02752,38.00000,2011.00000
+Feature ensemble,validation,EN,Face,0.70000,0.00899,10.00000,2039.00000
+Feature ensemble,validation,EN,Security: personal,0.41905,0.01274,35.00000,2014.00000
+Feature ensemble,validation,EN,Security: societal,0.56637,0.04838,113.00000,1936.00000
+Feature ensemble,validation,EN,Tradition,0.44000,0.01038,25.00000,2024.00000
+Feature ensemble,validation,EN,Conformity: rules,0.47312,0.03707,62.00000,1987.00000
+Feature ensemble,validation,EN,Conformity: interpersonal,0.41379,0.01221,29.00000,2020.00000
+Feature ensemble,validation,EN,Humility,0.00000,0.00082,5.00000,2044.00000
+Feature ensemble,validation,EN,Benevolence: caring,0.22222,0.00409,12.00000,2037.00000
+Feature ensemble,validation,EN,Benevolence: dependability,0.40741,0.00837,18.00000,2031.00000
+Feature ensemble,validation,EN,Universalism: concern,0.61353,0.03215,69.00000,1980.00000
+Feature ensemble,validation,EN,Universalism: nature,0.77236,0.00780,41.00000,2008.00000
+Feature ensemble,validation,EN,Universalism: tolerance,0.42424,0.00867,11.00000,2038.00000
+Feature ensemble,validation,FR,Self-direction: thought,0.00000,0.00878,2.00000,949.00000
+Feature ensemble,validation,FR,Self-direction: action,0.33333,0.03082,10.00000,941.00000
+Feature ensemble,validation,FR,Stimulation,0.39583,0.01747,16.00000,935.00000
+Feature ensemble,validation,FR,Hedonism,0.13333,0.00317,5.00000,946.00000
+Feature ensemble,validation,FR,Achievement,0.48148,0.05216,18.00000,933.00000
+Feature ensemble,validation,FR,Power: dominance,0.39583,0.02317,16.00000,935.00000
+Feature ensemble,validation,FR,Power: resources,0.25490,0.04497,17.00000,934.00000
+Feature ensemble,validation,FR,Face,0.19231,0.01405,26.00000,925.00000
+Feature ensemble,validation,FR,Security: personal,0.21429,0.00961,14.00000,937.00000
+Feature ensemble,validation,FR,Security: societal,0.31694,0.03258,61.00000,890.00000
+Feature ensemble,validation,FR,Tradition,0.33333,0.00460,8.00000,943.00000
+Feature ensemble,validation,FR,Conformity: rules,0.65152,0.03732,22.00000,929.00000
+Feature ensemble,validation,FR,Conformity: interpersonal,0.33333,0.01799,6.00000,945.00000
+Feature ensemble,validation,FR,Humility,0.00000,0.00456,1.00000,950.00000
+Feature ensemble,validation,FR,Benevolence: caring,0.22222,0.00991,9.00000,942.00000
+Feature ensemble,validation,FR,Benevolence: dependability,0.20000,0.00705,5.00000,946.00000
+Feature ensemble,validation,FR,Universalism: concern,0.40000,0.01840,45.00000,906.00000
+Feature ensemble,validation,FR,Universalism: nature,0.62745,0.01142,17.00000,934.00000
+Feature ensemble,validation,FR,Universalism: tolerance,0.43333,0.00992,10.00000,941.00000
+Feature ensemble,validation,HE,Self-direction: thought,0.11905,0.01188,28.00000,1319.00000
+Feature ensemble,validation,HE,Self-direction: action,0.24031,0.02684,43.00000,1304.00000
+Feature ensemble,validation,HE,Stimulation,0.32258,0.01266,31.00000,1316.00000
+Feature ensemble,validation,HE,Hedonism,0.00000,0.00050,3.00000,1344.00000
+Feature ensemble,validation,HE,Achievement,0.36825,0.03247,105.00000,1242.00000
+Feature ensemble,validation,HE,Power: dominance,0.49808,0.08383,174.00000,1173.00000
+Feature ensemble,validation,HE,Power: resources,0.53018,0.02596,127.00000,1220.00000
+Feature ensemble,validation,HE,Face,0.31111,0.01898,30.00000,1317.00000
+Feature ensemble,validation,HE,Security: personal,0.46491,0.01146,38.00000,1309.00000
+Feature ensemble,validation,HE,Security: societal,0.58582,0.10627,268.00000,1079.00000
+Feature ensemble,validation,HE,Tradition,0.46154,0.00917,39.00000,1308.00000
+Feature ensemble,validation,HE,Conformity: rules,0.47086,0.05703,143.00000,1204.00000
+Feature ensemble,validation,HE,Conformity: interpersonal,0.04348,0.00755,23.00000,1324.00000
+Feature ensemble,validation,HE,Humility,0.20000,0.00174,5.00000,1342.00000
+Feature ensemble,validation,HE,Benevolence: caring,0.75000,0.00921,8.00000,1339.00000
+Feature ensemble,validation,HE,Benevolence: dependability,0.31250,0.01488,48.00000,1299.00000
+Feature ensemble,validation,HE,Universalism: concern,0.37288,0.01734,59.00000,1288.00000
+Feature ensemble,validation,HE,Universalism: nature,0.00000,0.00100,8.00000,1339.00000
+Feature ensemble,validation,HE,Universalism: tolerance,0.25926,0.00401,18.00000,1329.00000
+Feature ensemble,validation,IT,Self-direction: thought,0.09524,0.00711,14.00000,1312.00000
+Feature ensemble,validation,IT,Self-direction: action,0.02083,0.02239,16.00000,1310.00000
+Feature ensemble,validation,IT,Stimulation,0.23864,0.03123,88.00000,1238.00000
+Feature ensemble,validation,IT,Hedonism,0.00000,0.00330,13.00000,1313.00000
+Feature ensemble,validation,IT,Achievement,0.29495,0.04910,165.00000,1161.00000
+Feature ensemble,validation,IT,Power: dominance,0.22846,0.02129,89.00000,1237.00000
+Feature ensemble,validation,IT,Power: resources,0.22126,0.03333,116.00000,1210.00000
+Feature ensemble,validation,IT,Face,0.14912,0.02122,38.00000,1288.00000
+Feature ensemble,validation,IT,Security: personal,0.13725,0.00789,17.00000,1309.00000
+Feature ensemble,validation,IT,Security: societal,0.29167,0.06471,64.00000,1262.00000
+Feature ensemble,validation,IT,Tradition,0.44444,0.00655,3.00000,1323.00000
+Feature ensemble,validation,IT,Conformity: rules,0.36745,0.03281,127.00000,1199.00000
+Feature ensemble,validation,IT,Conformity: interpersonal,,0.01458,0.00000,1326.00000
+Feature ensemble,validation,IT,Humility,,0.00126,0.00000,1326.00000
+Feature ensemble,validation,IT,Benevolence: caring,0.20988,0.00898,27.00000,1299.00000
+Feature ensemble,validation,IT,Benevolence: dependability,0.00000,0.02533,10.00000,1316.00000
+Feature ensemble,validation,IT,Universalism: concern,0.42077,0.03136,61.00000,1265.00000
+Feature ensemble,validation,IT,Universalism: nature,0.45455,0.01349,66.00000,1260.00000
+Feature ensemble,validation,IT,Universalism: tolerance,0.00000,0.00530,4.00000,1322.00000
+Feature ensemble,validation,NL,Self-direction: thought,0.06173,0.00907,27.00000,2241.00000
+Feature ensemble,validation,NL,Self-direction: action,0.21839,0.02187,58.00000,2210.00000
+Feature ensemble,validation,NL,Stimulation,0.35088,0.01482,19.00000,2249.00000
+Feature ensemble,validation,NL,Hedonism,0.24242,0.00546,11.00000,2257.00000
+Feature ensemble,validation,NL,Achievement,0.41071,0.03726,112.00000,2156.00000
+Feature ensemble,validation,NL,Power: dominance,0.21164,0.01315,63.00000,2205.00000
+Feature ensemble,validation,NL,Power: resources,0.25086,0.03547,97.00000,2171.00000
+Feature ensemble,validation,NL,Face,0.40741,0.01060,36.00000,2232.00000
+Feature ensemble,validation,NL,Security: personal,0.38889,0.01010,24.00000,2244.00000
+Feature ensemble,validation,NL,Security: societal,0.41849,0.04270,137.00000,2131.00000
+Feature ensemble,validation,NL,Tradition,0.03333,0.00162,10.00000,2258.00000
+Feature ensemble,validation,NL,Conformity: rules,0.44048,0.02976,84.00000,2184.00000
+Feature ensemble,validation,NL,Conformity: interpersonal,0.04545,0.01009,22.00000,2246.00000
+Feature ensemble,validation,NL,Humility,0.00000,0.00059,5.00000,2263.00000
+Feature ensemble,validation,NL,Benevolence: caring,0.42222,0.01613,15.00000,2253.00000
+Feature ensemble,validation,NL,Benevolence: dependability,0.21622,0.00911,37.00000,2231.00000
+Feature ensemble,validation,NL,Universalism: concern,0.35262,0.03338,121.00000,2147.00000
+Feature ensemble,validation,NL,Universalism: nature,0.64384,0.01792,73.00000,2195.00000
+Feature ensemble,validation,NL,Universalism: tolerance,0.22222,0.00636,15.00000,2253.00000
+Feature ensemble,validation,TR,Self-direction: thought,0.17647,0.01304,51.00000,2275.00000
+Feature ensemble,validation,TR,Self-direction: action,0.29333,0.03438,125.00000,2201.00000
+Feature ensemble,validation,TR,Stimulation,0.27604,0.01857,64.00000,2262.00000
+Feature ensemble,validation,TR,Hedonism,0.25000,0.00625,32.00000,2294.00000
+Feature ensemble,validation,TR,Achievement,0.38806,0.04532,134.00000,2192.00000
+Feature ensemble,validation,TR,Power: dominance,0.33796,0.02884,72.00000,2254.00000
+Feature ensemble,validation,TR,Power: resources,0.32593,0.02102,90.00000,2236.00000
+Feature ensemble,validation,TR,Face,0.22222,0.00917,36.00000,2290.00000
+Feature ensemble,validation,TR,Security: personal,0.36078,0.02915,85.00000,2241.00000
+Feature ensemble,validation,TR,Security: societal,0.47333,0.03646,150.00000,2176.00000
+Feature ensemble,validation,TR,Tradition,0.57317,0.02525,82.00000,2244.00000
+Feature ensemble,validation,TR,Conformity: rules,0.50969,0.03219,172.00000,2154.00000
+Feature ensemble,validation,TR,Conformity: interpersonal,0.14815,0.01050,9.00000,2317.00000
+Feature ensemble,validation,TR,Humility,0.20833,0.00635,16.00000,2310.00000
+Feature ensemble,validation,TR,Benevolence: caring,0.34493,0.03030,115.00000,2211.00000
+Feature ensemble,validation,TR,Benevolence: dependability,0.29630,0.02274,54.00000,2272.00000
+Feature ensemble,validation,TR,Universalism: concern,0.32900,0.03053,77.00000,2249.00000
+Feature ensemble,validation,TR,Universalism: nature,0.53333,0.00818,45.00000,2281.00000
+Feature ensemble,validation,TR,Universalism: tolerance,0.47059,0.00520,17.00000,2309.00000
+Feature ensemble,test,all,Self-direction: thought,0.16374,0.00840,171.00000,14398.00000
+Feature ensemble,test,all,Self-direction: action,0.23177,0.02582,512.00000,14057.00000
+Feature ensemble,test,all,Stimulation,0.30728,0.01794,371.00000,14198.00000
+Feature ensemble,test,all,Hedonism,0.37867,0.00729,125.00000,14444.00000
+Feature ensemble,test,all,Achievement,0.39005,0.04144,911.00000,13658.00000
+Feature ensemble,test,all,Power: dominance,0.34707,0.02822,631.00000,13938.00000
+Feature ensemble,test,all,Power: resources,0.40621,0.03591,805.00000,13764.00000
+Feature ensemble,test,all,Face,0.27216,0.01200,267.00000,14302.00000
+Feature ensemble,test,all,Security: personal,0.34091,0.01090,352.00000,14217.00000
+Feature ensemble,test,all,Security: societal,0.46771,0.05334,1151.00000,13418.00000
+Feature ensemble,test,all,Tradition,0.51871,0.00652,196.00000,14373.00000
+Feature ensemble,test,all,Conformity: rules,0.47603,0.03905,911.00000,13658.00000
+Feature ensemble,test,all,Conformity: interpersonal,0.15897,0.01234,195.00000,14374.00000
+Feature ensemble,test,all,Humility,0.08889,0.00211,30.00000,14539.00000
+Feature ensemble,test,all,Benevolence: caring,0.29115,0.01877,324.00000,14245.00000
+Feature ensemble,test,all,Benevolence: dependability,0.27778,0.01127,288.00000,14281.00000
+Feature ensemble,test,all,Universalism: concern,0.44626,0.03250,735.00000,13834.00000
+Feature ensemble,test,all,Universalism: nature,0.59954,0.00957,293.00000,14276.00000
+Feature ensemble,test,all,Universalism: tolerance,0.22807,0.00739,171.00000,14398.00000
+Feature ensemble,test,manifestos,Self-direction: thought,0.07937,0.00868,21.00000,1382.00000
+Feature ensemble,test,manifestos,Self-direction: action,0.34722,0.03100,48.00000,1355.00000
+Feature ensemble,test,manifestos,Stimulation,0.48797,0.05436,97.00000,1306.00000
+Feature ensemble,test,manifestos,Hedonism,,0.00143,0.00000,1403.00000
+Feature ensemble,test,manifestos,Achievement,0.33670,0.03937,99.00000,1304.00000
+Feature ensemble,test,manifestos,Power: dominance,0.21930,0.01685,38.00000,1365.00000
+Feature ensemble,test,manifestos,Power: resources,0.39706,0.05367,136.00000,1267.00000
+Feature ensemble,test,manifestos,Face,0.33333,0.00287,8.00000,1395.00000
+Feature ensemble,test,manifestos,Security: personal,0.00000,0.00144,11.00000,1392.00000
+Feature ensemble,test,manifestos,Security: societal,0.51064,0.05898,188.00000,1215.00000
+Feature ensemble,test,manifestos,Tradition,0.71429,0.00707,35.00000,1368.00000
+Feature ensemble,test,manifestos,Conformity: rules,0.44167,0.04989,80.00000,1323.00000
+Feature ensemble,test,manifestos,Conformity: interpersonal,0.05556,0.00335,12.00000,1391.00000
+Feature ensemble,test,manifestos,Humility,,0.00190,0.00000,1403.00000
+Feature ensemble,test,manifestos,Benevolence: caring,0.17857,0.02133,28.00000,1375.00000
+Feature ensemble,test,manifestos,Benevolence: dependability,0.20513,0.01331,26.00000,1377.00000
+Feature ensemble,test,manifestos,Universalism: concern,0.55333,0.08091,200.00000,1203.00000
+Feature ensemble,test,manifestos,Universalism: nature,0.74214,0.02442,106.00000,1297.00000
+Feature ensemble,test,manifestos,Universalism: tolerance,0.31944,0.01184,24.00000,1379.00000
+Feature ensemble,test,news,Self-direction: thought,0.17556,0.00837,150.00000,13016.00000
+Feature ensemble,test,news,Self-direction: action,0.21983,0.02527,464.00000,12702.00000
+Feature ensemble,test,news,Stimulation,0.24331,0.01425,274.00000,12892.00000
+Feature ensemble,test,news,Hedonism,0.37867,0.00792,125.00000,13041.00000
+Feature ensemble,test,news,Achievement,0.39655,0.04166,812.00000,12354.00000
+Feature ensemble,test,news,Power: dominance,0.35526,0.02945,593.00000,12573.00000
+Feature ensemble,test,news,Power: resources,0.40807,0.03411,669.00000,12497.00000
+Feature ensemble,test,news,Face,0.27027,0.01299,259.00000,12907.00000
+Feature ensemble,test,news,Security: personal,0.35191,0.01193,341.00000,12825.00000
+Feature ensemble,test,news,Security: societal,0.45933,0.05277,963.00000,12203.00000
+Feature ensemble,test,news,Tradition,0.47619,0.00646,161.00000,13005.00000
+Feature ensemble,test,news,Conformity: rules,0.47934,0.03789,831.00000,12335.00000
+Feature ensemble,test,news,Conformity: interpersonal,0.16576,0.01330,183.00000,12983.00000
+Feature ensemble,test,news,Humility,0.08889,0.00213,30.00000,13136.00000
+Feature ensemble,test,news,Benevolence: caring,0.30180,0.01849,296.00000,12870.00000
+Feature ensemble,test,news,Benevolence: dependability,0.28499,0.01106,262.00000,12904.00000
+Feature ensemble,test,news,Universalism: concern,0.40623,0.02789,535.00000,12631.00000
+Feature ensemble,test,news,Universalism: nature,0.51872,0.00809,187.00000,12979.00000
+Feature ensemble,test,news,Universalism: tolerance,0.21315,0.00691,147.00000,13019.00000
+Feature ensemble,test,BG,Self-direction: thought,0.10000,0.00624,20.00000,1282.00000
+Feature ensemble,test,BG,Self-direction: action,0.18033,0.02095,61.00000,1241.00000
+Feature ensemble,test,BG,Stimulation,0.37374,0.02211,66.00000,1236.00000
+Feature ensemble,test,BG,Hedonism,0.23810,0.00386,7.00000,1295.00000
+Feature ensemble,test,BG,Achievement,0.42593,0.05226,90.00000,1212.00000
+Feature ensemble,test,BG,Power: dominance,0.11728,0.02564,54.00000,1248.00000
+Feature ensemble,test,BG,Power: resources,0.40000,0.03314,75.00000,1227.00000
+Feature ensemble,test,BG,Face,0.26471,0.01735,34.00000,1268.00000
+Feature ensemble,test,BG,Security: personal,0.14583,0.00499,32.00000,1270.00000
+Feature ensemble,test,BG,Security: societal,0.33867,0.04361,125.00000,1177.00000
+Feature ensemble,test,BG,Tradition,0.45833,0.00155,8.00000,1294.00000
+Feature ensemble,test,BG,Conformity: rules,0.50153,0.06622,109.00000,1193.00000
+Feature ensemble,test,BG,Conformity: interpersonal,0.13889,0.01499,12.00000,1290.00000
+Feature ensemble,test,BG,Humility,0.00000,0.00077,7.00000,1295.00000
+Feature ensemble,test,BG,Benevolence: caring,0.29804,0.03588,85.00000,1217.00000
+Feature ensemble,test,BG,Benevolence: dependability,0.25000,0.01491,28.00000,1274.00000
+Feature ensemble,test,BG,Universalism: concern,0.26333,0.03494,100.00000,1202.00000
+Feature ensemble,test,BG,Universalism: nature,0.60952,0.00526,35.00000,1267.00000
+Feature ensemble,test,BG,Universalism: tolerance,0.11111,0.00541,9.00000,1293.00000
+Feature ensemble,test,DE,Self-direction: thought,0.24138,0.00813,29.00000,1845.00000
+Feature ensemble,test,DE,Self-direction: action,0.25959,0.03634,113.00000,1761.00000
+Feature ensemble,test,DE,Stimulation,0.36000,0.01572,50.00000,1824.00000
+Feature ensemble,test,DE,Hedonism,0.16667,0.00575,20.00000,1854.00000
+Feature ensemble,test,DE,Achievement,0.35697,0.03135,141.00000,1733.00000
+Feature ensemble,test,DE,Power: dominance,0.33333,0.02430,77.00000,1797.00000
+Feature ensemble,test,DE,Power: resources,0.29845,0.02703,86.00000,1788.00000
+Feature ensemble,test,DE,Face,0.20370,0.00961,36.00000,1838.00000
+Feature ensemble,test,DE,Security: personal,0.27778,0.01351,48.00000,1826.00000
+Feature ensemble,test,DE,Security: societal,0.53763,0.04514,124.00000,1750.00000
+Feature ensemble,test,DE,Tradition,0.30000,0.00143,10.00000,1864.00000
+Feature ensemble,test,DE,Conformity: rules,0.53598,0.04613,176.00000,1698.00000
+Feature ensemble,test,DE,Conformity: interpersonal,0.00000,0.00806,12.00000,1862.00000
+Feature ensemble,test,DE,Humility,0.00000,0.00125,1.00000,1873.00000
+Feature ensemble,test,DE,Benevolence: caring,0.34375,0.01466,32.00000,1842.00000
+Feature ensemble,test,DE,Benevolence: dependability,0.28205,0.01064,26.00000,1848.00000
+Feature ensemble,test,DE,Universalism: concern,0.31868,0.03440,91.00000,1783.00000
+Feature ensemble,test,DE,Universalism: nature,0.54167,0.00763,40.00000,1834.00000
+Feature ensemble,test,DE,Universalism: tolerance,0.18333,0.00539,20.00000,1854.00000
+Feature ensemble,test,EL,Self-direction: thought,0.16667,0.00788,6.00000,1396.00000
+Feature ensemble,test,EL,Self-direction: action,0.24074,0.02987,18.00000,1384.00000
+Feature ensemble,test,EL,Stimulation,0.38542,0.01460,32.00000,1370.00000
+Feature ensemble,test,EL,Hedonism,0.50000,0.00620,4.00000,1398.00000
+Feature ensemble,test,EL,Achievement,0.50556,0.03726,60.00000,1342.00000
+Feature ensemble,test,EL,Power: dominance,0.46789,0.03944,109.00000,1293.00000
+Feature ensemble,test,EL,Power: resources,0.47661,0.05538,114.00000,1288.00000
+Feature ensemble,test,EL,Face,0.31183,0.01994,31.00000,1371.00000
+Feature ensemble,test,EL,Security: personal,0.33333,0.00264,14.00000,1388.00000
+Feature ensemble,test,EL,Security: societal,0.39348,0.05963,133.00000,1269.00000
+Feature ensemble,test,EL,Tradition,0.50000,0.00407,8.00000,1394.00000
+Feature ensemble,test,EL,Conformity: rules,0.42857,0.02570,105.00000,1297.00000
+Feature ensemble,test,EL,Conformity: interpersonal,0.19556,0.01984,75.00000,1327.00000
+Feature ensemble,test,EL,Humility,,0.00238,0.00000,1402.00000
+Feature ensemble,test,EL,Benevolence: caring,0.27500,0.01468,40.00000,1362.00000
+Feature ensemble,test,EL,Benevolence: dependability,0.42000,0.01381,50.00000,1352.00000
+Feature ensemble,test,EL,Universalism: concern,0.51462,0.05176,114.00000,1288.00000
+Feature ensemble,test,EL,Universalism: nature,0.53535,0.00463,33.00000,1369.00000
+Feature ensemble,test,EL,Universalism: tolerance,0.20430,0.00802,31.00000,1371.00000
+Feature ensemble,test,EN,Self-direction: thought,0.15152,0.00451,11.00000,1994.00000
+Feature ensemble,test,EN,Self-direction: action,0.34014,0.02079,49.00000,1956.00000
+Feature ensemble,test,EN,Stimulation,0.29412,0.01090,17.00000,1988.00000
+Feature ensemble,test,EN,Hedonism,0.39583,0.00838,16.00000,1989.00000
+Feature ensemble,test,EN,Achievement,0.50000,0.03612,76.00000,1929.00000
+Feature ensemble,test,EN,Power: dominance,0.54386,0.01897,19.00000,1986.00000
+Feature ensemble,test,EN,Power: resources,0.19540,0.02362,29.00000,1976.00000
+Feature ensemble,test,EN,Face,0.23810,0.01051,7.00000,1998.00000
+Feature ensemble,test,EN,Security: personal,0.33333,0.01414,25.00000,1980.00000
+Feature ensemble,test,EN,Security: societal,0.47959,0.04789,98.00000,1907.00000
+Feature ensemble,test,EN,Tradition,0.27273,0.00251,11.00000,1994.00000
+Feature ensemble,test,EN,Conformity: rules,0.37500,0.02932,72.00000,1933.00000
+Feature ensemble,test,EN,Conformity: interpersonal,0.19192,0.01623,33.00000,1972.00000
+Feature ensemble,test,EN,Humility,0.00000,0.00083,8.00000,1997.00000
+Feature ensemble,test,EN,Benevolence: caring,0.35185,0.00923,18.00000,1987.00000
+Feature ensemble,test,EN,Benevolence: dependability,0.25000,0.00469,16.00000,1989.00000
+Feature ensemble,test,EN,Universalism: concern,0.58156,0.03132,47.00000,1958.00000
+Feature ensemble,test,EN,Universalism: nature,0.70833,0.00841,24.00000,1981.00000
+Feature ensemble,test,EN,Universalism: tolerance,0.54902,0.01442,17.00000,1988.00000
+Feature ensemble,test,FR,Self-direction: thought,0.04762,0.00758,7.00000,924.00000
+Feature ensemble,test,FR,Self-direction: action,0.22222,0.02389,24.00000,907.00000
+Feature ensemble,test,FR,Stimulation,0.50000,0.03083,12.00000,919.00000
+Feature ensemble,test,FR,Hedonism,0.40000,0.00796,10.00000,921.00000
+Feature ensemble,test,FR,Achievement,0.52632,0.06177,19.00000,912.00000
+Feature ensemble,test,FR,Power: dominance,0.40000,0.04194,25.00000,906.00000
+Feature ensemble,test,FR,Power: resources,0.28395,0.06785,27.00000,904.00000
+Feature ensemble,test,FR,Face,0.16667,0.00979,12.00000,919.00000
+Feature ensemble,test,FR,Security: personal,0.34568,0.01217,27.00000,904.00000
+Feature ensemble,test,FR,Security: societal,0.43750,0.04426,80.00000,851.00000
+Feature ensemble,test,FR,Tradition,0.52778,0.00363,12.00000,919.00000
+Feature ensemble,test,FR,Conformity: rules,0.39080,0.04398,29.00000,902.00000
+Feature ensemble,test,FR,Conformity: interpersonal,0.00000,0.00831,8.00000,923.00000
+Feature ensemble,test,FR,Humility,0.00000,0.00215,1.00000,930.00000
+Feature ensemble,test,FR,Benevolence: caring,0.33333,0.00724,10.00000,921.00000
+Feature ensemble,test,FR,Benevolence: dependability,0.22222,0.00505,6.00000,925.00000
+Feature ensemble,test,FR,Universalism: concern,0.28986,0.02753,23.00000,908.00000
+Feature ensemble,test,FR,Universalism: nature,0.63158,0.01462,19.00000,912.00000
+Feature ensemble,test,FR,Universalism: tolerance,0.13333,0.00684,5.00000,926.00000
+Feature ensemble,test,HE,Self-direction: thought,0.27957,0.01265,31.00000,1449.00000
+Feature ensemble,test,HE,Self-direction: action,0.34167,0.03810,80.00000,1400.00000
+Feature ensemble,test,HE,Stimulation,0.39048,0.02307,35.00000,1445.00000
+Feature ensemble,test,HE,Hedonism,0.55556,0.00993,3.00000,1477.00000
+Feature ensemble,test,HE,Achievement,0.30645,0.03564,124.00000,1356.00000
+Feature ensemble,test,HE,Power: dominance,0.35431,0.05236,143.00000,1337.00000
+Feature ensemble,test,HE,Power: resources,0.47451,0.04249,170.00000,1310.00000
+Feature ensemble,test,HE,Face,0.33333,0.01821,52.00000,1428.00000
+Feature ensemble,test,HE,Security: personal,0.47126,0.01055,58.00000,1422.00000
+Feature ensemble,test,HE,Security: societal,0.60269,0.08008,198.00000,1282.00000
+Feature ensemble,test,HE,Tradition,0.63333,0.02277,60.00000,1420.00000
+Feature ensemble,test,HE,Conformity: rules,0.45869,0.06163,117.00000,1363.00000
+Feature ensemble,test,HE,Conformity: interpersonal,0.11111,0.01541,9.00000,1471.00000
+Feature ensemble,test,HE,Humility,0.50000,0.00541,2.00000,1478.00000
+Feature ensemble,test,HE,Benevolence: caring,0.34409,0.03290,31.00000,1449.00000
+Feature ensemble,test,HE,Benevolence: dependability,0.22222,0.01600,63.00000,1417.00000
+Feature ensemble,test,HE,Universalism: concern,0.53368,0.04403,193.00000,1287.00000
+Feature ensemble,test,HE,Universalism: nature,0.73050,0.00512,47.00000,1433.00000
+Feature ensemble,test,HE,Universalism: tolerance,0.21986,0.01652,47.00000,1433.00000
+Feature ensemble,test,IT,Self-direction: thought,0.00000,0.00810,4.00000,1234.00000
+Feature ensemble,test,IT,Self-direction: action,0.00000,0.01629,10.00000,1228.00000
+Feature ensemble,test,IT,Stimulation,0.21895,0.03081,102.00000,1136.00000
+Feature ensemble,test,IT,Hedonism,0.00000,0.00190,7.00000,1231.00000
+Feature ensemble,test,IT,Achievement,0.28485,0.05219,165.00000,1073.00000
+Feature ensemble,test,IT,Power: dominance,0.28464,0.03336,89.00000,1149.00000
+Feature ensemble,test,IT,Power: resources,0.42105,0.05368,114.00000,1124.00000
+Feature ensemble,test,IT,Face,0.27778,0.00971,36.00000,1202.00000
+Feature ensemble,test,IT,Security: personal,0.14583,0.00276,32.00000,1206.00000
+Feature ensemble,test,IT,Security: societal,0.44715,0.10554,82.00000,1156.00000
+Feature ensemble,test,IT,Tradition,0.07407,0.00759,9.00000,1229.00000
+Feature ensemble,test,IT,Conformity: rules,0.28962,0.02294,61.00000,1177.00000
+Feature ensemble,test,IT,Conformity: interpersonal,0.21429,0.01062,14.00000,1224.00000
+Feature ensemble,test,IT,Humility,,0.00081,0.00000,1238.00000
+Feature ensemble,test,IT,Benevolence: caring,0.15942,0.00878,23.00000,1215.00000
+Feature ensemble,test,IT,Benevolence: dependability,0.33333,0.01786,6.00000,1232.00000
+Feature ensemble,test,IT,Universalism: concern,0.50000,0.04654,42.00000,1196.00000
+Feature ensemble,test,IT,Universalism: nature,0.48611,0.02213,48.00000,1190.00000
+Feature ensemble,test,IT,Universalism: tolerance,0.16667,0.00381,14.00000,1224.00000
+Feature ensemble,test,NL,Self-direction: thought,0.17204,0.01085,31.00000,2119.00000
+Feature ensemble,test,NL,Self-direction: action,0.15301,0.02138,61.00000,2089.00000
+Feature ensemble,test,NL,Stimulation,0.20000,0.01137,10.00000,2140.00000
+Feature ensemble,test,NL,Hedonism,0.46667,0.00544,5.00000,2145.00000
+Feature ensemble,test,NL,Achievement,0.35294,0.04052,85.00000,2065.00000
+Feature ensemble,test,NL,Power: dominance,0.40376,0.02213,71.00000,2079.00000
+Feature ensemble,test,NL,Power: resources,0.32444,0.02249,75.00000,2075.00000
+Feature ensemble,test,NL,Face,0.28000,0.00753,25.00000,2125.00000
+Feature ensemble,test,NL,Security: personal,0.46032,0.01519,21.00000,2129.00000
+Feature ensemble,test,NL,Security: societal,0.37553,0.04769,158.00000,1992.00000
+Feature ensemble,test,NL,Tradition,0.65000,0.00219,20.00000,2130.00000
+Feature ensemble,test,NL,Conformity: rules,0.46078,0.03090,68.00000,2082.00000
+Feature ensemble,test,NL,Conformity: interpersonal,0.13333,0.01072,5.00000,2145.00000
+Feature ensemble,test,NL,Humility,0.00000,0.00140,3.00000,2147.00000
+Feature ensemble,test,NL,Benevolence: caring,0.00000,0.01149,3.00000,2147.00000
+Feature ensemble,test,NL,Benevolence: dependability,0.26496,0.00742,39.00000,2111.00000
+Feature ensemble,test,NL,Universalism: concern,0.48148,0.02272,81.00000,2069.00000
+Feature ensemble,test,NL,Universalism: nature,0.61111,0.01541,30.00000,2120.00000
+Feature ensemble,test,NL,Universalism: tolerance,0.19697,0.00345,22.00000,2128.00000
+Feature ensemble,test,TR,Self-direction: thought,0.06250,0.00913,32.00000,2155.00000
+Feature ensemble,test,TR,Self-direction: action,0.15972,0.02455,96.00000,2091.00000
+Feature ensemble,test,TR,Stimulation,0.21277,0.01682,47.00000,2140.00000
+Feature ensemble,test,TR,Hedonism,0.49057,0.01328,53.00000,2134.00000
+Feature ensemble,test,TR,Achievement,0.48565,0.04142,151.00000,2036.00000
+Feature ensemble,test,TR,Power: dominance,0.25000,0.01711,44.00000,2143.00000
+Feature ensemble,test,TR,Power: resources,0.44058,0.03057,115.00000,2072.00000
+Feature ensemble,test,TR,Face,0.25490,0.00975,34.00000,2153.00000
+Feature ensemble,test,TR,Security: personal,0.40000,0.01466,95.00000,2092.00000
+Feature ensemble,test,TR,Security: societal,0.52070,0.02999,153.00000,2034.00000
+Feature ensemble,test,TR,Tradition,0.51724,0.01346,58.00000,2129.00000
+Feature ensemble,test,TR,Conformity: rules,0.56705,0.03527,174.00000,2013.00000
+Feature ensemble,test,TR,Conformity: interpersonal,0.13580,0.00849,27.00000,2160.00000
+Feature ensemble,test,TR,Humility,0.20833,0.00382,8.00000,2179.00000
+Feature ensemble,test,TR,Benevolence: caring,0.28049,0.03262,82.00000,2105.00000
+Feature ensemble,test,TR,Benevolence: dependability,0.24074,0.01375,54.00000,2133.00000
+Feature ensemble,test,TR,Universalism: concern,0.38636,0.01587,44.00000,2143.00000
+Feature ensemble,test,TR,Universalism: nature,0.58824,0.00614,17.00000,2170.00000
+Feature ensemble,test,TR,Universalism: tolerance,0.16667,0.00352,6.00000,2181.00000
+DeBERTa,validation,all,Self-direction: thought,0.12281,0.01018,171.00000,14733.00000
+DeBERTa,validation,all,Self-direction: action,0.23663,0.02573,486.00000,14418.00000
+DeBERTa,validation,all,Stimulation,0.30952,0.02002,420.00000,14484.00000
+DeBERTa,validation,all,Hedonism,0.28333,0.00484,100.00000,14804.00000
+DeBERTa,validation,all,Achievement,0.36877,0.04297,950.00000,13954.00000
+DeBERTa,validation,all,Power: dominance,0.34248,0.03027,656.00000,14248.00000
+DeBERTa,validation,all,Power: resources,0.33379,0.03402,724.00000,14180.00000
+DeBERTa,validation,all,Face,0.27091,0.01411,283.00000,14621.00000
+DeBERTa,validation,all,Security: personal,0.32014,0.01292,278.00000,14626.00000
+DeBERTa,validation,all,Security: societal,0.43140,0.05255,1261.00000,13643.00000
+DeBERTa,validation,all,Tradition,0.43796,0.01053,274.00000,14630.00000
+DeBERTa,validation,all,Conformity: rules,0.46374,0.03676,956.00000,13948.00000
+DeBERTa,validation,all,Conformity: interpersonal,0.17647,0.01143,204.00000,14700.00000
+DeBERTa,validation,all,Humility,0.07752,0.00267,43.00000,14861.00000
+DeBERTa,validation,all,Benevolence: caring,0.27875,0.01694,342.00000,14562.00000
+DeBERTa,validation,all,Benevolence: dependability,0.24653,0.01485,288.00000,14616.00000
+DeBERTa,validation,all,Universalism: concern,0.35122,0.03059,671.00000,14233.00000
+DeBERTa,validation,all,Universalism: nature,0.55178,0.01182,383.00000,14521.00000
+DeBERTa,validation,all,Universalism: tolerance,0.22039,0.00638,121.00000,14783.00000
+DeBERTa,validation,manifestos,Self-direction: thought,0.18519,0.01001,9.00000,1465.00000
+DeBERTa,validation,manifestos,Self-direction: action,0.35461,0.03994,47.00000,1427.00000
+DeBERTa,validation,manifestos,Stimulation,0.47863,0.05306,117.00000,1357.00000
+DeBERTa,validation,manifestos,Hedonism,0.00000,0.00045,2.00000,1472.00000
+DeBERTa,validation,manifestos,Achievement,0.35354,0.05489,132.00000,1342.00000
+DeBERTa,validation,manifestos,Power: dominance,0.24904,0.02451,87.00000,1387.00000
+DeBERTa,validation,manifestos,Power: resources,0.30540,0.07001,179.00000,1295.00000
+DeBERTa,validation,manifestos,Face,0.44444,0.00840,6.00000,1468.00000
+DeBERTa,validation,manifestos,Security: personal,0.00000,0.00137,11.00000,1463.00000
+DeBERTa,validation,manifestos,Security: societal,0.38475,0.07050,188.00000,1286.00000
+DeBERTa,validation,manifestos,Tradition,0.42177,0.00795,49.00000,1425.00000
+DeBERTa,validation,manifestos,Conformity: rules,0.43411,0.03602,86.00000,1388.00000
+DeBERTa,validation,manifestos,Conformity: interpersonal,0.06667,0.00388,15.00000,1459.00000
+DeBERTa,validation,manifestos,Humility,0.00000,0.00227,3.00000,1471.00000
+DeBERTa,validation,manifestos,Benevolence: caring,0.25333,0.02949,50.00000,1424.00000
+DeBERTa,validation,manifestos,Benevolence: dependability,0.13043,0.01286,23.00000,1451.00000
+DeBERTa,validation,manifestos,Universalism: concern,0.45766,0.06568,185.00000,1289.00000
+DeBERTa,validation,manifestos,Universalism: nature,0.62333,0.04173,100.00000,1374.00000
+DeBERTa,validation,manifestos,Universalism: tolerance,0.18056,0.00874,24.00000,1450.00000
+DeBERTa,validation,news,Self-direction: thought,0.11934,0.01020,162.00000,13268.00000
+DeBERTa,validation,news,Self-direction: action,0.22399,0.02417,439.00000,12991.00000
+DeBERTa,validation,news,Stimulation,0.24422,0.01661,303.00000,13127.00000
+DeBERTa,validation,news,Hedonism,0.28912,0.00533,98.00000,13332.00000
+DeBERTa,validation,news,Achievement,0.37123,0.04171,818.00000,12612.00000
+DeBERTa,validation,news,Power: dominance,0.35677,0.03089,569.00000,12861.00000
+DeBERTa,validation,news,Power: resources,0.34312,0.03040,545.00000,12885.00000
+DeBERTa,validation,news,Face,0.26715,0.01475,277.00000,13153.00000
+DeBERTa,validation,news,Security: personal,0.33333,0.01421,267.00000,13163.00000
+DeBERTa,validation,news,Security: societal,0.43958,0.05069,1073.00000,12357.00000
+DeBERTa,validation,news,Tradition,0.44148,0.01080,225.00000,13205.00000
+DeBERTa,validation,news,Conformity: rules,0.46667,0.03684,870.00000,12560.00000
+DeBERTa,validation,news,Conformity: interpersonal,0.18519,0.01226,189.00000,13241.00000
+DeBERTa,validation,news,Humility,0.08333,0.00271,40.00000,13390.00000
+DeBERTa,validation,news,Benevolence: caring,0.28311,0.01558,292.00000,13138.00000
+DeBERTa,validation,news,Benevolence: dependability,0.25660,0.01507,265.00000,13165.00000
+DeBERTa,validation,news,Universalism: concern,0.31070,0.02709,486.00000,12944.00000
+DeBERTa,validation,news,Universalism: nature,0.52650,0.00870,283.00000,13147.00000
+DeBERTa,validation,news,Universalism: tolerance,0.23024,0.00613,97.00000,13333.00000
+DeBERTa,validation,BG,Self-direction: thought,0.09091,0.01369,11.00000,1510.00000
+DeBERTa,validation,BG,Self-direction: action,0.19713,0.02871,93.00000,1428.00000
+DeBERTa,validation,BG,Stimulation,0.31276,0.02269,81.00000,1440.00000
+DeBERTa,validation,BG,Hedonism,0.00000,0.00329,2.00000,1519.00000
+DeBERTa,validation,BG,Achievement,0.29514,0.03579,96.00000,1425.00000
+DeBERTa,validation,BG,Power: dominance,0.20000,0.02273,40.00000,1481.00000
+DeBERTa,validation,BG,Power: resources,0.34568,0.04454,54.00000,1467.00000
+DeBERTa,validation,BG,Face,0.21839,0.02011,29.00000,1492.00000
+DeBERTa,validation,BG,Security: personal,0.19444,0.00442,12.00000,1509.00000
+DeBERTa,validation,BG,Security: societal,0.35897,0.04610,169.00000,1352.00000
+DeBERTa,validation,BG,Tradition,0.42424,0.01016,77.00000,1444.00000
+DeBERTa,validation,BG,Conformity: rules,0.53385,0.05097,128.00000,1393.00000
+DeBERTa,validation,BG,Conformity: interpersonal,0.06349,0.01178,21.00000,1500.00000
+DeBERTa,validation,BG,Humility,0.00000,0.00352,6.00000,1515.00000
+DeBERTa,validation,BG,Benevolence: caring,0.21176,0.03064,85.00000,1436.00000
+DeBERTa,validation,BG,Benevolence: dependability,0.21905,0.01705,35.00000,1486.00000
+DeBERTa,validation,BG,Universalism: concern,0.26812,0.02683,92.00000,1429.00000
+DeBERTa,validation,BG,Universalism: nature,0.53216,0.01093,57.00000,1464.00000
+DeBERTa,validation,BG,Universalism: tolerance,0.09524,0.00176,7.00000,1514.00000
+DeBERTa,validation,DE,Self-direction: thought,0.22989,0.01142,29.00000,1664.00000
+DeBERTa,validation,DE,Self-direction: action,0.25610,0.01904,82.00000,1611.00000
+DeBERTa,validation,DE,Stimulation,0.32759,0.02569,58.00000,1635.00000
+DeBERTa,validation,DE,Hedonism,0.36111,0.00436,12.00000,1681.00000
+DeBERTa,validation,DE,Achievement,0.41553,0.04870,146.00000,1547.00000
+DeBERTa,validation,DE,Power: dominance,0.25146,0.02180,57.00000,1636.00000
+DeBERTa,validation,DE,Power: resources,0.27861,0.03137,67.00000,1626.00000
+DeBERTa,validation,DE,Face,0.29787,0.01053,47.00000,1646.00000
+DeBERTa,validation,DE,Security: personal,0.29412,0.01085,34.00000,1659.00000
+DeBERTa,validation,DE,Security: societal,0.52330,0.03729,93.00000,1600.00000
+DeBERTa,validation,DE,Tradition,0.41667,0.00599,24.00000,1669.00000
+DeBERTa,validation,DE,Conformity: rules,0.44792,0.02875,128.00000,1565.00000
+DeBERTa,validation,DE,Conformity: interpersonal,0.33333,0.00983,32.00000,1661.00000
+DeBERTa,validation,DE,Humility,0.00000,0.00316,4.00000,1689.00000
+DeBERTa,validation,DE,Benevolence: caring,0.25833,0.01230,40.00000,1653.00000
+DeBERTa,validation,DE,Benevolence: dependability,0.26667,0.00782,30.00000,1663.00000
+DeBERTa,validation,DE,Universalism: concern,0.30233,0.03941,86.00000,1607.00000
+DeBERTa,validation,DE,Universalism: nature,0.52632,0.01913,38.00000,1655.00000
+DeBERTa,validation,DE,Universalism: tolerance,0.09333,0.01059,25.00000,1668.00000
+DeBERTa,validation,EL,Self-direction: thought,0.00000,0.00892,3.00000,1420.00000
+DeBERTa,validation,EL,Self-direction: action,0.30769,0.02388,13.00000,1410.00000
+DeBERTa,validation,EL,Stimulation,0.44444,0.02036,48.00000,1375.00000
+DeBERTa,validation,EL,Hedonism,0.70370,0.00754,9.00000,1414.00000
+DeBERTa,validation,EL,Achievement,0.41558,0.04656,77.00000,1346.00000
+DeBERTa,validation,EL,Power: dominance,0.50476,0.04729,105.00000,1318.00000
+DeBERTa,validation,EL,Power: resources,0.42938,0.05109,118.00000,1305.00000
+DeBERTa,validation,EL,Face,0.26882,0.01772,31.00000,1392.00000
+DeBERTa,validation,EL,Security: personal,0.42105,0.00689,19.00000,1404.00000
+DeBERTa,validation,EL,Security: societal,0.34628,0.07204,206.00000,1217.00000
+DeBERTa,validation,EL,Tradition,0.38889,0.01035,6.00000,1417.00000
+DeBERTa,validation,EL,Conformity: rules,0.48889,0.02876,90.00000,1333.00000
+DeBERTa,validation,EL,Conformity: interpersonal,0.15054,0.01200,62.00000,1361.00000
+DeBERTa,validation,EL,Humility,0.00000,0.00305,1.00000,1422.00000
+DeBERTa,validation,EL,Benevolence: caring,0.34409,0.01772,31.00000,1392.00000
+DeBERTa,validation,EL,Benevolence: dependability,0.26144,0.01433,51.00000,1372.00000
+DeBERTa,validation,EL,Universalism: concern,0.32240,0.03035,61.00000,1362.00000
+DeBERTa,validation,EL,Universalism: nature,0.55263,0.01396,38.00000,1385.00000
+DeBERTa,validation,EL,Universalism: tolerance,0.00000,0.00331,14.00000,1409.00000
+DeBERTa,validation,EN,Self-direction: thought,0.05556,0.00914,6.00000,2043.00000
+DeBERTa,validation,EN,Self-direction: action,0.31159,0.02180,46.00000,2003.00000
+DeBERTa,validation,EN,Stimulation,0.46667,0.01327,15.00000,2034.00000
+DeBERTa,validation,EN,Hedonism,0.51282,0.00655,13.00000,2036.00000
+DeBERTa,validation,EN,Achievement,0.44330,0.04559,97.00000,1952.00000
+DeBERTa,validation,EN,Power: dominance,0.30000,0.02472,40.00000,2009.00000
+DeBERTa,validation,EN,Power: resources,0.28947,0.02768,38.00000,2011.00000
+DeBERTa,validation,EN,Face,0.63333,0.00981,10.00000,2039.00000
+DeBERTa,validation,EN,Security: personal,0.39048,0.01341,35.00000,2014.00000
+DeBERTa,validation,EN,Security: societal,0.53687,0.05269,113.00000,1936.00000
+DeBERTa,validation,EN,Tradition,0.38667,0.01235,25.00000,2024.00000
+DeBERTa,validation,EN,Conformity: rules,0.43011,0.03808,62.00000,1987.00000
+DeBERTa,validation,EN,Conformity: interpersonal,0.34483,0.01089,29.00000,2020.00000
+DeBERTa,validation,EN,Humility,0.00000,0.00147,5.00000,2044.00000
+DeBERTa,validation,EN,Benevolence: caring,0.27778,0.00507,12.00000,2037.00000
+DeBERTa,validation,EN,Benevolence: dependability,0.31481,0.01050,18.00000,2031.00000
+DeBERTa,validation,EN,Universalism: concern,0.60386,0.03165,69.00000,1980.00000
+DeBERTa,validation,EN,Universalism: nature,0.71545,0.00797,41.00000,2008.00000
+DeBERTa,validation,EN,Universalism: tolerance,0.39394,0.01112,11.00000,2038.00000
+DeBERTa,validation,FR,Self-direction: thought,0.00000,0.01194,2.00000,949.00000
+DeBERTa,validation,FR,Self-direction: action,0.26667,0.02940,10.00000,941.00000
+DeBERTa,validation,FR,Stimulation,0.35417,0.02246,16.00000,935.00000
+DeBERTa,validation,FR,Hedonism,0.06667,0.00388,5.00000,946.00000
+DeBERTa,validation,FR,Achievement,0.42593,0.05395,18.00000,933.00000
+DeBERTa,validation,FR,Power: dominance,0.39583,0.02674,16.00000,935.00000
+DeBERTa,validation,FR,Power: resources,0.17647,0.04640,17.00000,934.00000
+DeBERTa,validation,FR,Face,0.19231,0.01441,26.00000,925.00000
+DeBERTa,validation,FR,Security: personal,0.21429,0.01316,14.00000,937.00000
+DeBERTa,validation,FR,Security: societal,0.32787,0.03521,61.00000,890.00000
+DeBERTa,validation,FR,Tradition,0.29167,0.00530,8.00000,943.00000
+DeBERTa,validation,FR,Conformity: rules,0.65152,0.03409,22.00000,929.00000
+DeBERTa,validation,FR,Conformity: interpersonal,0.22222,0.01587,6.00000,945.00000
+DeBERTa,validation,FR,Humility,0.00000,0.00421,1.00000,950.00000
+DeBERTa,validation,FR,Benevolence: caring,0.22222,0.00991,9.00000,942.00000
+DeBERTa,validation,FR,Benevolence: dependability,0.20000,0.00634,5.00000,946.00000
+DeBERTa,validation,FR,Universalism: concern,0.38519,0.01950,45.00000,906.00000
+DeBERTa,validation,FR,Universalism: nature,0.60784,0.01356,17.00000,934.00000
+DeBERTa,validation,FR,Universalism: tolerance,0.46667,0.00886,10.00000,941.00000
+DeBERTa,validation,HE,Self-direction: thought,0.09524,0.00935,28.00000,1319.00000
+DeBERTa,validation,HE,Self-direction: action,0.20155,0.02582,43.00000,1304.00000
+DeBERTa,validation,HE,Stimulation,0.30108,0.01342,31.00000,1316.00000
+DeBERTa,validation,HE,Hedonism,0.22222,0.00149,3.00000,1344.00000
+DeBERTa,validation,HE,Achievement,0.31111,0.03167,105.00000,1242.00000
+DeBERTa,validation,HE,Power: dominance,0.46169,0.07900,174.00000,1173.00000
+DeBERTa,validation,HE,Power: resources,0.50919,0.02623,127.00000,1220.00000
+DeBERTa,validation,HE,Face,0.30000,0.01924,30.00000,1317.00000
+DeBERTa,validation,HE,Security: personal,0.41228,0.01273,38.00000,1309.00000
+DeBERTa,validation,HE,Security: societal,0.53980,0.10380,268.00000,1079.00000
+DeBERTa,validation,HE,Tradition,0.47009,0.00841,39.00000,1308.00000
+DeBERTa,validation,HE,Conformity: rules,0.43357,0.06423,143.00000,1204.00000
+DeBERTa,validation,HE,Conformity: interpersonal,0.01449,0.00932,23.00000,1324.00000
+DeBERTa,validation,HE,Humility,0.06667,0.00124,5.00000,1342.00000
+DeBERTa,validation,HE,Benevolence: caring,0.70833,0.01170,8.00000,1339.00000
+DeBERTa,validation,HE,Benevolence: dependability,0.28472,0.01745,48.00000,1299.00000
+DeBERTa,validation,HE,Universalism: concern,0.38418,0.02070,59.00000,1288.00000
+DeBERTa,validation,HE,Universalism: nature,0.00000,0.00124,8.00000,1339.00000
+DeBERTa,validation,HE,Universalism: tolerance,0.25926,0.00426,18.00000,1329.00000
+DeBERTa,validation,IT,Self-direction: thought,0.09524,0.00661,14.00000,1312.00000
+DeBERTa,validation,IT,Self-direction: action,0.02083,0.02417,16.00000,1310.00000
+DeBERTa,validation,IT,Stimulation,0.21970,0.03796,88.00000,1238.00000
+DeBERTa,validation,IT,Hedonism,0.00000,0.00305,13.00000,1313.00000
+DeBERTa,validation,IT,Achievement,0.29899,0.05570,165.00000,1161.00000
+DeBERTa,validation,IT,Power: dominance,0.19476,0.02210,89.00000,1237.00000
+DeBERTa,validation,IT,Power: resources,0.21552,0.03168,116.00000,1210.00000
+DeBERTa,validation,IT,Face,0.16667,0.02148,38.00000,1288.00000
+DeBERTa,validation,IT,Security: personal,0.09804,0.01044,17.00000,1309.00000
+DeBERTa,validation,IT,Security: societal,0.24479,0.06498,64.00000,1262.00000
+DeBERTa,validation,IT,Tradition,0.33333,0.00882,3.00000,1323.00000
+DeBERTa,validation,IT,Conformity: rules,0.37008,0.03586,127.00000,1199.00000
+DeBERTa,validation,IT,Conformity: interpersonal,,0.01609,0.00000,1326.00000
+DeBERTa,validation,IT,Humility,,0.00226,0.00000,1326.00000
+DeBERTa,validation,IT,Benevolence: caring,0.18519,0.01309,27.00000,1299.00000
+DeBERTa,validation,IT,Benevolence: dependability,0.00000,0.02280,10.00000,1316.00000
+DeBERTa,validation,IT,Universalism: concern,0.40437,0.02951,61.00000,1265.00000
+DeBERTa,validation,IT,Universalism: nature,0.42929,0.01561,66.00000,1260.00000
+DeBERTa,validation,IT,Universalism: tolerance,0.00000,0.00479,4.00000,1322.00000
+DeBERTa,validation,NL,Self-direction: thought,0.06173,0.01086,27.00000,2241.00000
+DeBERTa,validation,NL,Self-direction: action,0.22989,0.02232,58.00000,2210.00000
+DeBERTa,validation,NL,Stimulation,0.35088,0.01616,19.00000,2249.00000
+DeBERTa,validation,NL,Hedonism,0.21212,0.00650,11.00000,2257.00000
+DeBERTa,validation,NL,Achievement,0.41667,0.03571,112.00000,2156.00000
+DeBERTa,validation,NL,Power: dominance,0.19048,0.01572,63.00000,2205.00000
+DeBERTa,validation,NL,Power: resources,0.21306,0.03670,97.00000,2171.00000
+DeBERTa,validation,NL,Face,0.39815,0.01045,36.00000,2232.00000
+DeBERTa,validation,NL,Security: personal,0.31944,0.00995,24.00000,2244.00000
+DeBERTa,validation,NL,Security: societal,0.40146,0.04614,137.00000,2131.00000
+DeBERTa,validation,NL,Tradition,0.00000,0.00162,10.00000,2258.00000
+DeBERTa,validation,NL,Conformity: rules,0.46429,0.02900,84.00000,2184.00000
+DeBERTa,validation,NL,Conformity: interpersonal,0.07576,0.01098,22.00000,2246.00000
+DeBERTa,validation,NL,Humility,0.13333,0.00029,5.00000,2263.00000
+DeBERTa,validation,NL,Benevolence: caring,0.28889,0.01627,15.00000,2253.00000
+DeBERTa,validation,NL,Benevolence: dependability,0.18919,0.01330,37.00000,2231.00000
+DeBERTa,validation,NL,Universalism: concern,0.29752,0.03322,121.00000,2147.00000
+DeBERTa,validation,NL,Universalism: nature,0.63470,0.01640,73.00000,2195.00000
+DeBERTa,validation,NL,Universalism: tolerance,0.22222,0.00621,15.00000,2253.00000
+DeBERTa,validation,TR,Self-direction: thought,0.14379,0.00982,51.00000,2275.00000
+DeBERTa,validation,TR,Self-direction: action,0.25867,0.03620,125.00000,2201.00000
+DeBERTa,validation,TR,Stimulation,0.25521,0.01695,64.00000,2262.00000
+DeBERTa,validation,TR,Hedonism,0.23958,0.00480,32.00000,2294.00000
+DeBERTa,validation,TR,Achievement,0.37313,0.04121,134.00000,2192.00000
+DeBERTa,validation,TR,Power: dominance,0.29630,0.03120,72.00000,2254.00000
+DeBERTa,validation,TR,Power: resources,0.32593,0.02251,90.00000,2236.00000
+DeBERTa,validation,TR,Face,0.19444,0.01077,36.00000,2290.00000
+DeBERTa,validation,TR,Security: personal,0.31765,0.02796,85.00000,2241.00000
+DeBERTa,validation,TR,Security: societal,0.44889,0.03753,150.00000,2176.00000
+DeBERTa,validation,TR,Tradition,0.53252,0.02600,82.00000,2244.00000
+DeBERTa,validation,TR,Conformity: rules,0.49225,0.03126,172.00000,2154.00000
+DeBERTa,validation,TR,Conformity: interpersonal,0.14815,0.00964,9.00000,2317.00000
+DeBERTa,validation,TR,Humility,0.14583,0.00534,16.00000,2310.00000
+DeBERTa,validation,TR,Benevolence: caring,0.31304,0.03106,115.00000,2211.00000
+DeBERTa,validation,TR,Benevolence: dependability,0.27160,0.02171,54.00000,2272.00000
+DeBERTa,validation,TR,Universalism: concern,0.29870,0.03409,77.00000,2249.00000
+DeBERTa,validation,TR,Universalism: nature,0.57037,0.00818,45.00000,2281.00000
+DeBERTa,validation,TR,Universalism: tolerance,0.39216,0.00534,17.00000,2309.00000
+DeBERTa,test,all,Self-direction: thought,0.14620,0.00847,171.00000,14398.00000
+DeBERTa,test,all,Self-direction: action,0.21224,0.02691,512.00000,14057.00000
+DeBERTa,test,all,Stimulation,0.28661,0.01852,371.00000,14198.00000
+DeBERTa,test,all,Hedonism,0.34667,0.00674,125.00000,14444.00000
+DeBERTa,test,all,Achievement,0.37834,0.04183,911.00000,13658.00000
+DeBERTa,test,all,Power: dominance,0.32858,0.03044,631.00000,13938.00000
+DeBERTa,test,all,Power: resources,0.38095,0.03715,805.00000,13764.00000
+DeBERTa,test,all,Face,0.25968,0.01203,267.00000,14302.00000
+DeBERTa,test,all,Security: personal,0.29735,0.01116,352.00000,14217.00000
+DeBERTa,test,all,Security: societal,0.44744,0.05373,1151.00000,13418.00000
+DeBERTa,test,all,Tradition,0.48129,0.00758,196.00000,14373.00000
+DeBERTa,test,all,Conformity: rules,0.46213,0.04066,911.00000,13658.00000
+DeBERTa,test,all,Conformity: interpersonal,0.14872,0.01192,195.00000,14374.00000
+DeBERTa,test,all,Humility,0.08889,0.00298,30.00000,14539.00000
+DeBERTa,test,all,Benevolence: caring,0.26955,0.01867,324.00000,14245.00000
+DeBERTa,test,all,Benevolence: dependability,0.25694,0.01102,288.00000,14281.00000
+DeBERTa,test,all,Universalism: concern,0.41315,0.03181,735.00000,13834.00000
+DeBERTa,test,all,Universalism: nature,0.59841,0.00932,293.00000,14276.00000
+DeBERTa,test,all,Universalism: tolerance,0.22612,0.00840,171.00000,14398.00000
+DeBERTa,test,manifestos,Self-direction: thought,0.06349,0.00844,21.00000,1382.00000
+DeBERTa,test,manifestos,Self-direction: action,0.34028,0.04157,48.00000,1355.00000
+DeBERTa,test,manifestos,Stimulation,0.43986,0.05462,97.00000,1306.00000
+DeBERTa,test,manifestos,Hedonism,,0.00071,0.00000,1403.00000
+DeBERTa,test,manifestos,Achievement,0.37710,0.04320,99.00000,1304.00000
+DeBERTa,test,manifestos,Power: dominance,0.22807,0.02344,38.00000,1365.00000
+DeBERTa,test,manifestos,Power: resources,0.37990,0.05130,136.00000,1267.00000
+DeBERTa,test,manifestos,Face,0.29167,0.00430,8.00000,1395.00000
+DeBERTa,test,manifestos,Security: personal,0.03030,0.00239,11.00000,1392.00000
+DeBERTa,test,manifestos,Security: societal,0.51596,0.06475,188.00000,1215.00000
+DeBERTa,test,manifestos,Tradition,0.63810,0.00707,35.00000,1368.00000
+DeBERTa,test,manifestos,Conformity: rules,0.42917,0.05215,80.00000,1323.00000
+DeBERTa,test,manifestos,Conformity: interpersonal,0.00000,0.00312,12.00000,1391.00000
+DeBERTa,test,manifestos,Humility,,0.00285,0.00000,1403.00000
+DeBERTa,test,manifestos,Benevolence: caring,0.19048,0.02667,28.00000,1375.00000
+DeBERTa,test,manifestos,Benevolence: dependability,0.19231,0.01380,26.00000,1377.00000
+DeBERTa,test,manifestos,Universalism: concern,0.52000,0.07620,200.00000,1203.00000
+DeBERTa,test,manifestos,Universalism: nature,0.73585,0.02493,106.00000,1297.00000
+DeBERTa,test,manifestos,Universalism: tolerance,0.31944,0.01184,24.00000,1379.00000
+DeBERTa,test,news,Self-direction: thought,0.15778,0.00848,150.00000,13016.00000
+DeBERTa,test,news,Self-direction: action,0.19899,0.02535,464.00000,12702.00000
+DeBERTa,test,news,Stimulation,0.23236,0.01487,274.00000,12892.00000
+DeBERTa,test,news,Hedonism,0.34667,0.00739,125.00000,13041.00000
+DeBERTa,test,news,Achievement,0.37849,0.04169,812.00000,12354.00000
+DeBERTa,test,news,Power: dominance,0.33502,0.03120,593.00000,12573.00000
+DeBERTa,test,news,Power: resources,0.38117,0.03572,669.00000,12497.00000
+DeBERTa,test,news,Face,0.25869,0.01286,259.00000,12907.00000
+DeBERTa,test,news,Security: personal,0.30596,0.01211,341.00000,12825.00000
+DeBERTa,test,news,Security: societal,0.43406,0.05264,963.00000,12203.00000
+DeBERTa,test,news,Tradition,0.44720,0.00764,161.00000,13005.00000
+DeBERTa,test,news,Conformity: rules,0.46530,0.03943,831.00000,12335.00000
+DeBERTa,test,news,Conformity: interpersonal,0.15847,0.01286,183.00000,12983.00000
+DeBERTa,test,news,Humility,0.08889,0.00299,30.00000,13136.00000
+DeBERTa,test,news,Benevolence: caring,0.27703,0.01782,296.00000,12870.00000
+DeBERTa,test,news,Benevolence: dependability,0.26336,0.01072,262.00000,12904.00000
+DeBERTa,test,news,Universalism: concern,0.37321,0.02758,535.00000,12631.00000
+DeBERTa,test,news,Universalism: nature,0.52050,0.00776,187.00000,12979.00000
+DeBERTa,test,news,Universalism: tolerance,0.21088,0.00804,147.00000,13019.00000
+DeBERTa,test,BG,Self-direction: thought,0.10000,0.00676,20.00000,1282.00000
+DeBERTa,test,BG,Self-direction: action,0.15847,0.02149,61.00000,1241.00000
+DeBERTa,test,BG,Stimulation,0.36869,0.02131,66.00000,1236.00000
+DeBERTa,test,BG,Hedonism,0.28571,0.00412,7.00000,1295.00000
+DeBERTa,test,BG,Achievement,0.42593,0.04895,90.00000,1212.00000
+DeBERTa,test,BG,Power: dominance,0.11111,0.02858,54.00000,1248.00000
+DeBERTa,test,BG,Power: resources,0.37778,0.03450,75.00000,1227.00000
+DeBERTa,test,BG,Face,0.23529,0.01551,34.00000,1268.00000
+DeBERTa,test,BG,Security: personal,0.12500,0.00472,32.00000,1270.00000
+DeBERTa,test,BG,Security: societal,0.35200,0.04871,125.00000,1177.00000
+DeBERTa,test,BG,Tradition,0.41667,0.00155,8.00000,1294.00000
+DeBERTa,test,BG,Conformity: rules,0.49235,0.07209,109.00000,1193.00000
+DeBERTa,test,BG,Conformity: interpersonal,0.13889,0.01499,12.00000,1290.00000
+DeBERTa,test,BG,Humility,0.00000,0.00232,7.00000,1295.00000
+DeBERTa,test,BG,Benevolence: caring,0.27843,0.03424,85.00000,1217.00000
+DeBERTa,test,BG,Benevolence: dependability,0.16667,0.01648,28.00000,1274.00000
+DeBERTa,test,BG,Universalism: concern,0.25333,0.03161,100.00000,1202.00000
+DeBERTa,test,BG,Universalism: nature,0.58095,0.00500,35.00000,1267.00000
+DeBERTa,test,BG,Universalism: tolerance,0.11111,0.00567,9.00000,1293.00000
+DeBERTa,test,DE,Self-direction: thought,0.21839,0.00849,29.00000,1845.00000
+DeBERTa,test,DE,Self-direction: action,0.22714,0.03521,113.00000,1761.00000
+DeBERTa,test,DE,Stimulation,0.35333,0.01718,50.00000,1824.00000
+DeBERTa,test,DE,Hedonism,0.16667,0.00503,20.00000,1854.00000
+DeBERTa,test,DE,Achievement,0.34279,0.03097,141.00000,1733.00000
+DeBERTa,test,DE,Power: dominance,0.38095,0.02745,77.00000,1797.00000
+DeBERTa,test,DE,Power: resources,0.28295,0.03393,86.00000,1788.00000
+DeBERTa,test,DE,Face,0.22222,0.00925,36.00000,1838.00000
+DeBERTa,test,DE,Security: personal,0.25000,0.01351,48.00000,1826.00000
+DeBERTa,test,DE,Security: societal,0.50538,0.04590,124.00000,1750.00000
+DeBERTa,test,DE,Tradition,0.26667,0.00215,10.00000,1864.00000
+DeBERTa,test,DE,Conformity: rules,0.51894,0.04653,176.00000,1698.00000
+DeBERTa,test,DE,Conformity: interpersonal,0.00000,0.00788,12.00000,1862.00000
+DeBERTa,test,DE,Humility,0.00000,0.00196,1.00000,1873.00000
+DeBERTa,test,DE,Benevolence: caring,0.29167,0.01719,32.00000,1842.00000
+DeBERTa,test,DE,Benevolence: dependability,0.24359,0.00866,26.00000,1848.00000
+DeBERTa,test,DE,Universalism: concern,0.29304,0.03346,91.00000,1783.00000
+DeBERTa,test,DE,Universalism: nature,0.53333,0.00763,40.00000,1834.00000
+DeBERTa,test,DE,Universalism: tolerance,0.15000,0.00593,20.00000,1854.00000
+DeBERTa,test,EL,Self-direction: thought,0.16667,0.00907,6.00000,1396.00000
+DeBERTa,test,EL,Self-direction: action,0.24074,0.03227,18.00000,1384.00000
+DeBERTa,test,EL,Stimulation,0.36458,0.01509,32.00000,1370.00000
+DeBERTa,test,EL,Hedonism,0.50000,0.00525,4.00000,1398.00000
+DeBERTa,test,EL,Achievement,0.46667,0.03626,60.00000,1342.00000
+DeBERTa,test,EL,Power: dominance,0.44648,0.04305,109.00000,1293.00000
+DeBERTa,test,EL,Power: resources,0.43567,0.05150,114.00000,1288.00000
+DeBERTa,test,EL,Face,0.34409,0.01823,31.00000,1371.00000
+DeBERTa,test,EL,Security: personal,0.33333,0.00432,14.00000,1388.00000
+DeBERTa,test,EL,Security: societal,0.35589,0.06015,133.00000,1269.00000
+DeBERTa,test,EL,Tradition,0.33333,0.00454,8.00000,1394.00000
+DeBERTa,test,EL,Conformity: rules,0.40952,0.02621,105.00000,1297.00000
+DeBERTa,test,EL,Conformity: interpersonal,0.15556,0.01658,75.00000,1327.00000
+DeBERTa,test,EL,Humility,,0.00357,0.00000,1402.00000
+DeBERTa,test,EL,Benevolence: caring,0.26667,0.01468,40.00000,1362.00000
+DeBERTa,test,EL,Benevolence: dependability,0.34000,0.01479,50.00000,1352.00000
+DeBERTa,test,EL,Universalism: concern,0.48538,0.04995,114.00000,1288.00000
+DeBERTa,test,EL,Universalism: nature,0.52525,0.00438,33.00000,1369.00000
+DeBERTa,test,EL,Universalism: tolerance,0.23656,0.01070,31.00000,1371.00000
+DeBERTa,test,EN,Self-direction: thought,0.12121,0.00485,11.00000,1994.00000
+DeBERTa,test,EN,Self-direction: action,0.27891,0.02130,49.00000,1956.00000
+DeBERTa,test,EN,Stimulation,0.35294,0.01258,17.00000,1988.00000
+DeBERTa,test,EN,Hedonism,0.35417,0.00838,16.00000,1989.00000
+DeBERTa,test,EN,Achievement,0.48684,0.03784,76.00000,1929.00000
+DeBERTa,test,EN,Power: dominance,0.47368,0.02048,19.00000,1986.00000
+DeBERTa,test,EN,Power: resources,0.21839,0.02547,29.00000,1976.00000
+DeBERTa,test,EN,Face,0.23810,0.01051,7.00000,1998.00000
+DeBERTa,test,EN,Security: personal,0.34667,0.01448,25.00000,1980.00000
+DeBERTa,test,EN,Security: societal,0.46939,0.04859,98.00000,1907.00000
+DeBERTa,test,EN,Tradition,0.21212,0.00418,11.00000,1994.00000
+DeBERTa,test,EN,Conformity: rules,0.36111,0.03207,72.00000,1933.00000
+DeBERTa,test,EN,Conformity: interpersonal,0.19192,0.01471,33.00000,1972.00000
+DeBERTa,test,EN,Humility,0.04167,0.00234,8.00000,1997.00000
+DeBERTa,test,EN,Benevolence: caring,0.31481,0.01023,18.00000,1987.00000
+DeBERTa,test,EN,Benevolence: dependability,0.27083,0.00587,16.00000,1989.00000
+DeBERTa,test,EN,Universalism: concern,0.56028,0.03166,47.00000,1958.00000
+DeBERTa,test,EN,Universalism: nature,0.68056,0.00774,24.00000,1981.00000
+DeBERTa,test,EN,Universalism: tolerance,0.49020,0.01643,17.00000,1988.00000
+DeBERTa,test,FR,Self-direction: thought,0.04762,0.00830,7.00000,924.00000
+DeBERTa,test,FR,Self-direction: action,0.26389,0.02830,24.00000,907.00000
+DeBERTa,test,FR,Stimulation,0.47222,0.02575,12.00000,919.00000
+DeBERTa,test,FR,Hedonism,0.40000,0.00507,10.00000,921.00000
+DeBERTa,test,FR,Achievement,0.49123,0.05885,19.00000,912.00000
+DeBERTa,test,FR,Power: dominance,0.34667,0.04341,25.00000,906.00000
+DeBERTa,test,FR,Power: resources,0.25926,0.07006,27.00000,904.00000
+DeBERTa,test,FR,Face,0.11111,0.00979,12.00000,919.00000
+DeBERTa,test,FR,Security: personal,0.32099,0.01069,27.00000,904.00000
+DeBERTa,test,FR,Security: societal,0.40417,0.04269,80.00000,851.00000
+DeBERTa,test,FR,Tradition,0.50000,0.00218,12.00000,919.00000
+DeBERTa,test,FR,Conformity: rules,0.35632,0.04398,29.00000,902.00000
+DeBERTa,test,FR,Conformity: interpersonal,0.00000,0.01083,8.00000,923.00000
+DeBERTa,test,FR,Humility,0.00000,0.00287,1.00000,930.00000
+DeBERTa,test,FR,Benevolence: caring,0.43333,0.00579,10.00000,921.00000
+DeBERTa,test,FR,Benevolence: dependability,0.44444,0.00721,6.00000,925.00000
+DeBERTa,test,FR,Universalism: concern,0.30435,0.03010,23.00000,908.00000
+DeBERTa,test,FR,Universalism: nature,0.63158,0.01425,19.00000,912.00000
+DeBERTa,test,FR,Universalism: tolerance,0.20000,0.00576,5.00000,926.00000
+DeBERTa,test,HE,Self-direction: thought,0.19355,0.00920,31.00000,1449.00000
+DeBERTa,test,HE,Self-direction: action,0.31250,0.03619,80.00000,1400.00000
+DeBERTa,test,HE,Stimulation,0.29524,0.02007,35.00000,1445.00000
+DeBERTa,test,HE,Hedonism,0.55556,0.00970,3.00000,1477.00000
+DeBERTa,test,HE,Achievement,0.32527,0.03687,124.00000,1356.00000
+DeBERTa,test,HE,Power: dominance,0.31935,0.05211,143.00000,1337.00000
+DeBERTa,test,HE,Power: resources,0.44902,0.04071,170.00000,1310.00000
+DeBERTa,test,HE,Face,0.28205,0.01657,52.00000,1428.00000
+DeBERTa,test,HE,Security: personal,0.39080,0.00797,58.00000,1422.00000
+DeBERTa,test,HE,Security: societal,0.56734,0.08060,198.00000,1282.00000
+DeBERTa,test,HE,Tradition,0.60556,0.02277,60.00000,1420.00000
+DeBERTa,test,HE,Conformity: rules,0.44444,0.06212,117.00000,1363.00000
+DeBERTa,test,HE,Conformity: interpersonal,0.11111,0.01405,9.00000,1471.00000
+DeBERTa,test,HE,Humility,0.50000,0.00631,2.00000,1478.00000
+DeBERTa,test,HE,Benevolence: caring,0.32258,0.03244,31.00000,1449.00000
+DeBERTa,test,HE,Benevolence: dependability,0.22751,0.01270,63.00000,1417.00000
+DeBERTa,test,HE,Universalism: concern,0.46459,0.03885,193.00000,1287.00000
+DeBERTa,test,HE,Universalism: nature,0.73050,0.00465,47.00000,1433.00000
+DeBERTa,test,HE,Universalism: tolerance,0.20567,0.01582,47.00000,1433.00000
+DeBERTa,test,IT,Self-direction: thought,0.00000,0.00783,4.00000,1234.00000
+DeBERTa,test,IT,Self-direction: action,0.00000,0.02063,10.00000,1228.00000
+DeBERTa,test,IT,Stimulation,0.19281,0.03022,102.00000,1136.00000
+DeBERTa,test,IT,Hedonism,0.00000,0.00217,7.00000,1231.00000
+DeBERTa,test,IT,Achievement,0.28081,0.05343,165.00000,1073.00000
+DeBERTa,test,IT,Power: dominance,0.26966,0.03800,89.00000,1149.00000
+DeBERTa,test,IT,Power: resources,0.42105,0.05012,114.00000,1124.00000
+DeBERTa,test,IT,Face,0.31481,0.01165,36.00000,1202.00000
+DeBERTa,test,IT,Security: personal,0.09375,0.00276,32.00000,1206.00000
+DeBERTa,test,IT,Security: societal,0.41057,0.10208,82.00000,1156.00000
+DeBERTa,test,IT,Tradition,0.11111,0.00976,9.00000,1229.00000
+DeBERTa,test,IT,Conformity: rules,0.31148,0.02634,61.00000,1177.00000
+DeBERTa,test,IT,Conformity: interpersonal,0.21429,0.00899,14.00000,1224.00000
+DeBERTa,test,IT,Humility,,0.00188,0.00000,1238.00000
+DeBERTa,test,IT,Benevolence: caring,0.13043,0.00850,23.00000,1215.00000
+DeBERTa,test,IT,Benevolence: dependability,0.33333,0.01677,6.00000,1232.00000
+DeBERTa,test,IT,Universalism: concern,0.46825,0.04654,42.00000,1196.00000
+DeBERTa,test,IT,Universalism: nature,0.52083,0.02325,48.00000,1190.00000
+DeBERTa,test,IT,Universalism: tolerance,0.16667,0.00545,14.00000,1224.00000
+DeBERTa,test,NL,Self-direction: thought,0.17204,0.01180,31.00000,2119.00000
+DeBERTa,test,NL,Self-direction: action,0.14754,0.02330,61.00000,2089.00000
+DeBERTa,test,NL,Stimulation,0.20000,0.01480,10.00000,2140.00000
+DeBERTa,test,NL,Hedonism,0.46667,0.00591,5.00000,2145.00000
+DeBERTa,test,NL,Achievement,0.35294,0.04213,85.00000,2065.00000
+DeBERTa,test,NL,Power: dominance,0.37559,0.02245,71.00000,2079.00000
+DeBERTa,test,NL,Power: resources,0.33333,0.02474,75.00000,2075.00000
+DeBERTa,test,NL,Face,0.26667,0.00878,25.00000,2125.00000
+DeBERTa,test,NL,Security: personal,0.46032,0.01409,21.00000,2129.00000
+DeBERTa,test,NL,Security: societal,0.39030,0.04769,158.00000,1992.00000
+DeBERTa,test,NL,Tradition,0.58333,0.00344,20.00000,2130.00000
+DeBERTa,test,NL,Conformity: rules,0.44608,0.03266,68.00000,2082.00000
+DeBERTa,test,NL,Conformity: interpersonal,0.13333,0.01212,5.00000,2145.00000
+DeBERTa,test,NL,Humility,0.00000,0.00186,3.00000,2147.00000
+DeBERTa,test,NL,Benevolence: caring,0.00000,0.01149,3.00000,2147.00000
+DeBERTa,test,NL,Benevolence: dependability,0.28205,0.00679,39.00000,2111.00000
+DeBERTa,test,NL,Universalism: concern,0.46091,0.02417,81.00000,2069.00000
+DeBERTa,test,NL,Universalism: nature,0.61111,0.01494,30.00000,2120.00000
+DeBERTa,test,NL,Universalism: tolerance,0.22727,0.00454,22.00000,2128.00000
+DeBERTa,test,TR,Self-direction: thought,0.08333,0.00913,32.00000,2155.00000
+DeBERTa,test,TR,Self-direction: action,0.15625,0.02535,96.00000,2091.00000
+DeBERTa,test,TR,Stimulation,0.19149,0.01916,47.00000,2140.00000
+DeBERTa,test,TR,Hedonism,0.42138,0.01140,53.00000,2134.00000
+DeBERTa,test,TR,Achievement,0.44371,0.04355,151.00000,2036.00000
+DeBERTa,test,TR,Power: dominance,0.21212,0.02038,44.00000,2143.00000
+DeBERTa,test,TR,Power: resources,0.36232,0.03250,115.00000,2072.00000
+DeBERTa,test,TR,Face,0.20588,0.01115,34.00000,2153.00000
+DeBERTa,test,TR,Security: personal,0.32982,0.01864,95.00000,2092.00000
+DeBERTa,test,TR,Security: societal,0.49020,0.03032,153.00000,2034.00000
+DeBERTa,test,TR,Tradition,0.48851,0.01628,58.00000,2129.00000
+DeBERTa,test,TR,Conformity: rules,0.54789,0.03527,174.00000,2013.00000
+DeBERTa,test,TR,Conformity: interpersonal,0.17284,0.00864,27.00000,2160.00000
+DeBERTa,test,TR,Humility,0.16667,0.00398,8.00000,2179.00000
+DeBERTa,test,TR,Benevolence: caring,0.25203,0.03088,82.00000,2105.00000
+DeBERTa,test,TR,Benevolence: dependability,0.21605,0.01360,54.00000,2133.00000
+DeBERTa,test,TR,Universalism: concern,0.37121,0.01540,44.00000,2143.00000
+DeBERTa,test,TR,Universalism: nature,0.60784,0.00568,17.00000,2170.00000
+DeBERTa,test,TR,Universalism: tolerance,0.16667,0.00504,6.00000,2181.00000
+RoBERTa,validation,all,Self-direction: thought,0.12086,0.01020,171.00000,14733.00000
+RoBERTa,validation,all,Self-direction: action,0.22428,0.02615,486.00000,14418.00000
+RoBERTa,validation,all,Stimulation,0.30794,0.02007,420.00000,14484.00000
+RoBERTa,validation,all,Hedonism,0.26667,0.00495,100.00000,14804.00000
+RoBERTa,validation,all,Achievement,0.35930,0.04362,950.00000,13954.00000
+RoBERTa,validation,all,Power: dominance,0.32978,0.03086,656.00000,14248.00000
+RoBERTa,validation,all,Power: resources,0.32413,0.03451,724.00000,14180.00000
+RoBERTa,validation,all,Face,0.26502,0.01423,283.00000,14621.00000
+RoBERTa,validation,all,Security: personal,0.31415,0.01304,278.00000,14626.00000
+RoBERTa,validation,all,Security: societal,0.42850,0.05282,1261.00000,13643.00000
+RoBERTa,validation,all,Tradition,0.42822,0.01071,274.00000,14630.00000
+RoBERTa,validation,all,Conformity: rules,0.43654,0.03862,956.00000,13948.00000
+RoBERTa,validation,all,Conformity: interpersonal,0.14052,0.01193,204.00000,14700.00000
+RoBERTa,validation,all,Humility,0.09302,0.00262,43.00000,14861.00000
+RoBERTa,validation,all,Benevolence: caring,0.25926,0.01740,342.00000,14562.00000
+RoBERTa,validation,all,Benevolence: dependability,0.23611,0.01505,288.00000,14616.00000
+RoBERTa,validation,all,Universalism: concern,0.34128,0.03105,671.00000,14233.00000
+RoBERTa,validation,all,Universalism: nature,0.55527,0.01173,383.00000,14521.00000
+RoBERTa,validation,all,Universalism: tolerance,0.20386,0.00652,121.00000,14783.00000
+RoBERTa,validation,manifestos,Self-direction: thought,0.14815,0.00865,9.00000,1465.00000
+RoBERTa,validation,manifestos,Self-direction: action,0.33333,0.03340,47.00000,1427.00000
+RoBERTa,validation,manifestos,Stimulation,0.47863,0.05920,117.00000,1357.00000
+RoBERTa,validation,manifestos,Hedonism,0.00000,0.00113,2.00000,1472.00000
+RoBERTa,validation,manifestos,Achievement,0.33586,0.05216,132.00000,1342.00000
+RoBERTa,validation,manifestos,Power: dominance,0.22989,0.01899,87.00000,1387.00000
+RoBERTa,validation,manifestos,Power: resources,0.28305,0.07542,179.00000,1295.00000
+RoBERTa,validation,manifestos,Face,0.22222,0.00613,6.00000,1468.00000
+RoBERTa,validation,manifestos,Security: personal,0.00000,0.00182,11.00000,1463.00000
+RoBERTa,validation,manifestos,Security: societal,0.41667,0.07802,188.00000,1286.00000
+RoBERTa,validation,manifestos,Tradition,0.44898,0.01053,49.00000,1425.00000
+RoBERTa,validation,manifestos,Conformity: rules,0.42636,0.03939,86.00000,1388.00000
+RoBERTa,validation,manifestos,Conformity: interpersonal,0.00000,0.00297,15.00000,1459.00000
+RoBERTa,validation,manifestos,Humility,0.00000,0.00317,3.00000,1471.00000
+RoBERTa,validation,manifestos,Benevolence: caring,0.24000,0.03277,50.00000,1424.00000
+RoBERTa,validation,manifestos,Benevolence: dependability,0.17391,0.01378,23.00000,1451.00000
+RoBERTa,validation,manifestos,Universalism: concern,0.46306,0.07991,185.00000,1289.00000
+RoBERTa,validation,manifestos,Universalism: nature,0.67667,0.04343,100.00000,1374.00000
+RoBERTa,validation,manifestos,Universalism: tolerance,0.18056,0.00621,24.00000,1450.00000
+RoBERTa,validation,news,Self-direction: thought,0.11934,0.01038,162.00000,13268.00000
+RoBERTa,validation,news,Self-direction: action,0.21260,0.02535,439.00000,12991.00000
+RoBERTa,validation,news,Stimulation,0.24202,0.01602,303.00000,13127.00000
+RoBERTa,validation,news,Hedonism,0.27211,0.00538,98.00000,13332.00000
+RoBERTa,validation,news,Achievement,0.36308,0.04271,818.00000,12612.00000
+RoBERTa,validation,news,Power: dominance,0.34505,0.03214,569.00000,12861.00000
+RoBERTa,validation,news,Power: resources,0.33761,0.03040,545.00000,12885.00000
+RoBERTa,validation,news,Face,0.26594,0.01513,277.00000,13153.00000
+RoBERTa,validation,news,Security: personal,0.32709,0.01428,267.00000,13163.00000
+RoBERTa,validation,news,Security: societal,0.43057,0.05020,1073.00000,12357.00000
+RoBERTa,validation,news,Tradition,0.42370,0.01073,225.00000,13205.00000
+RoBERTa,validation,news,Conformity: rules,0.43755,0.03854,870.00000,12560.00000
+RoBERTa,validation,news,Conformity: interpersonal,0.15168,0.01291,189.00000,13241.00000
+RoBERTa,validation,news,Humility,0.10000,0.00256,40.00000,13390.00000
+RoBERTa,validation,news,Benevolence: caring,0.26256,0.01573,292.00000,13138.00000
+RoBERTa,validation,news,Benevolence: dependability,0.24151,0.01519,265.00000,13165.00000
+RoBERTa,validation,news,Universalism: concern,0.29492,0.02619,486.00000,12944.00000
+RoBERTa,validation,news,Universalism: nature,0.51237,0.00842,283.00000,13147.00000
+RoBERTa,validation,news,Universalism: tolerance,0.20962,0.00655,97.00000,13333.00000
+RoBERTa,validation,BG,Self-direction: thought,0.09091,0.01302,11.00000,1510.00000
+RoBERTa,validation,BG,Self-direction: action,0.19713,0.03245,93.00000,1428.00000
+RoBERTa,validation,BG,Stimulation,0.34156,0.02755,81.00000,1440.00000
+RoBERTa,validation,BG,Hedonism,0.00000,0.00373,2.00000,1519.00000
+RoBERTa,validation,BG,Achievement,0.31944,0.03860,96.00000,1425.00000
+RoBERTa,validation,BG,Power: dominance,0.23333,0.02318,40.00000,1481.00000
+RoBERTa,validation,BG,Power: resources,0.32099,0.04158,54.00000,1467.00000
+RoBERTa,validation,BG,Face,0.18391,0.01743,29.00000,1492.00000
+RoBERTa,validation,BG,Security: personal,0.25000,0.00552,12.00000,1509.00000
+RoBERTa,validation,BG,Security: societal,0.36095,0.04956,169.00000,1352.00000
+RoBERTa,validation,BG,Tradition,0.39394,0.00785,77.00000,1444.00000
+RoBERTa,validation,BG,Conformity: rules,0.48698,0.05025,128.00000,1393.00000
+RoBERTa,validation,BG,Conformity: interpersonal,0.09524,0.01067,21.00000,1500.00000
+RoBERTa,validation,BG,Humility,0.05556,0.00418,6.00000,1515.00000
+RoBERTa,validation,BG,Benevolence: caring,0.23529,0.03366,85.00000,1436.00000
+RoBERTa,validation,BG,Benevolence: dependability,0.20000,0.01727,35.00000,1486.00000
+RoBERTa,validation,BG,Universalism: concern,0.24275,0.02986,92.00000,1429.00000
+RoBERTa,validation,BG,Universalism: nature,0.53216,0.01002,57.00000,1464.00000
+RoBERTa,validation,BG,Universalism: tolerance,0.14286,0.00418,7.00000,1514.00000
+RoBERTa,validation,DE,Self-direction: thought,0.18391,0.01142,29.00000,1664.00000
+RoBERTa,validation,DE,Self-direction: action,0.20732,0.01883,82.00000,1611.00000
+RoBERTa,validation,DE,Stimulation,0.29310,0.02283,58.00000,1635.00000
+RoBERTa,validation,DE,Hedonism,0.25000,0.00337,12.00000,1681.00000
+RoBERTa,validation,DE,Achievement,0.37900,0.04740,146.00000,1547.00000
+RoBERTa,validation,DE,Power: dominance,0.25146,0.02282,57.00000,1636.00000
+RoBERTa,validation,DE,Power: resources,0.16915,0.03854,67.00000,1626.00000
+RoBERTa,validation,DE,Face,0.28369,0.01397,47.00000,1646.00000
+RoBERTa,validation,DE,Security: personal,0.28431,0.00944,34.00000,1659.00000
+RoBERTa,validation,DE,Security: societal,0.49104,0.03917,93.00000,1600.00000
+RoBERTa,validation,DE,Tradition,0.44444,0.00839,24.00000,1669.00000
+RoBERTa,validation,DE,Conformity: rules,0.44531,0.02833,128.00000,1565.00000
+RoBERTa,validation,DE,Conformity: interpersonal,0.22917,0.01064,32.00000,1661.00000
+RoBERTa,validation,DE,Humility,0.00000,0.00336,4.00000,1689.00000
+RoBERTa,validation,DE,Benevolence: caring,0.20000,0.01028,40.00000,1653.00000
+RoBERTa,validation,DE,Benevolence: dependability,0.35556,0.00962,30.00000,1663.00000
+RoBERTa,validation,DE,Universalism: concern,0.34109,0.03692,86.00000,1607.00000
+RoBERTa,validation,DE,Universalism: nature,0.57895,0.02054,38.00000,1655.00000
+RoBERTa,validation,DE,Universalism: tolerance,0.12000,0.00580,25.00000,1668.00000
+RoBERTa,validation,EL,Self-direction: thought,0.00000,0.00892,3.00000,1420.00000
+RoBERTa,validation,EL,Self-direction: action,0.28205,0.02506,13.00000,1410.00000
+RoBERTa,validation,EL,Stimulation,0.40278,0.02255,48.00000,1375.00000
+RoBERTa,validation,EL,Hedonism,0.66667,0.00778,9.00000,1414.00000
+RoBERTa,validation,EL,Achievement,0.39394,0.04086,77.00000,1346.00000
+RoBERTa,validation,EL,Power: dominance,0.44127,0.04122,105.00000,1318.00000
+RoBERTa,validation,EL,Power: resources,0.45198,0.04981,118.00000,1305.00000
+RoBERTa,validation,EL,Face,0.32258,0.01772,31.00000,1392.00000
+RoBERTa,validation,EL,Security: personal,0.35088,0.00617,19.00000,1404.00000
+RoBERTa,validation,EL,Security: societal,0.39482,0.07313,206.00000,1217.00000
+RoBERTa,validation,EL,Tradition,0.44444,0.01059,6.00000,1417.00000
+RoBERTa,validation,EL,Conformity: rules,0.44815,0.03451,90.00000,1333.00000
+RoBERTa,validation,EL,Conformity: interpersonal,0.15054,0.01494,62.00000,1361.00000
+RoBERTa,validation,EL,Humility,0.00000,0.00141,1.00000,1422.00000
+RoBERTa,validation,EL,Benevolence: caring,0.32258,0.02466,31.00000,1392.00000
+RoBERTa,validation,EL,Benevolence: dependability,0.26144,0.01555,51.00000,1372.00000
+RoBERTa,validation,EL,Universalism: concern,0.32240,0.02863,61.00000,1362.00000
+RoBERTa,validation,EL,Universalism: nature,0.52632,0.01300,38.00000,1385.00000
+RoBERTa,validation,EL,Universalism: tolerance,0.02381,0.00402,14.00000,1409.00000
+RoBERTa,validation,EN,Self-direction: thought,0.05556,0.00718,6.00000,2043.00000
+RoBERTa,validation,EN,Self-direction: action,0.26812,0.02163,46.00000,2003.00000
+RoBERTa,validation,EN,Stimulation,0.40000,0.01098,15.00000,2034.00000
+RoBERTa,validation,EN,Hedonism,0.41026,0.00426,13.00000,2036.00000
+RoBERTa,validation,EN,Achievement,0.42268,0.03911,97.00000,1952.00000
+RoBERTa,validation,EN,Power: dominance,0.34167,0.02937,40.00000,2009.00000
+RoBERTa,validation,EN,Power: resources,0.27193,0.02868,38.00000,2011.00000
+RoBERTa,validation,EN,Face,0.60000,0.01079,10.00000,2039.00000
+RoBERTa,validation,EN,Security: personal,0.33333,0.01241,35.00000,2014.00000
+RoBERTa,validation,EN,Security: societal,0.51917,0.05114,113.00000,1936.00000
+RoBERTa,validation,EN,Tradition,0.49333,0.01021,25.00000,2024.00000
+RoBERTa,validation,EN,Conformity: rules,0.41398,0.03758,62.00000,1987.00000
+RoBERTa,validation,EN,Conformity: interpersonal,0.22989,0.01106,29.00000,2020.00000
+RoBERTa,validation,EN,Humility,0.06667,0.00147,5.00000,2044.00000
+RoBERTa,validation,EN,Benevolence: caring,0.11111,0.00573,12.00000,2037.00000
+RoBERTa,validation,EN,Benevolence: dependability,0.20370,0.01034,18.00000,2031.00000
+RoBERTa,validation,EN,Universalism: concern,0.53623,0.03384,69.00000,1980.00000
+RoBERTa,validation,EN,Universalism: nature,0.69919,0.00896,41.00000,2008.00000
+RoBERTa,validation,EN,Universalism: tolerance,0.18182,0.01112,11.00000,2038.00000
+RoBERTa,validation,FR,Self-direction: thought,0.16667,0.00983,2.00000,949.00000
+RoBERTa,validation,FR,Self-direction: action,0.26667,0.02798,10.00000,941.00000
+RoBERTa,validation,FR,Stimulation,0.47917,0.01925,16.00000,935.00000
+RoBERTa,validation,FR,Hedonism,0.20000,0.00529,5.00000,946.00000
+RoBERTa,validation,FR,Achievement,0.33333,0.05395,18.00000,933.00000
+RoBERTa,validation,FR,Power: dominance,0.39583,0.02353,16.00000,935.00000
+RoBERTa,validation,FR,Power: resources,0.19608,0.03997,17.00000,934.00000
+RoBERTa,validation,FR,Face,0.20513,0.01369,26.00000,925.00000
+RoBERTa,validation,FR,Security: personal,0.26190,0.01245,14.00000,937.00000
+RoBERTa,validation,FR,Security: societal,0.34426,0.03446,61.00000,890.00000
+RoBERTa,validation,FR,Tradition,0.20833,0.00353,8.00000,943.00000
+RoBERTa,validation,FR,Conformity: rules,0.62121,0.04485,22.00000,929.00000
+RoBERTa,validation,FR,Conformity: interpersonal,0.16667,0.01270,6.00000,945.00000
+RoBERTa,validation,FR,Humility,0.00000,0.00246,1.00000,950.00000
+RoBERTa,validation,FR,Benevolence: caring,0.14815,0.00991,9.00000,942.00000
+RoBERTa,validation,FR,Benevolence: dependability,0.13333,0.00423,5.00000,946.00000
+RoBERTa,validation,FR,Universalism: concern,0.34815,0.03348,45.00000,906.00000
+RoBERTa,validation,FR,Universalism: nature,0.64706,0.01463,17.00000,934.00000
+RoBERTa,validation,FR,Universalism: tolerance,0.46667,0.01204,10.00000,941.00000
+RoBERTa,validation,HE,Self-direction: thought,0.15476,0.00960,28.00000,1319.00000
+RoBERTa,validation,HE,Self-direction: action,0.20930,0.03170,43.00000,1304.00000
+RoBERTa,validation,HE,Stimulation,0.32258,0.01241,31.00000,1316.00000
+RoBERTa,validation,HE,Hedonism,0.00000,0.00273,3.00000,1344.00000
+RoBERTa,validation,HE,Achievement,0.33968,0.04187,105.00000,1242.00000
+RoBERTa,validation,HE,Power: dominance,0.43678,0.08724,174.00000,1173.00000
+RoBERTa,validation,HE,Power: resources,0.50919,0.02541,127.00000,1220.00000
+RoBERTa,validation,HE,Face,0.22222,0.01822,30.00000,1317.00000
+RoBERTa,validation,HE,Security: personal,0.30702,0.01681,38.00000,1309.00000
+RoBERTa,validation,HE,Security: societal,0.52612,0.10287,268.00000,1079.00000
+RoBERTa,validation,HE,Tradition,0.48718,0.00968,39.00000,1308.00000
+RoBERTa,validation,HE,Conformity: rules,0.43124,0.06202,143.00000,1204.00000
+RoBERTa,validation,HE,Conformity: interpersonal,0.01449,0.01662,23.00000,1324.00000
+RoBERTa,validation,HE,Humility,0.06667,0.00248,5.00000,1342.00000
+RoBERTa,validation,HE,Benevolence: caring,0.75000,0.01120,8.00000,1339.00000
+RoBERTa,validation,HE,Benevolence: dependability,0.27083,0.01591,48.00000,1299.00000
+RoBERTa,validation,HE,Universalism: concern,0.33333,0.02096,59.00000,1288.00000
+RoBERTa,validation,HE,Universalism: nature,0.08333,0.00199,8.00000,1339.00000
+RoBERTa,validation,HE,Universalism: tolerance,0.24074,0.00477,18.00000,1329.00000
+RoBERTa,validation,IT,Self-direction: thought,0.11905,0.00965,14.00000,1312.00000
+RoBERTa,validation,IT,Self-direction: action,0.10417,0.02570,16.00000,1310.00000
+RoBERTa,validation,IT,Stimulation,0.20076,0.03635,88.00000,1238.00000
+RoBERTa,validation,IT,Hedonism,0.00000,0.00432,13.00000,1313.00000
+RoBERTa,validation,IT,Achievement,0.30505,0.05168,165.00000,1161.00000
+RoBERTa,validation,IT,Power: dominance,0.20599,0.02371,89.00000,1237.00000
+RoBERTa,validation,IT,Power: resources,0.20977,0.04077,116.00000,1210.00000
+RoBERTa,validation,IT,Face,0.17544,0.01967,38.00000,1288.00000
+RoBERTa,validation,IT,Security: personal,0.11765,0.00917,17.00000,1309.00000
+RoBERTa,validation,IT,Security: societal,0.27604,0.06973,64.00000,1262.00000
+RoBERTa,validation,IT,Tradition,0.33333,0.00983,3.00000,1323.00000
+RoBERTa,validation,IT,Conformity: rules,0.33071,0.03420,127.00000,1199.00000
+RoBERTa,validation,IT,Conformity: interpersonal,,0.01860,0.00000,1326.00000
+RoBERTa,validation,IT,Humility,,0.00176,0.00000,1326.00000
+RoBERTa,validation,IT,Benevolence: caring,0.20988,0.01360,27.00000,1299.00000
+RoBERTa,validation,IT,Benevolence: dependability,0.03333,0.02381,10.00000,1316.00000
+RoBERTa,validation,IT,Universalism: concern,0.38798,0.03136,61.00000,1265.00000
+RoBERTa,validation,IT,Universalism: nature,0.46465,0.01614,66.00000,1260.00000
+RoBERTa,validation,IT,Universalism: tolerance,0.00000,0.00429,4.00000,1322.00000
+RoBERTa,validation,NL,Self-direction: thought,0.06173,0.01145,27.00000,2241.00000
+RoBERTa,validation,NL,Self-direction: action,0.18966,0.02157,58.00000,2210.00000
+RoBERTa,validation,NL,Stimulation,0.35088,0.01704,19.00000,2249.00000
+RoBERTa,validation,NL,Hedonism,0.15152,0.00502,11.00000,2257.00000
+RoBERTa,validation,NL,Achievement,0.38095,0.03881,112.00000,2156.00000
+RoBERTa,validation,NL,Power: dominance,0.19577,0.01648,63.00000,2205.00000
+RoBERTa,validation,NL,Power: resources,0.22337,0.03577,97.00000,2171.00000
+RoBERTa,validation,NL,Face,0.34259,0.01284,36.00000,2232.00000
+RoBERTa,validation,NL,Security: personal,0.36111,0.01070,24.00000,2244.00000
+RoBERTa,validation,NL,Security: societal,0.34063,0.04661,137.00000,2131.00000
+RoBERTa,validation,NL,Tradition,0.00000,0.00310,10.00000,2258.00000
+RoBERTa,validation,NL,Conformity: rules,0.44048,0.03281,84.00000,2184.00000
+RoBERTa,validation,NL,Conformity: interpersonal,0.04545,0.00757,22.00000,2246.00000
+RoBERTa,validation,NL,Humility,0.00000,0.00118,5.00000,2263.00000
+RoBERTa,validation,NL,Benevolence: caring,0.33333,0.01894,15.00000,2253.00000
+RoBERTa,validation,NL,Benevolence: dependability,0.19820,0.01285,37.00000,2231.00000
+RoBERTa,validation,NL,Universalism: concern,0.33884,0.03136,121.00000,2147.00000
+RoBERTa,validation,NL,Universalism: nature,0.60731,0.01701,73.00000,2195.00000
+RoBERTa,validation,NL,Universalism: tolerance,0.15556,0.00533,15.00000,2253.00000
+RoBERTa,validation,TR,Self-direction: thought,0.11765,0.01055,51.00000,2275.00000
+RoBERTa,validation,TR,Self-direction: action,0.26667,0.03302,125.00000,2201.00000
+RoBERTa,validation,TR,Stimulation,0.27083,0.01886,64.00000,2262.00000
+RoBERTa,validation,TR,Hedonism,0.30208,0.00727,32.00000,2294.00000
+RoBERTa,validation,TR,Achievement,0.36816,0.04699,134.00000,2192.00000
+RoBERTa,validation,TR,Power: dominance,0.27315,0.02869,72.00000,2254.00000
+RoBERTa,validation,TR,Power: resources,0.31481,0.02132,90.00000,2236.00000
+RoBERTa,validation,TR,Face,0.25926,0.00946,36.00000,2290.00000
+RoBERTa,validation,TR,Security: personal,0.35686,0.02826,85.00000,2241.00000
+RoBERTa,validation,TR,Security: societal,0.44889,0.03401,150.00000,2176.00000
+RoBERTa,validation,TR,Tradition,0.48374,0.02659,82.00000,2244.00000
+RoBERTa,validation,TR,Conformity: rules,0.45155,0.03466,172.00000,2154.00000
+RoBERTa,validation,TR,Conformity: interpersonal,0.11111,0.01007,9.00000,2317.00000
+RoBERTa,validation,TR,Humility,0.18750,0.00491,16.00000,2310.00000
+RoBERTa,validation,TR,Benevolence: caring,0.27246,0.02593,115.00000,2211.00000
+RoBERTa,validation,TR,Benevolence: dependability,0.22222,0.02259,54.00000,2272.00000
+RoBERTa,validation,TR,Universalism: concern,0.26840,0.03098,77.00000,2249.00000
+RoBERTa,validation,TR,Universalism: nature,0.55556,0.00511,45.00000,2281.00000
+RoBERTa,validation,TR,Universalism: tolerance,0.41176,0.00722,17.00000,2309.00000
+RoBERTa,test,all,Self-direction: thought,0.13645,0.00866,171.00000,14398.00000
+RoBERTa,test,all,Self-direction: action,0.21159,0.02734,512.00000,14057.00000
+RoBERTa,test,all,Stimulation,0.27942,0.01850,371.00000,14198.00000
+RoBERTa,test,all,Hedonism,0.25067,0.00669,125.00000,14444.00000
+RoBERTa,test,all,Achievement,0.35456,0.04115,911.00000,13658.00000
+RoBERTa,test,all,Power: dominance,0.32699,0.03221,631.00000,13938.00000
+RoBERTa,test,all,Power: resources,0.36480,0.03497,805.00000,13764.00000
+RoBERTa,test,all,Face,0.24594,0.01175,267.00000,14302.00000
+RoBERTa,test,all,Security: personal,0.30208,0.01290,352.00000,14217.00000
+RoBERTa,test,all,Security: societal,0.41906,0.05324,1151.00000,13418.00000
+RoBERTa,test,all,Tradition,0.47789,0.00837,196.00000,14373.00000
+RoBERTa,test,all,Conformity: rules,0.44420,0.04112,911.00000,13658.00000
+RoBERTa,test,all,Conformity: interpersonal,0.13504,0.01201,195.00000,14374.00000
+RoBERTa,test,all,Humility,0.07778,0.00273,30.00000,14539.00000
+RoBERTa,test,all,Benevolence: caring,0.25412,0.01933,324.00000,14245.00000
+RoBERTa,test,all,Benevolence: dependability,0.27778,0.01158,288.00000,14281.00000
+RoBERTa,test,all,Universalism: concern,0.40635,0.03118,735.00000,13834.00000
+RoBERTa,test,all,Universalism: nature,0.61547,0.00983,293.00000,14276.00000
+RoBERTa,test,all,Universalism: tolerance,0.19883,0.00671,171.00000,14398.00000
+RoBERTa,test,manifestos,Self-direction: thought,0.06349,0.00748,21.00000,1382.00000
+RoBERTa,test,manifestos,Self-direction: action,0.31250,0.03641,48.00000,1355.00000
+RoBERTa,test,manifestos,Stimulation,0.42612,0.04722,97.00000,1306.00000
+RoBERTa,test,manifestos,Hedonism,,0.00238,0.00000,1403.00000
+RoBERTa,test,manifestos,Achievement,0.38047,0.04985,99.00000,1304.00000
+RoBERTa,test,manifestos,Power: dominance,0.17544,0.02051,38.00000,1365.00000
+RoBERTa,test,manifestos,Power: resources,0.32843,0.05709,136.00000,1267.00000
+RoBERTa,test,manifestos,Face,0.33333,0.00502,8.00000,1395.00000
+RoBERTa,test,manifestos,Security: personal,0.06061,0.00359,11.00000,1392.00000
+RoBERTa,test,manifestos,Security: societal,0.49468,0.07654,188.00000,1215.00000
+RoBERTa,test,manifestos,Tradition,0.66667,0.01023,35.00000,1368.00000
+RoBERTa,test,manifestos,Conformity: rules,0.38750,0.05795,80.00000,1323.00000
+RoBERTa,test,manifestos,Conformity: interpersonal,0.00000,0.00264,12.00000,1391.00000
+RoBERTa,test,manifestos,Humility,,0.00285,0.00000,1403.00000
+RoBERTa,test,manifestos,Benevolence: caring,0.20238,0.02885,28.00000,1375.00000
+RoBERTa,test,manifestos,Benevolence: dependability,0.20513,0.01210,26.00000,1377.00000
+RoBERTa,test,manifestos,Universalism: concern,0.52167,0.08174,200.00000,1203.00000
+RoBERTa,test,manifestos,Universalism: nature,0.73585,0.02544,106.00000,1297.00000
+RoBERTa,test,manifestos,Universalism: tolerance,0.20833,0.00870,24.00000,1379.00000
+RoBERTa,test,news,Self-direction: thought,0.14667,0.00878,150.00000,13016.00000
+RoBERTa,test,news,Self-direction: action,0.20115,0.02637,464.00000,12702.00000
+RoBERTa,test,news,Stimulation,0.22749,0.01559,274.00000,12892.00000
+RoBERTa,test,news,Hedonism,0.25067,0.00716,125.00000,13041.00000
+RoBERTa,test,news,Achievement,0.35140,0.04023,812.00000,12354.00000
+RoBERTa,test,news,Power: dominance,0.33671,0.03348,593.00000,12573.00000
+RoBERTa,test,news,Power: resources,0.37220,0.03273,669.00000,12497.00000
+RoBERTa,test,news,Face,0.24324,0.01247,259.00000,12907.00000
+RoBERTa,test,news,Security: personal,0.30987,0.01391,341.00000,12825.00000
+RoBERTa,test,news,Security: societal,0.40429,0.05092,963.00000,12203.00000
+RoBERTa,test,news,Tradition,0.43685,0.00818,161.00000,13005.00000
+RoBERTa,test,news,Conformity: rules,0.44966,0.03932,831.00000,12335.00000
+RoBERTa,test,news,Conformity: interpersonal,0.14390,0.01302,183.00000,12983.00000
+RoBERTa,test,news,Humility,0.07778,0.00272,30.00000,13136.00000
+RoBERTa,test,news,Benevolence: caring,0.25901,0.01831,296.00000,12870.00000
+RoBERTa,test,news,Benevolence: dependability,0.28499,0.01152,262.00000,12904.00000
+RoBERTa,test,news,Universalism: concern,0.36324,0.02636,535.00000,12631.00000
+RoBERTa,test,news,Universalism: nature,0.54724,0.00827,187.00000,12979.00000
+RoBERTa,test,news,Universalism: tolerance,0.19728,0.00650,147.00000,13019.00000
+RoBERTa,test,BG,Self-direction: thought,0.13333,0.00702,20.00000,1282.00000
+RoBERTa,test,BG,Self-direction: action,0.14208,0.02149,61.00000,1241.00000
+RoBERTa,test,BG,Stimulation,0.35354,0.01915,66.00000,1236.00000
+RoBERTa,test,BG,Hedonism,0.28571,0.00412,7.00000,1295.00000
+RoBERTa,test,BG,Achievement,0.39630,0.04620,90.00000,1212.00000
+RoBERTa,test,BG,Power: dominance,0.16049,0.02484,54.00000,1248.00000
+RoBERTa,test,BG,Power: resources,0.40889,0.02798,75.00000,1227.00000
+RoBERTa,test,BG,Face,0.22549,0.01656,34.00000,1268.00000
+RoBERTa,test,BG,Security: personal,0.10417,0.00997,32.00000,1270.00000
+RoBERTa,test,BG,Security: societal,0.31733,0.05324,125.00000,1177.00000
+RoBERTa,test,BG,Tradition,0.41667,0.00258,8.00000,1294.00000
+RoBERTa,test,BG,Conformity: rules,0.44343,0.06287,109.00000,1193.00000
+RoBERTa,test,BG,Conformity: interpersonal,0.08333,0.01525,12.00000,1290.00000
+RoBERTa,test,BG,Humility,0.00000,0.00103,7.00000,1295.00000
+RoBERTa,test,BG,Benevolence: caring,0.28235,0.03615,85.00000,1217.00000
+RoBERTa,test,BG,Benevolence: dependability,0.22619,0.01779,28.00000,1274.00000
+RoBERTa,test,BG,Universalism: concern,0.22333,0.02745,100.00000,1202.00000
+RoBERTa,test,BG,Universalism: nature,0.58095,0.00816,35.00000,1267.00000
+RoBERTa,test,BG,Universalism: tolerance,0.07407,0.00361,9.00000,1293.00000
+RoBERTa,test,DE,Self-direction: thought,0.16092,0.00795,29.00000,1845.00000
+RoBERTa,test,DE,Self-direction: action,0.23894,0.03540,113.00000,1761.00000
+RoBERTa,test,DE,Stimulation,0.28667,0.01718,50.00000,1824.00000
+RoBERTa,test,DE,Hedonism,0.13333,0.00521,20.00000,1854.00000
+RoBERTa,test,DE,Achievement,0.33333,0.03789,141.00000,1733.00000
+RoBERTa,test,DE,Power: dominance,0.32900,0.03079,77.00000,1797.00000
+RoBERTa,test,DE,Power: resources,0.25969,0.02908,86.00000,1788.00000
+RoBERTa,test,DE,Face,0.29630,0.00852,36.00000,1838.00000
+RoBERTa,test,DE,Security: personal,0.29861,0.01260,48.00000,1826.00000
+RoBERTa,test,DE,Security: societal,0.47312,0.04705,124.00000,1750.00000
+RoBERTa,test,DE,Tradition,0.20000,0.00232,10.00000,1864.00000
+RoBERTa,test,DE,Conformity: rules,0.50000,0.05300,176.00000,1698.00000
+RoBERTa,test,DE,Conformity: interpersonal,0.00000,0.00949,12.00000,1862.00000
+RoBERTa,test,DE,Humility,0.00000,0.00249,1.00000,1873.00000
+RoBERTa,test,DE,Benevolence: caring,0.23958,0.01846,32.00000,1842.00000
+RoBERTa,test,DE,Benevolence: dependability,0.32051,0.01046,26.00000,1848.00000
+RoBERTa,test,DE,Universalism: concern,0.32234,0.03328,91.00000,1783.00000
+RoBERTa,test,DE,Universalism: nature,0.63333,0.00800,40.00000,1834.00000
+RoBERTa,test,DE,Universalism: tolerance,0.13333,0.00414,20.00000,1854.00000
+RoBERTa,test,EL,Self-direction: thought,0.16667,0.01027,6.00000,1396.00000
+RoBERTa,test,EL,Self-direction: action,0.38889,0.03661,18.00000,1384.00000
+RoBERTa,test,EL,Stimulation,0.37500,0.01655,32.00000,1370.00000
+RoBERTa,test,EL,Hedonism,0.41667,0.00548,4.00000,1398.00000
+RoBERTa,test,EL,Achievement,0.43889,0.03602,60.00000,1342.00000
+RoBERTa,test,EL,Power: dominance,0.40061,0.04692,109.00000,1293.00000
+RoBERTa,test,EL,Power: resources,0.41520,0.05150,114.00000,1288.00000
+RoBERTa,test,EL,Face,0.20430,0.01556,31.00000,1371.00000
+RoBERTa,test,EL,Security: personal,0.23810,0.00432,14.00000,1388.00000
+RoBERTa,test,EL,Security: societal,0.33835,0.05779,133.00000,1269.00000
+RoBERTa,test,EL,Tradition,0.37500,0.00550,8.00000,1394.00000
+RoBERTa,test,EL,Conformity: rules,0.40317,0.03213,105.00000,1297.00000
+RoBERTa,test,EL,Conformity: interpersonal,0.18667,0.01934,75.00000,1327.00000
+RoBERTa,test,EL,Humility,,0.00262,0.00000,1402.00000
+RoBERTa,test,EL,Benevolence: caring,0.30000,0.02154,40.00000,1362.00000
+RoBERTa,test,EL,Benevolence: dependability,0.48000,0.01824,50.00000,1352.00000
+RoBERTa,test,EL,Universalism: concern,0.47076,0.04814,114.00000,1288.00000
+RoBERTa,test,EL,Universalism: nature,0.56566,0.00633,33.00000,1369.00000
+RoBERTa,test,EL,Universalism: tolerance,0.16129,0.00802,31.00000,1371.00000
+RoBERTa,test,EN,Self-direction: thought,0.09091,0.00585,11.00000,1994.00000
+RoBERTa,test,EN,Self-direction: action,0.31293,0.02284,49.00000,1956.00000
+RoBERTa,test,EN,Stimulation,0.39216,0.01006,17.00000,1988.00000
+RoBERTa,test,EN,Hedonism,0.29167,0.00804,16.00000,1989.00000
+RoBERTa,test,EN,Achievement,0.44737,0.03750,76.00000,1929.00000
+RoBERTa,test,EN,Power: dominance,0.36842,0.01829,19.00000,1986.00000
+RoBERTa,test,EN,Power: resources,0.19540,0.02497,29.00000,1976.00000
+RoBERTa,test,EN,Face,0.38095,0.01051,7.00000,1998.00000
+RoBERTa,test,EN,Security: personal,0.38667,0.01751,25.00000,1980.00000
+RoBERTa,test,EN,Security: societal,0.40136,0.04562,98.00000,1907.00000
+RoBERTa,test,EN,Tradition,0.27273,0.00802,11.00000,1994.00000
+RoBERTa,test,EN,Conformity: rules,0.34259,0.02983,72.00000,1933.00000
+RoBERTa,test,EN,Conformity: interpersonal,0.16162,0.01031,33.00000,1972.00000
+RoBERTa,test,EN,Humility,0.04167,0.00250,8.00000,1997.00000
+RoBERTa,test,EN,Benevolence: caring,0.24074,0.01074,18.00000,1987.00000
+RoBERTa,test,EN,Benevolence: dependability,0.14583,0.00335,16.00000,1989.00000
+RoBERTa,test,EN,Universalism: concern,0.53901,0.02945,47.00000,1958.00000
+RoBERTa,test,EN,Universalism: nature,0.83333,0.00808,24.00000,1981.00000
+RoBERTa,test,EN,Universalism: tolerance,0.37255,0.01224,17.00000,1988.00000
+RoBERTa,test,FR,Self-direction: thought,0.09524,0.00866,7.00000,924.00000
+RoBERTa,test,FR,Self-direction: action,0.27778,0.02903,24.00000,907.00000
+RoBERTa,test,FR,Stimulation,0.36111,0.02829,12.00000,919.00000
+RoBERTa,test,FR,Hedonism,0.20000,0.00688,10.00000,921.00000
+RoBERTa,test,FR,Achievement,0.50877,0.05482,19.00000,912.00000
+RoBERTa,test,FR,Power: dominance,0.36000,0.04047,25.00000,906.00000
+RoBERTa,test,FR,Power: resources,0.28395,0.06195,27.00000,904.00000
+RoBERTa,test,FR,Face,0.16667,0.00725,12.00000,919.00000
+RoBERTa,test,FR,Security: personal,0.27160,0.01106,27.00000,904.00000
+RoBERTa,test,FR,Security: societal,0.44583,0.04622,80.00000,851.00000
+RoBERTa,test,FR,Tradition,0.50000,0.00435,12.00000,919.00000
+RoBERTa,test,FR,Conformity: rules,0.26437,0.04730,29.00000,902.00000
+RoBERTa,test,FR,Conformity: interpersonal,0.04167,0.01481,8.00000,923.00000
+RoBERTa,test,FR,Humility,0.00000,0.00108,1.00000,930.00000
+RoBERTa,test,FR,Benevolence: caring,0.20000,0.00651,10.00000,921.00000
+RoBERTa,test,FR,Benevolence: dependability,0.22222,0.00613,6.00000,925.00000
+RoBERTa,test,FR,Universalism: concern,0.14493,0.03231,23.00000,908.00000
+RoBERTa,test,FR,Universalism: nature,0.52632,0.01352,19.00000,912.00000
+RoBERTa,test,FR,Universalism: tolerance,0.26667,0.00540,5.00000,926.00000
+RoBERTa,test,HE,Self-direction: thought,0.18280,0.01058,31.00000,1449.00000
+RoBERTa,test,HE,Self-direction: action,0.25833,0.03690,80.00000,1400.00000
+RoBERTa,test,HE,Stimulation,0.35238,0.02330,35.00000,1445.00000
+RoBERTa,test,HE,Hedonism,0.55556,0.00767,3.00000,1477.00000
+RoBERTa,test,HE,Achievement,0.28763,0.03982,124.00000,1356.00000
+RoBERTa,test,HE,Power: dominance,0.32867,0.06258,143.00000,1337.00000
+RoBERTa,test,HE,Power: resources,0.39608,0.04275,170.00000,1310.00000
+RoBERTa,test,HE,Face,0.21154,0.01494,52.00000,1428.00000
+RoBERTa,test,HE,Security: personal,0.40230,0.01430,58.00000,1422.00000
+RoBERTa,test,HE,Security: societal,0.52357,0.07826,198.00000,1282.00000
+RoBERTa,test,HE,Tradition,0.57778,0.02183,60.00000,1420.00000
+RoBERTa,test,HE,Conformity: rules,0.44729,0.05772,117.00000,1363.00000
+RoBERTa,test,HE,Conformity: interpersonal,0.14815,0.01541,9.00000,1471.00000
+RoBERTa,test,HE,Humility,0.16667,0.00519,2.00000,1478.00000
+RoBERTa,test,HE,Benevolence: caring,0.32258,0.03221,31.00000,1449.00000
+RoBERTa,test,HE,Benevolence: dependability,0.21693,0.01835,63.00000,1417.00000
+RoBERTa,test,HE,Universalism: concern,0.44387,0.04092,193.00000,1287.00000
+RoBERTa,test,HE,Universalism: nature,0.68794,0.00651,47.00000,1433.00000
+RoBERTa,test,HE,Universalism: tolerance,0.25532,0.01349,47.00000,1433.00000
+RoBERTa,test,IT,Self-direction: thought,0.00000,0.00837,4.00000,1234.00000
+RoBERTa,test,IT,Self-direction: action,0.06667,0.02144,10.00000,1228.00000
+RoBERTa,test,IT,Stimulation,0.20588,0.03609,102.00000,1136.00000
+RoBERTa,test,IT,Hedonism,0.00000,0.00379,7.00000,1231.00000
+RoBERTa,test,IT,Achievement,0.27273,0.04877,165.00000,1073.00000
+RoBERTa,test,IT,Power: dominance,0.32584,0.04207,89.00000,1149.00000
+RoBERTa,test,IT,Power: resources,0.42690,0.04745,114.00000,1124.00000
+RoBERTa,test,IT,Face,0.29630,0.01498,36.00000,1202.00000
+RoBERTa,test,IT,Security: personal,0.07292,0.00415,32.00000,1206.00000
+RoBERTa,test,IT,Security: societal,0.46341,0.09862,82.00000,1156.00000
+RoBERTa,test,IT,Tradition,0.11111,0.00597,9.00000,1229.00000
+RoBERTa,test,IT,Conformity: rules,0.29508,0.02266,61.00000,1177.00000
+RoBERTa,test,IT,Conformity: interpersonal,0.04762,0.01362,14.00000,1224.00000
+RoBERTa,test,IT,Humility,,0.00135,0.00000,1238.00000
+RoBERTa,test,IT,Benevolence: caring,0.17391,0.00713,23.00000,1215.00000
+RoBERTa,test,IT,Benevolence: dependability,0.33333,0.01461,6.00000,1232.00000
+RoBERTa,test,IT,Universalism: concern,0.42857,0.04404,42.00000,1196.00000
+RoBERTa,test,IT,Universalism: nature,0.50694,0.02101,48.00000,1190.00000
+RoBERTa,test,IT,Universalism: tolerance,0.02381,0.00463,14.00000,1224.00000
+RoBERTa,test,NL,Self-direction: thought,0.11828,0.01085,31.00000,2119.00000
+RoBERTa,test,NL,Self-direction: action,0.14754,0.02250,61.00000,2089.00000
+RoBERTa,test,NL,Stimulation,0.20000,0.01293,10.00000,2140.00000
+RoBERTa,test,NL,Hedonism,0.20000,0.00544,5.00000,2145.00000
+RoBERTa,test,NL,Achievement,0.37255,0.04019,85.00000,2065.00000
+RoBERTa,test,NL,Power: dominance,0.39437,0.02581,71.00000,2079.00000
+RoBERTa,test,NL,Power: resources,0.28889,0.02329,75.00000,2075.00000
+RoBERTa,test,NL,Face,0.26667,0.00831,25.00000,2125.00000
+RoBERTa,test,NL,Security: personal,0.41270,0.01848,21.00000,2129.00000
+RoBERTa,test,NL,Security: societal,0.36287,0.04836,158.00000,1992.00000
+RoBERTa,test,NL,Tradition,0.61667,0.00548,20.00000,2130.00000
+RoBERTa,test,NL,Conformity: rules,0.48039,0.03570,68.00000,2082.00000
+RoBERTa,test,NL,Conformity: interpersonal,0.00000,0.00793,5.00000,2145.00000
+RoBERTa,test,NL,Humility,0.00000,0.00171,3.00000,2147.00000
+RoBERTa,test,NL,Benevolence: caring,0.00000,0.01366,3.00000,2147.00000
+RoBERTa,test,NL,Benevolence: dependability,0.25641,0.00805,39.00000,2111.00000
+RoBERTa,test,NL,Universalism: concern,0.52263,0.02239,81.00000,2069.00000
+RoBERTa,test,NL,Universalism: nature,0.65556,0.01635,30.00000,2120.00000
+RoBERTa,test,NL,Universalism: tolerance,0.21212,0.00533,22.00000,2128.00000
+RoBERTa,test,TR,Self-direction: thought,0.12500,0.00851,32.00000,2155.00000
+RoBERTa,test,TR,Self-direction: action,0.13889,0.02327,96.00000,2091.00000
+RoBERTa,test,TR,Stimulation,0.16312,0.01713,47.00000,2140.00000
+RoBERTa,test,TR,Hedonism,0.29560,0.01125,53.00000,2134.00000
+RoBERTa,test,TR,Achievement,0.38411,0.03946,151.00000,2036.00000
+RoBERTa,test,TR,Power: dominance,0.19697,0.02022,44.00000,2143.00000
+RoBERTa,test,TR,Power: resources,0.36812,0.03169,115.00000,2072.00000
+RoBERTa,test,TR,Face,0.23529,0.01177,34.00000,2153.00000
+RoBERTa,test,TR,Security: personal,0.35789,0.01546,95.00000,2092.00000
+RoBERTa,test,TR,Security: societal,0.42484,0.02901,153.00000,2034.00000
+RoBERTa,test,TR,Tradition,0.48851,0.01644,58.00000,2129.00000
+RoBERTa,test,TR,Conformity: rules,0.52107,0.03726,174.00000,2013.00000
+RoBERTa,test,TR,Conformity: interpersonal,0.13580,0.00895,27.00000,2160.00000
+RoBERTa,test,TR,Humility,0.20833,0.00505,8.00000,2179.00000
+RoBERTa,test,TR,Benevolence: caring,0.22358,0.02660,82.00000,2105.00000
+RoBERTa,test,TR,Benevolence: dependability,0.22222,0.01188,54.00000,2133.00000
+RoBERTa,test,TR,Universalism: concern,0.42424,0.01789,44.00000,2143.00000
+RoBERTa,test,TR,Universalism: nature,0.56863,0.00430,17.00000,2170.00000
+RoBERTa,test,TR,Universalism: tolerance,0.16667,0.00352,6.00000,2181.00000
+Seed ensemble,validation,all,Self-direction: thought,0.13450,0.01005,171.00000,14733.00000
+Seed ensemble,validation,all,Self-direction: action,0.24280,0.02552,486.00000,14418.00000
+Seed ensemble,validation,all,Stimulation,0.33810,0.01919,420.00000,14484.00000
+Seed ensemble,validation,all,Hedonism,0.31000,0.00466,100.00000,14804.00000
+Seed ensemble,validation,all,Achievement,0.37263,0.04271,950.00000,13954.00000
+Seed ensemble,validation,all,Power: dominance,0.35823,0.02955,656.00000,14248.00000
+Seed ensemble,validation,all,Power: resources,0.35221,0.03307,724.00000,14180.00000
+Seed ensemble,validation,all,Face,0.28269,0.01388,283.00000,14621.00000
+Seed ensemble,validation,all,Security: personal,0.33094,0.01272,278.00000,14626.00000
+Seed ensemble,validation,all,Security: societal,0.44171,0.05160,1261.00000,13643.00000
+Seed ensemble,validation,all,Tradition,0.44526,0.01039,274.00000,14630.00000
+Seed ensemble,validation,all,Conformity: rules,0.47803,0.03578,956.00000,13948.00000
+Seed ensemble,validation,all,Conformity: interpersonal,0.16667,0.01156,204.00000,14700.00000
+Seed ensemble,validation,all,Humility,0.04651,0.00276,43.00000,14861.00000
+Seed ensemble,validation,all,Benevolence: caring,0.29240,0.01662,342.00000,14562.00000
+Seed ensemble,validation,all,Benevolence: dependability,0.24306,0.01492,288.00000,14616.00000
+Seed ensemble,validation,all,Universalism: concern,0.35768,0.03028,671.00000,14233.00000
+Seed ensemble,validation,all,Universalism: nature,0.55875,0.01164,383.00000,14521.00000
+Seed ensemble,validation,all,Universalism: tolerance,0.23967,0.00622,121.00000,14783.00000
+Seed ensemble,validation,manifestos,Self-direction: thought,0.11111,0.01024,9.00000,1465.00000
+Seed ensemble,validation,manifestos,Self-direction: action,0.34043,0.04205,47.00000,1427.00000
+Seed ensemble,validation,manifestos,Stimulation,0.52137,0.05158,117.00000,1357.00000
+Seed ensemble,validation,manifestos,Hedonism,0.00000,0.00068,2.00000,1472.00000
+Seed ensemble,validation,manifestos,Achievement,0.34091,0.05365,132.00000,1342.00000
+Seed ensemble,validation,manifestos,Power: dominance,0.27586,0.02523,87.00000,1387.00000
+Seed ensemble,validation,manifestos,Power: resources,0.30726,0.06564,179.00000,1295.00000
+Seed ensemble,validation,manifestos,Face,0.50000,0.00817,6.00000,1468.00000
+Seed ensemble,validation,manifestos,Security: personal,0.00000,0.00068,11.00000,1463.00000
+Seed ensemble,validation,manifestos,Security: societal,0.40957,0.06532,188.00000,1286.00000
+Seed ensemble,validation,manifestos,Tradition,0.42857,0.00632,49.00000,1425.00000
+Seed ensemble,validation,manifestos,Conformity: rules,0.45349,0.03530,86.00000,1388.00000
+Seed ensemble,validation,manifestos,Conformity: interpersonal,0.06667,0.00480,15.00000,1459.00000
+Seed ensemble,validation,manifestos,Humility,0.00000,0.00204,3.00000,1471.00000
+Seed ensemble,validation,manifestos,Benevolence: caring,0.28000,0.02949,50.00000,1424.00000
+Seed ensemble,validation,manifestos,Benevolence: dependability,0.17391,0.01241,23.00000,1451.00000
+Seed ensemble,validation,manifestos,Universalism: concern,0.44865,0.06594,185.00000,1289.00000
+Seed ensemble,validation,manifestos,Universalism: nature,0.63000,0.04003,100.00000,1374.00000
+Seed ensemble,validation,manifestos,Universalism: tolerance,0.25000,0.00966,24.00000,1450.00000
+Seed ensemble,validation,news,Self-direction: thought,0.13580,0.01002,162.00000,13268.00000
+Seed ensemble,validation,news,Self-direction: action,0.23235,0.02371,439.00000,12991.00000
+Seed ensemble,validation,news,Stimulation,0.26733,0.01585,303.00000,13127.00000
+Seed ensemble,validation,news,Hedonism,0.31633,0.00510,98.00000,13332.00000
+Seed ensemble,validation,news,Achievement,0.37775,0.04155,818.00000,12612.00000
+Seed ensemble,validation,news,Power: dominance,0.37083,0.03001,569.00000,12861.00000
+Seed ensemble,validation,news,Power: resources,0.36697,0.02980,545.00000,12885.00000
+Seed ensemble,validation,news,Face,0.27798,0.01452,277.00000,13153.00000
+Seed ensemble,validation,news,Security: personal,0.34457,0.01405,267.00000,13163.00000
+Seed ensemble,validation,news,Security: societal,0.44734,0.05017,1073.00000,12357.00000
+Seed ensemble,validation,news,Tradition,0.44889,0.01083,225.00000,13205.00000
+Seed ensemble,validation,news,Conformity: rules,0.48046,0.03583,870.00000,12560.00000
+Seed ensemble,validation,news,Conformity: interpersonal,0.17460,0.01231,189.00000,13241.00000
+Seed ensemble,validation,news,Humility,0.05000,0.00284,40.00000,13390.00000
+Seed ensemble,validation,news,Benevolence: caring,0.29452,0.01522,292.00000,13138.00000
+Seed ensemble,validation,news,Benevolence: dependability,0.24906,0.01519,265.00000,13165.00000
+Seed ensemble,validation,news,Universalism: concern,0.32305,0.02673,486.00000,12944.00000
+Seed ensemble,validation,news,Universalism: nature,0.53357,0.00867,283.00000,13147.00000
+Seed ensemble,validation,news,Universalism: tolerance,0.23711,0.00585,97.00000,13333.00000
+Seed ensemble,validation,BG,Self-direction: thought,0.18182,0.01457,11.00000,1510.00000
+Seed ensemble,validation,BG,Self-direction: action,0.21505,0.02731,93.00000,1428.00000
+Seed ensemble,validation,BG,Stimulation,0.32099,0.02361,81.00000,1440.00000
+Seed ensemble,validation,BG,Hedonism,0.00000,0.00461,2.00000,1519.00000
+Seed ensemble,validation,BG,Achievement,0.28125,0.03649,96.00000,1425.00000
+Seed ensemble,validation,BG,Power: dominance,0.17500,0.02228,40.00000,1481.00000
+Seed ensemble,validation,BG,Power: resources,0.33333,0.04294,54.00000,1467.00000
+Seed ensemble,validation,BG,Face,0.24138,0.02212,29.00000,1492.00000
+Seed ensemble,validation,BG,Security: personal,0.16667,0.00464,12.00000,1509.00000
+Seed ensemble,validation,BG,Security: societal,0.37278,0.04956,169.00000,1352.00000
+Seed ensemble,validation,BG,Tradition,0.44156,0.01039,77.00000,1444.00000
+Seed ensemble,validation,BG,Conformity: rules,0.53906,0.05025,128.00000,1393.00000
+Seed ensemble,validation,BG,Conformity: interpersonal,0.04762,0.01133,21.00000,1500.00000
+Seed ensemble,validation,BG,Humility,0.00000,0.00462,6.00000,1515.00000
+Seed ensemble,validation,BG,Benevolence: caring,0.22353,0.02786,85.00000,1436.00000
+Seed ensemble,validation,BG,Benevolence: dependability,0.20000,0.01615,35.00000,1486.00000
+Seed ensemble,validation,BG,Universalism: concern,0.26087,0.02799,92.00000,1429.00000
+Seed ensemble,validation,BG,Universalism: nature,0.54386,0.01161,57.00000,1464.00000
+Seed ensemble,validation,BG,Universalism: tolerance,0.14286,0.00264,7.00000,1514.00000
+Seed ensemble,validation,DE,Self-direction: thought,0.24138,0.00841,29.00000,1664.00000
+Seed ensemble,validation,DE,Self-direction: action,0.24390,0.01676,82.00000,1611.00000
+Seed ensemble,validation,DE,Stimulation,0.36207,0.02385,58.00000,1635.00000
+Seed ensemble,validation,DE,Hedonism,0.41667,0.00357,12.00000,1681.00000
+Seed ensemble,validation,DE,Achievement,0.39726,0.04783,146.00000,1547.00000
+Seed ensemble,validation,DE,Power: dominance,0.26316,0.02262,57.00000,1636.00000
+Seed ensemble,validation,DE,Power: resources,0.29851,0.03260,67.00000,1626.00000
+Seed ensemble,validation,DE,Face,0.29787,0.01094,47.00000,1646.00000
+Seed ensemble,validation,DE,Security: personal,0.29412,0.01025,34.00000,1659.00000
+Seed ensemble,validation,DE,Security: societal,0.53763,0.03812,93.00000,1600.00000
+Seed ensemble,validation,DE,Tradition,0.41667,0.00599,24.00000,1669.00000
+Seed ensemble,validation,DE,Conformity: rules,0.44531,0.02620,128.00000,1565.00000
+Seed ensemble,validation,DE,Conformity: interpersonal,0.28125,0.00963,32.00000,1661.00000
+Seed ensemble,validation,DE,Humility,0.00000,0.00296,4.00000,1689.00000
+Seed ensemble,validation,DE,Benevolence: caring,0.25000,0.01270,40.00000,1653.00000
+Seed ensemble,validation,DE,Benevolence: dependability,0.26667,0.00902,30.00000,1663.00000
+Seed ensemble,validation,DE,Universalism: concern,0.32558,0.04045,86.00000,1607.00000
+Seed ensemble,validation,DE,Universalism: nature,0.55263,0.01873,38.00000,1655.00000
+Seed ensemble,validation,DE,Universalism: tolerance,0.16000,0.01019,25.00000,1668.00000
+Seed ensemble,validation,EL,Self-direction: thought,0.00000,0.00915,3.00000,1420.00000
+Seed ensemble,validation,EL,Self-direction: action,0.38462,0.02553,13.00000,1410.00000
+Seed ensemble,validation,EL,Stimulation,0.52083,0.02036,48.00000,1375.00000
+Seed ensemble,validation,EL,Hedonism,0.77778,0.00778,9.00000,1414.00000
+Seed ensemble,validation,EL,Achievement,0.42857,0.04755,77.00000,1346.00000
+Seed ensemble,validation,EL,Power: dominance,0.55238,0.04628,105.00000,1318.00000
+Seed ensemble,validation,EL,Power: resources,0.41525,0.04904,118.00000,1305.00000
+Seed ensemble,validation,EL,Face,0.35484,0.01868,31.00000,1392.00000
+Seed ensemble,validation,EL,Security: personal,0.52632,0.00499,19.00000,1404.00000
+Seed ensemble,validation,EL,Security: societal,0.36893,0.06738,206.00000,1217.00000
+Seed ensemble,validation,EL,Tradition,0.33333,0.01059,6.00000,1417.00000
+Seed ensemble,validation,EL,Conformity: rules,0.54444,0.02851,90.00000,1333.00000
+Seed ensemble,validation,EL,Conformity: interpersonal,0.16129,0.01249,62.00000,1361.00000
+Seed ensemble,validation,EL,Humility,0.00000,0.00352,1.00000,1422.00000
+Seed ensemble,validation,EL,Benevolence: caring,0.35484,0.01652,31.00000,1392.00000
+Seed ensemble,validation,EL,Benevolence: dependability,0.27451,0.01458,51.00000,1372.00000
+Seed ensemble,validation,EL,Universalism: concern,0.34426,0.02863,61.00000,1362.00000
+Seed ensemble,validation,EL,Universalism: nature,0.55263,0.01300,38.00000,1385.00000
+Seed ensemble,validation,EL,Universalism: tolerance,0.00000,0.00426,14.00000,1409.00000
+Seed ensemble,validation,EN,Self-direction: thought,0.00000,0.00930,6.00000,2043.00000
+Seed ensemble,validation,EN,Self-direction: action,0.34783,0.02197,46.00000,2003.00000
+Seed ensemble,validation,EN,Stimulation,0.46667,0.01278,15.00000,2034.00000
+Seed ensemble,validation,EN,Hedonism,0.53846,0.00639,13.00000,2036.00000
+Seed ensemble,validation,EN,Achievement,0.47423,0.04662,97.00000,1952.00000
+Seed ensemble,validation,EN,Power: dominance,0.30000,0.02489,40.00000,2009.00000
+Seed ensemble,validation,EN,Power: resources,0.31579,0.02636,38.00000,2011.00000
+Seed ensemble,validation,EN,Face,0.60000,0.00883,10.00000,2039.00000
+Seed ensemble,validation,EN,Security: personal,0.34286,0.01241,35.00000,2014.00000
+Seed ensemble,validation,EN,Security: societal,0.55752,0.05062,113.00000,1936.00000
+Seed ensemble,validation,EN,Tradition,0.44000,0.01087,25.00000,2024.00000
+Seed ensemble,validation,EN,Conformity: rules,0.46774,0.03473,62.00000,1987.00000
+Seed ensemble,validation,EN,Conformity: interpersonal,0.34483,0.01040,29.00000,2020.00000
+Seed ensemble,validation,EN,Humility,0.00000,0.00098,5.00000,2044.00000
+Seed ensemble,validation,EN,Benevolence: caring,0.25000,0.00589,12.00000,2037.00000
+Seed ensemble,validation,EN,Benevolence: dependability,0.33333,0.01083,18.00000,2031.00000
+Seed ensemble,validation,EN,Universalism: concern,0.59420,0.02980,69.00000,1980.00000
+Seed ensemble,validation,EN,Universalism: nature,0.73171,0.00797,41.00000,2008.00000
+Seed ensemble,validation,EN,Universalism: tolerance,0.45455,0.00883,11.00000,2038.00000
+Seed ensemble,validation,FR,Self-direction: thought,0.00000,0.01264,2.00000,949.00000
+Seed ensemble,validation,FR,Self-direction: action,0.30000,0.03082,10.00000,941.00000
+Seed ensemble,validation,FR,Stimulation,0.50000,0.02032,16.00000,935.00000
+Seed ensemble,validation,FR,Hedonism,0.00000,0.00423,5.00000,946.00000
+Seed ensemble,validation,FR,Achievement,0.44444,0.05252,18.00000,933.00000
+Seed ensemble,validation,FR,Power: dominance,0.43750,0.02353,16.00000,935.00000
+Seed ensemble,validation,FR,Power: resources,0.23529,0.04711,17.00000,934.00000
+Seed ensemble,validation,FR,Face,0.19231,0.01297,26.00000,925.00000
+Seed ensemble,validation,FR,Security: personal,0.21429,0.01281,14.00000,937.00000
+Seed ensemble,validation,FR,Security: societal,0.36066,0.03258,61.00000,890.00000
+Seed ensemble,validation,FR,Tradition,0.25000,0.00530,8.00000,943.00000
+Seed ensemble,validation,FR,Conformity: rules,0.63636,0.03337,22.00000,929.00000
+Seed ensemble,validation,FR,Conformity: interpersonal,0.16667,0.01693,6.00000,945.00000
+Seed ensemble,validation,FR,Humility,0.00000,0.00526,1.00000,950.00000
+Seed ensemble,validation,FR,Benevolence: caring,0.22222,0.00955,9.00000,942.00000
+Seed ensemble,validation,FR,Benevolence: dependability,0.20000,0.00634,5.00000,946.00000
+Seed ensemble,validation,FR,Universalism: concern,0.37778,0.01766,45.00000,906.00000
+Seed ensemble,validation,FR,Universalism: nature,0.58824,0.01499,17.00000,934.00000
+Seed ensemble,validation,FR,Universalism: tolerance,0.50000,0.00744,10.00000,941.00000
+Seed ensemble,validation,HE,Self-direction: thought,0.10714,0.00834,28.00000,1319.00000
+Seed ensemble,validation,HE,Self-direction: action,0.16279,0.02837,43.00000,1304.00000
+Seed ensemble,validation,HE,Stimulation,0.32258,0.01216,31.00000,1316.00000
+Seed ensemble,validation,HE,Hedonism,0.33333,0.00074,3.00000,1344.00000
+Seed ensemble,validation,HE,Achievement,0.33333,0.02979,105.00000,1242.00000
+Seed ensemble,validation,HE,Power: dominance,0.48276,0.07758,174.00000,1173.00000
+Seed ensemble,validation,HE,Power: resources,0.55118,0.02623,127.00000,1220.00000
+Seed ensemble,validation,HE,Face,0.33333,0.02050,30.00000,1317.00000
+Seed ensemble,validation,HE,Security: personal,0.44737,0.01146,38.00000,1309.00000
+Seed ensemble,validation,HE,Security: societal,0.55224,0.10751,268.00000,1079.00000
+Seed ensemble,validation,HE,Tradition,0.48718,0.00688,39.00000,1308.00000
+Seed ensemble,validation,HE,Conformity: rules,0.43357,0.06728,143.00000,1204.00000
+Seed ensemble,validation,HE,Conformity: interpersonal,0.00000,0.00906,23.00000,1324.00000
+Seed ensemble,validation,HE,Humility,0.00000,0.00149,5.00000,1342.00000
+Seed ensemble,validation,HE,Benevolence: caring,0.75000,0.01046,8.00000,1339.00000
+Seed ensemble,validation,HE,Benevolence: dependability,0.29167,0.01694,48.00000,1299.00000
+Seed ensemble,validation,HE,Universalism: concern,0.37288,0.01786,59.00000,1288.00000
+Seed ensemble,validation,HE,Universalism: nature,0.00000,0.00075,8.00000,1339.00000
+Seed ensemble,validation,HE,Universalism: tolerance,0.22222,0.00376,18.00000,1329.00000
+Seed ensemble,validation,IT,Self-direction: thought,0.07143,0.00534,14.00000,1312.00000
+Seed ensemble,validation,IT,Self-direction: action,0.00000,0.02214,16.00000,1310.00000
+Seed ensemble,validation,IT,Stimulation,0.23864,0.03554,88.00000,1238.00000
+Seed ensemble,validation,IT,Hedonism,0.00000,0.00305,13.00000,1313.00000
+Seed ensemble,validation,IT,Achievement,0.29697,0.05599,165.00000,1161.00000
+Seed ensemble,validation,IT,Power: dominance,0.21348,0.02344,89.00000,1237.00000
+Seed ensemble,validation,IT,Power: resources,0.22414,0.02810,116.00000,1210.00000
+Seed ensemble,validation,IT,Face,0.13158,0.02096,38.00000,1288.00000
+Seed ensemble,validation,IT,Security: personal,0.05882,0.01070,17.00000,1309.00000
+Seed ensemble,validation,IT,Security: societal,0.28125,0.06260,64.00000,1262.00000
+Seed ensemble,validation,IT,Tradition,0.33333,0.00831,3.00000,1323.00000
+Seed ensemble,validation,IT,Conformity: rules,0.37008,0.03586,127.00000,1199.00000
+Seed ensemble,validation,IT,Conformity: interpersonal,,0.01584,0.00000,1326.00000
+Seed ensemble,validation,IT,Humility,,0.00226,0.00000,1326.00000
+Seed ensemble,validation,IT,Benevolence: caring,0.18519,0.01078,27.00000,1299.00000
+Seed ensemble,validation,IT,Benevolence: dependability,0.00000,0.02204,10.00000,1316.00000
+Seed ensemble,validation,IT,Universalism: concern,0.44262,0.03004,61.00000,1265.00000
+Seed ensemble,validation,IT,Universalism: nature,0.42424,0.01429,66.00000,1260.00000
+Seed ensemble,validation,IT,Universalism: tolerance,0.00000,0.00605,4.00000,1322.00000
+Seed ensemble,validation,NL,Self-direction: thought,0.07407,0.01116,27.00000,2241.00000
+Seed ensemble,validation,NL,Self-direction: action,0.24138,0.02127,58.00000,2210.00000
+Seed ensemble,validation,NL,Stimulation,0.42105,0.01378,19.00000,2249.00000
+Seed ensemble,validation,NL,Hedonism,0.18182,0.00576,11.00000,2257.00000
+Seed ensemble,validation,NL,Achievement,0.44643,0.03479,112.00000,2156.00000
+Seed ensemble,validation,NL,Power: dominance,0.19048,0.01451,63.00000,2205.00000
+Seed ensemble,validation,NL,Power: resources,0.22680,0.03685,97.00000,2171.00000
+Seed ensemble,validation,NL,Face,0.38889,0.00851,36.00000,2232.00000
+Seed ensemble,validation,NL,Security: personal,0.33333,0.00980,24.00000,2244.00000
+Seed ensemble,validation,NL,Security: societal,0.36496,0.04364,137.00000,2131.00000
+Seed ensemble,validation,NL,Tradition,0.00000,0.00177,10.00000,2258.00000
+Seed ensemble,validation,NL,Conformity: rules,0.46429,0.02885,84.00000,2184.00000
+Seed ensemble,validation,NL,Conformity: interpersonal,0.09091,0.01202,22.00000,2246.00000
+Seed ensemble,validation,NL,Humility,0.00000,0.00000,5.00000,2263.00000
+Seed ensemble,validation,NL,Benevolence: caring,0.33333,0.01642,15.00000,2253.00000
+Seed ensemble,validation,NL,Benevolence: dependability,0.13514,0.01165,37.00000,2231.00000
+Seed ensemble,validation,NL,Universalism: concern,0.28926,0.03447,121.00000,2147.00000
+Seed ensemble,validation,NL,Universalism: nature,0.65753,0.01595,73.00000,2195.00000
+Seed ensemble,validation,NL,Universalism: tolerance,0.20000,0.00666,15.00000,2253.00000
+Seed ensemble,validation,TR,Self-direction: thought,0.15686,0.01099,51.00000,2275.00000
+Seed ensemble,validation,TR,Self-direction: action,0.26400,0.03635,125.00000,2201.00000
+Seed ensemble,validation,TR,Stimulation,0.25000,0.01813,64.00000,2262.00000
+Seed ensemble,validation,TR,Hedonism,0.28125,0.00436,32.00000,2294.00000
+Seed ensemble,validation,TR,Achievement,0.35821,0.04060,134.00000,2192.00000
+Seed ensemble,validation,TR,Power: dominance,0.29167,0.02928,72.00000,2254.00000
+Seed ensemble,validation,TR,Power: resources,0.37778,0.02057,90.00000,2236.00000
+Seed ensemble,validation,TR,Face,0.22222,0.01004,36.00000,2290.00000
+Seed ensemble,validation,TR,Security: personal,0.34118,0.02990,85.00000,2241.00000
+Seed ensemble,validation,TR,Security: societal,0.44667,0.03631,150.00000,2176.00000
+Seed ensemble,validation,TR,Tradition,0.52439,0.02718,82.00000,2244.00000
+Seed ensemble,validation,TR,Conformity: rules,0.52907,0.02925,172.00000,2154.00000
+Seed ensemble,validation,TR,Conformity: interpersonal,0.11111,0.00993,9.00000,2317.00000
+Seed ensemble,validation,TR,Humility,0.12500,0.00519,16.00000,2310.00000
+Seed ensemble,validation,TR,Benevolence: caring,0.33913,0.03256,115.00000,2211.00000
+Seed ensemble,validation,TR,Benevolence: dependability,0.27778,0.02377,54.00000,2272.00000
+Seed ensemble,validation,TR,Universalism: concern,0.32468,0.03424,77.00000,2249.00000
+Seed ensemble,validation,TR,Universalism: nature,0.55556,0.00833,45.00000,2281.00000
+Seed ensemble,validation,TR,Universalism: tolerance,0.41176,0.00520,17.00000,2309.00000
+Seed ensemble,test,all,Self-direction: thought,0.16959,0.00889,171.00000,14398.00000
+Seed ensemble,test,all,Self-direction: action,0.21680,0.02739,512.00000,14057.00000
+Seed ensemble,test,all,Stimulation,0.27493,0.01859,371.00000,14198.00000
+Seed ensemble,test,all,Hedonism,0.36000,0.00706,125.00000,14444.00000
+Seed ensemble,test,all,Achievement,0.37980,0.03983,911.00000,13658.00000
+Seed ensemble,test,all,Power: dominance,0.35341,0.02992,631.00000,13938.00000
+Seed ensemble,test,all,Power: resources,0.38634,0.03684,805.00000,13764.00000
+Seed ensemble,test,all,Face,0.26592,0.01147,267.00000,14302.00000
+Seed ensemble,test,all,Security: personal,0.29830,0.01139,352.00000,14217.00000
+Seed ensemble,test,all,Security: societal,0.46134,0.05418,1151.00000,13418.00000
+Seed ensemble,test,all,Tradition,0.47959,0.00710,196.00000,14373.00000
+Seed ensemble,test,all,Conformity: rules,0.47311,0.04151,911.00000,13658.00000
+Seed ensemble,test,all,Conformity: interpersonal,0.14872,0.01183,195.00000,14374.00000
+Seed ensemble,test,all,Humility,0.10000,0.00316,30.00000,14539.00000
+Seed ensemble,test,all,Benevolence: caring,0.25617,0.01811,324.00000,14245.00000
+Seed ensemble,test,all,Benevolence: dependability,0.27778,0.01148,288.00000,14281.00000
+Seed ensemble,test,all,Universalism: concern,0.42313,0.03173,735.00000,13834.00000
+Seed ensemble,test,all,Universalism: nature,0.59727,0.00904,293.00000,14276.00000
+Seed ensemble,test,all,Universalism: tolerance,0.25731,0.00827,171.00000,14398.00000
+Seed ensemble,test,manifestos,Self-direction: thought,0.04762,0.00941,21.00000,1382.00000
+Seed ensemble,test,manifestos,Self-direction: action,0.33333,0.03911,48.00000,1355.00000
+Seed ensemble,test,manifestos,Stimulation,0.41237,0.05743,97.00000,1306.00000
+Seed ensemble,test,manifestos,Hedonism,,0.00143,0.00000,1403.00000
+Seed ensemble,test,manifestos,Achievement,0.36364,0.03988,99.00000,1304.00000
+Seed ensemble,test,manifestos,Power: dominance,0.23684,0.02198,38.00000,1365.00000
+Seed ensemble,test,manifestos,Power: resources,0.38971,0.04815,136.00000,1267.00000
+Seed ensemble,test,manifestos,Face,0.25000,0.00358,8.00000,1395.00000
+Seed ensemble,test,manifestos,Security: personal,0.00000,0.00287,11.00000,1392.00000
+Seed ensemble,test,manifestos,Security: societal,0.50000,0.06667,188.00000,1215.00000
+Seed ensemble,test,manifestos,Tradition,0.65714,0.00512,35.00000,1368.00000
+Seed ensemble,test,manifestos,Conformity: rules,0.42500,0.05215,80.00000,1323.00000
+Seed ensemble,test,manifestos,Conformity: interpersonal,0.00000,0.00288,12.00000,1391.00000
+Seed ensemble,test,manifestos,Humility,,0.00285,0.00000,1403.00000
+Seed ensemble,test,manifestos,Benevolence: caring,0.10714,0.02618,28.00000,1375.00000
+Seed ensemble,test,manifestos,Benevolence: dependability,0.19231,0.01307,26.00000,1377.00000
+Seed ensemble,test,manifestos,Universalism: concern,0.51500,0.07731,200.00000,1203.00000
+Seed ensemble,test,manifestos,Universalism: nature,0.72642,0.02159,106.00000,1297.00000
+Seed ensemble,test,manifestos,Universalism: tolerance,0.37500,0.01160,24.00000,1379.00000
+Seed ensemble,test,news,Self-direction: thought,0.18667,0.00884,150.00000,13016.00000
+Seed ensemble,test,news,Self-direction: action,0.20474,0.02614,464.00000,12702.00000
+Seed ensemble,test,news,Stimulation,0.22628,0.01466,274.00000,12892.00000
+Seed ensemble,test,news,Hedonism,0.36000,0.00767,125.00000,13041.00000
+Seed ensemble,test,news,Achievement,0.38177,0.03983,812.00000,12354.00000
+Seed ensemble,test,news,Power: dominance,0.36088,0.03078,593.00000,12573.00000
+Seed ensemble,test,news,Power: resources,0.38565,0.03569,669.00000,12497.00000
+Seed ensemble,test,news,Face,0.26641,0.01232,259.00000,12907.00000
+Seed ensemble,test,news,Security: personal,0.30792,0.01232,341.00000,12825.00000
+Seed ensemble,test,news,Security: societal,0.45379,0.05294,963.00000,12203.00000
+Seed ensemble,test,news,Tradition,0.44099,0.00730,161.00000,13005.00000
+Seed ensemble,test,news,Conformity: rules,0.47774,0.04037,831.00000,12335.00000
+Seed ensemble,test,news,Conformity: interpersonal,0.15847,0.01279,183.00000,12983.00000
+Seed ensemble,test,news,Humility,0.10000,0.00320,30.00000,13136.00000
+Seed ensemble,test,news,Benevolence: caring,0.27027,0.01725,296.00000,12870.00000
+Seed ensemble,test,news,Benevolence: dependability,0.28626,0.01131,262.00000,12904.00000
+Seed ensemble,test,news,Universalism: concern,0.38879,0.02739,535.00000,12631.00000
+Seed ensemble,test,news,Universalism: nature,0.52406,0.00778,187.00000,12979.00000
+Seed ensemble,test,news,Universalism: tolerance,0.23810,0.00791,147.00000,13019.00000
+Seed ensemble,test,BG,Self-direction: thought,0.10000,0.00546,20.00000,1282.00000
+Seed ensemble,test,BG,Self-direction: action,0.19672,0.02095,61.00000,1241.00000
+Seed ensemble,test,BG,Stimulation,0.31818,0.02184,66.00000,1236.00000
+Seed ensemble,test,BG,Hedonism,0.28571,0.00386,7.00000,1295.00000
+Seed ensemble,test,BG,Achievement,0.44444,0.05198,90.00000,1212.00000
+Seed ensemble,test,BG,Power: dominance,0.11111,0.02404,54.00000,1248.00000
+Seed ensemble,test,BG,Power: resources,0.37333,0.03586,75.00000,1227.00000
+Seed ensemble,test,BG,Face,0.23529,0.01656,34.00000,1268.00000
+Seed ensemble,test,BG,Security: personal,0.12500,0.00394,32.00000,1270.00000
+Seed ensemble,test,BG,Security: societal,0.35200,0.04928,125.00000,1177.00000
+Seed ensemble,test,BG,Tradition,0.50000,0.00155,8.00000,1294.00000
+Seed ensemble,test,BG,Conformity: rules,0.49541,0.07460,109.00000,1193.00000
+Seed ensemble,test,BG,Conformity: interpersonal,0.16667,0.01783,12.00000,1290.00000
+Seed ensemble,test,BG,Humility,0.00000,0.00232,7.00000,1295.00000
+Seed ensemble,test,BG,Benevolence: caring,0.25882,0.03287,85.00000,1217.00000
+Seed ensemble,test,BG,Benevolence: dependability,0.21429,0.01727,28.00000,1274.00000
+Seed ensemble,test,BG,Universalism: concern,0.27000,0.03245,100.00000,1202.00000
+Seed ensemble,test,BG,Universalism: nature,0.57143,0.00631,35.00000,1267.00000
+Seed ensemble,test,BG,Universalism: tolerance,0.11111,0.00541,9.00000,1293.00000
+Seed ensemble,test,DE,Self-direction: thought,0.20690,0.00921,29.00000,1845.00000
+Seed ensemble,test,DE,Self-direction: action,0.22124,0.03691,113.00000,1761.00000
+Seed ensemble,test,DE,Stimulation,0.34000,0.01700,50.00000,1824.00000
+Seed ensemble,test,DE,Hedonism,0.15000,0.00485,20.00000,1854.00000
+Seed ensemble,test,DE,Achievement,0.33333,0.02943,141.00000,1733.00000
+Seed ensemble,test,DE,Power: dominance,0.44156,0.02727,77.00000,1797.00000
+Seed ensemble,test,DE,Power: resources,0.29070,0.03300,86.00000,1788.00000
+Seed ensemble,test,DE,Face,0.19444,0.01034,36.00000,1838.00000
+Seed ensemble,test,DE,Security: personal,0.25000,0.01479,48.00000,1826.00000
+Seed ensemble,test,DE,Security: societal,0.54839,0.04571,124.00000,1750.00000
+Seed ensemble,test,DE,Tradition,0.30000,0.00161,10.00000,1864.00000
+Seed ensemble,test,DE,Conformity: rules,0.54545,0.05006,176.00000,1698.00000
+Seed ensemble,test,DE,Conformity: interpersonal,0.00000,0.00806,12.00000,1862.00000
+Seed ensemble,test,DE,Humility,0.00000,0.00107,1.00000,1873.00000
+Seed ensemble,test,DE,Benevolence: caring,0.28125,0.01574,32.00000,1842.00000
+Seed ensemble,test,DE,Benevolence: dependability,0.26923,0.00920,26.00000,1848.00000
+Seed ensemble,test,DE,Universalism: concern,0.29670,0.03421,91.00000,1783.00000
+Seed ensemble,test,DE,Universalism: nature,0.52500,0.00654,40.00000,1834.00000
+Seed ensemble,test,DE,Universalism: tolerance,0.20000,0.00647,20.00000,1854.00000
+Seed ensemble,test,EL,Self-direction: thought,0.16667,0.01146,6.00000,1396.00000
+Seed ensemble,test,EL,Self-direction: action,0.16667,0.03179,18.00000,1384.00000
+Seed ensemble,test,EL,Stimulation,0.34375,0.01533,32.00000,1370.00000
+Seed ensemble,test,EL,Hedonism,0.50000,0.00644,4.00000,1398.00000
+Seed ensemble,test,EL,Achievement,0.45000,0.03204,60.00000,1342.00000
+Seed ensemble,test,EL,Power: dominance,0.46789,0.04022,109.00000,1293.00000
+Seed ensemble,test,EL,Power: resources,0.43860,0.05590,114.00000,1288.00000
+Seed ensemble,test,EL,Face,0.32258,0.01751,31.00000,1371.00000
+Seed ensemble,test,EL,Security: personal,0.28571,0.00288,14.00000,1388.00000
+Seed ensemble,test,EL,Security: societal,0.33835,0.05516,133.00000,1269.00000
+Seed ensemble,test,EL,Tradition,0.25000,0.00359,8.00000,1394.00000
+Seed ensemble,test,EL,Conformity: rules,0.40000,0.02467,105.00000,1297.00000
+Seed ensemble,test,EL,Conformity: interpersonal,0.13333,0.01733,75.00000,1327.00000
+Seed ensemble,test,EL,Humility,,0.00428,0.00000,1402.00000
+Seed ensemble,test,EL,Benevolence: caring,0.27500,0.01175,40.00000,1362.00000
+Seed ensemble,test,EL,Benevolence: dependability,0.34000,0.01479,50.00000,1352.00000
+Seed ensemble,test,EL,Universalism: concern,0.50000,0.05202,114.00000,1288.00000
+Seed ensemble,test,EL,Universalism: nature,0.51515,0.00438,33.00000,1369.00000
+Seed ensemble,test,EL,Universalism: tolerance,0.32258,0.00948,31.00000,1371.00000
+Seed ensemble,test,EN,Self-direction: thought,0.18182,0.00351,11.00000,1994.00000
+Seed ensemble,test,EN,Self-direction: action,0.28571,0.02301,49.00000,1956.00000
+Seed ensemble,test,EN,Stimulation,0.35294,0.01056,17.00000,1988.00000
+Seed ensemble,test,EN,Hedonism,0.37500,0.00905,16.00000,1989.00000
+Seed ensemble,test,EN,Achievement,0.50000,0.03473,76.00000,1929.00000
+Seed ensemble,test,EN,Power: dominance,0.52632,0.02165,19.00000,1986.00000
+Seed ensemble,test,EN,Power: resources,0.24138,0.02429,29.00000,1976.00000
+Seed ensemble,test,EN,Face,0.28571,0.00951,7.00000,1998.00000
+Seed ensemble,test,EN,Security: personal,0.32000,0.01465,25.00000,1980.00000
+Seed ensemble,test,EN,Security: societal,0.50000,0.04982,98.00000,1907.00000
+Seed ensemble,test,EN,Tradition,0.18182,0.00351,11.00000,1994.00000
+Seed ensemble,test,EN,Conformity: rules,0.37500,0.03570,72.00000,1933.00000
+Seed ensemble,test,EN,Conformity: interpersonal,0.18182,0.01420,33.00000,1972.00000
+Seed ensemble,test,EN,Humility,0.00000,0.00250,8.00000,1997.00000
+Seed ensemble,test,EN,Benevolence: caring,0.33333,0.00856,18.00000,1987.00000
+Seed ensemble,test,EN,Benevolence: dependability,0.31250,0.00553,16.00000,1989.00000
+Seed ensemble,test,EN,Universalism: concern,0.53191,0.03115,47.00000,1958.00000
+Seed ensemble,test,EN,Universalism: nature,0.70833,0.00757,24.00000,1981.00000
+Seed ensemble,test,EN,Universalism: tolerance,0.58824,0.01610,17.00000,1988.00000
+Seed ensemble,test,FR,Self-direction: thought,0.00000,0.00758,7.00000,924.00000
+Seed ensemble,test,FR,Self-direction: action,0.25000,0.03197,24.00000,907.00000
+Seed ensemble,test,FR,Stimulation,0.41667,0.02503,12.00000,919.00000
+Seed ensemble,test,FR,Hedonism,0.50000,0.00543,10.00000,921.00000
+Seed ensemble,test,FR,Achievement,0.47368,0.05702,19.00000,912.00000
+Seed ensemble,test,FR,Power: dominance,0.40000,0.04194,25.00000,906.00000
+Seed ensemble,test,FR,Power: resources,0.25926,0.06637,27.00000,904.00000
+Seed ensemble,test,FR,Face,0.08333,0.00762,12.00000,919.00000
+Seed ensemble,test,FR,Security: personal,0.33333,0.01327,27.00000,904.00000
+Seed ensemble,test,FR,Security: societal,0.45000,0.04583,80.00000,851.00000
+Seed ensemble,test,FR,Tradition,0.50000,0.00109,12.00000,919.00000
+Seed ensemble,test,FR,Conformity: rules,0.37931,0.04545,29.00000,902.00000
+Seed ensemble,test,FR,Conformity: interpersonal,0.00000,0.01192,8.00000,923.00000
+Seed ensemble,test,FR,Humility,0.00000,0.00323,1.00000,930.00000
+Seed ensemble,test,FR,Benevolence: caring,0.30000,0.00543,10.00000,921.00000
+Seed ensemble,test,FR,Benevolence: dependability,0.50000,0.00541,6.00000,925.00000
+Seed ensemble,test,FR,Universalism: concern,0.30435,0.02974,23.00000,908.00000
+Seed ensemble,test,FR,Universalism: nature,0.63158,0.01316,19.00000,912.00000
+Seed ensemble,test,FR,Universalism: tolerance,0.20000,0.00648,5.00000,926.00000
+Seed ensemble,test,HE,Self-direction: thought,0.29032,0.01173,31.00000,1449.00000
+Seed ensemble,test,HE,Self-direction: action,0.32500,0.03929,80.00000,1400.00000
+Seed ensemble,test,HE,Stimulation,0.31429,0.02215,35.00000,1445.00000
+Seed ensemble,test,HE,Hedonism,0.66667,0.01083,3.00000,1477.00000
+Seed ensemble,test,HE,Achievement,0.30645,0.03835,124.00000,1356.00000
+Seed ensemble,test,HE,Power: dominance,0.31469,0.05236,143.00000,1337.00000
+Seed ensemble,test,HE,Power: resources,0.45294,0.03969,170.00000,1310.00000
+Seed ensemble,test,HE,Face,0.28846,0.01611,52.00000,1428.00000
+Seed ensemble,test,HE,Security: personal,0.37931,0.00914,58.00000,1422.00000
+Seed ensemble,test,HE,Security: societal,0.59596,0.08424,198.00000,1282.00000
+Seed ensemble,test,HE,Tradition,0.61667,0.02183,60.00000,1420.00000
+Seed ensemble,test,HE,Conformity: rules,0.48718,0.06530,117.00000,1363.00000
+Seed ensemble,test,HE,Conformity: interpersonal,0.11111,0.01088,9.00000,1471.00000
+Seed ensemble,test,HE,Humility,0.50000,0.00744,2.00000,1478.00000
+Seed ensemble,test,HE,Benevolence: caring,0.32258,0.03382,31.00000,1449.00000
+Seed ensemble,test,HE,Benevolence: dependability,0.22222,0.01341,63.00000,1417.00000
+Seed ensemble,test,HE,Universalism: concern,0.47150,0.03963,193.00000,1287.00000
+Seed ensemble,test,HE,Universalism: nature,0.74468,0.00488,47.00000,1433.00000
+Seed ensemble,test,HE,Universalism: tolerance,0.21277,0.01535,47.00000,1433.00000
+Seed ensemble,test,IT,Self-direction: thought,0.00000,0.00891,4.00000,1234.00000
+Seed ensemble,test,IT,Self-direction: action,0.00000,0.02117,10.00000,1228.00000
+Seed ensemble,test,IT,Stimulation,0.19608,0.03521,102.00000,1136.00000
+Seed ensemble,test,IT,Hedonism,0.00000,0.00162,7.00000,1231.00000
+Seed ensemble,test,IT,Achievement,0.29697,0.04660,165.00000,1073.00000
+Seed ensemble,test,IT,Power: dominance,0.31461,0.03568,89.00000,1149.00000
+Seed ensemble,test,IT,Power: resources,0.42982,0.04715,114.00000,1124.00000
+Seed ensemble,test,IT,Face,0.33333,0.01165,36.00000,1202.00000
+Seed ensemble,test,IT,Security: personal,0.15625,0.00332,32.00000,1206.00000
+Seed ensemble,test,IT,Security: societal,0.41463,0.10208,82.00000,1156.00000
+Seed ensemble,test,IT,Tradition,0.11111,0.00895,9.00000,1229.00000
+Seed ensemble,test,IT,Conformity: rules,0.34426,0.02549,61.00000,1177.00000
+Seed ensemble,test,IT,Conformity: interpersonal,0.21429,0.00817,14.00000,1224.00000
+Seed ensemble,test,IT,Humility,,0.00242,0.00000,1238.00000
+Seed ensemble,test,IT,Benevolence: caring,0.13043,0.00658,23.00000,1215.00000
+Seed ensemble,test,IT,Benevolence: dependability,0.33333,0.01786,6.00000,1232.00000
+Seed ensemble,test,IT,Universalism: concern,0.47619,0.04599,42.00000,1196.00000
+Seed ensemble,test,IT,Universalism: nature,0.50000,0.02269,48.00000,1190.00000
+Seed ensemble,test,IT,Universalism: tolerance,0.21429,0.00735,14.00000,1224.00000
+Seed ensemble,test,NL,Self-direction: thought,0.22581,0.01133,31.00000,2119.00000
+Seed ensemble,test,NL,Self-direction: action,0.18033,0.02202,61.00000,2089.00000
+Seed ensemble,test,NL,Stimulation,0.20000,0.01402,10.00000,2140.00000
+Seed ensemble,test,NL,Hedonism,0.40000,0.00606,5.00000,2145.00000
+Seed ensemble,test,NL,Achievement,0.34118,0.04019,85.00000,2065.00000
+Seed ensemble,test,NL,Power: dominance,0.40845,0.02357,71.00000,2079.00000
+Seed ensemble,test,NL,Power: resources,0.33333,0.02506,75.00000,2075.00000
+Seed ensemble,test,NL,Face,0.28000,0.00800,25.00000,2125.00000
+Seed ensemble,test,NL,Security: personal,0.42857,0.01456,21.00000,2129.00000
+Seed ensemble,test,NL,Security: societal,0.37342,0.04920,158.00000,1992.00000
+Seed ensemble,test,NL,Tradition,0.60000,0.00376,20.00000,2130.00000
+Seed ensemble,test,NL,Conformity: rules,0.42647,0.03026,68.00000,2082.00000
+Seed ensemble,test,NL,Conformity: interpersonal,0.20000,0.01119,5.00000,2145.00000
+Seed ensemble,test,NL,Humility,0.00000,0.00140,3.00000,2147.00000
+Seed ensemble,test,NL,Benevolence: caring,0.00000,0.01211,3.00000,2147.00000
+Seed ensemble,test,NL,Benevolence: dependability,0.35897,0.00805,39.00000,2111.00000
+Seed ensemble,test,NL,Universalism: concern,0.46914,0.02320,81.00000,2069.00000
+Seed ensemble,test,NL,Universalism: nature,0.63333,0.01557,30.00000,2120.00000
+Seed ensemble,test,NL,Universalism: tolerance,0.18182,0.00423,22.00000,2128.00000
+Seed ensemble,test,TR,Self-direction: thought,0.06250,0.01021,32.00000,2155.00000
+Seed ensemble,test,TR,Self-direction: action,0.14583,0.02343,96.00000,2091.00000
+Seed ensemble,test,TR,Stimulation,0.19149,0.01822,47.00000,2140.00000
+Seed ensemble,test,TR,Hedonism,0.43396,0.01172,53.00000,2134.00000
+Seed ensemble,test,TR,Achievement,0.45695,0.04077,151.00000,2036.00000
+Seed ensemble,test,TR,Power: dominance,0.22727,0.02100,44.00000,2143.00000
+Seed ensemble,test,TR,Power: resources,0.37391,0.03234,115.00000,2072.00000
+Seed ensemble,test,TR,Face,0.26471,0.00929,34.00000,2153.00000
+Seed ensemble,test,TR,Security: personal,0.33684,0.01769,95.00000,2092.00000
+Seed ensemble,test,TR,Security: societal,0.50980,0.02999,153.00000,2034.00000
+Seed ensemble,test,TR,Tradition,0.46552,0.01597,58.00000,2129.00000
+Seed ensemble,test,TR,Conformity: rules,0.54023,0.03428,174.00000,2013.00000
+Seed ensemble,test,TR,Conformity: interpersonal,0.22222,0.00926,27.00000,2160.00000
+Seed ensemble,test,TR,Humility,0.25000,0.00459,8.00000,2179.00000
+Seed ensemble,test,TR,Benevolence: caring,0.23171,0.03230,82.00000,2105.00000
+Seed ensemble,test,TR,Benevolence: dependability,0.22222,0.01453,54.00000,2133.00000
+Seed ensemble,test,TR,Universalism: concern,0.43182,0.01400,44.00000,2143.00000
+Seed ensemble,test,TR,Universalism: nature,0.58824,0.00415,17.00000,2170.00000
+Seed ensemble,test,TR,Universalism: tolerance,0.16667,0.00413,6.00000,2181.00000

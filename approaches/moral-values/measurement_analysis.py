@@ -40,6 +40,10 @@ both built on CC@prev:
                divided by the attenuation slope measured on validation (language-pair contrasts
                for languages, manifesto-news contrasts for genre).
 
+Further sections (step 5.2): G adds error rates per value by genre and language, on validation and
+test (AE item 8; measurement-error-rates.csv); H accuracy and coverage; I totals per group; J language
+contrasts on value composition, which removes the teams' differences in labeling rate (AE item 5).
+
 Estimators that use the annotated validation documents of each group directly (step 5.2, AE
 item 4). Like ACC-G and RC, they need annotated documents from every group being compared:
   Gold-only    the share of validation sentences with the value in the group: no classifier;
@@ -507,7 +511,9 @@ class RowFits:
                 while (lo < hi).any():
                     mid = (lo + hi) // 2
                     reach = np.einsum("bd,db->b", W, first[:, mid + 1]) >= target
-                    hi, lo = np.where(reach, mid, hi), np.where(reach, lo, mid + 1)
+                    act = lo < hi                     # finished rows stay put (a value with no positive in a
+                    hi = np.where(act & reach, mid, hi)   # row targets all its sentences, which the float32
+                    lo = np.where(act & ~reach, mid + 1, lo)   # table may miss by a rounding error)
                 self.tprev[:, j] = p[order[lo], j]
 
         # Platt maps, fitted per row on histograms of the logit over its observed range
@@ -558,7 +564,8 @@ class RowFits:
                 H = doc_hist(doc, col, n_docs, nb)
                 D = doc_hist(doc, col, n_docs, nb, z[:, j] - zbar[col])
                 a, c = self.platt[:, j, 0, None], self.platt[:, j, 1, None]
-                cal = 1 / (1 + np.exp(-(a * zbar[None, :] + c)))
+                with np.errstate(over="ignore"):
+                    cal = 1 / (1 + np.exp(-(a * zbar[None, :] + c)))
                 out[:, :, j] = cal @ H.T + (a * cal * (1 - cal)) @ D.T
         else:
             raise KeyError(rule)
@@ -782,6 +789,21 @@ def main() -> None:
     pos_v, neg_v = Sv @ yv, Sv @ (1 - yv)
     mechanism = {s: [] for s in SYSTEMS}
     man_sent = gt["Text-ID"].str.contains("_M_").to_numpy()
+    err_rates = {s: [] for s in SYSTEMS}
+    sent_groups = {
+        "validation": {"all": all_v[doc_v], "manifestos": man_v[doc_v], "news": news_v[doc_v],
+                       **{l: m[doc_v] for l, m in zip(langs, lang_masks_v)}},
+        "test": {"all": allm[doc_t], "manifestos": man[doc_t], "news": news[doc_t],
+                 **{l: m[doc_t] for l, m in zip(langs, lang_masks)}}}
+
+    def group_rates(dec: np.ndarray, y: np.ndarray, groups: dict) -> dict:
+        """tpr, fpr and the counts behind them, per group of sentences, (4, 19) each."""
+        res = {}
+        for g, m in groups.items():
+            pos, neg = y[m].sum(0), (1 - y[m]).sum(0)
+            with np.errstate(invalid="ignore", divide="ignore"):
+                res[g] = np.stack([(dec[m] * y[m]).sum(0) / pos, (dec[m] * (1 - y[m])).sum(0) / neg, pos, neg])
+        return res
 
     def genre_rate_gap(dec: np.ndarray, positive: int) -> np.ndarray:
         """Manifesto minus news detection rate among gold positives (tpr) or gold negatives (fpr)."""
@@ -814,6 +836,9 @@ def main() -> None:
             gap_t, gap_f = genre_rate_gap(est["CC@prev"], 1), genre_rate_gap(est["CC@prev"], 0)
             mechanism[system].append((spearmanr(g0, gap_t)[0], spearmanr(g0, gap_f)[0],
                                       (np.sign(gap_f) == np.sign(g0)).mean()))
+            dec_v = apply_rules(pv, fit)["CC@prev"]
+            err_rates[system].append({"validation": group_rates(dec_v, yv, sent_groups["validation"]),
+                                      "test": group_rates(est["CC@prev"], yt, sent_groups["test"])})
 
             # validation true and false positives of each row's own decisions, per document
             vcounts = {r: (rf.counts(r, pv, Sv, weight=yv), rf.counts(r, pv, Sv, weight=1 - yv))
@@ -1096,10 +1121,35 @@ def main() -> None:
     out("   gap in tpr / in fpr. Positive = the classifier fires more, correctly and falsely, in the genre where")
     out("   the value is common, which inflates raw contrasts and breaks the prior-shift assumption.")
     out("=" * 108)
+    def mean_rates(system: str) -> dict:
+        """Error rates per split and group, mean over the system's runs (NaN where a group has no positive; the same in every run)."""
+        runs = err_rates[system]
+        return {sp: {g: np.mean([r[sp][g] for r in runs], axis=0) for g in runs[0][sp]} for sp in runs[0]}
+
+    gold_genre_v = (gold_v_doc[man_v].sum(0) / nsent_v[man_v].sum() - gold_v_doc[news_v].sum(0) / nsent_v[news_v].sum())
     for system in SYSTEMS:
         m = np.array(mechanism[system])
         out(f"  {system:17s} rho(contrast, tpr gap) {m[:, 0].mean():+.2f}   rho(contrast, fpr gap) {m[:, 1].mean():+.2f}   "
             f"fpr gap has the contrast's sign for {m[:, 2].mean() * 100:.0f}% of values")
+        mr = mean_rates(system)["validation"]
+        gt_, gf_ = mr["manifestos"][0] - mr["news"][0], mr["manifestos"][1] - mr["news"][1]
+        ok = np.isfinite(gt_)
+        out(f"  {'':17s} on validation:  rho {spearmanr(gold_genre_v[ok], gt_[ok])[0]:+.2f} (tpr gap)   "
+            f"{spearmanr(gold_genre_v, gf_)[0]:+.2f} (fpr gap)   ({ok.sum()} values with manifesto positives)")
+
+    # error-rate table (AE item 8): the main system, per value
+    mr = mean_rates(SYSTEMS[0])
+    out(f"\n  Error rates of the prevalence-matched decisions per value, {SYSTEMS[0]}, mean over runs, % (tpr / fpr):")
+    out(f"  {'value':28s} {'validation: manifestos':>23s} {'news':>13s} {'test: manifestos':>18s} {'news':>13s} "
+        f"{'test, languages: tpr range':>27s} {'fpr range':>13s}")
+    pct = lambda x: "--" if not np.isfinite(x) else f"{x * 100:.0f}"
+    for j, val in enumerate(VALUES):
+        cells = [f"{pct(mr[sp][g][0, j]):>4s} / {pct(mr[sp][g][1, j]):>4s}" for sp in ["validation", "test"]
+                 for g in ["manifestos", "news"]]
+        lt = np.array([mr["test"][l][0, j] for l in langs]); lf = np.array([mr["test"][l][1, j] for l in langs])
+        out(f"  {val:28s} {cells[0]:>23s} {cells[1]:>13s} {cells[2]:>18s} {cells[3]:>13s} "
+            f"{np.nanmin(lt) * 100:13.0f}-{np.nanmax(lt) * 100:<4.0f} {np.nanmin(lf) * 100:9.1f}-{np.nanmax(lf) * 100:<4.1f}")
+    out("  '--': no positive sentence in the group. Full table, every system and language: measurement-error-rates.csv")
 
     # ---- H. accuracy and coverage (step 5.2, AE item 2)
     out()
@@ -1171,8 +1221,63 @@ def main() -> None:
                                 ("lang_mae", gm["lang"])]:
                 put(system, r, name, value)
 
+    # ---- J. language contrasts on value composition (step 5.2, AE item 5)
+    out()
+    out("=" * 108)
+    out("J. LANGUAGE CONTRASTS ON VALUE COMPOSITION (each value's share of all value mentions in the language)")
+    out("   Each language was annotated by its own team, and the share of sentences with a value ranges from about")
+    out("   30% to 86%. Shares of all mentions remove those differences in labeling rate, so a contrast here compares")
+    out("   which values a language's texts stress, not how many sentences its team labeled. Estimates are turned")
+    out("   into shares the same way (negative PPI estimates set to 0 first). 684 contrasts, as in C.")
+    out("   Slope, MAE, single test, cover: as in C and H. Prevalence columns repeat C for comparison.")
+
+    def composition(lp: np.ndarray) -> np.ndarray:
+        lp = np.clip(lp, 0.0, None)
+        tot = lp.sum(2, keepdims=True)
+        return np.divide(lp, tot, out=np.zeros_like(lp), where=tot > 0)
+
+    def comp_pairs(lp: np.ndarray) -> np.ndarray:
+        c = composition(lp)
+        return np.stack([c[:, i] - c[:, j] for i, j in pairs], axis=1).reshape(B + 1, -1)
+
+    gold_comp = comp_pairs(gold["lang"])
+    comp_sig = bh(boot_p(gold_comp)) < ALPHA
+    rel_c = 1 - gold_comp[1:].var(0).sum() / (gold_comp[0] ** 2).sum()
+    out(f"   Reference: {comp_sig.sum()} of {len(comp_sig)} composition contrasts significant (BH q < {ALPHA}); "
+        f"reliability {rel_c:.2f}.")
+    out("=" * 108)
+    for system in SYSTEMS:
+        out(f"\n{system}")
+        out(f"  {'rule':12s} | {'composition: slope':>26s} {'MAE':>6s} {'single %':>9s} {'cover':>6s} | "
+            f"{'prevalence: slope':>18s} {'MAE':>6s} {'single %':>9s}")
+        for r in RULES:
+            vm = run_mean(system, r)
+            ec = comp_pairs(vm["lang"])
+            d0 = ec[0] - gold_comp[0]
+            single = ((boot_p(ec) < ALPHA) & (np.sign(ec[0]) == np.sign(gold_comp[0])))[comp_sig].mean() * 100
+            cover = (boot_p(ec - gold_comp) >= ALPHA).mean() * 100
+            annot = r in ANNOT_RULES
+            sl = slope(gold_comp, ec)
+            sl_p = slope(gold["lpair"], vm["lpair"])
+            sm = summary[(system, r)]
+            out(f"  {r:12s} | {'--' if annot else ci(sl):>26s} {np.abs(d0).mean() * 100:6.2f} {single:9.1f} {cover:6.0f} | "
+                f"{'--' if annot else f'{sl_p[0]:.2f}':>18s} {sm['lpair_mae']:6.2f} {sm['lpair_detected']:9.1f}")
+            if not annot:
+                put(system, r, "comp_slope", sl[0], sl)
+            put(system, r, "comp_mae", np.abs(d0).mean() * 100)
+            put(system, r, "comp_detected", single)
+            put(system, r, "comp_cover", cover)
+
     # ---- CSVs
     RES.mkdir(exist_ok=True)
+    rate_rows = []
+    for system in SYSTEMS:
+        for sp, groups in mean_rates(system).items():
+            for g, a in groups.items():
+                for j, val in enumerate(VALUES):
+                    rate_rows.append({"system": system, "split": sp, "group": g, "value": val, "tpr": a[0, j],
+                                      "fpr": a[1, j], "positives": a[2, j], "negatives": a[3, j]})
+    pd.DataFrame(rate_rows).to_csv(RES / "measurement-error-rates.csv", index=False, float_format="%.5f")
     per_value, genre_rows, lang_rows = [], [], []
     for system in SYSTEMS:
         genre_sig = {r: bh(boot_p(run_mean(system, r)["genre"])) < ALPHA for r in RULES}

@@ -332,13 +332,13 @@ This analysis asks how well classifier outputs measure **how often** each value 
 
    ```bash
    cd approaches/moral-values
-   python3 reproduce.py          # about 50 min (Apple M1)
-   python3 reproduce.py -j 4     # independent steps in parallel; the shift step alone takes about 30 min
+   python3 reproduce.py          # about 40 min (Apple M1)
+   python3 reproduce.py -j 4     # independent steps in parallel; the shift step alone takes about 22 min
    python3 reproduce.py --list   # the steps and what each produces
    ```
 
    The steps write to `approaches/moral-values/results/`:
-   - text reports and CSVs from `threshold_schemes.py`, `measurement_analysis.py`, `shift_tests.py`, `llm_measurement.py`, `gold_reliability.py` and `worked_example.py`;
+   - text reports and CSVs from `threshold_schemes.py`, `measurement_analysis.py`, `shift_tests.py`, `subsample_validation.py`, `llm_measurement.py`, `gold_reliability.py` and `worked_example.py`;
    - the paper's figures (`results/paper/figures/*.pdf`) and LaTeX tables (`results/paper/tables/*.tex`) from `paper_assets.py`;
    - the supplement's figures (`figS*.pdf`) and tables (`supp-*.tex`), in the same folders, from `supplement_assets.py`.
 

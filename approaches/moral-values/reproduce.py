@@ -23,8 +23,8 @@ precision (CSV numbers at most one unit apart in the fourth decimal), or differe
 reference manifest unless asked to (--update-manifest); if there is none, it writes one.
 
 Usage (from this folder):
-    python3 reproduce.py                    # run everything (about 50 min on an Apple M1), then compare
-    python3 reproduce.py -j 4               # independent steps in parallel (the shift step alone takes ~30 min)
+    python3 reproduce.py                    # run everything (about 40 min on an Apple M1), then compare
+    python3 reproduce.py -j 4               # independent steps in parallel (the shift step alone takes ~22 min)
     python3 reproduce.py --steps shift,assets
     python3 reproduce.py --verify           # compare the files on disk with the manifest; run nothing
     python3 reproduce.py --update-manifest  # after an intended change: run, then record the new reference
@@ -53,6 +53,10 @@ MANIFEST = HERE / "results" / "reproduce-manifest.tsv"
 PACKAGES = ["numpy", "pandas", "scipy", "sklearn", "matplotlib"]
 GOLD = [ROOT / "data" / f"{split}-english" / "labels-cat.tsv" for split in ["training", "validation", "test"]]
 CSV_TOL = 1.5e-4                               # one unit in the 4th decimal (outputs have 4-6 decimals)
+# One BLAS thread per step unless the caller sets these: the matrix products here are small, so extra
+# threads cost more than they save (30-50% slower alone, much slower when steps run in parallel), and a
+# fixed thread count keeps floating-point sums in the same order on every run.
+SINGLE_THREAD = {k: "1" for k in ["OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "VECLIB_MAXIMUM_THREADS"]}
 
 
 @dataclass(frozen=True)
@@ -65,15 +69,15 @@ class Step:
 
 
 STEPS = [
-    # minutes: wall time on an Apple M1, steps run one at a time, 19 Nov 2026 (rules refitted on every
-    # validation resample; annotated-sample estimators and the extra shift-test rules added the same day;
-    # shift scaled from a parallel run, to be re-measured; numpy may use several cores)
+    # minutes: wall time on an Apple M1 with one BLAS thread per step, 19 Nov 2026 (rules refitted on
+    # every validation resample, annotated-sample estimators, extra shift-test rules, subsampling)
     Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 0.3),
-    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 15.0),
-    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 31.0),
+    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 10.7),
+    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 21.5),
     Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.8),
     Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.1),
     Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.5),
+    Step("subsample", "subsample_validation.py", "Supplement: how large the annotated sample must be", 4.6),
     Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.4, final=True),
     Step("supplement", "supplement_assets.py", "Supplement: Tables S1-S13 and Figures S1-S2", 0.3, final=True),
 ]
@@ -247,7 +251,7 @@ def run_step(step: Step, logdir: Path) -> dict:
     start = time.time()
     with open(log, "w", encoding="utf-8") as out:
         proc = subprocess.run([sys.executable, "-c", TRACER, step.script, str(trace), str(ROOT)], cwd=HERE,
-                              stdout=out, stderr=subprocess.STDOUT, env={**os.environ, "MPLBACKEND": "Agg"})
+                              stdout=out, stderr=subprocess.STDOUT, env={**SINGLE_THREAD, **os.environ, "MPLBACKEND": "Agg"})
     if proc.returncode != 0:
         tail = log.read_text(encoding="utf-8", errors="replace").splitlines()[-25:]
         raise RuntimeError(f"step '{step.name}' ({step.script}) failed; last lines of {log}:\n  " + "\n  ".join(tail))

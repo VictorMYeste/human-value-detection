@@ -22,7 +22,8 @@ LLM systems (single runs; the paper's Section on LLM baselines):
   LLM ensemble                hard vote of the gated few-shot and the QLoRA Gemma models
 
 Reference: the feature ensemble (the paper's main system, three seeds) with CC@t*, CC@prev
-and RC@prev, computed here with the same code.
+and RC@prev, computed here with the same code: rules refitted on every validation resample and
+metrics on the mean of the three runs, as in measurement_analysis.py.
 
 Uncertainty: the stratified document bootstraps of test and validation shared with
 measurement_analysis.py (B = 2000). LLM results are single runs, so their intervals cover
@@ -41,8 +42,9 @@ import numpy as np
 import pandas as pd
 
 from analyze_provenance import KEY, VALUES, load_gold
-from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, adjust, apply_rules, bh, boot_p, boot_rates, ci,
-                                  document_design, fit_rules, macro_f1, rank_corr, slope, system_probs)
+from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, RowFits, adjust, bh, boot_p, boot_rates, ci,
+                                  genre_reference_p, lpair_reference_p,
+                                  document_design, macro_f1, rank_corr, slope, system_probs)
 from shift_tests import Groups, all_pairs, pair_contrasts, rc, safe_slope
 
 HERE = Path(__file__).resolve().parent
@@ -79,7 +81,8 @@ def main() -> None:
     yv = (gv[VALUES].to_numpy() >= 0.5).astype(int)
     yt = (gt[VALUES].to_numpy() >= 0.5).astype(int)
     T = Groups(document_design(gt))
-    V = Groups(document_design(gv, seed=RNG_SEED + 1))
+    Vdesign = document_design(gv, seed=RNG_SEED + 1)
+    V = Groups(Vdesign)
     langs = sorted(set(T.lang))
     lpairs = all_pairs(len(langs))
     man_t, news_t = T.genre == "manifesto", T.genre == "news"
@@ -89,8 +92,8 @@ def main() -> None:
     def views(total, man, news, lang) -> dict[str, np.ndarray]:
         return {"all": total, "genre": man - news, "lang": lang, "lpair": pair_contrasts(lang, lpairs)}
 
-    def cc_views(dec_t: np.ndarray) -> dict:
-        c = T.S @ dec_t
+    def cc_views(c: np.ndarray) -> dict:
+        """Views from per-document test counts, fixed (docs, k) or per bootstrap row (B+1, docs, k)."""
         return views(T.prev(c, T.all), T.prev(c, man_t), T.prev(c, news_t), T.langs(c, langs))
 
     def acc_views(dec_t: np.ndarray, dec_v: np.ndarray) -> dict:
@@ -99,18 +102,19 @@ def main() -> None:
         return views(adjust(T.prev(c, T.all), tpr, fpr), adjust(T.prev(c, man_t), tpr, fpr),
                      adjust(T.prev(c, news_t), tpr, fpr), adjust(T.langs(c, langs), tpr[:, None], fpr[:, None]))
 
-    def rc_views(dec_t: np.ndarray, dec_v: np.ndarray) -> tuple[dict, float, float]:
-        cv = V.S @ dec_v
+    def rc_views(c: np.ndarray, cv: np.ndarray) -> tuple[dict, float, float]:
+        """Regression calibration from per-document test counts c and validation counts cv."""
         e_l, g_l = pair_contrasts(V.langs(cv, langs), lpairs), pair_contrasts(V.langs(gold_v, langs), lpairs)
         beta_l = safe_slope(slope(g_l, e_l))
         beta_g = safe_slope(slope(V.prev(gold_v, man_v) - V.prev(gold_v, news_v), V.prev(cv, man_v) - V.prev(cv, news_v)))
-        c = T.S @ dec_t
         total = T.prev(c, T.all)
         return (views(total, rc(T.prev(c, man_t), total, beta_g), rc(T.prev(c, news_t), total, beta_g),
                       rc(T.langs(c, langs), total, beta_l)), beta_l[0], beta_g[0])
 
-    gold = cc_views(yt)
-    gsig = {k: bh(boot_p(gold[k])) < ALPHA for k in ["genre", "lpair"]}
+    gold = cc_views(T.S @ yt)
+    gold_doc = T.S @ yt
+    gsig = {"genre": bh(genre_reference_p(gold["genre"], gold_doc, T.nsent, man_t, news_t)) < ALPHA,
+            "lpair": bh(lpair_reference_p(gold["lpair"], gold_doc, T.nsent, [T.lang == l for l in langs], lpairs)) < ALPHA}
 
     def metrics(v: dict) -> dict:
         diff = v["all"] - gold["all"]
@@ -123,6 +127,7 @@ def main() -> None:
             esig = bh(boot_p(v[key])) < ALPHA
             same = np.sign(e0) == np.sign(g0)
             m.update({f"{key}_reproduced": (esig & same)[gs].mean() * 100,
+                      f"{key}_detected": ((boot_p(v[key]) < ALPHA) & same)[gs].mean() * 100,
                       f"{key}_reversed": (esig & ~same)[gs].mean() * 100,
                       f"{key}_biased": (bh(boot_p(v[key] - gold[key])) < ALPHA).mean() * 100,
                       f"{key}_mae": np.abs(e0 - g0).mean() * 100,
@@ -138,17 +143,23 @@ def main() -> None:
         if f1 is not None:
             f1s.setdefault(system, {}).setdefault(est, []).append(f1)
 
-    # ---- reference: the main supervised system, three seeds
+    # ---- reference: the main supervised system, rules refitted on every validation row; metrics on the
+    #      mean of its three runs, as in measurement_analysis.py
+    ref_views: dict[str, list[dict]] = {"CC@t*": [], "CC@prev": [], "RC@prev": []}
     for seed in SEEDS:
         pv, pt = system_probs(REFERENCE, seed, "val"), system_probs(REFERENCE, seed, "test")
-        fit = fit_rules(pv, yv)
-        est = apply_rules(pt, fit)
-        dt_t, dt_p = est["CC@t*"].astype(int), est["CC@prev"].astype(int)
-        record(REFERENCE, "CC@t*", cc_views(dt_t), macro_f1(yt, dt_t))
-        record(REFERENCE, "CC@prev", cc_views(dt_p), macro_f1(yt, dt_p))
-        v, bl, bg = rc_views(dt_p, (pv >= fit["tprev"]).astype(int))
-        record(REFERENCE, "RC@prev", v)
+        rf = RowFits(pv, yv, Vdesign)
+        f1s.setdefault(REFERENCE, {}).setdefault("CC@t*", []).append(macro_f1(yt, (pt >= rf.tstar[0]).astype(int)))
+        f1s[REFERENCE].setdefault("CC@prev", []).append(macro_f1(yt, (pt >= rf.tprev[0]).astype(int)))
+        c_prev = rf.counts("CC@prev", pt, T.S)
+        ref_views["CC@t*"].append(cc_views(rf.counts("CC@t*", pt, T.S)))
+        ref_views["CC@prev"].append(cc_views(c_prev))
+        v, bl, bg = rc_views(c_prev, rf.counts("CC@prev", pv, V.S))
+        ref_views["RC@prev"].append(v)
         slopes_used.setdefault(REFERENCE, []).append((bl, bg))
+        del c_prev
+    for est_name, vs in ref_views.items():
+        record(REFERENCE, est_name, {key: np.mean([v[key] for v in vs], axis=0) for key in vs[0]})
 
     # ---- LLM systems, single runs
     for system, (pattern, published) in LLM_SYSTEMS.items():
@@ -156,9 +167,9 @@ def main() -> None:
         f1 = macro_f1(yt, dec_t)
         if abs(f1 - published) > 0.0006:
             raise ValueError(f"{system}: test macro-F1 {f1:.4f} differs from the published {published:.3f}")
-        record(system, "CC", cc_views(dec_t), f1)
+        record(system, "CC", cc_views(T.S @ dec_t), f1)
         record(system, "ACC", acc_views(dec_t, dec_v))
-        v, bl, bg = rc_views(dec_t, dec_v)
+        v, bl, bg = rc_views(T.S @ dec_t, V.S @ dec_v)
         record(system, "RC", v)
         slopes_used[system] = [(bl, bg)]
 
@@ -170,7 +181,7 @@ def main() -> None:
         return float(np.mean([m[k] for m in results[system][est]]))
 
     out("LLM LABELS AS A MEASUREMENT INSTRUMENT -- ValueEval'24 English test split")
-    out(f"Stratified document bootstrap B = {B}; LLM systems are single runs; the reference averages three seeds.")
+    out(f"Stratified document bootstrap B = {B}; LLM systems are single runs; the reference is the mean of three seeds.")
     out(f"Gold-significant contrasts: {gsig['genre'].sum()} of 19 manifesto-news, {gsig['lpair'].sum()} of "
         f"{len(lpairs) * 19} language-pair. Test macro-F1 of every LLM system matches the published value.")
     out()
@@ -178,26 +189,28 @@ def main() -> None:
     out("A. CORPUS PREVALENCE AND MANIFESTO-NEWS CONTRASTS")
     out("   pred/gold: total estimated value mentions / gold mentions [95% CI]. Biased values: significantly under / over")
     out("   (BH q < 0.05, of 19). Genre: slope of estimated on gold contrasts [95% CI]; reproduced: gold-significant contrasts")
-    out("   found significant with the right sign; biased: contrasts with differential error (BH q < 0.05).")
+    out("   found significant with the right sign (BH over the family); single: the same when each contrast is tested on")
+    out("   its own (p < 0.05, uncorrected); biased: contrasts with differential error (BH q < 0.05).")
     out("=" * 118)
     out(f"  {'system':28s} {'est.':8s} {'macro-F1':>8s} {'pred/gold':>18s} {'MAE pp':>7s} {'under/over':>11s} "
-        f"{'genre slope':>20s} {'reprod. %':>9s} {'biased %':>9s} {'MAE pp':>7s}")
+        f"{'genre slope':>20s} {'reprod. %':>9s} {'single %':>9s} {'biased %':>9s} {'MAE pp':>7s}")
     for system, ests in results.items():
         for est in ests:
             f1 = f"{np.mean(f1s[system][est]):.3f}" if est in f1s.get(system, {}) else "--"
-            under_over = f"{avg(system, est, 'under'):.1f}/{avg(system, est, 'over'):.1f}"
+            under_over = f"{avg(system, est, 'under'):.0f}/{avg(system, est, 'over'):.0f}"
             out(f"  {system:28s} {est:8s} {f1:>8s} {ci(mean_arr(system, est, 'ratio')):>18s} {avg(system, est, 'mae'):7.2f} "
                 f"{under_over:>11s} {ci(mean_arr(system, est, 'genre_slope')):>20s} {avg(system, est, 'genre_reproduced'):9.1f} "
-                f"{avg(system, est, 'genre_biased'):9.1f} {avg(system, est, 'genre_mae'):7.2f}")
+                f"{avg(system, est, 'genre_detected'):9.1f} {avg(system, est, 'genre_biased'):9.1f} {avg(system, est, 'genre_mae'):7.2f}")
     out()
     out("=" * 118)
     out("B. SOURCE-LANGUAGE PAIRWISE CONTRASTS (684)")
     out("=" * 118)
-    out(f"  {'system':28s} {'est.':8s} {'language slope':>20s} {'reprod. %':>9s} {'biased %':>9s} {'MAE pp':>7s} {'lang. rank rho':>20s}")
+    out(f"  {'system':28s} {'est.':8s} {'language slope':>20s} {'reprod. %':>9s} {'single %':>9s} {'biased %':>9s} {'MAE pp':>7s} {'lang. rank rho':>20s}")
     for system, ests in results.items():
         for est in ests:
             out(f"  {system:28s} {est:8s} {ci(mean_arr(system, est, 'lpair_slope')):>20s} "
-                f"{avg(system, est, 'lpair_reproduced'):9.1f} {avg(system, est, 'lpair_biased'):9.1f} "
+                f"{avg(system, est, 'lpair_reproduced'):9.1f} {avg(system, est, 'lpair_detected'):9.1f} "
+                f"{avg(system, est, 'lpair_biased'):9.1f} "
                 f"{avg(system, est, 'lpair_mae'):7.2f} {ci(mean_arr(system, est, 'rho')):>20s}")
     reversals = [f"{system} {est} {'genre' if k == 'genre' else 'language'} {avg(system, est, f'{k}_reversed'):.1f}%"
                  for system, ests in results.items() for est in ests for k in ["genre", "lpair"]
@@ -215,8 +228,8 @@ def main() -> None:
             for k in ["ratio", "genre_slope", "lpair_slope", "rho"]:
                 a = mean_arr(system, est, k)
                 row[k], row[f"{k}_lo"], row[f"{k}_hi"] = a[0], np.percentile(a[1:], 2.5), np.percentile(a[1:], 97.5)
-            for k in ["mae", "under", "over", "genre_reproduced", "genre_reversed", "genre_biased", "genre_mae",
-                      "lpair_reproduced", "lpair_reversed", "lpair_biased", "lpair_mae"]:
+            for k in ["mae", "under", "over", "genre_reproduced", "genre_detected", "genre_reversed", "genre_biased",
+                      "genre_mae", "lpair_reproduced", "lpair_detected", "lpair_reversed", "lpair_biased", "lpair_mae"]:
                 row[k] = avg(system, est, k)
             rows.append(row)
     RES.mkdir(exist_ok=True)

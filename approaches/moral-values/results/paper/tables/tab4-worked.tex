@@ -1,5 +1,5 @@
 \begin{table}[t]
-\caption{Worked example: how each method fares on the 10 significant reference differences between manifestos and news}
+\caption{Worked example: how each method fares on the 9 significant reference differences between manifestos and news}
 \label{tab:worked}
 \centering
 \footnotesize
@@ -8,14 +8,14 @@
 \toprule
 Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 \midrule
-CC, $t = 0.5$ & 7.0 & 3.0 & 0 & 1.7 & 0.73 & 0.82 \\
-CC, macro-F1 $t^*$ & 8.7 & 1.3 & 0 & 1.0 & 1.16 & 0.92 \\
-\textbf{CC, prev.-matched} & 7.3 & 2.7 & 0 & 1.0 & 0.96 & 0.64 \\
-PCC, Platt & 9.3 & 0.7 & 0 & 4.7 & 0.62 & 0.99 \\
-ACC, prev.-matched & 6.0 & 4.0 & 0 & 0.3 & 2.49 & 3.75 \\
-\textbf{RC, prev.-matched} & 7.3 & 2.7 & 0 & 1.0 & 1.02 & 0.72 \\
-Gemma few-shot + gate & 6.0 & 3.0 & 1 & 3.0 & 0.91 & 2.45 \\
+CC, $t = 0.5$ & 7 & 2 & 0 & 2 & 0.72 & 0.81 \\
+CC, macro-F1 $t^*$ & 8 & 1 & 0 & 1 & 1.17 & 0.88 \\
+\textbf{CC, prev.-matched} & 7 & 2 & 0 & 1 & 0.96 & 0.62 \\
+PCC, Platt & 8 & 1 & 0 & 5 & 0.66 & 0.98 \\
+ACC, prev.-matched & 4 & 5 & 0 & 0 & 2.56 & 3.69 \\
+\textbf{RC, prev.-matched} & 7 & 2 & 0 & 1 & 1.05 & 0.74 \\
+Gemma few-shot + gate & 6 & 2 & 1 & 3 & 1.08 & 2.45 \\
 \bottomrule
-\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of 9). Supervised methods: main system, counted in each training run and averaged over the three runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
+\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of 10). Supervised methods: main system, on the mean of three training runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
 \end{tabular}
 \end{table}

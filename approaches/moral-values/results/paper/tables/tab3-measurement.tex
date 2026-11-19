@@ -11,29 +11,29 @@
 Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Biased (\%) & Slope [95\% CI] & Biased (\%) & Rank $\rho$ \\
 \midrule
 \multicolumn{10}{@{}l}{\emph{Decision rules (classify and count)}} \\
-\quad CC, $t = 0.5$ & 0.284 & 0.61$^\dagger$ & 1.21 & 17.0 / 0.0 & 0.73 [0.58, 0.85] & 18 & 0.38 [0.32, 0.47] & 17.8 & 0.61 \\
-\quad CC, macro-F1 $t^*$ & 0.335 & 1.28$^\dagger$ & 0.97 & 2.0 / 10.7 & 1.16 [0.96, 1.30] & 9 & 0.69 [0.60, 0.80] & 1.5 & 0.64 \\
-\quad CC, per-label F1 $t_j$ & 0.338 & 1.30$^\dagger$ & 1.07 & 2.0 / 9.3 & 1.12 [0.94, 1.25] & 5 & 0.70 [0.60, 0.80] & 2.2 & 0.62 \\
-\quad \textbf{CC, prevalence-matched} & 0.336 & 1.01 & 0.23 & 0.0 / 0.0 & 0.96 [0.80, 1.09] & 0 & 0.58 [0.50, 0.67] & 3.6 & 0.64 \\
+\quad CC, $t = 0.5$ & 0.284 & 0.61$^\dagger$ & 1.21 & 18 / 0 & 0.72 [0.57, 0.85] & 16 & 0.38 [0.32, 0.47] & 10.7 & 0.65 \\
+\quad CC, macro-F1 $t^*$ & 0.335 & 1.28$^\dagger$ & 0.94 & 1 / 10 & 1.17 [0.96, 1.33] & 5 & 0.69 [0.58, 0.81] & 0.7 & 0.68 \\
+\quad CC, per-label F1 $t_j$ & 0.338 & 1.30$^\dagger$ & 0.99 & 0 / 1 & 1.14 [0.94, 1.34] & 0 & 0.70 [0.59, 0.82] & 1.2 & 0.63 \\
+\quad \textbf{CC, prevalence-matched} & 0.336 & 1.01 & 0.21 & 0 / 0 & 0.96 [0.80, 1.10] & 0 & 0.58 [0.49, 0.67] & 1.2 & 0.64 \\
 \multicolumn{10}{@{}l}{\emph{Probability averages}} \\
-\quad PCC, raw & -- & 1.14$^\dagger$ & 0.51 & 0.7 / 9.7 & 0.85 [0.72, 0.94] & 7 & 0.50 [0.43, 0.57] & 13.2 & 0.65 \\
-\quad PCC, Platt & -- & 1.00 & 0.19 & 0.0 / 0.0 & 0.62 [0.52, 0.69] & 21 & 0.37 [0.32, 0.42] & 18.6 & 0.64 \\
+\quad PCC, raw & -- & 1.14$^\dagger$ & 0.44 & 0 / 9 & 0.89 [0.74, 0.98] & 5 & 0.50 [0.43, 0.57] & 7.5 & 0.65 \\
+\quad PCC, Platt & -- & 1.00 & 0.19 & 0 / 0 & 0.66 [0.55, 0.74] & 21 & 0.37 [0.31, 0.42] & 11.1 & 0.64 \\
 \multicolumn{10}{@{}l}{\emph{Quantification methods}} \\
-\quad ACC, $t^*$ & -- & 1.01 & 0.71 & 1.0 / 0.0 & 2.61 [2.03, 3.07] & 23 & 1.65 [1.38, 1.88] & 0.0 & 0.64 \\
-\quad ACC, prevalence-matched & -- & 1.04 & 0.77 & 0.0 / 0.0 & 2.49 [1.93, 2.97] & 16 & 1.61 [1.35, 1.85] & 0.0 & 0.64 \\
-\quad PACC & -- & 0.99 & 0.71 & 0.0 / 0.0 & 2.74 [2.13, 3.23] & 32 & 1.73 [1.47, 1.94] & 1.6 & 0.64 \\
-\quad EM & -- & 0.99 & 0.64 & 1.0 / 0.0 & 3.34 [2.58, 3.92] & 44 & 2.03 [1.67, 2.27] & 10.0 & 0.64 \\
-\quad ACC-G, prevalence-matched & -- & 1.04 & 0.77 & 0.0 / 0.0 & 1.02 [0.58, 1.59] & 0 & 1.28 [0.93, 2.00] & 0.0 & 0.43 \\
+\quad ACC, $t^*$ & -- & 1.01 & 0.69 & 1 / 0 & 2.71 [2.10, 3.18] & 16 & 1.65 [1.35, 1.88] & 0.0 & 0.67 \\
+\quad ACC, prevalence-matched & -- & 1.04 & 0.71 & 0 / 0 & 2.56 [2.01, 3.11] & 16 & 1.60 [1.32, 1.85] & 0.0 & 0.65 \\
+\quad PACC & -- & 0.99 & 0.69 & 0 / 0 & 2.99 [2.36, 3.52] & 32 & 1.73 [1.44, 1.96] & 0.4 & 0.65 \\
+\quad EM & -- & 0.98 & 0.63 & 1 / 0 & 3.90 [3.02, 4.56] & 32 & 2.02 [1.65, 2.31] & 0.0 & 0.66 \\
+\quad ACC-G, prevalence-matched & -- & 1.04 & 0.71 & 0 / 0 & 0.97 [0.58, 1.72] & 0 & 1.27 [0.93, 2.04] & 0.0 & 0.42 \\
 \multicolumn{10}{@{}l}{\emph{Contrast correction (regression calibration)}} \\
-\quad \textbf{RC, prevalence-matched} & -- & 1.01 & 0.23 & 0.0 / 0.0 & 1.02 [0.82, 1.26] & 0 & 0.91 [0.74, 1.13] & 0.0 & 0.64 \\
+\quad \textbf{RC, prevalence-matched} & -- & 1.01 & 0.21 & 0 / 0 & 1.05 [0.84, 1.34] & 0 & 0.90 [0.74, 1.13] & 0.0 & 0.64 \\
 \multicolumn{10}{@{}l}{\emph{LLM labels (single runs)}} \\
-\quad Gemma few-shot + gate, CC & 0.238 & 1.61$^\dagger$ & 2.27 & 4 / 15 & 0.91 [0.60, 1.21] & 42 & 0.33 [0.24, 0.52] & 17.5 & 0.34 \\
-\quad Gemma few-shot + gate, ACC & -- & 1.31$^\dagger$ & 3.83 & 7 / 4 & 1.81 [0.94, 2.82] & 47 & 0.79 [0.54, 1.48] & 8.5 & 0.35 \\
-\quad Gemma few-shot + gate, RC & -- & 1.61$^\dagger$ & 2.27 & 4 / 15 & 0.97 [0.60, 1.56] & 32 & 0.78 [0.50, 1.27] & 11.0 & 0.34 \\
-\quad Gemma few-shot, CC & 0.233 & 1.86$^\dagger$ & 3.01 & 4 / 15 & 0.91 [0.57, 1.22] & 32 & 0.30 [0.21, 0.51] & 17.0 & 0.29 \\
-\quad Gemma QLoRA, CC & 0.236 & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.30 [0.18, 0.47] & 37 & 0.37 [0.29, 0.46] & 18.1 & 0.57 \\
-\quad LLM union, CC & 0.277 & 1.80$^\dagger$ & 2.64 & 3 / 15 & 1.00 [0.70, 1.28] & 32 & 0.53 [0.43, 0.71] & 13.3 & 0.39 \\
+\quad Gemma few-shot + gate, CC & 0.238 & 1.61$^\dagger$ & 2.27 & 4 / 15 & 1.08 [0.77, 1.35] & 26 & 0.33 [0.25, 0.53] & 12.7 & 0.34 \\
+\quad Gemma few-shot + gate, ACC & -- & 1.31$^\dagger$ & 3.83 & 9 / 3 & 2.38 [1.44, 3.37] & 37 & 0.81 [0.52, 1.51] & 2.3 & 0.35 \\
+\quad Gemma few-shot + gate, RC & -- & 1.61$^\dagger$ & 2.27 & 4 / 15 & 0.97 [0.67, 1.38] & 26 & 0.78 [0.50, 1.28] & 7.3 & 0.34 \\
+\quad Gemma few-shot, CC & 0.233 & 1.86$^\dagger$ & 3.01 & 4 / 15 & 1.00 [0.69, 1.29] & 32 & 0.30 [0.21, 0.52] & 14.0 & 0.29 \\
+\quad Gemma QLoRA, CC & 0.236 & 0.46$^\dagger$ & 1.66 & 19 / 0 & 0.31 [0.18, 0.48] & 21 & 0.37 [0.29, 0.45] & 13.5 & 0.57 \\
+\quad LLM union, CC & 0.277 & 1.80$^\dagger$ & 2.64 & 3 / 15 & 1.16 [0.86, 1.43] & 32 & 0.53 [0.43, 0.71] & 9.5 & 0.39 \\
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
+\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
 \end{tabular}
 \end{table*}

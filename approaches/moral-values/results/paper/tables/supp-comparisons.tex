@@ -8,42 +8,42 @@
 Comparison (second minus first) & $\Delta$ macro-F1 [95\% CI] & $q$ & Same sign in every run \\
 \midrule
 \multicolumn{4}{@{}l}{\emph{Decision rules (same system)}} \\
-\quad DeBERTa: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.035 [0.027, 0.042] & $<$0.01 & yes \\
+\quad DeBERTa: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.035 [0.028, 0.042] & $<$0.01 & yes \\
 \quad RoBERTa: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.042 [0.034, 0.051] & $<$0.01 & yes \\
 \quad Feature ensemble: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.051 [0.043, 0.059] & $<$0.01 & yes \\
-\quad Seed ensemble: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.047 [0.036, 0.058] & $<$0.01 & -- \\
-\quad DeBERTa: per-label F1 vs.\ macro-F1 $t^*$ & 0.002 [$-$0.002, 0.006] & 0.46 & yes \\
-\quad RoBERTa: per-label F1 vs.\ macro-F1 $t^*$ & $-$0.001 [$-$0.005, 0.004] & 0.88 & no \\
-\quad Feature ensemble: per-label F1 vs.\ macro-F1 $t^*$ & 0.003 [$-$0.002, 0.008] & 0.37 & yes \\
-\quad Seed ensemble: per-label F1 vs.\ macro-F1 $t^*$ & $-$0.002 [$-$0.009, 0.005] & 0.75 & -- \\
-\quad DeBERTa: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.000 [$-$0.004, 0.004] & 0.97 & no \\
-\quad RoBERTa: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.004 [$-$0.008, 0.000] & 0.11 & yes \\
-\quad Feature ensemble: prevalence-matched vs.\ macro-F1 $t^*$ & 0.001 [$-$0.004, 0.005] & 0.88 & no \\
-\quad Seed ensemble: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.006 [$-$0.012, $-$0.000] & 0.10 & -- \\
+\quad Seed ensemble: macro-F1 $t^*$ vs.\ $t = 0.5$ & 0.047 [0.036, 0.057] & $<$0.01 & -- \\
+\quad DeBERTa: per-label F1 vs.\ macro-F1 $t^*$ & 0.002 [$-$0.002, 0.007] & 0.45 & yes \\
+\quad RoBERTa: per-label F1 vs.\ macro-F1 $t^*$ & $-$0.001 [$-$0.005, 0.004] & 0.85 & no \\
+\quad Feature ensemble: per-label F1 vs.\ macro-F1 $t^*$ & 0.003 [$-$0.002, 0.008] & 0.36 & yes \\
+\quad Seed ensemble: per-label F1 vs.\ macro-F1 $t^*$ & $-$0.002 [$-$0.009, 0.005] & 0.78 & -- \\
+\quad DeBERTa: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.000 [$-$0.004, 0.004] & 1.00 & no \\
+\quad RoBERTa: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.004 [$-$0.007, 0.000] & 0.11 & yes \\
+\quad Feature ensemble: prevalence-matched vs.\ macro-F1 $t^*$ & 0.001 [$-$0.004, 0.005] & 0.85 & no \\
+\quad Seed ensemble: prevalence-matched vs.\ macro-F1 $t^*$ & $-$0.006 [$-$0.012, $-$0.001] & 0.07 & -- \\
 \multicolumn{4}{@{}l}{\emph{Auxiliary inputs (vs.\ text-only DeBERTa, same rule)}} \\
-\quad + LIWC-22 (macro-F1 $t^*$) & 0.003 [$-$0.002, 0.007] & 0.82 & no \\
-\quad + Prev-2 (macro-F1 $t^*$) & $-$0.000 [$-$0.006, 0.007] & 0.96 & no \\
+\quad + LIWC-22 (macro-F1 $t^*$) & 0.003 [$-$0.002, 0.008] & 0.87 & no \\
+\quad + Prev-2 (macro-F1 $t^*$) & $-$0.000 [$-$0.007, 0.006] & 0.96 & no \\
 \quad + MJD (macro-F1 $t^*$) & $-$0.001 [$-$0.006, 0.004] & 0.96 & no \\
-\quad + BERTopic (macro-F1 $t^*$) & 0.003 [$-$0.001, 0.007] & 0.82 & no \\
-\quad + LIWC-22 (prevalence-matched) & 0.001 [$-$0.003, 0.006] & 0.96 & no \\
+\quad + BERTopic (macro-F1 $t^*$) & 0.003 [$-$0.001, 0.007] & 0.87 & no \\
+\quad + LIWC-22 (prevalence-matched) & 0.001 [$-$0.004, 0.006] & 0.96 & no \\
 \quad + Prev-2 (prevalence-matched) & $-$0.000 [$-$0.007, 0.006] & 0.96 & no \\
-\quad + MJD (prevalence-matched) & 0.001 [$-$0.005, 0.005] & 0.96 & no \\
-\quad + BERTopic (prevalence-matched) & 0.003 [$-$0.002, 0.008] & 0.82 & yes \\
+\quad + MJD (prevalence-matched) & 0.001 [$-$0.004, 0.005] & 0.96 & no \\
+\quad + BERTopic (prevalence-matched) & 0.003 [$-$0.003, 0.008] & 0.87 & yes \\
 \multicolumn{4}{@{}l}{\emph{Encoders and ensembles (same rule)}} \\
-\quad RoBERTa vs.\ DeBERTa (macro-F1 $t^*$) & $-$0.008 [$-$0.015, $-$0.001] & 0.04 & yes \\
+\quad RoBERTa vs.\ DeBERTa (macro-F1 $t^*$) & $-$0.008 [$-$0.015, $-$0.001] & 0.03 & yes \\
 \quad Feature ensemble vs.\ DeBERTa (macro-F1 $t^*$) & 0.018 [0.014, 0.022] & $<$0.01 & yes \\
-\quad Feature ensemble vs.\ DeBERTa + LIWC-22 (macro-F1 $t^*$) & 0.015 [0.011, 0.019] & $<$0.01 & yes \\
+\quad Feature ensemble vs.\ DeBERTa + LIWC-22 (macro-F1 $t^*$) & 0.015 [0.011, 0.020] & $<$0.01 & yes \\
 \quad Seed ensemble vs.\ DeBERTa (macro-F1 $t^*$) & 0.014 [0.010, 0.017] & $<$0.01 & -- \\
-\quad Feature ensemble vs.\ seed ensemble (macro-F1 $t^*$) & 0.004 [$-$0.000, 0.009] & 0.07 & -- \\
-\quad RoBERTa vs.\ DeBERTa (prevalence-matched) & $-$0.012 [$-$0.019, $-$0.004] & $<$0.01 & yes \\
+\quad Feature ensemble vs.\ seed ensemble (macro-F1 $t^*$) & 0.004 [$-$0.000, 0.009] & 0.06 & -- \\
+\quad RoBERTa vs.\ DeBERTa (prevalence-matched) & $-$0.012 [$-$0.020, $-$0.004] & $<$0.01 & yes \\
 \quad Feature ensemble vs.\ DeBERTa (prevalence-matched) & 0.019 [0.014, 0.023] & $<$0.01 & yes \\
 \quad Feature ensemble vs.\ DeBERTa + LIWC-22 (prevalence-matched) & 0.017 [0.013, 0.022] & $<$0.01 & yes \\
 \quad Seed ensemble vs.\ DeBERTa (prevalence-matched) & 0.007 [0.003, 0.011] & $<$0.01 & -- \\
 \quad Feature ensemble vs.\ seed ensemble (prevalence-matched) & 0.011 [0.007, 0.016] & $<$0.01 & -- \\
 \multicolumn{4}{@{}l}{\emph{Presence gate (same value classifier, macro-F1 $t^*$)}} \\
-\quad DeBERTa + hard gate 0.10 vs.\ no gate & 0.001 [$-$0.002, 0.004] & 0.84 & no \\
-\quad DeBERTa + hard gate tuned vs.\ no gate & 0.000 [$-$0.002, 0.003] & 0.84 & no \\
-\quad DeBERTa + soft gate vs.\ no gate & 0.000 [$-$0.004, 0.005] & 0.84 & no \\
+\quad DeBERTa + hard gate 0.10 vs.\ no gate & 0.001 [$-$0.002, 0.004] & 0.85 & no \\
+\quad DeBERTa + hard gate tuned vs.\ no gate & 0.000 [$-$0.002, 0.003] & 0.85 & no \\
+\quad DeBERTa + soft gate vs.\ no gate & 0.000 [$-$0.004, 0.005] & 0.85 & no \\
 \bottomrule
 \end{tabular*}
 \par\vspace{2pt}

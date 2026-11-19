@@ -23,8 +23,8 @@ precision (CSV numbers at most one unit apart in the fourth decimal), or differe
 reference manifest unless asked to (--update-manifest); if there is none, it writes one.
 
 Usage (from this folder):
-    python3 reproduce.py                    # run everything (about 9 min on one core of an Apple M1), then compare
-    python3 reproduce.py -j 4               # independent steps in parallel (the measurement step alone takes ~6 min)
+    python3 reproduce.py                    # run everything (about 25 min on an Apple M1), then compare
+    python3 reproduce.py -j 4               # independent steps in parallel (the shift step alone takes ~16 min)
     python3 reproduce.py --steps shift,assets
     python3 reproduce.py --verify           # compare the files on disk with the manifest; run nothing
     python3 reproduce.py --update-manifest  # after an intended change: run, then record the new reference
@@ -65,14 +65,15 @@ class Step:
 
 
 STEPS = [
-    # minutes: measured single-threaded on an Apple M1, 18 Nov 2026 (8 min 16 s for the first seven steps)
+    # minutes: wall time on an Apple M1, steps run one at a time, 19 Nov 2026 (rules refitted on every
+    # validation resample since then; numpy may use several cores)
     Step("classification", "threshold_schemes.py", "Table II: macro-F1 by decision rule, gates, presence", 0.3),
-    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 6.3),
-    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 0.8),
-    Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.6),
+    Step("measurement", "measurement_analysis.py", "Table III, Fig. 2: prevalence, contrasts, slopes", 7.4),
+    Step("shift", "shift_tests.py", "Fig. 3: a language or genre left out of the fit", 15.6),
+    Step("llm", "llm_measurement.py", "Tables II-III: LLM labels used as counts", 0.8),
     Step("reliability", "gold_reliability.py", "Section on the gold standard: agreement vs. error", 0.1),
-    Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.1),
-    Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.1, final=True),
+    Step("worked", "worked_example.py", "Fig. 4, Table IV: manifesto vs. news", 0.5),
+    Step("assets", "paper_assets.py", "Figures 1-4 (PDF) and Tables I-V (LaTeX)", 0.4, final=True),
     Step("supplement", "supplement_assets.py", "Supplement: Tables S1-S13 and Figures S1-S2", 0.3, final=True),
 ]
 BY_NAME = {s.name: s for s in STEPS}
@@ -312,7 +313,7 @@ def main() -> None:
     logdir = Path(tempfile.mkdtemp(prefix="reproduce-"))
     snap = snapshot_reference(ref, set(names), logdir)
     est = sum(s.minutes for s in steps)
-    print(f"Running {len(steps)} step(s) (about {est:.0f} min on one core); logs in {logdir}")
+    print(f"Running {len(steps)} step(s) (about {est:.0f} min run one at a time); logs in {logdir}")
     try:
         traces = run(steps, args.jobs, logdir)
     except RuntimeError as e:

@@ -38,7 +38,7 @@ import pandas as pd
 from matplotlib.lines import Line2D
 
 from analyze_provenance import VALUES, load_gold
-from measurement_analysis import RES, SEEDS, apply_rules, document_design, fit_rules, system_probs
+from measurement_analysis import RES, RNG_SEED, SEEDS, RowFits, document_design, system_probs, wsum
 
 OUT = RES / "paper"
 FIG, TAB = OUT / "figures", OUT / "tables"
@@ -104,11 +104,14 @@ def figure1_prevalence() -> None:
     gold = (W @ (S @ yt)) / denom
     rules = [("CC@0.5", AQUA, "v"), ("CC@t*", ORANGE, "^"), ("CC@prev", BLUE, "o")]
     ratio = {r: 0.0 for r, _, _ in rules}
-    for seed in SEEDS:
+    vdesign = document_design(gv, seed=RNG_SEED + 1)
+    every = np.ones(S.shape[0], bool)
+    for seed in SEEDS:   # rules refitted on every validation row, as in measurement_analysis.py
         pv, pt = system_probs(MAIN, seed, "val"), system_probs(MAIN, seed, "test")
-        est = apply_rules(pt, fit_rules(pv, yv))
+        rf = RowFits(pv, yv, vdesign)
         for r, _, _ in rules:
-            ratio[r] = ratio[r] + ((W @ (S @ est[r])) / denom) / gold / len(SEEDS)
+            c = S @ (pt >= 0.5).astype(float) if r == "CC@0.5" else rf.counts(r, pt, S)
+            ratio[r] = ratio[r] + (wsum(W, c, every) / denom) / gold / len(SEEDS)
 
     order = np.argsort(-gold[0])
     y = np.arange(len(VALUES))[::-1]
@@ -230,7 +233,7 @@ def figure4_worked(values: pd.DataFrame) -> None:
     """Manifesto-news differences per value: gold with CI next to four estimators (crude version).
 
     Estimates are averaged over the main system's runs, and the fill shows whether that averaged
-    estimate is significant. The per-run counts of found / missed / spurious are in Table 4."""
+    estimate is significant. The counts of found / missed / spurious are in Table 4."""
     v = values[values["version"] == "crude"]
     gold = v[v["estimator"] == "gold"].set_index("value")
     order = gold["diff_pp"].sort_values(ascending=False).index.tolist()
@@ -401,7 +404,7 @@ def table3_measurement(summary: pd.DataFrame, llm: pd.DataFrame) -> None:
             name = f"\\textbf{{{LABEL[r]}}}" if r in RECOMMENDED else LABEL[r]
             lines.append(" & ".join([
                 r"\quad " + name, f1(m.macro_f1), excl1(m.ratio, m.ratio_lo, m.ratio_hi), f"{m.prev_mae:.2f}",
-                f"{m.biased_under:.1f} / {m.biased_over:.1f}",  # seed means: one decimal throughout
+                f"{m.biased_under:.0f} / {m.biased_over:.0f}",  # counts of values, on the mean of the runs
                 slope_cell(m.genre_slope, m.genre_slope_lo, m.genre_slope_hi), f"{m.genre_biased:.0f}",
                 slope_cell(m.lpair_slope, m.lpair_slope_lo, m.lpair_slope_hi), f"{m.lpair_biased:.1f}",
                 f"{m.lang_rank_rho:.2f}"]) + r" \\")
@@ -434,22 +437,24 @@ Method & Macro-F1 & Pred./ref. & MAE (pp) & Under / over & Slope [95\% CI] & Bia
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics averaged over three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
+\multicolumn{10}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. LLM outputs are label sets, so no threshold is tuned. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. Under / over: values significantly under- or overestimated (of 19). Biased: contrasts whose error differs from zero (document bootstrap, Benjamini--Hochberg $q < 0.05$). Slope: attenuation slope (Section V-B; 1 = differences keep their size). Rank $\rho$: Spearman correlation of the nine languages' prevalence, averaged over values.}
 \end{tabular}
 \end{table*}
 """)
 
 
-def table4_worked(worked: pd.DataFrame) -> None:
+def table4_worked(worked: pd.DataFrame, values: pd.DataFrame) -> None:
     w = worked[worked["version"] == "crude"].set_index("estimator")
+    ref = values[(values["version"] == "crude") & (values["estimator"] == "gold")]
+    n_sig = int(ref["significant"].sum()); n_other = len(ref) - n_sig
     names = {"CC@0.5": "CC, $t = 0.5$", "CC@t*": "CC, macro-F1 $t^*$", "CC@prev": r"\textbf{CC, prev.-matched}",
              "PCC-Platt": "PCC, Platt", "ACC@prev": "ACC, prev.-matched", "RC@prev": r"\textbf{RC, prev.-matched}",
              "LLM": "Gemma few-shot + gate"}
-    lines = [f"{names[e]} & {w.loc[e, 'found']:.1f} & {w.loc[e, 'missed']:.1f} & {w.loc[e, 'reversed']:.0f} & "
-             f"{w.loc[e, 'spurious']:.1f} & {w.loc[e, 'slope']:.2f} & {w.loc[e, 'mae']:.2f}" + r" \\" for e in names]
+    lines = [f"{names[e]} & {w.loc[e, 'found']:.0f} & {w.loc[e, 'missed']:.0f} & {w.loc[e, 'reversed']:.0f} & "
+             f"{w.loc[e, 'spurious']:.0f} & {w.loc[e, 'slope']:.2f} & {w.loc[e, 'mae']:.2f}" + r" \\" for e in names]
     write_table("tab4-worked.tex", r"""
 \begin{table}[t]
-\caption{Worked example: how each method fares on the 10 significant reference differences between manifestos and news}
+\caption{Worked example: how each method fares on the """ + str(n_sig) + r""" significant reference differences between manifestos and news}
 \label{tab:worked}
 \centering
 \footnotesize
@@ -460,7 +465,7 @@ Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of 9). Supervised methods: main system, counted in each training run and averaged over the three runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
+\multicolumn{7}{@{}p{0.96\columnwidth}@{}}{\scriptsize Found: significant with the sign of the reference. Missed: not significant. Rev.: significant with the opposite sign. Spur.: significant where the reference is not (of """ + str(n_other) + r"""). Supervised methods: main system, on the mean of three training runs; LLM: Gemma-2-9B few-shot with the presence gate, single run. Slope: attenuation slope, and MAE: mean absolute error in percentage points, over the 19 differences.}
 \end{tabular}
 \end{table}
 """)
@@ -507,7 +512,7 @@ def main() -> None:
     table1_data()
     table2_classification(llm)
     table3_measurement(summary, llm)
-    table4_worked(worked_summary)
+    table4_worked(worked_summary, worked_values)
     table5_recommendations()
     print(f"Wrote {len(list(FIG.glob('*.pdf')))} figures to {FIG} and {len(list(TAB.glob('*.tex')))} tables to {TAB}")
 

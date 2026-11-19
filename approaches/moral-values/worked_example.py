@@ -24,10 +24,12 @@ Two versions of the question:
                      threefold between teams (gold_reliability.py), so this version removes
                      differences in language composition between the genres.
 
-Main system: the feature ensemble (three seeds). Per-value estimates are averaged over the
-three runs; summary counts are computed per run and averaged. Significance: stratified
-document bootstrap (B = 2000, shared with measurement_analysis.py), two-sided, BH across the
-19 values. Validation quantities (error rates, slopes) use the validation bootstrap.
+Main system: the feature ensemble (three seeds). Its estimate is the mean of the three runs,
+and every count and test is on that mean. Significance: stratified document bootstrap
+(B = 2000, shared with measurement_analysis.py), normal-approximation p-values, BH across the
+19 values; a value with no reference mentions in one genre is tested with Fisher's exact
+test. Everything fitted on validation (thresholds, Platt maps, error rates, slopes) is refitted
+on each validation resample.
 
 Usage:
     python3 worked_example.py
@@ -42,8 +44,8 @@ from scipy.stats import rankdata
 
 from analyze_provenance import VALUES, load_gold
 from llm_measurement import LLM_SYSTEMS, load_labels
-from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, adjust, apply_rules, bh, boot_p, boot_rates,
-                                  ci, document_design, fit_rules, slope, system_probs)
+from measurement_analysis import (ALPHA, B, RES, RNG_SEED, SEEDS, RowFits, adjust, bh, boot_p, ci,
+                                  document_design, genre_reference_p, slope, system_probs, wsum)
 from shift_tests import Groups, safe_slope
 
 SYSTEM = "Feature ensemble"
@@ -100,28 +102,34 @@ def main() -> None:
     yv = (gv[VALUES].to_numpy() >= 0.5).astype(int)
     yt = (gt[VALUES].to_numpy() >= 0.5).astype(int)
     T = GenreContrast(Groups(document_design(gt)))
-    V = GenreContrast(Groups(document_design(gv, seed=RNG_SEED + 1)))
+    Vdesign = document_design(gv, seed=RNG_SEED + 1)
+    V = GenreContrast(Groups(Vdesign))
 
     gold = T.of(T.G.S @ yt)
     gold_v = V.of(V.G.S @ yv)
-    gsig = {k: bh(boot_p(gold[k])) < ALPHA for k in VERSIONS}
+    # a value with no reference mentions in one genre is tested with Fisher's exact test on the pooled
+    # sentence counts, in both versions (the bootstrap cannot vary an empty group)
+    gsig = {k: bh(genre_reference_p(gold[k], T.G.S @ yt, T.G.nsent, T.man, T.news)) < ALPHA for k in VERSIONS}
 
     runs: dict[str, dict[str, list[np.ndarray]]] = {k: {e: [] for e in ESTIMATORS} for k in VERSIONS}
     betas: dict[str, list[float]] = {k: [] for k in VERSIONS}
     for seed in SEEDS:
         pv, pt = system_probs(SYSTEM, seed, "val"), system_probs(SYSTEM, seed, "test")
-        fit = fit_rules(pv, yv)
-        est = apply_rules(pt, fit)
+        rf = RowFits(pv, yv, Vdesign)                     # every rule refitted on each validation row
+        counts = {"CC@0.5": T.G.S @ (pt >= 0.5).astype(float),
+                  **{r: rf.counts(r, pt, T.G.S) for r in ["CC@t*", "CC@prev", "PCC-Platt"]}}
         for r in ["CC@0.5", "CC@t*", "CC@prev", "PCC-Platt"]:
-            for k, c in T.of(T.G.S @ est[r]).items():
+            for k, c in T.of(counts[r]).items():
                 runs[k][r].append(c)
-        dec_v = (pv >= fit["tprev"]).astype(int)
-        tpr, fpr = boot_rates(V.G.S, V.G.W, yv, dec_v)
-        p = T.parts(T.G.S @ est["CC@prev"])
+        tp_v, fp_v = rf.counts("CC@prev", pv, V.G.S, weight=yv), rf.counts("CC@prev", pv, V.G.S, weight=1 - yv)
+        every = np.ones(V.G.S.shape[0], bool)
+        tpr = wsum(V.G.W, tp_v, every) / wsum(V.G.W, V.G.S @ yv, every)
+        fpr = wsum(V.G.W, fp_v, every) / wsum(V.G.W, V.G.S @ (1 - yv), every)
+        p = T.parts(counts["CC@prev"])
         acc = {"man": adjust(p["man"], tpr, fpr), "news": adjust(p["news"], tpr, fpr),
                "man_l": adjust(p["man_l"], tpr[:, None], fpr[:, None]),
                "news_l": adjust(p["news_l"], tpr[:, None], fpr[:, None])}
-        est_v = V.of(V.G.S @ dec_v)
+        est_v = V.of(tp_v + fp_v)
         for k, c in T.contrasts(acc).items():
             runs[k]["ACC@prev"].append(c)
         for k in VERSIONS:
@@ -165,16 +173,16 @@ def main() -> None:
             out(f"  {SHORT[VALUES[i]]:24s} {gtxt:>22s} " + " ".join(cells))
 
         out()
-        out(f"  Conclusions per estimator (per run, mean over the main system's {len(SEEDS)} runs): of the {gsig[k].sum()} "
+        out(f"  Conclusions per estimator (on the mean of the main system's {len(SEEDS)} runs): of the {gsig[k].sum()} "
             "significant gold differences, how many are found with the right sign, missed or reversed; spurious = significant")
         out("  where gold is not; top/bottom 3 = overlap with gold's three most manifesto- / news-leaning values.")
         out(f"  {'estimator':10s} {'found':>6s} {'missed':>7s} {'reversed':>9s} {'spurious':>9s} {'slope [95% CI]':>20s} "
             f"{'rank rho':>9s} {'MAE pp':>7s} {'top 3':>6s} {'bottom 3':>9s}")
         for e in ESTIMATORS:
-            ms = [summary(c, g, gsig[k]) for c in runs[k][e]]
-            m = {key: np.mean([x[key] for x in ms], axis=0) for key in ms[0]}
-            out(f"  {e:10s} {m['found']:6.1f} {m['missed']:7.1f} {m['reversed']:9.1f} {m['spurious']:9.1f} "
-                f"{ci(m['slope']):>20s} {m['rho']:9.2f} {m['mae']:7.2f} {m['top3']:6.1f} {m['bottom3']:9.1f}")
+            m = summary(avg[k][e], g, gsig[k])
+            ms = runs[k][e]
+            out(f"  {e:10s} {m['found']:6d} {m['missed']:7d} {m['reversed']:9d} {m['spurious']:9d} "
+                f"{ci(m['slope']):>20s} {m['rho']:9.2f} {m['mae']:7.2f} {m['top3']:6d} {m['bottom3']:9d}")
             summ.append({"version": k, "estimator": e, "runs": len(ms), **{key: float(np.ravel(m[key])[0]) for key in m}})
 
         out()

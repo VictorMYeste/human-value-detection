@@ -416,7 +416,7 @@ def table_worked_values() -> None:
         r"Supervised methods: main system, mean of three training runs; LLM: Gemma-2-9B few-shot with the "
         r"presence gate, single run. $^*$ significant (document bootstrap, Benjamini--Hochberg $q < 0.05$ over "
         r"the 19 values); $^\ddagger$ significant with the sign opposite to a significant reference difference. "
-        r"Significance is tested on the mean of the three runs, whereas Table~\ref{tab:worked} counts per run. "
+        r"Significance is tested on the mean of the three runs. "
         r"Values sorted by the reference difference. Fig.~\ref{M-fig:worked} of the article plots four of these columns.",
         size=r"\scriptsize", colsep="3pt"))
 

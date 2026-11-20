@@ -11,7 +11,7 @@ Goal & Recommendation \\
 \addlinespace
 \raggedright Corpus totals & Set each value's threshold so that it is labeled as often as in the annotated sample, or average calibrated probabilities. With 50 annotated documents, totals were within about 5\% here. Both assume that the corpus resembles the sample, and neither makes each group's total right. Do not count with thresholds tuned for macro-F1. \\
 \addlinespace
-\raggedright Group differences, about 20 or more annotated documents per group & Add the classifier's mean error on each group's annotated documents to its count (prediction-powered estimate), or calibrate it on each group's documents. \\
+\raggedright Group differences, about 20 or more annotated documents per group & Average calibrated probabilities in each group and add the classifier's mean error on that group's annotated documents (prediction-powered estimate), or calibrate the classifier on each group's documents. \\
 \addlinespace
 \raggedright Group differences, fewer annotated documents & Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%; genre differences kept their size only because two errors canceled). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind. \\
 \addlinespace

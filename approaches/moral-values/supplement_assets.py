@@ -509,7 +509,7 @@ def table_subsample() -> None:
     cols = [("Corpus total (\\%)", "total_err", ["CC@t*", "CC@prev"], 1),
             ("Languages (\\%)", "lang_total_err", ["CC@prev", "PPI-Platt"], 1),
             ("Language pairs, MAE", "lpair_mae", ["CC@prev", "SC@prev", "PPI-Platt", "Platt-G"], 2),
-            ("Large differences, MAE", "lpair_mae_refsig", ["CC@prev", "SC@prev", "PPI-Platt"], 2),
+            ("Clear differences, MAE", "lpair_mae_refsig", ["CC@prev", "SC@prev", "PPI-Platt"], 2),
             ("Genre, MAE", "genre_mae", ["CC@prev", "PPI-Platt"], 2),
             ("Detected (\\%)", "lpair_detected", ["CC@prev", "SC@prev", "PPI-Platt"], 0)]
     rows = []
@@ -537,7 +537,7 @@ def table_subsample() -> None:
         r"language, the rest in proportion to each language's size) are drawn separately. The last row is the full "
         r"validation split, about 58 documents per language. Corpus total and languages: error of the total value "
         r"mentions, \%, for the corpus and on average over the nine languages. MAE in percentage points over the "
-        r"684 language-pair contrasts, the 126 that are significant in the reference (large differences) and the "
+        r"684 language-pair contrasts, the 126 that are significant in the reference (clear differences) and the "
         r"19 manifesto--news contrasts. Detected: share of the 126 found significant with the reference's sign "
         r"(single test); with 50 resamples, the last row differs by a few points from the 2,000-resample shares of "
         r"Table~\ref{M-tab:measurement} (49\% and 86\%). CC: prevalence-matched thresholds; $t^*$: macro-F1 threshold; SC: slope correction; PPI: "

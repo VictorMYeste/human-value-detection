@@ -669,7 +669,7 @@ def table_detection() -> None:
         r"Share of the significant reference differences that the method also finds significant with the same "
         r"sign. Single: each difference tested on its own ($p < 0.05$). BH: after Benjamini--Hochberg correction "
         r"over the 19 genre or 684 language contrasts ($q < 0.05$). Sign: share estimated with the right sign, "
-        r"significant or not. No method finds a significant difference with the wrong sign.",
+        r"significant or not. After the BH correction, no method finds any of them significant with the wrong sign.",
         size=r"\scriptsize", colsep="2.5pt"))
 
 

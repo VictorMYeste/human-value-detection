@@ -34,6 +34,8 @@ Writes to results/paper/ (the paper's own tables and figures come from paper_ass
     tables/supp-lolo.tex              each language left out of the fit (shift_tests.py)
     tables/supp-composition.tex       language contrasts on value composition
     tables/supp-error-rates.tex       tpr and fpr per value by genre, validation and test
+    tables/supp-group-totals.tex      totals of single groups, also with the group left out of the fit
+    tables/supp-detection.tex         significant reference differences found by each method
     figures/figS1-reliability.pdf     reliability diagram of the main system
     figures/figS2-language-contrasts.pdf   the 684 language contrasts, estimated against reference
 
@@ -263,23 +265,26 @@ def table_comparisons() -> None:
 def table_prevalence() -> None:
     v = pd.read_csv(RES / "measurement-per-value.csv")
     v = v[v.system == MAIN].sort_values("gold_prev", ascending=False)
-    cols = ["CC@0.5", "CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "EM", "SC@prev"]
+    cols = ["CC@0.5", "CC@t*", "CC@prev", "PCC", "PCC-Platt", "ACC@prev", "EM", "Gold-only"]
     rows = []
     for _, r in v.iterrows():
         rows.append(f"{r.value} & {100 * r.gold_prev:.2f} [{100 * r.gold_lo:.2f}, {100 * r.gold_hi:.2f}] & "
-                    + " & ".join(f"{100 * r[c]:.2f}" for c in cols if c != "SC@prev") + r" \\")
+                    + " & ".join(f"{100 * r[c]:.2f}" for c in cols) + r" \\")
     # drop the method name where the group header already gives it ("PCC, raw" -> "raw"); keep "ACC, ..."
     head = " & ".join(re.sub(r"^P?CC, ", "", LABEL[c]).replace("prevalence-matched", "prev.-matched")
-                      for c in cols if c != "SC@prev")
+                      for c in cols)
     write_table("supp-prevalence.tex", table(
         "table*", "Corpus prevalence of each value on the test split: reference and estimates of the main system (\\%)",
-        "tab:prevalence", r"@{}lcccccccc@{}",
+        "tab:prevalence", r"@{}lccccccccc@{}",
         r" & & \multicolumn{3}{c}{Classify and count} & \multicolumn{2}{c}{Probability averages} & "
-        r"\multicolumn{2}{c}{Quantification} \\" "\n" r"\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}"
+        r"\multicolumn{2}{c}{Quantification} & No classifier \\" "\n"
+        r"\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(l){10-10}"
         "\n" rf"Value & Reference [95\% CI] & {head} \\", rows,
         r"Share of test sentences with the value, in percent; estimates are means over three training runs. "
-        r"Values sorted by reference prevalence. SC leaves the corpus total unchanged, so its column equals "
-        r"prevalence-matched classify and count. Fig.~\ref{M-fig:prevalence} of the article plots the ratios of the first three columns."))
+        r"Values sorted by reference prevalence. Annotated share: the value's share of the validation sentences, "
+        r"with no classifier. SC leaves the corpus total unchanged, so it would repeat prevalence-matched classify "
+        r"and count. Fig.~\ref{M-fig:prevalence} of the article plots the ratios of the first three columns.",
+        size=r"\scriptsize", colsep="3pt"))
 
 
 def calibration() -> pd.DataFrame:
@@ -617,6 +622,56 @@ def table_error_rates() -> None:
         size=r"\scriptsize", colsep="3pt"))
 
 
+def table_group_totals() -> None:
+    """Totals of single groups, where prevalence differs from the annotated sample (AE item 1)."""
+    m = pd.read_csv(RES / "measurement-summary.csv").set_index(["system", "rule"])
+    s = pd.read_csv(RES / "shift-tests.csv").set_index(["system", "scenario", "rule"])
+    rows = []
+    for r in ALL_RULES:
+        x = m.loc[(MAIN, r)]
+        lolo = s.loc[(MAIN, "A leave-one-language-out", r)] if (MAIN, "A leave-one-language-out", r) in s.index else None
+        news = s.loc[(MAIN, "B news-only fit", r)] if (MAIN, "B news-only fit", r) in s.index else None
+        rows.append(" & ".join([
+            LABEL[r], f"{x.man_total_err:.1f}", f"{x.news_total_err:.1f}",
+            f"{x.lang_total_err:.1f} ({x.lang_total_err_max:.1f})",
+            "--" if lolo is None else f"{lolo.total_err:.1f} ({lolo.total_err_max:.1f})",
+            "--" if news is None else f"{news.total_err:.1f}"]) + r" \\")
+    write_table("supp-group-totals.tex", table(
+        "table*", "Error of the total value mentions in single groups (main system, \\%)", "tab:group-totals",
+        "@{}lccccc@{}",
+        r" & \multicolumn{3}{c}{Every rule fitted on all validation documents} & "
+        r"\multicolumn{2}{c}{Group left out of the fit} \\" "\n" r"\cmidrule(lr){2-4}\cmidrule(l){5-6}"
+        "\n" r"Method & Manifestos & News & Languages, mean (max) & Left-out language, mean (max) & "
+        r"Manifestos, fitted on news \\", rows,
+        r"Error: estimated over reference value mentions in the group, minus 1, in absolute value. Languages: "
+        r"each of the nine languages, mean and largest error. Left-out language: thresholds, maps, error rates "
+        r"and slopes fitted without the language's validation documents. Manifestos, fitted on news: every rule "
+        r"fitted on news validation documents only. --: not run in that test. Means of three training runs.",
+        size=r"\scriptsize", colsep="3pt"))
+
+
+def table_detection() -> None:
+    """How many of the significant reference differences each method finds (AE item 11)."""
+    m = pd.read_csv(RES / "measurement-summary.csv").set_index(["system", "rule"])
+    rows = []
+    for r in ALL_RULES:
+        x = m.loc[(MAIN, r)]
+        rows.append(" & ".join([LABEL[r], f"{x.genre_detected:.0f}", f"{x.genre_reproduced:.0f}",
+                                f"{x.lpair_detected:.0f}", f"{x.lpair_reproduced:.0f}", f"{x.lpair_sign_ok:.0f}"])
+                    + r" \\")
+    write_table("supp-detection.tex", table(
+        "table", "Significant reference differences found by each method (main system, \\%)", "tab:detection",
+        "@{}lccccc@{}",
+        r" & \multicolumn{2}{c}{Genre (9)} & \multicolumn{3}{c}{Language pairs (126)} \\"
+        "\n" r"\cmidrule(lr){2-3}\cmidrule(l){4-6}"
+        "\n" r"Method & Single & BH & Single & BH & Sign \\", rows,
+        r"Share of the significant reference differences that the method also finds significant with the same "
+        r"sign. Single: each difference tested on its own ($p < 0.05$). BH: after Benjamini--Hochberg correction "
+        r"over the 19 genre or 684 language contrasts ($q < 0.05$). Sign: share estimated with the right sign, "
+        r"significant or not. No method finds a significant difference with the wrong sign.",
+        size=r"\scriptsize", colsep="2.5pt"))
+
+
 def main() -> None:
     FIG.mkdir(parents=True, exist_ok=True)
     TAB.mkdir(parents=True, exist_ok=True)
@@ -635,6 +690,8 @@ def main() -> None:
     table_lolo()
     table_composition()
     table_error_rates()
+    table_group_totals()
+    table_detection()
     print(f"Wrote the supplement's tables and figures to {TAB.parent}")
 
 

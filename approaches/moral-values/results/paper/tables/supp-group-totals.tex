@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\caption{Error of the total value mentions in single groups (main system, \%)}
+\label{tab:group-totals}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Every rule fitted on all validation documents} & \multicolumn{2}{c}{Group left out of the fit} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-6}
+Method & Manifestos & News & Languages, mean (max) & Left-out language, mean (max) & Manifestos, fitted on news \\
+\midrule
+CC, $t = 0.5$ & 36.9 & 39.5 & 35.7 (51.9) & -- & -- \\
+CC, macro-F1 $t^*$ & 26.5 & 27.7 & 35.7 (86.5) & 32.5 (86.1) & 21.8 \\
+CC, per-label F1 $t_j$ & 28.2 & 30.3 & 38.2 (88.3) & -- & -- \\
+CC, prevalence-matched & 0.5 & 1.2 & 16.5 (45.4) & 18.5 (51.2) & 0.8 \\
+PCC, raw & 12.1 & 13.9 & 22.8 (72.3) & 22.8 (72.3) & 12.1 \\
+PCC, Platt & 3.8 & 0.1 & 21.7 (55.7) & 24.2 (63.4) & 6.5 \\
+ACC, $t^*$ & 68.8 & 6.6 & 27.4 (70.6) & -- & -- \\
+ACC, prevalence-matched & 61.8 & 2.8 & 26.9 (74.5) & 30.5 (87.4) & 82.6 \\
+PACC & 100.4 & 12.9 & 31.8 (89.1) & 36.2 (101.1) & 122.8 \\
+EM & 180.3 & 13.6 & 41.4 (141.8) & 47.9 (160.7) & 220.1 \\
+ACC-G, prevalence-matched & 3.6 & 4.7 & 32.1 (78.1) & -- & -- \\
+SC, prevalence-matched & 2.1 & 0.8 & 12.8 (41.4) & 17.9 (44.6) & 16.5 \\
+Annotated share & 8.0 & 1.8 & 6.5 (15.3) & -- & -- \\
+PPI, prevalence-matched & 5.5 & 0.0 & 4.8 (10.3) & -- & -- \\
+PPI, Platt & 8.7 & 2.0 & 3.6 (11.1) & -- & -- \\
+Platt per group & 8.9 & 2.0 & 3.7 (11.7) & -- & -- \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\textwidth}\scriptsize Error: estimated over reference value mentions in the group, minus 1, in absolute value. Languages: each of the nine languages, mean and largest error. Left-out language: thresholds, maps, error rates and slopes fitted without the language's validation documents. Manifestos, fitted on news: every rule fitted on news validation documents only. --: not run in that test. Means of three training runs.\end{minipage}
+\end{table*}

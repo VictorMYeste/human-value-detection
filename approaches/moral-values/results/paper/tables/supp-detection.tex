@@ -1,0 +1,33 @@
+\begin{table}[t]
+\caption{Significant reference differences found by each method (main system, \%)}
+\label{tab:detection}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Genre (9)} & \multicolumn{3}{c}{Language pairs (126)} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-6}
+Method & Single & BH & Single & BH & Sign \\
+\midrule
+CC, $t = 0.5$ & 78 & 78 & 42 & 0 & 90 \\
+CC, macro-F1 $t^*$ & 100 & 89 & 52 & 9 & 96 \\
+CC, per-label F1 $t_j$ & 100 & 67 & 48 & 2 & 96 \\
+CC, prevalence-matched & 89 & 78 & 49 & 1 & 95 \\
+PCC, raw & 89 & 89 & 55 & 33 & 95 \\
+PCC, Platt & 89 & 89 & 58 & 30 & 95 \\
+ACC, $t^*$ & 100 & 67 & 40 & 0 & 95 \\
+ACC, prevalence-matched & 89 & 44 & 37 & 0 & 94 \\
+PACC & 89 & 89 & 46 & 12 & 92 \\
+EM & 89 & 78 & 45 & 17 & 94 \\
+ACC-G, prevalence-matched & 11 & 0 & 10 & 0 & 82 \\
+SC, prevalence-matched & 78 & 78 & 50 & 0 & 95 \\
+Annotated share & 89 & 78 & 74 & 56 & 94 \\
+PPI, prevalence-matched & 78 & 67 & 68 & 36 & 100 \\
+PPI, Platt & 89 & 89 & 86 & 77 & 100 \\
+Platt per group & 89 & 89 & 86 & 76 & 100 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{2pt}
+\begin{minipage}{\columnwidth}\scriptsize Share of the significant reference differences that the method also finds significant with the same sign. Single: each difference tested on its own ($p < 0.05$). BH: after Benjamini--Hochberg correction over the 19 genre or 684 language contrasts ($q < 0.05$). Sign: share estimated with the right sign, significant or not. No method finds a significant difference with the wrong sign.\end{minipage}
+\end{table}

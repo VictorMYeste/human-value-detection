@@ -2,34 +2,35 @@
 \caption{Corpus prevalence of each value on the test split: reference and estimates of the main system (\%)}
 \label{tab:prevalence}
 \centering
-\footnotesize
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccccc@{}}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccccccc@{}}
 \toprule
- & & \multicolumn{3}{c}{Classify and count} & \multicolumn{2}{c}{Probability averages} & \multicolumn{2}{c}{Quantification} \\
-\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}
-Value & Reference [95\% CI] & $t = 0.5$ & macro-F1 $t^*$ & prev.-matched & raw & Platt & ACC, prev.-matched & EM \\
+ & & \multicolumn{3}{c}{Classify and count} & \multicolumn{2}{c}{Probability averages} & \multicolumn{2}{c}{Quantification} & No classifier \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(l){10-10}
+Value & Reference [95\% CI] & $t = 0.5$ & macro-F1 $t^*$ & prev.-matched & raw & Platt & ACC, prev.-matched & EM & Annotated share \\
 \midrule
-Security: societal & 7.90 [6.99, 8.87] & 5.92 & 11.21 & 8.61 & 8.82 & 8.42 & 8.80 & 8.28 \\
-Achievement & 6.25 [5.41, 7.15] & 3.58 & 7.14 & 6.32 & 6.12 & 6.31 & 6.21 & 6.06 \\
-Conformity: rules & 6.25 [5.35, 7.16] & 5.00 & 8.78 & 6.64 & 6.90 & 6.62 & 6.89 & 7.12 \\
-Power: resources & 5.53 [4.66, 6.42] & 3.40 & 7.40 & 5.64 & 5.61 & 5.26 & 7.40 & 6.84 \\
-Universalism: concern & 5.04 [4.31, 5.82] & 3.34 & 6.67 & 5.34 & 5.46 & 4.76 & 6.91 & 5.78 \\
-Power: dominance & 4.33 [3.63, 5.01] & 3.16 & 6.50 & 4.20 & 5.49 & 4.32 & 3.80 & 3.99 \\
-Self-direction: action & 3.51 [3.04, 4.00] & 1.41 & 3.95 & 3.31 & 4.46 & 3.30 & 3.42 & 3.62 \\
-Stimulation & 2.55 [2.11, 3.02] & 1.39 & 3.64 & 2.53 & 3.53 & 2.62 & 1.88 & 1.49 \\
-Security: personal & 2.42 [1.92, 2.97] & 1.41 & 3.08 & 1.89 & 2.74 & 1.97 & 1.91 & 2.35 \\
-Benevolence: caring & 2.22 [1.74, 2.73] & 0.58 & 2.06 & 2.48 & 2.23 & 2.39 & 2.93 & 3.06 \\
-Universalism: nature & 2.01 [1.40, 2.71] & 2.13 & 2.94 & 2.14 & 2.48 & 2.24 & 1.79 & 1.90 \\
-Benevolence: dependability & 1.98 [1.55, 2.43] & 0.66 & 1.74 & 1.65 & 1.96 & 1.76 & 0.85 & 0.66 \\
-Face & 1.83 [1.46, 2.26] & 0.59 & 1.68 & 1.68 & 1.79 & 1.72 & 1.08 & 0.74 \\
-Tradition & 1.34 [0.94, 1.84] & 1.01 & 1.73 & 1.34 & 1.56 & 1.57 & 0.73 & 1.06 \\
-Conformity: interpersonal & 1.34 [1.03, 1.68] & 0.34 & 1.67 & 1.43 & 2.03 & 1.33 & 1.67 & 0.79 \\
-Self-direction: thought & 1.17 [0.93, 1.44] & 0.14 & 0.96 & 1.02 & 1.71 & 1.07 & 0.19 & 0.00 \\
-Universalism: tolerance & 1.17 [0.81, 1.63] & 0.54 & 1.42 & 1.00 & 1.43 & 0.92 & 1.52 & 1.72 \\
-Hedonism & 0.86 [0.59, 1.18] & 0.63 & 1.28 & 1.05 & 1.23 & 0.81 & 1.99 & 1.58 \\
-Humility & 0.21 [0.12, 0.31] & 0.00 & 0.01 & 0.23 & 0.30 & 0.28 & 0.00 & 0.00 \\
+Security: societal & 7.90 [6.99, 8.87] & 5.92 & 11.21 & 8.61 & 8.82 & 8.42 & 8.80 & 8.28 & 8.46 \\
+Achievement & 6.25 [5.41, 7.15] & 3.58 & 7.14 & 6.32 & 6.12 & 6.31 & 6.21 & 6.06 & 6.37 \\
+Conformity: rules & 6.25 [5.35, 7.16] & 5.00 & 8.78 & 6.64 & 6.90 & 6.62 & 6.89 & 7.12 & 6.41 \\
+Power: resources & 5.53 [4.66, 6.42] & 3.40 & 7.40 & 5.64 & 5.61 & 5.26 & 7.40 & 6.84 & 4.86 \\
+Universalism: concern & 5.04 [4.31, 5.82] & 3.34 & 6.67 & 5.34 & 5.46 & 4.76 & 6.91 & 5.78 & 4.50 \\
+Power: dominance & 4.33 [3.63, 5.01] & 3.16 & 6.50 & 4.20 & 5.49 & 4.32 & 3.80 & 3.99 & 4.40 \\
+Self-direction: action & 3.51 [3.04, 4.00] & 1.41 & 3.95 & 3.31 & 4.46 & 3.30 & 3.42 & 3.62 & 3.26 \\
+Stimulation & 2.55 [2.11, 3.02] & 1.39 & 3.64 & 2.53 & 3.53 & 2.62 & 1.88 & 1.49 & 2.82 \\
+Security: personal & 2.42 [1.92, 2.97] & 1.41 & 3.08 & 1.89 & 2.74 & 1.97 & 1.91 & 2.35 & 1.86 \\
+Benevolence: caring & 2.22 [1.74, 2.73] & 0.58 & 2.06 & 2.48 & 2.23 & 2.39 & 2.93 & 3.06 & 2.30 \\
+Universalism: nature & 2.01 [1.40, 2.71] & 2.13 & 2.94 & 2.14 & 2.48 & 2.24 & 1.79 & 1.90 & 2.57 \\
+Benevolence: dependability & 1.98 [1.55, 2.43] & 0.66 & 1.74 & 1.65 & 1.96 & 1.76 & 0.85 & 0.66 & 1.93 \\
+Face & 1.83 [1.46, 2.26] & 0.59 & 1.68 & 1.68 & 1.79 & 1.72 & 1.08 & 0.74 & 1.90 \\
+Tradition & 1.34 [0.94, 1.84] & 1.01 & 1.73 & 1.34 & 1.56 & 1.57 & 0.73 & 1.06 & 1.84 \\
+Conformity: interpersonal & 1.34 [1.03, 1.68] & 0.34 & 1.67 & 1.43 & 2.03 & 1.33 & 1.67 & 0.79 & 1.37 \\
+Self-direction: thought & 1.17 [0.93, 1.44] & 0.14 & 0.96 & 1.02 & 1.71 & 1.07 & 0.19 & 0.00 & 1.15 \\
+Universalism: tolerance & 1.17 [0.81, 1.63] & 0.54 & 1.42 & 1.00 & 1.43 & 0.92 & 1.52 & 1.72 & 0.81 \\
+Hedonism & 0.86 [0.59, 1.18] & 0.63 & 1.28 & 1.05 & 1.23 & 0.81 & 1.99 & 1.58 & 0.67 \\
+Humility & 0.21 [0.12, 0.31] & 0.00 & 0.01 & 0.23 & 0.30 & 0.28 & 0.00 & 0.00 & 0.29 \\
 \bottomrule
 \end{tabular*}
 \par\vspace{2pt}
-\begin{minipage}{\textwidth}\scriptsize Share of test sentences with the value, in percent; estimates are means over three training runs. Values sorted by reference prevalence. SC leaves the corpus total unchanged, so its column equals prevalence-matched classify and count. Fig.~\ref{M-fig:prevalence} of the article plots the ratios of the first three columns.\end{minipage}
+\begin{minipage}{\textwidth}\scriptsize Share of test sentences with the value, in percent; estimates are means over three training runs. Values sorted by reference prevalence. Annotated share: the value's share of the validation sentences, with no classifier. SC leaves the corpus total unchanged, so it would repeat prevalence-matched classify and count. Fig.~\ref{M-fig:prevalence} of the article plots the ratios of the first three columns.\end{minipage}
 \end{table*}

@@ -213,9 +213,11 @@ def table1_data() -> None:
         y = (g[VALUES].to_numpy() >= 0.5).astype(int)
         docs = g["Text-ID"].drop_duplicates()
         man = docs.str.contains("_M_").sum()
-        rows[label] = [f"{len(docs) - man:,} / {man:,}", f"{len(g):,}", f"{y.any(1).mean() * 100:.1f}",
-                       f"{y.sum(1).mean():.2f}"]
-    names = ["Documents (news / manifestos)", "Sentences", r"Sentences with $\geq$1 value (\%)", "Value mentions per sentence"]
+        man_sent = g["Text-ID"].str.contains("_M_").sum()
+        rows[label] = [f"{len(docs) - man:,} / {man:,}", f"{len(g):,}", f"{man_sent:,}",
+                       f"{y.any(1).mean() * 100:.1f}", f"{y.sum(1).mean():.2f}"]
+    names = ["Documents (news / manifestos)", "Sentences", r"\quad in manifestos", r"Sentences with $\geq$1 value (\%)",
+             "Value mentions per sentence"]
     lines = [f"{n} & " + " & ".join(rows[s][k] for s in rows) + r" \\" for k, n in enumerate(names)]
     write_table("tab1-data.tex", r"""
 \begin{table}[t]
@@ -311,7 +313,7 @@ System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t
 
 def table3_measurement(summary: pd.DataFrame) -> None:
     """Main system only (step 5.2 E): accuracy (MAE) and coverage for totals and both families of contrasts,
-    with the estimators that use each group's annotated documents. LLM rows are in Table S13."""
+    with the estimators that use each group's annotated documents. LLM rows are in Table S19."""
     def excl1(v, lo, hi):
         return f"{v:.2f}" + (r"$^\dagger$" if lo > 1 or hi < 1 else "")
 

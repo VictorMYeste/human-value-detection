@@ -277,7 +277,7 @@ def table_prevalence() -> None:
         "table*", "Corpus prevalence of each value on the test split: reference and estimates of the main system (\\%)",
         "tab:prevalence", r"@{}lccccccccc@{}",
         r" & & \multicolumn{3}{c}{Classify and count} & \multicolumn{2}{c}{Probability averages} & "
-        r"\multicolumn{2}{c}{Quantification} & No classifier \\" "\n"
+        r"\multicolumn{2}{c}{Adjusted counts} & No classifier \\" "\n"
         r"\cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(l){10-10}"
         "\n" rf"Value & Reference [95\% CI] & {head} \\", rows,
         r"Share of test sentences with the value, in percent; estimates are means over three training runs. "
@@ -377,8 +377,8 @@ def table_systems() -> None:
         "\n" r"Method & " + " & ".join(["Ratio", "G.\\ slope", "G.\\ cover", "L.\\ slope", "L.\\ cover"] * 3) + r" \\",
         rows,
         r"Ratio: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. G.: the 19 manifesto--news "
-        r"contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope, not shown for the estimates from "
-        r"each group's annotated documents (Section~\ref{M-sec:metrics} of the article). " + COVER_NOTE + r" DeBERTa "
+        r"contrasts; L.: the 684 language-pair contrasts. Slope: attenuation slope, not shown for per-group "
+        r"estimates (Section~\ref{M-sec:metrics} of the article). " + COVER_NOTE + r" DeBERTa "
         r"and RoBERTa: means of three training runs; seed ensemble: one system. The main system is in "
         r"Table~\ref{M-tab:measurement} of the article.",
         size=r"\scriptsize", colsep="2.5pt"))
@@ -539,7 +539,8 @@ def table_subsample() -> None:
         r"mentions, \%, for the corpus and on average over the nine languages. MAE in percentage points over the "
         r"684 language-pair contrasts, the 126 that are significant in the reference (large differences) and the "
         r"19 manifesto--news contrasts. Detected: share of the 126 found significant with the reference's sign "
-        r"(single test). CC: prevalence-matched thresholds; $t^*$: macro-F1 threshold; SC: slope correction; PPI: "
+        r"(single test); with 50 resamples, the last row differs by a few points from the 2,000-resample shares of "
+        r"Table~\ref{M-tab:measurement} (49\% and 86\%). CC: prevalence-matched thresholds; $t^*$: macro-F1 threshold; SC: slope correction; PPI: "
         r"prediction-powered estimate with Platt-scaled probabilities; P-G: Platt per group.",
         size=r"\scriptsize", colsep="3pt"))
 

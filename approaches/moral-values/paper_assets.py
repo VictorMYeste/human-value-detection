@@ -165,8 +165,8 @@ def figure4_worked(values: pd.DataFrame) -> None:
     gold = v[v["estimator"] == "gold"].set_index("value")
     order = gold["diff_pp"].sort_values(ascending=False).index.tolist()
     y = np.arange(len(order))[::-1].astype(float)
-    panels = [("CC@t*", "(a) Macro-F1 threshold"), ("CC@prev", "(b) Prevalence-matched"),
-              ("PCC-Platt", "(c) Calibrated prob."), ("LLM", "(d) LLM labels")]
+    panels = [("CC@t*", "(a) CC, macro-F1 $t^*$"), ("CC@prev", "(b) CC, prevalence-matched"),
+              ("PCC-Platt", "(c) PCC, Platt"), ("LLM", "(d) LLM labels")]
     fig, axes = new_figure(PAGE_W, 3.25, 1, 4, sharey=True, sharex=True)
     for ax, (est, title) in zip(axes, panels):
         e = v[v["estimator"] == est].set_index("value")
@@ -301,7 +301,7 @@ def classification_table(llm: pd.DataFrame, systems: list[str], filename: str, l
 \toprule
  & \multicolumn{4}{c}{Macro-F1 by decision rule} & \multicolumn{2}{c}{Predicted / reference mentions} \\
 \cmidrule(lr){2-5}\cmidrule(l){6-7}
-System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t_j$ & at $t^*$ & prev.-matched \\
+System & $t = 0.5$ & Macro-F1 $t^*$ & Per-label F1 $t_j$ & Prevalence-matched $t^{\mathrm{prev}}$ & at $t^*$ & prev.-matched \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
@@ -320,27 +320,26 @@ def table3_measurement(summary: pd.DataFrame) -> None:
     def slope_cell(v, lo, hi):
         return "--" if pd.isna(v) else f"{v:.2f} [{lo:.2f}, {hi:.2f}]"
 
-    def f1(v):
-        return "--" if pd.isna(v) else f"{v:.3f}"
-
-    groups = [("Decision rules (classify and count)", ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]),
-              ("Probability averages", ["PCC", "PCC-Platt"]),
-              ("Quantification methods", ["ACC@t*", "ACC@prev", "PACC", "EM", "ACC-G@prev"]),
-              ("Slope correction", ["SC@prev"]),
-              ("Estimates from each group's annotated documents", ["Gold-only", "PPI@prev", "PPI-Platt", "Platt-G"])]
-    lines = []
+    groups = [("1. Classify and count", ["CC@0.5", "CC@t*", "CC@label-t*", "CC@prev"]),
+              ("2. Probability averages", ["PCC", "PCC-Platt"]),
+              ("3. Adjusted counts", ["ACC@t*", "ACC@prev", "PACC", "EM", "ACC-G@prev"]),
+              ("4. Slope correction", ["SC@prev"]),
+              ("5. Per-group estimates, from each group's annotated documents", ["Gold-only", "PPI@prev", "PPI-Platt",
+                                                                                  "Platt-G"])]
+    lines = [r"\emph{Target} & 1 & 0 & $\approx$95 & 1 & 0 & $\approx$95 & 1 & 0 & $\approx$95 & 100 \\",
+             r"\midrule"]
     for title, rules in groups:
         lines.append(f"\\multicolumn{{11}}{{@{{}}l}}{{\\emph{{{title}}}}}" + r" \\")
         for r in rules:
             m = summary.loc[(MAIN, r)]
             name = f"\\textbf{{{LABEL[r]}}}" if r in RECOMMENDED else LABEL[r]
             lines.append(" & ".join([
-                r"\quad " + name, f1(m.macro_f1), excl1(m.ratio, m.ratio_lo, m.ratio_hi), f"{m.prev_mae:.2f}",
+                r"\quad " + name, excl1(m.ratio, m.ratio_lo, m.ratio_hi), f"{m.prev_mae:.2f}",
                 f"{m.prev_cover:.0f}",
                 slope_cell(m.genre_slope, m.genre_slope_lo, m.genre_slope_hi), f"{m.genre_mae:.2f}",
                 f"{m.genre_cover:.0f}",
                 slope_cell(m.lpair_slope, m.lpair_slope_lo, m.lpair_slope_hi), f"{m.lpair_mae:.2f}",
-                f"{m.lpair_cover:.0f}"]) + r" \\")
+                f"{m.lpair_cover:.0f}", f"{m.lpair_detected:.0f}"]) + r" \\")
     write_table("tab3-measurement.tex", r"""
 \begin{table*}[t]
 \caption{Measurement: corpus prevalence of the 19 values, manifesto--news contrasts (19) and source-language pair contrasts (684), main system}
@@ -350,13 +349,13 @@ def table3_measurement(summary: pd.DataFrame) -> None:
 \setlength{\tabcolsep}{3pt}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccccccc@{}}
 \toprule
- & & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{3}{c}{Manifesto vs.\ news} & \multicolumn{3}{c}{Language pairs} \\
-\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(l){9-11}
-Method & Macro-F1 & Pred./ref. & MAE & Cover & Slope [95\% CI] & MAE & Cover & Slope [95\% CI] & MAE & Cover \\
+ & \multicolumn{3}{c}{Corpus prevalence} & \multicolumn{3}{c}{Manifesto vs.\ news} & \multicolumn{4}{c}{Language pairs} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(l){8-11}
+Method & Pred./ref. & MAE & Cover & Slope [95\% CI] & MAE & Cover & Slope [95\% CI] & MAE & Cover & Det. \\
 \midrule
 """ + "\n".join(lines) + r"""
 \bottomrule
-\multicolumn{11}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. MAE: mean absolute error in percentage points, over the 19 values or the contrasts. Cover: share of values or contrasts (\%) whose error is within sampling noise (paired document bootstrap, $p \geq 0.05$), about 95 for an unbiased method. Slope: attenuation slope (Section~\ref{sec:attenuation}, 1 = differences keep their size), not shown for estimates from other annotated documents (Section~\ref{sec:metrics}). LLM labels: Table~\ref{S-tab:llm} of the supplement.}
+\multicolumn{11}{@{}p{0.98\textwidth}@{}}{\scriptsize Main system: feature ensemble, metrics computed on the mean of three training runs. Bold: methods recommended in Table~\ref{tab:recommendations}. Target: the value of an accurate method. Pred./ref.: estimated over reference value mentions, $^\dagger$ 95\% CI excludes 1. MAE: mean absolute error in percentage points, over the 19 values or the contrasts. Cover: share of values or contrasts (\%) whose error is within sampling noise (paired document bootstrap, $p \geq 0.05$), about 95 for an unbiased method and higher for a noisy one, so it is read with the MAE. Slope: attenuation slope (Section~\ref{sec:attenuation}, 1 = differences keep their size), not shown for per-group estimates (Section~\ref{sec:metrics}). Det.: share (\%) of the 126 language contrasts that are significant in the reference that the method detects (single test; after correction for multiple tests in Table~\ref{S-tab:detection} of the supplement). Macro-F1: Table~\ref{tab:classification}. LLM labels: Table~\ref{S-tab:llm} of the supplement.}
 \end{tabular*}
 \end{table*}
 """)
@@ -390,13 +389,41 @@ Method & Found & Missed & Rev. & Spur. & Slope & MAE \\
 """)
 
 
+def table_families() -> None:
+    """The five families of estimators, in plain words (Section V-C; step 5.2 E5, readability check)."""
+    rows = [
+        (r"1. Classify and count (CC)", r"Label each sentence with one of the four rules of Section~\ref{sec:rules} and count the labels.", "No"),
+        (r"2. Probability averages (PCC)", r"Average the probabilities, raw or after Platt scaling on validation data.", "No"),
+        (r"3. Adjusted counts (ACC, PACC, EM, ACC-G)", r"Undo the classifier's error rates, measured on validation data, in each group for ACC-G.", "ACC-G"),
+        (r"4. Slope correction (SC)", r"Divide each contrast by the shrinkage measured on validation contrasts of the same kind.", "No"),
+        (r"5. Per-group estimates (annotated share, PPI, Platt per group)", r"Use each group's annotated documents, alone or to correct the classifier's estimate.", "Yes"),
+    ]
+    lines = [r"\raggedright " + f"{a} & {b} & {c}" + r" \\" for a, b, c in rows]
+    write_table("tab-families.tex", r"""
+\begin{table}[t]
+\caption{Five families of methods for estimating prevalence from a classifier}
+\label{tab:families}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.31\columnwidth}p{0.43\columnwidth}c@{}}
+\toprule
+Family (labels in the tables) & How it estimates & Each group \\
+\midrule
+""" + "\n\\addlinespace\n".join(lines) + r"""
+\bottomrule
+\multicolumn{3}{@{}p{0.96\columnwidth}@{}}{\scriptsize Each group: whether the method needs annotated documents from every group compared.}
+\end{tabular}
+\end{table}
+""")
+
+
 def table5_recommendations() -> None:
     # step 5.2 E: from the results of steps B-D (annotated-sample estimators, subsampling, LLM checks)
     rows = [
         ("Any analysis", r"Report how the thresholds were chosen, and on how many annotated documents from which groups."),
         ("Corpus totals", r"Set each value's threshold so that it is labeled as often as in the annotated sample, or average calibrated probabilities. With 50 annotated documents, totals were within about 5\% here. Both assume that the corpus resembles the sample, and neither makes each group's total right. Do not count with thresholds tuned for macro-F1."),
         ("Group differences, about 20 or more annotated documents per group", r"Add the classifier's mean error on each group's annotated documents to its count (prediction-powered estimate), or calibrate it on each group's documents."),
-        ("Group differences, fewer annotated documents", r"Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind."),
+        ("Group differences, fewer annotated documents", r"Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%; genre differences kept their size only because two errors canceled). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind."),
         ("Group differences, to avoid", r"Calibrated averages, which shrink differences. Adjusted counts, which inflate them when the classifier's error rates differ between groups, and are too noisy with error rates measured in each group."),
         ("LLM labels", r"Check them against annotated documents from each group before counting. Here no correction brought their differences as close to the expert labels as the classifier's counts."),
     ]
@@ -432,6 +459,7 @@ def main() -> None:
     table2_classification(llm)
     table3_measurement(summary)
     table4_worked(worked_summary, worked_values)
+    table_families()
     table5_recommendations()
     print(f"Wrote {len(list(FIG.glob('*.pdf')))} figures to {FIG} and {len(list(TAB.glob('*.tex')))} tables to {TAB}")
 

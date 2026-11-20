@@ -1,0 +1,22 @@
+\begin{table}[t]
+\caption{Five families of methods for estimating prevalence from a classifier}
+\label{tab:families}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.31\columnwidth}p{0.43\columnwidth}c@{}}
+\toprule
+Family (labels in the tables) & How it estimates & Each group \\
+\midrule
+\raggedright 1. Classify and count (CC) & Label each sentence with one of the four rules of Section~\ref{sec:rules} and count the labels. & No \\
+\addlinespace
+\raggedright 2. Probability averages (PCC) & Average the probabilities, raw or after Platt scaling on validation data. & No \\
+\addlinespace
+\raggedright 3. Adjusted counts (ACC, PACC, EM, ACC-G) & Undo the classifier's error rates, measured on validation data, in each group for ACC-G. & ACC-G \\
+\addlinespace
+\raggedright 4. Slope correction (SC) & Divide each contrast by the shrinkage measured on validation contrasts of the same kind. & No \\
+\addlinespace
+\raggedright 5. Per-group estimates (annotated share, PPI, Platt per group) & Use each group's annotated documents, alone or to correct the classifier's estimate. & Yes \\
+\bottomrule
+\multicolumn{3}{@{}p{0.96\columnwidth}@{}}{\scriptsize Each group: whether the method needs annotated documents from every group compared.}
+\end{tabular}
+\end{table}

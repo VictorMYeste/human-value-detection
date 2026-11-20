@@ -13,7 +13,7 @@ Goal & Recommendation \\
 \addlinespace
 \raggedright Group differences, about 20 or more annotated documents per group & Add the classifier's mean error on each group's annotated documents to its count (prediction-powered estimate), or calibrate it on each group's documents. \\
 \addlinespace
-\raggedright Group differences, fewer annotated documents & Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind. \\
+\raggedright Group differences, fewer annotated documents & Count with prevalence-matched thresholds, and report that differences may be too small (here, those between languages by about 40\%; genre differences kept their size only because two errors canceled). Dividing them by the shrinkage measured on validation data (slope correction) restores their average size but makes single differences less accurate. Take the slope from comparisons of the same kind. \\
 \addlinespace
 \raggedright Group differences, to avoid & Calibrated averages, which shrink differences. Adjusted counts, which inflate them when the classifier's error rates differ between groups, and are too noisy with error rates measured in each group. \\
 \addlinespace

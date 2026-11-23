@@ -1,0 +1,116 @@
+
+=== HO detection: test macro-F1 by rule (thresholds fitted on validation; * = paper's rule)
+                                                                0.5   f.30  f.40*   f.50  lblF1  glbF1
+unit                                    system                                                        
+Growth vs. Self-Protection              Baseline              0.582  0.567  0.579  0.590  0.592  0.589
+Social Focus vs. Personal Focus         Baseline              0.415  0.454  0.428  0.388  0.464  0.457
+                                        Lex-LIWC-22           0.038  0.449  0.385  0.163  0.474  0.475
+                                        Lex-LIWC              0.545  0.558  0.565  0.553  0.571  0.573
+                                        Lex-Schwartz          0.553  0.550  0.562  0.555  0.573  0.575
+                                        Lex-WorryWords        0.551  0.553  0.567  0.559  0.576  0.578
+                                        NER                   0.551  0.556  0.566  0.557  0.574  0.573
+                                        Previous-Sentences-2  0.544  0.556  0.559  0.551  0.565  0.565
+                                        TD-BERTopic           0.553  0.546  0.561  0.561  0.574  0.574
+                                        TD-NMF                0.555  0.550  0.562  0.561  0.574  0.576
+Openness vs. Conservation               Baseline              0.416  0.412  0.376  0.424  0.425  0.426
+                                        Lex-LIWC-22_LingFeat  0.421  0.422  0.389  0.425  0.432  0.428
+Self-Transcendence vs. Self-Enhancement Baseline              0.477  0.481  0.500  0.456  0.503  0.494
+                                        Lex-WorryWords        0.472  0.495  0.505  0.469  0.504  0.504
+                                        TD-BERTopic           0.478  0.487  0.504  0.467  0.509  0.506
+                                        Lex-MFD-20            0.481  0.490  0.506  0.471  0.506  0.505
+
+--- HO detection: labels that fell back to 0.5 (no threshold reached the precision floor)
+                                                              f.30  f.40*  f.50  labels
+unit                                    system                                         
+Growth vs. Self-Protection              Baseline               0.0    0.0   0.0       2
+Social Focus vs. Personal Focus         Baseline               0.0    0.0   1.0       2
+                                        Lex-LIWC-22            0.0    0.0   0.0       2
+                                        Lex-LIWC               0.0    0.0   0.0       2
+                                        Lex-Schwartz           0.0    0.0   0.0       2
+                                        Lex-WorryWords         0.0    0.0   0.0       2
+                                        NER                    0.0    0.0   0.0       2
+                                        Previous-Sentences-2   0.0    0.0   0.0       2
+                                        TD-BERTopic            0.0    0.0   0.0       2
+                                        TD-NMF                 0.0    0.0   0.0       2
+Openness vs. Conservation               Baseline               0.0    0.0   1.0       2
+                                        Lex-LIWC-22_LingFeat   0.0    0.0   1.0       2
+Self-Transcendence vs. Self-Enhancement Baseline               0.0    0.0   0.0       2
+                                        Lex-WorryWords         0.0    0.0   0.0       2
+                                        TD-BERTopic            0.0    0.0   0.0       2
+                                        Lex-MFD-20             0.0    0.0   0.0       2
+
+--- HO detection: each rule against 'fixed 0.5' (one-sided paired bootstrap, BH within family)
+                   systems  mean_delta  higher  sig_better  sig_worse
+rule                                                                 
+Eq. 8, floor 0.30       16      0.0307      11           5          1
+Eq. 8, floor 0.40       16      0.0300      13          12          2
+Eq. 8, floor 0.50       16      0.0072      11          10          4
+label F1                16      0.0490      16          16          0
+global F1               16      0.0479      16          16          0
+
+--- HO detection: each rule against 'Eq. 8, floor 0.40' (one-sided paired bootstrap, BH within family)
+                   systems  mean_delta  higher  sig_better  sig_worse
+rule                                                                 
+fixed 0.5               16     -0.0300       3           2         11
+Eq. 8, floor 0.30       16      0.0006       4           4         12
+Eq. 8, floor 0.50       16     -0.0229       3           3         11
+label F1                16      0.0190      15          12          0
+global F1               16      0.0178      13          12          1
+
+=== Value detection: test macro-F1 by rule (thresholds fitted on validation; * = paper's rule)
+                                                                      0.5   f.30  f.40*   f.50  lblF1  glbF1
+unit               system                                                                                   
+Growth             Direct                                           0.251  0.259  0.209  0.181  0.291  0.288
+                   Gated (1_Baseline_0.5_Baseline)                  0.263  0.262  0.264  0.263  0.268  0.271
+Self-Protection    Direct                                           0.292  0.307  0.290  0.259  0.322  0.321
+                   Gated (1_Baseline_0.5_Baseline)                  0.294  0.281  0.272  0.293  0.308  0.306
+Social Focus       Direct                                           0.294  0.298  0.273  0.253  0.337  0.330
+                   Gated (1_TD-NMF_0.5_Lex-MJD)                     0.303  0.304  0.292  0.271  0.320  0.326
+Personal Focus     Direct                                           0.267  0.284  0.232  0.197  0.290  0.297
+                   Gated (1_NER_0.19_Lex-MJD)                       0.283  0.285  0.283  0.283  0.281  0.287
+Openness           Direct                                           0.224  0.213  0.159  0.142  0.239  0.245
+                   Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA)    0.235  0.231  0.235  0.235  0.230  0.229
+Conservation       Direct                                           0.277  0.279  0.283  0.265  0.301  0.301
+                   Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz)  0.297  0.281  0.297  0.297  0.292  0.293
+Self-Transcendence Direct                                           0.254  0.270  0.214  0.190  0.310  0.302
+                   Gated (1_Lex-MFD-20_0.5_Baseline)                0.298  0.297  0.296  0.296  0.294  0.307
+Self-Enhancement   Direct                                           0.292  0.332  0.277  0.216  0.322  0.336
+                   Gated (1_Lex-WorryWords_0.23_Lex-Schwartz)       0.319  0.316  0.319  0.319  0.317  0.319
+
+--- Value detection: labels that fell back to 0.5 (no threshold reached the precision floor)
+                                                                    f.30  f.40*  f.50  labels
+unit               system                                                                    
+Growth             Direct                                            1.0    1.0   3.0      11
+                   Gated (1_Baseline_0.5_Baseline)                   4.0    9.0  10.0      11
+Self-Protection    Direct                                            2.0    3.0   4.0      10
+                   Gated (1_Baseline_0.5_Baseline)                   1.0    4.0   8.0      10
+Social Focus       Direct                                            2.0    2.0   3.0      10
+                   Gated (1_TD-NMF_0.5_Lex-MJD)                      1.0    4.0   5.0      10
+Personal Focus     Direct                                            0.0    1.0   3.0       9
+                   Gated (1_NER_0.19_Lex-MJD)                        6.0    9.0   9.0       9
+Openness           Direct                                            0.0    0.0   1.0       4
+                   Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA)     2.0    4.0   4.0       4
+Conservation       Direct                                            2.0    3.0   3.0       7
+                   Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz)   3.0    7.0   7.0       7
+Self-Transcendence Direct                                            1.0    1.0   2.0       6
+                   Gated (1_Lex-MFD-20_0.5_Baseline)                 4.0    5.0   5.0       6
+Self-Enhancement   Direct                                            0.0    0.0   1.0       5
+                   Gated (1_Lex-WorryWords_0.23_Lex-Schwartz)        0.0    5.0   5.0       5
+
+--- Value detection: each rule against 'fixed 0.5' (one-sided paired bootstrap, BH within family)
+                   systems  mean_delta  higher  sig_better  sig_worse
+rule                                                                 
+Eq. 8, floor 0.30       16      0.0036       9           4          2
+Eq. 8, floor 0.40       16     -0.0155       2           0          9
+Eq. 8, floor 0.50       16     -0.0301       1           0         10
+label F1                16      0.0175      11           9          0
+global F1               16      0.0197      14          10          0
+
+--- Value detection: each rule against 'Eq. 8, floor 0.40' (one-sided paired bootstrap, BH within family)
+                   systems  mean_delta  higher  sig_better  sig_worse
+rule                                                                 
+fixed 0.5               16      0.0155      10           9          0
+Eq. 8, floor 0.30       16      0.0191      11           8          1
+Eq. 8, floor 0.50       16     -0.0146       1           1          8
+label F1                16      0.0330      11          10          0
+global F1               16      0.0352      14          11          0

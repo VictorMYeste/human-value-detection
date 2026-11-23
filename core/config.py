@@ -630,6 +630,23 @@ MODEL_CONFIG = {
     }
 }
 
+# Multi-task variant of "moral_values" (Array revision of the HO paper): one shared
+# encoder trained on the 19 values plus the 8 higher-order categories, so the HO labels
+# act as an auxiliary objective. Only the 19 values are evaluated.
+MODEL_CONFIG["moral_values_ho_aux"] = {
+    **MODEL_CONFIG["moral_values"],
+    "labels": MODEL_CONFIG["moral_values"]["labels"] + [
+        "Openness to Change",
+        "Self-Enhancement",
+        "Conservation",
+        "Self-Transcendence",
+        "Social Focus",
+        "Personal Focus",
+        "Growth Anxiety-Free",
+        "Self-Protection Anxiety-Avoidance"
+    ],
+}
+
 SCHWARTZ_VALUE_LEXICON = {
     "Power": [
         "power", "powers", "strength", "strengths", "control", "controls", 

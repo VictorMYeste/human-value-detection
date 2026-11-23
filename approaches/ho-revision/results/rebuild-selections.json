@@ -1,0 +1,34 @@
+{
+  "ho_detector": {
+    "Growth vs. Self-Protection": "Baseline",
+    "Social Focus vs. Personal Focus": "TD-NMF",
+    "Openness vs. Conservation": "Lex-LIWC-22_LingFeat",
+    "Self-Transcendence vs. Self-Enhancement": "TD-BERTopic"
+  },
+  "presence_cascade": {
+    "Growth vs. Self-Protection": "1_Baseline_0.5_Baseline",
+    "Social Focus vs. Personal Focus": "1_Baseline_0.5_Lex-LIWC",
+    "Openness vs. Conservation": "1_Baseline_0.5_Lex-VAD",
+    "Self-Transcendence vs. Self-Enhancement": "1_Baseline_0.5_Lex-WorryWords"
+  },
+  "direct": {
+    "Growth": "Previous-Sentences-2",
+    "Self-Protection": "Previous-Sentences-2",
+    "Social Focus": "Previous-Sentences-2",
+    "Personal Focus": "Lex-MJD",
+    "Openness": "Lex-MJD",
+    "Conservation": "Previous-Sentences-2",
+    "Self-Transcendence": "Previous-Sentences-2",
+    "Self-Enhancement": "Lex-MJD"
+  },
+  "ho_gated": {
+    "Growth": "1_Baseline_0.5_Baseline",
+    "Self-Protection": "1_Baseline_0.1_Baseline",
+    "Social Focus": "1_NER_0.1_Lex-Schwartz",
+    "Personal Focus": "1_Lex-LIWC_0.17_Baseline",
+    "Openness": "1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA",
+    "Conservation": "1_Lex-LIWC-22_LingFeat_0.1_TD-LDA",
+    "Self-Transcendence": "1_Lex-WorryWords_0.16_Lex-MFD",
+    "Self-Enhancement": "1_TD-BERTopic_0.29_Lex-Schwartz"
+  }
+}

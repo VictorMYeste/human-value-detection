@@ -1,0 +1,321 @@
+task,unit,system,baseline,rule,delta,lower95,p,p_worse,p_bh,p_worse_bh
+HO detection,Growth vs. Self-Protection,Baseline,fixed 0.5,"Eq. 8, floor 0.30",-0.014425694811902923,-0.020796757936477662,1.0,0.0,1.0,0.0
+HO detection,Growth vs. Self-Protection,Baseline,fixed 0.5,"Eq. 8, floor 0.40",-0.002768071340776057,-0.008726325631141663,0.764,0.236,0.8973913043478261,1.0
+HO detection,Growth vs. Self-Protection,Baseline,fixed 0.5,"Eq. 8, floor 0.50",0.007769930921801893,0.004076918959617615,0.0005,0.9995,0.0009090909090909091,1.0
+HO detection,Growth vs. Self-Protection,Baseline,fixed 0.5,label F1,0.010219817362209005,0.006414875388145447,0.0,1.0,0.0,1.0
+HO detection,Growth vs. Self-Protection,Baseline,fixed 0.5,global F1,0.007106064260787082,0.002056628465652466,0.0095,0.9905,0.014339622641509434,1.0
+HO detection,Growth vs. Self-Protection,Baseline,"Eq. 8, floor 0.40",fixed 0.5,0.002768071340776057,-0.003428620100021362,0.236,0.764,0.5102702702702703,1.0
+HO detection,Growth vs. Self-Protection,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.011657623471126866,-0.013807559013366699,1.0,0.0,1.0,0.0
+HO detection,Growth vs. Self-Protection,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.01053800226257795,0.005808901786804199,0.0,1.0,0.0,1.0
+HO detection,Growth vs. Self-Protection,Baseline,"Eq. 8, floor 0.40",label F1,0.012987888702985062,0.008414831757545472,0.0,1.0,0.0,1.0
+HO detection,Growth vs. Self-Protection,Baseline,"Eq. 8, floor 0.40",global F1,0.009874135601563139,0.006524911522865296,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,fixed 0.5,"Eq. 8, floor 0.30",0.03885902287151749,0.03347291648387909,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,fixed 0.5,"Eq. 8, floor 0.40",0.013320412921511648,0.00973299890756607,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,fixed 0.5,"Eq. 8, floor 0.50",-0.026626798460098577,-0.030655477941036225,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Baseline,fixed 0.5,label F1,0.04859487822374742,0.04201491475105286,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,fixed 0.5,global F1,0.0425689194367328,0.0366515576839447,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,"Eq. 8, floor 0.40",fixed 0.5,-0.013320412921511648,-0.016930048167705537,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.02553860995000584,0.0213794469833374,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.039947211381610226,-0.045229014754295346,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Baseline,"Eq. 8, floor 0.40",label F1,0.03527446530223577,0.029447372257709502,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Baseline,"Eq. 8, floor 0.40",global F1,0.02924850651522115,0.024242360889911652,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,fixed 0.5,"Eq. 8, floor 0.30",0.4108764563588073,0.403775629401207,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,fixed 0.5,"Eq. 8, floor 0.40",0.3468234394682723,0.33791220635175706,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,fixed 0.5,"Eq. 8, floor 0.50",0.12463213760224974,0.11726153530180454,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,fixed 0.5,label F1,0.43624547335144537,0.4290407165884972,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,fixed 0.5,global F1,0.4366206459107669,0.42933776080608366,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,"Eq. 8, floor 0.40",fixed 0.5,-0.3468234394682723,-0.35509948432445526,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.064053016890535,0.056306925415992734,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.22219130186602257,-0.23134316504001617,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,"Eq. 8, floor 0.40",label F1,0.08942203388317305,0.08229464292526245,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC-22,"Eq. 8, floor 0.40",global F1,0.08979720644249456,0.08268873542547225,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,fixed 0.5,"Eq. 8, floor 0.30",0.01257768672708226,0.00575549304485321,0.0015,0.9985,0.0025,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,fixed 0.5,"Eq. 8, floor 0.40",0.020356795825417162,0.013662534952163696,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,fixed 0.5,"Eq. 8, floor 0.50",0.008378418253084385,0.003711509704589844,0.0015,0.9985,0.0025,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,fixed 0.5,label F1,0.025630246592589723,0.019801503419876097,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,fixed 0.5,global F1,0.028455375846352382,0.02285826802253723,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,"Eq. 8, floor 0.40",fixed 0.5,-0.020356795825417162,-0.02668493092060089,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.007779109098334902,-0.010039570927619933,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.011978377572332777,-0.01701512336730957,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,"Eq. 8, floor 0.40",label F1,0.0052734507671725606,0.0017482757568359375,0.006,0.994,0.014545454545454545,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-LIWC,"Eq. 8, floor 0.40",global F1,0.00809858002093522,0.004334545135498047,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,fixed 0.5,"Eq. 8, floor 0.30",-0.003247800498410003,-0.010073286294937134,0.774,0.226,0.8973913043478261,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,fixed 0.5,"Eq. 8, floor 0.40",0.008872647306040204,0.00273856520652771,0.008,0.992,0.012307692307692308,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,fixed 0.5,"Eq. 8, floor 0.50",0.002535003773509348,-0.0018323630094528199,0.176,0.824,0.21999999999999997,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,fixed 0.5,label F1,0.020547635622778726,0.015138918161392212,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,fixed 0.5,global F1,0.02262668114967359,0.017264002561569215,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,"Eq. 8, floor 0.40",fixed 0.5,-0.008872647306040204,-0.01535053551197052,0.992,0.008,1.0,0.02
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.012120447804450207,-0.014803797006607056,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.006337643532530857,-0.011474061012268066,0.981,0.019,1.0,0.04470588235294118
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,"Eq. 8, floor 0.40",label F1,0.011674988316738522,0.00825330913066864,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-Schwartz,"Eq. 8, floor 0.40",global F1,0.013754033843633384,0.01047171950340271,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.30",0.0023228867825209054,-0.004462188482284546,0.297,0.703,0.36,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.40",0.015448205249896318,0.009041619300842286,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.50",0.007908948267229543,0.003157094120979309,0.001,0.999,0.0017777777777777779,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,fixed 0.5,label F1,0.02526575762092964,0.019725790619850157,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,fixed 0.5,global F1,0.026925681277867985,0.02133147120475769,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,"Eq. 8, floor 0.40",fixed 0.5,-0.015448205249896318,-0.021851950883865358,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.013125318467375413,-0.015679681301116945,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.0075392569826667755,-0.012315061688423157,0.9955,0.0045,1.0,0.01161290322580645
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,"Eq. 8, floor 0.40",label F1,0.009817552371033322,0.006386888027191162,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Lex-WorryWords,"Eq. 8, floor 0.40",global F1,0.011477476027971667,0.007884728908538818,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,NER,fixed 0.5,"Eq. 8, floor 0.30",0.004933931957044724,-0.0019280433654785155,0.113,0.887,0.1434920634920635,1.0
+HO detection,Social Focus vs. Personal Focus,NER,fixed 0.5,"Eq. 8, floor 0.40",0.015262252927239817,0.00887903869152069,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,NER,fixed 0.5,"Eq. 8, floor 0.50",0.005423180616060064,0.0009289950132369996,0.026,0.974,0.03586206896551724,1.0
+HO detection,Social Focus vs. Personal Focus,NER,fixed 0.5,label F1,0.022342485957171476,0.01667163670063019,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,NER,fixed 0.5,global F1,0.021840050996572824,0.01634334921836853,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,NER,"Eq. 8, floor 0.40",fixed 0.5,-0.015262252927239817,-0.022130343317985534,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,NER,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.010328320970195093,-0.012890517711639404,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,NER,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.009839072311179753,-0.014772447943687438,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,NER,"Eq. 8, floor 0.40",label F1,0.00708023302993166,0.004036837816238403,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,NER,"Eq. 8, floor 0.40",global F1,0.006577798069333007,0.002841365337371826,0.0015,0.9985,0.00375,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,fixed 0.5,"Eq. 8, floor 0.30",0.012673549654885985,0.0061624675989151,0.002,0.998,0.0032653061224489797,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,fixed 0.5,"Eq. 8, floor 0.40",0.01545538736841312,0.009086623787879944,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,fixed 0.5,"Eq. 8, floor 0.50",0.007027094916444154,0.0026147633790969847,0.0045,0.9955,0.007058823529411764,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,fixed 0.5,label F1,0.02130297676154047,0.015785399079322814,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,fixed 0.5,global F1,0.021086683849429133,0.01517011821269989,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,"Eq. 8, floor 0.40",fixed 0.5,-0.01545538736841312,-0.022171080112457275,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.0027818377135271355,-0.004746177792549133,0.989,0.011,1.0,0.026666666666666665
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.008428292451968966,-0.013525187969207764,0.998,0.002,1.0,0.005333333333333333
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,"Eq. 8, floor 0.40",label F1,0.00584758939312735,0.00289076566696167,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,Previous-Sentences-2,"Eq. 8, floor 0.40",global F1,0.005631296481016013,0.00391559898853302,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.30",-0.007897357570779806,-0.014657863974571228,0.9615,0.0385,1.0,0.3422222222222222
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.40",0.007325729553525617,0.0009444862604141236,0.03,0.97,0.04067796610169491,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.50",0.007173954542375682,0.00277542769908905,0.004,0.996,0.0064,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,fixed 0.5,label F1,0.020670153333577024,0.015311065316200256,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,fixed 0.5,global F1,0.02032304897385906,0.014761129021644592,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,"Eq. 8, floor 0.40",fixed 0.5,-0.007325729553525617,-0.01409098505973816,0.97,0.03,1.0,0.06666666666666667
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.015223087124305423,-0.01814175546169281,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.00015177501114993497,-0.005505824089050293,0.5175,0.4825,1.0,0.9190476190476191
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,"Eq. 8, floor 0.40",label F1,0.013344423780051407,0.009413582086563111,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-BERTopic,"Eq. 8, floor 0.40",global F1,0.012997319420333442,0.009500131011009216,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,fixed 0.5,"Eq. 8, floor 0.30",-0.005507192481854495,-0.012560763955116272,0.8995,0.1005,1.0,0.7927272727272728
+HO detection,Social Focus vs. Personal Focus,TD-NMF,fixed 0.5,"Eq. 8, floor 0.40",0.006880740955015341,0.00036016404628753663,0.0415,0.9585,0.05533333333333334,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,fixed 0.5,"Eq. 8, floor 0.50",0.005639162518407459,0.0014356672763824463,0.0145,0.9855,0.020714285714285716,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,fixed 0.5,label F1,0.018942338886606014,0.013946554064750672,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,fixed 0.5,global F1,0.02078375202495053,0.01580832004547119,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,"Eq. 8, floor 0.40",fixed 0.5,-0.006880740955015341,-0.013378351926803589,0.9585,0.0415,1.0,0.08972972972972974
+HO detection,Social Focus vs. Personal Focus,TD-NMF,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.012387933436869836,-0.014961770176887513,1.0,0.0,1.0,0.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.001241578436607882,-0.0061480313539505,0.6495,0.3505,1.0,0.701
+HO detection,Social Focus vs. Personal Focus,TD-NMF,"Eq. 8, floor 0.40",label F1,0.012061597931590673,0.008075353503227235,0.0,1.0,0.0,1.0
+HO detection,Social Focus vs. Personal Focus,TD-NMF,"Eq. 8, floor 0.40",global F1,0.01390301106993519,0.00952887237071991,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,fixed 0.5,"Eq. 8, floor 0.30",-0.0049474432719606165,-0.011420336365699769,0.891,0.109,1.0,0.7927272727272728
+HO detection,Openness vs. Conservation,Baseline,fixed 0.5,"Eq. 8, floor 0.40",-0.04035267094355405,-0.050956669449806216,1.0,0.0,1.0,0.0
+HO detection,Openness vs. Conservation,Baseline,fixed 0.5,"Eq. 8, floor 0.50",0.007171934166005367,0.004316706955432892,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,fixed 0.5,label F1,0.00878700143459854,0.004058574140071869,0.0015,0.9985,0.0025,1.0
+HO detection,Openness vs. Conservation,Baseline,fixed 0.5,global F1,0.009736918392732163,0.0027433782815933228,0.0125,0.9875,0.01818181818181818,1.0
+HO detection,Openness vs. Conservation,Baseline,"Eq. 8, floor 0.40",fixed 0.5,0.04035267094355405,0.02918931543827057,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.03540522767159343,0.026127895712852477,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.047524605109559415,0.036817041039466855,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,"Eq. 8, floor 0.40",label F1,0.04913967237815259,0.039146365225315095,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Baseline,"Eq. 8, floor 0.40",global F1,0.05008958933628621,0.03874870240688324,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,fixed 0.5,"Eq. 8, floor 0.30",0.0004096794456523445,-0.006416329741477966,0.45,0.55,0.5373134328358209,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,fixed 0.5,"Eq. 8, floor 0.40",-0.03277624184555633,-0.04394026845693588,1.0,0.0,1.0,0.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,fixed 0.5,"Eq. 8, floor 0.50",0.0035238506299353767,0.0009693458676338196,0.0125,0.9875,0.01818181818181818,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,fixed 0.5,label F1,0.010737589114214074,0.005586215853691102,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,fixed 0.5,global F1,0.006727947811009827,0.000919175148010254,0.0255,0.9745,0.035789473684210524,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,"Eq. 8, floor 0.40",fixed 0.5,0.03277624184555633,0.021993926167488097,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.033185921291208675,0.024518148601055147,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.03630009247549171,0.02580069303512573,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,"Eq. 8, floor 0.40",label F1,0.043513830959770405,0.032806476950645445,0.0,1.0,0.0,1.0
+HO detection,Openness vs. Conservation,Lex-LIWC-22_LingFeat,"Eq. 8, floor 0.40",global F1,0.03950418965656616,0.027895860373973846,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,fixed 0.5,"Eq. 8, floor 0.30",0.0035013856803308707,-0.005980576574802399,0.2675,0.7325,0.32923076923076927,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,fixed 0.5,"Eq. 8, floor 0.40",0.022760478361289693,0.01523536592721939,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,fixed 0.5,"Eq. 8, floor 0.50",-0.021400787731935433,-0.026431137323379518,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,fixed 0.5,label F1,0.026254746859013633,0.019263991713523866,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,fixed 0.5,global F1,0.01713565778464443,0.011288812756538391,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,"Eq. 8, floor 0.40",fixed 0.5,-0.022760478361289693,-0.029661700129508972,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.019259092680958823,-0.0250894233584404,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.04416126609322513,-0.05235912948846817,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,"Eq. 8, floor 0.40",label F1,0.00349426849772394,-0.000980594754219055,0.0935,0.9065,0.21371428571428572,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Baseline,"Eq. 8, floor 0.40",global F1,-0.005624820576645262,-0.010201843082904815,0.9795,0.0205,1.0,0.04685714285714286
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,fixed 0.5,"Eq. 8, floor 0.30",0.008830185442323057,-0.0004794269800186157,0.059,0.941,0.07737704918032787,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,fixed 0.5,"Eq. 8, floor 0.40",0.02492706450517146,0.017149364948272704,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,fixed 0.5,"Eq. 8, floor 0.50",-0.009742847758854034,-0.013278047740459441,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,fixed 0.5,label F1,0.0253981730797318,0.017743995785713194,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,fixed 0.5,global F1,0.02387078671600351,0.015853695571422577,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,"Eq. 8, floor 0.40",fixed 0.5,-0.02492706450517146,-0.03310638815164566,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.0160968790628484,-0.02180144637823105,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.03466991226402549,-0.04335749000310898,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,"Eq. 8, floor 0.40",label F1,0.0004711085745603416,-0.0029029756784439086,0.4155,0.5845,0.874736842105263,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-MFD-20,"Eq. 8, floor 0.40",global F1,-0.0010562777891679476,-0.0034734904766082764,0.756,0.244,1.0,0.5136842105263157
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.30",0.022977012865849578,0.013148961961269379,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.40",0.03348229818924209,0.0247918963432312,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,fixed 0.5,"Eq. 8, floor 0.50",-0.0028012012465589153,-0.00499519556760788,0.9835,0.0165,1.0,0.165
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,fixed 0.5,label F1,0.03244210576116735,0.02458312511444092,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,fixed 0.5,global F1,0.03264517074154427,0.025269849598407744,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,"Eq. 8, floor 0.40",fixed 0.5,-0.03348229818924209,-0.041714133322238924,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.01050528532339251,-0.015817049145698547,0.9995,0.0005,1.0,0.0013793103448275863
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.036283499435801,-0.04474770724773407,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,"Eq. 8, floor 0.40",label F1,-0.0010401924280747377,-0.00578407347202301,0.65,0.35,1.0,0.701
+HO detection,Self-Transcendence vs. Self-Enhancement,Lex-WorryWords,"Eq. 8, floor 0.40",global F1,-0.0008371274476978163,-0.005126519501209259,0.6305,0.3695,1.0,0.7209756097560975
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.30",0.008586790590298155,-0.0008004426956176756,0.0725,0.9275,0.0935483870967742,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.40",0.025713432554157034,0.017732132971286774,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,fixed 0.5,"Eq. 8, floor 0.50",-0.011492148342625574,-0.015786275267601013,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,fixed 0.5,label F1,0.03097711167938,0.02346050888299942,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,fixed 0.5,global F1,0.027770482507526006,0.019405637681484223,0.0,1.0,0.0,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,"Eq. 8, floor 0.40",fixed 0.5,-0.025713432554157034,-0.03330884575843811,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.01712664196385888,-0.02288411557674408,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.03720558089678261,-0.04517484158277511,1.0,0.0,1.0,0.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,"Eq. 8, floor 0.40",label F1,0.005263679125222964,-6.671249866485592e-05,0.0525,0.9475,0.12352941176470589,1.0
+HO detection,Self-Transcendence vs. Self-Enhancement,TD-BERTopic,"Eq. 8, floor 0.40",global F1,0.0020570499533689723,-0.0011694461107254028,0.1455,0.8545,0.3233333333333333,1.0
+Value detection,Growth,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.008668535833404267,0.0018786787986755371,0.0155,0.9845,0.0512,1.0
+Value detection,Growth,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.04189646515869985,-0.05082569047808647,1.0,0.0,1.0,0.0
+Value detection,Growth,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.06921968814180526,-0.07865049988031388,1.0,0.0,1.0,0.0
+Value detection,Growth,Direct,fixed 0.5,label F1,0.03997220930042311,0.03071611076593399,0.0,1.0,0.0,1.0
+Value detection,Growth,Direct,fixed 0.5,global F1,0.03765002253681493,0.026314906775951385,0.0,1.0,0.0,1.0
+Value detection,Growth,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.04189646515869985,0.03271031677722931,0.0,1.0,0.0,1.0
+Value detection,Growth,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.05056500099210412,0.04157627150416374,0.0,1.0,0.0,1.0
+Value detection,Growth,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.02732322298310541,-0.03639417439699173,1.0,0.0,1.0,0.0
+Value detection,Growth,Direct,"Eq. 8, floor 0.40",label F1,0.08186867445912296,0.07071207314729691,0.0,1.0,0.0,1.0
+Value detection,Growth,Direct,"Eq. 8, floor 0.40",global F1,0.07954648769551478,0.06704383790493011,0.0,1.0,0.0,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.30",-0.0008733480896127022,-0.00550321489572525,0.6095,0.3905,1.0,0.8925714285714287
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.40",0.001129644386761497,-0.002402755618095398,0.273,0.727,0.6423529411764707,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.50",0.0005630397712909074,-9.908676147460937e-05,0.0885,0.912,0.23600000000000002,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),fixed 0.5,label F1,0.005030786476006688,-0.002241384983062744,0.131,0.869,0.33806451612903227,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),fixed 0.5,global F1,0.007816421948862062,0.00108315646648407,0.024,0.976,0.07384615384615384,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",fixed 0.5,-0.001129644386761497,-0.0043690413236618045,0.727,0.273,1.0,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.002002992476374199,-0.0064065903425216675,0.7635,0.2365,1.0,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.0005666046154705895,-0.003704749047756195,0.616,0.384,1.0,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",label F1,0.003901142089245191,-0.003142517805099487,0.1755,0.8245,0.32651162790697674,1.0
+Value detection,Growth,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",global F1,0.006686777562100565,-0.0009854480624198914,0.082,0.918,0.15714285714285717,1.0
+Value detection,Self-Protection,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.014805865132494267,0.007952721416950225,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.0022671223663554563,-0.007577653229236603,0.749,0.251,1.0,0.6693333333333332
+Value detection,Self-Protection,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.03277936257029446,-0.03745410293340683,1.0,0.0,1.0,0.0
+Value detection,Self-Protection,Direct,fixed 0.5,label F1,0.030354488911159716,0.022258153557777403,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Direct,fixed 0.5,global F1,0.028680281628127968,0.01796434372663498,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.0022671223663554563,-0.0032694295048713686,0.251,0.749,0.43652173913043474,1.0
+Value detection,Self-Protection,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.017072987498849723,0.011139681935310364,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.030512240203939,-0.0372937873005867,1.0,0.0,1.0,0.0
+Value detection,Self-Protection,Direct,"Eq. 8, floor 0.40",label F1,0.03262161127751517,0.025125755369663237,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Direct,"Eq. 8, floor 0.40",global F1,0.030947403994483424,0.020390327274799346,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.30",-0.012260069688925956,-0.017929396033287047,1.0,0.0,1.0,0.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.40",-0.02153721087032645,-0.027023781836032868,1.0,0.0,1.0,0.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.50",-0.00040231889876585214,-0.0025414302945137024,0.621,0.379,1.0,0.8917647058823529
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),fixed 0.5,label F1,0.014797685522935033,0.00815587192773819,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),fixed 0.5,global F1,0.01267687512848259,0.0023448362946510318,0.016,0.984,0.0512,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",fixed 0.5,0.02153721087032645,0.016271378099918365,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.009277141181400494,0.0027993857860565186,0.01,0.99,0.020512820512820513,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0211348919715606,0.01563664376735687,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",label F1,0.036334896393261484,0.028319534659385682,0.0,1.0,0.0,1.0
+Value detection,Self-Protection,Gated (1_Baseline_0.5_Baseline),"Eq. 8, floor 0.40",global F1,0.03421408599880904,0.023575429618358613,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.004684009161230518,-0.002789710462093353,0.1525,0.8475,0.38125,1.0
+Value detection,Social Focus,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.020821919033727765,-0.028414121270179747,1.0,0.0,1.0,0.0
+Value detection,Social Focus,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.04061132829165254,-0.04752813726663589,1.0,0.0,1.0,0.0
+Value detection,Social Focus,Direct,fixed 0.5,label F1,0.04275486877833862,0.03336262255907059,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,fixed 0.5,global F1,0.036111060833878605,0.024768418073654173,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.020821919033727765,0.012315517663955689,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.025505928194958283,0.017874766886234284,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.019789409257924773,-0.028991056978702544,1.0,0.0,1.0,0.0
+Value detection,Social Focus,Direct,"Eq. 8, floor 0.40",label F1,0.06357678781206638,0.05365670323371887,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Direct,"Eq. 8, floor 0.40",global F1,0.05693297986760637,0.04436854124069214,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.30",0.000359139882993853,-0.01294788420200348,0.5055,0.4945,1.0,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.40",-0.01111548495351311,-0.01680818945169449,0.9995,0.0005,1.0,0.002
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.50",-0.031943408640821735,-0.038639014959335326,1.0,0.0,1.0,0.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),fixed 0.5,label F1,0.016840066216713523,0.009541097283363342,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),fixed 0.5,global F1,0.02240560915192602,0.009204220771789551,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),"Eq. 8, floor 0.40",fixed 0.5,0.01111548495351311,0.005733193457126617,0.0005,0.9995,0.001142857142857143,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.011474624836506964,-0.0015751540660858155,0.0825,0.9175,0.15714285714285717,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.020827923687308625,-0.026919935643672944,1.0,0.0,1.0,0.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),"Eq. 8, floor 0.40",label F1,0.027955551170226633,0.01961820125579834,0.0,1.0,0.0,1.0
+Value detection,Social Focus,Gated (1_TD-NMF_0.5_Lex-MJD),"Eq. 8, floor 0.40",global F1,0.03352109410543913,0.020398229360580444,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.017314111728954973,0.010022701323032379,0.0005,0.9995,0.002,1.0
+Value detection,Personal Focus,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.034914749435560194,-0.04375790357589722,1.0,0.0,1.0,0.0
+Value detection,Personal Focus,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.07050497818224077,-0.080048368871212,1.0,0.0,1.0,0.0
+Value detection,Personal Focus,Direct,fixed 0.5,label F1,0.023397805802126748,0.01569736748933792,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,fixed 0.5,global F1,0.029720357471828385,0.01960810422897339,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.034914749435560194,0.02648758888244629,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.05222886116451517,0.04315383359789848,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.03559022874668058,-0.044070962071418765,1.0,0.0,1.0,0.0
+Value detection,Personal Focus,Direct,"Eq. 8, floor 0.40",label F1,0.05831255523768694,0.0488287404179573,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Direct,"Eq. 8, floor 0.40",global F1,0.06463510690738858,0.05278974547982216,0.0,1.0,0.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.30",0.0022472616692167935,-0.0027462318539619446,0.2395,0.7605,0.5806060606060606,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.40",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),fixed 0.5,"Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),fixed 0.5,label F1,-0.0016027381520557493,-0.00864580124616623,0.675,0.325,1.0,0.8125
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),fixed 0.5,global F1,0.003754773629956798,-0.00046564787626266466,0.075,0.925,0.20689655172413793,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),"Eq. 8, floor 0.40",fixed 0.5,0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.0022472616692167935,-0.0027462318539619446,0.2395,0.7605,0.42577777777777776,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),"Eq. 8, floor 0.40",label F1,-0.0016027381520557493,-0.00864580124616623,0.675,0.325,1.0,1.0
+Value detection,Personal Focus,Gated (1_NER_0.19_Lex-MJD),"Eq. 8, floor 0.40",global F1,0.003754773629956798,-0.00046564787626266466,0.075,0.925,0.15,1.0
+Value detection,Openness,Direct,fixed 0.5,"Eq. 8, floor 0.30",-0.01084658312922554,-0.02196304649114609,0.9495,0.0505,1.0,0.16833333333333333
+Value detection,Openness,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.06538310327251132,-0.08312047496438027,1.0,0.0,1.0,0.0
+Value detection,Openness,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.08221078229277956,-0.10167431086301804,1.0,0.0,1.0,0.0
+Value detection,Openness,Direct,fixed 0.5,label F1,0.015209876525875465,0.0012016206979751588,0.038,0.962,0.11259259259259259,1.0
+Value detection,Openness,Direct,fixed 0.5,global F1,0.02124267745977179,0.005659114569425583,0.011,0.989,0.03826086956521739,1.0
+Value detection,Openness,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.06538310327251132,0.04817102774977684,0.0,1.0,0.0,1.0
+Value detection,Openness,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.05453652014328578,0.03963931575417519,0.0,1.0,0.0,1.0
+Value detection,Openness,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.016827679020268244,-0.031722381711006165,0.9695,0.0305,1.0,0.2218181818181818
+Value detection,Openness,Direct,"Eq. 8, floor 0.40",label F1,0.08059297979838678,0.062019580602645875,0.0,1.0,0.0,1.0
+Value detection,Openness,Direct,"Eq. 8, floor 0.40",global F1,0.08662578073228311,0.06628431230783463,0.0,1.0,0.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),fixed 0.5,"Eq. 8, floor 0.30",-0.004299806943259599,-0.013423372060060501,0.801,0.199,1.0,0.5685714285714286
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),fixed 0.5,"Eq. 8, floor 0.40",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),fixed 0.5,"Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),fixed 0.5,label F1,-0.0046723628838678255,-0.016600584983825682,0.767,0.233,1.0,0.6427586206896552
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),fixed 0.5,global F1,-0.005616550930524461,-0.01069125160574913,0.958,0.042,1.0,0.14608695652173914
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),"Eq. 8, floor 0.40",fixed 0.5,0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.004299806943259599,-0.013423372060060501,0.801,0.199,1.0,0.9950000000000001
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),"Eq. 8, floor 0.40",label F1,-0.0046723628838678255,-0.016600584983825682,0.767,0.233,1.0,1.0
+Value detection,Openness,Gated (1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA),"Eq. 8, floor 0.40",global F1,-0.005616550930524461,-0.01069125160574913,0.958,0.042,1.0,0.28
+Value detection,Conservation,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.002523955970507641,-0.005609056353569031,0.307,0.693,0.7017142857142856,1.0
+Value detection,Conservation,Direct,fixed 0.5,"Eq. 8, floor 0.40",0.006196129603503853,-3.0465424060821533e-05,0.051,0.949,0.1457142857142857,1.0
+Value detection,Conservation,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.011057949588953064,-0.01592937409877777,1.0,0.0,1.0,0.0
+Value detection,Conservation,Direct,fixed 0.5,label F1,0.02436525400892875,0.013760101795196534,0.0,1.0,0.0,1.0
+Value detection,Conservation,Direct,fixed 0.5,global F1,0.024020764413113183,0.008954733610153198,0.0005,0.9995,0.002,1.0
+Value detection,Conservation,Direct,"Eq. 8, floor 0.40",fixed 0.5,-0.006196129603503853,-0.012837617099285126,0.949,0.051,1.0,0.31384615384615383
+Value detection,Conservation,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.003672173632996212,-0.009496642649173737,0.8475,0.1525,1.0,0.8133333333333332
+Value detection,Conservation,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.017254079192456917,-0.02552303671836853,1.0,0.0,1.0,0.0
+Value detection,Conservation,Direct,"Eq. 8, floor 0.40",label F1,0.018169124405424897,0.009128406643867493,0.0,1.0,0.0,1.0
+Value detection,Conservation,Direct,"Eq. 8, floor 0.40",global F1,0.01782463480960933,0.003660954535007477,0.0065,0.9935,0.01368421052631579,1.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.30",-0.01597989822065965,-0.021544891595840453,1.0,0.0,1.0,0.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.40",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),fixed 0.5,label F1,-0.005465674024263123,-0.012664788961410522,0.889,0.111,1.0,0.3552
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),fixed 0.5,global F1,-0.0040275592436330165,-0.007101304829120636,0.9785,0.0215,1.0,0.07818181818181817
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),"Eq. 8, floor 0.40",fixed 0.5,0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.01597989822065965,-0.021544891595840453,1.0,0.0,1.0,0.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),"Eq. 8, floor 0.40",label F1,-0.005465674024263123,-0.012664788961410522,0.889,0.111,1.0,0.6342857142857143
+Value detection,Conservation,Gated (1_Lex-LIWC-22_LingFeat_0.1_Lex-Schwartz),"Eq. 8, floor 0.40",global F1,-0.0040275592436330165,-0.007101304829120636,0.9785,0.0215,1.0,0.172
+Value detection,Self-Transcendence,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.016332463060809654,0.006928770244121552,0.0015,0.9985,0.005714285714285714,1.0
+Value detection,Self-Transcendence,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.03970804975062023,-0.05082302540540695,1.0,0.0,1.0,0.0
+Value detection,Self-Transcendence,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.06400355528043841,-0.07515185326337814,1.0,0.0,1.0,0.0
+Value detection,Self-Transcendence,Direct,fixed 0.5,label F1,0.05629075746457124,0.04276004433631897,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Direct,fixed 0.5,global F1,0.04837519965815146,0.031085431575775146,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.03970804975062023,0.02826529145240784,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.05604051281142988,0.04414992034435272,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.024295505529818184,-0.03673073649406433,0.9995,0.0005,1.0,0.0044444444444444444
+Value detection,Self-Transcendence,Direct,"Eq. 8, floor 0.40",label F1,0.09599880721519147,0.08035951927304268,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Direct,"Eq. 8, floor 0.40",global F1,0.08808324940877169,0.06874931156635285,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.30",-0.001388219280395786,-0.0032720088958740233,0.88,0.12,1.0,0.3692307692307692
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.40",-0.0020722762789325833,-0.003121984004974365,1.0,0.0,1.0,0.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),fixed 0.5,"Eq. 8, floor 0.50",-0.0020722762789325833,-0.003121984004974365,1.0,0.0,1.0,0.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),fixed 0.5,label F1,-0.003891104201690476,-0.009535151720046996,0.861,0.139,1.0,0.4118518518518519
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),fixed 0.5,global F1,0.008981377908212518,0.002851720154285431,0.007,0.993,0.025454545454545455,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),"Eq. 8, floor 0.40",fixed 0.5,0.0020722762789325833,0.001163448393344879,0.0,1.0,0.0,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.0006840569985367972,-0.0008824869990348815,0.2385,0.7615,0.42577777777777776,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),"Eq. 8, floor 0.40",label F1,-0.001818827922757893,-0.007630099356174469,0.679,0.321,1.0,1.0
+Value detection,Self-Transcendence,Gated (1_Lex-MFD-20_0.5_Baseline),"Eq. 8, floor 0.40",global F1,0.011053654187145101,0.004871632158756256,0.004,0.996,0.008648648648648649,1.0
+Value detection,Self-Enhancement,Direct,fixed 0.5,"Eq. 8, floor 0.30",0.03912146554912321,0.029435500502586365,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Direct,fixed 0.5,"Eq. 8, floor 0.40",-0.015669447712566176,-0.026101110875606535,0.9965,0.0035,1.0,0.013333333333333334
+Value detection,Self-Enhancement,Direct,fixed 0.5,"Eq. 8, floor 0.50",-0.07689894936250902,-0.0904665045440197,1.0,0.0,1.0,0.0
+Value detection,Self-Enhancement,Direct,fixed 0.5,label F1,0.029166779116433006,0.01941322982311249,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Direct,fixed 0.5,global F1,0.04335562181686381,0.030621768534183504,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Direct,"Eq. 8, floor 0.40",fixed 0.5,0.015669447712566176,0.005311264097690583,0.0035,0.9965,0.007777777777777778,1.0
+Value detection,Self-Enhancement,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.30",0.05479091326168939,0.04241301715373993,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Direct,"Eq. 8, floor 0.40","Eq. 8, floor 0.50",-0.06122950164994284,-0.07351523861289025,1.0,0.0,1.0,0.0
+Value detection,Self-Enhancement,Direct,"Eq. 8, floor 0.40",label F1,0.04483622682899918,0.035092365741729734,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Direct,"Eq. 8, floor 0.40",global F1,0.059025069529429985,0.0440894827246666,0.0,1.0,0.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.30",-0.0029541819274492287,-0.011326445639133454,0.715,0.285,1.0,0.7354838709677418
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.40",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),fixed 0.5,"Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),fixed 0.5,label F1,-0.002128091847440672,-0.010982300341129302,0.656,0.344,1.0,0.8339393939393939
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),fixed 0.5,global F1,0.00035021567130555376,-0.002146218717098236,0.3805,0.6195,0.8455555555555556,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),"Eq. 8, floor 0.40",fixed 0.5,0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),"Eq. 8, floor 0.40","Eq. 8, floor 0.30",-0.0029541819274492287,-0.011326445639133454,0.715,0.285,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),"Eq. 8, floor 0.40","Eq. 8, floor 0.50",0.0,0.0,1.0,1.0,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),"Eq. 8, floor 0.40",label F1,-0.002128091847440672,-0.010982300341129302,0.656,0.344,1.0,1.0
+Value detection,Self-Enhancement,Gated (1_Lex-WorryWords_0.23_Lex-Schwartz),"Eq. 8, floor 0.40",global F1,0.00035021567130555376,-0.002146218717098236,0.3805,0.6195,0.6476595744680851,1.0

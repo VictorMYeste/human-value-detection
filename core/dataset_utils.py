@@ -942,7 +942,9 @@ def compute_mfd_scores(text, mfd_embeddings, tokenizer, num_categories=10):
     cat_to_index = {cat: i for i, cat in enumerate(categories_order)}
 
     tokens = tokenizer.tokenize(text)
-    normalized_tokens = [token.upper() for token in tokens]
+    # Strip the word-start marker as the other lexicons do (normalize_token); without it,
+    # "ĠCARE" never matched "CARE" and only ~3% of sentences received any count.
+    normalized_tokens = [normalize_token(token).upper() for token in tokens]
 
     scores = [0]*len(categories_order)
     

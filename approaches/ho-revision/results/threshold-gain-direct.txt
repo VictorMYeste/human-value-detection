@@ -1,0 +1,20 @@
+=== Selected Direct model: per-label F1 thresholds vs fixed 0.5 (test; Table 7 'Thr. tuning')
+             slice                model  fixed_test  tuned_test   diff  lower95   p_bh  p_worse_bh  median_threshold
+            Growth Previous-Sentences-2      0.2516      0.2968 0.0452   0.0339 0.0000         1.0             0.170
+   Self-Protection Previous-Sentences-2      0.2933      0.3287 0.0354   0.0246 0.0000         1.0             0.145
+      Social Focus Previous-Sentences-2      0.2945      0.3378 0.0433   0.0316 0.0000         1.0             0.180
+    Personal Focus              Lex-MJD      0.2785      0.3090 0.0305   0.0211 0.0000         1.0             0.280
+          Openness              Lex-MJD      0.2261      0.2555 0.0293   0.0138 0.0005         1.0             0.315
+      Conservation Previous-Sentences-2      0.2763      0.3115 0.0352   0.0206 0.0000         1.0             0.230
+Self-Transcendence Previous-Sentences-2      0.2632      0.3198 0.0567   0.0382 0.0000         1.0             0.160
+  Self-Enhancement              Lex-MJD      0.3049      0.3371 0.0322   0.0213 0.0000         1.0             0.260
+
+--- Per-label McNemar on gold positives (BH within slice): significant values
+Growth: 9 of 11: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Achievement', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+Self-Protection: 8 of 10: ['Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal']
+Social Focus: 9 of 10: ['Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal', 'Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+Personal Focus: 9 of 9: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal']
+Openness: 4 of 4: ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism']
+Conservation: 5 of 7: ['Face', 'Security: societal', 'Tradition', 'Conformity: rules', 'Conformity: interpersonal']
+Self-Transcendence: 5 of 6: ['Benevolence: caring', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+Self-Enhancement: 5 of 5: ['Hedonism', 'Achievement', 'Power: dominance', 'Power: resources', 'Face']

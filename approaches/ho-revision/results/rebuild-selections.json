@@ -28,7 +28,7 @@
     "Personal Focus": "1_Lex-LIWC_0.17_Baseline",
     "Openness": "1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA",
     "Conservation": "1_Lex-LIWC-22_LingFeat_0.1_TD-LDA",
-    "Self-Transcendence": "1_Lex-WorryWords_0.16_Lex-MFD",
+    "Self-Transcendence": "1_Lex-WorryWords_0.16_Lex-Schwartz",
     "Self-Enhancement": "1_TD-BERTopic_0.29_Lex-Schwartz"
   }
 }

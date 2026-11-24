@@ -1,0 +1,13 @@
+seed,pair,mt_test,detector,detector_test
+42,Growth vs. Self-Protection,0.5811162461716454,Baseline,0.5921128561846415
+42,Social Focus vs. Personal Focus,0.5661357414092706,TD-NMF,0.5741999042093842
+42,Openness vs. Conservation,0.41136850936888225,Lex-LIWC-22_LingFeat,0.43202259722490544
+42,Self-Transcendence vs. Self-Enhancement,0.4852665898828291,TD-BERTopic,0.5092344803731377
+7,Growth vs. Self-Protection,0.6011809338822958,Baseline,0.5921128561846415
+7,Social Focus vs. Personal Focus,0.5825522090777402,TD-NMF,0.5741999042093842
+7,Openness vs. Conservation,0.4393133910169271,Lex-LIWC-22_LingFeat,0.43202259722490544
+7,Self-Transcendence vs. Self-Enhancement,0.5156631003806742,TD-BERTopic,0.5092344803731377
+1701,Growth vs. Self-Protection,0.5997066309125738,Baseline,0.5921128561846415
+1701,Social Focus vs. Personal Focus,0.5840804463749985,TD-NMF,0.5741999042093842
+1701,Openness vs. Conservation,0.437697609961587,Lex-LIWC-22_LingFeat,0.43202259722490544
+1701,Self-Transcendence vs. Self-Enhancement,0.5148528465423337,TD-BERTopic,0.5092344803731377

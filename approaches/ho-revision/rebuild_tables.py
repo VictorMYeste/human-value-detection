@@ -144,6 +144,23 @@ def part_b(boot, cand_rows, sel_rows, selections):
                              diff=direct["test_f1"] - best["test_f1"], lower95=t["lower95"],
                              p_direct_better_bh=pa, p_cascade_better_bh=pr))
 
+    # Table 3: one fixed cascade (HO model Baseline, Presence gate Lex-LIWC-22_LingFeat),
+    # varying only the gate threshold, with fixed and tuned HO thresholds.
+    print("\n--- Table 3: HO model Baseline, Presence gate Lex-LIWC-22_LingFeat (test; HO thresholds fixed 0.5 / label F1)")
+    print(f"{'pair':40s} {'Direct':>7s}   {'gate 0.5':>13s}   {'gate 0.1':>13s}")
+    for pair, direct, *_ in rows:
+        out = APPROACHES / f"p_{PAIRS[pair][0]}" / "output"
+        cells = []
+        for tg in ("0.5", "0.1"):
+            name = f"1_Lex-LIWC-22_LingFeat_{tg}_Baseline"
+            fx, tu = (candidate("Presence cascade", pair, name, PAIRS[pair][1], out / f"{name}-val.tsv",
+                                out / f"{name}-test.tsv", rule=r) for r in ("fixed 0.5", MAIN))
+            cells.append(f"{fx['test_f1']:.3f} / {tu['test_f1']:.3f}")
+            sel_rows.append(dict(part="B3", unit=pair, system=name, rule="fixed 0.5 / " + MAIN,
+                                 test_f1_fixed=fx["test_f1"], test_f1=tu["test_f1"],
+                                 direct=direct["name"], direct_test_f1=direct["test_f1"]))
+        print(f"{pair:40s} {direct['test_f1']:7.3f}   " + "   ".join(cells))
+
 
 def part_c(boot, cand_rows, sel_rows, selections):
     print("\n=== C. HO->values hard gating by slice (Tables 4, 6, 7)")
@@ -206,6 +223,13 @@ def part_c(boot, cand_rows, sel_rows, selections):
             sig = "Direct" if r["p_direct_bh"] < 0.05 else "gated" if r["p_gated_bh"] < 0.05 else "n.s."
             cells.append(f"{r['d']['test_f1']:7.3f} {r['g']['test_f1']:7.3f} {r['d']['test_f1'] - r['g']['test_f1']:+7.3f} {sig:>9s}")
         print(f"{sl:18s} " + " | ".join(cells))
+    for rule in RULE_FNS:
+        for r in out_by_rule[rule]:
+            sel_rows.append(dict(part="C-rules", unit=r["slice"], rule=rule, direct=r["d"]["name"],
+                                 direct_val=r["d"]["val_f1"], direct_test=r["d"]["test_f1"],
+                                 gated=r["g"]["name"], gated_val=r["g"]["val_f1"], gated_test=r["g"]["test_f1"],
+                                 diff=r["d"]["test_f1"] - r["g"]["test_f1"], lower95=r["t"]["lower95"],
+                                 p_direct_better_bh=r["p_direct_bh"], p_gated_better_bh=r["p_gated_bh"]))
     for rule in RULE_FNS:
         res = out_by_rule[rule]
         print(f"  {rule:10s}: Direct higher in {sum(r['d']['test_f1'] > r['g']['test_f1'] for r in res)}/8,"

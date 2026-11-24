@@ -1,0 +1,25 @@
+2026-11-23 13:22:31 waiting for PID 1415937
+2026-11-24 10:47:32 train Lex-MFD in self-trans_moral-values
+2026-11-24 11:20:57 predict self-trans_moral-values --filter-1-dir ../self-trans-vs-self-enh/output/ --filter-1-model Baseline
+2026-11-24 11:22:24 predict self-trans_moral-values --filter-1-dir ../self-trans-vs-self-enh/output/ --filter-1-model Lex-MFD-20
+2026-11-24 11:23:18 predict self-trans_moral-values --filter-1-dir ../self-trans-vs-self-enh/output/ --filter-1-model Lex-MFD-20 --filter-1-th 0.21
+2026-11-24 11:24:21 predict self-trans_moral-values --filter-1-dir ../self-trans-vs-self-enh/output/ --filter-1-model Lex-WorryWords --filter-1-th 0.16
+2026-11-24 11:25:25 predict self-trans_moral-values --filter-1-dir ../self-trans-vs-self-enh/output/ --filter-1-model TD-BERTopic --filter-1-th 0.19
+2026-11-24 11:26:29 train Lex-MFD in conservation_moral-values
+2026-11-24 12:38:36 predict conservation_moral-values --filter-1-dir ../openness-vs-conservation/output/ --filter-1-model Baseline
+2026-11-24 12:39:53 predict conservation_moral-values --filter-1-dir ../openness-vs-conservation/output/ --filter-1-model Lex-LIWC-22_LingFeat
+2026-11-24 12:40:59 predict conservation_moral-values --filter-1-dir ../openness-vs-conservation/output/ --filter-1-model Lex-LIWC-22_LingFeat --filter-1-th 0.1
+2026-11-24 12:42:32 train Lex-MFD in social-focus_moral-values
+2026-11-24 14:20:02 predict social-focus_moral-values --filter-1-dir ../social-vs-personal-focus/output/ --filter-1-model Lex-LIWC --filter-1-th 0.1
+2026-11-24 14:22:10 predict social-focus_moral-values --filter-1-dir ../social-vs-personal-focus/output/ --filter-1-model Lex-WorryWords --filter-1-th 0.1
+2026-11-24 14:23:55 predict social-focus_moral-values --filter-1-dir ../social-vs-personal-focus/output/ --filter-1-model NER --filter-1-th 0.1
+2026-11-24 14:25:41 predict social-focus_moral-values --filter-1-dir ../social-vs-personal-focus/output/ --filter-1-model Previous-Sentences-2 --filter-1-th 0.1
+2026-11-24 14:27:25 predict social-focus_moral-values --filter-1-dir ../social-vs-personal-focus/output/ --filter-1-model TD-NMF
+2026-11-24 14:28:41 train Lex-MFD in p_social-vs-personal-focus
+2026-11-24 16:30:33 predict p_social-vs-personal-focus --filter-1-model Baseline
+2026-11-24 16:32:41 predict p_social-vs-personal-focus --filter-1-model Lex-LIWC-22_LingFeat
+2026-11-24 16:34:35 predict p_social-vs-personal-focus --filter-1-model Lex-LIWC-22_LingFeat --filter-1-th 0.1
+2026-11-24 16:36:56 predict p_social-vs-personal-focus --filter-1-model Previous-Sentences-2-Lex-eMFD --filter-1-th 0.1
+2026-11-24 16:39:03 predict p_social-vs-personal-focus --filter-1-model Previous-Sentences-2-Lex-EmoLex --filter-1-th 0.1
+2026-11-24 16:41:11 predict p_social-vs-personal-focus --filter-1-model Previous-Sentences-2-Lex-LIWC-22 --filter-1-th 0.1
+2026-11-24 16:43:22 done

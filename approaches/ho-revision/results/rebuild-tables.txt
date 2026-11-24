@@ -32,18 +32,25 @@ Social Focus vs. Personal Focus          0.573/0.574       0.566 (0.610)/0.562  
 Openness vs. Conservation                0.443/0.432       0.436 (0.475)/0.420        +0.012  +0.002   0.028      1.000   1_Baseline_0.5_Lex-VAD (gate passes 60% of val)
 Self-Transcendence vs. Self-Enhancement  0.478/0.509       0.479 (0.518)/0.503        +0.007  -0.002   0.091      1.000   1_Baseline_0.5_Lex-WorryWords (gate passes 60% of val)
 
+--- Table 3: HO model Baseline, Presence gate Lex-LIWC-22_LingFeat (test; HO thresholds fixed 0.5 / label F1)
+pair                                      Direct        gate 0.5        gate 0.1
+Growth vs. Self-Protection                 0.592   0.573 / 0.577   0.566 / 0.566
+Social Focus vs. Personal Focus            0.574   0.557 / 0.561   0.551 / 0.552
+Openness vs. Conservation                  0.432   0.412 / 0.418   0.416 / 0.416
+Self-Transcendence vs. Self-Enhancement    0.509   0.486 / 0.488   0.488 / 0.488
+
 === C. HO->values hard gating by slice (Tables 4, 6, 7)
 
 --- Main rule (per-label F1). Diff = Direct - gated on test.
 slice              #val              Direct (selected)    val   test |                         gated (selected)    val   test |   diff  low95  pD>G  pG>D McNemar sig (BH)
 Growth               11           Previous-Sentences-2 0.304 0.297 |                  1_Baseline_0.5_Baseline 0.283 0.268 | +0.029 +0.017 0.001 1.000 7/11 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Achievement', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
 Self-Protection      10           Previous-Sentences-2 0.348 0.329 |                  1_Baseline_0.1_Baseline 0.317 0.306 | +0.023 +0.011 0.000 1.000 0/10 []
-Social Focus         10           Previous-Sentences-2 0.350 0.338 |                   1_NER_0.1_Lex-Schwartz 0.334 0.316 | +0.022 +0.010 0.003 1.000 2/10 ['Conformity: interpersonal', 'Universalism: tolerance']
+Social Focus         10           Previous-Sentences-2 0.350 0.338 |                   1_NER_0.1_Lex-Schwartz 0.334 0.316 | +0.022 +0.010 0.002 1.000 2/10 ['Conformity: interpersonal', 'Universalism: tolerance']
 Personal Focus        9                        Lex-MJD 0.317 0.309 |                 1_Lex-LIWC_0.17_Baseline 0.292 0.283 | +0.026 +0.015 0.000 1.000 7/9 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources']
 Openness              4                        Lex-MJD 0.266 0.255 |    1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA 0.252 0.230 | +0.025 +0.008 0.013 1.000 2/4 ['Stimulation', 'Hedonism']
 Conservation          7           Previous-Sentences-2 0.341 0.312 |        1_Lex-LIWC-22_LingFeat_0.1_TD-LDA 0.320 0.301 | +0.010 -0.006 0.157 1.000 4/7 ['Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules']
-Self-Transcendence    6           Previous-Sentences-2 0.323 0.320 |            1_Lex-WorryWords_0.16_Lex-MFD 0.309 0.297 | +0.023 +0.008 0.005 1.000 3/6 ['Benevolence: dependability', 'Universalism: concern', 'Universalism: tolerance']
-Self-Enhancement      5                        Lex-MJD 0.351 0.337 |          1_TD-BERTopic_0.29_Lex-Schwartz 0.335 0.312 | +0.025 +0.010 0.005 1.000 2/5 ['Hedonism', 'Power: dominance']
+Self-Transcendence    6           Previous-Sentences-2 0.323 0.320 |       1_Lex-WorryWords_0.16_Lex-Schwartz 0.304 0.293 | +0.027 +0.012 0.001 1.000 2/6 ['Universalism: concern', 'Universalism: tolerance']
+Self-Enhancement      5                        Lex-MJD 0.351 0.337 |          1_TD-BERTopic_0.29_Lex-Schwartz 0.335 0.312 | +0.025 +0.010 0.004 1.000 2/5 ['Hedonism', 'Power: dominance']
 
 --- The same comparison under each rule (validation selection within each rule).
 slice                           label F1              |             global F1              |             fixed 0.5             
@@ -54,7 +61,7 @@ Social Focus         0.338   0.316  +0.022    Direct |   0.330   0.308  +0.022  
 Personal Focus       0.309   0.283  +0.026    Direct |   0.308   0.281  +0.027    Direct |   0.275   0.282  -0.008      n.s.
 Openness             0.255   0.230  +0.025    Direct |   0.241   0.227  +0.014      n.s. |   0.231   0.230  +0.001      n.s.
 Conservation         0.312   0.301  +0.010      n.s. |   0.299   0.292  +0.007      n.s. |   0.283   0.285  -0.002      n.s.
-Self-Transcendence   0.320   0.297  +0.023    Direct |   0.307   0.296  +0.012      n.s. |   0.272   0.296  -0.024      n.s.
+Self-Transcendence   0.320   0.293  +0.027    Direct |   0.307   0.299  +0.008      n.s. |   0.272   0.301  -0.029      n.s.
 Self-Enhancement     0.337   0.312  +0.025    Direct |   0.340   0.319  +0.020    Direct |   0.305   0.319  -0.014      n.s.
   label F1  : Direct higher in 8/8, significantly in 7; gated significantly higher in 0
   global F1 : Direct higher in 8/8, significantly in 5; gated significantly higher in 0

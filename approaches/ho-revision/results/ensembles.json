@@ -1,0 +1,134 @@
+{
+  "Growth": {
+    "tr_log": [
+      "seed Previous-Sentences-2 (val 0.3042)",
+      "+ Lex-MJD (lower +0.0056, val 0.3183)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3183)"
+    ],
+    "llm_systems": [
+      "LLM ensemble",
+      "definition",
+      "definition +gate",
+      "definition-12",
+      "definition-12 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Self-Protection": {
+    "tr_log": [
+      "seed Previous-Sentences-2 (val 0.3478)",
+      "+ Lex-MJD (lower +0.0076, val 0.3622)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3622)",
+      "+ qlora +gate (lower +0.0042, val 0.3702)"
+    ],
+    "llm_systems": [
+      "definition",
+      "definition +gate",
+      "definition-11",
+      "definition-11 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Social Focus": {
+    "tr_log": [
+      "seed Previous-Sentences-2 (val 0.3503)",
+      "+ Lex-MJD (lower +0.0056, val 0.3641)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3641)"
+    ],
+    "llm_systems": [
+      "LLM ensemble",
+      "definition",
+      "definition +gate",
+      "definition-11",
+      "definition-11 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Personal Focus": {
+    "tr_log": [
+      "seed Lex-MJD (val 0.3174)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3174)",
+      "+ qlora +gate (lower +0.0079, val 0.3295)"
+    ],
+    "llm_systems": [
+      "definition",
+      "definition +gate",
+      "definition-10",
+      "definition-10 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Openness": {
+    "tr_log": [
+      "seed Lex-MJD (val 0.2655)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.2655)",
+      "+ qlora +gate (lower +0.0044, val 0.2771)"
+    ],
+    "llm_systems": [
+      "definition",
+      "definition +gate",
+      "definition-5",
+      "definition-5 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Conservation": {
+    "tr_log": [
+      "seed Previous-Sentences-2 (val 0.3414)",
+      "+ Lex-MJD (lower +0.0037, val 0.3544)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3544)",
+      "+ qlora +gate (lower +0.0047, val 0.3642)"
+    ],
+    "llm_systems": [
+      "definition",
+      "definition +gate",
+      "definition-8",
+      "definition-8 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Self-Transcendence": {
+    "tr_log": [
+      "seed Previous-Sentences-2 (val 0.3227)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3227)"
+    ],
+    "llm_systems": [
+      "LLM ensemble",
+      "definition",
+      "definition +gate",
+      "definition-7",
+      "definition-7 +gate",
+      "qlora +gate"
+    ]
+  },
+  "Self-Enhancement": {
+    "tr_log": [
+      "seed Lex-MJD (val 0.3513)"
+    ],
+    "hy_log": [
+      "seed Tr ens. (val 0.3513)",
+      "+ qlora +gate (lower +0.0064, val 0.3642)"
+    ],
+    "llm_systems": [
+      "definition",
+      "definition +gate",
+      "definition-6",
+      "definition-6 +gate",
+      "qlora +gate"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+=== Ensembles under per-label F1 thresholds, validation-only selection (Tables 6-7)
+             slice               single  single_test                     tr_members  tr_test  ens_lower95  ens_p_bh  ens_p_worse_bh
+            Growth Previous-Sentences-2        0.297 Previous-Sentences-2 + Lex-MJD    0.305        0.000     0.046             1.0
+   Self-Protection Previous-Sentences-2        0.329 Previous-Sentences-2 + Lex-MJD    0.349        0.015     0.000             1.0
+      Social Focus Previous-Sentences-2        0.338 Previous-Sentences-2 + Lex-MJD    0.347        0.002     0.020             1.0
+    Personal Focus              Lex-MJD        0.309                        Lex-MJD    0.309        0.000       NaN             NaN
+          Openness              Lex-MJD        0.255                        Lex-MJD    0.255        0.000       NaN             NaN
+      Conservation Previous-Sentences-2        0.312 Previous-Sentences-2 + Lex-MJD    0.333        0.014     0.000             1.0
+Self-Transcendence Previous-Sentences-2        0.320           Previous-Sentences-2    0.320        0.000       NaN             NaN
+  Self-Enhancement              Lex-MJD        0.337                        Lex-MJD    0.337        0.000       NaN             NaN
+
+             slice            hy_members  hy_test  hyb_lower95  hyb_p_bh  hyb_p_worse_bh     best_llm  best_llm_test
+            Growth               Tr ens.    0.305        0.000       NaN             NaN LLM ensemble          0.201
+   Self-Protection Tr ens. + qlora +gate    0.360        0.007     0.000             1.0  qlora +gate          0.254
+      Social Focus               Tr ens.    0.347        0.000       NaN             NaN LLM ensemble          0.267
+    Personal Focus Tr ens. + qlora +gate    0.319        0.007     0.000             1.0  qlora +gate          0.184
+          Openness Tr ens. + qlora +gate    0.262        0.002     0.006             1.0  qlora +gate          0.123
+      Conservation Tr ens. + qlora +gate    0.347        0.009     0.000             1.0  qlora +gate          0.258
+Self-Transcendence               Tr ens.    0.320        0.000       NaN             NaN LLM ensemble          0.220
+  Self-Enhancement Tr ens. + qlora +gate    0.350        0.007     0.000             1.0  qlora +gate          0.227
+
+--- Forward-selection logs (validation)
+Growth: Tr ens. seed Previous-Sentences-2 (val 0.3042) | + Lex-MJD (lower +0.0056, val 0.3183)
+        Tr+LLM  seed Tr ens. (val 0.3183)  [LLM pool: LLM ensemble, definition, definition +gate, definition-12, definition-12 +gate, qlora +gate]
+Self-Protection: Tr ens. seed Previous-Sentences-2 (val 0.3478) | + Lex-MJD (lower +0.0076, val 0.3622)
+                 Tr+LLM  seed Tr ens. (val 0.3622) | + qlora +gate (lower +0.0042, val 0.3702)  [LLM pool: definition, definition +gate, definition-11, definition-11 +gate, qlora +gate]
+Social Focus: Tr ens. seed Previous-Sentences-2 (val 0.3503) | + Lex-MJD (lower +0.0056, val 0.3641)
+              Tr+LLM  seed Tr ens. (val 0.3641)  [LLM pool: LLM ensemble, definition, definition +gate, definition-11, definition-11 +gate, qlora +gate]
+Personal Focus: Tr ens. seed Lex-MJD (val 0.3174)
+                Tr+LLM  seed Tr ens. (val 0.3174) | + qlora +gate (lower +0.0079, val 0.3295)  [LLM pool: definition, definition +gate, definition-10, definition-10 +gate, qlora +gate]
+Openness: Tr ens. seed Lex-MJD (val 0.2655)
+          Tr+LLM  seed Tr ens. (val 0.2655) | + qlora +gate (lower +0.0044, val 0.2771)  [LLM pool: definition, definition +gate, definition-5, definition-5 +gate, qlora +gate]
+Conservation: Tr ens. seed Previous-Sentences-2 (val 0.3414) | + Lex-MJD (lower +0.0037, val 0.3544)
+              Tr+LLM  seed Tr ens. (val 0.3544) | + qlora +gate (lower +0.0047, val 0.3642)  [LLM pool: definition, definition +gate, definition-8, definition-8 +gate, qlora +gate]
+Self-Transcendence: Tr ens. seed Previous-Sentences-2 (val 0.3227)
+                    Tr+LLM  seed Tr ens. (val 0.3227)  [LLM pool: LLM ensemble, definition, definition +gate, definition-7, definition-7 +gate, qlora +gate]
+Self-Enhancement: Tr ens. seed Lex-MJD (val 0.3513)
+                  Tr+LLM  seed Tr ens. (val 0.3513) | + qlora +gate (lower +0.0064, val 0.3642)  [LLM pool: definition, definition +gate, definition-6, definition-6 +gate, qlora +gate]
+
+--- Per-label McNemar (Tr ens. vs Single, BH within slice): significant values
+Growth: ['Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+Self-Protection: ['Achievement', 'Power: dominance', 'Power: resources', 'Face', 'Security: personal', 'Security: societal', 'Conformity: interpersonal']
+Social Focus: ['Security: societal', 'Conformity: interpersonal', 'Benevolence: dependability', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
+Personal Focus: []
+Openness: []
+Conservation: ['Face', 'Security: personal', 'Security: societal', 'Conformity: interpersonal']
+Self-Transcendence: []
+Self-Enhancement: []

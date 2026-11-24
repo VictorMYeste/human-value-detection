@@ -22,6 +22,15 @@ all of validation and applied once to test. Thresholds use the main rule (per-la
 selected hard-gated pipeline: one-sided paired bootstrap (B = 2000) in both directions,
 with Benjamini-Hochberg correction across the 8 slices x 3 variants of each family.
 
+A fourth system separates the two parts of the hard-gated pipeline (step 2.5):
+
+  masked Direct the selected Direct model behind the gate of the selected hard-gated
+                pipeline (same HO detector, same tau_c), with its own per-label
+                thresholds. It differs from the gated pipeline only in the value model
+                (trained on all sentences instead of the gold-HO-positive ones), and from
+                Direct only in the mask. It is compared with both, with Benjamini-Hochberg
+                correction across the 8 slices of each comparison.
+
 Usage (after rebuild_tables.py):
     python3 approaches/ho-revision/soft_conditioning.py
 Writes results/soft-conditioning.csv and results/soft-conditioning.txt.
@@ -29,6 +38,7 @@ Writes results/soft-conditioning.csv and results/soft-conditioning.txt.
 import contextlib
 import io
 import json
+import re
 import sys
 
 import numpy as np
@@ -41,6 +51,8 @@ from common import (APPROACHES, ID, PAIRS, RESULTS, SLICES, Bootstrap, bh, gold,
 
 ALPHAS = [0.25, 0.5, 1.0, 2.0]
 EPS = 1e-6
+GATED = re.compile(r"^1_(?P<gate>.+?)_(?P<tau>\d(?:\.\d+)?)_(?P<model>.+)$")
+SOFT = ["HO prior", "parent stack", "HO stack"]
 
 
 def logit(p):
@@ -71,8 +83,23 @@ def stack(Xv, yv, Xt, groups):
 
 def scored(yv, sv, yt, st):
     th = label_f1_thresholds(yv, sv)
+    pred = st >= th[None, :]
+    tp, fp, fn = (pred & yt).sum(0), (pred & ~yt).sum(0), (~pred & yt).sum(0)
     return dict(val_f1=macro_f1(yv, sv, th), test_f1=macro_f1(yt, st, th),
-                pred=st >= th[None, :], thresholds=th)
+                test_precision=float(np.mean(np.divide(tp, tp + fp, out=np.zeros(len(tp)), where=tp + fp > 0))),
+                test_recall=float(np.mean(np.divide(tp, tp + fn, out=np.zeros(len(tp)), where=tp + fn > 0))),
+                pred=pred, thresholds=th)
+
+
+def gate_mask(gname, parent):
+    """Open/closed decisions of the gate of a hard-gated pipeline, on val and test."""
+    m = GATED.match(gname)
+    folder, labs = next(v for v in PAIRS.values() if parent in v[1])
+    out = {}
+    for split in ("val", "test"):
+        _, s = load(APPROACHES / folder / "output" / f"{m['gate']}-{split}.tsv", labs, split)
+        out[split] = s[:, [labs.index(parent)]] >= float(m["tau"])
+    return out
 
 
 def main() -> None:
@@ -92,6 +119,8 @@ def main() -> None:
         _, gv = load(out / f"{gname}-val.tsv", labs, "val")
         _, gt = load(out / f"{gname}-test.tsv", labs, "test")
         systems = {"Direct": scored(yv, dv, yt, dt), "hard gate": scored(yv, gv, yt, gt)}
+        mask = gate_mask(gname, parent)
+        systems["masked Direct"] = scored(yv, dv * mask["val"], yt, dt * mask["test"])
 
         # HO prior: alpha chosen on validation
         pc_v, pc_t = ho["val"][parent][:, None], ho["test"][parent][:, None]
@@ -113,6 +142,7 @@ def main() -> None:
 
         for name, r in systems.items():
             row = dict(slice=sl, system=name, val_f1=r["val_f1"], test_f1=r["test_f1"],
+                       test_precision=r["test_precision"], test_recall=r["test_recall"],
                        alpha=r.get("alpha"), direct_model=dname, gated_pipeline=gname)
             if name not in ("Direct", "hard gate"):
                 for ref in ("Direct", "hard gate"):
@@ -124,11 +154,11 @@ def main() -> None:
             rows.append(row)
 
     df = pd.DataFrame(rows)
-    soft = df.system.isin(["HO prior", "parent stack", "HO stack"])
-    for ref in ("Direct", "hard gate"):
-        for kind in ("better", "worse"):
-            col = f"p_{kind}_than_{ref}"
-            df.loc[soft, col + "_bh"] = bh(df.loc[soft, col].to_numpy())
+    for family in (df.system.isin(SOFT), df.system == "masked Direct"):
+        for ref in ("Direct", "hard gate"):
+            for kind in ("better", "worse"):
+                col = f"p_{kind}_than_{ref}"
+                df.loc[family, col + "_bh"] = bh(df.loc[family, col].to_numpy())
     df.to_csv(RESULTS / "soft-conditioning.csv", index=False)
 
     buf = io.StringIO()
@@ -141,23 +171,27 @@ def main() -> None:
 
 def report(df: pd.DataFrame) -> None:
     pd.set_option("display.width", 220)
-    order = ["Direct", "hard gate", "HO prior", "parent stack", "HO stack"]
+    order = ["Direct", "hard gate", "masked Direct"] + SOFT
     tab = df.pivot_table(index="slice", columns="system", values="test_f1", sort=False)[order]
     tab["alpha"] = df[df.system == "HO prior"].set_index("slice")["alpha"]
     print("=== Test macro-F1 (per-label F1 thresholds fitted on validation)")
     print(tab.round(3).to_string())
     print("\n=== Validation macro-F1 (stackers: out-of-fold)")
     print(df.pivot_table(index="slice", columns="system", values="val_f1", sort=False)[order].round(3).to_string())
-    soft = df[df.system.isin(order[2:])]
-    for ref in ("Direct", "hard gate"):
-        print(f"\n=== Soft variants against {ref} (diff on test; BH over 24 tests)")
-        t = soft.pivot_table(index="slice", columns="system", values=f"diff_vs_{ref}", sort=False)[order[2:]]
-        print(t.round(3).to_string())
-        for v in order[2:]:
-            s = soft[soft.system == v]
-            print(f"  {v:12s}: higher in {(s[f'diff_vs_{ref}'] > 0).sum()}/8, significantly better in "
-                  f"{(s[f'p_better_than_{ref}_bh'] < 0.05).sum()}, significantly worse in "
-                  f"{(s[f'p_worse_than_{ref}_bh'] < 0.05).sum()}; mean diff {s[f'diff_vs_{ref}'].mean():+.4f}")
+    for metric in ("test_precision", "test_recall"):
+        print(f"\n=== {metric} (mean over the values of the slice)")
+        print(df.pivot_table(index="slice", columns="system", values=metric, sort=False)[order].round(3).to_string())
+    for family, n in ((SOFT, 24), (["masked Direct"], 8)):
+        sub = df[df.system.isin(family)]
+        for ref in ("Direct", "hard gate"):
+            print(f"\n=== {', '.join(family)} against {ref} (diff on test; BH over {n} tests)")
+            t = sub.pivot_table(index="slice", columns="system", values=f"diff_vs_{ref}", sort=False)[family]
+            print(t.round(3).to_string())
+            for v in family:
+                s = sub[sub.system == v]
+                print(f"  {v:13s}: higher in {(s[f'diff_vs_{ref}'] > 0).sum()}/8, significantly better in "
+                      f"{(s[f'p_better_than_{ref}_bh'] < 0.05).sum()}, significantly worse in "
+                      f"{(s[f'p_worse_than_{ref}_bh'] < 0.05).sum()}; mean diff {s[f'diff_vs_{ref}'].mean():+.4f}")
 
 
 if __name__ == "__main__":

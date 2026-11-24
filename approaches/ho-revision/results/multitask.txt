@@ -1,0 +1,61 @@
+=== Seed 42: multi-task (19 values + 8 HO) vs Direct Baseline, per-label F1 thresholds
+              unit  n_labels  direct_val  mt_val  direct_test  mt_test   diff  lower95  p_mt_better_bh  p_mt_worse_bh
+     All 19 values        19       0.319   0.305        0.315    0.303 -0.011   -0.019           0.999          0.025
+            Growth        11       0.287   0.284        0.291    0.280 -0.010   -0.021           0.999          0.074
+   Self-Protection        10       0.334   0.315        0.322    0.309 -0.013   -0.024           0.999          0.040
+      Social Focus        10       0.335   0.324        0.337    0.321 -0.015   -0.026           0.999          0.009
+    Personal Focus         9       0.301   0.284        0.290    0.284 -0.007   -0.018           0.999          0.195
+          Openness         4       0.251   0.239        0.239    0.235 -0.005   -0.024           0.999          0.338
+      Conservation         7       0.320   0.299        0.301    0.287 -0.014   -0.027           0.999          0.070
+Self-Transcendence         6       0.296   0.301        0.310    0.295 -0.015   -0.030           0.999          0.054
+  Self-Enhancement         5       0.339   0.321        0.322    0.316 -0.005   -0.020           0.999          0.296
+=== Seed 7: multi-task (19 values + 8 HO) vs Direct Baseline, per-label F1 thresholds
+              unit  n_labels  direct_val  mt_val  direct_test  mt_test   diff  lower95  p_mt_better_bh  p_mt_worse_bh
+     All 19 values        19       0.325   0.326        0.324    0.321 -0.003   -0.010           0.944          0.502
+            Growth        11       0.293   0.302        0.300    0.293 -0.007   -0.018           0.944          0.398
+   Self-Protection        10       0.344   0.344        0.335    0.334 -0.001   -0.011           0.944          0.502
+      Social Focus        10       0.339   0.347        0.341    0.342  0.000   -0.010           0.944          0.532
+    Personal Focus         9       0.310   0.302        0.305    0.298 -0.007   -0.017           0.944          0.398
+          Openness         4       0.259   0.250        0.248    0.230 -0.018   -0.036           0.944          0.398
+      Conservation         7       0.335   0.330        0.318    0.314 -0.004   -0.018           0.944          0.502
+Self-Transcendence         6       0.302   0.321        0.321    0.318 -0.003   -0.018           0.944          0.502
+  Self-Enhancement         5       0.341   0.338        0.343    0.342 -0.001   -0.015           0.944          0.502
+=== Seed 1701: multi-task (19 values + 8 HO) vs Direct Baseline, per-label F1 thresholds
+              unit  n_labels  direct_val  mt_val  direct_test  mt_test   diff  lower95  p_mt_better_bh  p_mt_worse_bh
+     All 19 values        19       0.325   0.325        0.319    0.313 -0.006   -0.013           0.996          0.190
+            Growth        11       0.297   0.298        0.291    0.278 -0.012   -0.022           0.996          0.079
+   Self-Protection        10       0.344   0.339        0.329    0.331  0.001   -0.007           0.996          0.616
+      Social Focus        10       0.340   0.342        0.329    0.327 -0.002   -0.011           0.996          0.439
+    Personal Focus         9       0.309   0.307        0.307    0.297 -0.010   -0.021           0.996          0.117
+          Openness         4       0.261   0.253        0.252    0.220 -0.032   -0.051           0.996          0.036
+      Conservation         7       0.330   0.321        0.309    0.307 -0.002   -0.012           0.996          0.439
+Self-Transcendence         6       0.306   0.312        0.301    0.299 -0.002   -0.013           0.996          0.439
+  Self-Enhancement         5       0.349   0.349        0.347    0.341 -0.006   -0.019           0.996          0.407
+
+=== Across seeds [7, 42, 1701]: test difference (multi-task - Direct)
+                      mean      sd     min     max  seeds_positive
+unit                                                              
+All 19 values      -0.0067  0.0042 -0.0113 -0.0031               0
+Growth             -0.0100  0.0025 -0.0124 -0.0074               0
+Self-Protection    -0.0043  0.0079 -0.0134  0.0013               1
+Social Focus       -0.0055  0.0085 -0.0152  0.0004               1
+Personal Focus     -0.0081  0.0020 -0.0105 -0.0069               0
+Openness           -0.0182  0.0135 -0.0318 -0.0048               0
+Conservation       -0.0065  0.0062 -0.0136 -0.0020               0
+Self-Transcendence -0.0067  0.0076 -0.0155 -0.0018               0
+Self-Enhancement   -0.0043  0.0026 -0.0061 -0.0013               0
+
+=== The multi-task model's HO outputs as HO detectors (test macro-F1 over the pair)
+ seed                                    pair  mt_test             detector  detector_test
+   42              Growth vs. Self-Protection    0.581             Baseline          0.592
+   42         Social Focus vs. Personal Focus    0.566               TD-NMF          0.574
+   42               Openness vs. Conservation    0.411 Lex-LIWC-22_LingFeat          0.432
+   42 Self-Transcendence vs. Self-Enhancement    0.485          TD-BERTopic          0.509
+    7              Growth vs. Self-Protection    0.601             Baseline          0.592
+    7         Social Focus vs. Personal Focus    0.583               TD-NMF          0.574
+    7               Openness vs. Conservation    0.439 Lex-LIWC-22_LingFeat          0.432
+    7 Self-Transcendence vs. Self-Enhancement    0.516          TD-BERTopic          0.509
+ 1701              Growth vs. Self-Protection    0.600             Baseline          0.592
+ 1701         Social Focus vs. Personal Focus    0.584               TD-NMF          0.574
+ 1701               Openness vs. Conservation    0.438 Lex-LIWC-22_LingFeat          0.432
+ 1701 Self-Transcendence vs. Self-Enhancement    0.515          TD-BERTopic          0.509

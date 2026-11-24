@@ -1,28 +1,52 @@
 === Test macro-F1 (per-label F1 thresholds fitted on validation)
-system              Direct  hard gate  HO prior  parent stack  HO stack  alpha
-slice                                                                         
-Growth               0.297      0.268     0.298         0.299     0.299   0.50
-Self-Protection      0.329      0.306     0.330         0.332     0.340   0.25
-Social Focus         0.338      0.316     0.347         0.338     0.341   0.25
-Personal Focus       0.309      0.283     0.310         0.309     0.309   0.25
-Openness             0.255      0.230     0.255         0.255     0.247   0.25
-Conservation         0.312      0.301     0.313         0.318     0.321   0.25
-Self-Transcendence   0.320      0.297     0.327         0.323     0.318   0.25
-Self-Enhancement     0.337      0.312     0.337         0.343     0.336   0.25
+system              Direct  hard gate  masked Direct  HO prior  parent stack  HO stack  alpha
+slice                                                                                        
+Growth               0.297      0.268          0.284     0.298         0.299     0.299   0.50
+Self-Protection      0.329      0.306          0.328     0.330         0.332     0.340   0.25
+Social Focus         0.338      0.316          0.345     0.347         0.338     0.341   0.25
+Personal Focus       0.309      0.283          0.300     0.310         0.309     0.309   0.25
+Openness             0.255      0.230          0.246     0.255         0.255     0.247   0.25
+Conservation         0.312      0.301          0.321     0.313         0.318     0.321   0.25
+Self-Transcendence   0.320      0.293          0.331     0.327         0.323     0.318   0.25
+Self-Enhancement     0.337      0.312          0.323     0.337         0.343     0.336   0.25
 
 === Validation macro-F1 (stackers: out-of-fold)
-system              Direct  hard gate  HO prior  parent stack  HO stack
-slice                                                                  
-Growth               0.304      0.283     0.305         0.300     0.306
-Self-Protection      0.348      0.317     0.348         0.344     0.350
-Social Focus         0.350      0.334     0.354         0.350     0.350
-Personal Focus       0.317      0.292     0.317         0.315     0.315
-Openness             0.266      0.252     0.269         0.264     0.260
-Conservation         0.341      0.320     0.343         0.337     0.337
-Self-Transcendence   0.323      0.309     0.333         0.325     0.320
-Self-Enhancement     0.351      0.335     0.352         0.346     0.351
+system              Direct  hard gate  masked Direct  HO prior  parent stack  HO stack
+slice                                                                                 
+Growth               0.304      0.283          0.294     0.305         0.300     0.306
+Self-Protection      0.348      0.317          0.348     0.348         0.344     0.350
+Social Focus         0.350      0.334          0.351     0.354         0.350     0.350
+Personal Focus       0.317      0.292          0.308     0.317         0.315     0.315
+Openness             0.266      0.252          0.251     0.269         0.264     0.260
+Conservation         0.341      0.320          0.337     0.343         0.337     0.337
+Self-Transcendence   0.323      0.304          0.328     0.333         0.325     0.320
+Self-Enhancement     0.351      0.335          0.332     0.352         0.346     0.351
 
-=== Soft variants against Direct (diff on test; BH over 24 tests)
+=== test_precision (mean over the values of the slice)
+system              Direct  hard gate  masked Direct  HO prior  parent stack  HO stack
+slice                                                                                 
+Growth               0.270      0.253          0.280     0.279         0.273     0.284
+Self-Protection      0.287      0.256          0.305     0.293         0.297     0.314
+Social Focus         0.296      0.284          0.320     0.313         0.300     0.303
+Personal Focus       0.277      0.278          0.274     0.275         0.273     0.284
+Openness             0.223      0.223          0.258     0.255         0.237     0.250
+Conservation         0.285      0.248          0.285     0.311         0.298     0.312
+Self-Transcendence   0.281      0.265          0.344     0.295         0.299     0.277
+Self-Enhancement     0.303      0.301          0.335     0.294         0.301     0.311
+
+=== test_recall (mean over the values of the slice)
+system              Direct  hard gate  masked Direct  HO prior  parent stack  HO stack
+slice                                                                                 
+Growth               0.348      0.293          0.305     0.342         0.353     0.340
+Self-Protection      0.398      0.397          0.376     0.392         0.394     0.388
+Social Focus         0.400      0.374          0.378     0.398         0.397     0.403
+Personal Focus       0.355      0.319          0.338     0.360         0.362     0.368
+Openness             0.299      0.250          0.236     0.257         0.278     0.270
+Conservation         0.352      0.400          0.371     0.341         0.352     0.347
+Self-Transcendence   0.380      0.338          0.331     0.372         0.361     0.384
+Self-Enhancement     0.388      0.338          0.321     0.404         0.403     0.411
+
+=== HO prior, parent stack, HO stack against Direct (diff on test; BH over 24 tests)
 system              HO prior  parent stack  HO stack
 slice                                               
 Growth                 0.001         0.002     0.002
@@ -33,11 +57,11 @@ Openness              -0.000        -0.001    -0.009
 Conservation           0.002         0.007     0.010
 Self-Transcendence     0.007         0.003    -0.002
 Self-Enhancement      -0.000         0.006    -0.001
-  HO prior    : higher in 6/8, significantly better in 1, significantly worse in 0; mean diff +0.0026
-  parent stack: higher in 7/8, significantly better in 0, significantly worse in 0; mean diff +0.0026
-  HO stack    : higher in 4/8, significantly better in 2, significantly worse in 0; mean diff +0.0018
+  HO prior     : higher in 6/8, significantly better in 1, significantly worse in 0; mean diff +0.0026
+  parent stack : higher in 7/8, significantly better in 0, significantly worse in 0; mean diff +0.0026
+  HO stack     : higher in 4/8, significantly better in 2, significantly worse in 0; mean diff +0.0018
 
-=== Soft variants against hard gate (diff on test; BH over 24 tests)
+=== HO prior, parent stack, HO stack against hard gate (diff on test; BH over 24 tests)
 system              HO prior  parent stack  HO stack
 slice                                               
 Growth                 0.030         0.031     0.031
@@ -46,8 +70,34 @@ Social Focus           0.031         0.022     0.025
 Personal Focus         0.027         0.026     0.026
 Openness               0.025         0.025     0.017
 Conservation           0.012         0.017     0.020
-Self-Transcendence     0.030         0.026     0.021
+Self-Transcendence     0.034         0.030     0.025
 Self-Enhancement       0.025         0.031     0.024
-  HO prior    : higher in 8/8, significantly better in 7, significantly worse in 0; mean diff +0.0254
-  parent stack: higher in 8/8, significantly better in 8, significantly worse in 0; mean diff +0.0254
-  HO stack    : higher in 8/8, significantly better in 7, significantly worse in 0; mean diff +0.0245
+  HO prior     : higher in 8/8, significantly better in 7, significantly worse in 0; mean diff +0.0259
+  parent stack : higher in 8/8, significantly better in 8, significantly worse in 0; mean diff +0.0259
+  HO stack     : higher in 8/8, significantly better in 7, significantly worse in 0; mean diff +0.0251
+
+=== masked Direct against Direct (diff on test; BH over 8 tests)
+system              masked Direct
+slice                            
+Growth                     -0.012
+Self-Protection            -0.001
+Social Focus                0.007
+Personal Focus             -0.009
+Openness                   -0.010
+Conservation                0.010
+Self-Transcendence          0.011
+Self-Enhancement           -0.014
+  masked Direct: higher in 3/8, significantly better in 1, significantly worse in 3; mean diff -0.0021
+
+=== masked Direct against hard gate (diff on test; BH over 8 tests)
+system              masked Direct
+slice                            
+Growth                      0.017
+Self-Protection             0.022
+Social Focus                0.029
+Personal Focus              0.017
+Openness                    0.016
+Conservation                0.020
+Self-Transcendence          0.038
+Self-Enhancement            0.011
+  masked Direct: higher in 8/8, significantly better in 7, significantly worse in 0; mean diff +0.0212

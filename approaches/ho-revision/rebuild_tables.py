@@ -199,15 +199,19 @@ def part_c(boot, cand_rows, sel_rows, selections):
         mc = [p for p in r["mc"] if not np.isnan(p)]
         mc_adj = bh(mc) if mc else []
         labs_sig = [lab for lab, p in zip([l for l, q in zip(d["labels"], r["mc"]) if not np.isnan(q)], mc_adj) if p < 0.05]
+        # direction: values where the gated pipeline finds more of the true cases than Direct
+        tp_d, tp_g = (d["yt"] & d["pred"]).sum(0), (d["yt"] & g["pred"]).sum(0)
+        sig_gated = [lab for lab in labs_sig if tp_g[d["labels"].index(lab)] > tp_d[d["labels"].index(lab)]]
         print(f"{r['slice']:18s} {len(d['labels']):4d} {d['name']:>30s} {d['val_f1']:.3f} {d['test_f1']:.3f} | "
               f"{g['name']:>40s} {g['val_f1']:.3f} {g['test_f1']:.3f} | "
               f"{d['test_f1'] - g['test_f1']:+.3f} {t['lower95']:+.3f} {r['p_direct_bh']:.3f} {r['p_gated_bh']:.3f} "
-              f"{len(labs_sig)}/{len(d['labels'])} {labs_sig}")
+              f"{len(labs_sig)}/{len(d['labels'])} {labs_sig} gated more TP: {sig_gated}")
         sel_rows.append(dict(part="C", unit=r["slice"], rule=MAIN, direct=d["name"], direct_val=d["val_f1"],
                              direct_test=d["test_f1"], gated=g["name"], gated_val=g["val_f1"],
                              gated_test=g["test_f1"], diff=d["test_f1"] - g["test_f1"],
                              lower95=t["lower95"], p_direct_better_bh=r["p_direct_bh"],
                              p_gated_better_bh=r["p_gated_bh"], mcnemar_sig=labs_sig,
+                             mcnemar_sig_gated_more_tp=sig_gated,
                              direct_thresholds=d["thresholds"].round(2).tolist(),
                              gated_thresholds=g["thresholds"].round(2).tolist()))
         selections.setdefault("direct", {})[r["slice"]] = d["name"]

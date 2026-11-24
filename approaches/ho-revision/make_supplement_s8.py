@@ -219,10 +219,12 @@ Table~\ref{tab:s8-values-rules} repeats the comparison of main-text Table~4 with
     for sl in SLICES:
         r = sel[(sel.part == "C") & (sel.unit == sl)].iloc[0]
         labs = ast.literal_eval(r.mcnemar_sig)
+        g_more = set(ast.literal_eval(r.mcnemar_sig_gated_more_tp))
         n = len(ast.literal_eval(r.direct_thresholds))
-        rows.append([sl, f"{len(labs)} of {n}", ", ".join(ABBR[x] for x in labs) or "none"])
+        rows.append([sl, f"{len(labs)} of {n}",
+                     ", ".join(ABBR[x] + ("$^{G}$" if x in g_more else "") for x in labs) or "none"])
     out.append(table(
-        "Per-label exact McNemar tests on the gold positives, \\emph{Direct} vs.\\ HO-gated (main rule, systems of main-text Table~4), with Benjamini--Hochberg correction within each slice. Abbreviations as in Table~\\ref{tab:abbr-moral-values}.",
+        "Per-label exact McNemar tests on the gold positives, \\emph{Direct} vs.\\ HO-gated (main rule, systems of main-text Table~4), with Benjamini--Hochberg correction within each slice. The \\emph{Direct} model finds more of the true cases of each listed value, except for the values marked $^{G}$, where the HO-gated pipeline finds more. Abbreviations as in Table~\\ref{tab:abbr-moral-values}.",
         "tab:s8-mcnemar", "lcX", "\\textbf{Slice} & \\textbf{Significant} & \\textbf{Values}", rows))
 
     thr = pd.read_csv(RESULTS / "threshold-gain-direct.csv")

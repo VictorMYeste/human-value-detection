@@ -43,14 +43,14 @@ Self-Transcendence vs. Self-Enhancement    0.509   0.486 / 0.488   0.488 / 0.488
 
 --- Main rule (per-label F1). Diff = Direct - gated on test.
 slice              #val              Direct (selected)    val   test |                         gated (selected)    val   test |   diff  low95  pD>G  pG>D McNemar sig (BH)
-Growth               11           Previous-Sentences-2 0.304 0.297 |                  1_Baseline_0.5_Baseline 0.283 0.268 | +0.029 +0.017 0.001 1.000 7/11 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Achievement', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance']
-Self-Protection      10           Previous-Sentences-2 0.348 0.329 |                  1_Baseline_0.1_Baseline 0.317 0.306 | +0.023 +0.011 0.000 1.000 0/10 []
-Social Focus         10           Previous-Sentences-2 0.350 0.338 |                   1_NER_0.1_Lex-Schwartz 0.334 0.316 | +0.022 +0.010 0.002 1.000 2/10 ['Conformity: interpersonal', 'Universalism: tolerance']
-Personal Focus        9                        Lex-MJD 0.317 0.309 |                 1_Lex-LIWC_0.17_Baseline 0.292 0.283 | +0.026 +0.015 0.000 1.000 7/9 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources']
-Openness              4                        Lex-MJD 0.266 0.255 |    1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA 0.252 0.230 | +0.025 +0.008 0.013 1.000 2/4 ['Stimulation', 'Hedonism']
-Conservation          7           Previous-Sentences-2 0.341 0.312 |        1_Lex-LIWC-22_LingFeat_0.1_TD-LDA 0.320 0.301 | +0.010 -0.006 0.157 1.000 4/7 ['Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules']
-Self-Transcendence    6           Previous-Sentences-2 0.323 0.320 |       1_Lex-WorryWords_0.16_Lex-Schwartz 0.304 0.293 | +0.027 +0.012 0.001 1.000 2/6 ['Universalism: concern', 'Universalism: tolerance']
-Self-Enhancement      5                        Lex-MJD 0.351 0.337 |          1_TD-BERTopic_0.29_Lex-Schwartz 0.335 0.312 | +0.025 +0.010 0.004 1.000 2/5 ['Hedonism', 'Power: dominance']
+Growth               11           Previous-Sentences-2 0.304 0.297 |                  1_Baseline_0.5_Baseline 0.283 0.268 | +0.029 +0.017 0.001 1.000 7/11 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Achievement', 'Universalism: concern', 'Universalism: nature', 'Universalism: tolerance'] gated more TP: []
+Self-Protection      10           Previous-Sentences-2 0.348 0.329 |                  1_Baseline_0.1_Baseline 0.317 0.306 | +0.023 +0.011 0.000 1.000 0/10 [] gated more TP: []
+Social Focus         10           Previous-Sentences-2 0.350 0.338 |                   1_NER_0.1_Lex-Schwartz 0.334 0.316 | +0.022 +0.010 0.002 1.000 2/10 ['Conformity: interpersonal', 'Universalism: tolerance'] gated more TP: []
+Personal Focus        9                        Lex-MJD 0.317 0.309 |                 1_Lex-LIWC_0.17_Baseline 0.292 0.283 | +0.026 +0.015 0.000 1.000 7/9 ['Self-direction: thought', 'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: dominance', 'Power: resources'] gated more TP: ['Power: dominance', 'Power: resources']
+Openness              4                        Lex-MJD 0.266 0.255 |    1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA 0.252 0.230 | +0.025 +0.008 0.013 1.000 2/4 ['Stimulation', 'Hedonism'] gated more TP: []
+Conservation          7           Previous-Sentences-2 0.341 0.312 |        1_Lex-LIWC-22_LingFeat_0.1_TD-LDA 0.320 0.301 | +0.010 -0.006 0.157 1.000 4/7 ['Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules'] gated more TP: ['Security: personal', 'Security: societal', 'Tradition', 'Conformity: rules']
+Self-Transcendence    6           Previous-Sentences-2 0.323 0.320 |       1_Lex-WorryWords_0.16_Lex-Schwartz 0.304 0.293 | +0.027 +0.012 0.001 1.000 2/6 ['Universalism: concern', 'Universalism: tolerance'] gated more TP: ['Universalism: concern']
+Self-Enhancement      5                        Lex-MJD 0.351 0.337 |          1_TD-BERTopic_0.29_Lex-Schwartz 0.335 0.312 | +0.025 +0.010 0.004 1.000 2/5 ['Hedonism', 'Power: dominance'] gated more TP: []
 
 --- The same comparison under each rule (validation selection within each rule).
 slice                           label F1              |             global F1              |             fixed 0.5             

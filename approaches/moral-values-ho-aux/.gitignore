@@ -1,0 +1,4 @@
+models/
+checkpoints/
+__pycache__/
+results/run.log

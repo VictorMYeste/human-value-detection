@@ -13,7 +13,8 @@ and 8.2 of the revision plan). Only per-label F1 thresholds are fitted here.
 
 Usage (after rebuild_tables.py and soft_conditioning.py):
     python3 approaches/ho-revision/gate_diagnostics.py
-Writes results/gate-diagnostics.txt.
+Writes results/gate-diagnostics.txt and results/gate-false-positives.csv (part 2, used for a
+table in Supplementary Section S8).
 """
 import contextlib
 import io
@@ -51,16 +52,20 @@ def false_positives() -> None:
         _, gt = load(out / f"{gname}-test.tsv", labs, "test")
         m = gate_mask(gname, parent)
         cat = yt.any(1)[:, None]
+        admitted = m["test"][:, 0]
         res = {}
         for sys_, sv, st in (("masked Direct", dv * m["val"], dt * m["test"]), ("gated", gv, gt)):
             p = st >= label_f1_thresholds(yv, sv)[None, :]
             res[sys_] = dict(fp_out=int((p & ~cat).sum()), fp_in=int((p & ~yt & cat).sum()), tp=int((p & yt).sum()))
         rows.append(dict(slice=sl, pipeline=gname,
+                         n_admitted_out=int((admitted & ~cat[:, 0]).sum()),
+                         n_admitted_in=int((admitted & cat[:, 0]).sum()),
                          fp_out_masked=res["masked Direct"]["fp_out"], fp_out_gated=res["gated"]["fp_out"],
                          fp_in_masked=res["masked Direct"]["fp_in"], fp_in_gated=res["gated"]["fp_in"],
                          tp_masked=res["masked Direct"]["tp"], tp_gated=res["gated"]["tp"]))
     df = pd.DataFrame(rows)
     df["extra_fp_out"] = df.fp_out_gated / df.fp_out_masked - 1
+    df.to_csv(RESULTS / "gate-false-positives.csv", index=False)
     print(df.round(3).to_string(index=False))
     print(f"  extra false positives on sentences without the category: "
           f"{df.extra_fp_out.min():.1%} to {df.extra_fp_out.max():.1%}")

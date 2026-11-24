@@ -2,10 +2,11 @@
 """
 LaTeX for Supplementary Section S8 ("Results under per-label F1 thresholds"), step 2.4d of
 the revision plan. It only formats results already computed by threshold_sensitivity.py
-rebuild_tables.py, rebuild_ensembles.py, soft_conditioning.py and multitask_eval.py; nothing is refitted here.
+rebuild_tables.py, rebuild_ensembles.py, soft_conditioning.py, gate_diagnostics.py, multitask_eval.py
+and seed_spread.py; nothing is refitted here.
 
 Usage (after threshold_sensitivity.py, rebuild_tables.py, rebuild_ensembles.py and
-threshold_gain_direct.py, soft_conditioning.py and multitask_eval.py):
+threshold_gain_direct.py, soft_conditioning.py, gate_diagnostics.py, multitask_eval.py and seed_spread.py):
     python3 approaches/ho-revision/make_supplement_s8.py
 Writes results/supplement-s8.tex, to be pasted (or \\input) at the end of the supplement.
 """
@@ -35,6 +36,7 @@ ABBR = {
     "Universalism: concern": "Uni-c", "Universalism: nature": "Uni-n", "Universalism: tolerance": "Uni-t",
 }
 CASCADE = re.compile(r"^1_(?P<gate>.+)_(?P<tg>0\.\d+)_(?P<model>.+)$")
+WORDS = dict(enumerate(["no", "one", "two", "three", "four", "five", "six", "seven", "eight"]))
 RULES = ["fixed 0.5", "Eq. 8, floor 0.30", "Eq. 8, floor 0.40", "Eq. 8, floor 0.50", "label F1", "global F1"]
 RULE_TEX = ["0.5", "$\\pi{=}0.30$", "$\\pi{=}0.40$", "$\\pi{=}0.50$", "Label $F_1$", "Global $F_1$"]
 
@@ -152,7 +154,7 @@ Tables~\ref{tab:s8-rules-ho} and~\ref{tab:s8-rules-values} compare six rules, ea
                 c = cmp[(cmp.task == task) & (cmp.baseline == base) & (cmp["rule"] == r)]
                 if c.empty:
                     continue
-                rows.append([task, RULE_TEX[RULES.index(base)], rt, str(len(c)), f3(c.delta.mean()),
+                rows.append([task, RULE_TEX[RULES.index(base)], rt, str(len(c)), f3(c.delta.mean()), f3(c.delta.median()),
                              str(int((c.delta > 0).sum())), str(int((c.p_bh < 0.05).sum())), str(int((c.p_worse_bh < 0.05).sum()))])
     seen = set()
     for r in rows:
@@ -162,9 +164,9 @@ Tables~\ref{tab:s8-rules-ho} and~\ref{tab:s8-rules-values} compare six rules, ea
                 r[0] = ""
             seen.add(key)
     out.append(table(
-        "Each threshold rule against a reference rule (the fixed threshold 0.5, or the recall rule with $\\pi=0.40$): number of systems, mean test difference, and number of systems for which the rule scores higher, significantly better, and significantly worse (one-sided paired bootstrap, Benjamini--Hochberg correction within each block).",
-        "tab:s8-rules-summary", "llXccccc",
-        "\\textbf{Task} & \\textbf{Reference} & \\textbf{Rule} & \\textbf{Systems} & \\textbf{Mean $\\Delta$} & \\textbf{Higher} & \\textbf{Sig.\\ better} & \\textbf{Sig.\\ worse}",
+        "Each threshold rule against a reference rule (the fixed threshold 0.5, or the recall rule with $\\pi=0.40$): number of systems, mean and median test difference, and number of systems for which the rule scores higher, significantly better, and significantly worse (one-sided paired bootstrap, Benjamini--Hochberg correction within each block). In HO detection the means are pulled up by the \\emph{Social vs.\\ Personal} LIWC-22 detector, which scores 0.038 at the fixed threshold (Table~\\ref{tab:s8-rules-ho}), so the medians describe a typical detector better.",
+        "tab:s8-rules-summary", "llXcccccc",
+        "\\textbf{Task} & \\textbf{Reference} & \\textbf{Rule} & \\textbf{Systems} & \\textbf{Mean $\\Delta$} & \\textbf{Median $\\Delta$} & \\textbf{Higher} & \\textbf{Sig.\\ better} & \\textbf{Sig.\\ worse}",
         rows))
 
     # ---- S8.2 Presence cascades
@@ -333,7 +335,7 @@ Tables~\ref{tab:s8-ens} and~\ref{tab:s8-hybrid} rebuild the ensembles of main-te
 \subsection{Soft uses of the HO probability}
 \label{sec:s8-soft}
 
-Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_1$ thresholds fitted on validation. The HO prior multiplies the \emph{Direct} probability of each value by $\hat{p}_c^{\alpha}$, where $\hat{p}_c$ is the probability of the slice's category from the HO detector selected in Table~\ref{tab:s8-rules-ho}, and $\alpha$ is chosen on validation from $\{0.25,0.5,1,2\}$. The parent stack and the HO stack are logistic regressions fitted for each value on the log-odds of the \emph{Direct} probability and of the parent HO probability, or of all eight HO probabilities. Their validation scores are out-of-fold (five folds, all the sentences of a text in the same fold), and they are refitted on the whole validation split before being applied once to test. Masked Direct places the \emph{Direct} model behind the gate of the selected hard-gated pipeline, with the same detector and gate threshold, so it differs from that pipeline only in the value model. Benjamini--Hochberg correction runs across the 24 soft entries and, separately, across the eight masked Direct entries of each comparison.
+Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_1$ thresholds fitted on validation. The HO prior multiplies the \emph{Direct} probability of each value by $\hat{p}_c^{\alpha}$, where $\hat{p}_c$ is the probability of the slice's category from the HO detector selected in Table~\ref{tab:s8-rules-ho}, and $\alpha$ is chosen on validation from $\{0.25,0.5,1,2\}$. The parent stack and the HO stack are logistic regressions fitted for each value on the log-odds of the \emph{Direct} probability and of the parent HO probability, or of all eight HO probabilities. Their validation scores are out-of-fold (five folds, all the sentences of a text in the same fold), and they are refitted on the whole validation split before being applied once to test. Masked Direct places the \emph{Direct} model behind the gate of the selected hard-gated pipeline, with the same detector and gate threshold, so it differs from that pipeline only in the value model. The HO prior and masked Direct use the same HO detector in five slices. In \emph{Social Focus}, \emph{Personal Focus} and \emph{Self-Transcendence}, the gate of the selected pipeline uses a different detector from the one selected for HO detection. Table~\ref{tab:s8-gate-fp} counts the false positives behind the gate. Benjamini--Hochberg correction runs across the 24 soft entries and, separately, across the eight masked Direct entries of each comparison.
 """)
 
     def soft_sig(r, ref):
@@ -363,6 +365,22 @@ Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_
         "\\textbf{$\\Delta$ Direct} & \\textbf{LB} & \\textbf{Sig.} & \\textbf{$\\Delta$ gated} & \\textbf{LB} & \\textbf{Sig.}",
         rows) + "}\n")
 
+    fp = pd.read_csv(RESULTS / "gate-false-positives.csv")
+    n_in_fewer = int((fp.fp_in_gated < fp.fp_in_masked).sum())
+    out.append(rf"""
+Table~\ref{{tab:s8-gate-fp}} shows where the two systems behind the same gate differ. On the admitted sentences without the category, the gated value models make {100 * fp.extra_fp_out.min():.0f}\% to {100 * fp.extra_fp_out.max():.0f}\% more false positives than the \emph{{Direct}} model. On the admitted sentences with the category, they make fewer in {WORDS[n_in_fewer]} of the eight slices. The value models thus make fewer errors on the kind of sentence they were trained on and more on the others.
+""")
+    rows = []
+    for r in fp.itertuples():
+        rows.append([r.slice, str(r.n_admitted_out), str(r.n_admitted_in), str(r.fp_out_masked), str(r.fp_out_gated),
+                     f"{100 * r.extra_fp_out:+.0f}\\%", str(r.fp_in_masked), str(r.fp_in_gated),
+                     str(r.tp_masked), str(r.tp_gated)])
+    out.append("{\\setlength{\\tabcolsep}{3pt}\n" + table(
+        "Where the hard-gated pipelines add false positives (test). Both systems sit behind the same gate, that of the selected pipeline: masked \\emph{Direct} (M) uses the \\emph{Direct} model, and the gated pipeline (G) uses the slice's value model, trained only on sentences that express the category. Admitted: sentences that pass the gate, without and with the category (gold labels). FP: false positives, counted over sentence--value pairs, on sentences without and with the category; Extra: G relative to M on sentences without the category. TP: true positives. Each system uses its own per-label $F_1$ thresholds.",
+        "tab:s8-gate-fp", "lccccccccc",
+        "\\textbf{Slice} & \\textbf{Adm.\\ without} & \\textbf{Adm.\\ with} & \\textbf{FP without M} & \\textbf{FP without G} & "
+        "\\textbf{Extra} & \\textbf{FP with M} & \\textbf{FP with G} & \\textbf{TP M} & \\textbf{TP G}", rows, size="\\scriptsize") + "}\n")
+
     mt = pd.read_csv(RESULTS / "multitask.csv")
     mt_ho = pd.read_csv(RESULTS / "multitask-ho.csv")
     seeds = list(dict.fromkeys(mt.seed))
@@ -370,11 +388,14 @@ Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_
     mean = mt.groupby("unit")["diff"].mean()
     slice_means = mean.drop("All 19 values")
     n_neg = int((mt["diff"] < 0).sum())
+    all19 = mt[mt.unit == "All 19 values"]
+    assert (all19["diff"] < 0).all()
+    n19_sig = {0: "none", 1: "one", 2: "two", 3: "all"}[int((all19.p_mt_worse_bh < 0.05).sum())]
     out.append(rf"""
 \subsection{{Multi-task training with HO labels}}
 \label{{sec:s8-multitask}}
 
-The multi-task model of main-text Section~3.3.3 fine-tunes one DeBERTa-base encoder with a linear head over 27 labels, the 19 values and the eight HO categories, with the hyperparameters of the \emph{{Direct}} Baseline. Checkpoint selection and early stopping use the validation Macro-$F_1$ over the 27 labels at the threshold 0.5. The model was trained with the three seeds of the \emph{{Direct}} runs ({", ".join(map(str, seeds[:-1]))} and {seeds[-1]}), and each run is compared with the \emph{{Direct}} Baseline of the same seed. Table~\ref{{tab:s8-multitask}} uses only the 19 value outputs. Both systems use per-label $F_1$ thresholds fitted on validation, and Benjamini--Hochberg correction runs across the nine units of each seed. Averaged over the seeds, the difference on test is {f3(mean["All 19 values"])} on all 19 values and between {f3(slice_means.max())} and {f3(slice_means.min())} in the slices, and {n_neg} of the {len(mt)} differences are negative. Table~\ref{{tab:s8-multitask-ho}} scores the eight HO outputs of the same model as HO detectors, with per-label thresholds, against the detectors selected in main-text Table~1.
+The multi-task model of main-text Section~3.3.3 fine-tunes one DeBERTa-base encoder with a linear head over 27 labels, the 19 values and the eight HO categories, with the hyperparameters of the \emph{{Direct}} Baseline. Checkpoint selection and early stopping use the validation Macro-$F_1$ over the 27 labels at the threshold 0.5. The model was trained with the three seeds of the \emph{{Direct}} runs ({", ".join(map(str, seeds[:-1]))} and {seeds[-1]}), and each run is compared with the \emph{{Direct}} Baseline of the same seed. Table~\ref{{tab:s8-multitask}} uses only the 19 value outputs. Both systems use per-label $F_1$ thresholds fitted on validation, and Benjamini--Hochberg correction runs across the nine units of each seed. All three seeds score lower over the 19 values, {n19_sig} of them significantly. Averaged over the seeds, the difference on test is {f3(mean["All 19 values"])} over all 19 values and between {f3(slice_means.max())} and {f3(slice_means.min())} in the slices, and {n_neg} of the {len(mt)} differences are negative (the nine units of each seed overlap, since the slices are subsets of the 19 values). Table~\ref{{tab:s8-multitask-ho}} scores the eight HO outputs of the same model as HO detectors, with per-label thresholds, against the detectors selected in main-text Table~1.
 """)
     rows = []
     for u in units:
@@ -400,6 +421,24 @@ The multi-task model of main-text Section~3.3.3 fine-tunes one DeBERTa-base enco
         "tab:s8-multitask-ho", "Xccccc",
         "\\textbf{Pair} & \\textbf{Seed} & \\textbf{Multi-task} & \\textbf{Selected detector} & \\textbf{Test} & "
         "\\textbf{$\\Delta$}", rows))
+
+    sp = pd.read_csv(RESULTS / "seed-spread.csv")
+    out.append(rf"""
+\subsection{{Variation between training runs}}
+\label{{sec:s8-seeds}}
+
+Table~\ref{{tab:s8-seeds}} gives the test Macro-$F_1$ of the five \emph{{Direct}} models of each slice in three training runs with different random seeds (42, the run used throughout, and 7 and 1701, saved by the earlier study cited in the main text). Each run has its own per-label $F_1$ thresholds fitted on validation. Over the 40 model--slice pairs, the range across the three runs has a median of {sp["range"].median():.3f} and a maximum of {sp["range"].max():.3f}. Main-text limitation~1 compares the differences between systems with this spread.
+""")
+    rows = []
+    for sl in SLICES:
+        g = sp[sp.slice == sl]
+        for i, r in enumerate(g.itertuples()):
+            rows.append([sl if i == 0 else "", pretty(r.model), f3(r.s42), f3(r.s7), f3(r.s1701), f3(r.range)])
+    out.append(longtable(
+        "Test Macro-$F_1$ of the five \\emph{Direct} models of each slice in three training runs (seeds 42, 7 and 1701), with per-label $F_1$ thresholds. Range: largest minus smallest of the three.",
+        "tab:s8-seeds", "llcccc",
+        "\\textbf{Slice} & \\textbf{Model} & \\textbf{Seed 42} & \\textbf{Seed 7} & \\textbf{Seed 1701} & \\textbf{Range}",
+        rows))
 
     (RESULTS / "supplement-s8.tex").write_text("\n".join(out))
     print(f"wrote {RESULTS / 'supplement-s8.tex'}")

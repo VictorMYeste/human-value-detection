@@ -69,32 +69,32 @@ Self-Enhancement & Direct: Baseline & 0.292 & 0.332$^{+}$ & 0.277$^{-}$ & 0.216$
 \begin{table}[!htbp]
 \centering
 \footnotesize
-\caption{Each threshold rule against a reference rule (the fixed threshold 0.5, or the recall rule with $\pi=0.40$): number of systems, mean test difference, and number of systems for which the rule scores higher, significantly better, and significantly worse (one-sided paired bootstrap, Benjamini--Hochberg correction within each block).}
+\caption{Each threshold rule against a reference rule (the fixed threshold 0.5, or the recall rule with $\pi=0.40$): number of systems, mean and median test difference, and number of systems for which the rule scores higher, significantly better, and significantly worse (one-sided paired bootstrap, Benjamini--Hochberg correction within each block). In HO detection the means are pulled up by the \emph{Social vs.\ Personal} LIWC-22 detector, which scores 0.038 at the fixed threshold (Table~\ref{tab:s8-rules-ho}), so the medians describe a typical detector better.}
 \label{tab:s8-rules-summary}
-\begin{tabularx}{\textwidth}{llXccccc}
+\begin{tabularx}{\textwidth}{llXcccccc}
 \hline
-\textbf{Task} & \textbf{Reference} & \textbf{Rule} & \textbf{Systems} & \textbf{Mean $\Delta$} & \textbf{Higher} & \textbf{Sig.\ better} & \textbf{Sig.\ worse} \\
+\textbf{Task} & \textbf{Reference} & \textbf{Rule} & \textbf{Systems} & \textbf{Mean $\Delta$} & \textbf{Median $\Delta$} & \textbf{Higher} & \textbf{Sig.\ better} & \textbf{Sig.\ worse} \\
 \hline
-HO detection & 0.5 & $\pi{=}0.30$ & 16 & 0.031 & 11 & 5 & 1 \\
- & 0.5 & $\pi{=}0.40$ & 16 & 0.030 & 13 & 12 & 2 \\
- & 0.5 & $\pi{=}0.50$ & 16 & 0.007 & 11 & 10 & 4 \\
- & 0.5 & Label $F_1$ & 16 & 0.049 & 16 & 16 & 0 \\
- & 0.5 & Global $F_1$ & 16 & 0.048 & 16 & 16 & 0 \\
- & $\pi{=}0.40$ & 0.5 & 16 & $-$0.030 & 3 & 2 & 11 \\
- & $\pi{=}0.40$ & $\pi{=}0.30$ & 16 & 0.001 & 4 & 4 & 12 \\
- & $\pi{=}0.40$ & $\pi{=}0.50$ & 16 & $-$0.023 & 3 & 3 & 11 \\
- & $\pi{=}0.40$ & Label $F_1$ & 16 & 0.019 & 15 & 12 & 0 \\
- & $\pi{=}0.40$ & Global $F_1$ & 16 & 0.018 & 13 & 12 & 1 \\
-Value detection & 0.5 & $\pi{=}0.30$ & 16 & 0.004 & 9 & 4 & 2 \\
- & 0.5 & $\pi{=}0.40$ & 16 & $-$0.016 & 2 & 0 & 9 \\
- & 0.5 & $\pi{=}0.50$ & 16 & $-$0.030 & 1 & 0 & 10 \\
- & 0.5 & Label $F_1$ & 16 & 0.018 & 11 & 9 & 0 \\
- & 0.5 & Global $F_1$ & 16 & 0.020 & 14 & 10 & 0 \\
- & $\pi{=}0.40$ & 0.5 & 16 & 0.016 & 10 & 9 & 0 \\
- & $\pi{=}0.40$ & $\pi{=}0.30$ & 16 & 0.019 & 11 & 8 & 1 \\
- & $\pi{=}0.40$ & $\pi{=}0.50$ & 16 & $-$0.015 & 1 & 1 & 8 \\
- & $\pi{=}0.40$ & Label $F_1$ & 16 & 0.033 & 11 & 10 & 0 \\
- & $\pi{=}0.40$ & Global $F_1$ & 16 & 0.035 & 14 & 11 & 0 \\
+HO detection & 0.5 & $\pi{=}0.30$ & 16 & 0.031 & 0.004 & 11 & 5 & 1 \\
+ & 0.5 & $\pi{=}0.40$ & 16 & 0.030 & 0.015 & 13 & 12 & 2 \\
+ & 0.5 & $\pi{=}0.50$ & 16 & 0.007 & 0.006 & 11 & 10 & 4 \\
+ & 0.5 & Label $F_1$ & 16 & 0.049 & 0.024 & 16 & 16 & 0 \\
+ & 0.5 & Global $F_1$ & 16 & 0.048 & 0.022 & 16 & 16 & 0 \\
+ & $\pi{=}0.40$ & 0.5 & 16 & $-$0.030 & $-$0.015 & 3 & 2 & 11 \\
+ & $\pi{=}0.40$ & $\pi{=}0.30$ & 16 & 0.001 & $-$0.011 & 4 & 4 & 12 \\
+ & $\pi{=}0.40$ & $\pi{=}0.50$ & 16 & $-$0.023 & $-$0.009 & 3 & 3 & 11 \\
+ & $\pi{=}0.40$ & Label $F_1$ & 16 & 0.019 & 0.011 & 15 & 12 & 0 \\
+ & $\pi{=}0.40$ & Global $F_1$ & 16 & 0.018 & 0.011 & 13 & 12 & 1 \\
+Value detection & 0.5 & $\pi{=}0.30$ & 16 & 0.004 & 0.001 & 9 & 4 & 2 \\
+ & 0.5 & $\pi{=}0.40$ & 16 & $-$0.016 & $-$0.007 & 2 & 0 & 9 \\
+ & 0.5 & $\pi{=}0.50$ & 16 & $-$0.030 & $-$0.022 & 1 & 0 & 10 \\
+ & 0.5 & Label $F_1$ & 16 & 0.018 & 0.016 & 11 & 9 & 0 \\
+ & 0.5 & Global $F_1$ & 16 & 0.020 & 0.022 & 14 & 10 & 0 \\
+ & $\pi{=}0.40$ & 0.5 & 16 & 0.016 & 0.007 & 10 & 9 & 0 \\
+ & $\pi{=}0.40$ & $\pi{=}0.30$ & 16 & 0.019 & 0.010 & 11 & 8 & 1 \\
+ & $\pi{=}0.40$ & $\pi{=}0.50$ & 16 & $-$0.015 & $-$0.017 & 1 & 1 & 8 \\
+ & $\pi{=}0.40$ & Label $F_1$ & 16 & 0.033 & 0.030 & 11 & 10 & 0 \\
+ & $\pi{=}0.40$ & Global $F_1$ & 16 & 0.035 & 0.032 & 14 & 11 & 0 \\
 \hline
 \end{tabularx}
 \end{table}
@@ -650,7 +650,7 @@ Conservation & 4 of 7 & Face, Sec-per, Sec-soc, Conf-i \\
 \subsection{Soft uses of the HO probability}
 \label{sec:s8-soft}
 
-Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_1$ thresholds fitted on validation. The HO prior multiplies the \emph{Direct} probability of each value by $\hat{p}_c^{\alpha}$, where $\hat{p}_c$ is the probability of the slice's category from the HO detector selected in Table~\ref{tab:s8-rules-ho}, and $\alpha$ is chosen on validation from $\{0.25,0.5,1,2\}$. The parent stack and the HO stack are logistic regressions fitted for each value on the log-odds of the \emph{Direct} probability and of the parent HO probability, or of all eight HO probabilities. Their validation scores are out-of-fold (five folds, all the sentences of a text in the same fold), and they are refitted on the whole validation split before being applied once to test. Masked Direct places the \emph{Direct} model behind the gate of the selected hard-gated pipeline, with the same detector and gate threshold, so it differs from that pipeline only in the value model. Benjamini--Hochberg correction runs across the 24 soft entries and, separately, across the eight masked Direct entries of each comparison.
+Table~\ref{tab:s8-soft} details main-text Table~5. All systems use per-label $F_1$ thresholds fitted on validation. The HO prior multiplies the \emph{Direct} probability of each value by $\hat{p}_c^{\alpha}$, where $\hat{p}_c$ is the probability of the slice's category from the HO detector selected in Table~\ref{tab:s8-rules-ho}, and $\alpha$ is chosen on validation from $\{0.25,0.5,1,2\}$. The parent stack and the HO stack are logistic regressions fitted for each value on the log-odds of the \emph{Direct} probability and of the parent HO probability, or of all eight HO probabilities. Their validation scores are out-of-fold (five folds, all the sentences of a text in the same fold), and they are refitted on the whole validation split before being applied once to test. Masked Direct places the \emph{Direct} model behind the gate of the selected hard-gated pipeline, with the same detector and gate threshold, so it differs from that pipeline only in the value model. The HO prior and masked Direct use the same HO detector in five slices. In \emph{Social Focus}, \emph{Personal Focus} and \emph{Self-Transcendence}, the gate of the selected pipeline uses a different detector from the one selected for HO detection. Table~\ref{tab:s8-gate-fp} counts the false positives behind the gate. Benjamini--Hochberg correction runs across the 24 soft entries and, separately, across the eight masked Direct entries of each comparison.
 
 {\setlength{\tabcolsep}{4pt}
 {\footnotesize
@@ -720,10 +720,36 @@ Self-Enhancement & Direct & 0.351 & 0.337 & 0.303 & 0.388 &  &  &  &  &  &  \\
 }
 
 
+Table~\ref{tab:s8-gate-fp} shows where the two systems behind the same gate differ. On the admitted sentences without the category, the gated value models make 18\% to 73\% more false positives than the \emph{Direct} model. On the admitted sentences with the category, they make fewer in seven of the eight slices. The value models thus make fewer errors on the kind of sentence they were trained on and more on the others.
+
+{\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\scriptsize
+\caption{Where the hard-gated pipelines add false positives (test). Both systems sit behind the same gate, that of the selected pipeline: masked \emph{Direct} (M) uses the \emph{Direct} model, and the gated pipeline (G) uses the slice's value model, trained only on sentences that express the category. Admitted: sentences that pass the gate, without and with the category (gold labels). FP: false positives, counted over sentence--value pairs, on sentences without and with the category; Extra: G relative to M on sentences without the category. TP: true positives. Each system uses its own per-label $F_1$ thresholds.}
+\label{tab:s8-gate-fp}
+\begin{tabularx}{\textwidth}{lccccccccc}
+\hline
+\textbf{Slice} & \textbf{Adm.\ without} & \textbf{Adm.\ with} & \textbf{FP without M} & \textbf{FP without G} & \textbf{Extra} & \textbf{FP with M} & \textbf{FP with G} & \textbf{TP M} & \textbf{TP G} \\
+\hline
+Growth & 2017 & 2191 & 1834 & 2155 & +18\% & 1443 & 1124 & 1442 & 1343 \\
+Self-Protection & 5126 & 4530 & 3042 & 4471 & +47\% & 2010 & 1659 & 2537 & 2514 \\
+Social Focus & 3954 & 3317 & 2124 & 3164 & +49\% & 1176 & 942 & 1889 & 1990 \\
+Personal Focus & 4004 & 2912 & 2521 & 3162 & +25\% & 1171 & 998 & 1564 & 1577 \\
+Openness & 1193 & 480 & 675 & 1133 & +68\% & 143 & 145 & 279 & 315 \\
+Conservation & 3676 & 2258 & 1994 & 3295 & +65\% & 637 & 499 & 1433 & 1596 \\
+Self-Transcendence & 1414 & 1155 & 774 & 1342 & +73\% & 356 & 344 & 737 & 782 \\
+Self-Enhancement & 1991 & 1473 & 1443 & 2024 & +40\% & 424 & 414 & 999 & 1082 \\
+\hline
+\end{tabularx}
+\end{table}
+}
+
+
 \subsection{Multi-task training with HO labels}
 \label{sec:s8-multitask}
 
-The multi-task model of main-text Section~3.3.3 fine-tunes one DeBERTa-base encoder with a linear head over 27 labels, the 19 values and the eight HO categories, with the hyperparameters of the \emph{Direct} Baseline. Checkpoint selection and early stopping use the validation Macro-$F_1$ over the 27 labels at the threshold 0.5. The model was trained with the three seeds of the \emph{Direct} runs (42, 7 and 1701), and each run is compared with the \emph{Direct} Baseline of the same seed. Table~\ref{tab:s8-multitask} uses only the 19 value outputs. Both systems use per-label $F_1$ thresholds fitted on validation, and Benjamini--Hochberg correction runs across the nine units of each seed. Averaged over the seeds, the difference on test is $-$0.007 on all 19 values and between $-$0.004 and $-$0.018 in the slices, and 25 of the 27 differences are negative. Table~\ref{tab:s8-multitask-ho} scores the eight HO outputs of the same model as HO detectors, with per-label thresholds, against the detectors selected in main-text Table~1.
+The multi-task model of main-text Section~3.3.3 fine-tunes one DeBERTa-base encoder with a linear head over 27 labels, the 19 values and the eight HO categories, with the hyperparameters of the \emph{Direct} Baseline. Checkpoint selection and early stopping use the validation Macro-$F_1$ over the 27 labels at the threshold 0.5. The model was trained with the three seeds of the \emph{Direct} runs (42, 7 and 1701), and each run is compared with the \emph{Direct} Baseline of the same seed. Table~\ref{tab:s8-multitask} uses only the 19 value outputs. Both systems use per-label $F_1$ thresholds fitted on validation, and Benjamini--Hochberg correction runs across the nine units of each seed. All three seeds score lower over the 19 values, one of them significantly. Averaged over the seeds, the difference on test is $-$0.007 over all 19 values and between $-$0.004 and $-$0.018 in the slices, and 25 of the 27 differences are negative (the nine units of each seed overlap, since the slices are subsets of the 19 values). Table~\ref{tab:s8-multitask-ho} scores the eight HO outputs of the same model as HO detectors, with per-label thresholds, against the detectors selected in main-text Table~1.
 
 \begin{table}[!htbp]
 \centering
@@ -789,3 +815,66 @@ Self-Trans. vs.\ Self-Enh. & 42 & 0.485 & BERTopic topics & 0.509 & $-$0.024 \\
 \hline
 \end{tabularx}
 \end{table}
+
+
+\subsection{Variation between training runs}
+\label{sec:s8-seeds}
+
+Table~\ref{tab:s8-seeds} gives the test Macro-$F_1$ of the five \emph{Direct} models of each slice in three training runs with different random seeds (42, the run used throughout, and 7 and 1701, saved by the earlier study cited in the main text). Each run has its own per-label $F_1$ thresholds fitted on validation. Over the 40 model--slice pairs, the range across the three runs has a median of 0.012 and a maximum of 0.026. Main-text limitation~1 compares the differences between systems with this spread.
+
+{\footnotesize
+\begin{longtable}{llcccc}
+\caption{Test Macro-$F_1$ of the five \emph{Direct} models of each slice in three training runs (seeds 42, 7 and 1701), with per-label $F_1$ thresholds. Range: largest minus smallest of the three.}\label{tab:s8-seeds}\\
+\hline
+\textbf{Slice} & \textbf{Model} & \textbf{Seed 42} & \textbf{Seed 7} & \textbf{Seed 1701} & \textbf{Range} \\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{\emph{Table~\ref{tab:s8-seeds}, continued}}\\
+\hline
+\textbf{Slice} & \textbf{Model} & \textbf{Seed 42} & \textbf{Seed 7} & \textbf{Seed 1701} & \textbf{Range} \\
+\hline
+\endhead
+\hline
+\endfoot
+Growth & Baseline & 0.291 & 0.300 & 0.291 & 0.009 \\
+ & LIWC-22 & 0.287 & 0.288 & 0.301 & 0.013 \\
+ & MJD & 0.299 & 0.292 & 0.284 & 0.015 \\
+ & Prev.\ sentences & 0.297 & 0.293 & 0.296 & 0.004 \\
+ & BERTopic topics & 0.288 & 0.297 & 0.286 & 0.011 \\
+Self-Protection & Baseline & 0.322 & 0.335 & 0.329 & 0.012 \\
+ & LIWC-22 & 0.333 & 0.332 & 0.344 & 0.012 \\
+ & MJD & 0.331 & 0.324 & 0.328 & 0.008 \\
+ & Prev.\ sentences & 0.329 & 0.327 & 0.332 & 0.006 \\
+ & BERTopic topics & 0.331 & 0.340 & 0.333 & 0.009 \\
+Social Focus & Baseline & 0.337 & 0.341 & 0.329 & 0.012 \\
+ & LIWC-22 & 0.337 & 0.334 & 0.342 & 0.008 \\
+ & MJD & 0.339 & 0.335 & 0.333 & 0.006 \\
+ & Prev.\ sentences & 0.338 & 0.329 & 0.341 & 0.012 \\
+ & BERTopic topics & 0.331 & 0.348 & 0.335 & 0.017 \\
+Personal Focus & Baseline & 0.290 & 0.305 & 0.307 & 0.017 \\
+ & LIWC-22 & 0.298 & 0.301 & 0.319 & 0.020 \\
+ & MJD & 0.309 & 0.297 & 0.294 & 0.015 \\
+ & Prev.\ sentences & 0.301 & 0.304 & 0.302 & 0.004 \\
+ & BERTopic topics & 0.302 & 0.301 & 0.300 & 0.002 \\
+Openness & Baseline & 0.239 & 0.248 & 0.252 & 0.012 \\
+ & LIWC-22 & 0.239 & 0.238 & 0.262 & 0.024 \\
+ & MJD & 0.255 & 0.243 & 0.232 & 0.023 \\
+ & Prev.\ sentences & 0.244 & 0.250 & 0.246 & 0.006 \\
+ & BERTopic topics & 0.246 & 0.238 & 0.234 & 0.013 \\
+Conservation & Baseline & 0.301 & 0.318 & 0.309 & 0.017 \\
+ & LIWC-22 & 0.314 & 0.311 & 0.326 & 0.015 \\
+ & MJD & 0.313 & 0.305 & 0.308 & 0.008 \\
+ & Prev.\ sentences & 0.312 & 0.305 & 0.313 & 0.008 \\
+ & BERTopic topics & 0.315 & 0.325 & 0.314 & 0.011 \\
+Self-Transcendence & Baseline & 0.310 & 0.321 & 0.301 & 0.019 \\
+ & LIWC-22 & 0.305 & 0.307 & 0.311 & 0.006 \\
+ & MJD & 0.314 & 0.311 & 0.304 & 0.010 \\
+ & Prev.\ sentences & 0.320 & 0.308 & 0.316 & 0.012 \\
+ & BERTopic topics & 0.301 & 0.322 & 0.305 & 0.020 \\
+Self-Enhancement & Baseline & 0.322 & 0.343 & 0.347 & 0.026 \\
+ & LIWC-22 & 0.335 & 0.331 & 0.354 & 0.023 \\
+ & MJD & 0.337 & 0.335 & 0.329 & 0.008 \\
+ & Prev.\ sentences & 0.336 & 0.345 & 0.331 & 0.014 \\
+ & BERTopic topics & 0.336 & 0.333 & 0.326 & 0.010 \\
+\end{longtable}
+}

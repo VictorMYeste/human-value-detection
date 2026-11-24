@@ -4,15 +4,15 @@ gated value models   n= 62  median=0.510  IQR=[0.352, 0.617]  share<0.5=0.468
 
 === 2. False positives on test behind the gate of the selected pipeline
     fp_out: on sentences without the slice's category; fp_in: on sentences with it
-             slice                              pipeline  fp_out_masked  fp_out_gated  fp_in_masked  fp_in_gated  tp_masked  tp_gated  extra_fp_out
-            Growth               1_Baseline_0.5_Baseline           1834          2155          1443         1124       1442      1343         0.175
-   Self-Protection               1_Baseline_0.1_Baseline           3042          4471          2010         1659       2537      2514         0.470
-      Social Focus                1_NER_0.1_Lex-Schwartz           2124          3164          1176          942       1889      1990         0.490
-    Personal Focus              1_Lex-LIWC_0.17_Baseline           2521          3162          1171          998       1564      1577         0.254
-          Openness 1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA            675          1133           143          145        279       315         0.679
-      Conservation     1_Lex-LIWC-22_LingFeat_0.1_TD-LDA           1994          3295           637          499       1433      1596         0.652
-Self-Transcendence    1_Lex-WorryWords_0.16_Lex-Schwartz            774          1342           356          344        737       782         0.734
-  Self-Enhancement       1_TD-BERTopic_0.29_Lex-Schwartz           1443          2024           424          414        999      1082         0.403
+             slice                              pipeline  n_admitted_out  n_admitted_in  fp_out_masked  fp_out_gated  fp_in_masked  fp_in_gated  tp_masked  tp_gated  extra_fp_out
+            Growth               1_Baseline_0.5_Baseline            2017           2191           1834          2155          1443         1124       1442      1343         0.175
+   Self-Protection               1_Baseline_0.1_Baseline            5126           4530           3042          4471          2010         1659       2537      2514         0.470
+      Social Focus                1_NER_0.1_Lex-Schwartz            3954           3317           2124          3164          1176          942       1889      1990         0.490
+    Personal Focus              1_Lex-LIWC_0.17_Baseline            4004           2912           2521          3162          1171          998       1564      1577         0.254
+          Openness 1_Lex-LIWC-22_LingFeat_0.5_NER_TD-LDA            1193            480            675          1133           143          145        279       315         0.679
+      Conservation     1_Lex-LIWC-22_LingFeat_0.1_TD-LDA            3676           2258           1994          3295           637          499       1433      1596         0.652
+Self-Transcendence    1_Lex-WorryWords_0.16_Lex-Schwartz            1414           1155            774          1342           356          344        737       782         0.734
+  Self-Enhancement       1_TD-BERTopic_0.29_Lex-Schwartz            1991           1473           1443          2024           424          414        999      1082         0.403
   extra false positives on sentences without the category: 17.5% to 73.4%
 
 === 3. The mask alone: masked Direct minus Direct (mean over the values of the slice)
